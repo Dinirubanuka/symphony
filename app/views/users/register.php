@@ -10,7 +10,7 @@
   <!-----------register-nav-bar-------->
   <?php require_once APPROOT . '/views/inc/register-nav.php'; ?>
 
-<!--  -----------register-form----------->
+  <!-------------register-form----------->
     <div class="register">
       <section class="container">
       <p>Registration Form</p>
