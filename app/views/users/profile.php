@@ -24,7 +24,7 @@
     <!------options------->
     <div class="modal" id="options-modal">
         <div class="modal-content">
-            <a href="#" onclick="myfunc()">X</a>
+            <a href="" onclick="myfunc()">X</a>
             <form action="<?php echo URLROOT; ?>/users/profilePhotoUpdate"  method="post" enctype="multipart/form-data">
                 <input type="file" id="photo" accept=".jpg, .jpeg, .png, .HEIC" name="photo" class="<?php echo (!empty($data['image_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['image']; ?>">
                 <input type="submit" value="Upload" id="upload-btn"/>
