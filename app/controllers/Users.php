@@ -212,6 +212,7 @@ class Users extends Controller {
             else{
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 $combinedNumber = $_POST['char1'].$_POST['char2'].$_POST['char3'].$_POST['char4'].$_POST['char5'].$_POST['char6'];
+//                $finalNumber = (int)$combinedNumber;
                 $result = $this->userModel->verificationNumber($combinedNumber);
                 if ($result){
                     $this->view('users/succesfull',$data);

@@ -61,9 +61,7 @@ class User {
 
             // Execute
             if($this->db->execute()){
-
                 return true;
-
             } else {
                 return false;
             }
