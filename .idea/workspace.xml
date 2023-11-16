@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b38043d5-52c0-4c15-8c01-780342c8c479" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/views/users/succesfull.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/users/verification.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +93,7 @@
       <workItem from="1699761241751" duration="17554000" />
       <workItem from="1699789677985" duration="6681000" />
       <workItem from="1699799547579" duration="14912000" />
-      <workItem from="1700109727853" duration="10424000" />
+      <workItem from="1700109727853" duration="13719000" />
     </task>
     <servers />
   </component>
@@ -116,29 +113,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php-line-method">
-          <url>file://$PROJECT_DIR$/app/controllers/Users.php</url>
-          <line>197</line>
-          <properties>
-            <option name="className" value="\Users" />
-            <option name="methodName" value="verification" />
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php-line-method">
-          <url>file://$PROJECT_DIR$/app/controllers/Users.php</url>
-          <line>227</line>
-          <properties>
-            <option name="className" value="\Users" />
-            <option name="methodName" value="register" />
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
