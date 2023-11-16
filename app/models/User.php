@@ -141,10 +141,6 @@ class User {
     // ---delete acccount----
     public function fectchEncrptedPassword($id,$password){
         try{
-//            $this->db->query('SELECT verification  FROM users WHERE id = :id');
-//            $this->db->bind(':id', $id);
-//            $results = $this->db->single();
-//            $verification = $results->verification;
             $this->db->query('SELECT password FROM users WHERE id = :id');
             $this->db->bind(':id', $id);
             $results = $this->db->single();
