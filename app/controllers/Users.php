@@ -52,7 +52,7 @@ class Users extends Controller {
                 $img_ex_lc = strtolower($img_ex);
                 $new_img_name = uniqid("IMG-", true).'.'.$img_ex_lc;
                 $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/mag_img/'.$new_img_name;
-                $bool =move_uploaded_file($tmp_name, $img_upload_path);
+                $bool = move_uploaded_file($tmp_name, $img_upload_path);
                 if($this->userModel->photoUpdate($new_img_name)){
                     // flash('register_success', 'You are registered and can log in');
                     redirect('users/profile');
@@ -212,7 +212,6 @@ class Users extends Controller {
             else{
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 $combinedNumber = $_POST['char1'].$_POST['char2'].$_POST['char3'].$_POST['char4'].$_POST['char5'].$_POST['char6'];
-//                $finalNumber = (int)$combinedNumber;
                 $result = $this->userModel->verificationNumber($combinedNumber);
                 if ($result){
                     $this->view('users/succesfull',$data);
