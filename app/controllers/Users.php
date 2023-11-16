@@ -48,13 +48,11 @@ class Users extends Controller {
                     die('Something went wrong');
                 }
             } else {
-
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img_name = uniqid("IMG-", true).'.'.$img_ex_lc;
                 $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/mag_img/'.$new_img_name;
                 $bool =move_uploaded_file($tmp_name, $img_upload_path);
-
                 if($this->userModel->photoUpdate($new_img_name)){
                     // flash('register_success', 'You are registered and can log in');
                     redirect('users/profile');
@@ -63,7 +61,6 @@ class Users extends Controller {
                     die('Something went wrong');
                 }
             }
-
         }
     }
 
@@ -196,7 +193,35 @@ class Users extends Controller {
                 redirect('users/profile');
             }
         }
+    }
 
+    public function verification(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $data = [
+                'char1' => trim($_POST['char1']),
+                'char2' => trim($_POST['char2']),
+                'char3' => trim($_POST['char3']),
+                'char4' => trim($_POST['char4']),
+                'char5' => trim($_POST['char5']),
+                'char6' => trim($_POST['char6']),
+            ];
+            if (empty($data['char1']) && empty($data['char2']) && empty($data['char3']) && empty($data['char4']) && empty($data['char5']) && empty($data['char6'])){
+                $data = ['validation_err'=> 'Empty'];
+                $this->view('users/verification',$data);
+            }
+            else{
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                $combinedNumber = $_POST['char1'].$_POST['char2'].$_POST['char3'].$_POST['char4'].$_POST['char5'].$_POST['char6'];
+//                $finalNumber = (int)$combinedNumber;
+                $result = $this->userModel->verificationNumber($combinedNumber);
+                if ($result){
+                    $this->view('users/succesfull',$data);
+                }else{
+                    $data = ['validation_err'=> 'Invalid OTP'];
+                    $this->view('users/verification',$data);
+                }
+            }
+        }
     }
 
 
@@ -304,7 +329,7 @@ class Users extends Controller {
                 // Register User
                 if($this->userModel->register($data)){
                     // flash('register_success', 'You are registered and can log in');
-                    redirect('users/login');
+                    $this->view('users/verification');
                 } else {
                     die('Something went wrong');
                 }

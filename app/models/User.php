@@ -61,20 +61,18 @@ class User {
 
             // Execute
             if($this->db->execute()){
-
                 return true;
-
             } else {
                 return false;
             }
         }
         catch (PDOException $e) {
-
             die($e->getMessage());
         }
 
     }
 
+    //view user
     public function view($id){
         $this->db->query('SELECT * FROM users WHERE id = :id');
         $this->db->bind(':id', $id);
@@ -82,6 +80,25 @@ class User {
         return $results;
     }
 
+    public function verificationNumber($finalNumber){
+        try{
+//            die($finalNumber);
+            $this->db->query('SELECT * FROM users WHERE  verification= :verification');
+            $this->db->bind(':verification', $finalNumber);
+            $results = $this->db->single();
+            $verification = $results->verification;
+            if($verification == $finalNumber){
+                return true;
+            } else {
+                return false;
+            }
+        }catch(PDOException $e){
+            echo "Database error: " . $e->getMessage();
+            return false;
+        }
+}
+
+//    update user
     public function update($data){
         try {
             $this->db->query('UPDATE users SET name  = :name , email = :email , TelephoneNumber = :TelephoneNumber , BirthDate = :BirthDate , address = :address WHERE id = :id');
@@ -124,7 +141,10 @@ class User {
     // ---delete acccount----
     public function fectchEncrptedPassword($id,$password){
         try{
-            // die($id);
+//            $this->db->query('SELECT verification  FROM users WHERE id = :id');
+//            $this->db->bind(':id', $id);
+//            $results = $this->db->single();
+//            $verification = $results->verification;
             $this->db->query('SELECT password FROM users WHERE id = :id');
             $this->db->bind(':id', $id);
             $results = $this->db->single();
