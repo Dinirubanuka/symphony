@@ -1,18 +1,27 @@
 <!DOCTYPE html>
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<<<<<<< Updated upstream
       <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/sp-register.css"/>
   </head>
   <body>
   <!-----------register-nav-bar-------->
   <?php require_once APPROOT . '/views/inc/register-nav.php'; ?>
+=======
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/sp-register.css"/>
+  </head>
+  <body>
+  <!-----------register-nav-bar-------->
+  <?php require_once APPROOT . '/views/inc/sp-register-nav.php'; ?>
+  <!-------------register-form----------->
+  <div class="register">
+>>>>>>> Stashed changes
     <section class="container">
-      <header>Registration Form</header>
-      <form action="<?php echo URLROOT; ?>/serviceproviders/serviceproviderregister" class="form" method="post">
+      <p>Registration Form</p>
+      <form action="<?php echo URLROOT; ?>/serviceproviders/serviceproviderregister" class="form" method="post" enctype="multipart/form-data">
         <div class="input-box">
           <label>Business Name</label>
           <!-- <input type="text" placeholder="Enter full name" required /> -->
@@ -38,7 +47,8 @@
           <label>Business Address</label>
           <input type="text" name="business_address" class="<?php echo (!empty($data['business_address_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['business_address']; ?>">
           <span class="invalid-feedback"><?php echo $data['business_address_err']; ?></span><br><br>
-          <label>Password</label>
+          <label>Profile Picture</label>
+          <input type="file" id="photo" accept=".jpg, .jpeg, .png, .HEIC" name="photo" class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['photo']; ?>"><br><br><label>Password</label>
           <input type="password" name="password" class="<?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['password']; ?>">
           <span class="invalid-feedback"><?php echo $data['password_err']; ?></span><br><br>
           <label>Confirm Password</label>

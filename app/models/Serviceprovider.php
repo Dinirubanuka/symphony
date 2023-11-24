@@ -1,27 +1,34 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require 'vendor/autoload.php';
   class ServiceProvider {
     private $db;
+    private $mail;
 
     public function __construct(){
       $this->db = new Database;
+      $this->mail = new PHPMailer(true);
     }
 
-    // Regsiter user
-    public function register($data){
-      $this->db->query('INSERT INTO serviceproviders ( business_name, business_address, business_contact_no, business_email, password,  owner_name, owner_address, owner_contact_no, owner_nic, owner_email, about) VALUES(:business_name, :business_address, :business_contact_no, :business_email, :password,  :owner_name, :owner_address, :owner_contact_no, :owner_nic, :owner_email, :about)');
-      // Bind values
+    public function additem($data){
+      
+      $this->db->query('INSERT INTO products (created_by, category, brand, model, quantity, unit_price, description, photo_1, photo_2, photo_3) VALUES(:created_by, :category, :brand, :model, :quantity, :unit_price, :description, :photo_1, :photo_2, :photo_3)');
+ 
       try{
-        $this->db->bind(':business_name', $data['business_name']);
-        $this->db->bind(':business_address', $data['business_address']);
-        $this->db->bind(':business_contact_no', $data['business_contact_no']);
-        $this->db->bind(':business_email', $data['business_email']);
-        $this->db->bind(':password', $data['password']);
-        $this->db->bind(':owner_name', $data['owner_name']);
-        $this->db->bind(':owner_address', $data['owner_address']);
-        $this->db->bind(':owner_contact_no', $data['owner_contact_no']);
-        $this->db->bind(':owner_nic', $data['owner_nic']);
-        $this->db->bind(':owner_email', $data['owner_email']);
-        $this->db->bind(':about', $data['about']);
+        $this->db->bind(':created_by', $data['created_by']);
+        $this->db->bind(':category', $data['category']);
+        $this->db->bind(':brand', $data['brand']);
+        $this->db->bind(':model', $data['model']);
+        $this->db->bind(':quantity', $data['quantity']);
+        $this->db->bind(':unit_price', $data['unit_price']);
+        $this->db->bind(':description', $data['description']);
+        $this->db->bind(':photo_1', $data['photo_1']);
+        $this->db->bind(':photo_2', $data['photo_2']);
+        $this->db->bind(':photo_3', $data['photo_3']);
 
         // Execute
         if($this->db->execute()){
@@ -36,6 +43,69 @@
     }
     
     }
+    // Regsiter user
+    public function register($data){
+      $name=$data['business_name'];
+      $email=$data['business_email'];
+      $this->db->query('INSERT INTO serviceproviders ( business_name, business_address, business_contact_no, business_email, password,  owner_name, owner_address, owner_contact_no, owner_nic, owner_email, about, profile_photo, verification) VALUES(:business_name, :business_address, :business_contact_no, :business_email, :password,  :owner_name, :owner_address, :owner_contact_no, :owner_nic, :owner_email, :about, :photo, :verification)');
+      $this->mail->isSMTP();                                            //Send using SMTP
+      $this->mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
+      $this->mail->SMTPAuth = true;                                   //Enable SMTP authentication
+      $this->mail->Username = 'symphonyuscs@gmail.com';                     //SMTP username
+      $this->mail->Password = 'wmoe qbsp fxcl bwqp';                               //SMTP password
+      $this->mail->Port = 587;
+      
+      //Recipients
+      $this->mail->setFrom('symphonyucsc@gmail.com', 'Symphony');
+      $this->mail->addAddress($email, $name);     //Add a recipient
+
+      //Attachments
+//    $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+//    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+      //Content
+      $this->mail->isHTML(true);                                  //Set email format to HTML
+      $this->mail->Subject = 'Here is the subject';
+      $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+      $this->mail->Body = '<div id="overview" style="border: 1px solid #343131;margin: auto;width: 50%;text-align: center">
+        <h1 style="">Hello '.$name.'</h1>
+        <p style="font-size: 18px;text-align: justify;width: 90%;margin: auto">Thank you for choosing Symphony. We are excited to have you on board!</p>
+        <hr style="width:90%;color: #3d3b3b;opacity: 0.3;">
+        <p style="font-size: 20px; color: #2e043a;">To complete your account creation, please use the following verification code:</p>
+        <p style="font-size: 24px; color: #333;  cursor: pointer; margin: 15px 10px;">' . $verification_code . '</p>
+      </div>';
+      $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+      $this->mail->send();
+      // Bind values
+      try{
+        $this->db->bind(':business_name', $data['business_name']);
+        $this->db->bind(':business_address', $data['business_address']);
+        $this->db->bind(':business_contact_no', $data['business_contact_no']);
+        $this->db->bind(':business_email', $data['business_email']);
+        $this->db->bind(':password', $data['password']);
+        $this->db->bind(':owner_name', $data['owner_name']);
+        $this->db->bind(':owner_address', $data['owner_address']);
+        $this->db->bind(':owner_contact_no', $data['owner_contact_no']);
+        $this->db->bind(':owner_nic', $data['owner_nic']);
+        $this->db->bind(':owner_email', $data['owner_email']);
+        $this->db->bind(':about', $data['about']);
+        $this->db->bind(':photo', $data['photo']);
+        $this->db->bind(':verification',$verification_code);
+
+        // Execute
+        if($this->db->execute()){
+          return true;
+        } else {
+          return false;
+        }
+    }
+      catch (PDOException $e) {
+        
+        die($e->getMessage());
+    }
+
+    }
 
     public function view($serviceprovider_id){
       $this->db->query('SELECT * FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id'); 
@@ -44,6 +114,29 @@
       return $results;
     }
 
+    public function inventory($created_by){
+      $this->db->query('SELECT * FROM products WHERE created_by = :created_by'); 
+      $this->db->bind(':created_by', $created_by);
+      $results = $this->db->resultSet();
+      return $results; 
+    }
+
+    public function verificationNumber($finalNumber){
+      try{
+          $this->db->query('SELECT * FROM serviceproviders WHERE  verification= :verification');
+          $this->db->bind(':verification', $finalNumber);
+          $results = $this->db->single();
+          $verification = $results->verification;
+          if($verification == $finalNumber){
+              return true;
+          } else {
+              return false;
+          }
+      }catch(PDOException $e){
+          echo "Database error: " . $e->getMessage();
+          return false;
+      }
+}
     public function update($data){
         try {
             $this->db->query('UPDATE serviceproviders SET business_name  = :business_name , business_address = :business_address , business_contact_no = :business_contact_no , business_email = :business_email , owner_name = :owner_name, owner_address = :owner_address , owner_contact_no = :owner_contact_no , owner_email = :owner_email , about = :about WHERE serviceprovider_id = :serviceprovider_id');
@@ -87,6 +180,25 @@
           return false;
       }
     }
+
+    public function fectchEncrptedPassword($serviceprovider_id,$password){
+      try{
+          $this->db->query('SELECT password FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id');
+          $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+          $results = $this->db->single();
+          $hashed_password = $results->password;
+          if(password_verify($password, $hashed_password)){
+              // $this->delete($id);
+              return true;
+          } else {
+              return false;
+          }
+      }catch(PDOException $e){
+          echo "Database error: " . $e->getMessage();
+          return false;
+      }
+  }
+
     public function delete($serviceprovider_id){
       $this->db->query('DELETE FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id');
       $this->db->bind(':serviceprovider_id', $serviceprovider_id);
@@ -128,6 +240,22 @@
       } else {
         return false;
       }
+    }
+
+    public function findOtherServiceProviderByEmail($business_email,$serviceprovider_id){
+        $this->db->query('SELECT * FROM serviceproviders WHERE business_email = :business_email AND serviceprovider_id != :currentSPId');
+        // Bind value
+        $this->db->bind(':business_email', $business_email);
+        $this->db->bind(':currentSPId', $serviceprovider_id);
+
+        $row = $this->db->single();
+
+        // Check row
+        if($this->db->rowCount() > 0){
+            return true;
+        } else {
+            return false;
+        }
     }
 
      public function findserviceproviderByEmailEdit($business_email){

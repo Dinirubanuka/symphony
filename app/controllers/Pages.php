@@ -23,9 +23,5 @@
     public function serviceProviderRegister(){
       $this->view('serviceproviders/serviceproviderregister');      
     }
-
-    public function eventpackage(){
-      $this->view('moderators/eventpackage');      
-    }
-
+    
   }

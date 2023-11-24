@@ -62,7 +62,7 @@
                 <label style="background: rgba(217, 212, 212, 0.08);border-radius: 8px;"><?php echo $data['address']; ?></label><br><br>
             </div>
             <div class="llink">
-                <form action = "<?php echo URLROOT; ?>/users/editDeatil/<?php echo $_SESSION['user_id']; ?>" method ="post">
+                <form action = "<?php echo URLROOT; ?>/users/editDetail/<?php echo $_SESSION['user_id']; ?>" method ="post">
                     <div class = "edit-link">
                         <input type = "submit" value = "edit" id = "editButton">
                     </div>

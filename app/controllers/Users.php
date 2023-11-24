@@ -67,7 +67,7 @@ class Users extends Controller {
         }
     }
 
-    public function editDeatil($id){
+    public function editDetail($id){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $user = $this->userModel->view($_SESSION['user_id']);
             $data =[
