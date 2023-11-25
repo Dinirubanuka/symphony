@@ -62,12 +62,6 @@
       margin-right: 1.5rem;
       color: #fff;
     }
-
-    #nav-menu {
-      /* border-bottom: var(--border); */
-      background-color: rgba(0,0,0,0.2);
-    }
-
     .container {
       display: flex;
       align-items: center;
@@ -82,7 +76,6 @@
 
     .menu {
       position: relative;
-      background: rgba(0,0,0,0.2);
       color: white;
     }
 
@@ -126,7 +119,6 @@
       align-items: center;
     }
     .search input[type="search"]{
-      background: rgba(0, 0, 0, 0.5);
       color: white;
     }
     .search input[type="search"]::placeholder {

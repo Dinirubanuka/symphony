@@ -70,11 +70,6 @@ button {
     color: #fff;
 }
 
-#nav-menu {
-    /* border-bottom: var(--border); */
-    background-color: rgba(0,0,0,0.2);
-}
-
 .container {
     display: flex;
     align-items: center;
@@ -89,7 +84,6 @@ button {
 
 .menu {
     position: relative;
-    background: rgba(0,0,0,0.2);
     color: white;
 }
 

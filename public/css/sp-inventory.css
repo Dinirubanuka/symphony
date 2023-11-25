@@ -68,12 +68,6 @@ button {
   margin-right: 1.5rem;
   color: #fff;
 }
-
-#nav-menu {
-  /* border-bottom: var(--border); */
-  background-color: rgba(0,0,0,0.6);
-}
-
 .container {
   display: flex;
   align-items: center;

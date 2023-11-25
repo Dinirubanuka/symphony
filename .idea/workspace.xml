@@ -5,12 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b38043d5-52c0-4c15-8c01-780342c8c479" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/img/user.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/inc/index-nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/inc/index-nav.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/users/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/users/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/inc/sp-index-nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/inc/sp-index-nav.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/sp-edititem.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/sp-edititem.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/sp-index.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/sp-index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/sp-inventory.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/sp-inventory.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/sp-profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/sp-profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/user-edit.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/user-edit.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/user-index.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/user-index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/user-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/user-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/user-profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/user-profile.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +61,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "user",
+    "git-widget-placeholder": "serviceprovider",
     "last_opened_file_path": "/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
