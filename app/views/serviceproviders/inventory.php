@@ -26,23 +26,9 @@
               <img src="<?php echo URLROOT; ?>/img/mag_img/<?php echo $inventory->photo_1; ?>" alt="Business B Photo">
           </div>
           <div class="request-actions">
-<<<<<<< Updated upstream
               <button class="accept-button">Edit</button>
               <button class="decline-button">Remove</button>
               <button class="view-details-button">View Details</button>
-=======
-                <form action = "<?php echo URLROOT; ?>/serviceproviders/edititem/<?php echo $inventory->product_id; ?>" method ="post">
-                    <div class = "edit-link">
-                        <input class="accept-button" type = "submit" value = "Edit" id = "editButton">
-                    </div>
-                </form>
-                <form action = "<?php echo URLROOT; ?>/serviceproviders/deleteitem/<?php echo $inventory->product_id; ?>" method ="post">
-                    <div class = "edit-link">
-                        <input class="decline-button" onclick="DeleteItem()" type = "submit" value = "Delete" id = "deleteButton">
-                    </div>
-                </form>
-              <!-- <button class="decline-button">Remove</button> -->
->>>>>>> Stashed changes
           </div>
       </div>
 
@@ -52,7 +38,6 @@
 </body>
 
 </div>
-<<<<<<< Updated upstream
 <script>
   // script.js
   const dropdownBtn = document.querySelectorAll(".dropdown-btn");
@@ -121,8 +106,5 @@
   hamburgerBtn.addEventListener("click", toggleHamburger);
 
 </script>
-=======
-<script src="<?php echo URLROOT;?>/js/sp-inventory.js"></script>
->>>>>>> Stashed changes
 </body>
 </html>
