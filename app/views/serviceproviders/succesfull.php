@@ -67,7 +67,7 @@
 <body>
 <div class="box">
   <h1>Registration successfull</h1>
-  <button><a href="<?php echo URLROOT; ?>/serviceproviders/login" style="color:#cccccc;text-decoration: none">login</a></button>
+  <button><a href="<?php echo URLROOT; ?>/serviceproviders/serviceproviderlogin" style="color:#cccccc;text-decoration: none">login</a></button>
 </div>
 
 </body>

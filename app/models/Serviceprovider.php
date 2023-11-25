@@ -38,6 +38,7 @@ require 'vendor/autoload.php';
         }
     }
       catch (PDOException $e) {
+        
         die($e->getMessage());
     }
     
@@ -100,7 +101,6 @@ require 'vendor/autoload.php';
         }
     }
       catch (PDOException $e) {
-
         die($e->getMessage());
     }
 
@@ -151,7 +151,6 @@ require 'vendor/autoload.php';
       return false;
     }
   }
-
     public function inventory($created_by){
       $this->db->query('SELECT * FROM products WHERE created_by = :created_by'); 
       $this->db->bind(':created_by', $created_by);
@@ -313,8 +312,7 @@ require 'vendor/autoload.php';
     }
 
     // Get User by ID
-
-    public function getUserById($serviceprovider_id){
+    public function getServiceProviderById($id){
       $this->db->query('SELECT * FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id');
       // Bind value
       $this->db->bind(':serviceprovider_id', $serviceprovider_id);

@@ -39,7 +39,7 @@ class User {
         $this->mail->Subject = 'Here is the subject';
         $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
         $this->mail->Body = '<div id="overview" style="border: 1px solid #343131;margin: auto;width: 50%;text-align: center">
-          <h1 style="">Hello'.$name.'</h1>
+          <h1 style="">Hello '.$name.'</h1>
           <p style="font-size: 18px;text-align: justify;width: 90%;margin: auto">Thank you for choosing Symphony. We are excited to have you on board!</p>
           <hr style="width:90%;color: #3d3b3b;opacity: 0.3;">
           <p style="font-size: 20px; color: #2e043a;">To complete your account creation, please use the following verification code:</p>
@@ -48,7 +48,7 @@ class User {
         $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         $this->mail->send();
-        try{
+           try{
             $this->db->bind(':name', $data['name']);
             $this->db->bind(':email', $data['email']);
             $this->db->bind(':TelephoneNumber', $data['tel_Number']);
@@ -96,7 +96,7 @@ class User {
             echo "Database error: " . $e->getMessage();
             return false;
         }
-    }
+}
 
 //    update user
     public function update($data){

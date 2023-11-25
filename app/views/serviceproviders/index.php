@@ -160,11 +160,7 @@
         </div>
     </div>
 </div>
-<<<<<<< Updated upstream
-<script src="<?php echo URLROOT;?>/js/user-index.js"></script>
-=======
 <script src="<?php echo URLROOT;?>/js/sp-index.js"></script>
->>>>>>> Stashed changes
 <script>
     let items = document.querySelectorAll('.slider .list .item');
     let next = document.getElementById('next');

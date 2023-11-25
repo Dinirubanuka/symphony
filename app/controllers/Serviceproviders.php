@@ -317,33 +317,7 @@
         }
         }
     
-        public function verification(){
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                $data = [
-                    'char1' => trim($_POST['char1']),
-                    'char2' => trim($_POST['char2']),
-                    'char3' => trim($_POST['char3']),
-                    'char4' => trim($_POST['char4']),
-                    'char5' => trim($_POST['char5']),
-                    'char6' => trim($_POST['char6']),
-                ];
-                if (empty($data['char1']) && empty($data['char2']) && empty($data['char3']) && empty($data['char4']) && empty($data['char5']) && empty($data['char6'])){
-                    $data = ['validation_err'=> 'Empty'];
-                    $this->view('serviceproviders/verification',$data);
-                }
-                else{
-                    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-                    $combinedNumber = $_POST['char1'].$_POST['char2'].$_POST['char3'].$_POST['char4'].$_POST['char5'].$_POST['char6'];
-                    $result = $this->serviceProviderModel->verificationNumber($combinedNumber);
-                    if ($result){
-                        $this->view('serviceproviders/succesfull',$data);
-                    }else{
-                        $data = ['validation_err'=> 'Invalid OTP'];
-                        $this->view('serviceproviders/verification',$data);
-                    }
-                }
-            }
-        }
+        
         public function additem(){
             // Check for POST
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -487,7 +461,34 @@
                 $this->view('serviceproviders/additem', $data);
             }
             }
-    
+            public function verification(){
+                if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                    
+                    $data = [
+                        'char1' => trim($_POST['char1']),
+                        'char2' => trim($_POST['char2']),
+                        'char3' => trim($_POST['char3']),
+                        'char4' => trim($_POST['char4']),
+                        'char5' => trim($_POST['char5']),
+                        'char6' => trim($_POST['char6']),
+                    ];
+                    if (empty($data['char1']) && empty($data['char2']) && empty($data['char3']) && empty($data['char4']) && empty($data['char5']) && empty($data['char6'])){
+                        $data = ['validation_err'=> 'Empty'];
+                        $this->view('serviceproviders/verification',$data);
+                    }
+                    else{
+                        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                        $combinedNumber = $_POST['char1'].$_POST['char2'].$_POST['char3'].$_POST['char4'].$_POST['char5'].$_POST['char6'];
+                        $result = $this->serviceProviderModel->verificationNumber($combinedNumber);
+                        if ($result){
+                            $this->view('serviceproviders/succesfull',$data);
+                        }else{
+                            $data = ['validation_err'=> 'Invalid OTP'];
+                            $this->view('serviceproviders/verification',$data);
+                        }
+                    }
+                }
+            }
         public function serviceproviderregister(){
         // Check for POST
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -629,7 +630,7 @@
                 // Register serviceprovider
                 if($this->serviceProviderModel->register($data)){
                     // flash('register_success', 'You are registered and can log in');
-                    redirect('serviceproviders/verification');
+                    $this->view('serviceproviders/verification');
                 } else {
                     die('Something went wrong');
                 }
