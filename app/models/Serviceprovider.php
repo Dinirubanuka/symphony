@@ -38,7 +38,6 @@ require 'vendor/autoload.php';
         }
     }
       catch (PDOException $e) {
-        
         die($e->getMessage());
     }
     
@@ -101,10 +100,7 @@ require 'vendor/autoload.php';
         }
     }
       catch (PDOException $e) {
-<<<<<<< Updated upstream
-        
-=======
->>>>>>> Stashed changes
+
         die($e->getMessage());
     }
 
@@ -117,8 +113,6 @@ require 'vendor/autoload.php';
       return $results;
     }
 
-<<<<<<< Updated upstream
-=======
     public function viewitem($product_id){
       $this->db->query('SELECT * FROM products WHERE product_id = :product_id'); 
       $this->db->bind(':product_id', $product_id);
@@ -157,7 +151,7 @@ require 'vendor/autoload.php';
       return false;
     }
   }
->>>>>>> Stashed changes
+
     public function inventory($created_by){
       $this->db->query('SELECT * FROM products WHERE created_by = :created_by'); 
       $this->db->bind(':created_by', $created_by);
@@ -319,7 +313,8 @@ require 'vendor/autoload.php';
     }
 
     // Get User by ID
-    public function getServiceProviderById($id){
+
+    public function getUserById($serviceprovider_id){
       $this->db->query('SELECT * FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id');
       // Bind value
       $this->db->bind(':serviceprovider_id', $serviceprovider_id);
