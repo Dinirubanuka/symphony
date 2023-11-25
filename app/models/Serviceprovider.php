@@ -101,7 +101,10 @@ require 'vendor/autoload.php';
         }
     }
       catch (PDOException $e) {
+<<<<<<< Updated upstream
         
+=======
+>>>>>>> Stashed changes
         die($e->getMessage());
     }
 
@@ -114,6 +117,47 @@ require 'vendor/autoload.php';
       return $results;
     }
 
+<<<<<<< Updated upstream
+=======
+    public function viewitem($product_id){
+      $this->db->query('SELECT * FROM products WHERE product_id = :product_id'); 
+      $this->db->bind(':product_id', $product_id);
+      $results = $this->db->single();
+      return $results;
+    }
+
+    public function updateitem($data){
+      try {
+          $this->db->query('UPDATE products SET quantity  = :quantity , unit_price = :unit_price WHERE product_id = :product_id');
+          // Bind values
+          $this->db->bind(':quantity', $data['quantity']);
+          $this->db->bind(':unit_price', $data['unit_price']);
+          $this->db->bind(':product_id', $data['product_id']);
+          // Execute
+          if($this->db->execute()){
+              return true;
+          } else {
+              return false;
+          }
+      } catch (PDOException $e) {
+          // Print the exception message
+          echo "Database error: " . $e->getMessage();
+          return false;
+      }
+  }
+
+  public function deleteitem($product_id){
+    $this->db->query('DELETE FROM products WHERE product_id = :product_id');
+    $this->db->bind(':product_id', $product_id);
+
+    // Execute
+    if($this->db->execute()){
+      return true;
+    } else {
+      return false;
+    }
+  }
+>>>>>>> Stashed changes
     public function inventory($created_by){
       $this->db->query('SELECT * FROM products WHERE created_by = :created_by'); 
       $this->db->bind(':created_by', $created_by);
@@ -164,6 +208,7 @@ require 'vendor/autoload.php';
             return false;
         }
     }
+
     public function photoUpdate($photo){
       try{
         $this->db->query('UPDATE serviceproviders SET profile_photo  = :photo WHERE serviceprovider_id = :id');
@@ -274,7 +319,7 @@ require 'vendor/autoload.php';
     }
 
     // Get User by ID
-    public function getUserById($id){
+    public function getServiceProviderById($id){
       $this->db->query('SELECT * FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id');
       // Bind value
       $this->db->bind(':serviceprovider_id', $serviceprovider_id);
