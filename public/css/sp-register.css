@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 /* Import Google font - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 /* ---navbar--- */
@@ -246,6 +247,8 @@ nav ul.active {
         row-gap: 15px;
     }
 =======
+=======
+>>>>>>> Stashed changes
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 * {
   margin: 0;
@@ -375,5 +378,8 @@ body {
   .form :where(.gender-option, .gender) {
     row-gap: 15px;
   }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }
