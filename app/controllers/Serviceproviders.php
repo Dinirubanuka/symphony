@@ -106,6 +106,97 @@
         }
     }
 
+    public function edititem($product_id){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $item = $this->serviceProviderModel->viewitem($product_id);
+            $data =[
+                'product_id'=>$item->product_id,
+                'brand'=>$item->brand,
+                'model'=>$item->model,
+                'quantity'=>$item->quantity,
+                'unit_price'=>$item->unit_price
+            ];
+        $this->view('serviceproviders/edititem',$data);
+        }else {
+        $this->view('serviceproviders/edititem',$data);
+        }
+    }
+
+    public function deleteitem($product_id){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $this->serviceProviderModel->deleteitem($product_id);
+            redirect('serviceproviders/inventory');
+            } else {
+                redirect('serviceproviders/inventory');
+            }
+    }
+
+    public function editconfirm(){
+        // Check for POST
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            // Process form
+    
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data =[
+                'quantity' => trim($_POST['quantity']),
+                'unit_price' => trim($_POST['unit_price']),
+                'product_id' => trim($_POST['product_id']),
+                'quantity_err' => '',
+                'unit_price_err' => '',
+            ];
+            if(empty($data['quantity'])){
+                $data['quantity_err'] = 'Please enter the quantity!';
+            }else if($data['quantity'] <= 0){
+                    $data['quantity_err'] = 'Please enter a valid quantity!';
+            }
+
+            // Validate owner address
+            if(empty($data['unit_price'])){
+            $data['unit_price_err'] = 'Please enter the unit price!';
+            }else if($data['unit_price'] <= 0){
+                $data['unit_price_err'] = 'Please enter a valid unit price!';
+        }
+            // Make sure errors are empty
+            if(empty($data['quantity_err']) && empty($data['unit_price_err'])){
+                
+                // Register serviceprovider
+                if($this->serviceProviderModel->updateitem($data)){
+                    // flash('register_success', 'You are registered and can log in');
+                    redirect('serviceproviders/inventory');
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+            // Load view with errors
+            $this->view('serviceproviders/edititem', $data);
+            }
+
+        } else {
+            // Init data
+            $data =[
+                'created_by' => '',
+                'category' => '',
+                'brand' => '',
+                'model' => '',
+                'quantiry' => '',
+                'unit_price' => '',
+                'description' => '',
+                'created_by_err' => '',
+                'category_err' => '',
+                'brand_err' => '',
+                'model_err' => '',
+                'quantity_err' => '',
+                'unit_price_err' => '',
+                'description_err' => ''
+            ];
+
+            // Load view
+            $this->view('serviceproviders/additem', $data);
+        }
+        }
+    
+
         public function edit(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Sanitize POST data
