@@ -1,18 +1,21 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require 'vendor/autoload.php';
 class User {
     private $db;
+    private $mail;
 
     public function __construct(){
         $this->db = new Database;
+        $this->mail = new PHPMailer(true);
     }
 
     // Regsiter user
     public function register($data){
-<<<<<<< Updated upstream
-        $this->db->query('INSERT INTO users (name, email, TelephoneNumber, BirthDate, address, password,profile_photo ,gender) VALUES(:name, :email, :TelephoneNumber, :BirthDate, :address, :password, :photo,:gender)');
-        // Bind values
-        try{
-=======
         $name=$data['name'];
         $email=$data['email'];
         $this->db->query('INSERT INTO users (name, email, TelephoneNumber, BirthDate, address, password,profile_photo ,gender,verification ) VALUES(:name, :email, :TelephoneNumber, :BirthDate, :address, :password, :photo,:gender,:verification )');
@@ -36,7 +39,7 @@ class User {
         $this->mail->Subject = 'Here is the subject';
         $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
         $this->mail->Body = '<div id="overview" style="border: 1px solid #343131;margin: auto;width: 50%;text-align: center">
-          <h1 style="">Hello '.$name.'</h1>
+          <h1 style="">Hello'.$name.'</h1>
           <p style="font-size: 18px;text-align: justify;width: 90%;margin: auto">Thank you for choosing Symphony. We are excited to have you on board!</p>
           <hr style="width:90%;color: #3d3b3b;opacity: 0.3;">
           <p style="font-size: 20px; color: #2e043a;">To complete your account creation, please use the following verification code:</p>
@@ -45,8 +48,7 @@ class User {
         $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
         $this->mail->send();
-           try{
->>>>>>> Stashed changes
+        try{
             $this->db->bind(':name', $data['name']);
             $this->db->bind(':email', $data['email']);
             $this->db->bind(':TelephoneNumber', $data['tel_Number']);
@@ -55,7 +57,7 @@ class User {
             $this->db->bind(':address', $data['address']);
             $this->db->bind(':photo', $data['photo']);
             $this->db->bind(':password', $data['password']);
-
+            $this->db->bind(':verification',$verification_code);
 
             // Execute
             if($this->db->execute()){
@@ -65,12 +67,12 @@ class User {
             }
         }
         catch (PDOException $e) {
-
             die($e->getMessage());
         }
 
     }
 
+    //view user
     public function view($id){
         $this->db->query('SELECT * FROM users WHERE id = :id');
         $this->db->bind(':id', $id);
@@ -78,6 +80,25 @@ class User {
         return $results;
     }
 
+    public function verificationNumber($finalNumber){
+        try{
+//            die($finalNumber);
+            $this->db->query('SELECT * FROM users WHERE  verification= :verification');
+            $this->db->bind(':verification', $finalNumber);
+            $results = $this->db->single();
+            $verification = $results->verification;
+            if($verification == $finalNumber){
+                return true;
+            } else {
+                return false;
+            }
+        }catch(PDOException $e){
+            echo "Database error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+//    update user
     public function update($data){
         try {
             $this->db->query('UPDATE users SET name  = :name , email = :email , TelephoneNumber = :TelephoneNumber , BirthDate = :BirthDate , address = :address WHERE id = :id');
@@ -120,7 +141,6 @@ class User {
     // ---delete acccount----
     public function fectchEncrptedPassword($id,$password){
         try{
-            // die($id);
             $this->db->query('SELECT password FROM users WHERE id = :id');
             $this->db->bind(':id', $id);
             $results = $this->db->single();
