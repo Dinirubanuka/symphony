@@ -138,8 +138,8 @@
             </div>
           </li>
           <li><a class="nav-link" href="/">Orders</a></li>
-          <li><a class="nav-link" href="/">Inventory</a></li>
-          <li><a class="nav-link" href="/">About</a></li>
+            <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/inventory">Inventory</a></li>
+            <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/additem">Add Item</a></li>
         </ul>
       </nav>
     </div>

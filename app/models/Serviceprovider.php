@@ -158,6 +158,56 @@ require 'vendor/autoload.php';
       return $results; 
     }
 
+    public function electricGuitars($serviceprovider_id){
+        $this->db->query('SELECT * FROM products WHERE created_by = :serviceprovider_id AND category = :category');
+        $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+        $this->db->bind(':category', 'Electric_Guitars');
+        $results = $this->db->resultSet();
+        return $results;
+    }
+      public function keyboard($serviceprovider_id){
+          $this->db->query('SELECT * FROM products WHERE created_by = :serviceprovider_id AND category = :category');
+          $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+          $this->db->bind(':category', 'Keyboard');
+          $results = $this->db->resultSet();
+          return $results;
+      }
+      public function acousticGuitars($serviceprovider_id){
+          $this->db->query('SELECT * FROM products WHERE created_by = :serviceprovider_id AND category = :category');
+          $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+          $this->db->bind(':category', 'Acoustic_Guitars');
+          $results = $this->db->resultSet();
+          return $results;
+      }
+      public function amps($serviceprovider_id){
+          $this->db->query('SELECT * FROM products WHERE created_by = :serviceprovider_id AND category = :category');
+          $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+          $this->db->bind(':category', 'Amps');
+          $results = $this->db->resultSet();
+          return $results;
+      }
+      public function bassGuitars($serviceprovider_id){
+          $this->db->query('SELECT * FROM products WHERE created_by = :serviceprovider_id AND category = :category');
+          $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+          $this->db->bind(':category', 'Bass_Guitars');
+          $results = $this->db->resultSet();
+          return $results;
+      }
+      public function bandAndOrchestra($serviceprovider_id){
+          $this->db->query('SELECT * FROM products WHERE created_by = :serviceprovider_id AND category = :category');
+          $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+          $this->db->bind(':category', 'Band_And_Orchestra');
+          $results = $this->db->resultSet();
+          return $results;
+      }
+      public function homeAudio($serviceprovider_id){
+          $this->db->query('SELECT * FROM products WHERE created_by = :serviceprovider_id AND category = :category');
+          $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+          $this->db->bind(':category', 'Home_Audi');
+          $results = $this->db->resultSet();
+          return $results;
+      }
+
     public function verificationNumber($finalNumber){
       try{
           $this->db->query('SELECT * FROM serviceproviders WHERE  verification= :verification');

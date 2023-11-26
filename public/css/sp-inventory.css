@@ -20,6 +20,7 @@
 }
 
 body {
+  text-align: center;
   font-family: inherit;
   /* background-color: var(--white); */
   color: var(--dark-grey);
@@ -307,97 +308,163 @@ button {
     display: none;
   }
 }
-.inventory-grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 20px;
+/*navigatable scroll bar*/
+.thumbnail{
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  position: absolute;
+  /*bottom: 10px;*/
+  z-index: 11;
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  height: 250px;
+  padding: 10px 50px;
+  margin-bottom: 4%;
+  box-sizing: border-box;
+  overflow: auto;
+  justify-content: start;
+}
+.thumbnail::-webkit-scrollbar{
+  width: 0;
+}
+.thumbnail .item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  width: 150px;
+  height: 220px;
+  transition: transform 0.5s;
+  flex-shrink: 0;
+}
+.thumbnail .item img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.thumbnail .item img:hover{
+  filter: brightness(.5);
+}
+.thumbnail .item:hover img{
+  transform: scale(1.09);
+}
+.thumbnail .item .content{
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  /*font-size:20px;*/
+  position: absolute;
+  top: 45%;
+  color: #fff;
+  /*text-align: center;*/
+  /*inset: auto 10px 10px 10px;*/
+}
+@media screen and (max-width: 678px) {
+  .thumbnail{
+    justify-content: start;
+  }
+  .slider .list .item .content h2{
+    font-size: 60px;
+  }
+  .arrows{
+    top: 10%;
+  }
 }
 /* Style the container of the "View Account Requests" page */
-body {
-text-align: center;
-background-color: #f9f9f9;
-color: #333; /* Set default text color */
-}
+/*body {*/
+/*    text-align: center;*/
+/*    background-color: #f9f9f9;*/
+/*    color: #333; !* Set default text color *!*/
+/*}*/
 
 /* Style the "Sort by" select dropdown */
 #sort-select {
-margin: 10px 0;
+  margin: 10px 0;
 }
 
 /* Style the account requests container */
 .account-requests {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 20px;
-max-width: 800px;
-margin: 20px auto;
+  position: absolute;
+  top: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 20px ;
+  padding: 20px;
 }
 
 /* Style each individual account request */
 .request {
-border: 1px solid #ddd;
-border-radius: 5px;
-padding: 20px;
-background-color: #fff;
-text-align: left;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #fff;
+  text-align: left;
 }
 
 /* Style request details, including date, business name, address, mobile number, and email */
 .request-details h2 {
-font-size: 1.2rem;
-margin-top: 0;
+  font-size: 1.2rem;
+  margin-top: 0;
 }
 
 /* Style the request photo */
+.request-photo{
+  height: 200px;
+  width: 200px;
+  overflow: hidden;
+}
 .request-photo img {
-max-width: 100%;
-height: auto;
-border: 1px solid #ddd;
-border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  object-fit:cover;
 }
 
 /* Style the request actions buttons */
 .request-actions {
-display: flex;
-justify-content: space-between;
-margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
 /* Style the "Accept" button */
 .accept-button {
-background-color: #4caf50;
-color: #fff;
-padding: 5px 10px;
-border: none;
-border-radius: 5px;
-cursor: pointer;
+  background-color: #4caf50;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 /* Style the "Decline" button */
 .decline-button {
-background-color: #f44336;
-color: #fff;
-padding: 5px 10px;
-border: none;
-border-radius: 5px;
-cursor: pointer;
+  background-color: #f44336;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 /* Style the "View Details" button */
 .view-details-button {
-background-color: #3498db;
-color: #fff;
-padding: 5px 10px;
-border: none;
-border-radius: 5px;
-cursor: pointer;
+  background-color: #3498db;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 /* Hover effect for the buttons */
 .accept-button:hover,
 .decline-button:hover,
 .view-details-button:hover {
-filter: brightness(90%);
+  filter: brightness(90%);
 }
 
 .additem {

@@ -77,3 +77,29 @@
   });
 
   hamburgerBtn.addEventListener("click", toggleHamburger);
+
+  // inventory categories
+  function triggerAll(){
+    document.getElementById('all').click();
+  }
+  function triggerElectric(){
+    document.getElementById('electricGuitars').click();
+  }
+  function triggerKeyboard(){
+    document.getElementById('keyboard').click();
+  }
+  function triggerAcoustic(){
+    document.getElementById('acousticGuitars').click();
+  }
+  function triggerAmps(){
+    document.getElementById('amps').click();
+  }
+  function triggerBass(){
+    document.getElementById('bassGuitars').click();
+  }
+  function triggerBand(){
+    document.getElementById('bandAndOrchestra').click();
+  }
+  function triggerHome(){
+    document.getElementById('homeAudio').click();
+  }

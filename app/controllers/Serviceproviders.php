@@ -33,7 +33,77 @@
                 'inventory' => $inventory
             ];
             $this->view('serviceproviders/inventory',$data);
+        }
+
+        public function electricGuitars(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $inventory = $this->serviceProviderModel->electricGuitars($_SESSION['serviceprovider_id']);
+                $data =[
+                    'inventory' => $inventory
+                ];
+                $this->view('serviceproviders/inventory',$data);
             }
+        }
+        public function keyboard(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $inventory = $this->serviceProviderModel->keyboard($_SESSION['serviceprovider_id']);
+                $data =[
+                    'inventory' => $inventory
+                ];
+                $this->view('serviceproviders/inventory',$data);
+            }
+
+        }
+        public function acousticGuitars(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $inventory = $this->serviceProviderModel->acousticGuitars($_SESSION['serviceprovider_id']);
+                $data =[
+                    'inventory' => $inventory
+                ];
+                $this->view('serviceproviders/inventory',$data);
+            }
+
+        }
+        public function amps(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $inventory = $this->serviceProviderModel->amps($_SESSION['serviceprovider_id']);
+                $data =[
+                    'inventory' => $inventory
+                ];
+                $this->view('serviceproviders/inventory',$data);
+            }
+
+        }
+        public function bassGuitars(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $inventory = $this->serviceProviderModel->bassGuitars($_SESSION['serviceprovider_id']);
+                $data =[
+                    'inventory' => $inventory
+                ];
+                $this->view('serviceproviders/inventory',$data);
+            }
+
+        }
+        public function bandAndOrchestra(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $inventory = $this->serviceProviderModel->bandAndOrchestra($_SESSION['serviceprovider_id']);
+                $data =[
+                    'inventory' => $inventory
+                ];
+                $this->view('serviceproviders/inventory',$data);
+            }
+
+        }
+        public function homeAudio(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $inventory = $this->serviceProviderModel->homeAudio($_SESSION['serviceprovider_id']);
+                $data =[
+                    'inventory' => $inventory
+                ];
+                $this->view('serviceproviders/inventory',$data);
+            }
+
+        }
 
         public function profilePhotoUpdate(){
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
