@@ -109,9 +109,10 @@
                 </form>
                 <form action = "<?php echo URLROOT; ?>/serviceproviders/deleteitem/<?php echo $inventory->product_id; ?>" method ="post">
                     <div class = "edit-link">
-                        <input class="decline-button" onclick="DeleteItem()" type = "submit" value = "Delete" id = "deleteButton">
+                            <input type = "submit" value = "delete" id="button123" style="display: none">
                     </div>
                 </form>
+                <input class="decline-button" onclick="DeleteItem()" type = "submit" value = "Delete" id = "deleteButton">
                 <!-- <button class="decline-button">Remove</button> -->
             </div>
         </div>

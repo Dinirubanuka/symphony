@@ -5,20 +5,6 @@
   const navMenu = document.querySelector(".menu");
   const links = document.querySelectorAll(".dropdown a");
 
-  function DeleteItem() {
-  // Display a confirmation dialog
-  var confirmed = confirm("Are you sure you want to remove this item from your inventory?");
-  
-  // Check the user's response
-  if (confirmed) {
-    document.getElementById("deleteButton").click();
-    alert("Item Removed.");
-  } else {
-    alert("Deletion canceled.");
-  }
-}
-
-
   function setAriaExpandedFalse() {
     dropdownBtn.forEach((btn) => btn.setAttribute("aria-expanded", "false"));
   }
@@ -103,3 +89,16 @@
   function triggerHome(){
     document.getElementById('homeAudio').click();
   }
+
+  //delete item
+  function DeleteItem() {
+    // Display a confirmation dialog
+    var confirmed = confirm("Are you sure you want to delete your account?");
+    // Check the user's response
+    if (confirmed) {
+      document.getElementById("button123").click();
+    } else {
+      alert("Deletion canceled.");
+    }
+  }
+
