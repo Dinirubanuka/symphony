@@ -16,7 +16,7 @@ require 'vendor/autoload.php';
 
     public function additem($data){
       
-      $this->db->query('INSERT INTO products (created_by, category, brand, model, quantity, unit_price, description, photo_1, photo_2, photo_3) VALUES(:created_by, :category, :brand, :model, :quantity, :unit_price, :description, :photo_1, :photo_2, :photo_3)');
+      $this->db->query('INSERT INTO products (created_by, category, brand, model, quantity, unit_price, photo_1, photo_2, photo_3, Title, Description, outOfStock) VALUES(:created_by, :category, :brand, :model, :quantity, :unit_price, :photo_1, :photo_2, :photo_3, :title, :description, :outOfStock)');
  
       try{
         $this->db->bind(':created_by', $data['created_by']);
@@ -29,6 +29,8 @@ require 'vendor/autoload.php';
         $this->db->bind(':photo_1', $data['photo_1']);
         $this->db->bind(':photo_2', $data['photo_2']);
         $this->db->bind(':photo_3', $data['photo_3']);
+        $this->db->bind(':title', $data['title']);
+        $this->db->bind(':outOfStock', $data['outOfStock']);
 
         // Execute
         if($this->db->execute()){
@@ -42,6 +44,65 @@ require 'vendor/autoload.php';
         die($e->getMessage());
     }
     
+    }
+
+    public function editPhoto($product_id,$data,$photo_num){
+        if ($photo_num == 'photo_1'){
+            try{
+                $this->db->query('UPDATE products SET photo_1 = :photo_1 WHERE product_id = :product_id');
+                $this->db->bind(':photo_1',$data['photo_1']);
+                $this->db->bind(':product_id',$product_id);
+                $this->db->execute();
+            } catch (PDOException $e){
+                echo "Database error: " . $e->getMessage();
+                return false;
+            }
+        }else if ($photo_num == 'photo_2'){
+            try{
+                $this->db->query('UPDATE products SET photo_2 = :photo_2 WHERE product_id = :product_id');
+                $this->db->bind(':photo_2',$data['photo_2']);
+                $this->db->bind(':product_id',$product_id);
+                $this->db->execute();
+            } catch (PDOException $e){
+                echo "Database error: " . $e->getMessage();
+                return false;
+            }
+
+        }else if($photo_num == 'photo_3'){
+            try{
+                $this->db->query('UPDATE products SET photo_3 = :photo_3 WHERE product_id = :product_id');
+                $this->db->bind(':photo_3',$data['photo_3']);
+                $this->db->bind(':product_id',$product_id);
+                $this->db->execute();
+            } catch (PDOException $e){
+                echo "Database error: " . $e->getMessage();
+                return false;
+            }
+        }
+    }
+
+    public function editItem($product_id,$data){
+        try{
+            $this->db->query('UPDATE products SET category  = :category , brand = :brand , model = :model , quantity = :quantity , unit_price = :unit_price , Description = :description  WHERE product_id = :product_id');
+            $this->db->bind(':category', $data['category']);
+            $this->db->bind(':brand', $data['brand']);
+            $this->db->bind(':model', $data['model']);
+            $this->db->bind(':quantity', $data['quantity']);
+            $this->db->bind(':unit_price', $data['unit_price']);
+            $this->db->bind(':description', $data['description']);
+            $this->db->bind(':product_id',$product_id );
+
+            if($this->db->execute()){
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            // Print the exception message
+            echo "Database error: " . $e->getMessage();
+            return false;
+        }
+
     }
     // Regsiter user
     public function register($data){

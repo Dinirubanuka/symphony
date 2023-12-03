@@ -69,7 +69,6 @@ class User {
         catch (PDOException $e) {
             die($e->getMessage());
         }
-
     }
 
     //view user

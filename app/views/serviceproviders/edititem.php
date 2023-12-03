@@ -10,7 +10,7 @@
 <?php require_once APPROOT . '/views/inc/sp-index-nav.php'; ?>
 
 <!-------------register-form----------->
-<h1>Edit Item</h1>
+<h1 style="color: white">Edit Item</h1>
   <form id="edit-item-form" action="<?php echo URLROOT; ?>/serviceproviders/editconfirm" method="POST">
       <input type="hidden" name="brand" >
       <label for="name">Brand: <?php echo $data['brand']; ?></label>

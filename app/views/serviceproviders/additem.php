@@ -10,8 +10,11 @@
 <div class="register">
     <div class="container">
         <p>Add Item</p>
-        <div class="container">
             <form action="<?php echo URLROOT; ?>/serviceproviders/additem" class="form" method="post" enctype="multipart/form-data">
+                <div class="input-box">
+                    <label>Title</label>
+                    <input type="text" name="title" class="<?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['title']; ?>">
+                </div>
 <!--                category-->
                 <div class="input-box">
                     <label>Category</label>
@@ -63,20 +66,6 @@
                     <label>Brand</label>
                     <div class="custom-select">
                         <select id="brandSelect" name="brand">
-<!--                            <option value="Yamaha">Yamaha</option>-->
-<!--                            <option value="Gibson">Gibson</option>-->
-<!--                            <option value="Ibanez">Ibanez</option>-->
-<!--                            <option value="PRS(Paul Reed Smith)">PRS(Paul Reed Smith)</option>-->
-<!--                            <option value="Epiphone">Epiphone</option>-->
-<!--                            <option value="Gretsch">Gretsch</option>-->
-<!--                            <option value="Jackson">Jackson</option>-->
-<!--                            <option value="Taylor">Taylor</option>-->
-<!--                            <option value="Martin">Martin</option>-->
-<!--                            <option value="Schecter">Schecter</option>-->
-<!--                            <option value="ESP">ESP</option>-->
-<!--                            <option value="Music Man">Music Man</option>-->
-<!--                            <option value="Rickenbacker">Rickenbacker</option>-->
-<!--                            <option value="Washburn">Washburn</option>-->
                         </select>
                     </div>
                 </div>
@@ -101,41 +90,37 @@
                         <label>Description</label>
                     </div>
                     <div class="textArea">
-                        <textarea id="description" name="description" rows="4" required></textarea>
+                        <textarea id="description" name="description" rows="4" required style="width: 290px;height: 150px"></textarea>
                     </div>
                 </div>
 <!--                photos-->
                 <div class="photo_container">
                     <div class="input-box">
-                        <label style="font-weight: bold">Add up to 3 photos</label>
+                        <label style="font-weight: bold">Add up to 3 photos (Must be 3 photos)</label>
                     </div>
                     <div class="photo-table">
                         <div class="photo-outer">
                             <div class="photo-inner">
-<!--                                <img src="<?php echo URLROOT; ?>/img/mag_img/<?php echo $data['photo']?>" alt="user image" class = "photo" id="photo-1"/>-->
-                                <!-- <img src="<?php echo URLROOT;?>/img/add-image.png" onclick="triggerInput()"> -->
-                                <input type="file" id="photo_1" accept=".jpg, .jpeg, .png, .HEIC" name="photo_1" class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['photo_1']; ?>">
+                                <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_1" onclick="triggerInput(1)">
+                                <input type="file" id="photo_1" accept=".jpg, .jpeg, .png, .HEIC" name="photo_1" class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['photo_1']; ?>" onchange="previewImage(this, 'previewPhoto_1')" required>
                             </div>
                         </div>
                         <div class="photo-outer">
                             <div class="photo-inner">
-                                <!--                                <img src="<?php echo URLROOT; ?>/img/mag_img/<?php echo $data['photo']?>" alt="user image" class = "photo" id="photo-1"/>-->
-                                <!-- <img src="<?php echo URLROOT;?>/img/add-image.png" onclick="triggerInput()"> -->
-                                <input type="file" id="photo_2" accept=".jpg, .jpeg, .png, .HEIC" name="photo_2" class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['photo_2']; ?>">
+                                <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_2" onclick="triggerInput(2)">
+                                <input type="file" id="photo_2" accept=".jpg, .jpeg, .png, .HEIC" name="photo_2" class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['photo_2']; ?>" onchange="previewImage(this, 'previewPhoto_2')" required>
                             </div>
                         </div>
                         <div class="photo-outer">
                             <div class="photo-inner">
-                                <!--                                <img src="<?php echo URLROOT; ?>/img/mag_img/<?php echo $data['photo']?>" alt="user image" class = "photo" id="photo-1"/>-->
-                                <!-- <img src="<?php echo URLROOT;?>/img/add-image.png" onclick="triggerInput()"> -->
-                                <input type="file" id="photo_3" accept=".jpg, .jpeg, .png, .HEIC" name="photo_3" class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['photo_3']; ?>">
+                                <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_3" onclick="triggerInput(3)">
+                                <input type="file" id="photo_3" accept=".jpg, .jpeg, .png, .HEIC" name="photo_3" class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['photo_3']; ?>" onchange="previewImage(this, 'previewPhoto_3')" required>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button>Submit</button>
+                <button id="submitBtn">Submit</button>
             </form>
-        </div>
     </div>
 </div>
 <script src="<?php echo URLROOT;?>/js/sp-additem.js"></script>

@@ -1,6 +1,19 @@
 // add photo
-function triggerInput(){
-    document.getElementById("photo").click();
+function triggerInput(id){
+    document.getElementById("photo_"+id).click();
+}
+function previewImage(input, imgId) {
+    var preview = document.getElementById(imgId);
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
 }
 
 // categories and brands dynamically
@@ -249,23 +262,8 @@ function updateSubBrandOptions(){
             addBrandOption('Stomvi');
 
         }
-        // addBrandOption('Yamaha');
-        // addBrandOption('Gibson');
-        // addBrandOption('Epiphone');
-        // addBrandOption('Ibanez');
-        // addBrandOption('Jackson');
-        // addBrandOption('Schecter');
-        // addBrandOption('ESP');
-        // addBrandOption('Washburn');
-        // addBrandOption('Charvel');
     }
 }
-// addBrandOption.forEach(function (brand) {
-//     var option = document.createElement("option");
-//     option.value = brand;
-//     option.text = brand;
-//     brandSelect.add(option);
-// });
 
 function addBrandOption(brand) {
     var brandSelect = document.getElementById('brandSelect');

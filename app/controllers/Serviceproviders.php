@@ -34,75 +34,98 @@
             ];
             $this->view('serviceproviders/inventory',$data);
         }
+        public function inventoryDelete(){
+            if($_SERVER['REQUEST_METHOD'] == 'GET'){
+                $inventory = $this->serviceProviderModel->inventory($_SESSION['serviceprovider_id']);
+            $data =[
+                'inventory' => $inventory
+            ];
+            }
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            exit();
+        }
+
+        //thumbnail category
+        public function inventoryAll(){
+            $inventory = $this->serviceProviderModel->inventory($_SESSION['serviceprovider_id']);
+            $data =[
+                'inventory' => $inventory
+           ];
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            exit();
+        }
 
         public function electricGuitars(){
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $inventory = $this->serviceProviderModel->electricGuitars($_SESSION['serviceprovider_id']);
                 $data =[
                     'inventory' => $inventory
                 ];
-                $this->view('serviceproviders/inventory',$data);
-            }
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            exit();
+//                $this->view('serviceproviders/inventory',$data);
         }
         public function keyboard(){
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $inventory = $this->serviceProviderModel->keyboard($_SESSION['serviceprovider_id']);
                 $data =[
                     'inventory' => $inventory
                 ];
-                $this->view('serviceproviders/inventory',$data);
-            }
-
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            exit();
+//                $this->view('serviceproviders/inventory',$data);
         }
         public function acousticGuitars(){
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $inventory = $this->serviceProviderModel->acousticGuitars($_SESSION['serviceprovider_id']);
                 $data =[
                     'inventory' => $inventory
                 ];
-                $this->view('serviceproviders/inventory',$data);
-            }
-
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            exit();
+//                $this->view('serviceproviders/inventory',$data);
         }
         public function amps(){
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $inventory = $this->serviceProviderModel->amps($_SESSION['serviceprovider_id']);
                 $data =[
                     'inventory' => $inventory
                 ];
-                $this->view('serviceproviders/inventory',$data);
-            }
-
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            exit();
+//                $this->view('serviceproviders/inventory',$data);
         }
         public function bassGuitars(){
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $inventory = $this->serviceProviderModel->bassGuitars($_SESSION['serviceprovider_id']);
                 $data =[
                     'inventory' => $inventory
                 ];
-                $this->view('serviceproviders/inventory',$data);
-            }
-
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            exit();
+//                $this->view('serviceproviders/inventory',$data);
         }
         public function bandAndOrchestra(){
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $inventory = $this->serviceProviderModel->bandAndOrchestra($_SESSION['serviceprovider_id']);
                 $data =[
                     'inventory' => $inventory
                 ];
-                $this->view('serviceproviders/inventory',$data);
-            }
-
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            exit();
+//                $this->view('serviceproviders/inventory',$data);
         }
         public function homeAudio(){
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $inventory = $this->serviceProviderModel->homeAudio($_SESSION['serviceprovider_id']);
                 $data =[
                     'inventory' => $inventory
                 ];
-                $this->view('serviceproviders/inventory',$data);
-            }
-
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            exit();
+//                $this->view('serviceproviders/inventory',$data);
         }
 
         public function profilePhotoUpdate(){
@@ -175,20 +198,301 @@
         $this->view('serviceproviders/edit',$data);
         }
     }
+        public function edititem($product_id){
+            // Check for POST
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                // Process form
+                $img1_name = $_FILES['photo_1-'.$product_id]['name'];
+                $img1_size = $_FILES['photo_1-'.$product_id]['size'];
+                $tmp1_name = $_FILES['photo_1-'.$product_id]['tmp_name'];
+                $error1 = $_FILES['photo_1-'.$product_id]['error'];
 
-    public function edititem($product_id){
+                $img2_name = $_FILES['photo_2-'.$product_id]['name'];
+                $img2_size = $_FILES['photo_2-'.$product_id]['size'];
+                $tmp2_name = $_FILES['photo_2-'.$product_id]['tmp_name'];
+                $error2 = $_FILES['photo_2-'.$product_id]['error'];
+
+                $img3_name = $_FILES['photo_3-'.$product_id]['name'];
+                $img3_size = $_FILES['photo_3-'.$product_id]['size'];
+                $tmp3_name = $_FILES['photo_3-'.$product_id]['tmp_name'];
+                $error3 = $_FILES['photo_3-'.$product_id]['error'];
+
+                if ($error1 === UPLOAD_ERR_NO_FILE) {
+                    $new_img1_name = 'IMG-653fd611dd2445.48951448.png';
+                } else {
+                    $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
+                    $img_ex_lc = strtolower($img_ex);
+                    $new_img1_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
+                    $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
+                    $bool = move_uploaded_file($tmp1_name, $img_upload_path);
+
+                    $data =[
+                        'photo_1' => $new_img1_name
+                    ];
+
+                    $this->serviceProviderModel->editPhoto($product_id,$data,'photo_1');
+                }
+
+                if ($error2 === UPLOAD_ERR_NO_FILE){
+                    $new_img2_name = 'IMG-6560baec22ff65.10062636.png';
+                }else{
+                    $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
+                    $img_ex_lc = strtolower($img_ex);
+                    $new_img2_name = uniqid("IMG-", true).'.'.$img_ex_lc;
+                    $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
+                    $bool =move_uploaded_file($tmp2_name, $img_upload_path);
+
+                    $data =[
+                        'photo_2' => $new_img2_name
+                    ];
+                    $this->serviceProviderModel->editPhoto($product_id,$data,'photo_2');
+                }
+
+                if ($error3 === UPLOAD_ERR_NO_FILE){
+                    $new_img3_name = 'IMG-6560baec22ff65.10062636.png';
+                }else{
+                    $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
+                    $img_ex_lc = strtolower($img_ex);
+                    $new_img3_name = uniqid("IMG-", true).'.'.$img_ex_lc;
+                    $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
+                    $bool =move_uploaded_file($tmp3_name, $img_upload_path);
+
+                    $data =[
+                        'photo_3' => $new_img3_name
+                    ];
+                    $this->serviceProviderModel->editPhoto($product_id,$data,'photo_3');
+                }
+
+                // Init data
+                $data =[
+                    'title' =>trim($_POST['title']),
+                    'created_by' => $_SESSION['serviceprovider_id'],
+                    'category' => trim($_POST['category']),
+                    'brand' => trim($_POST['brand']),
+                    'model' => trim($_POST['model']),
+                    'quantity' => trim($_POST['quantity']),
+                    'unit_price' => trim($_POST['unit_price']),
+                    'description' => trim($_POST['description']),
+                    'created_by_err' => '',
+                    'category_err' => '',
+                    'brand_err' => '',
+                    'model_err' => '',
+                    'quantity_err' => '',
+                    'unit_price_err' => '',
+                    'description_err' => ''
+                ];
+
+                if(empty($data['title'])){
+                    $data['title_err'] = 'Title cannot be empty!';
+                }
+
+                if(empty($data['category'])){
+                    $data['category_err'] = 'Please select a category!';
+                }
+
+                if(empty($data['brand'])){
+                    $data['brand_err'] = 'Please select a brand!';
+                }
+
+                if(empty($data['model'])){
+                    $data['model_err'] = 'Please enter the item model!';
+                }
+
+                if(empty($data['quantity'])){
+                    $data['quantity_err'] = 'Please enter the quantity!';
+                }else if($data['quantity'] <= 0){
+                    $data['quantity_err'] = 'Please enter a valid quantity!';
+                }
+
+                if(empty($data['unit_price'])){
+                    $data['unit_price_err'] = 'Please enter the unit price!';
+                }else if($data['unit_price'] <= 0){
+                    $data['unit_price_err'] = 'Please enter a valid unit price!';
+                }
+
+                if(empty($data['description'])){
+                    $data['description_err'] = 'Please enter the item description!';
+                }
+
+                if(empty($data['category_err']) && empty($data['title_err']) && empty($data['brand_err']) && empty($data['model_err']) && empty($data['quantity_err']) && empty($data['unit_price_err']) && empty($data['description_err'])){
+
+                    // Register serviceprovider
+                    if($this->serviceProviderModel->editItem($product_id,$data)){
+                        // flash('register_success', 'You are registered and can log in');
+                        redirect('serviceproviders/inventory');
+                    } else {
+                        die('Something went wrong');
+                    }
+                } else {
+                    // Load view with errors
+                    $this->view('serviceproviders/additem', $data);
+                }
+
+            } else {
+                // Init data
+                $data =[
+                    'title' => '',
+                    'created_by' => '',
+                    'category' => '',
+                    'brand' => '',
+                    'model' => '',
+                    'quantiry' => '',
+                    'unit_price' => '',
+                    'description' => '',
+                    'created_by_err' => '',
+                    'category_err' => '',
+                    'brand_err' => '',
+                    'model_err' => '',
+                    'quantity_err' => '',
+                    'unit_price_err' => '',
+                    'description_err' => ''
+                ];
+
+                // Load view
+                $this->view('serviceproviders/additem', $data);
+            }
+        }
+    public function additem(){
+        // Check for POST
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $item = $this->serviceProviderModel->viewitem($product_id);
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $img1_name = $_FILES['photo_1']['name'];
+            $img1_size = $_FILES['photo_1']['size'];
+            $tmp1_name = $_FILES['photo_1']['tmp_name'];
+            $error1 = $_FILES['photo_1']['error'];
+
+            $img2_name = $_FILES['photo_2']['name'];
+            $img2_size = $_FILES['photo_2']['size'];
+            $tmp2_name = $_FILES['photo_2']['tmp_name'];
+            $error2 = $_FILES['photo_2']['error'];
+
+            $img3_name = $_FILES['photo_3']['name'];
+            $img3_size = $_FILES['photo_3']['size'];
+            $tmp3_name = $_FILES['photo_3']['tmp_name'];
+            $error3 = $_FILES['photo_3']['error'];
+
+            if ($error1 === UPLOAD_ERR_NO_FILE) {
+                $new_img1_name = 'IMG-656bdc23223334.62765635.png';
+            } else {
+                $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
+                $new_img1_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
+                $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
+                $bool = move_uploaded_file($tmp1_name, $img_upload_path);
+            }
+
+            if ($error2 === UPLOAD_ERR_NO_FILE){
+                $new_img2_name = 'IMG-656bdc23223334.62765635.png';
+            }else{
+                $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
+                $new_img2_name = uniqid("IMG-", true).'.'.$img_ex_lc;
+                $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
+                $bool =move_uploaded_file($tmp2_name, $img_upload_path);
+            }
+
+            if ($error3 === UPLOAD_ERR_NO_FILE){
+                $new_img3_name = 'IMG-656bdc23223334.62765635.png';
+            }else{
+                $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
+                $new_img3_name = uniqid("IMG-", true).'.'.$img_ex_lc;
+                $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
+                $bool =move_uploaded_file($tmp3_name, $img_upload_path);
+            }
+
+            // Init data
             $data =[
-                'product_id'=>$item->product_id,
-                'brand'=>$item->brand,
-                'model'=>$item->model,
-                'quantity'=>$item->quantity,
-                'unit_price'=>$item->unit_price
+                'title' =>trim($_POST['title']),
+                'created_by' => $_SESSION['serviceprovider_id'],
+                'category' => trim($_POST['category']),
+                'brand' => trim($_POST['brand']),
+                'model' => trim($_POST['model']),
+                'quantity' => trim($_POST['quantity']),
+                'unit_price' => trim($_POST['unit_price']),
+                'description' => trim($_POST['description']),
+                'photo_1' => $new_img1_name,
+                'photo_2' => $new_img2_name,
+                'photo_3' => $new_img3_name,
+                'outOfStock'=>0,
+                'created_by_err' => '',
+                'category_err' => '',
+                'brand_err' => '',
+                'model_err' => '',
+                'quantity_err' => '',
+                'unit_price_err' => '',
+                'description_err' => ''
             ];
-        $this->view('serviceproviders/edititem',$data);
-        }else {
-        $this->view('serviceproviders/edititem',$data);
+
+            if(empty($data['title'])){
+                $data['title_err'] = 'Title cannot be empty!';
+            }
+
+            if(empty($data['category'])){
+                $data['category_err'] = 'Please select a category!';
+            }
+
+            if(empty($data['brand'])){
+                $data['brand_err'] = 'Please select a brand!';
+            }
+
+            if(empty($data['model'])){
+                $data['model_err'] = 'Please enter the item model!';
+            }
+
+            if(empty($data['quantity'])){
+                $data['quantity_err'] = 'Please enter the quantity!';
+            }else if($data['quantity'] <= 0){
+                $data['quantity_err'] = 'Please enter a valid quantity!';
+            }
+
+            if(empty($data['unit_price'])){
+                $data['unit_price_err'] = 'Please enter the unit price!';
+            }else if($data['unit_price'] <= 0){
+                $data['unit_price_err'] = 'Please enter a valid unit price!';
+            }
+
+            if(empty($data['description'])){
+                $data['description_err'] = 'Please enter the item description!';
+            }
+
+            if(empty($data['category_err']) && empty($data['title_err']) && empty($data['brand_err']) && empty($data['model_err']) && empty($data['quantity_err']) && empty($data['unit_price_err']) && empty($data['description_err'])){
+
+                // Register serviceprovider
+                if($this->serviceProviderModel->additem($data)){
+                    // flash('register_success', 'You are registered and can log in');
+                    redirect('serviceproviders/inventory');
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                // Load view with errors
+                $this->view('serviceproviders/additem', $data);
+            }
+
+        } else {
+            // Init data
+            $data =[
+                'title' => '',
+                'created_by' => '',
+                'category' => '',
+                'brand' => '',
+                'model' => '',
+                'quantiry' => '',
+                'unit_price' => '',
+                'description' => '',
+                'created_by_err' => '',
+                'category_err' => '',
+                'brand_err' => '',
+                'model_err' => '',
+                'quantity_err' => '',
+                'unit_price_err' => '',
+                'description_err' => ''
+            ];
+
+            // Load view
+            $this->view('serviceproviders/additem', $data);
         }
     }
 
@@ -386,151 +690,6 @@
             redirect('serviceproviders/profile');
         }
         }
-    
-        
-        public function additem(){
-            // Check for POST
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                // Process form
-        
-                // Sanitize POST data
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-                $img1_name = $_FILES['photo_1']['name'];
-                $img1_size = $_FILES['photo_1']['size'];
-                $tmp1_name = $_FILES['photo_1']['tmp_name'];
-                $error1 = $_FILES['photo_1']['error'];
-    
-                if ($error1 === UPLOAD_ERR_NO_FILE){
-                    $new_img1_name = 'IMG-6560baec22ff65.10062636.png';
-                }else{
-                    $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
-                    $img_ex_lc = strtolower($img_ex);
-                    $new_img1_name = uniqid("IMG-", true).'.'.$img_ex_lc;
-                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/'.$new_img1_name;
-                    $bool =move_uploaded_file($tmp1_name, $img_upload_path);
-                }
-
-                $img2_name = $_FILES['photo_2']['name'];
-                $img2_size = $_FILES['photo_2']['size'];
-                $tmp2_name = $_FILES['photo_2']['tmp_name'];
-                $error2 = $_FILES['photo_2']['error'];
-    
-                if ($error2 === UPLOAD_ERR_NO_FILE){
-                    $new_img2_name = 'IMG-6560baec22ff65.10062636.png';
-                }else{
-                    $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
-                    $img_ex_lc = strtolower($img_ex);
-                    $new_img2_name = uniqid("IMG-", true).'.'.$img_ex_lc;
-                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/'.$new_img2_name;
-                    $bool =move_uploaded_file($tmp2_name, $img_upload_path);
-                }
-
-                $img3_name = $_FILES['photo_3']['name'];
-                $img3_size = $_FILES['photo_3']['size'];
-                $tmp3_name = $_FILES['photo_3']['tmp_name'];
-                $error3 = $_FILES['photo_3']['error'];
-    
-                if ($error3 === UPLOAD_ERR_NO_FILE){
-                    $new_img3_name = 'IMG-6560baec22ff65.10062636.png';
-                }else{
-                    $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
-                    $img_ex_lc = strtolower($img_ex);
-                    $new_img3_name = uniqid("IMG-", true).'.'.$img_ex_lc;
-                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/'.$new_img3_name;
-                    $bool =move_uploaded_file($tmp3_name, $img_upload_path);
-                }
-                
-                // Init data
-                $data =[
-                    'created_by' => $_SESSION['serviceprovider_id'],
-                    'category' => trim($_POST['category']),
-                    'brand' => trim($_POST['brand']),
-                    'model' => trim($_POST['model']),
-                    'quantity' => trim($_POST['quantity']),
-                    'unit_price' => trim($_POST['unit_price']),
-                    'description' => trim($_POST['description']),
-                    'photo_1' => $new_img1_name,
-                    'photo_2' => $new_img2_name,
-                    'photo_3' => $new_img3_name,
-                    'created_by_err' => '',
-                    'category_err' => '',
-                    'brand_err' => '',
-                    'model_err' => '',
-                    'quantity_err' => '',
-                    'unit_price_err' => '',
-                    'description_err' => ''
-                ];
-    
-                // Validate business name
-                if(empty($data['category'])){
-                $data['category_err'] = 'Please select a category!';
-                }
-    
-                // Validate business address
-                if(empty($data['brand'])){
-                $data['brand_err'] = 'Please select a brand!';
-                }
-    
-                // Validate business contact number
-                if(empty($data['model'])){
-                $data['model_err'] = 'Please enter the item model!';
-                }
-
-                if(empty($data['quantity'])){
-                    $data['quantity_err'] = 'Please enter the quantity!';
-                }else if($data['quantity'] <= 0){
-                        $data['quantity_err'] = 'Please enter a valid quantity!';
-                }
-    
-                // Validate owner address
-                if(empty($data['unit_price'])){
-                $data['unit_price_err'] = 'Please enter the unit price!';
-                }else if($data['unit_price'] <= 0){
-                    $data['unit_price_err'] = 'Please enter a valid unit price!';
-            }
-    
-                // Validate owner contact number
-                if(empty($data['description'])){
-                    $data['description_err'] = 'Please enter the item description!';
-                }
-                // Make sure errors are empty
-                if(empty($data['category_err']) && empty($data['brand_err']) && empty($data['model_err']) && empty($data['quantity_err']) && empty($data['unit_price_err']) && empty($data['description_err'])){
-                    
-                    // Register serviceprovider
-                    if($this->serviceProviderModel->additem($data)){
-                        // flash('register_success', 'You are registered and can log in');
-                        redirect('serviceproviders/inventory');
-                    } else {
-                        die('Something went wrong');
-                    }
-                } else {
-                // Load view with errors
-                $this->view('serviceproviders/additem', $data);
-                }
-    
-            } else {
-                // Init data
-                $data =[
-                    'created_by' => '',
-                    'category' => '',
-                    'brand' => '',
-                    'model' => '',
-                    'quantiry' => '',
-                    'unit_price' => '',
-                    'description' => '',
-                    'created_by_err' => '',
-                    'category_err' => '',
-                    'brand_err' => '',
-                    'model_err' => '',
-                    'quantity_err' => '',
-                    'unit_price_err' => '',
-                    'description_err' => ''
-                ];
-    
-                // Load view
-                $this->view('serviceproviders/additem', $data);
-            }
-            }
             public function verification(){
                 if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     
