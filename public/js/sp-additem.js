@@ -19,18 +19,18 @@ function previewImage(input, imgId) {
 // categories and brands dynamically
 function updateBrandOptions() {
     var categorySelect = document.getElementById('categorySelect');
-    var bandOrchestraCategories = document.getElementById("bandOrchestraCategories");
-    var homeAudio = document.getElementById("homeAudioCategory");
+    var bandOrchestraCategories = document.getElementById("band");
+    var homeAudio = document.getElementById("home");
 
-    if (categorySelect.value === "Band_And_Orchestra") {
-        bandOrchestraCategories.style.display = "block";
+    if (categorySelect.value === "Brass") {
+        bandOrchestraCategories.classList.remove("band");
     } else {
-        bandOrchestraCategories.style.display = "none";
+        bandOrchestraCategories.classList.add("band");
     }
-    if (categorySelect.value === "Home_Audi") {
-        homeAudio.style.display = "block";
+    if (categorySelect.value === "sounds") {
+        homeAudio.classList.remove("home");
     } else {
-        homeAudio.style.display = "none";
+        homeAudio.classList.add("home");
     }
     updateSubBrandOptions();
 }
@@ -79,30 +79,7 @@ function updateSubBrandOptions(){
         addBrandOption('Novation');
         addBrandOption('Arturia');
 
-    } else if (categorySelect.value === 'Amps') {
-        addBrandOption('Fender');
-        addBrandOption('Marshall');
-        addBrandOption('Messa/Boogie');
-        addBrandOption('Peavey');
-        addBrandOption('Ampeg');
-        addBrandOption('Blackstar Amplification');
-        addBrandOption('Roland');
-        addBrandOption('Bugera');
-        addBrandOption('Hartke');
-
-    }else if (categorySelect.value === 'Bass_Guitars') {
-        // addBrandOption = ["Yamaha","Gibson","Epiphone","Ibanez","Jackson","Schecter","ESP","Washburn","Charvel"];
-        addBrandOption('Yamaha');
-        addBrandOption('Gibson');
-        addBrandOption('Epiphone');
-        addBrandOption('Ibanez');
-        addBrandOption('Jackson');
-        addBrandOption('Schecter');
-        addBrandOption('ESP');
-        addBrandOption('Washburn');
-        addBrandOption('Charvel');
-
-    }else if (categorySelect.value === 'Band_And_Orchestra') {
+    }else if (categorySelect.value === 'Brass') {
         if (subcategorySelect.value === "Woodwind") {
             addBrandOption('Yamaha');
             addBrandOption('Selmer');
@@ -142,17 +119,6 @@ function updateSubBrandOptions(){
             addBrandOption('Vandoren');
             addBrandOption('Schreiber');
 
-        } else if (subcategorySelect.value === "Brass") {
-            addBrandOption('Yamaha');
-            addBrandOption('Gibson');
-            addBrandOption('Epiphone');
-            addBrandOption('Ibanez');
-            addBrandOption('Jackson');
-            addBrandOption('Schecter');
-            addBrandOption('ESP');
-            addBrandOption('Washburn');
-            addBrandOption('Charvel');
-
         }else if (subcategorySelect.value === "Trumpets") {
             addBrandOption('Yamaha');
             addBrandOption('Schilke');
@@ -188,7 +154,7 @@ function updateSubBrandOptions(){
 
         }
 
-    }else if (categorySelect.value === 'Home_Audi') {
+    }else if (categorySelect.value === 'sounds') {
         if (homeAudio.value === "Headphones") {
             addBrandOption('Yamaha');
             addBrandOption('Selmer');
@@ -260,6 +226,17 @@ function updateSubBrandOptions(){
             addBrandOption('Holton');
             addBrandOption('Besson');
             addBrandOption('Stomvi');
+
+        } else if (homeAudio.value === 'amps') {
+            addBrandOption('Fender');
+            addBrandOption('Marshall');
+            addBrandOption('Messa/Boogie');
+            addBrandOption('Peavey');
+            addBrandOption('Ampeg');
+            addBrandOption('Blackstar Amplification');
+            addBrandOption('Roland');
+            addBrandOption('Bugera');
+            addBrandOption('Hartke');
 
         }
     }

@@ -42,6 +42,12 @@ html {
     gap:60px;
     margin-top: 20px;
 }
+.container .band{
+    display: none;
+}
+.container .home{
+    display: none;
+}
 .container .input-box label{
     /*border: 1px solid black;*/
     font-size: 1.5rem;

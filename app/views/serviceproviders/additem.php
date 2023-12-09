@@ -23,42 +23,45 @@
                             <option value="Electric_Guitars">Electric guitars</option>
                             <option value="Keyboard">Keyboard</option>
                             <option value="Acoustic_Guitars">Acoustic Guitars</option>
-                            <option value="Amps">Amps</option>
-                            <option value="Bass_Guitars">Bass guitars</option>
-                            <option value="Band_And_Orchestra">Band and Orchestra</option>
-                            <option value="Home_Audi">Home Audio</option>
-                        </select>
-                    </div>
-                </div>
-<!--                band and orchestra-->
-                <div class="input-box">
-                    <label>Band and Orchestra category</label>
-                    <div class="custom-select">
-                        <select id="bandOrchestraCategories" onchange="updateSubBrandOptions()">
-                            <option value="Woodwind">Woodwind</option>
-                            <option value="Saxophones">Saxophones</option>
-                            <option value="Flutes">Flutes</option>
-                            <option value="Clarinets">Clarinets</option>
                             <option value="Brass">Brass</option>
-                            <option value="Trumpets">Trumpets</option>
-                            <option value="String">String</option>
-                            <option value="Violins">Violins</option>
+                            <option value="sounds">sounds</option>
                         </select>
                     </div>
                 </div>
-<!--                home audio-->
-                <div class="input-box">
-                    <label>Home Audio category</label>
-                    <div class="custom-select">
-                        <select id="homeAudioCategory" onchange="updateSubBrandOptions()">
-                            <option value="Headphones">Headphones</option>
-                            <option value="Receivers">Receivers</option>
-                            <option value="Amplifiers">Amplifiers</option>
-                            <option value="Floor speakers">Floor speakers</option>
-                            <option value="Subwoofers">Subwoofers</option>
-                            <option value="Tape Decks">Tape Decks</option>
-                            <option value="Turntables">Turntables</option>
-                        </select>
+<!--              brass-->
+                <div class="band" id="band">
+                    <div class="input-box">
+                        <label>Brass</label>
+                        <div class="custom-select">
+                            <select id="bandOrchestraCategories" onchange="updateSubBrandOptions()" name="brass">
+                                <option value="Woodwind">Woodwind</option>
+                                <option value="Saxophones">Saxophones</option>
+                                <option value="Flutes">Flutes</option>
+                                <option value="Clarinets">Clarinets</option>
+                                <option value="Brass">Brass</option>
+                                <option value="Trumpets">Trumpets</option>
+                                <option value="String">String</option>
+                                <option value="Violins">Violins</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+<!--                sounds-->
+                <div class="home" id="home">
+                    <div class="input-box">
+                        <label>Sounds</label>
+                        <div class="custom-select">
+                            <select id="homeAudioCategory" onchange="updateSubBrandOptions()" name="sounds">
+                                <option value="Headphones">Headphones</option>
+                                <option value="Receivers">Receivers</option>
+                                <option value="Amplifiers">Amplifiers</option>
+                                <option value="Floor speakers">Floor speakers</option>
+                                <option value="Subwoofers">Subwoofers</option>
+                                <option value="Tape Decks">Tape Decks</option>
+                                <option value="Turntables">Turntables</option>
+                                <option value="amps">amps</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 <!--                brand-->
@@ -69,20 +72,33 @@
                         </select>
                     </div>
                 </div>
+<!--                ..... availability / out of stock.....-->
+                <div class="input-box">
+                    <label>Availability</label>
+                    <select name="availabilty" id="availability`+item.product_id+`">
+                        <option value="0">Available</option>
+                        <option value="1">Unavailable</option>
+                    </select>
+                </div>
 <!--                Model-->
                 <div class="input-box">
                     <label>Model</label>
-                    <input type="text" name="model" class="<?php echo (!empty($data['model_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['model']; ?>">
+                    <input type="text" required name="model" class="<?php echo (!empty($data['model_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['model']; ?>">
                 </div>
                 <!--                quantity-->
                 <div class="input-box">
                     <label>Quantity</label>
-                    <input type="number" name="quantity" class="<?php echo (!empty($data['quantity_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['quantity']; ?>">
+                    <input type="number" required name="quantity" class="<?php echo (!empty($data['quantity_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['quantity']; ?>">
                 </div>
                 <!--                Unit price-->
                 <div class="input-box">
                     <label>Unit Price (Lkr)</label>
-                    <input type="number" name="unit_price" class="<?php echo (!empty($data['unit_price_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['unit_price']; ?>">
+                    <input type="number" required name="unit_price" class="<?php echo (!empty($data['unit_price_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['unit_price']; ?>">
+                </div>
+<!--                warranty date-->
+                <div class="input-box">
+                    <label>Warranty date</label>
+                    <input type="date" required name="warranty" class="<?php echo (!empty($data['warranty_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['warranty']; ?>">
                 </div>
 <!--                description-->
                 <div class="description">

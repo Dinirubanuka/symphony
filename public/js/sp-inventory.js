@@ -172,7 +172,7 @@
         `<div class="item-modal item-modal`+item.product_id+`">`+
     `<div class="addItem">`+
         `<a href="" onclick="addItem(`+item.product_id+`)">X</a>`+
-        `<p>Add Item</p>`+
+        `<p>Edit details</p>`+
         `<form id="edit-item-form" action="http://localhost/symphony/serviceproviders/edititem/`+item.product_id+`" method="POST" enctype="multipart/form-data">`+
             `<div class="input-box">`+
                 `<label>Title</label>`+
@@ -186,27 +186,25 @@
                         `<option value="Electric_Guitars" `+(item.category === 'Electric_Guitars' ? 'selected' : '')+`>Electric guitars</option>`+
                         `<option value="Keyboard" `+(item.category === 'Keyboard' ? 'selected' : '')+`>Keyboard</option>`+
                         `<option value="Acoustic_Guitars" `+(item.category === 'Acoustic_Guitars' ? 'selected' : '')+`>Acoustic Guitars</option>`+
-                        `<option value="Amps" `+(item.category === 'Amps' ? 'selected' : '')+`>Amps</option>`+
-                        `<option value="Bass_Guitars" `+(item.category === 'Bass_Guitars' ? 'selected' : '')+`>Bass guitars</option>`+
-                        `<option value="Band_And_Orchestra" `+(item.category === 'Band_And_Orchestra' ? 'selected' : '')+`>Band and Orchestra</option>`+
-                        `<option value="Home_Audi" `+(item.category === 'Home_Audi' ? 'selected' : '')+`>Home Audio</option>`+
+                        `<option value="Brass" `+(item.category === 'Brass' ? 'selected' : '')+`>Brass</option>`+
+                        `<option value="sounds" `+(item.category === 'sounds' ? 'selected' : '')+`>Sounds</option>`+
                 `</select>`+
                 `</div>`+
             `</div>`+
                 `<!--                band and orchestra-->`+
             `<div className="band" id="band`+item.product_id+`">`+
             `<div class="input-box">`+
-                `<label>Band and Orchestra category</label>`+
+                `<label>Brass category</label>`+
                 `<div class="custom-select">`+
-                    `<select id="bandOrchestraCategories`+item.product_id+`" onchange="updateSubBrandOptions(`+item.product_id+`)">`+
-                        `<option value="Woodwind">Woodwind</option>`+
-                        `<option value="Saxophones">Saxophones</option>`+
-                        `<option value="Flutes">Flutes</option>`+
-                       ` <option value="Clarinets">Clarinets</option>`+
-                       ` <option value="Brass">Brass</option>`+
-                        `<option value="Trumpets">Trumpets</option>`+
-                        `<option value="String">String</option>`+
-                        `<option value="Violins">Violins</option>`+
+                    `<select id="bandOrchestraCategories`+item.product_id+`" onchange="updateSubBrandOptions(`+item.product_id+`)" name="bandOrchestraCategories">`+
+                        `<option value="Woodwind" `+(item.brass === 'Woodwind' ? 'selected' : '')+`>Woodwind</option>`+
+                        `<option value="Saxophones" `+(item.brass === 'Saxophones' ? 'selected' : '')+`>Saxophones</option>`+
+                        `<option value="Flutes" `+(item.brass === 'Flutes' ? 'selected' : '')+`>Flutes</option>`+
+                       ` <option value="Clarinets" `+(item.brass === 'Clarinets' ? 'selected' : '')+`>Clarinets</option>`+
+                       ` <option value="Brass" `+(item.brass === 'Brass' ? 'selected' : '')+`>Brass</option>`+
+                        `<option value="Trumpets" `+(item.brass === 'Trumpets' ? 'selected' : '')+`>Trumpets</option>`+
+                        `<option value="String" `+(item.brass === 'String' ? 'selected' : '')+`>String</option>`+
+                        `<option value="Violins" `+(item.brass === 'Violins' ? 'selected' : '')+`>Violins</option>`+
                     `</select>`+
                 `</div>`+
             `</div>`+
@@ -216,19 +214,20 @@
             `<div class="input-box">`+
                 `<label>Home Audio category</label>`+
                 `<div class="custom-select">`+
-                    `<select id="homeAudioCategory`+item.product_id+`" onchange="updateSubBrandOptions(`+item.product_id+`)">`+
-                        `<option value="Headphones">Headphones</option>`+
-                        `<option value="Receivers">Receivers</option>`+
-                        `<option value="Amplifiers">Amplifiers</option>`+
-                        `<option value="Floor speakers">Floor speakers</option>`+
-                        `<option value="Subwoofers">Subwoofers</option>`+
-                        `<option value="Tape Decks">Tape Decks</option>`+
-                        `<option value="Turntables">Turntables</option>`+
-                    `</select>`+
+                    `<select id="homeAudioCategory`+item.product_id+`" onchange="updateSubBrandOptions(`+item.product_id+`)" name="homeAudioCategory">`+
+                        `<option value="Headphones" `+(item.sounds === 'Headphones' ? 'selected' : '')+`>Headphones</option>`+
+                        `<option value="Receivers" `+(item.sounds === 'Receivers' ? 'selected' : '')+`>Receivers</option>`+
+                        `<option value="Amplifiers" `+(item.sounds === 'Amplifiers' ? 'selected' : '')+`>Amplifiers</option>`+
+                        `<option value="Floor speakers" `+(item.sounds === 'Floor speakers' ? 'selected' : '')+`>Floor speakers</option>`+
+                        `<option value="Subwoofers" `+(item.sounds === 'Subwoofers' ? 'selected' : '')+`>Subwoofers</option>`+
+                        `<option value="Tape Decks" `+(item.sounds === 'Tape Decks' ? 'selected' : '')+`>Tape Decks</option>`+
+                        `<option value="Turntables" `+(item.sounds === 'Turntables' ? 'selected' : '')+`>Turntables</option>`+
+                        `<option value="amps" `+(item.sounds === 'amps' ? 'selected' : '')+`>Amps</option>`+
+            `</select>`+
                 `</div>`+
             `</div>`+
             `</div>`+
-            `<!--                brand-->`+
+            `<!--brand-->`+
             `<div class="input-box">`+
                 `<label>Brand</label>`+
                 `<div class="custom-select">`+
@@ -236,20 +235,32 @@
                     `</select>`+
                 `</div>`+
             `</div>`+
+            //..... availability / out of stock.....
+            `<div class="input-box">`+
+                `<label>Availability</label>`+
+            `<select name="availabilty" id="availability`+item.product_id+`">`+
+             ` <option value="0">Available</option>`+
+              `<option value="1">Unavailable</option>`+
+            `</select>`+
+            `</div>`+
             `<!--                Model-->`+
             `<div class="input-box">`+
-                `<label>Model</label>`+
-                `<input type="text" name="model" class="<?php echo (!empty($data['model_err'])) ? 'is-invalid' : ''; ?>" value="`+item.model+`">`+
+            `<label>Model</label>`+
+            `<input type="text" required name="model" class="<?php echo (!empty($data['model_err'])) ? 'is-invalid' : ''; ?>" value="`+item.model+`">`+
             `</div>`+
             `<!--                quantity-->`+
             `<div class="input-box">`+
                 `<label>Quantity</label>`+
-                `<input type="number" name="quantity" class="<?php echo (!empty($data['quantity_err'])) ? 'is-invalid' : ''; ?>" value="`+item.quantity+`">`+
+                `<input type="number" required name="quantity" class="<?php echo (!empty($data['quantity_err'])) ? 'is-invalid' : ''; ?>" value="`+item.quantity+`">`+
             `</div>`+
             `<!--                Unit price-->`+
             `<div class="input-box">`+
                ` <label>Unit Price (Lkr)</label>`+
-                `<input type="number" name="unit_price" class="<?php echo (!empty($data['unit_price_err'])) ? 'is-invalid' : ''; ?>" value="`+item.unit_price+`">`+
+                `<input type="number" required name="unit_price" class="<?php echo (!empty($data['unit_price_err'])) ? 'is-invalid' : ''; ?>" value="`+item.unit_price+`">`+
+            `</div>`+
+            `<div class="input-box">`+
+            ` <label>Warranty date</label>`+
+            `<input type="date" required name="warranty" class="<?php echo (!empty($data['unit_price_err'])) ? 'is-invalid' : ''; ?>" value="`+item.warranty+`">`+
             `</div>`+
             `<!--                description-->`+
             `<div class="description">`+
@@ -257,7 +268,7 @@
                    ` <label>Description</label>`+
                 `</div>`+
                 `<div class="textArea">`+
-                    `<textarea id="description" name="description" rows="4"  >`+item.Description+`</textarea>`+
+                    `<textarea id="description" name="description" rows="4" required style="width: 290px;height: 150px">`+item.Description+`</textarea>`+
                 `</div>`+
             `</div>`+
             `<!--                photos-->`+
@@ -316,14 +327,6 @@
     method = 'acousticGuitars';
     Redirect(method);
   }
-  function amps(){
-    method = 'amps';
-    Redirect(method);
-  }
-  function bassGuitars(){
-    method = 'bassGuitars';
-    Redirect(method);
-  }
   function bandAndOrchestra(){
     method = 'bandAndOrchestra';
     Redirect(method);
@@ -364,12 +367,12 @@
     var bandOrchestraCategories = document.getElementById("band"+productId);
     var homeAudio = document.getElementById("home"+productId);
 
-    if (categorySelect.value === "Band_And_Orchestra") {
+    if (categorySelect.value === "Brass") {
       bandOrchestraCategories.style.display = "block";
     } else {
       bandOrchestraCategories.style.display = "none";
     }
-    if (categorySelect.value === "Home_Audi") {
+    if (categorySelect.value === "sounds") {
       homeAudio.style.display = "block";
     } else {
       homeAudio.style.display = "none";
@@ -411,40 +414,17 @@
       addBrandOption('Charvel',productId);
 
     }else if (categorySelect.value === 'Keyboard') {
-      addBrandOption('Yamaha',productId);
-      addBrandOption('Roland',productId);
-      addBrandOption('Korg',productId);
-      addBrandOption('Casio',productId);
-      addBrandOption('Nord',productId);
-      addBrandOption('Moog',productId);
-      addBrandOption('Kurzweil',productId);
-      addBrandOption('Novation',productId);
-      addBrandOption('Arturia',productId);
+      addBrandOption('Yamaha', productId);
+      addBrandOption('Roland', productId);
+      addBrandOption('Korg', productId);
+      addBrandOption('Casio', productId);
+      addBrandOption('Nord', productId);
+      addBrandOption('Moog', productId);
+      addBrandOption('Kurzweil', productId);
+      addBrandOption('Novation', productId);
+      addBrandOption('Arturia', productId);
 
-    } else if (categorySelect.value === 'Amps') {
-      addBrandOption('Fender',productId);
-      addBrandOption('Marshall',productId);
-      addBrandOption('Messa/Boogie',productId);
-      addBrandOption('Peavey',productId);
-      addBrandOption('Ampeg',productId);
-      addBrandOption('Blackstar Amplification',productId);
-      addBrandOption('Roland',productId);
-      addBrandOption('Bugera',productId);
-      addBrandOption('Hartke',productId);
-
-    }else if (categorySelect.value === 'Bass_Guitars') {
-      // addBrandOption = ["Yamaha","Gibson","Epiphone","Ibanez","Jackson","Schecter","ESP","Washburn","Charvel"];
-      addBrandOption('Yamaha',productId);
-      addBrandOption('Gibson',productId);
-      addBrandOption('Epiphone',productId);
-      addBrandOption('Ibanez',productId);
-      addBrandOption('Jackson',productId);
-      addBrandOption('Schecter',productId);
-      addBrandOption('ESP',productId);
-      addBrandOption('Washburn',productId);
-      addBrandOption('Charvel',productId);
-
-    }else if (categorySelect.value === 'Band_And_Orchestra') {
+    }else if (categorySelect.value === 'Brass') {
       if (subcategorySelect.value === "Woodwind") {
         addBrandOption('Yamaha',productId);
         addBrandOption('Gibson',productId);
@@ -484,18 +464,7 @@
         addBrandOption('Washburn',productId);
         addBrandOption('Charvel',productId);
 
-      } else if (subcategorySelect.value === "Brass") {
-        addBrandOption('Yamaha',productId);
-        addBrandOption('Gibson',productId);
-        addBrandOption('Epiphone',productId);
-        addBrandOption('Ibanez',productId);
-        addBrandOption('Jackson',productId);
-        addBrandOption('Schecter',productId);
-        addBrandOption('ESP',productId);
-        addBrandOption('Washburn',productId);
-        addBrandOption('Charvel',productId);
-
-      }else if (subcategorySelect.value === "Trumpets") {
+      } else if (subcategorySelect.value === "Trumpets") {
         addBrandOption('Yamaha',productId);
         addBrandOption('Gibson',productId);
         addBrandOption('Epiphone',productId);
@@ -530,7 +499,7 @@
 
       }
 
-    }else if (categorySelect.value === 'Home_Audi') {
+    }else if (categorySelect.value === 'sounds') {
       if (homeAudio.value === "Headphones") {
         addBrandOption('Yamaha',productId);
         addBrandOption('Gibson',productId);
@@ -598,6 +567,17 @@
         addBrandOption('Charvel',productId);
 
       }else if (homeAudio.value === "Turntables") {
+        addBrandOption('Yamaha',productId);
+        addBrandOption('Gibson',productId);
+        addBrandOption('Epiphone',productId);
+        addBrandOption('Ibanez',productId);
+        addBrandOption('Jackson',productId);
+        addBrandOption('Schecter',productId);
+        addBrandOption('ESP',productId);
+        addBrandOption('Washburn',productId);
+        addBrandOption('Charvel',productId);
+
+      }else if (homeAudio.value === "amps") {
         addBrandOption('Yamaha',productId);
         addBrandOption('Gibson',productId);
         addBrandOption('Epiphone',productId);

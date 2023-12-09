@@ -54,32 +54,12 @@
                 </div>
             </div>
     </div>
-    <div class="item" onclick="amps()">
-            <div class="item">
-                <div class="thumbnail-item-container">
-                    <img src="<?php echo URLROOT; ?>/img/amps.jpg">
-                    <div class="content">
-                        amps
-                    </div>
-                </div>
-            </div>
-    </div>
-    <div class="item" onclick="bassGuitars()">
-            <div class="item">
-                <div class="thumbnail-item-container">
-                    <img src="<?php echo URLROOT; ?>/img/bassGuitar.jpg">
-                    <div class="content">
-                        bassGuitars
-                    </div>
-                </div>
-            </div>
-    </div>
     <div class="item" onclick="bandAndOrchestra()">
             <div class="item">
                 <div class="thumbnail-item-container">
                     <img src="<?php echo URLROOT; ?>/img/bandOrchestra.jpg">
                     <div class="content">
-                        Band<br>and<br>Orchestra
+                        Brass
                     </div>
                 </div>
             </div>
@@ -89,7 +69,7 @@
                 <div class="thumbnail-item-container">
                     <img src="<?php echo URLROOT; ?>/img/home.jpg">
                     <div class="content">
-                        homeAudio
+                        Sounds
                     </div>
                 </div>
             </div>

@@ -650,7 +650,8 @@ display: none;
 }
 .addItem .description{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 24%;
 }
 .addItem .description .textArea{
   margin-top:20px;

@@ -16,8 +16,14 @@ require 'vendor/autoload.php';
 
     public function additem($data){
       
-      $this->db->query('INSERT INTO products (created_by, category, brand, model, quantity, unit_price, photo_1, photo_2, photo_3, Title, Description, outOfStock) VALUES(:created_by, :category, :brand, :model, :quantity, :unit_price, :photo_1, :photo_2, :photo_3, :title, :description, :outOfStock)');
- 
+      $this->db->query('INSERT INTO products (created_by, category, brand, model, quantity, unit_price, photo_1, photo_2, photo_3, Title, Description, outOfStock, brass, warranty) VALUES(:created_by, :category, :brand, :model, :quantity, :unit_price, :photo_1, :photo_2, :photo_3, :title, :description, :outOfStock, :brass, :sounds, :warranty)');
+
+        if($data['category'] !== 'Brass' ){
+            $data['bandOrchestraCategories'] = null;
+        }
+        if ($data['category'] !=='sounds'){
+            $data['homeAudioCategory'] = null;
+        }
       try{
         $this->db->bind(':created_by', $data['created_by']);
         $this->db->bind(':category', $data['category']);
@@ -31,6 +37,10 @@ require 'vendor/autoload.php';
         $this->db->bind(':photo_3', $data['photo_3']);
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':outOfStock', $data['outOfStock']);
+        $this->db->bind(':brass', $data['bandOrchestraCategories']);
+        $this->db->bind(':sounds', $data['homeAudioCategory']);
+        $this->db->bind(':outOfStock', $data['outOfStock']);
+        $this->db->bind(':warranty', $data['warranty']);
 
         // Execute
         if($this->db->execute()){
@@ -83,13 +93,20 @@ require 'vendor/autoload.php';
 
     public function editItem($product_id,$data){
         try{
-            $this->db->query('UPDATE products SET category  = :category , brand = :brand , model = :model , quantity = :quantity , unit_price = :unit_price , Description = :description  WHERE product_id = :product_id');
+            if($data['category'] !== 'Brass' || $data['category'] !=='sounds' ){
+                $data['bandAndOrchestraCategory'] = null;
+                $data['homeAudioCategory'] = null;
+            }
+            $this->db->query('UPDATE products SET category  = :category , brand = :brand , model = :model , quantity = :quantity , unit_price = :unit_price , Description = :description , outOfStock = :outOfStock , brass = :bandOrchestraCategories , sounds = :homeAudioCategory  WHERE product_id = :product_id');
             $this->db->bind(':category', $data['category']);
             $this->db->bind(':brand', $data['brand']);
             $this->db->bind(':model', $data['model']);
             $this->db->bind(':quantity', $data['quantity']);
             $this->db->bind(':unit_price', $data['unit_price']);
             $this->db->bind(':description', $data['description']);
+            $this->db->bind(':outOfStock', $data['outOfStock']);
+            $this->db->bind(':bandOrchestraCategories', $data['bandOrchestraCategories']);
+            $this->db->bind(':homeAudioCategory', $data['homeAudioCategory']);
             $this->db->bind(':product_id',$product_id );
 
             if($this->db->execute()){
@@ -240,31 +257,17 @@ require 'vendor/autoload.php';
           $results = $this->db->resultSet();
           return $results;
       }
-      public function amps($serviceprovider_id){
-          $this->db->query('SELECT * FROM products WHERE created_by = :serviceprovider_id AND category = :category');
-          $this->db->bind(':serviceprovider_id', $serviceprovider_id);
-          $this->db->bind(':category', 'Amps');
-          $results = $this->db->resultSet();
-          return $results;
-      }
-      public function bassGuitars($serviceprovider_id){
-          $this->db->query('SELECT * FROM products WHERE created_by = :serviceprovider_id AND category = :category');
-          $this->db->bind(':serviceprovider_id', $serviceprovider_id);
-          $this->db->bind(':category', 'Bass_Guitars');
-          $results = $this->db->resultSet();
-          return $results;
-      }
       public function bandAndOrchestra($serviceprovider_id){
           $this->db->query('SELECT * FROM products WHERE created_by = :serviceprovider_id AND category = :category');
           $this->db->bind(':serviceprovider_id', $serviceprovider_id);
-          $this->db->bind(':category', 'Band_And_Orchestra');
+          $this->db->bind(':category', 'Brass');
           $results = $this->db->resultSet();
           return $results;
       }
       public function homeAudio($serviceprovider_id){
           $this->db->query('SELECT * FROM products WHERE created_by = :serviceprovider_id AND category = :category');
           $this->db->bind(':serviceprovider_id', $serviceprovider_id);
-          $this->db->bind(':category', 'Home_Audi');
+          $this->db->bind(':category', 'sounds');
           $results = $this->db->resultSet();
           return $results;
       }
