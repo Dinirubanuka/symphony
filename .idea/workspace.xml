@@ -4,25 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b38043d5-52c0-4c15-8c01-780342c8c479" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/img/bin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/mag_img/IMG-656bcd42cfa871.55626049.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/serviceProvider/IMG-656c83c73636a9.73706684.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/serviceProvider/IMG-656c83c736bde3.22531564.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/serviceProvider/IMG-656c83c736c456.00353469.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/serviceProvider/IMG-656c83dd19fb29.18122006.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/Serviceproviders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Serviceproviders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Serviceprovider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Serviceprovider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/serviceproviders/additem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/serviceproviders/additem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/serviceproviders/edititem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/serviceproviders/edititem.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/serviceproviders/inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/serviceproviders/inventory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/sp-additem.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/sp-additem.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/sp-inventory.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/sp-inventory.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/sp-additem.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/sp-additem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/sp-inventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/sp-inventory.js" afterDir="false" />
-    </list>
+    <list default="true" id="b38043d5-52c0-4c15-8c01-780342c8c479" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

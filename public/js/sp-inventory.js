@@ -194,6 +194,7 @@
                 `</div>`+
             `</div>`+
                 `<!--                band and orchestra-->`+
+            `<div className="band" id="band`+item.product_id+`">`+
             `<div class="input-box">`+
                 `<label>Band and Orchestra category</label>`+
                 `<div class="custom-select">`+
@@ -209,7 +210,9 @@
                     `</select>`+
                 `</div>`+
             `</div>`+
+            `</div>`+
             `<!--                home audio-->`+
+            `<div className="home" id="home`+item.product_id+`">`+
             `<div class="input-box">`+
                 `<label>Home Audio category</label>`+
                 `<div class="custom-select">`+
@@ -223,6 +226,7 @@
                         `<option value="Turntables">Turntables</option>`+
                     `</select>`+
                 `</div>`+
+            `</div>`+
             `</div>`+
             `<!--                brand-->`+
             `<div class="input-box">`+
@@ -357,8 +361,8 @@
   // categories and brands dynamically
   function updateBrandOptions(productId) {
     var categorySelect = document.getElementById('categorySelect'+productId);
-    var bandOrchestraCategories = document.getElementById("bandOrchestraCategories"+productId);
-    var homeAudio = document.getElementById("homeAudioCategory"+productId);
+    var bandOrchestraCategories = document.getElementById("band"+productId);
+    var homeAudio = document.getElementById("home"+productId);
 
     if (categorySelect.value === "Band_And_Orchestra") {
       bandOrchestraCategories.style.display = "block";

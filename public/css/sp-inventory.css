@@ -625,6 +625,12 @@ button {
   font-size: larger;
   font-weight: 800;
 }
+.addItem .band{
+display: none;
+}
+.addItem .home{
+  display: none;
+}
 .addItem p{
   font-weight: 800;
   text-align: center;
