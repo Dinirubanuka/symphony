@@ -95,7 +95,7 @@ function addNewMessage(messageText, isOutgoing) {
 
 // Event listener for the send icon
 sendIcon.addEventListener('click', function() {
-    // addNewMessage("Hi there, this is a new incoming message!", false)
+    addNewMessage("Hello, this is a new outgoing message!", false)
     // Get the message text from the input field
     var messageText = messageInput.value.trim();
 

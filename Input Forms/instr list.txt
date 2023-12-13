@@ -1,0 +1,110 @@
+String Instruments:
+
+Guitar
+Violin
+Cello
+Double Bass
+Banjo
+Ukulele
+Mandolin
+Harp
+
+Woodwind Instruments:
+
+Flute
+Clarinet
+Oboe
+Bassoon
+Saxophone
+Recorder
+Piccolo
+
+Brass Instruments:
+
+Trumpet
+Trombone
+French Horn
+Tuba
+Euphonium
+
+Percussion Instruments:
+
+Drum Set
+Snare Drum
+Bass Drum
+Timpani
+Xylophone
+Marimba
+Congas
+Bongos
+Chime
+Cajon
+
+Keyboard Instruments:
+
+Piano
+Organ
+Harpsichord
+Synthesizer
+Accordion
+
+Electronic Instruments:
+
+Synthesizer
+Electric Guitar
+Electronic Drums
+Theremin
+Digital Piano
+
+Indian Classical Instruments:
+
+Sitar
+Tabla
+Santoor
+Bansuri
+Sarod
+Veena
+
+African Instruments:
+
+Djembe
+Balafon
+Kora
+Talking Drum
+Kalimba
+
+Chinese Instruments:
+
+Erhu
+Pipa
+Guzheng
+Dizi
+
+Latin American Instruments:
+
+Maracas
+Bongo Drums
+Guiro
+Quena (Andean Flute)
+
+Australian Indigenous Instruments:
+
+Didgeridoo
+
+Middle Eastern Instruments:
+
+Oud
+Ney
+Darbuka
+
+
+
+
+1 - Recover my account
+2- Technical Issue
+3-Report a bug
+4-Billing/Payment issue
+5-Refund a purchase
+6-Report a user
+7-Question
+8-other
