@@ -45,7 +45,22 @@ html {
 .container .band{
     display: none;
 }
-.container .home{
+.container .Audio{
+    display: none;
+}
+.container .Keyboard{
+    display: none;
+}
+.container .woodwing{
+    display: none;
+}
+.container .brass{
+    display: none;
+}
+.container .string{
+    display: none;
+}
+.container .Percussion{
     display: none;
 }
 .container .input-box label{

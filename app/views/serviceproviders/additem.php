@@ -20,46 +20,107 @@
                     <label>Category</label>
                     <div class="custom-select">
                         <select id="categorySelect" onchange="updateBrandOptions()" name="category">
-                            <option value="Electric_Guitars">Electric guitars</option>
+                            <option value="Electric Guitars">Electric guitars</option>
+                            <option value="Acoustic Guitars">Acoustic Guitars</option>
                             <option value="Keyboard">Keyboard</option>
-                            <option value="Acoustic_Guitars">Acoustic Guitars</option>
-                            <option value="Brass">Brass</option>
-                            <option value="sounds">sounds</option>
+                            <option value="Band and Orchestra">Band and Orchestra</option>
+                            <option value="Audio">Audio</option>
+                            <option value="Percussion">Drums and Percussion</option>
                         </select>
                     </div>
                 </div>
-<!--              brass-->
+<!--              brand and orchestra-->
                 <div class="band" id="band">
                     <div class="input-box">
-                        <label>Brass</label>
+                        <label>Band and Orchestra</label>
                         <div class="custom-select">
-                            <select id="bandOrchestraCategories" onchange="updateSubBrandOptions()" name="brass">
+                            <select id="bandOrchestraCategories" onchange="updateBrandOptions()" name="brass">
                                 <option value="Woodwind">Woodwind</option>
-                                <option value="Saxophones">Saxophones</option>
-                                <option value="Flutes">Flutes</option>
-                                <option value="Clarinets">Clarinets</option>
                                 <option value="Brass">Brass</option>
-                                <option value="Trumpets">Trumpets</option>
                                 <option value="String">String</option>
-                                <option value="Violins">Violins</option>
                             </select>
                         </div>
                     </div>
                 </div>
-<!--                sounds-->
-                <div class="home" id="home">
+                <!--                woodwind-->
+                <div class="woodwing" id="woodwing">
                     <div class="input-box">
-                        <label>Sounds</label>
+                        <label>Woodwind Category</label>
+                        <div class="custom-select">
+                            <select id="WoodwindCategories" onchange="" name="Woodwind">
+                                <option value="Flutes">Flutes</option>
+                                <option value="Saxophones">Saxophones</option>
+                                <option value="Clarinets">Clarinets</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!--                brass-->
+                <div class="brass" id="brass">
+                    <div class="input-box">
+                        <label>Brass category</label>
+                        <div class="custom-select">
+                            <select id="brassCategories" onchange="updateSubBrandOptions()" name="brass">
+                                <option value="trumphet">Trumphets</option>
+                                <option value="trombones">Trombones</option>
+                                <option value="frenchHorns">French Hornes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!--                string-->
+                <div class="string" id="string">
+                    <div class="input-box">
+                        <label>String category</label>
+                        <div class="custom-select">
+                            <select id="stringCategories" onchange="updateSubBrandOptions()" name="string">
+                                <option value="violins">Violins</option>
+                                <option value="cellos">Cellos</option>
+                                <option value="violas">violas</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+<!--                keyboard-->
+                <div class="Keyboard" id="Keyboard">
+                    <div class="input-box">
+                        <label>Keyboard category</label>
+                        <div class="custom-select">
+                            <select id="keyboardCategories" onchange="updateSubBrandOptions()" name="keyboard">
+                                <option value="piano">Piano</option>
+                                <option value="organs">Organs</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+<!--                drums and percussion -->
+                <div class="Percussion" id="Percussion">
+                    <div class="input-box">
+                        <label>Drums and Percussion Category</label>
+                        <div class="custom-select">
+                            <select id="drumsCategories" onchange="updateSubBrandOptions()" name="Percussion">
+                                <option value="Cymbals">Cymbals</option>
+                                <option value="Drums">Drums</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+<!--                Audio-->
+                <div class="Audio" id="Audio">
+                    <div class="input-box">
+                        <label>Audio</label>
                         <div class="custom-select">
                             <select id="homeAudioCategory" onchange="updateSubBrandOptions()" name="sounds">
                                 <option value="Headphones">Headphones</option>
                                 <option value="Receivers">Receivers</option>
                                 <option value="Amplifiers">Amplifiers</option>
-                                <option value="Floor speakers">Floor speakers</option>
+                                <option value="speakers">Speakers</option>
                                 <option value="Subwoofers">Subwoofers</option>
                                 <option value="Tape Decks">Tape Decks</option>
                                 <option value="Turntables">Turntables</option>
-                                <option value="amps">amps</option>
+                                <option value="Microphones">Microphones</option>
+                                <option value="Mixers">Mixers</option>
+                                <option value="Recording">Recording</option>
                             </select>
                         </div>
                     </div>
