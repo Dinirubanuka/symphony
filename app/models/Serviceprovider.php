@@ -16,7 +16,7 @@ require 'vendor/autoload.php';
 
     public function additem($data){
       
-      $this->db->query('INSERT INTO products (created_by, category, brand, model, quantity, unit_price, photo_1, photo_2, photo_3, Title, Description, outOfStock, brass, warranty) VALUES(:created_by, :category, :brand, :model, :quantity, :unit_price, :photo_1, :photo_2, :photo_3, :title, :description, :outOfStock, :brass, :sounds, :warranty)');
+      $this->db->query('INSERT INTO products (created_by, category, brand, model, quantity, unit_price, photo_1, photo_2, photo_3, Title, Description, outOfStock, warranty) VALUES(:created_by, :category, :brand, :model, :quantity, :unit_price, :photo_1, :photo_2, :photo_3, :title, :description, :outOfStock, :warranty)');
 
         if($data['category'] !== 'Brass' ){
             $data['bandOrchestraCategories'] = null;
@@ -37,8 +37,6 @@ require 'vendor/autoload.php';
         $this->db->bind(':photo_3', $data['photo_3']);
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':outOfStock', $data['outOfStock']);
-        $this->db->bind(':brass', $data['bandOrchestraCategories']);
-        $this->db->bind(':sounds', $data['homeAudioCategory']);
         $this->db->bind(':outOfStock', $data['outOfStock']);
         $this->db->bind(':warranty', $data['warranty']);
 
