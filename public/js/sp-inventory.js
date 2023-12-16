@@ -1,4 +1,7 @@
-  // script.js
+
+var $data;
+
+// script.js
   const dropdownBtn = document.querySelectorAll(".dropdown-btn");
   const dropdown = document.querySelectorAll(".dropdown");
   const hamburgerBtn = document.getElementById("hamburger");
@@ -66,37 +69,23 @@
 
   // Display data
   const accReq = document.querySelector(".account-requests");
-  var method = '';
 
-  Redirect(method);
-  function Redirect(method){
-    if (method.length !== 0){
-      $.ajax({
-        method: 'POST',
-        url: 'http://localhost/symphony/serviceproviders/'+method,
-        dataType: 'json',
-        success: function(response) {
-          displaydata(response);
-          console.log('method');
-        },
-        error: function(error) {
-          console.error('Error:', error);
-        }
-      });
-    }else{
-      $.ajax({
-        method: 'GET',
-        url: 'http://localhost/symphony/serviceproviders/inventoryDelete',
-        dataType: 'json',
-        success: function(response) {
-          displaydata(response);
-          console.log('no method');
-        },
-        error: function(error) {
-          console.error('Error:', error);
-        }
-      });
-    }
+  Redirect();
+  function Redirect() {
+    $.ajax({
+      method: 'GET',
+      url: 'http://localhost/symphony/serviceproviders/inventoryDelete',
+      dataType: 'json',
+      success: function (response) {
+        $data = response.inventory;
+        console.log('response',response);
+        displaydata($data);
+        console.log('method');
+      },
+      error: function (error) {
+        console.error('Error:', error);
+      }
+    });
   }
 
   function Delete(productId) {
@@ -118,7 +107,7 @@
   }
 
   function displaydata(data){
-    var inventory = data.inventory;
+    var inventory = data;
     let req = "";
 
     if (inventory && inventory.length > 0) {
@@ -310,31 +299,32 @@
     }
   }
 
-  //thumbnail category
-  function allItem(){
-    method = 'inventoryAll';
-    Redirect(method);
+  function updateDisplayedData() {
+    var selectedCategories = $('.equipment-list input:checked').map(function() {
+      return $(this).parent().text().trim();
+    }).get();
+
+    var filteredData;
+
+    if (selectedCategories.length === 0) {
+      filteredData = $data;
+    } else {
+      filteredData = $data.filter(function(item) {
+        return selectedCategories.some(function(selectedCategory) {
+          return item.category.includes(selectedCategory);
+        });
+      });
+    }
+    displaydata(filteredData);
+    console.log(filteredData);
   }
-  function electricGuitars(){
-    method = 'electricGuitars';
-    Redirect(method);
-  }
-  function keyboard(){
-    method = 'keyboard';
-    Redirect(method);
-  }
-  function acousticGuitars(){
-    method = 'acousticGuitars';
-    Redirect(method);
-  }
-  function bandAndOrchestra(){
-    method = 'bandAndOrchestra';
-    Redirect(method);
-  }
-  function homeAudio(){
-    method = 'homeAudio';
-    Redirect(method);
-  }
+
+  // function toggleCategory(category) {
+  //   $('#' + category).toggle();
+  //   updateDisplayedData();
+  // }
+
+  $('.equipment-list input').change(updateDisplayedData);
 
   //item details
   function addItem(productId){
