@@ -126,6 +126,86 @@ var $data;
         console.log('Title:', item.Title);
         console.log('------------------------');
 
+        var categoryString = item.category;
+        var categoryArray = categoryString.split(' ');
+
+        if (categoryArray[0] === 'Electric_Guitars'){
+          item.category = 'Electric_Guitars';
+        }else if (categoryArray[0] ==='Acoustic_Guitars'){
+          item.category = 'Acoustic_Guitars';
+        }else if (categoryArray[0] ==='Keyboard'){
+          item.category = 'Keyboard';
+          if (categoryArray[1] ==='Piano'){
+            item.keyboard = 'Piano';
+          }else if (categoryArray[1] ==='Organs'){
+            item.keyboard = 'Organs';
+          }
+        }else if (categoryArray[0] ==='Band_And_Orchestra'){
+          item.category = 'Band_And_Orchestra';
+          if (categoryArray[1] === 'Woodwind'){
+            item.band = 'Woodwind';
+            if (categoryArray[2] ==='Flutes'){
+              item.woodwind = 'Flutes';
+            }else if (categoryArray[2] ==='Saxophones'){
+              item.woodwind = 'Saxophones';
+            }else if (categoryArray[2] ==='Clarinets'){
+              item.woodwind = 'Clarinets';
+            }
+          }else if (categoryArray[1] === 'Brass'){
+            item.band = 'Brass';
+            if (categoryArray[2] ==='Trumphet'){
+              item.brass = 'Trumphet';
+            }else if (categoryArray[2] ==='Trombones'){
+              item.brass = 'Trombones';
+            }else if (categoryArray[2] ==='FrenchHorns'){
+              item.brass = 'FrenchHorns';
+            }
+          }else if (categoryArray[1] === 'String'){
+            item.band = 'String';
+            if (categoryArray[2] ==='Violins'){
+              item.string = 'Violins';
+            }else if (categoryArray[2] ==='Cellos'){
+              item.string = 'Cellos';
+            }else if (categoryArray[2] ==='Violas'){
+              item.string = 'Violas';
+            }
+          }
+        }else if (categoryArray[0] ==='Audio'){
+          item.category = 'Audio';
+          if (categoryArray[1] ==='Headphones'){
+            item.audio = 'Headphones';
+          }else if (categoryArray[1] ==='Receivers'){
+            item.audio = 'Receivers';
+          }else if (categoryArray[1] ==='Amplifiers'){
+            item.audio = 'Amplifiers';
+          }
+          if (categoryArray[1] ==='Speakers'){
+            item.audio = 'Speakers';
+          }else if (categoryArray[1] ==='Subwoofers'){
+            item.audio = 'Subwoofers';
+          }else if (categoryArray[1] ==='Tape_Decks'){
+            item.audio = 'Tape_Decks';
+          }
+          if (categoryArray[1] ==='Turntables'){
+            item.audio = 'Turntables';
+          }else if (categoryArray[1] ==='Microphones'){
+            item.audio = 'Microphones';
+          }else if (categoryArray[1] ==='Mixers'){
+            item.audio = 'Mixers';
+          }else if (categoryArray[1] ==='Recording'){
+            item.audio = 'Recording';
+          }
+        }else if (categoryArray[0] ==='Percussion'){
+          item.category = 'Percussion';
+          if (categoryArray[1] ==='Cymbals'){
+            item.persussion = 'Cymbals';
+          }else if (categoryArray[1] ==='Drums'){
+            item.persussion = 'Drums';
+          }
+        }
+        console.log(categoryArray);
+
+
         var stockText="";
         if(item.quantity<=0){
           stockText="Inventory not available";
@@ -175,8 +255,9 @@ var $data;
                         `<option value="Electric_Guitars" `+(item.category === 'Electric_Guitars' ? 'selected' : '')+`>Electric guitars</option>`+
                         `<option value="Keyboard" `+(item.category === 'Keyboard' ? 'selected' : '')+`>Keyboard</option>`+
                         `<option value="Acoustic_Guitars" `+(item.category === 'Acoustic_Guitars' ? 'selected' : '')+`>Acoustic Guitars</option>`+
-                        `<option value="Brass" `+(item.category === 'Brass' ? 'selected' : '')+`>Brass</option>`+
-                        `<option value="sounds" `+(item.category === 'sounds' ? 'selected' : '')+`>Sounds</option>`+
+                        `<option value="Band_And_Orchestra" `+(item.category === 'Band_And_Orchestra' ? 'selected' : '')+`>Band and Orchestra</option>`+
+                        `<option value="Audio" `+(item.category === 'Audio' ? 'selected' : '')+`>Audio</option>`+
+                        `<option value="Percussion" `+(item.category === 'Percussion' ? 'selected' : '')+`>Drums and Percussion</option>`+
                 `</select>`+
                 `</div>`+
             `</div>`+
@@ -185,33 +266,93 @@ var $data;
             `<div class="input-box">`+
                 `<label>Brass category</label>`+
                 `<div class="custom-select">`+
-                    `<select id="bandOrchestraCategories`+item.product_id+`" onchange="updateSubBrandOptions(`+item.product_id+`)" name="bandOrchestraCategories">`+
-                        `<option value="Woodwind" `+(item.brass === 'Woodwind' ? 'selected' : '')+`>Woodwind</option>`+
-                        `<option value="Saxophones" `+(item.brass === 'Saxophones' ? 'selected' : '')+`>Saxophones</option>`+
-                        `<option value="Flutes" `+(item.brass === 'Flutes' ? 'selected' : '')+`>Flutes</option>`+
-                       ` <option value="Clarinets" `+(item.brass === 'Clarinets' ? 'selected' : '')+`>Clarinets</option>`+
-                       ` <option value="Brass" `+(item.brass === 'Brass' ? 'selected' : '')+`>Brass</option>`+
-                        `<option value="Trumpets" `+(item.brass === 'Trumpets' ? 'selected' : '')+`>Trumpets</option>`+
-                        `<option value="String" `+(item.brass === 'String' ? 'selected' : '')+`>String</option>`+
-                        `<option value="Violins" `+(item.brass === 'Violins' ? 'selected' : '')+`>Violins</option>`+
+                    `<select id="bandOrchestraCategories`+item.product_id+`" onchange="updateSubBrandOptions(`+item.product_id+`)" name="bandOrchestra">`+
+                        `<option value="Woodwind" `+(item.band === 'Woodwind' ? 'selected' : '')+`>Woodwind</option>`+
+                        `<option value="Brass" `+(item.band === 'Brass' ? 'selected' : '')+`>Brass</option>`+
+                        `<option value="String" `+(item.band === 'String' ? 'selected' : '')+`>String</option>`+
                     `</select>`+
                 `</div>`+
             `</div>`+
             `</div>`+
+            <!--                woodwind-->
+            `<div class="woodwing" id="woodwing`+item.product_id+`">`+
+              `<div class="input-box">`+
+                `<label>Woodwind Category</label>`+
+                `<div class="custom-select">`+
+                  `<select id="WoodwindCategories`+item.product_id+`" onchange="updateSubBrandOptions(`+item.product_id+`)" name="Woodwind">`+
+                    `<option value="Flutes" `+(item.woodwind === 'Flutes' ? 'selected' : '')+`>Flutes</option>`+
+                    `<option value="Saxophones" `+(item.woodwind === 'Saxophones' ? 'selected' : '')+`>Saxophones</option>`+
+                    `<option value="Clarinets" `+(item.woodwind === 'Clarinets' ? 'selected' : '')+`>Clarinets</option>`+
+                  `</select>`+
+                `</div>`+
+              `</div>`+
+            `</div>`+
+            <!--                brass-->
+            `<div class="brass" id="brass`+item.product_id+`">`+
+              `<div class="input-box">`+
+                `<label>Brass category</label>`+
+                `<div class="custom-select">`+
+                  `<select id="brassCategories`+item.product_id+`" onchange="updateSubBrandOptions(`+item.product_id+`)" name="brass">`+
+                    `<option value="Trumphet" `+(item.brass === 'Trumphet' ? 'selected' : '')+`>Trumphets</option>`+
+                    `<option value="Trombones" `+(item.brass === 'Trombones' ? 'selected' : '')+`>Trombones</option>`+
+                    `<option value="FrenchHorns" `+(item.brass === 'FrenchHorns' ? 'selected' : '')+`>French Hornes</option>`+
+                  `</select>`+
+                `</div>`+
+              `</div>`+
+            `</div>`+
+            <!--                string-->
+            `<div class="string" id="string`+item.product_id+`">`+
+              `<div class="input-box">`+
+                `<label>String category</label>`+
+                `<div class="custom-select">`+
+                  `<select id="stringCategories`+item.product_id+`" onchange="updateSubBrandOptions(`+item.product_id+`)" name="string">`+
+                    `<option value="Violins" `+(item.string === 'Violins' ? 'selected' : '')+`>Violins</option>`+
+                    `<option value="Cellos" `+(item.string === 'Cellos' ? 'selected' : '')+`>Cellos</option>`+
+                    `<option value="Violas" `+(item.string === 'Violas' ? 'selected' : '')+`>Violas</option>`+
+                  `</select>`+
+                `</div>`+
+              `</div>`+
+            `</div>`+
+            <!--                keyboard-->
+            `<div class="Keyboard" id="Keyboard`+item.product_id+`">`+
+              `<div class="input-box">`+
+                `<label>Keyboard category</label>`+
+                `<div class="custom-select">`+
+                  `<select id="keyboardCategories`+item.product_id+`" onchange="updateSubBrandOptions(`+item.product_id+`)" name="keyboard">`+
+                    `<option value="Piano" `+(item.keyboard === 'Piano' ? 'selected' : '')+`>Piano</option>`+
+                    `<option value="Organs" `+(item.keyboard === 'Organs' ? 'selected' : '')+`>Organs</option>`+
+                  `</select>`+
+                `</div>`+
+              `</div>`+
+           `</div>`+
+            <!--                drums and percussion -->
+            `<div class="Percussion" id="Percussion`+item.product_id+`">`+
+              `<div class="input-box">`+
+                `<label>Drums and Percussion Category</label>`+
+                `<div class="custom-select">`+
+                  `<select id="drumsCategories`+item.product_id+`" onchange="updateSubBrandOptions(`+item.product_id+`)" name="Percussion">`+
+                    `<option value="Cymbals" `+(item.persussion === 'Cymbals' ? 'selected' : '')+`>Cymbals</option>`+
+                    `<option value="Drums" `+(item.persussion === 'Drums' ? 'selected' : '')+`>Drums</option>`+
+                  `</select>`+
+                `</div>`+
+              `</div>`+
+            `</div>`+
             `<!--                home audio-->`+
-            `<div className="home" id="home`+item.product_id+`">`+
+            `<div className="Audio" id="Audio`+item.product_id+`">`+
             `<div class="input-box">`+
                 `<label>Home Audio category</label>`+
                 `<div class="custom-select">`+
                     `<select id="homeAudioCategory`+item.product_id+`" onchange="updateSubBrandOptions(`+item.product_id+`)" name="homeAudioCategory">`+
-                        `<option value="Headphones" `+(item.sounds === 'Headphones' ? 'selected' : '')+`>Headphones</option>`+
-                        `<option value="Receivers" `+(item.sounds === 'Receivers' ? 'selected' : '')+`>Receivers</option>`+
-                        `<option value="Amplifiers" `+(item.sounds === 'Amplifiers' ? 'selected' : '')+`>Amplifiers</option>`+
-                        `<option value="Floor speakers" `+(item.sounds === 'Floor speakers' ? 'selected' : '')+`>Floor speakers</option>`+
-                        `<option value="Subwoofers" `+(item.sounds === 'Subwoofers' ? 'selected' : '')+`>Subwoofers</option>`+
-                        `<option value="Tape Decks" `+(item.sounds === 'Tape Decks' ? 'selected' : '')+`>Tape Decks</option>`+
-                        `<option value="Turntables" `+(item.sounds === 'Turntables' ? 'selected' : '')+`>Turntables</option>`+
-                        `<option value="amps" `+(item.sounds === 'amps' ? 'selected' : '')+`>Amps</option>`+
+                        `<option value="Headphones" `+(item.audio === 'Headphones' ? 'selected' : '')+`>Headphones</option>`+
+                        `<option value="Receivers" `+(item.audio === 'Receivers' ? 'selected' : '')+`>Receivers</option>`+
+                        `<option value="Amplifiers" `+(item.audio === 'Amplifiers' ? 'selected' : '')+`>Amplifiers</option>`+
+                        `<option value="Speakers" `+(item.audio === 'Speakers' ? 'selected' : '')+`>Speakers</option>`+
+                        `<option value="Subwoofers" `+(item.audio === 'Subwoofers' ? 'selected' : '')+`>Subwoofers</option>`+
+                        `<option value="Tape Decks" `+(item.audio === 'Tape_Decks' ? 'selected' : '')+`>Tape Decks</option>`+
+                        `<option value="Turntables" `+(item.audio === 'Turntables' ? 'selected' : '')+`>Turntables</option>`+
+                        `<option value="Microphones" `+(item.audio === 'Microphones' ? 'selected' : '')+`>Microphones</option>`+
+                        `<option value="Mixers" `+(item.audio === 'Mixers' ? 'selected' : '')+`>Mixers</option>`+
+                        `<option value="Recording" `+(item.audio === 'Recording' ? 'selected' : '')+`>Recording</option>`+
             `</select>`+
                 `</div>`+
             `</div>`+
@@ -352,237 +493,400 @@ var $data;
   }
 
   // categories and brands dynamically
-  function updateBrandOptions(productId) {
-    var categorySelect = document.getElementById('categorySelect'+productId);
-    var bandOrchestraCategories = document.getElementById("band"+productId);
-    var homeAudio = document.getElementById("home"+productId);
+function updateBrandOptions(productId) {
+  var categorySelect = document.getElementById('categorySelect'+productId);
+  var keyBoardId = document.getElementById('Keyboard'+productId);
+  var bandId = document.getElementById('band'+productId);
+  var AudioId = document.getElementById('Audio'+productId);
+  var PercussionId = document.getElementById('Percussion'+productId);
+  var bandOrchestraCategories = document.getElementById('bandOrchestraCategories'+productId);
+  var woodwindId = document.getElementById('woodwing'+productId);
+  var brassId = document.getElementById('brass'+productId);
+  var StringId = document.getElementById('string'+productId);
 
-    if (categorySelect.value === "Brass") {
-      bandOrchestraCategories.style.display = "block";
-    } else {
-      bandOrchestraCategories.style.display = "none";
-    }
-    if (categorySelect.value === "sounds") {
-      homeAudio.style.display = "block";
-    } else {
-      homeAudio.style.display = "none";
-    }
-    updateSubBrandOptions(productId);
+  if (categorySelect.value === 'Keyboard') {
+    keyBoardId.classList.remove('Keyboard');
+  } else {
+    keyBoardId.classList.add('Keyboard');
   }
-  function updateSubBrandOptions(productId){
-    var categorySelect = document.getElementById("categorySelect"+productId);
-    var subcategorySelect = document.getElementById("bandOrchestraCategories"+productId);
-    var brandSelect = document.getElementById("brandSelect"+productId);
-    var homeAudio = document.getElementById("homeAudioCategory"+productId);
+  if (categorySelect.value === 'Band_And_Orchestra') {
+    bandId.classList.remove("band");
+  } else {
+    bandId.classList.add("band");
+  }
+  if (categorySelect.value === "Audio") {
+    AudioId.classList.remove("Audio");
+  } else {
+    AudioId.classList.add("Audio");
+  }
+  if (categorySelect.value === "Percussion") {
+    PercussionId.classList.remove("Percussion");
+  } else {
+    PercussionId.classList.add("Percussion");
+  }
 
-    brandSelect.innerHTML = '';
+  // band and orchestra
+  if (bandOrchestraCategories.value === "Woodwind" && categorySelect.value === 'Band_And_Orchestra') {
+    woodwindId.classList.remove("woodwing");
+  } else {
+    woodwindId.classList.add("woodwing");
+  }
+  if (bandOrchestraCategories.value === "Brass" && categorySelect.value === 'Band_And_Orchestra') {
+    brassId.classList.remove("brass");
+  } else {
+    brassId.classList.add("brass");
+  }
+  if (bandOrchestraCategories.value === "String" && categorySelect.value === 'Band_And_Orchestra') {
+    StringId.classList.remove("string");
+  } else {
+    StringId.classList.add("string");
+  }
+  updateSubBrandOptions(productId);
+}
+function updateSubBrandOptions(productId) {
+  var categorySelect = document.getElementById("categorySelect" + productId);
+  var bandOrchestraCategories = document.getElementById("bandOrchestraCategories" + productId);
+  var keyBoardCategory = document.getElementById("keyboardCategories" + productId);
+  var brandSelect = document.getElementById("brandSelect" + productId);
+  var homeAudio = document.getElementById("homeAudioCategory" + productId);
+  var WoodwindCategories = document.getElementById("WoodwindCategories" + productId);
+  var brassCategories = document.getElementById("brassCategories" + productId);
+  var stringCategories = document.getElementById("stringCategories" + productId);
+  var drumsCategories = document.getElementById("drumsCategories" + productId);
+  brandSelect.innerHTML = '';
 
-    // var addBrandOption = [];
-
-    if (categorySelect.value === 'Electric_Guitars') {
-      // addBrandOption = ["Yamaha","Gibson","Epiphone","Ibanez","Jackson","Schecter","ESP","Washburn","Charvel"];
-      addBrandOption('Yamaha',productId);
-      addBrandOption('Gibson',productId);
-      addBrandOption('Epiphone',productId);
-      addBrandOption('Ibanez',productId);
-      addBrandOption('Jackson',productId);
-      addBrandOption('Schecter',productId);
-      addBrandOption('ESP',productId);
-      addBrandOption('Washburn',productId);
-      addBrandOption('Charvel',productId);
-
-    } else if (categorySelect.value === 'Acoustic_Guitars') {
-      // addBrandOption = ["Yamaha","Gibson","Epiphone","Ibanez","Jackson","Schecter","ESP","Washburn","Charvel"];
-      addBrandOption('Yamaha',productId);
-      addBrandOption('Gibson',productId);
-      addBrandOption('Epiphone',productId);
-      addBrandOption('Ibanez',productId);
-      addBrandOption('Jackson',productId);
-      addBrandOption('Schecter',productId);
-      addBrandOption('ESP',productId);
-      addBrandOption('Washburn',productId);
-      addBrandOption('Charvel',productId);
-
-    }else if (categorySelect.value === 'Keyboard') {
-      addBrandOption('Yamaha', productId);
+  if (categorySelect.value === 'Electric_Guitars') {
+    // var arr = ["Yamaha","Gibson","Epiphone","Ibanez","Jackson","Schecter","ESP","Washburn","Charvel"];
+    // addBrandOption(arr,productId);
+    addBrandOption('Yamaha', productId);
+    addBrandOption('Gibson', productId);
+    addBrandOption('PRS', productId);
+    addBrandOption('Ibanez', productId);
+    addBrandOption('Jackson', productId);
+    addBrandOption('Schecter', productId);
+    addBrandOption('ESP', productId);
+    addBrandOption('Epiphone', productId);
+    addBrandOption('Gretsch', productId);
+    addBrandOption('Squier', productId);
+    addBrandOption('Tokai', productId);
+    addBrandOption('Lakland', productId);
+    addBrandOption('Sadowsky', productId);
+    addBrandOption('Spector', productId);
+    addBrandOption('Warwick', productId);
+    addBrandOption('Sandberg', productId);
+    addBrandOption('Dingwall', productId);
+  } else if (categorySelect.value === 'Acoustic_Guitars') {
+    // addBrandOption = ["Yamaha","Gibson","Epiphone","Ibanez","Jackson","Schecter","ESP","Washburn","Charvel"];
+    addBrandOption('Yamaha', productId);
+    addBrandOption('Gibson', productId);
+    addBrandOption('Epiphone', productId);
+    addBrandOption('Ibanez', productId);
+    addBrandOption('Jackson', productId);
+    addBrandOption('Schecter', productId);
+    addBrandOption('ESP', productId);
+    addBrandOption('Washburn', productId);
+    addBrandOption('Charvel', productId);
+    addBrandOption('Alhambra', productId);
+    addBrandOption('Cordoba', productId);
+    addBrandOption('Ortega', productId);
+    addBrandOption('Eko', productId);
+    addBrandOption('Kremona', productId);
+  } else if (categorySelect.value === 'Keyboard') {
+    if (keyBoardCategory.value === 'Organs') {
+      addBrandOption('Lowrey', productId);
+      addBrandOption('Kimball', productId);
+      addBrandOption('Hammond', productId);
+      addBrandOption('Baldwin', productId);
+      addBrandOption('Gulbransen', productId);
+      addBrandOption('Conn', productId);
+      addBrandOption('Farfisa', productId);
       addBrandOption('Roland', productId);
-      addBrandOption('Korg', productId);
+      addBrandOption('Vox', productId);
+    } else if (keyBoardCategory.value === 'Piano') {
+      addBrandOption('Yamaha', productId);
+      addBrandOption('Steinway & Sons', productId);
+      addBrandOption('Bosendorfer', productId);
+      addBrandOption('Kawai', productId);
+      addBrandOption('Fazioli', productId);
+      addBrandOption('Bechstein', productId);
+      addBrandOption('Mason & Hamlin', productId);
+      addBrandOption('Blüthner', productId);
+      addBrandOption('Estonia', productId);
+      addBrandOption('Schimmel', productId);
+      addBrandOption('Baldwin', productId);
+      addBrandOption('Petrof', productId);
+      addBrandOption('Grotrian', productId);
+      addBrandOption('Knabe', productId);
+      addBrandOption('August Förster', productId);
+      addBrandOption('Samick', productId);
+      addBrandOption('Essex (Steinway & Sons)', productId);
+      addBrandOption('W. Hoffmann', productId);
+      addBrandOption('Roland', productId);
       addBrandOption('Casio', productId);
-      addBrandOption('Nord', productId);
-      addBrandOption('Moog', productId);
-      addBrandOption('Kurzweil', productId);
-      addBrandOption('Novation', productId);
-      addBrandOption('Arturia', productId);
-
-    }else if (categorySelect.value === 'Brass') {
-      if (subcategorySelect.value === "Woodwind") {
-        addBrandOption('Yamaha',productId);
-        addBrandOption('Gibson',productId);
-        addBrandOption('Epiphone',productId);
-        addBrandOption('Ibanez',productId);
-        addBrandOption('Jackson',productId);
-        addBrandOption('Schecter',productId);
-        addBrandOption('ESP',productId);
-        addBrandOption('Washburn',productId);
-        addBrandOption('Charvel',productId);
-
-      } else if (subcategorySelect.value === "Saxophones") {
-        addBrandOption('Yamaha',productId);
-        addBrandOption('Gibson',productId);
-        addBrandOption('Epiphone',productId);
-        addBrandOption('Ibanez',productId);
-        addBrandOption('Jackson',productId);
-        addBrandOption('Schecter',productId);
-        addBrandOption('ESP',productId);
-        addBrandOption('Washburn',productId);
-        addBrandOption('Charvel',productId);
-
-      } else if (subcategorySelect.value === "Flutes") {
-        addBrandOption('Yamaha',productId);
-        addBrandOption('Armstrong',productId);
-        addBrandOption('Trevor James',productId);
-        addBrandOption('Powell',productId);
-
-      }else if (subcategorySelect.value === "Clarinets") {
-        addBrandOption('Yamaha',productId);
-        addBrandOption('Gibson',productId);
-        addBrandOption('Epiphone',productId);
-        addBrandOption('Ibanez',productId);
-        addBrandOption('Jackson',productId);
-        addBrandOption('Schecter',productId);
-        addBrandOption('ESP',productId);
-        addBrandOption('Washburn',productId);
-        addBrandOption('Charvel',productId);
-
-      } else if (subcategorySelect.value === "Trumpets") {
-        addBrandOption('Yamaha',productId);
-        addBrandOption('Gibson',productId);
-        addBrandOption('Epiphone',productId);
-        addBrandOption('Ibanez',productId);
-        addBrandOption('Jackson',productId);
-        addBrandOption('Schecter',productId);
-        addBrandOption('ESP',productId);
-        addBrandOption('Washburn',productId);
-        addBrandOption('Charvel',productId);
-
-      } else if (subcategorySelect.value === "String") {
-        addBrandOption('Yamaha',productId);
-        addBrandOption('Gibson',productId);
-        addBrandOption('Epiphone',productId);
-        addBrandOption('Ibanez',productId);
-        addBrandOption('Jackson',productId);
-        addBrandOption('Schecter',productId);
-        addBrandOption('ESP',productId);
-        addBrandOption('Washburn',productId);
-        addBrandOption('Charvel',productId);
-
-      }else{
-        addBrandOption('Yamaha',productId);
-        addBrandOption('Gibson',productId);
-        addBrandOption('Epiphone',productId);
-        addBrandOption('Ibanez',productId);
-        addBrandOption('Jackson',productId);
-        addBrandOption('Schecter',productId);
-        addBrandOption('ESP',productId);
-        addBrandOption('Washburn',productId);
-        addBrandOption('Charvel',productId);
-
+    }
+  } else if (categorySelect.value === 'Band_And_Orchestra') {
+    if (bandOrchestraCategories.value === "Woodwind") {
+      if (WoodwindCategories.value === "Flutes") {
+        addBrandOption('Yamaha', productId);
+        addBrandOption('Armstrong', productId);
+        addBrandOption('Trevor James', productId);
+        addBrandOption('Powell', productId);
+      } else if (WoodwindCategories.value === "Saxophones") {
+        addBrandOption('Yamaha', productId);
+        addBrandOption('Selmer', productId);
+        addBrandOption('Yanagisawa', productId);
+        addBrandOption('Keilwerth', productId);
+        addBrandOption('Cannonball', productId);
+        addBrandOption('Buffet Crampon', productId);
+        addBrandOption('Jupiter', productId);
+        addBrandOption('Eastman', productId);
+        addBrandOption('Conn-Selmer', productId);
+      } else if (WoodwindCategories.value === "Clarinets") {
+        addBrandOption('Yamaha', productId);
+        addBrandOption('Selmer', productId);
+        addBrandOption('Buffet Crampon', productId);
+        addBrandOption('Backun', productId);
+        addBrandOption('Leblanc', productId);
+        addBrandOption('Clark W Fobes', productId);
+        addBrandOption('R13', productId);
+        addBrandOption('Vandoren', productId);
+        addBrandOption('Schreiber', productId);
       }
+    } else if (bandOrchestraCategories.value === "Brass") {
+      if (brassCategories.value === 'Trumphet') {
+      addBrandOption('Bach', productId);
+      addBrandOption('Yamaha', productId);
+      addBrandOption('KGUBrass', productId);
+      addBrandOption('Schiller', productId);
+      addBrandOption('Jupiter', productId);
+      addBrandOption('Conn', productId);
+      addBrandOption('King', productId);
+      addBrandOption('Selmer', productId);
+      addBrandOption('Olds', productId);
+      addBrandOption('New Brand', productId);
+      addBrandOption('BerkeleyWind', productId);
+      addBrandOption('Holton', productId);
 
-    }else if (categorySelect.value === 'sounds') {
-      if (homeAudio.value === "Headphones") {
-        addBrandOption('Yamaha',productId);
-        addBrandOption('Gibson',productId);
-        addBrandOption('Epiphone',productId);
-        addBrandOption('Ibanez',productId);
-        addBrandOption('Jackson',productId);
-        addBrandOption('Schecter',productId);
-        addBrandOption('ESP',productId);
-        addBrandOption('Washburn',productId);
-        addBrandOption('Charvel',productId);
+    } else if (brassCategories.value === 'Trombones') {
+      addBrandOption('Bach', productId);
+      addBrandOption('Schiller', productId);
+      addBrandOption('Jupiter', productId);
+      addBrandOption('New Brand', productId);
+      addBrandOption('Shires', productId);
+      addBrandOption('Conn', productId);
+      addBrandOption('Glenn Cronkhite', productId);
+      addBrandOption('Yamaha', productId);
+      addBrandOption('Olds', productId);
+      addBrandOption('King', productId);
+      addBrandOption('Holton', productId);
+      addBrandOption('Getzen', productId);
 
-      } else if (homeAudio.value === "Receivers") {
-        addBrandOption('Yamaha',productId);
-        addBrandOption('Gibson',productId);
-        addBrandOption('Epiphone',productId);
-        addBrandOption('Ibanez',productId);
-        addBrandOption('Jackson',productId);
-        addBrandOption('Schecter',productId);
-        addBrandOption('ESP',productId);
-        addBrandOption('Washburn',productId);
-        addBrandOption('Charvel',productId);
+    } else if (brassCategories.value === 'FrenchHorns') {
+      addBrandOption('Yamaha', productId);
+      addBrandOption('Schiller', productId);
+      addBrandOption('Eastman', productId);
+      addBrandOption('Holton', productId);
+      addBrandOption('USSR', productId);
+      addBrandOption('Glenn Cronkhite', productId);
+      addBrandOption('Alexander', productId);
+      addBrandOption('Jupiter', productId);
+      addBrandOption('Hans Hoyer', productId);
+      addBrandOption('C.G. Conn', productId);
+      addBrandOption('King', productId);
+      addBrandOption('Getzen', productId);
+    }
+  } else if (bandOrchestraCategories.value === "String") {
+    if (stringCategories.value === 'Violins') {
+      addBrandOption('Rozannas Violins', productId);
+      addBrandOption('Unknown', productId);
+      addBrandOption('D Z Strad', productId);
+      addBrandOption('Unbranded', productId);
+      addBrandOption('Suzuki', productId);
+      addBrandOption('Sky Music', productId);
+      addBrandOption('Stentor', productId);
+      addBrandOption('Violin', productId);
+      addBrandOption('Vienna Strings', productId);
+      addBrandOption('Oqan', productId);
+      addBrandOption('Paititi', productId);
 
-      } else if (homeAudio.value === "Amplifiers") {
-        addBrandOption('Yamaha',productId);
-        addBrandOption('Gibson',productId);
-        addBrandOption('Epiphone',productId);
-        addBrandOption('Ibanez',productId);
-        addBrandOption('Jackson',productId);
-        addBrandOption('Schecter',productId);
-        addBrandOption('ESP',productId);
-        addBrandOption('Washburn',productId);
-        addBrandOption('Charvel',productId);
+    } else if (stringCategories.value === 'Cellos') {
+      addBrandOption('D Z Strad', productId);
+      addBrandOption('Pirastro', productId);
+      addBrandOption('Oqan', productId);
+      addBrandOption('Wittner', productId);
+      addBrandOption('Cello', productId);
+      addBrandOption('Larsen', productId);
+      addBrandOption('NS Design', productId);
+      addBrandOption('Stentor', productId);
+      addBrandOption('Jargar', productId);
+      addBrandOption('Vienna Strings', productId);
+      addBrandOption('Thomastik-Infeld', productId);
 
-      }else if (homeAudio.value === "Floor speakers") {
-        addBrandOption('Yamaha',productId);
-        addBrandOption('Gibson',productId);
-        addBrandOption('Epiphone',productId);
-        addBrandOption('Ibanez',productId);
-        addBrandOption('Jackson',productId);
-        addBrandOption('Schecter',productId);
-        addBrandOption('ESP',productId);
-        addBrandOption('Washburn',productId);
-        addBrandOption('Charvel',productId);
-
-      } else if (homeAudio.value === "Subwoofers") {
-        addBrandOption('Yamaha',productId);
-        addBrandOption('Gibson',productId);
-        addBrandOption('Epiphone',productId);
-        addBrandOption('Ibanez',productId);
-        addBrandOption('Jackson',productId);
-        addBrandOption('Schecter',productId);
-        addBrandOption('ESP',productId);
-        addBrandOption('Washburn',productId);
-        addBrandOption('Charvel',productId);
-
-      }else if (homeAudio.value === "Tape Decks") {
-        addBrandOption('Yamaha',productId);
-        addBrandOption('Gibson',productId);
-        addBrandOption('Epiphone',productId);
-        addBrandOption('Ibanez',productId);
-        addBrandOption('Jackson',productId);
-        addBrandOption('Schecter',productId);
-        addBrandOption('ESP',productId);
-        addBrandOption('Washburn',productId);
-        addBrandOption('Charvel',productId);
-
-      }else if (homeAudio.value === "Turntables") {
-        addBrandOption('Yamaha',productId);
-        addBrandOption('Gibson',productId);
-        addBrandOption('Epiphone',productId);
-        addBrandOption('Ibanez',productId);
-        addBrandOption('Jackson',productId);
-        addBrandOption('Schecter',productId);
-        addBrandOption('ESP',productId);
-        addBrandOption('Washburn',productId);
-        addBrandOption('Charvel',productId);
-
-      }else if (homeAudio.value === "amps") {
-        addBrandOption('Yamaha',productId);
-        addBrandOption('Gibson',productId);
-        addBrandOption('Epiphone',productId);
-        addBrandOption('Ibanez',productId);
-        addBrandOption('Jackson',productId);
-        addBrandOption('Schecter',productId);
-        addBrandOption('ESP',productId);
-        addBrandOption('Washburn',productId);
-        addBrandOption('Charvel',productId);
-
-      }
+    } else if (stringCategories.value === 'Violas') {
+      addBrandOption('D Z Strad', productId);
+      addBrandOption('Super-Sensitive', productId);
+      addBrandOption('Rozannas Violins', productId);
+      addBrandOption('Pirastro', productId);
+      addBrandOption('Opal', productId);
+      addBrandOption('OEM', productId);
+      addBrandOption('Sky Music', productId);
+      addBrandOption('Thomastik-Infeld', productId);
+      addBrandOption('Viola', productId);
+      addBrandOption('Strumenti', productId);
     }
   }
+}else if (categorySelect.value === 'Audio') {
+    if (homeAudio.value === "Headphones") {
+      addBrandOption('Yamaha', productId);
+      addBrandOption('Selmer', productId);
+      addBrandOption('Yanagisawa', productId);
+      addBrandOption('Keilwerth', productId);
+      addBrandOption('Cannonball', productId);
+      addBrandOption('Buffet Crampon', productId);
+      addBrandOption('Jupiter', productId);
+      addBrandOption('Eastman', productId);
+      addBrandOption('Conn-Selmer', productId);
+    } else if (homeAudio.value === "Receivers") {
+      addBrandOption('Yamaha', productId);
+      addBrandOption('Selmer', productId);
+      addBrandOption('Yanagisawa', productId);
+      addBrandOption('Keilwerth', productId);
+      addBrandOption('Cannonball', productId);
+      addBrandOption('Buffet Crampon', productId);
+      addBrandOption('Jupiter', productId);
+      addBrandOption('Eastman', productId);
+      addBrandOption('Conn-Selmer', productId);
 
-  function addBrandOption(brand,productId) {
+
+    } else if (homeAudio.value === "Speakers") {
+      addBrandOption('Mackie', productId);
+      addBrandOption('JBL', productId);
+      addBrandOption('Genelec', productId);
+      addBrandOption('Yamaha', productId);
+      addBrandOption('Behringer', productId);
+      addBrandOption('Samson', productId);
+      addBrandOption('PreSonus', productId);
+      addBrandOption('Tone Tubby', productId);
+      addBrandOption('Focal', productId);
+      addBrandOption('QSC', productId);
+      addBrandOption('KRK', productId);
+      addBrandOption('HK Audio', productId);
+
+    }else if (homeAudio.value === "Amplifiers") {
+      addBrandOption('Yamaha', productId);
+      addBrandOption('Armstrong', productId);
+      addBrandOption('Trevor James', productId);
+      addBrandOption('Powell', productId);
+
+
+    } else if (homeAudio.value === "Subwoofers") {
+      addBrandOption('Yamaha', productId);
+      addBrandOption('Gibson', productId);
+      addBrandOption('Epiphone', productId);
+      addBrandOption('Ibanez', productId);
+      addBrandOption('Jackson', productId);
+      addBrandOption('Schecter', productId);
+      addBrandOption('ESP', productId);
+      addBrandOption('Washburn', productId);
+      addBrandOption('Charvel', productId);
+
+    }else if (homeAudio.value === "Tape_Decks") {
+      addBrandOption('Yamaha', productId);
+      addBrandOption('Schilke', productId);
+      addBrandOption('Getzen', productId);
+      addBrandOption('Conn-Selmer', productId);
+      addBrandOption('Jupiter', productId);
+      addBrandOption('King', productId);
+      addBrandOption('Holton', productId);
+      addBrandOption('Besson', productId);
+      addBrandOption('Stomvi', productId);
+
+
+    }else if (homeAudio.value === "Turntables") {
+      addBrandOption('Yamaha', productId);
+      addBrandOption('Schilke', productId);
+      addBrandOption('Getzen', productId);
+      addBrandOption('Conn-Selmer', productId);
+      addBrandOption('Jupiter', productId);
+      addBrandOption('King', productId);
+      addBrandOption('Holton', productId);
+      addBrandOption('Besson', productId);
+      addBrandOption('Stomvi', productId);
+
+    }else if (homeAudio.value === "Microphones") {
+      addBrandOption('Shure', productId);
+      addBrandOption('AKG', productId);
+      addBrandOption('Sennheiser', productId);
+      addBrandOption('Neumann', productId);
+      addBrandOption('Audio-Technica', productId);
+      addBrandOption('Electro-Voice', productId);
+      addBrandOption('sE Electronics', productId);
+      addBrandOption('Samson', productId);
+      addBrandOption('CAD', productId);
+      addBrandOption('Oktava', productId);
+      addBrandOption('Warm Audio', productId);
+      addBrandOption('RODE', productId);
+
+    }else if (homeAudio.value === "Mixers") {
+      addBrandOption('Behringer', productId);
+      addBrandOption('Mackie', productId);
+      addBrandOption('Yamaha', productId);
+      addBrandOption('Allen & Heath', productId);
+      addBrandOption('Aviom', productId);
+      addBrandOption('Soundcraft', productId);
+      addBrandOption('Boss', productId);
+      addBrandOption('Midas', productId);
+      addBrandOption('PreSonus', productId);
+      addBrandOption('TASCAM', productId);
+      addBrandOption('Solid State Logic', productId);
+      addBrandOption('Studer', productId);
+
+    }else if (homeAudio.value === "Recording") {
+      addBrandOption('TASCAM', productId);
+      addBrandOption('Pro Audio LA', productId);
+      addBrandOption('MRL', productId);
+      addBrandOption('Ampex', productId);
+      addBrandOption('Zoom', productId);
+      addBrandOption('Studer', productId);
+      addBrandOption('Akai', productId);
+      addBrandOption('Sony', productId);
+      addBrandOption('Yamaha', productId);
+      addBrandOption('Fostex', productId);
+    }
+  }else if (categorySelect.value === 'Percussion') {
+    if (drumsCategories.value === 'Cymbals'){
+      addBrandOption('Bosphorus', productId);
+      addBrandOption('Masterwork', productId);
+      addBrandOption('Mehteran Cymbals', productId);
+      addBrandOption('Pergamon', productId);
+      addBrandOption('Diril Cymbals', productId);
+      addBrandOption('Agean Cymbals', productId);
+      addBrandOption('Istanbul Agop', productId);
+      addBrandOption('Sabian', productId);
+      addBrandOption('Agean', productId);
+      addBrandOption('Zildjian', productId);
+      addBrandOption('Paiste', productId);
+      addBrandOption('Istanbul Mehmet', productId);
+
+    }else if (drumsCategories.value === 'Drums'){
+      addBrandOption('Bosphorus', productId);
+      addBrandOption('Masterwork', productId);
+      addBrandOption('Mehteran Cymbals', productId);
+      addBrandOption('Pergamon', productId);
+      addBrandOption('Diril Cymbals', productId);
+      addBrandOption('Agean Cymbals', productId);
+      addBrandOption('Sabian', productId);
+      addBrandOption('Meinl', productId);
+      addBrandOption('Istanbul Agop', productId);
+      addBrandOption('Tama', productId);
+      addBrandOption('Zildjian', productId);
+      addBrandOption('Agean', productId);
+    }
+  }
+}
+
+
+function addBrandOption(brand,productId) {
     var brandSelect = document.getElementById('brandSelect'+productId);
     var option = document.createElement('option');
     option.value = brand;

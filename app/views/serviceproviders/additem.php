@@ -47,7 +47,7 @@
                     <div class="input-box">
                         <label>Woodwind Category</label>
                         <div class="custom-select">
-                            <select id="WoodwindCategories" onchange="" name="Woodwind">
+                            <select id="WoodwindCategories" onchange="updateSubBrandOptions()" name="Woodwind">
                                 <option value="Flutes">Flutes</option>
                                 <option value="Saxophones">Saxophones</option>
                                 <option value="Clarinets">Clarinets</option>
@@ -76,7 +76,7 @@
                             <select id="stringCategories" onchange="updateSubBrandOptions()" name="string">
                                 <option value="Violins">Violins</option>
                                 <option value="Cellos">Cellos</option>
-                                <option value="Violas">violas</option>
+                                <option value="Violas">Violas</option>
                             </select>
                         </div>
                     </div>

@@ -627,9 +627,24 @@ button {
   font-weight: 800;
 }
 .addItem .band{
-display: none;
+  display: none;
 }
-.addItem .home{
+.addItem .Audio{
+  display: none;
+}
+.addItem .Keyboard{
+  display: none;
+}
+.addItem .woodwing{
+  display: none;
+}
+.addItem .brass{
+  display: none;
+}
+.addItem .string{
+  display: none;
+}
+.addItem .Percussion{
   display: none;
 }
 .addItem p{
