@@ -13,69 +13,6 @@
 <?php require_once APPROOT . '/views/inc/sp-index-nav.php'; ?>
 
 <h1 style="color: white;text-align: center;padding-bottom: 20px;letter-spacing: 2px;">Inventory</h1>
-<!--<div class="thumbnail">-->
-<!--    <div class="item" onclick="allItem()">-->
-<!--        <div class="item">-->
-<!--            <div class="thumbnail-item-container">-->
-<!--                <img src="--><?php //echo URLROOT; ?><!--/img/all.jpg">-->
-<!--                <div class="content">-->
-<!--                    All-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="item" onclick="electricGuitars()">-->
-<!--            <div class="item" >-->
-<!--                <div class="thumbnail-item-container">-->
-<!--                    <img src="--><?php //echo URLROOT; ?><!--/img/electricGuitar.jpg" >-->
-<!--                    <div class="content">-->
-<!--                        Electric<br>guitars-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--    </div>-->
-<!--    <div class="item" onclick="keyboard()">-->
-<!--            <div class="item">-->
-<!--                <div class="thumbnail-item-container">-->
-<!--                    <img src="--><?php //echo URLROOT; ?><!--/img/keyboard.jpg">-->
-<!--                    <div class="content">-->
-<!--                        keyboard-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--    </div>-->
-<!--    <div class="item" onclick="acousticGuitars()">-->
-<!--        <div class="item">-->
-<!--                <div class="thumbnail-item-container">-->
-<!--                    <img src="--><?php //echo URLROOT; ?><!--/img/acousticGuita.jpg">-->
-<!--                    <div class="content">-->
-<!--                        Acoustic<br>Guitars-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--    </div>-->
-<!--    <div class="item" onclick="bandAndOrchestra()">-->
-<!--            <div class="item">-->
-<!--                <div class="thumbnail-item-container">-->
-<!--                    <img src="--><?php //echo URLROOT; ?><!--/img/bandOrchestra.jpg">-->
-<!--                    <div class="content">-->
-<!--                        Brass-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--    </div>-->
-<!--    <div class="item" onclick="homeAudio()">-->
-<!--            <div class="item">-->
-<!--                <div class="thumbnail-item-container">-->
-<!--                    <img src="--><?php //echo URLROOT; ?><!--/img/home.jpg">-->
-<!--                    <div class="content">-->
-<!--                        Sounds-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--    </div>-->
-<!--</div>-->
-
 <div class="categories">
     <div class="category">
         <div class="category-name" onclick="toggleCategory('stringInstruments')">String Instruments</div>
