@@ -1,8 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instrument</title>
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/instrument.css">
+</head>
+<body>
+<!--navigation bar-->
 
 <header id="nav-menu" aria-label="navigation bar">
     <div class="container">
         <div class="nav-start">
-            <a class="logo" href="http://localhost/symphony/users/index">
+            <a class="logo" href="/">
                 <img
                     src="<?php echo logo; ?>"
                     width="35"
@@ -146,11 +155,16 @@
         </div>
         <div class="nav-end">
             <div class="right-container">
-<!--                <form class="search" role="search">-->
-<!--                    <input type="search" name="search" placeholder="Search" />-->
-<!--                    <i class="bx bx-search" aria-hidden="true"></i>-->
-<!--                </form>-->
-
+                <form class="search" role="search">
+                    <input type="search" name="search" placeholder="Search" />
+                    <i class="bx bx-search" aria-hidden="true"></i>
+                </form>
+                <div class="cart">
+                    <i class="fa-solid fa-cart-plus"></i>
+                </div>
+                <div class="notification">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
                 <a href="<?php echo URLROOT; ?>/users/profile">
                     <img
                         src="<?php echo URLROOT; ?>/img/user.png"
@@ -161,7 +175,6 @@
                 </a>
                 <a class="btn btn-primary" href="<?php echo URLROOT; ?>/users/logout">Log out</a>
             </div>
-
             <button
                 id="hamburger"
                 aria-label="hamburger"
@@ -173,3 +186,96 @@
         </div>
     </div>
 </header>
+<div class="categories">
+    <div class="category" onclick="toggleCategory('stringInstruments')">
+        <div class="category-name">String Instruments</div>
+        <ul class="equipment-list" id="stringInstruments">
+            <li class="equipment-item"><input type="checkbox"> Electric Guitars</li>
+            <li class="equipment-item"><input type="checkbox"> Acoustic Guitars</li>
+            <li class="equipment-item"><input type="checkbox"> Violins</li>
+            <li class="equipment-item"><input type="checkbox"> Cellos</li>
+            <li class="equipment-item"><input type="checkbox"> Violas</li>
+        </ul>
+    </div>
+    <div class="category" onclick="toggleCategory('woodwindInstruments')">
+        <div class="category-name">Woodwind Instruments</div>
+        <ul class="equipment-list" id="woodwindInstruments">
+            <li class="equipment-item"><input type="checkbox"> Flute</li>
+            <li class="equipment-item"><input type="checkbox"> Clarinet</li>
+            <li class="equipment-item"><input type="checkbox"> Saxophone</li>
+        </ul>
+    </div>
+    <div class="category" onclick="toggleCategory('brassInstruments')">
+        <div class="category-name">Brass Instruments</div>
+        <ul class="equipment-list" id="brassInstruments">
+            <li class="equipment-item"><input type="checkbox"> Trumpet</li>
+            <li class="equipment-item"><input type="checkbox"> Trombone</li>
+            <li class="equipment-item"><input type="checkbox"> French Horn</li>
+        </ul>
+    </div>
+    <div class="category" onclick="toggleCategory('percussionInstruments')">
+        <div class="category-name" >Percussion Instruments</div>
+        <ul class="equipment-list" id="percussionInstruments">
+            <li class="equipment-item"><input type="checkbox"> Drums</li>
+            <li class="equipment-item"><input type="checkbox"> Cymbals</li>
+        </ul>
+    </div>
+    <div class="category" onclick="toggleCategory('keyboardInstruments')">
+        <div class="category-name" >Keyboard Instruments</div>
+        <ul class="equipment-list" id="keyboardInstruments">
+            <li class="equipment-item"><input type="checkbox"> Piano</li>
+            <li class="equipment-item"><input type="checkbox"> Organ</li>
+        </ul>
+    </div>
+    <div class="category" onclick="toggleCategory('audioInstruments')">
+        <div class="category-name" >Audio</div>
+        <ul class="equipment-list" id="audioInstruments">
+            <li class="equipment-item"><input type="checkbox"> Headphones</li>
+            <li class="equipment-item"><input type="checkbox"> Receivers</li>
+            <li class="equipment-item"><input type="checkbox"> Amplifiers</li>
+            <li class="equipment-item"><input type="checkbox"> Speakers</li>
+            <li class="equipment-item"><input type="checkbox"> Subwoofers</li>
+            <li class="equipment-item"><input type="checkbox"> Tape Deks</li>
+            <li class="equipment-item"><input type="checkbox"> Truntables</li>
+            <li class="equipment-item"><input type="checkbox"> Microphones</li>
+            <li class="equipment-item"><input type="checkbox"> Mixers</li>
+            <li class="equipment-item"><input type="checkbox"> Recordings</li>
+        </ul>
+    </div>
+    <div class="category" onclick="toggleCategory('price')">
+        <div class="category-name" >Price</div>
+        <ul class="equipment-list price" id="price">
+            <li class="equipment-item" ><input type="number" style="width: 50px;border: 1px solid #dad7d7;padding: 10px;"></li>
+            <li class="equipment-item" style="padding: 10px">-</li>
+            <li class="equipment-item"><input type="number" style="width: 50px;border: 1px solid #dad7d7;padding: 10px"></li>
+        </ul>
+    </div>
+    <div class="category sort" >
+        <div class="category-name" onclick="toggleCategory('sort')">Sort</div>
+        <div class="sort-section">
+            <select id="sort">
+                <option value="name-asc">Name (A-Z)</option>
+                <option value="name-desc">Name (Z-A)</option>
+                <option value="price-asc">Price (Low to High)</option>
+                <option value="price-desc">Price (High to Low)</option>
+                <option value="date-asc">Date Added (Oldest First)</option>
+                <option value="date-desc">Date Added (Newest First)</option>
+            </select>
+        </div>
+    </div>
+
+</div>
+</div>
+<script src="https://kit.fontawesome.com/3376ff6b83.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    function toggleCategory(categoryId) {
+        const categoryList = document.getElementById(categoryId);
+        if (categoryId === 'price') {
+            categoryList.style.display = categoryList.style.display === "none" ? "flex" : "none";
+        }else{
+            categoryList.style.display = categoryList.style.display === "none" ? "block" : "none";
+        }
+    }
+</script>
+</body>
+</html>

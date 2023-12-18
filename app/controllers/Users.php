@@ -157,23 +157,6 @@ class Users extends Controller {
         }
     }
 
-    // public function delete(){
-    //   if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    //     if($this->userModel->delete($_SESSION['user_id'])){
-    //       unset($_SESSION['user_id']);
-    //       unset($_SESSION['user_email']);
-    //       unset($_SESSION['user_name']);
-    //       session_destroy();
-    //       redirect('pages/index');
-    //     }
-    //     else {
-    //       die('Something went wrong');
-    //     }
-    //   }
-    //   else {
-    //     redirect('users/profile');
-    //   }
-    // }
     public function delete(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $password = trim($_POST['password']);
@@ -222,7 +205,6 @@ class Users extends Controller {
             }
         }
     }
-
 
     public function register(){
         // Check for POST
@@ -445,5 +427,9 @@ class Users extends Controller {
         unset($_SESSION['user_name']);
         session_destroy();
         redirect('pages/index');
+    }
+
+    public function Instrument(){
+        $this->view('users/instrument');
     }
 }
