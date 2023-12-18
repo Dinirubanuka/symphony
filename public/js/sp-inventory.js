@@ -96,7 +96,7 @@ var Orgdata;
         method: 'POST',
         url: 'http://localhost/symphony/serviceproviders/deleteitem/'+productId,
         success: function(response) {
-          Redirect(method);
+          Redirect();
         },
         error: function(error) {
           console.error('Error:', error);
@@ -132,10 +132,10 @@ var Orgdata;
         console.log(item.category);
         console.log(categoryArray);
 
-        if (categoryArray[0] === 'Electric_Guitars'){
-          item.category = 'Electric_Guitars';
-        }else if (categoryArray[0] ==='Acoustic_Guitars'){
-          item.category = 'Acoustic_Guitars';
+        if (categoryArray[0] === 'Electric Guitars'){
+          item.category = 'Electric Guitars';
+        }else if (categoryArray[0] ==='Acoustic Guitars'){
+          item.category = 'Acoustic Guitars';
         }else if (categoryArray[0] ==='Keyboard'){
           item.category = 'Keyboard';
           if (categoryArray[1] ==='Piano'){
@@ -253,9 +253,9 @@ var Orgdata;
                 `<label>Category</label>`+
                 `<div class="custom-select">`+
                     `<select id="categorySelect`+item.product_id+`" onchange="updateBrandOptions(`+item.product_id+`)" name="category">`+
-                        `<option value="Electric_Guitars" `+(item.category === 'Electric_Guitars' ? 'selected' : '')+`>Electric guitars</option>`+
+                        `<option value="Electric Guitars" `+(item.category === 'Electric Guitars' ? 'selected' : '')+`>Electric guitars</option>`+
                         `<option value="Keyboard" `+(item.category === 'Keyboard' ? 'selected' : '')+`>Keyboard</option>`+
-                        `<option value="Acoustic_Guitars" `+(item.category === 'Acoustic_Guitars' ? 'selected' : '')+`>Acoustic Guitars</option>`+
+                        `<option value="Acoustic Guitars" `+(item.category === 'Acoustic Guitars' ? 'selected' : '')+`>Acoustic Guitars</option>`+
                         `<option value="Band_And_Orchestra" `+(item.category === 'Band_And_Orchestra' ? 'selected' : '')+`>Band and Orchestra</option>`+
                         `<option value="Audio" `+(item.category === 'Audio' ? 'selected' : '')+`>Audio</option>`+
                         `<option value="Percussion" `+(item.category === 'Percussion' ? 'selected' : '')+`>Drums and Percussion</option>`+
@@ -557,7 +557,7 @@ function updateSubBrandOptions(productId) {
   var drumsCategories = document.getElementById("drumsCategories" + productId);
   brandSelect.innerHTML = '';
 
-  if (categorySelect.value === 'Electric_Guitars') {
+  if (categorySelect.value === 'Electric Guitars') {
     // var arr = ["Yamaha","Gibson","Epiphone","Ibanez","Jackson","Schecter","ESP","Washburn","Charvel"];
     // addBrandOption(arr,productId);
     addBrandOption('Yamaha', productId);
@@ -577,7 +577,7 @@ function updateSubBrandOptions(productId) {
     addBrandOption('Warwick', productId);
     addBrandOption('Sandberg', productId);
     addBrandOption('Dingwall', productId);
-  } else if (categorySelect.value === 'Acoustic_Guitars') {
+  } else if (categorySelect.value === 'Acoustic Guitars') {
     // addBrandOption = ["Yamaha","Gibson","Epiphone","Ibanez","Jackson","Schecter","ESP","Washburn","Charvel"];
     addBrandOption('Yamaha', productId);
     addBrandOption('Gibson', productId);

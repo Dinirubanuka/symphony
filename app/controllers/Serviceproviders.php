@@ -456,7 +456,11 @@
 
 //            select category
             $category = trim($_POST['category']);
-            if ($category === 'Keyboard'){
+            if ($category === 'Electric_Guitars'){
+                $data['category'] ='Electric Guitars' ;
+            }elseif ($category === 'Acoustic_Guitars'){
+                $data['category'] ='Acoustic Guitars' ;
+            } else if ($category === 'Keyboard'){
                 $keyboardCategory = trim($_POST['keyboard']);
                 $data['category'] = $category.' '.$keyboardCategory;
 
