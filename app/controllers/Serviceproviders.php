@@ -283,6 +283,32 @@
                     'unit_price_err' => '',
                     'description_err' => ''
                 ];
+//                select category
+            $category = trim($_POST['category']);
+            if ($category === 'Keyboard'){
+                $keyboardCategory = trim($_POST['keyboard']);
+                $data['category'] = $category.' '.$keyboardCategory;
+
+            }else if($category === 'Band_And_Orchestra'){
+                $bandOrchestraCategories = trim($_POST['bandOrchestra']);
+                if ($bandOrchestraCategories === 'Woodwind'){
+                    $WoodwindCategories = trim($_POST['Woodwind']);
+                    $data['category'] = $category.' '.$bandOrchestraCategories.' '.$WoodwindCategories;
+                }else if($bandOrchestraCategories === 'Brass'){
+                    $brassCategories = trim($_POST['Brass']);
+                    $data['category'] = $category.' '.$bandOrchestraCategories.' '.$brassCategories;
+                }else if($bandOrchestraCategories === 'String'){
+                    $stringCategories = trim($_POST['string']);
+                    $data['category'] = $category.' '.$bandOrchestraCategories.' '.$stringCategories;
+                }
+
+            }else if($category === 'Audio'){
+                $homeAudioCategory = trim($_POST['sounds']);
+                $data['category'] = $category.' '.$homeAudioCategory;
+            }else if($category === 'Percussion'){
+                $percussionCategory = trim($_POST['Percussion']);
+                $data['category'] = $category.' '.$percussionCategory;
+            }
 
                 if(empty($data['title'])){
                     $data['title_err'] = 'Title cannot be empty!';
