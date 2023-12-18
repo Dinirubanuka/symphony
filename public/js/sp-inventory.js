@@ -898,3 +898,26 @@ function addBrandOption(brand,productId) {
 
   // updateBrandOptions(productId);
 
+//search
+document.getElementById("search-item").addEventListener("keyup" , search);
+function search(){
+    console.log('serach func');
+    const searchBox = document.getElementById("search-item").value.toUpperCase();
+    // const storeItems = document.getElementById("");
+    const products = document.querySelectorAll(".item-container");
+
+
+  products.forEach(product => {
+    const titleElement = product.querySelector("h3");
+
+    if (titleElement) {
+      const textValue = titleElement.textContent || titleElement.innerHTML;
+
+      if (textValue.toUpperCase().indexOf(searchBox) > -1) {
+        product.style.display = "";
+      } else {
+        product.style.display = "none";
+      }
+    }
+  });
+}

@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b38043d5-52c0-4c15-8c01-780342c8c479" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/Serviceproviders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Serviceproviders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/inc/sp-index-nav.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/inc/sp-index-nav.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/sp-inventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/sp-inventory.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -108,7 +108,7 @@
       <workItem from="1702479601632" duration="1476000" />
       <workItem from="1702532088842" duration="1258000" />
       <workItem from="1702605888035" duration="47700000" />
-      <workItem from="1702874957066" duration="9427000" />
+      <workItem from="1702874957066" duration="15380000" />
     </task>
     <servers />
   </component>
@@ -141,12 +141,6 @@
           <url>file://$PROJECT_DIR$/public/js/sp-inventory.js</url>
           <line>714</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/public/js/sp-inventory.js</url>
-          <line>455</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
