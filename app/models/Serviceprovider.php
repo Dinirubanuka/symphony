@@ -95,16 +95,15 @@ require 'vendor/autoload.php';
                 $data['bandAndOrchestraCategory'] = null;
                 $data['homeAudioCategory'] = null;
             }
-            $this->db->query('UPDATE products SET category  = :category , brand = :brand , model = :model , quantity = :quantity , unit_price = :unit_price , Description = :description , outOfStock = :outOfStock , brass = :bandOrchestraCategories , sounds = :homeAudioCategory  WHERE product_id = :product_id');
+            $this->db->query('UPDATE products SET category  = :category , brand = :brand , model = :model , quantity = :quantity , unit_price = :unit_price , Description = :description , outOfStock = :outOfStock , warranty = :warranty WHERE product_id = :product_id');
             $this->db->bind(':category', $data['category']);
             $this->db->bind(':brand', $data['brand']);
             $this->db->bind(':model', $data['model']);
+            $this->db->bind(':warranty', $data['warranty']);
             $this->db->bind(':quantity', $data['quantity']);
             $this->db->bind(':unit_price', $data['unit_price']);
             $this->db->bind(':description', $data['description']);
             $this->db->bind(':outOfStock', $data['outOfStock']);
-            $this->db->bind(':bandOrchestraCategories', $data['bandOrchestraCategories']);
-            $this->db->bind(':homeAudioCategory', $data['homeAudioCategory']);
             $this->db->bind(':product_id',$product_id );
 
             if($this->db->execute()){

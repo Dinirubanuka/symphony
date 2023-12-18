@@ -1,6 +1,6 @@
 
 var $data;
-
+var Orgdata;
 // script.js
   const dropdownBtn = document.querySelectorAll(".dropdown-btn");
   const dropdown = document.querySelectorAll(".dropdown");
@@ -77,7 +77,8 @@ var $data;
       url: 'http://localhost/symphony/serviceproviders/inventoryDelete',
       dataType: 'json',
       success: function (response) {
-        $data = response.inventory;
+        $data = JSON.parse(JSON.stringify(response.inventory));
+        Orgdata = JSON.parse(JSON.stringify(response.inventory));
         console.log('response',response);
         displaydata($data);
         console.log('method');
@@ -128,6 +129,8 @@ var $data;
 
         var categoryString = item.category;
         var categoryArray = categoryString.split(' ');
+        console.log(item.category);
+        console.log(categoryArray);
 
         if (categoryArray[0] === 'Electric_Guitars'){
           item.category = 'Electric_Guitars';
@@ -203,8 +206,6 @@ var $data;
             item.persussion = 'Drums';
           }
         }
-        console.log(categoryArray);
-
 
         var stockText="";
         if(item.quantity<=0){
@@ -448,10 +449,11 @@ var $data;
     var filteredData;
 
     if (selectedCategories.length === 0) {
-      filteredData = $data;
+      filteredData = JSON.parse(JSON.stringify(Orgdata));
     } else {
-      filteredData = $data.filter(function(item) {
+      filteredData = JSON.parse(JSON.stringify(Orgdata)).filter(function(item) {
         return selectedCategories.some(function(selectedCategory) {
+          console.log(item.category);
           return item.category.includes(selectedCategory);
         });
       });

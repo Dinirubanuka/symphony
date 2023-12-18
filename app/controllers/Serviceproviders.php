@@ -198,7 +198,7 @@
         $this->view('serviceproviders/edit',$data);
         }
     }
-        public function edititem($product_id){
+    public function edititem($product_id){
             // Check for POST
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 // Process form
@@ -274,8 +274,7 @@
                     'unit_price' => trim($_POST['unit_price']),
                     'description' => trim($_POST['description']),
                     'outOfStock' => trim($_POST['availabilty']),
-                    'bandOrchestraCategories' => trim($_POST['bandOrchestraCategories']),
-                    'homeAudioCategory' => trim($_POST['homeAudioCategory']),
+                    'warranty' => trim($_POST['warranty']),
                     'created_by_err' => '',
                     'category_err' => '',
                     'brand_err' => '',
