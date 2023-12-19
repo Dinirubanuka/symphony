@@ -371,8 +371,8 @@ button {
 }
 
 .item-container:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: white;
+    background-color: rgba(49, 47, 47, 0.2);
+    /*color: white;*/
     scale: 1.02;
 }
 

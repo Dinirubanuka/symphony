@@ -68,19 +68,18 @@ function displaydata(data){
                 `<p>Price(Lkr): `+item.unit_price+`</p>`+
                 `<button href="" onclick="addItem(`+item.product_id+`)" style="color: orange">see more details</button>`+
                 `<p>`+stockText+`</p>`+
-                <!-- User reviews go here -->
-                `<div class="user-review">`+
-                `<a href="http://" style="font-size: 0.9rem;">Read Customer Reviews</a>`+
+                // <!-- Add cart -->
+                // `<div class="add-cart">`+
+                // `<a href="http://" style="font-size: 0.9rem;">Read Customer Reviews</a>`+
+                // `</div>`+
                 `</div>`+
                 `</div>`+
-                `</div>`+
-                <!-- Review section -->
-                `<div class="reviews">`+
-                `<div class="bin">`+
-                `<img src="http://localhost/symphony/img/bin.png" alt="bin-icon"  class = "bin" id="bin_<?php echo $inventory->product_id; ?>" onclick="Delete(`+item.product_id+`)"/>`+
-                `</div>`+
-                <!-- Add more reviews as needed -->
-                `</div>`+
+                // `<div class="reviews">`+
+                // `<div class="bin">`+
+                // `<img src="http://localhost/symphony/img/bin.png" alt="bin-icon"  class = "bin" id="bin_<?php echo $inventory->product_id; ?>" onclick="Delete(`+item.product_id+`)"/>`+
+                // `</div>`+
+                // <!-- Add more reviews as needed -->
+                // `</div>`+
                 `</div>`;
         });
         accReq.innerHTML=req;
