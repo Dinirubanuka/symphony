@@ -243,4 +243,10 @@ class User {
 
         return $row;
     }
+
+    public function inventory(){
+        $this->db->query('SELECT * FROM products');
+        $results = $this->db->resultSet();
+        return $results;
+    }
 }

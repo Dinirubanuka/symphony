@@ -432,4 +432,16 @@ class Users extends Controller {
     public function Instrument(){
         $this->view('users/instrument');
     }
+
+    public function inventory(){
+        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+            $inventory = $this->userModel->inventory();
+            $data =[
+                'inventory' => $inventory
+            ];
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit();
+    }
 }
