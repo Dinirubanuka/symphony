@@ -117,3 +117,30 @@ function updateDisplayedData() {
 // }
 
 $('.equipment-list input').change(updateDisplayedData);
+
+//search
+document.getElementById("search-item").addEventListener("keyup" , search);
+function search(){
+    const searchBox = document.getElementById("search-item").value.toUpperCase();
+    // const storeItems = document.getElementById("");
+    const products = document.querySelectorAll(".item-container");
+
+
+    products.forEach(product => {
+        const titleElement = product.querySelector("h3");
+        const brand = product.querySelector("p:nth-child(2)");
+        const model = product.querySelector("p:nth-child(3)");
+
+        if (titleElement || brand || model) {
+            const textValue = titleElement.textContent || titleElement.innerHTML;
+            const brandValue = brand.textContent || brand.innerHTML;
+            const modelValue = model.textContent || model.innerHTML;
+
+            if (textValue.toUpperCase().indexOf(searchBox) > -1 || brandValue.toUpperCase().indexOf(searchBox) > -1 || modelValue.toUpperCase().indexOf(searchBox) > -1) {
+                product.style.display = "";
+            } else {
+                product.style.display = "none";
+            }
+        }
+    });
+}
