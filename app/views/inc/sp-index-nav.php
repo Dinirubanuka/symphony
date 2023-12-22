@@ -1,7 +1,7 @@
 <header id="nav-menu" aria-label="navigation bar">
   <div class="container">
     <div class="nav-start">
-      <a class="logo" href="/">
+      <a class="logo" href="<?php URLROOT;?>/img/logo.png">
         <img
                 src="<?php echo logo; ?>"
                 width="35"

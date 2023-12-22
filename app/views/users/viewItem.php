@@ -10,31 +10,24 @@
 </head>
 <body>
 <!-----------profile-nav-bar-------->
-<!-- <?php require_once APPROOT . '/views/inc/sp-index-nav.php'; ?> -->
+<!-- --><?php //require_once APPROOT . '/views/inc/sp-index-nav.php'; ?>
 
 <div class="wrapper">
 <div class="container">
     <div class="mySlides">
-        <div class="numbertext">1 / 3</div>
-        <img src="https://picsum.photos/400/300" style="width:600px; height:600px;">
+        <img src="<?php echo URLROOT ?>/img/serviceProvider/<?php echo $data['photo_1']; ?>">
     </div>
   
     <div class="mySlides">
-        <div class="numbertext">2 / 3</div>
-        <img src="https://picsum.photos/401/300" style="width:600px; height:600px;">
+        <img src="<?php echo URLROOT ?>/img/serviceProvider/<?php echo $data['photo_2']; ?>">
     </div>
   
     <div class="mySlides">
-        <div class="numbertext">3 / 3</div>
-         <img src="https://picsum.photos/402/300" style="width:600px; height:600px;">
+        <img src="<?php echo URLROOT ?>/img/serviceProvider/<?php echo $data['photo_3']; ?>">
     </div>
   
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
-  
-    <div class="caption-container">
-      <p id="caption"></p>
-    </div>
   
     <div class="row">
       <div class="column">
