@@ -55,7 +55,7 @@ function displaydata(data){
                 stockText="Inventory not available";
             }
 
-            req += `<div class="item-container">`+
+            req += `<div class="item-container" onclick="viewItem(`+item.product_id+`)">`+
                 `<div class="item-details">`+
                 `<div class="image-carousel">`+
                 `<img class="carousel-image" src="http://localhost/symphony/img/serviceProvider/`+item.photo_1+`" alt="Placeholder Image 1" style="display: block">`+
@@ -66,7 +66,6 @@ function displaydata(data){
                 `<p>Model:  `+item.model+`</p>`+
                 `<p>Units Left:  `+item.quantity+`</p>`+
                 `<p>Price(Lkr): `+item.unit_price+`</p>`+
-                `<button href="" onclick="addItem(`+item.product_id+`)" style="color: orange">see more details</button>`+
                 `<p>`+stockText+`</p>`+
                 // <!-- Add cart -->
                 // `<div class="add-cart">`+
@@ -143,4 +142,8 @@ function search(){
             }
         }
     });
+}
+
+function viewItem(productId){
+    window.location.href = 'http://localhost/symphony/users/itemDetails/'+productId ;
 }

@@ -444,4 +444,15 @@ class Users extends Controller {
         echo json_encode($data);
         exit();
     }
+
+    public function itemDetails($productId){
+        $itemDetails = $this->userModel->itemDetails($productId);
+
+        if ($itemDetails){
+//            die(print_r($itemDetails));
+            $this->view('users/viewItem', $itemDetails);
+        }else{
+            die('error fetching item details');
+        }
+    }
 }

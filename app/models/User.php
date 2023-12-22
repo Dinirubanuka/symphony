@@ -249,4 +249,15 @@ class User {
         $results = $this->db->resultSet();
         return $results;
     }
+
+    public function itemDetails($productId){
+        $this->db->query('SELECT * FROM products WHERE product_id = :productId');
+        $this->db->bind(':productId', $productId);
+        $row = $this->db->single();
+        if ($row){
+            return $row;
+        }else{
+            return false;
+        }
+    }
 }
