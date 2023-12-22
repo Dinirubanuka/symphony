@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/sp-viewitem.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-    <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/sp-viewitem.css"/> -->
 <body>
 <!-----------profile-nav-bar-------->
 <!-- <?php require_once APPROOT . '/views/inc/sp-index-nav.php'; ?> -->
@@ -53,28 +52,13 @@
 <div class="item-container">
     <div class="item-details">
         <div class="item-info">
-            <h2>title</h2>
-            <h3>Brand: XYZ</h3>
-            <p>Model: ABC123</p>
-            <p>Units Left: 50</p>
-            <p>Price: $499.99</p>
-            <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent erat orci, feugiat nec porta ac, imperdiet in massa. 
-                Vivamus porta, felis lobortis ornare tempus, felis turpis venenatis eros, non accumsan lacus nunc vitae nunc. Suspendisse aliquet 
-                pulvinar magna, sit amet tempor libero volutpat nec. Integer eget odio eget tortor auctor luctus fermentum non nisl. Pellentesque 
-                posuere convallis interdum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed euismod massa
-                 ac leo interdum, quis blandit nulla fringilla. Nam ullamcorper nec lorem varius vulputate. In consequat nunc in mattis lobortis. 
-                 Nulla facilisi. Nunc ultrices facilisis est, nec pharetra nunc rutrum et.
-                Pellentesque imperdiet dui id neque ultricies tristique. Ut placerat ultricies nunc. Lorem ipsum dolor sit amet, consectetur 
-                adipiscing elit. Curabitur eget turpis eget lectus vulputate cursus. In elit magna, imperdiet vitae convallis vel, pretium a orci. 
-                Vestibulum nec lacinia ex. Vestibulum lobortis quam massa, ac porta leo efficitur ac. Praesent vel tempus metus. Etiam at luctus 
-                tellus. Praesent egestas feugiat dapibus. Fusce velit lorem, sodales at neque varius, pharetra vestibulum quam.
-                Aliquam bibendum mauris sed lorem pulvinar, eu auctor nunc gravida. Cras varius pharetra velit, quis gravida nisi venenatis quis. 
-                Maecenas ornare nunc dolor, eget malesuada ipsum dapibus dapibus. Nam sed nibh augue. Fusce dui urna, pretium vitae mattis aliquet, 
-                dignissim nec nibh. Vivamus maximus lacinia enim, nec vulputate mauris semper quis. Suspendisse potenti. Nulla viverra arcu nulla, 
-                nec dapibus mi accumsan sit amet. Nullam varius ex vitae sapien dapibus, non faucibus dolor consectetur. Ut blandit massa ligula, 
-                eget feugiat nibh tincidunt sed. Ut tempus justo turpis. Quisque ultricies mauris at tempus congue.</p>
+            <h2><?php echo $data['title']; ?></h2>
+            <h3>Brand: <?php echo $data['brand']; ?></h3>
+            <p>Model: <?php echo $data['model']; ?></p>
+            <p>Units Left: <?php echo $data['quantity']; ?></p>
+            <p>Price: <?php echo $data['price']; ?></p>
+            <p><?php echo $data['description'] ?></p>
 
-            <!-- Add to cart and add to favorites buttons -->
             <button id="addToCartBtn">Add to Cart</button>
             <button id="addToFavoritesBtn">Add to Favorites</button>
         </div>
@@ -194,7 +178,6 @@
         <blockquote>Praesent sapien sem, ultrices accumsan mauris nec, lobortis lacinia mauris. Sed mollis scelerisque nisi, eu maximus magna facilisis eget. Etiam in laoreet dui, sit amet cursus dolor. Vestibulum sollicitudin tellus non ex suscipit hendrerit. Donec interdum mollis nisl, sit amet hendrerit erat hendrerit quis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin venenatis feugiat varius. Pellentesque blandit malesuada nulla non sodales. Nam et auctor tellus, vitae suscipit metus. In et condimentum turpis. Morbi vel lectus dolor. Integer erat tellus, ultrices et velit sit amet, condimentum pellentesque orci. Pellentesque sed pretium erat, ac auctor dui. Donec ut finibus magna. Suspendisse potenti.</blockquote>
       </figure>
 </div>
-<script src="<?php URLROOT?>/js/sp-viewitem.js"></script>
-<!-- <script src="<?php echo URLROOT;?>/js/sp-viewitem.js"></script> -->
+ <script src="<?php echo URLROOT;?>/js/sp-viewitem.js"></script>
 </body>
 </html>

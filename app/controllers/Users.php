@@ -449,8 +449,23 @@ class Users extends Controller {
         $itemDetails = $this->userModel->itemDetails($productId);
 
         if ($itemDetails){
-//            die(print_r($itemDetails));
-            $this->view('users/viewItem', $itemDetails);
+            var_dump(print_r($itemDetails));
+            $data = [
+                'product_id' => $itemDetails->product_id,
+                'title' => $itemDetails->Title,
+                'category'=> $itemDetails->category,
+                'brand' => $itemDetails->brand,
+                'model' => $itemDetails->model,
+                'price' => $itemDetails->unit_price,
+                'photo_1'=>$itemDetails->photo_1,
+                'photo_2'=>$itemDetails->photo_2,
+                'photo_3'=>$itemDetails->photo_3,
+                'outOfStock' => $itemDetails->outOfStock,
+                'warranty' => $itemDetails->warranty,
+                'quantity' => $itemDetails->quantity,
+                'description' => $itemDetails->Description
+            ];
+            $this->view('users/viewItem', $data);
         }else{
             die('error fetching item details');
         }
