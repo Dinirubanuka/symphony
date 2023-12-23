@@ -449,7 +449,6 @@ class Users extends Controller {
         $itemDetails = $this->userModel->itemDetails($productId);
 
         if ($itemDetails){
-            var_dump(print_r($itemDetails));
             $data = [
                 'product_id' => $itemDetails->product_id,
                 'title' => $itemDetails->Title,

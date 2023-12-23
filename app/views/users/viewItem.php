@@ -14,30 +14,31 @@
 
 <div class="wrapper">
 <div class="container">
-    <div class="mySlides">
-        <img src="<?php echo URLROOT ?>/img/serviceProvider/<?php echo $data['photo_1']; ?>">
+    <div class="slides">
+        <div class="mySlides">
+            <img src="<?php echo URLROOT ?>/img/serviceProvider/<?php echo $data['photo_1']; ?>">
+        </div>
+
+        <div class="mySlides">
+            <img src="<?php echo URLROOT ?>/img/serviceProvider/<?php echo $data['photo_2']; ?>">
+        </div>
+
+        <div class="mySlides">
+            <img src="<?php echo URLROOT ?>/img/serviceProvider/<?php echo $data['photo_3']; ?>">
+        </div>
     </div>
-  
-    <div class="mySlides">
-        <img src="<?php echo URLROOT ?>/img/serviceProvider/<?php echo $data['photo_2']; ?>">
-    </div>
-  
-    <div class="mySlides">
-        <img src="<?php echo URLROOT ?>/img/serviceProvider/<?php echo $data['photo_3']; ?>">
-    </div>
-  
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
   
     <div class="row">
       <div class="column">
-        <img class="demo cursor" src="https://picsum.photos/400/300" style="width:190px; height:190px;" onclick="currentSlide(1)">
+        <img class="demo cursor" src="<?php echo URLROOT ?>/img/serviceProvider/<?php echo $data['photo_1']; ?>"  onclick="currentSlide(1)">
       </div>
       <div class="column">
-        <img class="demo cursor" src="https://picsum.photos/401/300" style="width:190px; height:190px;" onclick="currentSlide(2)">
+        <img class="demo cursor" src="<?php echo URLROOT ?>/img/serviceProvider/<?php echo $data['photo_2']; ?>"  onclick="currentSlide(2)">
       </div>
       <div class="column">
-        <img class="demo cursor" src="https://picsum.photos/402/300" style="width:190px; height:190px;" onclick="currentSlide(3)">
+        <img class="demo cursor" src="<?php echo URLROOT ?>/img/serviceProvider/<?php echo $data['photo_3']; ?>" style="width:190px; height:190px;" onclick="currentSlide(3)">
       </div>
     </div>
 </div>
