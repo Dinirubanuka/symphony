@@ -71,11 +71,31 @@ class User {
         }
     }
 
+    public function search(){
+        $this->db->query('SELECT * FROM products'); 
+        $results = $this->db->resultSet();
+        return $results; 
+      }
+
     //view user
     public function view($id){
         $this->db->query('SELECT * FROM users WHERE id = :id');
         $this->db->bind(':id', $id);
         $results = $this->db->single();
+        return $results;
+    }
+
+    public function viewitem($product_id){
+        $this->db->query('SELECT * FROM products WHERE product_id = :product_id'); 
+        $this->db->bind(':product_id', $product_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function viewreviews($product_id){
+        $this->db->query('SELECT * FROM reviews WHERE product_id = :product_id'); 
+        $this->db->bind(':product_id', $product_id);
+        $results = $this->db->resultSet();
         return $results;
     }
 

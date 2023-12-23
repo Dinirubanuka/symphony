@@ -24,6 +24,46 @@ class Users extends Controller {
         $this->view('users/profile',$data);
     }
 
+    public function search(){
+        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+            $inventory = $this->userModel->search();
+        $data =[
+            'inventory' => $inventory
+        ];
+        }
+        $this->view('users/search',$data);
+    }
+
+    
+    public function viewitem($product_id){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $data = $this->userModel->viewitem($product_id);
+            $reviews = $this->userModel->viewreviews($product_id);
+            $data =[
+                'product_id'=>$data->product_id,
+                'created_by'=>$data->created_by,
+                'category'=>$data->category,
+                'brand'=>$data->brand,
+                'model'=>$data->model,
+                'quantity'=>$data->quantity,
+                'unit_price'=>$data->unit_price,
+                'photo_1'=>$data->photo_1,
+                'photo_2'=>$data->photo_2,
+                'photo_3'=>$data->photo_3,
+                'Title'=>$data->Title,
+                'Description'=>$data->Description,
+                'outOfStock'=>$data->outOfStock,
+                'createdDate'=>$data->createdDate,
+                'warranty'=>$data->warranty,
+                'reviews'=>$reviews,
+            ];
+        $this->view('users/viewitem',$data);
+        }else {
+        $this->view('users/viewitem',$data);
+        }
+    }
+
+
     //profile_photo update
     public function profilePhotoUpdate(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
