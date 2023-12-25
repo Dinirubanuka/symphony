@@ -3,6 +3,18 @@ class Users extends Controller {
     private $userModel;
     public function __construct(){
         $this->userModel = $this->model('User');
+
+        //inactive process / defined inactive time as 30 min
+        if (isset($_SESSION['user_id'])){
+            if (isset($_SESSION['last_activity'])){
+                $inactive_time = time() - $_SESSION['last_activity'];
+                if ($inactive_time > 1800){
+                    echo '<script>alert("Time out...")</script>';
+                    $this->logout();
+                }
+            }
+            $_SESSION['last_activity'] = time();
+        }
     }
 
     public function index(){
@@ -385,6 +397,10 @@ class Users extends Controller {
                 $loggedInUser = $this->userModel->login($data['email'], $data['password']);
 
                 if($loggedInUser){
+                    //set a cookie
+                    $cookie_name = $data['email'];
+                    $cookie_password = $data['password'];
+                    setcookie($cookie_name,$cookie_password,time()+86400,"/");
                     // Create Session
                     $this->createUserSession($loggedInUser);
                 } else {
@@ -413,12 +429,11 @@ class Users extends Controller {
     }
 
     public function createUserSession($user){
-
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_email'] = $user->email;
         $_SESSION['user_name'] = $user->name;
+        $_SESSION['last_activity'] = time();
         redirect('users/index');
-
     }
 
     public function logout(){
