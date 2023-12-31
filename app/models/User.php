@@ -78,7 +78,11 @@ class User {
       }
 
     public function cart($user_id){
+<<<<<<< Updated upstream
         $this->db->query('SELECT * FROM cart WHERE user_id = :user_id'); 
+=======
+        $this->db->query('SELECT * FROM products INNER JOIN cart WHERE products.product_id = cart.product_id AND cart.user_id = :user_id'); 
+>>>>>>> Stashed changes
         $this->db->bind(':user_id', $user_id);
         $results = $this->db->resultSet();
         return $results; 
@@ -100,7 +104,11 @@ class User {
     }
 
     public function viewreviews($product_id){
+<<<<<<< Updated upstream
         $this->db->query('SELECT * FROM reviews WHERE product_id = :product_id'); 
+=======
+        $this->db->query('SELECT * FROM reviews INNER JOIN users WHERE product_id = :product_id'); 
+>>>>>>> Stashed changes
         $this->db->bind(':product_id', $product_id);
         $results = $this->db->resultSet();
         return $results;
@@ -133,13 +141,22 @@ class User {
 
       public function addreview($data){
       
+<<<<<<< Updated upstream
         $this->db->query('INSERT INTO reviews (product_id, user_id, rating, content) VALUES(:product_id, :user_id, :rating, :content)');
+=======
+        $this->db->query('INSERT INTO reviews (product_id, user_id, rating, content, name, photo) VALUES(:product_id, :user_id, :rating, :content, :name, :photo)');
+>>>>>>> Stashed changes
 
         try{
           $this->db->bind(':product_id', $data['product_id']);
           $this->db->bind(':user_id', $data['user_id']);
           $this->db->bind(':rating', $data['rating']);
           $this->db->bind(':content', $data['content']);
+<<<<<<< Updated upstream
+=======
+          $this->db->bind(':name', $data['name']);
+          $this->db->bind(':photo', $data['photo']);
+>>>>>>> Stashed changes
   
           // Execute
           if($this->db->execute()){
@@ -237,6 +254,19 @@ class User {
         $this->db->query('DELETE FROM users WHERE id = :id');
         $this->db->bind(':id', $id);
 
+        // Execute
+        if($this->db->execute()){
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function removefromcart($product_id){
+
+        $this->db->query('DELETE FROM cart WHERE product_id = :product_id');
+        $this->db->bind(':product_id', $product_id);
         // Execute
         if($this->db->execute()){
 

@@ -38,12 +38,34 @@ class Users extends Controller {
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
             $cart = $this->userModel->cart($_SESSION['user_id']);
             $data =[
+<<<<<<< Updated upstream
                 'cart' => $cart
+=======
+                'cart' => $cart,
+                'subtotal' => '0',
+                'total' => '0',
+>>>>>>> Stashed changes
             ];
         }
         $this->view('users/cart',$data);
     }
 
+<<<<<<< Updated upstream
+=======
+    public function removefromcart($product_id){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $this->userModel->removefromcart($product_id);
+            $cart = $this->userModel->cart($_SESSION['user_id']);
+            $data =[
+                'cart' => $cart,
+            ];
+        }
+        $this->view('users/cart',$data);
+    }
+
+    
+
+>>>>>>> Stashed changes
     
     public function viewitem($product_id){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -130,6 +152,11 @@ class Users extends Controller {
                 'rating' =>trim($_POST['rating']),
                 'content' =>trim($_POST['reviewDescription']),
                 'user_id' => $_SESSION['user_id'],
+<<<<<<< Updated upstream
+=======
+                'name' =>trim($_POST['name']),
+                'photo' =>trim($_POST['photo']),
+>>>>>>> Stashed changes
                 'reviewDescription_err' => '',
                 'rating_err' => ''
             ];

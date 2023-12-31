@@ -159,7 +159,11 @@
           <img src="<?php echo URLROOT; ?>/img/mag_img/<?php echo $data['photo']?>" alt="User Image" class="user-image" width="50" height="50">
           <h3 class="user-name"><?php echo $data['name']; ?></h3>
         </div>
+<<<<<<< Updated upstream
         <div class="product-review"> Added container for the product review
+=======
+        <div class="product-review">
+>>>>>>> Stashed changes
           <h2>Leave a Review</h2>
           <form action="<?php echo URLROOT; ?>/users/addreview/<?php echo $data['product_id']; ?>"  class="form" method="post" enctype="multipart/form-data">
             <label>
@@ -189,11 +193,17 @@
             <span class="star" data-rating="5">&#9733;</span>
         </div>   -->
           </div>
+<<<<<<< Updated upstream
+=======
+          <input type="hidden" id="name" name="name" value="<?php echo $data['name']; ?>">
+          <input type="hidden" id="photo" name="photo" value="<?php echo $data['photo']; ?>">
+>>>>>>> Stashed changes
           <textarea rows="5" id="reviewDescription" name="reviewDescription" placeholder="Enter your review here"></textarea>
           <button id="submitBtn" action="<?php echo URLROOT; ?>/users/addreview" method="post">Post Review</button>
           </form>
         </div>
       </div>
+<<<<<<< Updated upstream
     Add more reviews as needed
 </div>
 
@@ -219,6 +229,20 @@
         </div>
         <blockquote>Praesent sapien sem, ultrices accumsan mauris nec, lobortis lacinia mauris. Sed mollis scelerisque nisi, eu maximus magna facilisis eget. Etiam in laoreet dui, sit amet cursus dolor. Vestibulum sollicitudin tellus non ex suscipit hendrerit. Donec interdum mollis nisl, sit amet hendrerit erat hendrerit quis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin venenatis feugiat varius. Pellentesque blandit malesuada nulla non sodales. Nam et auctor tellus, vitae suscipit metus. In et condimentum turpis. Morbi vel lectus dolor. Integer erat tellus, ultrices et velit sit amet, condimentum pellentesque orci. Pellentesque sed pretium erat, ac auctor dui. Donec ut finibus magna. Suspendisse potenti.</blockquote>
       </figure>
+=======
+</div>
+
+<div class = "review-grid">
+  <?php foreach($data['reviews'] as $review) : ?>
+    <figure class="snip1232">
+        <div class="author">
+          <img src="<?php echo URLROOT; ?>/img/mag_img/<?php echo $review->photo; ?>" alt="sq-sample7"/>
+          <h5><?php echo $review->name; ?></h5><span><?php echo $review->name; ?></span>
+        </div>
+        <blockquote><?php echo $review->content; ?></blockquote>
+      </figure>
+    <?php endforeach; ?>
+>>>>>>> Stashed changes
 </div>
 <script src="<?php echo URLROOT;?>/js/user-viewitem.js"></script>
 </body>
