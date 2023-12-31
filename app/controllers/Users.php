@@ -24,6 +24,132 @@ class Users extends Controller {
         $this->view('users/profile',$data);
     }
 
+    public function search(){
+        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+            $inventory = $this->userModel->search();
+        $data =[
+            'inventory' => $inventory
+        ];
+        }
+        $this->view('users/search',$data);
+    }
+
+    public function cart(){
+        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+            $cart = $this->userModel->cart($_SESSION['user_id']);
+            $data =[
+                'cart' => $cart
+            ];
+        }
+        $this->view('users/cart',$data);
+    }
+
+    
+    public function viewitem($product_id){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $data = $this->userModel->viewitem($product_id);
+            $reviews = $this->userModel->viewreviews($product_id);
+            $user = $this->userModel->view($_SESSION['user_id']);
+            $data =[
+                'product_id'=>$data->product_id,
+                'created_by'=>$data->created_by,
+                'category'=>$data->category,
+                'brand'=>$data->brand,
+                'model'=>$data->model,
+                'quantity'=>$data->quantity,
+                'unit_price'=>$data->unit_price,
+                'photo_1'=>$data->photo_1,
+                'photo_2'=>$data->photo_2,
+                'photo_3'=>$data->photo_3,
+                'Title'=>$data->Title,
+                'Description'=>$data->Description,
+                'outOfStock'=>$data->outOfStock,
+                'createdDate'=>$data->createdDate,
+                'warranty'=>$data->warranty,
+                'name'=>$user->name,
+                'photo'=>$user->profile_photo,
+                'reviews'=>$reviews,
+            ];
+        $this->view('users/viewitem',$data);
+        }else {
+        $this->view('users/viewitem',$data);
+        }
+    }
+
+
+    public function addtocart($product_id){
+        // Check for POST
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data =[
+                'product_id' => $product_id,
+                'quantity' =>trim($_POST['quantity']),
+                'start_date' =>trim($_POST['fromDateTime']),
+                'end_date' =>trim($_POST['toDateTime']),
+                'user_id' => $_SESSION['user_id'],
+                'quantity_err' => '',
+                'start_date_err' => '',
+                'end_date_err' => ''
+            ];
+
+            if(empty($data['quantity'])){
+                $data['quantity_err'] = 'Pleae enter the quantity';
+            }else if($data['quantity'] <= 0){
+                $data['quantity_err'] = 'Quantity cannot be a negative number';
+            }else if($data['quantity'] > $data['quantity']) {
+                $data['quantity_err'] = 'Not enough items in the stock';
+            }
+
+            if(empty($data['quantity_err']) && empty($data['start_date_err']) && empty($data['end_date_err'])){
+                if($this->userModel->addtocart($data)){
+                redirect('users/search');
+            } else {
+                die('Something went wrong');
+            }
+        }
+        
+         
+        } else {
+            $data =[
+                'quantity_err' => '',
+                'start_date_err' => '',
+                'end_date_err' => ''
+            ];
+            // Load view
+            $this->view('users/viewitem', $data);
+        }
+    }
+
+
+    public function addreview($product_id){
+        // Check for POST
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data =[
+                'product_id' => $product_id,
+                'rating' =>trim($_POST['rating']),
+                'content' =>trim($_POST['reviewDescription']),
+                'user_id' => $_SESSION['user_id'],
+                'reviewDescription_err' => '',
+                'rating_err' => ''
+            ];
+
+            if(empty($data['quantity_err']) && empty($data['start_date_err']) && empty($data['end_date_err'])){
+                if($this->userModel->addreview($data)){
+                    redirect('users/search');
+                } else {
+                    die('Something went wrong');
+                }
+            }
+        } else {
+            $data =[
+            ];
+            // Load view
+            $this->view('users/viewitem', $data);
+        }
+    }
+
+
     //profile_photo update
     public function profilePhotoUpdate(){
         if($_SERVER['REQUEST_METHOD'] == 'POST'){

@@ -71,6 +71,19 @@ class User {
         }
     }
 
+    public function search(){
+        $this->db->query('SELECT * FROM products'); 
+        $results = $this->db->resultSet();
+        return $results; 
+      }
+
+    public function cart($user_id){
+        $this->db->query('SELECT * FROM cart WHERE user_id = :user_id'); 
+        $this->db->bind(':user_id', $user_id);
+        $results = $this->db->resultSet();
+        return $results; 
+    }
+
     //view user
     public function view($id){
         $this->db->query('SELECT * FROM users WHERE id = :id');
@@ -78,6 +91,69 @@ class User {
         $results = $this->db->single();
         return $results;
     }
+
+    public function viewitem($product_id){
+        $this->db->query('SELECT * FROM products WHERE product_id = :product_id'); 
+        $this->db->bind(':product_id', $product_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function viewreviews($product_id){
+        $this->db->query('SELECT * FROM reviews WHERE product_id = :product_id'); 
+        $this->db->bind(':product_id', $product_id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function addtocart($data){
+      
+        $this->db->query('INSERT INTO cart (user_id, product_id, quantity, start_date, end_date) VALUES(:user_id, :product_id, :quantity, :start_date, :end_date)');
+
+        try{
+          $this->db->bind(':user_id', $data['user_id']);
+          $this->db->bind(':product_id', $data['product_id']);
+          $this->db->bind(':quantity', $data['quantity']);
+          $this->db->bind(':start_date', $data['start_date']);
+          $this->db->bind(':end_date', $data['end_date']);
+  
+          // Execute
+          if($this->db->execute()){
+            return true;
+          } else {
+            return false;
+          }
+      }
+        catch (PDOException $e) {
+          
+          die($e->getMessage());
+      }
+      
+      }
+
+      public function addreview($data){
+      
+        $this->db->query('INSERT INTO reviews (product_id, user_id, rating, content) VALUES(:product_id, :user_id, :rating, :content)');
+
+        try{
+          $this->db->bind(':product_id', $data['product_id']);
+          $this->db->bind(':user_id', $data['user_id']);
+          $this->db->bind(':rating', $data['rating']);
+          $this->db->bind(':content', $data['content']);
+  
+          // Execute
+          if($this->db->execute()){
+            return true;
+          } else {
+            return false;
+          }
+      }
+        catch (PDOException $e) {
+          
+          die($e->getMessage());
+      }
+      
+      }
 
     public function verificationNumber($finalNumber){
         try{

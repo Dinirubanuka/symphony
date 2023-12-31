@@ -139,17 +139,17 @@
                         </div>
                     </li>
                     <li><a class="nav-link" href="/">Orders</a></li>
-                    <li><a class="nav-link" href="/">Bookmarks</a></li>
-                    <li><a class="nav-link" href="/">About</a></li>
+                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/cart">Cart</a></li>
+                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/search">Search</a></li>
                 </ul>
             </nav>
         </div>
         <div class="nav-end">
             <div class="right-container">
-<!--                <form class="search" role="search">-->
-<!--                    <input type="search" name="search" placeholder="Search" />-->
-<!--                    <i class="bx bx-search" aria-hidden="true"></i>-->
-<!--                </form>-->
+               <form class="search" role="search">
+                   <input type="search" name="search" placeholder="Search" />
+                   <i class="bx bx-search" aria-hidden="true"></i>
+               </form>
 
                 <a href="<?php echo URLROOT; ?>/users/profile">
                     <img

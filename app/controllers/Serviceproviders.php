@@ -34,6 +34,7 @@
             ];
             $this->view('serviceproviders/inventory',$data);
         }
+        
         public function inventoryDelete(){
             if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 $inventory = $this->serviceProviderModel->inventory($_SESSION['serviceprovider_id']);
@@ -223,7 +224,7 @@
                     $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
                     $img_ex_lc = strtolower($img_ex);
                     $new_img1_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                    $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
+                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
                     $bool = move_uploaded_file($tmp1_name, $img_upload_path);
 
                     $data =[
@@ -239,7 +240,7 @@
                     $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
                     $img_ex_lc = strtolower($img_ex);
                     $new_img2_name = uniqid("IMG-", true).'.'.$img_ex_lc;
-                    $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
+                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
                     $bool =move_uploaded_file($tmp2_name, $img_upload_path);
 
                     $data =[
@@ -254,7 +255,7 @@
                     $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
                     $img_ex_lc = strtolower($img_ex);
                     $new_img3_name = uniqid("IMG-", true).'.'.$img_ex_lc;
-                    $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
+                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
                     $bool =move_uploaded_file($tmp3_name, $img_upload_path);
 
                     $data =[
@@ -406,7 +407,7 @@
                 $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img1_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
+                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
                 $bool = move_uploaded_file($tmp1_name, $img_upload_path);
             }
 
@@ -416,7 +417,7 @@
                 $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img2_name = uniqid("IMG-", true).'.'.$img_ex_lc;
-                $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
+                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
                 $bool =move_uploaded_file($tmp2_name, $img_upload_path);
             }
 
@@ -426,7 +427,7 @@
                 $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img3_name = uniqid("IMG-", true).'.'.$img_ex_lc;
-                $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
+                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
                 $bool =move_uploaded_file($tmp3_name, $img_upload_path);
             }
             // Init data
