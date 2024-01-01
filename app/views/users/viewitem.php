@@ -202,8 +202,8 @@
   <?php foreach($data['reviews'] as $review) : ?>
     <figure class="snip1232">
         <div class="author">
-          <img src="<?php echo URLROOT; ?>/img/mag_img/<?php echo $review->photo; ?>" alt="sq-sample7"/>
-          <h5><?php echo $review->name; ?></h5><span><?php echo $review->name; ?></span>
+          <img src="<?php echo URLROOT; ?>/img/mag_img/<?php echo $review->photo; ?>"/>
+          <span><?php echo $review->name; ?></span>
         </div>
         <blockquote><?php echo $review->content; ?></blockquote>
       </figure>

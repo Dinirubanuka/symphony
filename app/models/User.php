@@ -100,7 +100,7 @@ class User {
     }
 
     public function viewreviews($product_id){
-        $this->db->query('SELECT * FROM reviews INNER JOIN users WHERE product_id = :product_id'); 
+        $this->db->query('SELECT * FROM reviews WHERE product_id = :product_id'); 
         $this->db->bind(':product_id', $product_id);
         $results = $this->db->resultSet();
         return $results;
