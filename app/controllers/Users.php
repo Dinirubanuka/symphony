@@ -1,14 +1,18 @@
 <?php
-class Users extends Controller {
+
+class Users extends Controller
+{
     private $userModel;
-    public function __construct(){
+
+    public function __construct()
+    {
         $this->userModel = $this->model('User');
 
         //inactive process / defined inactive time as 30 min
-        if (isset($_SESSION['user_id'])){
-            if (isset($_SESSION['last_activity'])){
+        if (isset($_SESSION['user_id'])) {
+            if (isset($_SESSION['last_activity'])) {
                 $inactive_time = time() - $_SESSION['last_activity'];
-                if ($inactive_time > 1800){
+                if ($inactive_time > 1800) {
                     echo '<script>alert("Time out...")</script>';
                     $this->logout();
                 }
@@ -17,28 +21,31 @@ class Users extends Controller {
         }
     }
 
-    public function index(){
+    public function index()
+    {
         $this->view('users/index');
     }
 
     //view profile
-    public function profile(){
+    public function profile()
+    {
         $user = $this->userModel->view($_SESSION['user_id']);
-        $data =[
-            'name'=>$user->name,
-            'email'=>$user->email,
-            'tel_Number'=>$user->TelephoneNumber,
-            'date'=>$user->BirthDate,
-            'address'=>$user->address,
-            'gender'=>$user->gender,
-            'photo'=>$user->profile_photo
+        $data = [
+            'name' => $user->name,
+            'email' => $user->email,
+            'tel_Number' => $user->TelephoneNumber,
+            'date' => $user->BirthDate,
+            'address' => $user->address,
+            'gender' => $user->gender,
+            'photo' => $user->profile_photo
         ];
-        $this->view('users/profile',$data);
+        $this->view('users/profile', $data);
     }
 
     //profile_photo update
-    public function profilePhotoUpdate(){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    public function profilePhotoUpdate()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -52,53 +59,53 @@ class Users extends Controller {
 
                 $new_img_name = 'IMG-653fd611dd2445.48951448.png';
 
-                if($this->userModel->photoUpdate($new_img_name)){
+                if ($this->userModel->photoUpdate($new_img_name)) {
                     // flash('register_success', 'You are registered and can log in');
                     redirect('users/profile');
-                }
-                else {
+                } else {
                     die('Something went wrong');
                 }
             } else {
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
-                $new_img_name = uniqid("IMG-", true).'.'.$img_ex_lc;
-                $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/mag_img/'.$new_img_name;
-                $bool =move_uploaded_file($tmp_name, $img_upload_path);
-                if($this->userModel->photoUpdate($new_img_name)){
+                $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
+                $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/mag_img/' . $new_img_name;
+                $bool = move_uploaded_file($tmp_name, $img_upload_path);
+                if ($this->userModel->photoUpdate($new_img_name)) {
                     // flash('register_success', 'You are registered and can log in');
                     redirect('users/profile');
-                }
-                else {
+                } else {
                     die('Something went wrong');
                 }
             }
         }
     }
 
-    public function editDetail($id){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    public function editDetail($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user = $this->userModel->view($_SESSION['user_id']);
-            $data =[
-                'name'=>$user->name,
-                'email'=>$user->email,
-                'tel_Number'=>$user->TelephoneNumber,
-                'date'=>$user->BirthDate,
-                'address'=>$user->address,
+            $data = [
+                'name' => $user->name,
+                'email' => $user->email,
+                'tel_Number' => $user->TelephoneNumber,
+                'date' => $user->BirthDate,
+                'address' => $user->address,
             ];
-            $this->view('users/edit',$data);
-        }else {
-            $this->view('users/edit',$data);
+            $this->view('users/edit', $data);
+        } else {
+            $this->view('users/edit', $data);
         }
     }
 
-    public function edit(){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    public function edit()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            $data =[
+            $data = [
                 'name' => trim($_POST['name']),
                 'email' => trim($_POST['email']),
                 'tel_Number' => trim($_POST['tel_Number']),
@@ -106,8 +113,8 @@ class Users extends Controller {
                 'address' => trim($_POST['address']),
                 'name_err' => '',
                 'email_err' => '',
-                'tel_Number_err' =>'',
-                'date_err' =>'',
+                'tel_Number_err' => '',
+                'date_err' => '',
                 'address_err' => '',
             ];
 
@@ -118,80 +125,80 @@ class Users extends Controller {
                 // Check email format using a regular expression
                 if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
                     $data['email_err'] = 'Invalid email format';
-                }elseif ($this->userModel->findOtherUserByEmail($data['email'],$_SESSION['user_id'])) {
+                } elseif ($this->userModel->findOtherUserByEmail($data['email'], $_SESSION['user_id'])) {
                     $data['email_err'] = 'Email is already taken';
                 }
             }
 
 
             // Validate Name
-            if(empty($data['name'])){
+            if (empty($data['name'])) {
                 $data['name_err'] = 'Pleae enter name';
             }
 
             // Validate telephone number
-            if(empty($data['tel_Number'])){
+            if (empty($data['tel_Number'])) {
                 $data['tel_Number_err'] = 'Pleae enter telephone number';
-            }else if($data['tel_Number'] <= 0){
+            } else if ($data['tel_Number'] <= 0) {
                 $data['tel_Number_err'] = 'Telephone number cannot be a negative number';
-            }else if(!preg_match('/^\d{10}$/', $data['tel_Number'])){
+            } else if (!preg_match('/^\d{10}$/', $data['tel_Number'])) {
                 $data['tel_Number_err'] = 'Telephone number should have exactly 10 digits';
             }
 
             // Validate Address
-            if(empty($data['address'])){
+            if (empty($data['address'])) {
                 $data['address_err'] = 'Pleae enter address';
             }
 
             // Validate Date
-            if(empty($data['date'])){
+            if (empty($data['date'])) {
                 $data['date_err'] = 'Pleae enter date';
             }
             // Make sure errors are empty
-            if(empty($data['email_err']) && empty($data['name_err']) && empty($data['tel_Number_err']) && empty($data['date_err']) && empty($data['address_err'])){
+            if (empty($data['email_err']) && empty($data['name_err']) && empty($data['tel_Number_err']) && empty($data['date_err']) && empty($data['address_err'])) {
                 // Validated
 
                 // Update User
-                if($this->userModel->update($data)){
+                if ($this->userModel->update($data)) {
                     // flash('register_success', 'You are registered and can log in');
                     redirect('users/profile');
-                }
-                else {
+                } else {
                     die('Something went wrong');
                 }
-            }else{
+            } else {
                 $this->view('users/edit', $data);
             }
 
-        }else {
+        } else {
 
             redirect('users/profile');
         }
     }
 
-    public function delete(){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    public function delete()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $password = trim($_POST['password']);
-            $result = $this->userModel->fectchEncrptedPassword($_SESSION['user_id'],$password);
-            if($result){
-                if($this->userModel->delete($_SESSION['user_id'])){
+            $result = $this->userModel->fectchEncrptedPassword($_SESSION['user_id'], $password);
+            if ($result) {
+                if ($this->userModel->delete($_SESSION['user_id'])) {
                     unset($_SESSION['user_id']);
                     unset($_SESSION['user_email']);
                     unset($_SESSION['user_name']);
                     session_destroy();
                     redirect('pages/index');
-                }
-                else {
+                } else {
                     die('Something went wrong');
                 }
-            }else {
+            } else {
                 redirect('users/profile');
             }
         }
     }
 
-    public function verification(){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    public function verification()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = [
                 'char1' => trim($_POST['char1']),
                 'char2' => trim($_POST['char2']),
@@ -200,27 +207,27 @@ class Users extends Controller {
                 'char5' => trim($_POST['char5']),
                 'char6' => trim($_POST['char6']),
             ];
-            if (empty($data['char1']) && empty($data['char2']) && empty($data['char3']) && empty($data['char4']) && empty($data['char5']) && empty($data['char6'])){
-                $data = ['validation_err'=> 'Empty'];
-                $this->view('users/verification',$data);
-            }
-            else{
+            if (empty($data['char1']) && empty($data['char2']) && empty($data['char3']) && empty($data['char4']) && empty($data['char5']) && empty($data['char6'])) {
+                $data = ['validation_err' => 'Empty'];
+                $this->view('users/verification', $data);
+            } else {
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-                $combinedNumber = $_POST['char1'].$_POST['char2'].$_POST['char3'].$_POST['char4'].$_POST['char5'].$_POST['char6'];
+                $combinedNumber = $_POST['char1'] . $_POST['char2'] . $_POST['char3'] . $_POST['char4'] . $_POST['char5'] . $_POST['char6'];
                 $result = $this->userModel->verificationNumber($combinedNumber);
-                if ($result){
-                    $this->view('users/succesfull',$data);
-                }else{
-                    $data = ['validation_err'=> 'Invalid OTP'];
-                    $this->view('users/verification',$data);
+                if ($result) {
+                    $this->view('users/succesfull', $data);
+                } else {
+                    $data = ['validation_err' => 'Invalid OTP'];
+                    $this->view('users/verification', $data);
                 }
             }
         }
     }
 
-    public function register(){
+    public function register()
+    {
         // Check for POST
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Process form
 
             // Sanitize POST data
@@ -232,16 +239,16 @@ class Users extends Controller {
             $tmp_name = $_FILES['photo']['tmp_name'];
             $error = $_FILES['photo']['error'];
 
-            if ($error === UPLOAD_ERR_NO_FILE){
+            if ($error === UPLOAD_ERR_NO_FILE) {
                 $new_img_name = 'IMG-653fd611dd2445.48951448.png';
-            }else{
+            } else {
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
-                $new_img_name = uniqid("IMG-", true).'.'.$img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/'.$new_img_name;
-                $bool =move_uploaded_file($tmp_name, $img_upload_path);
+                $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
+                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
+                $bool = move_uploaded_file($tmp_name, $img_upload_path);
             }
-            $data =[
+            $data = [
                 'name' => trim($_POST['name']),
                 'email' => trim($_POST['email']),
                 'tel_Number' => trim($_POST['tel_Number']),
@@ -253,8 +260,8 @@ class Users extends Controller {
                 'photo' => $new_img_name,
                 'name_err' => '',
                 'email_err' => '',
-                'tel_Number_err' =>'',
-                'date_err' =>'',
+                'tel_Number_err' => '',
+                'date_err' => '',
                 'address_err' => '',
                 'password_err' => '',
                 'confirm_password_err' => ''
@@ -266,61 +273,61 @@ class Users extends Controller {
                 // Check email format using a regular expression
                 if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
                     $data['email_err'] = 'Invalid email format';
-                }elseif ($this->userModel->findUserByEmail($data['email'])) {
+                } elseif ($this->userModel->findUserByEmail($data['email'])) {
                     $data['email_err'] = 'Email is already taken';
                 }
             }
 
 
             // Validate Name
-            if(empty($data['name'])){
+            if (empty($data['name'])) {
                 $data['name_err'] = 'Pleae enter name';
             }
 
             // Validate telephone number
-            if(empty($data['tel_Number'])){
+            if (empty($data['tel_Number'])) {
                 $data['tel_Number_err'] = 'Pleae enter telephone number';
-            }else if($data['tel_Number'] <= 0){
+            } else if ($data['tel_Number'] <= 0) {
                 $data['tel_Number_err'] = 'Telephone number cannot be a negative number';
-            }else if(!preg_match('/^\d{10}$/', $data['tel_Number'])){
+            } else if (!preg_match('/^\d{10}$/', $data['tel_Number'])) {
                 $data['tel_Number_err'] = 'Telephone number should have exactly 10 digits';
             }
 
             // Validate Address
-            if(empty($data['address'])){
+            if (empty($data['address'])) {
                 $data['address_err'] = 'Pleae enter address';
             }
 
             // Validate Date
-            if(empty($data['date'])){
+            if (empty($data['date'])) {
                 $data['date_err'] = 'Pleae enter date';
             }
 
             // Validate Password
-            if(empty($data['password'])){
+            if (empty($data['password'])) {
                 $data['password_err'] = 'Pleae enter password';
-            } elseif(strlen($data['password']) < 6){
+            } elseif (strlen($data['password']) < 6) {
                 $data['password_err'] = 'Password must be at least 6 characters';
             }
 
             // Validate Confirm Password
-            if(empty($data['confirm_password'])){
+            if (empty($data['confirm_password'])) {
                 $data['confirm_password_err'] = 'Pleae confirm password';
             } else {
-                if($data['password'] != $data['confirm_password']){
+                if ($data['password'] != $data['confirm_password']) {
                     $data['confirm_password_err'] = 'Passwords do not match';
                 }
             }
 
             // Make sure errors are empty
-            if(empty($data['email_err']) && empty($data['name_err']) && empty($data['tel_Number_err']) && empty($data['date_err']) && empty($data['address_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])){
+            if (empty($data['email_err']) && empty($data['name_err']) && empty($data['tel_Number_err']) && empty($data['date_err']) && empty($data['address_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])) {
                 // Validated
 
                 // Hash Password
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
                 // Register User
-                if($this->userModel->register($data)){
+                if ($this->userModel->register($data)) {
                     // flash('register_success', 'You are registered and can log in');
                     $this->view('users/verification');
                 } else {
@@ -334,7 +341,7 @@ class Users extends Controller {
 
         } else {
             // Init data
-            $data =[
+            $data = [
                 'name' => '',
                 'email' => '',
                 'tel_Number' => '',
@@ -345,8 +352,8 @@ class Users extends Controller {
                 'confirm_password' => '',
                 'name_err' => '',
                 'email_err' => '',
-                'tel_Number_err' =>'',
-                'date_err' =>'',
+                'tel_Number_err' => '',
+                'date_err' => '',
                 'address_err' => '',
                 'password_err' => '',
                 'confirm_password_err' => ''
@@ -357,15 +364,16 @@ class Users extends Controller {
         }
     }
 
-    public function login(){
+    public function login()
+    {
         // Check for POST
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Process form
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             // Init data
-            $data =[
+            $data = [
                 'email' => trim($_POST['email']),
                 'password' => trim($_POST['password']),
                 'email_err' => '',
@@ -373,17 +381,17 @@ class Users extends Controller {
             ];
 
             // Validate Email
-            if(empty($data['email'])){
+            if (empty($data['email'])) {
                 $data['email_err'] = 'Pleae enter email';
             }
 
             // Validate Password
-            if(empty($data['password'])){
+            if (empty($data['password'])) {
                 $data['password_err'] = 'Please enter password';
             }
 
             // Check for user/email
-            if($this->userModel->findUserByEmail($data['email'])){
+            if ($this->userModel->findUserByEmail($data['email'])) {
                 // User found
             } else {
                 // User not found
@@ -391,16 +399,16 @@ class Users extends Controller {
             }
 
             // Make sure errors are empty
-            if(empty($data['email_err']) && empty($data['password_err'])){
+            if (empty($data['email_err']) && empty($data['password_err'])) {
                 // Validated
                 // Check and set logged in user
                 $loggedInUser = $this->userModel->login($data['email'], $data['password']);
 
-                if($loggedInUser){
+                if ($loggedInUser) {
                     //set a cookie
                     $cookie_name = $data['email'];
                     $cookie_password = $data['password'];
-                    setcookie($cookie_name,$cookie_password,time()+86400,"/");
+                    setcookie($cookie_name, $cookie_password, time() + 86400, "/");
                     // Create Session
                     $this->createUserSession($loggedInUser);
                 } else {
@@ -416,7 +424,7 @@ class Users extends Controller {
 
         } else {
             // Init data
-            $data =[
+            $data = [
                 'email' => '',
                 'password' => '',
                 'email_err' => '',
@@ -428,7 +436,8 @@ class Users extends Controller {
         }
     }
 
-    public function createUserSession($user){
+    public function createUserSession($user)
+    {
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_email'] = $user->email;
         $_SESSION['user_name'] = $user->name;
@@ -436,7 +445,8 @@ class Users extends Controller {
         redirect('users/index');
     }
 
-    public function logout(){
+    public function logout()
+    {
         unset($_SESSION['user_id']);
         unset($_SESSION['user_email']);
         unset($_SESSION['user_name']);
@@ -444,14 +454,16 @@ class Users extends Controller {
         redirect('pages/index');
     }
 
-    public function Instrument(){
+    public function Instrument()
+    {
         $this->view('users/instrument');
     }
 
-    public function inventory(){
-        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+    public function inventory()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $inventory = $this->userModel->inventory();
-            $data =[
+            $data = [
                 'inventory' => $inventory
             ];
         }
@@ -460,28 +472,71 @@ class Users extends Controller {
         exit();
     }
 
-    public function itemDetails($productId){
+    public function itemDetails($productId)
+    {
         $itemDetails = $this->userModel->itemDetails($productId);
+        $_SESSION['product_id'] = $productId;
 
-        if ($itemDetails){
+        if ($itemDetails) {
             $data = [
                 'product_id' => $itemDetails->product_id,
                 'title' => $itemDetails->Title,
-                'category'=> $itemDetails->category,
+                'category' => $itemDetails->category,
                 'brand' => $itemDetails->brand,
                 'model' => $itemDetails->model,
                 'price' => $itemDetails->unit_price,
-                'photo_1'=>$itemDetails->photo_1,
-                'photo_2'=>$itemDetails->photo_2,
-                'photo_3'=>$itemDetails->photo_3,
+                'photo_1' => $itemDetails->photo_1,
+                'photo_2' => $itemDetails->photo_2,
+                'photo_3' => $itemDetails->photo_3,
                 'outOfStock' => $itemDetails->outOfStock,
                 'warranty' => $itemDetails->warranty,
                 'quantity' => $itemDetails->quantity,
                 'description' => $itemDetails->Description
             ];
             $this->view('users/viewItem', $data);
-        }else{
+        } else {
             die('error fetching item details');
+        }
+    }
+
+    public function addReview()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                'userId' => (int)trim($_SESSION['user_id']),
+                'productId' => (int)trim($_SESSION['product_id']),
+                'review' => trim($_POST['review'])
+            ];
+            var_dump(print_r($data));
+            $this->userModel->addReview($data);
+        }
+    }
+
+    public function userName_Img()
+    {
+
+        return $user;
+    }
+
+    public function fetchReview()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                'productId' => (int)trim($_SESSION['product_id']),
+                'userId' => (int)trim($_SESSION['user_id'])
+            ];
+            $data = $this->userModel->fetchReview($data);
+
+            $arr = [
+                'reviews' => $data
+            ];
+//            var_dump(print_r($arr));
+            header('Content-Type: application/json');
+            echo json_encode($arr);
+            exit();
+
         }
     }
 }

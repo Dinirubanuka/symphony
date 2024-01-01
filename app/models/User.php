@@ -260,4 +260,24 @@ class User {
             return false;
         }
     }
+    public function addReview($data){
+        $this->db->query('INSERT INTO review (review,userId,productId) VALUES(:review, :userId, :productId)');
+        $this->db->bind(':review' , $data['review']);
+        $this->db->bind(':userId' , $data['userId']);
+        $this->db->bind(':productId' , $data['productId']);
+
+        if ($this->db->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function fetchReview($data){
+        $this->db->query('SELECT review.*, users.* from review JOIN users ON review.userId = users.id WHERE review.productId = :productId AND review.userId = :userId ');
+        $this->db->bind(':userId' , $data['userId']);
+        $this->db->bind(':productId' , $data['productId']);
+        $reviews = $this->db->resultSet();
+        return $reviews;
+    }
 }
