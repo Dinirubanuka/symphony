@@ -250,34 +250,75 @@ class User {
         return $results;
     }
 
-    public function itemDetails($productId){
-        $this->db->query('SELECT * FROM products WHERE product_id = :productId');
-        $this->db->bind(':productId', $productId);
-        $row = $this->db->single();
-        if ($row){
-            return $row;
-        }else{
-            return false;
-        }
+    public function cart($user_id){
+        $this->db->query('SELECT * FROM products INNER JOIN cart WHERE products.product_id = cart.product_id AND cart.user_id = :user_id'); 
+        $this->db->bind(':user_id', $user_id);
+        $results = $this->db->resultSet();
+        return $results; 
     }
-    public function addReview($data){
-        $this->db->query('INSERT INTO review (review,userId,productId) VALUES(:review, :userId, :productId)');
-        $this->db->bind(':review' , $data['review']);
-        $this->db->bind(':userId' , $data['userId']);
-        $this->db->bind(':productId' , $data['productId']);
 
-        if ($this->db->execute()){
+    public function viewItem($product_id){
+        $this->db->query('SELECT * FROM products WHERE product_id = :product_id'); 
+        $this->db->bind(':product_id', $product_id);
+        $results = $this->db->single();
+        return $results;
+    }
+    
+    public function viewReviews($product_id){
+        $this->db->query('SELECT * FROM reviews WHERE product_id = :product_id'); 
+        $this->db->bind(':product_id', $product_id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function addToCart($data){
+      
+        $this->db->query('INSERT INTO cart (user_id, product_id, quantity, start_date, end_date) VALUES(:user_id, :product_id, :quantity, :start_date, :end_date)');
+
+        try{
+          $this->db->bind(':user_id', $data['user_id']);
+          $this->db->bind(':product_id', $data['product_id']);
+          $this->db->bind(':quantity', $data['quantity']);
+          $this->db->bind(':start_date', $data['start_date']);
+          $this->db->bind(':end_date', $data['end_date']);
+  
+          // Execute
+          if($this->db->execute()){
             return true;
-        }else{
+          } else {
             return false;
-        }
-    }
+          }
+      }
+        catch (PDOException $e) {
+          
+          die($e->getMessage());
+      }
+      
+      }
 
-    public function fetchReview($data){
-        $this->db->query('SELECT review.*, users.* from review JOIN users ON review.userId = users.id WHERE review.productId = :productId AND review.userId = :userId ');
-        $this->db->bind(':userId' , $data['userId']);
-        $this->db->bind(':productId' , $data['productId']);
-        $reviews = $this->db->resultSet();
-        return $reviews;
-    }
+      public function addReview($data){
+      
+        $this->db->query('INSERT INTO reviews (product_id, user_id, rating, content, name, photo) VALUES(:product_id, :user_id, :rating, :content, :name, :photo)');
+
+        try{
+          $this->db->bind(':product_id', $data['product_id']);
+          $this->db->bind(':user_id', $data['user_id']);
+          $this->db->bind(':rating', $data['rating']);
+          $this->db->bind(':content', $data['content']);
+          $this->db->bind(':name', $data['name']);
+          $this->db->bind(':photo', $data['photo']);
+  
+          // Execute
+          if($this->db->execute()){
+            return true;
+          } else {
+            return false;
+          }
+      }
+        catch (PDOException $e) {
+          
+          die($e->getMessage());
+      }
+      
+      }
 }

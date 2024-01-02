@@ -188,7 +188,7 @@ require 'vendor/autoload.php';
       return $results;
     }
 
-    public function viewitem($product_id){
+    public function viewItem($product_id){
       $this->db->query('SELECT * FROM products WHERE product_id = :product_id'); 
       $this->db->bind(':product_id', $product_id);
       $results = $this->db->single();

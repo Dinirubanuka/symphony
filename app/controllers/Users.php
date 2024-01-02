@@ -472,71 +472,177 @@ class Users extends Controller
         exit();
     }
 
-    public function itemDetails($productId)
-    {
-        $itemDetails = $this->userModel->itemDetails($productId);
-        $_SESSION['product_id'] = $productId;
-
-        if ($itemDetails) {
-            $data = [
-                'product_id' => $itemDetails->product_id,
-                'title' => $itemDetails->Title,
-                'category' => $itemDetails->category,
-                'brand' => $itemDetails->brand,
-                'model' => $itemDetails->model,
-                'price' => $itemDetails->unit_price,
-                'photo_1' => $itemDetails->photo_1,
-                'photo_2' => $itemDetails->photo_2,
-                'photo_3' => $itemDetails->photo_3,
-                'outOfStock' => $itemDetails->outOfStock,
-                'warranty' => $itemDetails->warranty,
-                'quantity' => $itemDetails->quantity,
-                'description' => $itemDetails->Description
+    public function cart(){
+        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+            $cart = $this->userModel->cart($_SESSION['user_id']);
+            $data =[
+                'cart' => $cart,
+                'subtotal' => '0',
+                'total' => '0',
             ];
-            $this->view('users/viewItem', $data);
+        }
+        $this->view('users/cart',$data);
+    }
+
+    public function removeFromCart($product_id){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $this->userModel->removeFromCart($product_id);
+            $cart = $this->userModel->cart($_SESSION['user_id']);
+            $data =[
+                'cart' => $cart,
+            ];
+        }
+        $this->view('users/cart',$data);
+    }
+
+    public function viewItem($product_id){
+            $data = $this->userModel->viewItem($product_id);
+            $reviews = $this->userModel->viewreviews($product_id);
+            $user = $this->userModel->view($_SESSION['user_id']);
+            if($reviews){
+                $count = 0;
+                $star1 = 0;
+                $star2 = 0; 
+                $star3 = 0;
+                $star4 = 0;
+                $star5 = 0;
+                $rating = 0;
+                foreach ($reviews as $review){
+                    $count = $count + 1;
+                    switch ($review->rating) {
+                        case 1:
+                            $star1 = $star1 + 1;
+                            break;
+                        case 2:
+                            $star2 = $star2 + 1;
+                            break;
+                        case 3:
+                            $star3 = $star3 + 1;
+                            break;
+                        case 4:
+                            $star4 = $star4 + 1;
+                            break;
+                        case 5:
+                            $star5 = $star5 + 1;
+                            break;
+                    }
+                }
+                if($count != 0){
+                    $rating = ($star1 + $star2*2 + $star3*3 + $star4*4 + $star5*5)/$count;
+                }
+            } else {
+                $rating = 0;
+                $star1 = 0;
+                $star2 = 0; 
+                $star3 = 0;
+                $star4 = 0;
+                $star5 = 0;
+                $count = 0;
+            }
+
+        if($data){
+            $data =[
+                'product_id'=>$data->product_id,
+                'created_by'=>$data->created_by,
+                'category'=>$data->category,
+                'brand'=>$data->brand,
+                'model'=>$data->model,
+                'quantity'=>$data->quantity,
+                'unit_price'=>$data->unit_price,
+                'photo_1'=>$data->photo_1,
+                'photo_2'=>$data->photo_2,
+                'photo_3'=>$data->photo_3,
+                'Title'=>$data->Title,
+                'Description'=>$data->Description,
+                'outOfStock'=>$data->outOfStock,
+                'createdDate'=>$data->createdDate,
+                'warranty'=>$data->warranty,
+                'name'=>$user->name,
+                'photo'=>$user->profile_photo,
+                'reviews'=>$reviews,
+                'rating'=>$rating,
+                'count'=>$count,
+                'star1'=>$star1,
+                'star2'=>$star2,
+                'star3'=>$star3,
+                'star4'=>$star4,
+                'star5'=>$star5
+            ];
+            $this->view('users/viewItem',$data);
         } else {
-            die('error fetching item details');
+            die('Something went wrong');
         }
     }
 
-    public function addReview()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    public function addToCart($product_id){
+        // Check for POST
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $data = [
-                'userId' => (int)trim($_SESSION['user_id']),
-                'productId' => (int)trim($_SESSION['product_id']),
-                'review' => trim($_POST['review'])
+            $data =[
+                'product_id' => $product_id,
+                'quantity' =>trim($_POST['quantity']),
+                'start_date' =>trim($_POST['fromDateTime']),
+                'end_date' =>trim($_POST['toDateTime']),
+                'user_id' => $_SESSION['user_id'],
+                'quantity_err' => '',
+                'start_date_err' => '',
+                'end_date_err' => ''
             ];
-            var_dump(print_r($data));
-            $this->userModel->addReview($data);
+
+            if(empty($data['quantity'])){
+                $data['quantity_err'] = 'Pleae enter the quantity';
+            }else if($data['quantity'] <= 0){
+                $data['quantity_err'] = 'Quantity cannot be a negative number';
+            }else if($data['quantity'] > $data['quantity']) {
+                $data['quantity_err'] = 'Not enough items in the stock';
+            }
+
+            if(empty($data['quantity_err']) && empty($data['start_date_err']) && empty($data['end_date_err'])){
+                if($this->userModel->addToCart($data)){
+                    redirect('users/viewItem/'.$product_id.'');
+                } else {
+                    die('Something went wrong');
+                }
+            }
+        } else {
+            $data =[
+                'quantity_err' => '',
+                'start_date_err' => '',
+                'end_date_err' => ''
+            ];
+            // Load view
+            $this->view('users/viewItem', $data);
         }
     }
 
-    public function userName_Img()
-    {
-
-        return $user;
-    }
-
-    public function fetchReview()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    public function addReview($product_id){
+        // Check for POST
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $data = [
-                'productId' => (int)trim($_SESSION['product_id']),
-                'userId' => (int)trim($_SESSION['user_id'])
+            $data =[
+                'product_id' => $product_id,
+                'rating' =>trim($_POST['rating']),
+                'content' =>trim($_POST['reviewDescription']),
+                'user_id' => $_SESSION['user_id'],
+                'name' =>trim($_POST['name']),
+                'photo' =>trim($_POST['photo']),
+                'reviewDescription_err' => '',
+                'rating_err' => ''
             ];
-            $data = $this->userModel->fetchReview($data);
 
-            $arr = [
-                'reviews' => $data
+            if(empty($data['quantity_err']) && empty($data['start_date_err']) && empty($data['end_date_err'])){
+                if($this->userModel->addReview($data)){
+                    redirect('users/ViewItem/'.$product_id.'');
+                } else {
+                    die('Something went wrong');
+                }
+            }
+        } else {
+            $data =[
             ];
-//            var_dump(print_r($arr));
-            header('Content-Type: application/json');
-            echo json_encode($arr);
-            exit();
-
+            // Load view
+            $this->view('users/viewItem', $data);
         }
     }
 }

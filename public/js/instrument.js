@@ -145,5 +145,5 @@ function search(){
 }
 
 function viewItem(productId){
-    window.location.href = 'http://localhost/symphony/users/itemDetails/'+productId ;
+    window.location.href = 'http://localhost/symphony/users/viewItem/'+productId ;
 }

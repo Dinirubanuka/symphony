@@ -160,7 +160,9 @@
                     <i class="bx bx-search" aria-hidden="true"></i>
                 </form>
                 <div class="cart">
-                    <i class="fa-solid fa-cart-plus"></i>
+                <a href="<?php echo URLROOT; ?>/users/cart">
+                    <i class="fa-solid fa-cart-plus" ></i>
+                </a>
                 </div>
                 <div class="notification">
                     <i class="fa-solid fa-bell"></i>
