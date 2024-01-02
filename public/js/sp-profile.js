@@ -52,7 +52,19 @@ function EditAcc(){
 }
 
 //logout account
-
+function Logout() {
+  // Display a confirmation dialog
+  var confirmed = confirm("Are you sure you want to logout?");
+  
+  // Check the user's response
+  if (confirmed) {
+    window.location.href = "<?php echo URLROOT; ?>/serviceproviders/logout";
+    alert("Logged out.");
+  } else {
+    alert("Logout canceled.");
+  }
+  
+}
 
   function setAriaExpandedFalse() {
     dropdownBtn.forEach((btn) => btn.setAttribute("aria-expanded", "false"));

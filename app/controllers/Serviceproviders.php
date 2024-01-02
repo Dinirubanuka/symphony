@@ -34,7 +34,6 @@
             ];
             $this->view('serviceproviders/inventory',$data);
         }
-        
         public function inventoryDelete(){
             if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 $inventory = $this->serviceProviderModel->inventory($_SESSION['serviceprovider_id']);

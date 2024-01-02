@@ -29,46 +29,20 @@ function showSlides(n) {
   captionText.innerHTML = dots[slideIndex-1].alt;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  const stars = document.querySelectorAll('.star');
-  const submitBtn = document.getElementById('submitBtn');
-  const reviewDescriptionInput = document.getElementById('reviewDescription');
-
-  stars.forEach((star) => {
-    star.addEventListener('click', () => {
-      const ratingValue = parseInt(star.dataset.rating);
-      updateStars(ratingValue);
-    });
-  });
-
-  submitBtn.addEventListener('click', () => {
-    const selectedRating = document.querySelectorAll('.star.active').length;
-    const reviewDescription = reviewDescriptionInput.value;
-
-    alert(`You've rated the product ${selectedRating} stars and your review is: ${reviewDescription}`);
-
-    // This is where you'd send the review data to the server
-    // You can use the 'selectedRating' and 'reviewDescription' variables
-  });
-
-  function updateStars(selectedRating) {
-    stars.forEach((star) => {
-      const starRating = parseInt(star.dataset.rating);
-      if (starRating <= selectedRating) {
-        star.classList.add('active');
-      } else {
-        star.classList.remove('active');
-      }
-    });
-  }
-});
-
-function increment() {
-  var inputElement = document.getElementById('quantity');
-  inputElement.stepUp();
-}
-
-function decrement() {
-  var inputElement = document.getElementById('quantity');
-  inputElement.stepDown();
+function changeRating(){
+  let bar_5 = Math.floor((star5/count)*100);
+  let bar_4 = Math.floor((star4/count)*100);
+  let bar_3 = Math.floor((star3/count)*100);
+  let bar_2 = Math.floor((star2/count)*100);
+  let bar_1 = Math.floor((star1/count)*100);
+  document.getElementById("bar-5").style.width = bar_5 + "%";
+  document.getElementById("bar-4").style.width = bar_4 + "%";
+  document.getElementById("bar-3").style.width = bar_3 + "%";
+  document.getElementById("bar-2").style.width = bar_2 + "%";
+  document.getElementById("bar-1").style.width = bar_1 + "%";
+  const starRatingWrapper = document.querySelector('.star-rating');
+  const frontStars =  document.querySelector('.front-stars');
+  const percentage = Math.floor(rating*20) + '%';
+  starRatingWrapper.title = percentage;
+  frontStars.style.width = percentage;
 }

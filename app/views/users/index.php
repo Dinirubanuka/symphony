@@ -111,49 +111,49 @@
     <!-- thumbnail -->
     <div class="thumbnail">
         <div class="item active">
-            <img src="<?php echo URLROOT; ?>/img/instrument.jpg">
+            <img src="<?php echo URLROOT; ?>/img/instrument.jpg" onclick="callFunction('Instrument')">
             <div class="content">
                 Instrument
             </div>
         </div>
         <div class="item">
-            <img src="<?php echo URLROOT; ?>/img/studio.jpg">
+            <img src="<?php echo URLROOT; ?>/img/studio.jpg" onclick="callFunction('Studio')">
             <div class="content">
                 Studio
             </div>
         </div>
         <div class="item">
-            <img src="<?php echo URLROOT; ?>/img/singer.jpg">
+            <img src="<?php echo URLROOT; ?>/img/singer.jpg" onclick="callFunction('Singer')">
             <div class="content">
                 Singer
             </div>
         </div>
         <div class="item">
-            <img src="<?php echo URLROOT; ?>/img/band.jpg">
+            <img src="<?php echo URLROOT; ?>/img/band.jpg" onclick="callFunction('Band')">
             <div class="content">
                 Band
             </div>
         </div>
         <div class="item">
-            <img src="<?php echo URLROOT; ?>/img/solo.jpg">
+             <img src="<?php echo URLROOT; ?>/img/solo.jpg" onclick="callFunction('Musicians')">
             <div class="content">
                 Musicians
             </div>
         </div>
         <div class="item">
-            <img src="<?php echo URLROOT; ?>/img/lighting.jpg">
+            <img src="<?php echo URLROOT; ?>/img/lighting.jpg" onclick="callFunction('Lighting')">
             <div class="content">
                 Lighting
             </div>
         </div>
         <div class="item">
-            <img src="<?php echo URLROOT; ?>/img/decoration.jpg">
+            <img src="<?php echo URLROOT; ?>/img/decoration.jpg" onclick="callFunction('Decoration')">
             <div class="content">
                 Decoration
             </div>
         </div>
         <div class="item">
-            <img src="<?php echo URLROOT; ?>/img/repair.jpg">
+            <img src="<?php echo URLROOT; ?>/img/repair.jpg" onclick="callFunction('Repair')">
             <div class="content">
                 Repair
             </div>
@@ -215,6 +215,9 @@
             showSlider();
         })
     })
+    function callFunction(id){
+        window.location.href = 'http://localhost/symphony/users/'+id;
+    }
 </script>
 </body>
 </html>

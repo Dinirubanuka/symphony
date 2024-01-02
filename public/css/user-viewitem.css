@@ -157,7 +157,7 @@ button {
 }
 
 #addToCartBtn {
-  background-color: white;
+  background-color: #e9e0b0;
   transition: background-color 0.3s;
 }
 
@@ -167,7 +167,7 @@ button {
 }
 
 #addToFavoritesBtn {
-  background-color: white;
+  background-color: #71c971;
   transition: background-color 0.3s;
 }
 
@@ -182,10 +182,6 @@ button {
 
 .star-rating {
   font-size: 24px;
-}
-
-.star {
-  color: gold;
 }
 
 .user-review {
@@ -221,12 +217,32 @@ button {
   margin-right: 25px;
 }
 
-.fa {
-  font-size: 25px;
+.star-rating,
+.back-stars,
+.front-stars {
+  display: flex;
 }
 
-.checked {
-  color: orange;
+.star-rating {
+  max-width: 48%;
+  align-items: center;
+  font-size: 3em;
+  justify-content: center;
+  margin-top: 10px;
+}
+.back-stars {
+  color: #000000;
+  position: relative;
+  text-shadow: 4px 4px 10px #000000;
+}
+.front-stars {
+  color: #FFBC0B;
+  overflow: hidden;
+  position: absolute;
+  height:100%;
+  text-shadow: 2px 2px 5px #d29b09;
+  top: 0;
+  transition: all .5s
 }
 
 /* Three column layout */
@@ -263,11 +279,11 @@ button {
 }
 
 /* Individual bars */
-.bar-5 {width: 60%; height: 18px; background-color: #04AA6D;}
-.bar-4 {width: 30%; height: 18px; background-color: #2196F3;}
-.bar-3 {width: 10%; height: 18px; background-color: #00bcd4;}
-.bar-2 {width: 4%; height: 18px; background-color: #ff9800;}
-.bar-1 {width: 15%; height: 18px; background-color: #f44336;}
+.bar-5 {height: 18px; background-color: #2196F3;}
+.bar-4 {height: 18px; background-color: #04AA6D;}
+.bar-3 {height: 18px; background-color: #d2f315;}
+.bar-2 {height: 18px; background-color: #ff9800;}
+.bar-1 {height: 18px; background-color: #f44336;}
 
 /* Responsive layout - make the columns stack on top of each other instead of next to each other */
 @media (max-width: 400px) {
@@ -312,17 +328,6 @@ button {
 
 .rating-container {
   margin: 20px 0 20px;
-}
-
-.star {
-  font-size: 30px;
-  cursor: pointer;
-  color: #ccc;
-}
-
-.star:hover,
-.star.active {
-  color: #ffcc00;
 }
 
 #reviewDescription {
