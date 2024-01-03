@@ -616,6 +616,18 @@ class Users extends Controller
         }
     }
 
+    public function cartItemCount(){
+        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+            $cart = $this->userModel->cart($_SESSION['user_id']);
+            $data =[
+                'Count'=>count($cart)
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            exit();
+        }
+    }
+
     public function addReview($product_id){
         // Check for POST
         if($_SERVER['REQUEST_METHOD'] == 'POST'){

@@ -206,6 +206,10 @@ button {
     padding: 0;
     font-size: larger;
 }
+.cart{
+    position: relative;
+    display: inline-block;
+}
 
 #hamburger {
     display: none;
@@ -291,4 +295,15 @@ button {
     .right-container {
         display: none;
     }
+}
+
+.cart .badge {
+    position: absolute;
+    top: -30px;
+    right: -5px;
+    padding: 2px 5px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+    font-size: small;
 }

@@ -11,9 +11,32 @@ function toggleCategory(categoryId) {
 
 // Display data
 const accReq = document.querySelector(".account-requests");
-
+const cart = document.querySelector(".cart");
+function cartItems() {
+    $.ajax({
+        method: 'GET',
+        url: 'http://localhost/symphony/users/cartItemCount',
+        dataType: 'json',
+        success: function (response) {
+            console.log('count',response.Count);
+            showCartItems(response.Count);
+        },
+        error: function (error) {
+            console.error('Error:', error);
+        }
+    });
+}
+function showCartItems(count){
+    let text = "";
+    text += `<p class="badge" >`+count+`</p>`+
+        `<a href="http://localhost/symphony/users/cart">`+
+        `<i class="fa-solid fa-cart-plus" ></i>`+
+        `</a>`;
+    cart.innerHTML=text;
+}
 Redirect();
 function Redirect() {
+    cartItems();
     $.ajax({
         method: 'GET',
         url: 'http://localhost/symphony/users/inventory',

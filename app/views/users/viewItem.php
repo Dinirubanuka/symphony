@@ -231,5 +231,32 @@
 </div>
 <script src="https://kit.fontawesome.com/3376ff6b83.js" crossorigin="anonymous"></script>
 <script src="<?php echo URLROOT; ?>/js/user-viewItem.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    const cart = document.querySelector(".cart");
+    Redirect();
+    function Redirect() {
+        $.ajax({
+            method: 'GET',
+            url: 'http://localhost/symphony/users/cartItemCount',
+            dataType: 'json',
+            success: function (response) {
+                console.log('count',response.Count);
+                displaydata(response.Count);
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+    function displaydata(count){
+        let text = "";
+        text += `<p class="badge" >`+count+`</p>`+
+                    `<a href="http://localhost/symphony/users/cart">`+
+                        `<i class="fa-solid fa-cart-plus" ></i>`+
+                    `</a>`;
+        cart.innerHTML=text;
+    }
+</script>
 </body>
 </html>
