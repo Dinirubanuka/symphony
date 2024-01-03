@@ -600,7 +600,7 @@ class Users extends Controller
 
             if(empty($data['quantity_err']) && empty($data['start_date_err']) && empty($data['end_date_err'])){
                 if($this->userModel->addToCart($data)){
-                    redirect('users/viewItem/'.$product_id.'');
+                    redirect('users/viewItem/'.$product_id);
                 } else {
                     die('Something went wrong');
                 }

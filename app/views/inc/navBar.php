@@ -1,8 +1,7 @@
-
 <header id="nav-menu" aria-label="navigation bar" class="nav-menu">
     <div class="container">
         <div class="nav-start">
-            <a class="logo" href="http://localhost/symphony/users/index">
+            <a class="logo" href="/">
                 <img
                     src="<?php echo logo; ?>"
                     width="35"
@@ -147,10 +146,17 @@
         <div class="nav-end">
             <div class="right-container">
 <!--                <form class="search" role="search">-->
-<!--                    <input type="search" name="search" placeholder="Search" />-->
+<!--                    <input type="search" name="search" placeholder="Search" id = "search-item"/>-->
 <!--                    <i class="bx bx-search" aria-hidden="true"></i>-->
 <!--                </form>-->
-
+                <div class="cart">
+                    <a href="<?php echo URLROOT; ?>/users/cart">
+                        <i class="fa-solid fa-cart-plus" ></i>
+                    </a>
+                </div>
+                <div class="notification">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
                 <a href="<?php echo URLROOT; ?>/users/profile">
                     <img
                         src="<?php echo URLROOT; ?>/img/user.png"
@@ -161,7 +167,6 @@
                 </a>
                 <a class="btn btn-primary" href="<?php echo URLROOT; ?>/users/logout">Log out</a>
             </div>
-
             <button
                 id="hamburger"
                 aria-label="hamburger"

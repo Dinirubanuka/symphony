@@ -8,16 +8,16 @@
     <title>Store Inventory Item</title>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-viewItem.css"
     ">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/nav-bar.css"
+    ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body onload="changeRating()">
 <!------------nav-bar-------->
-<!-- <?php require_once APPROOT . '/views/inc/index-nav.php'; ?> -->
+ <?php require_once APPROOT . '/views/inc/navBar.php'; ?>
 
-<!-------------register-form----------->
 <div class="wrapper">
     <div class="container">
-        <!-- Full-width images with number text -->
         <div class="slides">
             <div class="mySlides">
                 <img src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $data['photo_1']; ?>">
@@ -207,13 +207,6 @@
                 <label>
                     <input type="radio" name="rating" value="5"> 5
                 </label>
-                <!-- <div class="rating-container" id="rating-container">
-                  <span class="star" data-rating="1">&#9733;</span>
-                  <span class="star" data-rating="2">&#9733;</span>
-                  <span class="star" data-rating="3">&#9733;</span>
-                  <span class="star" data-rating="4">&#9733;</span>
-                  <span class="star" data-rating="5">&#9733;</span>
-              </div>   -->
         </div>
         <input type="hidden" id="name" name="name" value="<?php echo $data['name']; ?>">
         <input type="hidden" id="photo" name="photo" value="<?php echo $data['photo']; ?>">
@@ -236,6 +229,7 @@
         </figure>
     <?php endforeach; ?>
 </div>
+<script src="https://kit.fontawesome.com/3376ff6b83.js" crossorigin="anonymous"></script>
 <script src="<?php echo URLROOT; ?>/js/user-viewItem.js"></script>
 </body>
 </html>
