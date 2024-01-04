@@ -308,6 +308,7 @@ class serviceproviders extends Controller
                 'unit_price_err' => '',
                 'description_err' => ''
             ];
+            var_dump(print_r($data));
 //                select category
             $category = trim($_POST['category']);
             if ($category === 'Keyboard') {

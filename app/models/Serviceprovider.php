@@ -101,7 +101,8 @@ class ServiceProvider
                 $data['bandAndOrchestraCategory'] = null;
                 $data['homeAudioCategory'] = null;
             }
-            $this->db->query('UPDATE products SET category  = :category , brand = :brand , model = :model , quantity = :quantity , unit_price = :unit_price , Description = :description , outOfStock = :outOfStock , warranty = :warranty WHERE product_id = :product_id');
+            $this->db->query('UPDATE products SET Title = :Title , category  = :category , brand = :brand , model = :model , quantity = :quantity , unit_price = :unit_price , Description = :description , outOfStock = :outOfStock , warranty = :warranty WHERE product_id = :product_id');
+            $this->db->bind(':Title', $data['title']);
             $this->db->bind(':category', $data['category']);
             $this->db->bind(':brand', $data['brand']);
             $this->db->bind(':model', $data['model']);
