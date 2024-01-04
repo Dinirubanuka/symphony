@@ -1,24 +1,23 @@
-
 <header id="nav-menu" aria-label="navigation bar" class="nav-menu">
     <div class="container">
         <div class="nav-start">
             <a class="logo" href="http://localhost/symphony/users/index">
                 <img
-                    src="<?php echo logo; ?>"
-                    width="35"
-                    height="35"
-                    alt="Inc Logo"
+                        src="<?php echo logo; ?>"
+                        width="35"
+                        height="35"
+                        alt="Inc Logo"
                 />
             </a>
             <nav class="menu">
                 <ul class="menu-bar">
                     <li>
                         <button
-                            class="nav-link dropdown-btn"
-                            data-dropdown="dropdown1"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            aria-label="browse"
+                                class="nav-link dropdown-btn"
+                                data-dropdown="dropdown1"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                aria-label="browse"
                         >
                             Browse
                             <i class="bx bx-chevron-down" aria-hidden="true"></i>
@@ -100,11 +99,11 @@
                     </li>
                     <li>
                         <button
-                            class="nav-link dropdown-btn"
-                            data-dropdown="dropdown2"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            aria-label="discover"
+                                class="nav-link dropdown-btn"
+                                data-dropdown="dropdown2"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                aria-label="discover"
                         >
                             Discover
                             <i class="bx bx-chevron-down" aria-hidden="true"></i>
@@ -146,27 +145,31 @@
         </div>
         <div class="nav-end">
             <div class="right-container">
-<!--                <form class="search" role="search">-->
-<!--                    <input type="search" name="search" placeholder="Search" />-->
-<!--                    <i class="bx bx-search" aria-hidden="true"></i>-->
-<!--                </form>-->
+                                <form class="search" role="search">
+                                    <input type="search" name="search" placeholder="Search" id = "search-item"/>
+                                    <i class="bx bx-search" aria-hidden="true"></i>
+                                </form>
+                <div class="cart">
 
+                </div>
+                <div class="notification">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
                 <a href="<?php echo URLROOT; ?>/users/profile">
                     <img
-                        src="<?php echo URLROOT; ?>/img/user.png"
-                        width="30"
-                        height="30"
-                        alt="user image"
+                            src="<?php echo URLROOT; ?>/img/user.png"
+                            width="30"
+                            height="30"
+                            alt="user image"
                     />
                 </a>
                 <a class="btn btn-primary" href="<?php echo URLROOT; ?>/users/logout">Log out</a>
             </div>
-
             <button
-                id="hamburger"
-                aria-label="hamburger"
-                aria-haspopup="true"
-                aria-expanded="false"
+                    id="hamburger"
+                    aria-label="hamburger"
+                    aria-haspopup="true"
+                    aria-expanded="false"
             >
                 <i class="bx bx-menu" aria-hidden="true"></i>
             </button>

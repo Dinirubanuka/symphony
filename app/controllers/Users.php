@@ -69,7 +69,7 @@ class Users extends Controller
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
+                $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/mag_img/' . $new_img_name;
                 $bool = move_uploaded_file($tmp_name, $img_upload_path);
                 if ($this->userModel->photoUpdate($new_img_name)) {
                     // flash('register_success', 'You are registered and can log in');
@@ -600,7 +600,7 @@ class Users extends Controller
 
             if(empty($data['quantity_err']) && empty($data['start_date_err']) && empty($data['end_date_err'])){
                 if($this->userModel->addToCart($data)){
-                    redirect('users/viewItem/'.$product_id.'');
+                    redirect('users/viewItem/'.$product_id);
                 } else {
                     die('Something went wrong');
                 }
@@ -613,6 +613,18 @@ class Users extends Controller
             ];
             // Load view
             $this->view('users/viewItem', $data);
+        }
+    }
+
+    public function cartItemCount(){
+        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+            $cart = $this->userModel->cart($_SESSION['user_id']);
+            $data =[
+                'Count'=>count($cart)
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            exit();
         }
     }
 
