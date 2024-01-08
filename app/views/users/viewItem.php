@@ -12,7 +12,7 @@
     ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body onload="changeRating()">
+<body onload="changeRating(); checkAvailability() ">
 <!------------nav-bar-------->
  <?php require_once APPROOT . '/views/inc/navBar.php'; ?>
 
@@ -55,13 +55,12 @@
     <div class="item-container">
         <div class="item-details">
             <div class="item-info">
-                <form action="<?php echo URLROOT; ?>/users/addToCart/<?php echo $data['product_id']; ?>" class="form"
-                      method="post" enctype="multipart/form-data">
+            <form action="<?php echo URLROOT; ?>/users/checkAvailability/<?php echo $data['product_id']; ?>" class="form" method="post" enctype="multipart/form-data" id="addToCartForm">
                     <h1><?php echo $data['Title']; ?></h1>
                     <h3>Category: <?php echo $data['category']; ?></h3>
                     <h3>Brand: <?php echo $data['brand']; ?></h3>
                     <p>Model: <?php echo $data['model']; ?></p>
-                    <p>Units Left: <?php echo $data['quantity']; ?></p>
+                    <p>Units Available: <?php echo $data['quantity']; ?></p>
                     <p>Price: <?php echo $data['unit_price']; ?></p>
                     <p>Warranty available until: <?php echo $data['warranty']; ?></p>
                     <p>Last Modified: <?php echo $data['createdDate']; ?></p>
@@ -69,20 +68,32 @@
 
                     <!-- Add to cart and add to favorites buttons -->
 
-                    <label for="fromDateTime">From:</label>
-                    <input type="datetime-local" id="fromDateTime" name="fromDateTime">
+                    <div class="date-picker-container">
+                        <label for="fromDate">From Date:</label>
+                        <input type="date" id="fromDate" name="fromDate" min="" max="" value="<?php echo $data['start_date']; ?>" required>
 
-                    <label for="toDateTime">To:</label>
-                    <input type="datetime-local" id="toDateTime" name="toDateTime">
+                        <label for="toDate">To Date:</label>
+                        <input type="date" id="toDate" name="toDate" min="" max="" value="<?php echo $data['end_date']; ?>" required>
                     <br><br>
                     <label id="product_id" name="product_id" value="<?php echo $data['product_id']; ?>"></label>
                     <div class="number-input-container">
                         <label for="amount">Quantity:</label>
-                        <input type="number" id="quantity" name="quantity">
+                        <input type="number" id="quantity" name="quantity" value="<?php echo $data['quantity_selected']; ?>" required>
                     </div>
-                    <br><br>
+                    </div>
+                    <br>
+                    <button id="availabilityChkBtn">Check Availability</button>
+                    </form>
+                    <div id="availabilityMessage"></div>
+                    <br>
+                    <form action="<?php echo URLROOT; ?>/users/addTocart/<?php echo $data['product_id']; ?>" class="form" method="post" enctype="multipart/form-data" id="addToCartForm">
+                    <div class="date-picker-container">
+                        <input type="date" id="fromDate" name="fromDate" value="<?php echo $data['start_date']; ?>" hidden>
+                        <input type="date" id="toDate" name="toDate" value="<?php echo $data['end_date']; ?>" hidden>
+                        <input type="number" id="quantity" name="quantity" value="<?php echo $data['quantity_selected']; ?>" hidden>
+                    </div>                  
                     <button id="addToCartBtn">Add to Cart</button>
-                </form>
+                    </form>
                 <button id="addToFavoritesBtn">Add to Favorites</button>
             </div>
         </div>
@@ -232,6 +243,7 @@
 <script src="https://kit.fontawesome.com/3376ff6b83.js" crossorigin="anonymous"></script>
 <script src="<?php echo URLROOT; ?>/js/user-viewItem.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script>
     const cart = document.querySelector(".cart");
     Redirect();
@@ -256,6 +268,59 @@
                         `<i class="fa-solid fa-cart-plus" ></i>`+
                     `</a>`;
         cart.innerHTML=text;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+  const fromDateInput = document.getElementById("fromDate");
+  const toDateInput = document.getElementById("toDate");
+
+  // Set minDate for from date
+  const minFromDate = moment().add(3, 'days').format("YYYY-MM-DD");
+  fromDateInput.min = minFromDate;
+
+  // Update minDate for to date when from date changes
+  fromDateInput.addEventListener("input", function () {
+    const selectedFromDate = moment(fromDateInput.value);
+    toDateInput.min = selectedFromDate.format("YYYY-MM-DD");
+  });
+
+  // Update minDate for from date when to date changes
+  toDateInput.addEventListener("input", function () {
+    const selectedToDate = moment(toDateInput.value);
+    fromDateInput.max = selectedToDate.format("YYYY-MM-DD");
+  });
+
+});
+
+function checkAvailability() {
+        // Assuming $data['availability'] is a PHP variable passed to JavaScript
+        var availability = "<?php echo $data['availability']; ?>";
+        var addToCartBtn = document.getElementById("addToCartBtn");
+        var availabilityMessage = document.getElementById("availabilityMessage");
+        if (availability === "notAvailable") {
+            // If the product is not available, disable the "Add to Cart" button
+            addToCartBtn.disabled = true;
+            // Display a message in red color
+            availabilityMessage.innerHTML = "Product not available!";
+            availabilityMessage.style.color = "red";
+        } else if (availability === "available") {
+            // If the product is available, enable the "Add to Cart" button
+            addToCartBtn.disabled = false;
+            // Display a message in green color
+            availabilityMessage.innerHTML = "Product available!";
+            availabilityMessage.style.color = "green";
+        } else if (availability === "notChecked") {
+            // If the value is "notChecked," disable the "Add to Cart" button
+            addToCartBtn.disabled = true;
+            // Clear any previous messages
+            availabilityMessage.innerHTML = "";
+        }else if (availability === "alreadyInCart") {
+            // If the product is available, enable the "Add to Cart" button
+            addToCartBtn.disabled = true;
+            // Display a message in green color
+            availabilityMessage.innerHTML = "Product is already in cart!";
+            availabilityMessage.style.color = "blue";
+        }
     }
 </script>
 </body>

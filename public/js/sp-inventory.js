@@ -1,7 +1,14 @@
 
 var $data;
 var Orgdata;
-// script.js
+function toggleCategory(categoryId) {
+  const categoryList = document.getElementById(categoryId);
+  if (categoryId === 'price') {
+    categoryList.style.display = categoryList.style.display === "none" ? "flex" : "none";
+  }else{
+    categoryList.style.display = categoryList.style.display === "none" ? "block" : "none";
+  }
+}
   const dropdownBtn = document.querySelectorAll(".dropdown-btn");
   const dropdown = document.querySelectorAll(".dropdown");
   const hamburgerBtn = document.getElementById("hamburger");
@@ -246,7 +253,7 @@ var Orgdata;
         `<form id="edit-item-form" action="http://localhost/symphony/serviceproviders/edititem/`+item.product_id+`" method="POST" enctype="multipart/form-data">`+
             `<div class="input-box">`+
                 `<label>Title</label>`+
-                `<input type="text" name="title" class="<?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>" value="`+item.Title+`">`+
+                `<input type="text" required name="title" class="<?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>" value="`+item.Title+`">`+
             `</div>`+
             <!--                category-->
             `<div class="input-box">`+

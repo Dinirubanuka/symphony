@@ -146,11 +146,6 @@
         </div>
         <div class="nav-end">
             <div class="right-container">
-<!--                <form class="search" role="search">-->
-<!--                    <input type="search" name="search" placeholder="Search" />-->
-<!--                    <i class="bx bx-search" aria-hidden="true"></i>-->
-<!--                </form>-->
-
                 <a href="<?php echo URLROOT; ?>/users/profile">
                     <img
                         src="<?php echo URLROOT; ?>/img/user.png"

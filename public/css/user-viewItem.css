@@ -176,6 +176,17 @@ body {
   color: black;
 }
 
+#availabilityChkBtn {
+  background-color: #7194c9;
+  transition: background-color 0.3s;
+}
+
+#availabilityChkBtn:hover {
+  background-color: #1c58ff;
+  color: black;
+}
+
+
 .reviews {
   margin-top: 20px;
 }

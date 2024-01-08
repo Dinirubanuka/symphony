@@ -260,8 +260,7 @@ class User
         return $row;
     }
 
-    public function inventory()
-    {
+    public function inventory(){
         $this->db->query('SELECT * FROM products');
         $results = $this->db->resultSet();
         return $results;
@@ -283,6 +282,35 @@ class User
         return $results;
     }
 
+    public function checkAvailability($data_check)
+    {
+        $this->db->query('SELECT * FROM availability WHERE product_id = :product_id AND date = :date');
+        $this->db->bind(':product_id', $data_check['product_id']);
+        $this->db->bind(':date', $data_check['date']);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function setNotAvailableCart($product_id, $user_id){
+        try {
+            $this->db->query('UPDATE cart SET availability  = :availability  WHERE product_id = :product_id AND user_id = :user_id');
+            // Bind values
+            $this->db->bind(':product_id', $product_id);
+            $this->db->bind(':user_id', $user_id);
+            $this->db->bind(':availability', 'notAvailable');
+            // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            // Print the exception message
+            echo "Database error: " . $e->getMessage();
+            return false;
+        }
+    }
+
     public function viewReviews($product_id)
     {
         $this->db->query('SELECT * FROM reviews WHERE product_id = :product_id');
@@ -293,8 +321,7 @@ class User
 
     public function addToCart($data)
     {
-
-        $this->db->query('INSERT INTO cart (user_id, product_id, quantity, start_date, end_date) VALUES(:user_id, :product_id, :quantity, :start_date, :end_date)');
+        $this->db->query('INSERT INTO cart (user_id, product_id, quantity, start_date, end_date, days, total, availability) VALUES(:user_id, :product_id, :quantity, :start_date, :end_date, :days, :total, :availability)');
 
         try {
             $this->db->bind(':user_id', $data['user_id']);
@@ -302,6 +329,9 @@ class User
             $this->db->bind(':quantity', $data['quantity']);
             $this->db->bind(':start_date', $data['start_date']);
             $this->db->bind(':end_date', $data['end_date']);
+            $this->db->bind(':days', $data['days']);
+            $this->db->bind(':total', $data['total']);
+            $this->db->bind(':availability', $data['availability']);
 
             // Execute
             if ($this->db->execute()) {
@@ -314,6 +344,114 @@ class User
             die($e->getMessage());
         }
 
+    }
+
+
+    public function getSubOrderId($data){
+        $this->db->query('SELECT sorder_id FROM suborder WHERE user_id = :user_id AND serviceprovider_id = :serviceprovider_id AND product_id = :product_id AND qty = :qty AND start_date = :start_date AND end_date = :end_date AND days = :days AND total = :total AND status = :status');
+        $this->db->bind(':user_id', $data['user_id']);
+        $this->db->bind(':serviceprovider_id', $data['serviceprovider_id']);
+        $this->db->bind(':product_id', $data['product_id']);
+        $this->db->bind(':qty', $data['quantity']);
+        $this->db->bind(':start_date', $data['start_date']);
+        $this->db->bind(':end_date', $data['end_date']);
+        $this->db->bind(':days', $data['days']);
+        $this->db->bind(':total', $data['total']);
+        $this->db->bind(':status', $data['status']);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function placeOrder($data)
+    {
+            $this->db->query('INSERT INTO suborder (user_id, serviceprovider_id, product_id, qty, start_date, end_date, days, total, status) VALUES(:user_id, :serviceprovider_id, :product_id, :qty, :start_date, :end_date, :days, :total, :status)');
+    
+            try {
+                $this->db->bind(':user_id', $data['user_id']);
+                $this->db->bind(':serviceprovider_id', $data['serviceprovider_id']);
+                $this->db->bind(':product_id', $data['product_id']);
+                $this->db->bind(':qty', $data['quantity']);
+                $this->db->bind(':start_date', $data['start_date']);
+                $this->db->bind(':end_date', $data['end_date']);
+                $this->db->bind(':days', $data['days']);
+                $this->db->bind(':total', $data['total']);
+                $this->db->bind(':status', $data['status']);
+                // Execute
+                if ($this->db->execute()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (PDOException $e) {
+    
+                die($e->getMessage());
+            }
+    }
+
+    public function clearCart($user_id)
+    {
+        $this->db->query('DELETE FROM cart WHERE user_id = :user_id');
+        $this->db->bind(':user_id', $user_id);
+
+        // Execute
+        if ($this->db->execute()) {
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function placeOrderTotal($data_order){
+        $this->db->query('INSERT INTO orders (user_id, sorder_ids, total) VALUES(:user_id, :sorder_ids, :total)');
+    
+        try {
+            $this->db->bind(':user_id', $data_order['user_id']);
+            $this->db->bind(':sorder_ids', $data_order['sorder_id']);
+            $this->db->bind(':total', $data_order['total']);
+            // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+
+            die($e->getMessage());
+        }
+    }
+
+    public function setAvailability($data){
+        $this->db->query('INSERT INTO availability (product_id, date, qty) VALUES(:product_id, :date, :qty)');
+    
+        try {
+            $this->db->bind(':product_id', $data['product_id']);
+            $this->db->bind(':date', $data['date']);
+            $this->db->bind(':qty', $data['quantity']);
+            // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+
+            die($e->getMessage());
+        }
+    }
+
+    public function removeFromCart($product_id)
+    {
+        $this->db->query('DELETE FROM cart WHERE product_id = :product_id');
+        $this->db->bind(':product_id', $product_id);
+
+        // Execute
+        if ($this->db->execute()) {
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function addReview($data)

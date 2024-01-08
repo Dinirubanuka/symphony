@@ -69,7 +69,7 @@ class Users extends Controller
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = '/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img/mag_img/' . $new_img_name;
+                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
                 $bool = move_uploaded_file($tmp_name, $img_upload_path);
                 if ($this->userModel->photoUpdate($new_img_name)) {
                     // flash('register_success', 'You are registered and can log in');
@@ -474,26 +474,241 @@ class Users extends Controller
 
     public function cart(){
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
+            $cart_ini = $this->userModel->cart($_SESSION['user_id']);
+            $subtotal = 0;
+            foreach ($cart_ini as $cartItem){
+                $startDateObj = new DateTime($cartItem->start_date);
+                $endDateObj = new DateTime($cartItem->end_date);
+                while ($startDateObj <= $endDateObj) {
+                    $data_check = [
+                        'product_id' => $cartItem->product_id,
+                        'date' => $startDateObj->format('Y-m-d')
+                    ];
+                    $product_data = $this->userModel->viewItem($cartItem->product_id);
+                    $availability = $this->userModel->checkAvailability($data_check);
+                    $qty = $cartItem->quantity;
+                    foreach ($availability as $avail){
+                        $qty = $qty + $avail->qty;
+                    }
+                    if($qty > $product_data->quantity){
+                        $this->userModel->setNotAvailableCart($cartItem->product_id, $_SESSION['user_id']);
+                        break;
+                    }
+                    $startDateObj->add(new DateInterval('P1D'));
+                }
+            }
             $cart = $this->userModel->cart($_SESSION['user_id']);
+            foreach ($cart as $cartItem){
+                if($cartItem->availability === 'notAvailable'){
+                    continue;
+                }
+                $subtotal = $subtotal + ($cartItem->total);
+            }
+            $total = $subtotal + $subtotal*0.05 + 200.00;
+            
             $data =[
                 'cart' => $cart,
-                'subtotal' => '0',
-                'total' => '0',
+                'subtotal' => $subtotal,
+                'total' => $total
             ];
         }
         $this->view('users/cart',$data);
     }
 
-    public function removeFromCart($product_id){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $this->userModel->removeFromCart($product_id);
-            $cart = $this->userModel->cart($_SESSION['user_id']);
-            $data =[
-                'cart' => $cart,
+    public function placeOrder(){
+        $cart = $this->userModel->cart($_SESSION['user_id']);
+        $sorder_id = '';
+        $total = 0; 
+        foreach ($cart as $cartItem){
+            $product_data = $this->userModel->viewItem($cartItem->product_id);
+            $data = [
+                'user_id' => $_SESSION['user_id'],
+                'serviceprovider_id' => $product_data->created_by,
+                'product_id' => $cartItem->product_id,
+                'quantity' => $cartItem->quantity,
+                'start_date' => $cartItem->start_date,
+                'end_date' => $cartItem->end_date,
+                'days' => $cartItem->days,
+                'total' => $cartItem->total,
+                'status' => 'pending'
             ];
+            $startDateObj = new DateTime($cartItem->start_date);
+            $endDateObj = new DateTime($cartItem->end_date);
+            while ($startDateObj <= $endDateObj) {
+                $avail_data = [
+                    'product_id' => $cartItem->product_id,
+                    'date' => $startDateObj->format('Y-m-d'),
+                    'quantity' => $cartItem->quantity
+                ];
+                $this->userModel->setAvailability($avail_data);
+                $startDateObj->add(new DateInterval('P1D'));
+            }
+            $total = $total + $cartItem->total;
+            $this->userModel->placeOrder($data);
+            $result = $this->userModel->getSubOrderId($data);
+            $temp = $result->sorder_id;
+            if($sorder_id == ''){
+                $sorder_id .= $temp;
+            } else {
+                $sorder_id .= ','.$temp;
+            }
         }
+        $total = $total + $total*0.05 + 200.00;
+        $data_order = [
+            'user_id' => $_SESSION['user_id'],
+            'sorder_id' => $sorder_id,
+            'total' => $total
+        ];
+        if($this->userModel->placeOrderTotal($data_order)){
+            $this->userModel->clearCart($_SESSION['user_id']);
+            redirect('users/index');
+        } else {
+            die('Something went wrong');
+        }
+    }
+
+    public function removeFromCart($product_id){
+        $this->userModel->removeFromCart($product_id);
+        $cart = $this->userModel->cart($_SESSION['user_id']);
+        $subtotal = 0;
+        foreach ($cart as $cartItem){
+            if($cartItem->availability === 'notAvailable'){
+                continue;
+            }
+            $subtotal = $subtotal + ($cartItem->total);
+        }
+        $total = $subtotal + $subtotal*0.05 + 200.00;
+        
+        $data =[
+            'cart' => $cart,
+            'subtotal' => $subtotal,
+            'total' => $total
+        ];
         $this->view('users/cart',$data);
     }
+
+    public function checkAvailability($product_id){
+        // Check for POST
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data =[
+                'product_id' => $product_id,
+                'quantity' =>trim($_POST['quantity']),
+                'start_date' =>trim($_POST['fromDate']),
+                'end_date' =>trim($_POST['toDate'])
+            ];
+            $avalability = true;
+            $startDateObj = new DateTime($data['start_date']);
+            $endDateObj = new DateTime($data['end_date']);
+            while ($startDateObj <= $endDateObj) {
+                $data_check = [
+                    'product_id' => $data['product_id'],
+                    'date' => $startDateObj->format('Y-m-d')
+                ];
+                $product_data = $this->userModel->viewItem($product_id);
+                $availability = $this->userModel->checkAvailability($data_check);
+                $qty = $data['quantity'];
+                foreach ($availability as $avail){
+                    $qty = $qty + $avail->qty;
+                }
+                if($qty > $product_data->quantity){
+                    $avalability = false;
+                    break;
+                }
+                $startDateObj->add(new DateInterval('P1D'));
+            }
+            if($avalability){
+                $this->viewItemAC($product_id, 'available', $data);
+            } else {
+                $this->viewItemAC($product_id, 'notAvailable', $data);
+            }
+        } else {
+            die('Something went wrong');
+        }
+    }
+
+    public function viewItemAC($product_id, $availability, $data_selected){
+        $data = $this->userModel->viewItem($product_id);
+        $reviews = $this->userModel->viewreviews($product_id);
+        $user = $this->userModel->view($_SESSION['user_id']);
+        if($reviews){
+            $count = 0;
+            $star1 = 0;
+            $star2 = 0;
+            $star3 = 0;
+            $star4 = 0;
+            $star5 = 0;
+            $rating = 0;
+            foreach ($reviews as $review){
+                $count = $count + 1;
+                switch ($review->rating) {
+                    case 1:
+                        $star1 = $star1 + 1;
+                        break;
+                    case 2:
+                        $star2 = $star2 + 1;
+                        break;
+                    case 3:
+                        $star3 = $star3 + 1;
+                        break;
+                    case 4:
+                        $star4 = $star4 + 1;
+                        break;
+                    case 5:
+                        $star5 = $star5 + 1;
+                        break;
+                }
+            }
+            if($count != 0){
+                $rating = ($star1 + $star2*2 + $star3*3 + $star4*4 + $star5*5)/$count;
+            }
+        } else {
+            $rating = 0;
+            $star1 = 0;
+            $star2 = 0; 
+            $star3 = 0;
+            $star4 = 0;
+            $star5 = 0;
+            $count = 0;
+        }
+
+    if($data){
+        $data =[
+            'product_id'=>$data->product_id,
+            'created_by'=>$data->created_by,
+            'category'=>$data->category,
+            'brand'=>$data->brand,
+            'model'=>$data->model,
+            'quantity'=>$data->quantity,
+            'unit_price'=>$data->unit_price,
+            'photo_1'=>$data->photo_1,
+            'photo_2'=>$data->photo_2,
+            'photo_3'=>$data->photo_3,
+            'Title'=>$data->Title,
+            'Description'=>$data->Description,
+            'outOfStock'=>$data->outOfStock,
+            'createdDate'=>$data->createdDate,
+            'warranty'=>$data->warranty,
+            'name'=>$user->name,
+            'photo'=>$user->profile_photo,
+            'reviews'=>$reviews,
+            'rating'=>$rating,
+            'count'=>$count,
+            'star1'=>$star1,
+            'star2'=>$star2,
+            'star3'=>$star3,
+            'star4'=>$star4,
+            'star5'=>$star5,
+            'availability' => $availability,
+            'quantity_selected' => $data_selected['quantity'],
+            'start_date' => $data_selected['start_date'],
+            'end_date' => $data_selected['end_date']
+        ];
+        $this->view('users/viewItem',$data);
+    } else {
+        die('Something went wrong');
+    }
+}
 
     public function viewItem($product_id){
             $data = $this->userModel->viewItem($product_id);
@@ -502,7 +717,7 @@ class Users extends Controller
             if($reviews){
                 $count = 0;
                 $star1 = 0;
-                $star2 = 0; 
+                $star2 = 0;
                 $star3 = 0;
                 $star4 = 0;
                 $star5 = 0;
@@ -566,7 +781,11 @@ class Users extends Controller
                 'star2'=>$star2,
                 'star3'=>$star3,
                 'star4'=>$star4,
-                'star5'=>$star5
+                'star5'=>$star5,
+                'availability' => 'notChecked',
+                'quantity_selected' => '',
+                'start_date' => '',
+                'end_date' => ''
             ];
             $this->view('users/viewItem',$data);
         } else {
@@ -578,13 +797,39 @@ class Users extends Controller
     public function addToCart($product_id){
         // Check for POST
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $cart = $this->userModel->cart($_SESSION['user_id']);
+            $cart_data_check =[
+                'product_id' => $product_id,
+                'quantity' =>trim($_POST['quantity']),
+                'start_date' =>trim($_POST['fromDate']),
+                'end_date' =>trim($_POST['toDate'])
+            ];
+            $item_exists = false;
+            foreach ($cart as $cartItem){
+                if($cartItem->product_id == $product_id){
+                    $this->viewItemAC($product_id, 'alreadyInCart', $cart_data_check);
+                    $item_exists = true;
+                }
+            }
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $startDateObj = new DateTime(trim($_POST['fromDate']));
+            $endDateObj = new DateTime(trim($_POST['toDate']));
+            $days = 0;
+            while ($startDateObj <= $endDateObj) {
+                $days = $days + 1;
+                $startDateObj->add(new DateInterval('P1D'));
+            }
+            $product_data = $this->userModel->viewItem($product_id);
+            $total = $days * $product_data->unit_price * trim($_POST['quantity']);
             $data =[
                 'product_id' => $product_id,
                 'quantity' =>trim($_POST['quantity']),
-                'start_date' =>trim($_POST['fromDateTime']),
-                'end_date' =>trim($_POST['toDateTime']),
+                'start_date' =>trim($_POST['fromDate']),
+                'end_date' =>trim($_POST['toDate']),
                 'user_id' => $_SESSION['user_id'],
+                'days' => $days,
+                'total' => $total,
+                'availability' => 'available',
                 'quantity_err' => '',
                 'start_date_err' => '',
                 'end_date_err' => ''
@@ -598,7 +843,7 @@ class Users extends Controller
                 $data['quantity_err'] = 'Not enough items in the stock';
             }
 
-            if(empty($data['quantity_err']) && empty($data['start_date_err']) && empty($data['end_date_err'])){
+            if(empty($data['quantity_err']) && $item_exists == false){
                 if($this->userModel->addToCart($data)){
                     redirect('users/viewItem/'.$product_id);
                 } else {
