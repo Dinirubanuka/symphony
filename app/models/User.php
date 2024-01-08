@@ -364,7 +364,7 @@ class User
 
     public function placeOrder($data)
     {
-            $this->db->query('INSERT INTO suborder (user_id, serviceprovider_id, product_id, qty, start_date, end_date, days, total, status) VALUES(:user_id, :serviceprovider_id, :product_id, :qty, :start_date, :end_date, :days, :total, :status)');
+            $this->db->query('INSERT INTO suborder (user_id, serviceprovider_id, product_id, qty, start_date, end_date, days, total, status, avail) VALUES(:user_id, :serviceprovider_id, :product_id, :qty, :start_date, :end_date, :days, :total, :status, :avail)');
     
             try {
                 $this->db->bind(':user_id', $data['user_id']);
@@ -376,6 +376,7 @@ class User
                 $this->db->bind(':days', $data['days']);
                 $this->db->bind(':total', $data['total']);
                 $this->db->bind(':status', $data['status']);
+                $this->db->bind(':avail', $data['avail']);
                 // Execute
                 if ($this->db->execute()) {
                     return true;
@@ -428,17 +429,20 @@ class User
             $this->db->bind(':product_id', $data['product_id']);
             $this->db->bind(':date', $data['date']);
             $this->db->bind(':qty', $data['quantity']);
-            // Execute
+            
             if ($this->db->execute()) {
-                return true;
+                $this->db->query('SELECT LAST_INSERT_ID() AS entry_id');
+                $result = $this->db->single();
+    
+                return $result->entry_id;
             } else {
                 return false;
             }
         } catch (PDOException $e) {
-
             die($e->getMessage());
         }
     }
+    
 
     public function removeFromCart($product_id)
     {

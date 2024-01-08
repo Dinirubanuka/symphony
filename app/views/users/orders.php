@@ -6,14 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
     <title>Orders</title>
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/inventory.css"/>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/sp-orders.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/sp-nav-bar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <!------------nav-bar-------->
-<?php require_once APPROOT . '/views/inc/sp-orders-nav.php'; ?>
+<?php require_once APPROOT . '/views/inc/user-orders-nav.php'; ?>
 
 <div class="orders-container">
     <?php foreach($data['orders'] as $order) : ?>
@@ -33,9 +32,7 @@
             <div class="status-<?php echo $order->status ?>"><strong>Status:</strong> <?php echo $order->status ?></div>
         </div>
         <div class="order-actions">
-            <button class="<?php echo $disableButton ? 'disabled-button' : 'accept-btn'; ?>" <?php echo $disableButton ? 'disabled' : ''; ?> onclick="confirmAction(<?php echo $order->sorder_id; ?>, 'Upcoming')">Accept Order</button>
-
-            <button class="<?php echo $disableButton ? 'disabled-button' : 'reject-btn'; ?>" <?php echo $disableButton ? 'disabled' : ''; ?> onclick="confirmAction(<?php echo $order->sorder_id; ?>, 'Rejected')">Reject Order</button>
+            <button class="<?php echo $disableButton ? 'disabled-button' : 'cancel-btn'; ?>" <?php echo $disableButton ? 'disabled' : ''; ?> onclick="confirmAction(<?php echo $order->sorder_id; ?>)">Cancel Order</button>
         </div>
     </div>
 <?php endforeach; ?>
@@ -71,9 +68,9 @@ $(document).ready(function () {
 
 <script>
     function confirmAction(orderId, status) {
-        var confirmationMessage = 'Are you sure you want to ' + (status === 'Upcoming' ? 'accept' : 'reject') + ' the order?';
+        var confirmationMessage = 'Are you sure you want to Cancel the order?';
         if (confirm(confirmationMessage)) {
-            var url = '<?php echo URLROOT; ?>/serviceproviders/changeOrderStatus/' + orderId + '/' + status;
+            var url = '<?php echo URLROOT; ?>/users/cancelOrder/' + orderId;
             window.location.href = url;
         }
     }

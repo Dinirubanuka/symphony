@@ -1069,20 +1069,51 @@ class serviceproviders extends Controller
 
     public function changeOrderStatus($order_id, $status)
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->serviceProviderModel->changeOrderStatus($order_id, $status);
-            redirect('serviceproviders/orders');
-        } else {
-            redirect('serviceproviders/orders');
+        $this->serviceProviderModel->changeOrderStatus($order_id, $status);
+        if($status === 'Rejected'){
+            $order_data = $this->serviceProviderModel->getOrderData($order_id);
+            $resultString = implode(', ', json_decode(json_encode($order_data), true));
+            $resultArray = explode(', ', $resultString);
+            $finalArray = explode(',', $resultArray[10]);
+            foreach ($finalArray as $entry_id) {
+                $this->serviceProviderModel->removeAvailability($entry_id);
+            }
         }
+        redirect('serviceproviders/orders');
+    }
+
+    function compareOrderByStatus($a, $b) {
+        $statusOrder = [
+            'Pending' => 1,
+            'In-Progress' => 2,
+            'Upcoming' => 3,
+            'Completed' => 4,
+            'Rejected' => 5,
+        ];
+    
+        // Get the numeric value for each status
+        $statusA = $statusOrder[$a->status] ?? 0;
+        $statusB = $statusOrder[$b->status] ?? 0;
+    
+        // Compare based on the numeric order
+        return $statusA - $statusB;
     }
 
     public function orders()
     {   
         $orders = $this->serviceProviderModel->getOrders($_SESSION['serviceprovider_id']);
         $order_objects = [];
-        
+        $today = strtotime(date("Y-m-d"));
         foreach ($orders as $order) {
+            $startDateTimestamp = strtotime($order->start_date);
+            $endDateTimestamp = strtotime($order->end_date);
+            if ($today >= $startDateTimestamp && $today <= $endDateTimestamp) {
+                $order->status = 'In-Progress';
+                $this->serviceProviderModel->changeOrderStatus($order->sorder_id, 'In-Progress');
+            } elseif ($today > $endDateTimestamp) {
+                $order->status = 'Completed';
+                $this->serviceProviderModel->changeOrderStatus($order->sorder_id, 'Completed');
+            }
             $user_data = json_decode(json_encode($this->serviceProviderModel->getUserData($order->user_id)), true);
             $product_data = json_decode(json_encode($this->serviceProviderModel->getProductData($order->product_id)), true);
             $serviceprovider_data = json_decode(json_encode($this->serviceProviderModel->view($order->serviceprovider_id)), true);
@@ -1093,6 +1124,7 @@ class serviceproviders extends Controller
             $order_object = json_decode(json_encode($order_data));
         
             $order_objects[] = $order_object;
+            usort($order_objects,[$this,  'compareOrderByStatus']);
         }
         
         $data = [

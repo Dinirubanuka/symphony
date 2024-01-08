@@ -165,6 +165,26 @@ class ServiceProvider
         }
     }
 
+    public function getOrderData($sorder_id)
+    {
+        $this->db->query('SELECT * FROM suborder WHERE sorder_id = :sorder_id');
+        $this->db->bind(':sorder_id', $sorder_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function removeAvailability($entry_id)
+    {
+        $this->db->query('DELETE FROM availability WHERE entry_id = :entry_id');
+        $this->db->bind(':entry_id', $entry_id);
+        // Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // Regsiter user
     public function register($data)
     {

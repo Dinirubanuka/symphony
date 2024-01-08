@@ -518,9 +518,26 @@ class Users extends Controller
     public function placeOrder(){
         $cart = $this->userModel->cart($_SESSION['user_id']);
         $sorder_id = '';
+        $avail_ids = '';
         $total = 0; 
         foreach ($cart as $cartItem){
             $product_data = $this->userModel->viewItem($cartItem->product_id);
+            $startDateObj = new DateTime($cartItem->start_date);
+            $endDateObj = new DateTime($cartItem->end_date);
+            while ($startDateObj <= $endDateObj) {
+                $avail_data = [
+                    'product_id' => $cartItem->product_id,
+                    'date' => $startDateObj->format('Y-m-d'),
+                    'quantity' => $cartItem->quantity
+                ];
+                $entry_id = $this->userModel->setAvailability($avail_data);
+                if($avail_ids == ''){
+                    $avail_ids .= $entry_id;
+                } else {
+                    $avail_ids .= ','.$entry_id;
+                }
+                $startDateObj->add(new DateInterval('P1D'));
+            }
             $data = [
                 'user_id' => $_SESSION['user_id'],
                 'serviceprovider_id' => $product_data->created_by,
@@ -530,19 +547,9 @@ class Users extends Controller
                 'end_date' => $cartItem->end_date,
                 'days' => $cartItem->days,
                 'total' => $cartItem->total,
-                'status' => 'Pending'
+                'status' => 'Pending',
+                'avail' => $avail_ids
             ];
-            $startDateObj = new DateTime($cartItem->start_date);
-            $endDateObj = new DateTime($cartItem->end_date);
-            while ($startDateObj <= $endDateObj) {
-                $avail_data = [
-                    'product_id' => $cartItem->product_id,
-                    'date' => $startDateObj->format('Y-m-d'),
-                    'quantity' => $cartItem->quantity
-                ];
-                $this->userModel->setAvailability($avail_data);
-                $startDateObj->add(new DateInterval('P1D'));
-            }
             $total = $total + $cartItem->total;
             $this->userModel->placeOrder($data);
             $result = $this->userModel->getSubOrderId($data);
