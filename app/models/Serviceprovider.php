@@ -57,6 +57,34 @@ class ServiceProvider
         }
 
     }
+    public function addStudio($data){
+        $this->db->query('INSERT INTO studio (created_by, name, rate, instrument, descriptionSounds, descriptionStudio, telephoneNumber, videoLink, photo_1, photo_2, photo_3, airCondition ) VALUES(:created_by, :name, :rate, :instrument, :descriptionSounds, :descriptionStudio, :telephoneNumber, :videoLink, :photo_1, :photo_2, :photo_3, :airCondition');
+
+        try {
+            $this->db->bind(':created_by', $data['created_by']);
+            $this->db->bind(':name', $data['name']);
+            $this->db->bind(':rate', $data['rate']);
+            $this->db->bind(':instrument', $data['instrument']);
+            $this->db->bind(':descriptionSounds', $data['descriptionSounds']);
+            $this->db->bind(':descriptionStudio', $data['descriptionStudio']);
+            $this->db->bind(':telephoneNumber', $data['telephoneNumber']);
+            $this->db->bind(':photo_1', $data['photo_1']);
+            $this->db->bind(':photo_2', $data['photo_2']);
+            $this->db->bind(':photo_3', $data['photo_3']);
+            $this->db->bind(':videoLink', $data['videoLink']);
+            $this->db->bind(':airCondition', $data['airCondition']);
+
+            // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+
+            die($e->getMessage());
+        }
+    }
 
     public function editPhoto($product_id, $data, $photo_num)
     {
@@ -242,6 +270,12 @@ class ServiceProvider
     public function inventory($created_by)
     {
         $this->db->query('SELECT * FROM products WHERE created_by = :created_by');
+        $this->db->bind(':created_by', $created_by);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+    public function studio($created_by){
+        $this->db->query('SELECT * FROM studio WHERE created_by = :created_by');
         $this->db->bind(':created_by', $created_by);
         $results = $this->db->resultSet();
         return $results;
