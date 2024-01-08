@@ -1,0 +1,454 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  display: flex;
+}
+.wrapper .container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 40px;
+}
+/* Hide the images by default */
+.mySlides {
+  display: none;
+  width:400px;
+  height:400px
+}
+.mySlides img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wrapper .item-container {
+  flex: 1;
+  padding: 20px;
+  background-color: #f2f2f2; /* Optional: Set background color for the right side */
+}
+.wrapper .item-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.number-input-container {
+  display: flex;
+  align-items: center;
+}
+
+.increment-btn,
+.decrement-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: #090808;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: 0.5s;
+}
+.prev{
+  left: 0;
+}
+.next{
+  right: 0;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(91, 89, 89, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  margin-left: 30px;
+}
+.row{
+  display: flex;
+  padding: 20px;
+  gap: 10px;
+}
+.row .column img{
+  object-fit: cover;
+  height: 190px;
+  width: 190px;
+}
+.row:after {
+  padding: 16px;
+  max-width: 00px;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+
+.item-details {
+  display: flex;
+}
+
+.item-info {
+  flex: 1;
+  padding-left: 20px;
+}
+
+.wrapper .item-container button {
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  color: black; /* Set font color to black */
+}
+
+#addToCartBtn {
+  background-color: #e9e0b0;
+  transition: background-color 0.3s;
+}
+
+#addToCartBtn:hover {
+  background-color: #FFD700; 
+  color: black;
+}
+
+#addToFavoritesBtn {
+  background-color: #71c971;
+  transition: background-color 0.3s;
+}
+
+#addToFavoritesBtn:hover {
+  background-color: #008000;
+  color: black;
+}
+
+#availabilityChkBtn {
+  background-color: #7194c9;
+  transition: background-color 0.3s;
+}
+
+#availabilityChkBtn:hover {
+  background-color: #1c58ff;
+  color: black;
+}
+
+
+.reviews {
+  margin-top: 20px;
+}
+
+.star-rating {
+  font-size: 24px;
+}
+
+.user-review {
+  margin-top: 10px;
+}
+
+.rating {
+  display: flex;
+  font-family: Arial;
+  margin: 0 auto; /* Center website */
+  padding: 20px;
+}
+
+.overrall-rating {
+  max-width: 620px;
+  flex: 1;
+  padding: 20px;
+}
+
+.review-form {
+  max-width: 800px;
+  flex: 1;
+  padding: 20px;
+  background-color: #f2f2f2; /* Optional: Set background color for the right side */
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.heading {
+  font-size: 25px;
+  margin-right: 25px;
+}
+
+.star-rating,
+.back-stars,
+.front-stars {
+  display: flex;
+}
+
+.star-rating {
+  max-width: 48%;
+  align-items: center;
+  font-size: 3em;
+  justify-content: center;
+  margin-top: 10px;
+}
+.back-stars {
+  color: #000000;
+  position: relative;
+  text-shadow: 4px 4px 10px #000000;
+}
+.front-stars {
+  color: #FFBC0B;
+  overflow: hidden;
+  position: absolute;
+  height:100%;
+  text-shadow: 2px 2px 5px #d29b09;
+  top: 0;
+  transition: all .5s
+}
+
+/* Three column layout */
+.side {
+  float: left;
+  width: 15%;
+  margin-top: 10px;
+}
+
+.middle {
+  float: left;
+  width: 70%;
+  margin-top: 10px;
+}
+
+/* Place text to the right */
+.right {
+  text-align: right;
+}
+
+/* Clear floats after the columns */
+.progress:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The bar container */
+.bar-container {
+  width: 100%;
+  background-color: #f1f1f1;
+  text-align: center;
+  color: white;
+}
+
+/* Individual bars */
+.bar-5 {height: 18px; background-color: #2196F3;}
+.bar-4 {height: 18px; background-color: #04AA6D;}
+.bar-3 {height: 18px; background-color: #d2f315;}
+.bar-2 {height: 18px; background-color: #ff9800;}
+.bar-1 {height: 18px; background-color: #f44336;}
+
+/* Responsive layout - make the columns stack on top of each other instead of next to each other */
+@media (max-width: 400px) {
+  .side, .middle {
+    width: 100%;
+  }
+  /* Hide the right column on small screens */
+  .right {
+    display: none;
+  }
+}
+
+.review-form {
+  text-align: left; /* Align everything to the left */
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-top: 50px;
+  position: relative;
+}
+
+.user-info {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.user-image {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-name {
+  margin: 0;
+}
+
+.product-review {
+  margin-top: 50px;
+  text-align: left; /* Align everything inside product-review to the left */
+}
+
+.rating-container {
+  margin: 20px 0 20px;
+}
+
+#reviewDescription {
+  width: 100%;
+}
+
+#submitBtn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #aaffaa;
+  border: none;
+  cursor: pointer;
+  color: #000;
+}
+
+#submitBtn:hover {
+  background-color: #00aa00;
+}
+
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500,800);
+
+.review-grid {
+  display: flex;
+}
+
+figure.snip1232 {
+font-family: 'Raleway', Arial, sans-serif;
+position: relative;
+overflow: hidden;
+margin: 10px;
+min-width: 220px;
+max-width: 310px;
+width: 100%;
+color: #333;
+text-align: left;
+box-shadow: none !important;
+}
+figure.snip1232 * {
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+}
+figure.snip1232 img {
+max-width: 100%;
+height: 80px;
+width: 80px;
+border-radius: 50%;
+margin-right: 5px;
+display: block;
+z-index: 1;
+position: absolute;
+right: 50%;
+}
+figure.snip1232 blockquote {
+margin: 0;
+display: block;
+border-radius: 8px;
+position: relative;
+background-color: #fafafa;
+padding: 65px 50px 35px 50px;
+font-size: 0.8em;
+font-weight: 500;
+margin: -40px 0 0;
+line-height: 1.6em;
+box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+figure.snip1232 blockquote:before,
+figure.snip1232 blockquote:after {
+font-family: 'FontAwesome';
+content: "\201C";
+position: absolute;
+font-size: 50px;
+opacity: 0.3;
+font-style: normal;
+}
+figure.snip1232 blockquote:before {
+top: 55px;
+left: 20px;
+}
+figure.snip1232 blockquote:after {
+content: "\201D";
+right: 20px;
+bottom: 5px;
+}
+figure.snip1232 .author {
+margin: 0;
+height: 80px;
+display: block;
+text-align: left;
+padding: 0 35px;
+position: relative;
+z-index: 1;
+}
+figure.snip1232 .author h5,
+figure.snip1232 .author span {
+left: 50%;
+position: absolute;
+opacity: 0.8;
+padding: 3px 5px;
+}
+figure.snip1232 .author h5 {
+text-transform: uppercase;
+bottom: 50%;
+margin: 0;
+font-weight: 800;
+color: #ffffff;
+}
+figure.snip1232 .author span {
+font-size: 0.8em;
+color: #000000;
+top: 50%;
+font-weight: 500;
+}

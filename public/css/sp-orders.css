@@ -1,0 +1,121 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #dad8d8;
+}
+
+.orders-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px; 
+    margin-left: 20px;/* Add a top margin */
+}
+
+.order-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: calc(25% - 20px);
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.order-image {
+    text-align: center;
+}
+
+.order-image img {
+    max-width: 100%;
+    height: auto;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.order-details {
+    padding: 16px;
+    flex-grow: 1;
+}
+
+.order-details div {
+    margin-bottom: 10px;
+}
+
+.order-actions {
+    text-align: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+.disabled-button {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.disabled-button {
+    opacity: 0.7;
+    padding: 8px 16px;
+    color:#1a1a1a;
+    margin: 0 8px;
+    border: none;
+    cursor: not-allowed;
+    background-color: #b1b1b1;
+    border-radius: 4px;
+}
+
+
+.accept-btn, .reject-btn {
+    padding: 8px 16px;
+    margin: 0 8px;
+    border: none;
+    cursor: pointer;
+    background-color: #b3caf5;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.accept-btn:hover, .reject-btn:hover {
+    background-color: #76a6ee;
+}
+
+.accept-btn {
+    color: #1a1a1a;
+}
+
+.reject-btn {
+    color: #fff;
+    background-color: #f08080;
+}
+
+.reject-btn:hover {
+    background-color: #e55454;
+}
+
+.order-details strong {
+    color: #333;
+}
+
+.order-details .status-Pending {
+    color: #3366cc;
+}
+
+.order-details .status-Accepted {
+    color: #4CAF50;
+}
+
+.order-details .status-In-Progress {
+    color: #ffcc00;
+}
+
+.order-details .status-Rejected {
+    color: #ff4d4d;
+}
+
+.order-details .status-Completed {
+    color: #ea00ff;
+}
+

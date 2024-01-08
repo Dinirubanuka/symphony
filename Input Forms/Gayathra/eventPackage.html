@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event Package</title>
+    <style>
+        /* Add your styles here */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .event-package-form {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section {
+            display: none;
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #packageDetails {
+            margin-top: 20px;
+        }
+
+        #packageList {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #packageList li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="event-package-form">
+    <h2>Create Event Package</h2>
+    <form id="eventForm">
+        <label for="packageName">Package Name:</label>
+        <input type="text" id="packageName" name="packageName" required>
+
+        <label for="packageDescription">Package Description:</label>
+        <textarea id="packageDescription" name="packageDescription" rows="4" required></textarea>
+
+        <button type="button" id="addItemBtn">Add Item</button>
+        <button type="button" id="addServiceBtn">Add Service</button>
+
+        <div id="addItemForm" class="form-section">
+            <h3>Add Item</h3>
+            <label for="itemID">Item ID:</label>
+            <input type="text" id="itemID" name="itemID" required>
+
+            <label for="itemName">Item Name:</label>
+            <input type="text" id="itemName" name="itemName" required>
+
+            <label for="itemQuantity">Quantity:</label>
+            <input type="number" id="itemQuantity" name="itemQuantity" min="1" required>
+
+            <label for="itemPrice">Price:</label>
+            <input type="number" id="itemPrice" name="itemPrice" min="0" step="0.01" required>
+
+            <button type="button" onclick="addItemToPackage()">Add to Package</button>
+        </div>
+
+        <div id="addServiceForm" class="form-section">
+            <h3>Add Service</h3>
+            <label for="serviceID">Service ID:</label>
+            <input type="text" id="serviceID" name="serviceID" required>
+
+            <label for="serviceName">Service Name:</label>
+            <input type="text" id="serviceName" name="serviceName" required>
+
+            <label for="serviceDuration">Duration:</label>
+            <input type="text" id="serviceDuration" name="serviceDuration" required>
+
+            <label for="servicePrice">Price:</label>
+            <input type="number" id="servicePrice" name="servicePrice" min="0" step="0.01" required>
+
+            <button type="button" onclick="addServiceToPackage()">Add to Package</button>
+        </div>
+
+        <div id="packageDetails">
+            <h3>Event Package Details:</h3>
+            <ul id="packageList"></ul>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add event listeners to show/hide forms
+        document.getElementById('addItemBtn').addEventListener('click', showItemForm);
+        document.getElementById('addServiceBtn').addEventListener('click', showServiceForm);
+
+        // Add event listeners to submit forms
+        document.getElementById('eventForm').addEventListener('submit', submitEventForm);
+    });
+
+    function showItemForm() {
+        toggleFormVisibility('addItemForm');
+    }
+
+    function showServiceForm() {
+        toggleFormVisibility('addServiceForm');
+    }
+
+    function toggleFormVisibility(formId) {
+        const forms = ['addItemForm', 'addServiceForm'];
+        forms.forEach(function (form) {
+            document.getElementById(form).style.display = form === formId ? 'block' : 'none';
+        });
+    }
+
+    function addItemToPackage() {
+        const itemID = document.getElementById('itemID').value;
+        const itemName = document.getElementById('itemName').value;
+        const itemQuantity = document.getElementById('itemQuantity').value;
+        const itemPrice = document.getElementById('itemPrice').value;
+
+        const packageList = document.getElementById('packageList');
+        const listItem = document.createElement('li');
+        listItem.textContent = `Item ID: ${itemID}, Name: ${itemName}, Quantity: ${itemQuantity}, Price: $${itemPrice}`;
+        packageList.appendChild(listItem);
+
+        // Clear the form fields
+        document.getElementById('itemID').value = '';
+        document.getElementById('itemName').value = '';
+        document.getElementById('itemQuantity').value = '';
+        document.getElementById('itemPrice').value = '';
+
+        // Hide the form after submission
+        toggleFormVisibility('addItemForm');
+    }
+
+    function addServiceToPackage() {
+        const serviceID = document.getElementById('serviceID').value;
+        const serviceName = document.getElementById('serviceName').value;
+        const serviceDuration = document.getElementById('serviceDuration').value;
+        const servicePrice = document.getElementById('servicePrice').value;
+
+        const packageList = document.getElementById('packageList');
+        const listItem = document.createElement('li');
+        listItem.textContent = `Service ID: ${serviceID}, Name: ${serviceName}, Duration: ${serviceDuration}, Price: $${servicePrice}`;
+        packageList.appendChild(listItem);
+
+        // Clear the form fields
+        document.getElementById('serviceID').value = '';
+        document.getElementById('serviceName').value = '';
+        document.getElementById('serviceDuration').value = '';
+        document.getElementById('servicePrice').value = '';
+
+        // Hide the form after submission
+        toggleFormVisibility('addServiceForm');
+    }
+
+    function submitEventForm(event) {
+        event.preventDefault();
+        // You can add additional logic for handling the form submission if needed
+        alert('Event Package Submitted!');
+    }
+</script>
+</body>
+</html>

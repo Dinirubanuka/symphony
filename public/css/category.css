@@ -1,0 +1,53 @@
+/*categories*/
+.upperCategory{
+    display: flex;
+    flex-direction: row;
+}
+.categories {
+    width: 250px;
+    padding: 0 10px;
+}
+.account-requests {
+    position: absolute;
+    top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px ;
+    padding: 20px;
+    left: 15rem;
+}
+
+.category {
+    margin-bottom: 10px;
+    padding: 20px 40px;
+    border-bottom: 1px solid #dad7d7;
+}
+
+.category-name {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.equipment-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+#price{
+    display: flex;
+    flex-direction: row;
+}
+.equipment-item {
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+
+.sort{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
