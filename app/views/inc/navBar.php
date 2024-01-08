@@ -137,7 +137,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a class="nav-link" href="/">Orders</a></li>
+                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/orders">Orders</a></li>
                     <li><a class="nav-link" href="/">Bookmarks</a></li>
                     <li><a class="nav-link" href="/">About</a></li>
                 </ul>

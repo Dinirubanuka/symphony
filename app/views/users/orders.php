@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
     <title>Orders</title>
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/sp-orders.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/sp-nav-bar.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/instrument.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-orders.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/nav-bar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -19,11 +20,11 @@
     <?php $disableButton = ($order->status === 'Pending') ? false : true; ?>
     <div class="order-card">
         <div class="order-image">
-            <img src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $order->photo_1; ?>" alt="Item 1">
+            <img src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $order->photo_1; ?>" style="width:100%; height:220px;" alt="Item 1">
         </div>
         <div class="order-details">
             <div><strong>Order ID: </strong><?php echo $order->sorder_id ?></div>
-            <div><strong>User Name: </strong><?php echo $order->name ?></div>
+            <div><strong>Store Name: </strong><?php echo $order->business_name ?></div>
             <div><strong>Product Title: </strong><?php echo $order->category ?></div>
             <div><strong>Quantity: </strong><?php echo $order->qty ?></div>
             <div><strong>From Date: </strong> <?php echo $order->start_date ?></div>
@@ -65,7 +66,9 @@ $(document).ready(function () {
 });
 
 </script>
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://kit.fontawesome.com/3376ff6b83.js" crossorigin="anonymous"></script>
+<script src="<?php echo URLROOT; ?>/js/instrument.js"></script>
 <script>
     function confirmAction(orderId, status) {
         var confirmationMessage = 'Are you sure you want to Cancel the order?';

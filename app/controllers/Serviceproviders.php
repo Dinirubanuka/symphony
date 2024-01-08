@@ -1089,6 +1089,7 @@ class serviceproviders extends Controller
             'Upcoming' => 3,
             'Completed' => 4,
             'Rejected' => 5,
+            'Cancelled' => 6,
         ];
     
         // Get the numeric value for each status

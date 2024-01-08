@@ -98,6 +98,25 @@ class Users extends Controller
         }
     }
 
+    public function cancelOrder($order_id)
+    {   
+        $orders = $this->userModel->getOrders($_SESSION['user_id']);
+        foreach ($orders as $order) {
+            if ($order->sorder_id == $order_id) {
+                $order_data = json_decode(json_encode($order), true);
+            }
+        }
+        $resultString = implode(', ', json_decode(json_encode($order_data), true));
+        $resultArray = explode(', ', $resultString);
+        $finalArray = explode(',', $resultArray[10]);
+        var_dump($finalArray);
+        foreach ($finalArray as $entry_id) {
+            $this->userModel->removeAvailability($entry_id);
+        }
+        $this->userModel->changeOrderStatus($order_id, 'Cancelled');
+        redirect('users/orders');
+    }
+
     public function edit()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -513,6 +532,58 @@ class Users extends Controller
             ];
         }
         $this->view('users/cart',$data);
+    }
+
+    function compareOrderByStatus($a, $b) {
+        $statusOrder = [
+            'Pending' => 1,
+            'In-Progress' => 2,
+            'Upcoming' => 3,
+            'Completed' => 4,
+            'Rejected' => 5,
+            'Cancelled' => 6,
+        ];
+    
+        // Get the numeric value for each status
+        $statusA = $statusOrder[$a->status] ?? 0;
+        $statusB = $statusOrder[$b->status] ?? 0;
+    
+        // Compare based on the numeric order
+        return $statusA - $statusB;
+    }
+
+    public function orders(){
+        $orders = $this->userModel->getOrders($_SESSION['user_id']);
+        $order_objects = [];
+        $today = strtotime(date("Y-m-d"));
+        foreach ($orders as $order) {
+            $startDateTimestamp = strtotime($order->start_date);
+            $endDateTimestamp = strtotime($order->end_date);
+            if ($today >= $startDateTimestamp && $today <= $endDateTimestamp) {
+                $order->status = 'In-Progress';
+                $this->userModel->changeOrderStatus($order->sorder_id, 'In-Progress');
+            } elseif ($today > $endDateTimestamp) {
+                $order->status = 'Completed';
+                $this->userModel->changeOrderStatus($order->sorder_id, 'Completed');
+            }
+            $user_data = json_decode(json_encode($this->userModel->view($order->user_id)), true);
+            $product_data = json_decode(json_encode($this->userModel->getProductData($order->product_id)), true);
+            $serviceprovider_data = json_decode(json_encode($this->userModel->getServiceProviderData($order->serviceprovider_id)), true);
+            $order_data = json_decode(json_encode($order), true);
+            
+            $order_data = array_merge($order_data, $user_data, $product_data, $serviceprovider_data); 
+        
+            $order_object = json_decode(json_encode($order_data));
+        
+            $order_objects[] = $order_object;
+            usort($order_objects,[$this,  'compareOrderByStatus']);
+        }
+        
+        $data = [
+            'orders' => $order_objects
+        ];
+        
+        $this->view('users/orders', $data);
     }
 
     public function placeOrder(){

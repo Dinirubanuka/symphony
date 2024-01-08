@@ -27,13 +27,14 @@ body {
 
 .order-image {
     text-align: center;
+    max-height: 240px;
 }
 
 .order-image img {
     max-width: 100%;
-    height: auto;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+    object-fit: cover;
 }
 
 .order-details {
@@ -67,8 +68,7 @@ body {
     border-radius: 4px;
 }
 
-
-.accept-btn, .reject-btn {
+.cancel-btn {
     padding: 8px 16px;
     margin: 0 8px;
     border: none;
@@ -78,20 +78,16 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.accept-btn:hover, .reject-btn:hover {
+.cancel-btn:hover {
     background-color: #76a6ee;
 }
 
-.accept-btn {
-    color: #1a1a1a;
-}
-
-.reject-btn {
+.cancel-btn {
     color: #fff;
     background-color: #f08080;
 }
 
-.reject-btn:hover {
+.cancel-btn:hover {
     background-color: #e55454;
 }
 
@@ -118,6 +114,7 @@ body {
 .order-details .status-Cancelled {
     color: #ff4d4d;
 }
+
 
 .order-details .status-Completed {
     color: #ea00ff;

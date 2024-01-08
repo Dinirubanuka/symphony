@@ -346,6 +346,60 @@ class User
 
     }
 
+    public function getOrderData($sorder_id){
+        $this->db->query('SELECT * FROM suborder WHERE sorder_id  = :sorder_id');
+        $this->db->bind(':sorder_id ', $sorder_id );
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function removeAvailability($entry_id)
+    {
+        $this->db->query('DELETE FROM availability WHERE entry_id = :entry_id');
+        $this->db->bind(':entry_id', $entry_id);
+        // Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getOrders($user_id){
+        $this->db->query('SELECT * FROM suborder WHERE user_id= :user_id');
+        $this->db->bind(':user_id', $user_id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function changeOrderStatus($sorder_id, $status)
+    {
+        try {
+            $this->db->query('UPDATE suborder SET status = :status WHERE sorder_id = :sorder_id');
+            $this->db->bind(':status', $status);
+            $this->db->bind(':sorder_id', $sorder_id);
+            $this->db->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Database error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function getProductData($product_id)
+    {
+        $this->db->query('SELECT * FROM products WHERE product_id = :product_id');
+        $this->db->bind(':product_id', $product_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function getServiceProviderData($serviceprovider_id){
+        $this->db->query('SELECT * FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id');
+        $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+        $results = $this->db->single();
+        return $results;
+    }
 
     public function getSubOrderId($data){
         $this->db->query('SELECT sorder_id FROM suborder WHERE user_id = :user_id AND serviceprovider_id = :serviceprovider_id AND product_id = :product_id AND qty = :qty AND start_date = :start_date AND end_date = :end_date AND days = :days AND total = :total AND status = :status');

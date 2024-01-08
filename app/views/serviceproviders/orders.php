@@ -13,7 +13,7 @@
 </head>
 <body>
 <!------------nav-bar-------->
-<?php require_once APPROOT . '/views/inc/sp-orders-nav.php'; ?>
+<?php require_once APPROOT . '/views/inc/sp-orders-nav.php';?>
 
 <div class="orders-container">
     <?php foreach($data['orders'] as $order) : ?>
@@ -80,31 +80,30 @@ $(document).ready(function () {
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script>
-    // const cart = document.querySelector(".order-icon");
-    // Redirect();
-    // function Redirect() {
-    //     $.ajax({
-    //         method: 'GET',
-    //         url: 'http://localhost/symphony/serviceproviders/orderCount',
-    //         dataType: 'json',
-    //         success: function (response) {
-    //             console.log('count',response.Count);
-    //             displaydata(response.Count);
-    //         },
-    //         error: function (error) {
-    //             console.error('Error:', error);
-    //         }
-    //     });
-    // }
-    // function displaydata(count){
-    //     let text = "";
-    //     text += `<p class="badge" >`+count+`</p>`+
-    //                 `<a href="http://localhost/symphony/serviceproviders/orders">`+
-    //                     `<i class="fa-solid fa-truck-fast"></i>`+
-    //                 `</a>`;
-    //     cart.innerHTML=text;
-    // }
-
+    const cart = document.querySelector(".order-icon");
+    Redirect();
+    function Redirect() {
+        $.ajax({
+            method: 'GET',
+            url: 'http://localhost/symphony/serviceproviders/orderCount',
+            dataType: 'json',
+            success: function (response) {
+                console.log('count',response.Count);
+                displaydata(response.Count);
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+    function displaydata(count){
+        let text = "";
+        text += `<p class="badge" >`+count+`</p>`+
+                    `<a href="http://localhost/symphony/serviceproviders/orders">`+
+                        `<i class="fa-solid fa-truck-fast"></i>`+
+                    `</a>`;
+        cart.innerHTML=text;
+    }
 </script>
 </body>
 </html>

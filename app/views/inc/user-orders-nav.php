@@ -146,7 +146,7 @@
         <div class="nav-end">
             <div class="right-container">
                                 <form class="search" role="search">
-                                    <input type="search" name="search" placeholder="Search" id = "search-item"/>
+                                    <input type="text" name="search" placeholder="Search" id = "orderSearch"/>
                                     <i class="bx bx-search" aria-hidden="true"></i>
                                 </form>
                 <div class="cart">
