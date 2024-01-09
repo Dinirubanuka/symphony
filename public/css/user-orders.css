@@ -14,42 +14,121 @@ body {
     margin-left: 20px;/* Add a top margin */
 }
 
-.order-card {
-    background-color: #fff;
+.invoice-card {
+    border: 1px solid #ddd;
+    background-color: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: calc(25% - 20px);
-    margin-bottom: 20px;
+    width: 98%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.349);
+    position: relative; /* Added position relative for absolute positioning */
+}
+
+.invoice-header {
+    background-color: #8a8a8a;
+    padding: 10px;
+    text-align: left;
+}
+
+.invoice-details {
+    padding: 10px;
+}
+
+.flex-container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
 }
 
-.order-image {
-    text-align: center;
-    max-height: 240px;
+.flex-item {
+    width: 48%; /* Adjust the width as needed */
 }
 
-.order-image img {
-    max-width: 100%;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #aaaaaa;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #dadada;
+}
+
+h2 {
+    color: #333;
+    margin: 0;
+}
+
+.product-image {
+    max-width: 50px;
+    max-height: 50px;
     object-fit: cover;
 }
 
-.order-details {
-    padding: 16px;
-    flex-grow: 1;
+.cancel-btn {
+    background-color: #f7a3a3;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
 }
 
-.order-details div {
-    margin-bottom: 10px;
+.cancel-btn:hover {
+    background-color: #ff4646;
+    transition: 0.2s ease-in-out;
 }
 
-.order-actions {
-    text-align: center;
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.action-buttons button {
+    margin: 5px;
     padding: 10px;
-    background-color: #f0f0f0;
+    cursor: pointer;
+    color: black;
+    border: none;
+    border-radius: 5px;
+}
+
+.download-button {
+    background-color: #87CEEB;
+    border: 2px solid #00BFFF;
+}
+
+.download-button:hover {
+    background-color: #00BFFF;
+    transition: 0.2s ease-in-out;
+}
+
+.print-button {
+    background-color: #f5e7ba;
+    border: 2px solid #00BFFF;
+}
+
+.print-button:hover {
+    background-color: #ffc400;
+    transition: 0.2s ease-in-out;
+}
+
+/* Added styles for the bottom-left text */
+.bottom-left-text {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 14px;
+    color: #333;
 }
 
 .disabled-button {
@@ -68,55 +147,33 @@ body {
     border-radius: 4px;
 }
 
-.cancel-btn {
-    padding: 8px 16px;
-    margin: 0 8px;
-    border: none;
-    cursor: pointer;
-    background-color: #b3caf5;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-}
-
-.cancel-btn:hover {
-    background-color: #76a6ee;
-}
-
-.cancel-btn {
-    color: #fff;
-    background-color: #f08080;
-}
-
-.cancel-btn:hover {
-    background-color: #e55454;
-}
 
 .order-details strong {
     color: #333;
 }
 
-.order-details .status-Pending {
+.invoice-details .status-Pending {
     color: #3366cc;
 }
 
-.order-details .status-Upcoming {
+.invoice-details .status-Upcoming {
     color: #4CAF50;
 }
 
-.order-details .status-In-Progress {
+.invoice-details .status-In-Progress {
     color: #ffcc00;
 }
 
-.order-details .status-Rejected {
+.invoice-details .status-Rejected {
     color: #ff4d4d;
 }
 
-.order-details .status-Cancelled {
+.invoice-details .status-Cancelled {
     color: #ff4d4d;
 }
 
 
-.order-details .status-Completed {
+.invoice-details .status-Completed {
     color: #ea00ff;
 }
 

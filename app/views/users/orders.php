@@ -10,101 +10,158 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-orders.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/nav-bar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.js"></script>
 </head>
 <body>
 <!------------nav-bar-------->
 <?php require_once APPROOT . '/views/inc/user-orders-nav.php'; ?>
 
 <div class="orders-container">
-    <?php foreach($data['orders'] as $order) : ?>
-    <?php $disableButton = ($order->status === 'Pending') ? false : true; ?>
-    <div class="order-card">
-        <div class="order-image">
-            <img src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $order->photo_1; ?>" style="width:100%; height:220px;" alt="Item 1">
+    <?php $index = 0; ?>
+    <?php foreach($data['orders'] as $orders) : ?>
+    <div class="invoice-card invoice-card-<?php echo $index; ?>">
+        <div class="invoice-header">
+            <h2>Order#<?php echo $orders['order']->order_id; ?></h2>
         </div>
-        <div class="order-details">
-            <div><strong>Order ID: </strong><?php echo $order->sorder_id ?></div>
-            <div><strong>Store Name: </strong><?php echo $order->business_name ?></div>
-            <div><strong>Product Title: </strong><?php echo $order->category ?></div>
-            <div><strong>Quantity: </strong><?php echo $order->qty ?></div>
-            <div><strong>From Date: </strong> <?php echo $order->start_date ?></div>
-            <div><strong>To Date: </strong> <?php echo $order->end_date ?></div>
-            <div><strong>Total: </strong> <?php echo $order->total ?></div>
-            <div class="status-<?php echo $order->status ?>"><strong>Status:</strong> <?php echo $order->status ?></div>
+        <div class="invoice-details">
+            <div class="flex-container">
+                <div class="flex-item">
+                    <h3>User Details</h3>
+                    <p><strong>Name:</strong> <?php echo $data['user_data']['name']; ?></p>
+                    <p><strong>Email:</strong> <?php echo $data['user_data']['email']; ?></p>
+                    <!-- Add more user details as needed -->
+                </div>
+
+                <div class="flex-item">
+                    <h3>SYMPHONY</h3>
+                    <p>FOR ALL YOUR MUSICAL NEEDS</p>
+                    <p><strong>Contact us:</strong> reach.dev.symphony@gmail.com</p>
+                    <!-- Add more seller details as needed -->
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <?php foreach($orders['suborders'] as $suborder) : ?>
+                <tbody>
+                    <tr>
+                        <?php $disableButton = ($suborder['status'] === 'Pending') ? false : true; ?>
+                        <td><img src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $suborder['photo_1']; ?>" style="width:100px; height:100px;" alt="Item 1"></td>
+                        <td><?php echo $suborder['category'] ?></td>
+                        <td><?php echo $suborder['qty'] ?></td>
+                        <td>LKR. <?php echo $suborder['unit_price'] ?></td>
+                        <td><?php echo $suborder['start_date'] ?></td>
+                        <td><?php echo $suborder['end_date'] ?></td>
+                        <td class="status-<?php echo $suborder['status'] ?>"><?php echo $suborder['status'] ?></td>
+                        <td>LKR. <?php echo $suborder['total'] ?></td>
+                        <td><button class="<?php echo $disableButton ? 'disabled-button' : 'cancel-btn'; ?>" <?php echo $disableButton ? 'disabled' : ''; ?> onclick="confirmAction(<?php echo $suborder['sorder_id'] ?>)">Cancel Order</button></td>
+                    </tr>
+                </tbody>
+                <?php endforeach; ?>
+                <tfoot>
+                    <tr>
+                        <td colspan="8" style="text-align: right;"><strong>Total:</strong></td>
+                        <td>LKR. <?php echo $orders['order']->total ?></td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
-        <div class="order-actions">
-            <button class="<?php echo $disableButton ? 'disabled-button' : 'cancel-btn'; ?>" <?php echo $disableButton ? 'disabled' : ''; ?> onclick="confirmAction(<?php echo $order->sorder_id; ?>)">Cancel Order</button>
+        <div class="action-buttons">
+            <button class="download-button" onclick="downloadPDF(<?php echo $index; ?>)">Download</button>
+            <button class="print-button" onclick="printInvoice(<?php echo $index; ?>)">Print</button>
+        </div>
+
+        <!-- Adjusted bottom-left text gap -->
+        <div class="bottom-left-text">
+            <h2><strong>SYMPHONY</strong></h2> <br>For all your musical needs
         </div>
     </div>
-<?php endforeach; ?>
+    <?php   $index = $index + 1;
+            endforeach; ?>
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 <script src="https://kit.fontawesome.com/3376ff6b83.js" crossorigin="anonymous"></script>
-<script src="<?php echo URLROOT; ?>/js/sp-orders-.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script>
 $(document).ready(function () {
     $('#orderSearch').on('input', function () {
         const searchValue = $(this).val().toLowerCase().trim();
-        
-        $('.order-card').each(function () {
-            const orderId = $(this).find('.order-details strong:contains("Order ID:")').parent().text().toLowerCase();
-            const userName = $(this).find('.order-details strong:contains("User Name:")').parent().text().toLowerCase();
-            const productTitle = $(this).find('.order-details strong:contains("Product Title:")').parent().text().toLowerCase();
-            const status = $(this).find('.order-details strong:contains("Status:")').parent().text().toLowerCase();
 
-            const isVisible = orderId.includes(searchValue) || userName.includes(searchValue) || productTitle.includes(searchValue) || status.includes(searchValue);
-
-            if (isVisible) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
+        $('.invoice-card').each(function () {
+            let isVisible = false;
+            $(this).find('tbody').each(function () {
+                const textContent = $(this).text().toLowerCase();
+                if (textContent.includes(searchValue)) {
+                    isVisible = true; 
+                }
+            });
+            isVisible ? $(this).show() : $(this).hide();
         });
     });
 });
 
-</script>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://kit.fontawesome.com/3376ff6b83.js" crossorigin="anonymous"></script>
-<script src="<?php echo URLROOT; ?>/js/instrument.js"></script>
-<script>
-    function confirmAction(orderId, status) {
+function printInvoice(cardIndex) {
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+    const invoiceCard = $('.invoice-card').eq(cardIndex).clone();
+    $(iframe.contentDocument.body).html(invoiceCard);
+    const cssLink = '<link rel="stylesheet" type="text/css" href="<?php echo URLROOT; ?>/css/user-orders.css">';
+    $(iframe.contentDocument.head).append(cssLink);
+    setTimeout(() => {
+        iframe.contentWindow.print();
+        document.body.removeChild(iframe);
+    }, 1000);
+}
+function confirmAction(orderId, status) {
         var confirmationMessage = 'Are you sure you want to Cancel the order?';
         if (confirm(confirmationMessage)) {
             var url = '<?php echo URLROOT; ?>/users/cancelOrder/' + orderId;
             window.location.href = url;
         }
-    }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-<script>
-    // const cart = document.querySelector(".order-icon");
-    // Redirect();
-    // function Redirect() {
-    //     $.ajax({
-    //         method: 'GET',
-    //         url: 'http://localhost/symphony/serviceproviders/orderCount',
-    //         dataType: 'json',
-    //         success: function (response) {
-    //             console.log('count',response.Count);
-    //             displaydata(response.Count);
-    //         },
-    //         error: function (error) {
-    //             console.error('Error:', error);
-    //         }
-    //     });
-    // }
-    // function displaydata(count){
-    //     let text = "";
-    //     text += `<p class="badge" >`+count+`</p>`+
-    //                 `<a href="http://localhost/symphony/serviceproviders/orders">`+
-    //                     `<i class="fa-solid fa-truck-fast"></i>`+
-    //                 `</a>`;
-    //     cart.innerHTML=text;
-    // }
+}
 
+    
+function downloadPDF(cardIndex) {
+    const invoiceCard = $('.invoice-card-' + cardIndex).eq(cardIndex).clone();
+    
+    // Create a new jsPDF instance with A3 paper size
+    window.jsPDF = window.jspdf.jsPDF;
+    const pdf = new jsPDF({
+        unit: 'mm',
+        format: 'a3',  // Set the paper size to A3
+        orientation: 'portrait'
+    });
+
+    // Convert the cloned invoice card to HTML
+    const element = $(invoiceCard)[0];
+    
+    // Use html2pdf to generate a PDF from the HTML element
+    html2pdf(element, {
+        margin: 10,
+        filename: `Invoice_${cardIndex + 1}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a3', orientation: 'portrait' }
+    }).then(() => {
+        console.log('PDF downloaded');
+    });
+}
 </script>
+<script src="<?php echo URLROOT; ?>/js/instrument.js"></script>
 </body>
 </html>

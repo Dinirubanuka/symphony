@@ -365,6 +365,13 @@ class User
         }
     }
 
+    public function getCompleteOrders($user_id){
+        $this->db->query('SELECT * FROM orders WHERE user_id= :user_id');
+        $this->db->bind(':user_id', $user_id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
     public function getOrders($user_id){
         $this->db->query('SELECT * FROM suborder WHERE user_id= :user_id');
         $this->db->bind(':user_id', $user_id);
@@ -458,11 +465,11 @@ class User
     }
 
     public function placeOrderTotal($data_order){
-        $this->db->query('INSERT INTO orders (user_id, sorder_ids, total) VALUES(:user_id, :sorder_ids, :total)');
+        $this->db->query('INSERT INTO orders (user_id, sorder_id, total) VALUES(:user_id, :sorder_id, :total)');
     
         try {
             $this->db->bind(':user_id', $data_order['user_id']);
-            $this->db->bind(':sorder_ids', $data_order['sorder_id']);
+            $this->db->bind(':sorder_id', $data_order['sorder_id']);
             $this->db->bind(':total', $data_order['total']);
             // Execute
             if ($this->db->execute()) {

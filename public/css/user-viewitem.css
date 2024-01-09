@@ -363,6 +363,9 @@ body {
 
 .review-grid {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0 auto;
 }
 
 figure.snip1232 {

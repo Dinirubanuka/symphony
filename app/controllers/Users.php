@@ -534,28 +534,22 @@ class Users extends Controller
         $this->view('users/cart',$data);
     }
 
-    function compareOrderByStatus($a, $b) {
-        $statusOrder = [
-            'Pending' => 1,
-            'In-Progress' => 2,
-            'Upcoming' => 3,
-            'Completed' => 4,
-            'Rejected' => 5,
-            'Cancelled' => 6,
-        ];
-    
-        // Get the numeric value for each status
-        $statusA = $statusOrder[$a->status] ?? 0;
-        $statusB = $statusOrder[$b->status] ?? 0;
-    
-        // Compare based on the numeric order
-        return $statusA - $statusB;
+
+    public function getSuborderDetails($suborders, $suborderID) {
+        foreach ($suborders as $suborder) {
+            if ($suborder['sorder_id'] == $suborderID) {
+                return $suborder;
+            }
+        }
+        return null;
     }
 
     public function orders(){
         $orders = $this->userModel->getOrders($_SESSION['user_id']);
+        $completeOrders = $this->userModel->getCompleteOrders($_SESSION['user_id']);
         $order_objects = [];
         $today = strtotime(date("Y-m-d"));
+    
         foreach ($orders as $order) {
             $startDateTimestamp = strtotime($order->start_date);
             $endDateTimestamp = strtotime($order->end_date);
@@ -570,21 +564,43 @@ class Users extends Controller
             $product_data = json_decode(json_encode($this->userModel->getProductData($order->product_id)), true);
             $serviceprovider_data = json_decode(json_encode($this->userModel->getServiceProviderData($order->serviceprovider_id)), true);
             $order_data = json_decode(json_encode($order), true);
-            
             $order_data = array_merge($order_data, $user_data, $product_data, $serviceprovider_data); 
-        
-            $order_object = json_decode(json_encode($order_data));
-        
-            $order_objects[] = $order_object;
-            usort($order_objects,[$this,  'compareOrderByStatus']);
+            $order_objects[] = $order_data;
         }
-        
+    
+        $result = [];
+    
+        foreach ($completeOrders as $order) {
+            $orderDetails = $order;
+            $orderSuborderIDs = explode(',', $order->sorder_id);
+    
+            foreach ($orderSuborderIDs as $suborderID) {
+                $suborderDetails = $this->getSuborderDetails($order_objects, $suborderID);
+    
+                $orderIndex = array_search($orderDetails, array_column($result, 'order'));
+    
+                if ($orderIndex !== false) {
+                    // Order already exists, add the suborder to the existing order
+                    $result[$orderIndex]['suborders'][] = $suborderDetails;
+                } else {
+                    // Order doesn't exist, create a new entry
+                    $result[] = [
+                        'order' => $orderDetails,
+                        'suborders' => [$suborderDetails],
+                    ];
+                }
+            }
+        }
+        $user_data = json_decode(json_encode($this->userModel->view($order->user_id)), true);
         $data = [
-            'orders' => $order_objects
+            'orders' => $result,
+            'user_data' => $user_data
         ];
         
         $this->view('users/orders', $data);
     }
+    
+    
 
     public function placeOrder(){
         $cart = $this->userModel->cart($_SESSION['user_id']);
