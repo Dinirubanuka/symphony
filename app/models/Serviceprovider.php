@@ -58,21 +58,20 @@ class ServiceProvider
 
     }
     public function addStudio($data){
-        $this->db->query('INSERT INTO studio (created_by, name, rate, instrument, descriptionSounds, descriptionStudio, telephoneNumber, videoLink, photo_1, photo_2, photo_3, airCondition ) VALUES(:created_by, :name, :rate, :instrument, :descriptionSounds, :descriptionStudio, :telephoneNumber, :videoLink, :photo_1, :photo_2, :photo_3, :airCondition');
-
-        try {
-            $this->db->bind(':created_by', $data['created_by']);
+        try{
+            $this->db->query('INSERT INTO studio (created_by, name, rate, instrument, descriptionSounds, descriptionStudio, telephoneNumber, videoLink, photo_1, photo_2, photo_3, airCondition) VALUES (:created_by, :name, :rate, :instrument,:descriptionSounds, :descriptionStudio, :telephoneNumber, :videoLink, :photo_1, :photo_2, :photo_3, :airCondition)');
+            $this->db->bind(':created_by', $_SESSION['serviceprovider_id']);
             $this->db->bind(':name', $data['name']);
             $this->db->bind(':rate', $data['rate']);
+            $this->db->bind(':airCondition', $data['airCondition']);
             $this->db->bind(':instrument', $data['instrument']);
             $this->db->bind(':descriptionSounds', $data['descriptionSounds']);
             $this->db->bind(':descriptionStudio', $data['descriptionStudio']);
             $this->db->bind(':telephoneNumber', $data['telephoneNumber']);
+            $this->db->bind(':videoLink', $data['videoLink']);
             $this->db->bind(':photo_1', $data['photo_1']);
             $this->db->bind(':photo_2', $data['photo_2']);
             $this->db->bind(':photo_3', $data['photo_3']);
-            $this->db->bind(':videoLink', $data['videoLink']);
-            $this->db->bind(':airCondition', $data['airCondition']);
 
             // Execute
             if ($this->db->execute()) {
@@ -80,8 +79,8 @@ class ServiceProvider
             } else {
                 return false;
             }
-        } catch (PDOException $e) {
 
+        }catch (PDOException $e){
             die($e->getMessage());
         }
     }

@@ -10,7 +10,7 @@
 <div class="register">
     <div class="container">
         <p>Studio Registration</p>
-        <form action="<?php echo URLROOT; ?>/serviceproviders/studio" class="form" method="post"
+        <form action="<?php echo URLROOT; ?>/serviceproviders/addStudio" class="form" method="post"
               enctype="multipart/form-data">
             <div class="input-box">
                 <label>Studio name</label>
@@ -319,11 +319,13 @@
 <!--                        </div>-->
 <!--                    </div>-->
 <!--                </div>-->
-<!--            </div>     -->
-            <button id="submitBtn" onclick="submitForm()">Submit</button>
+<!--            </div>-->
+            <button id="submitBtn" class="submit" style="display: none" >Submit</button>
         </form>
+        <button id="submitBtn" onclick="submitForm()">Submit</button>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="<?php echo URLROOT;?>/js/sp-additem.js"></script>
 <script>
     function toggleOptions() {
@@ -336,16 +338,17 @@
         var selectedCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked);
 
         var selectedValues = selectedCheckboxes.map(checkbox => checkbox.value);
-        console.log(selectedValues);
-
-        // Send the data to the backend using AJAX
+        var instrumentList = selectedValues.join(' ');
+        console.log('selectedValues',selectedValues);
+        console.log('instrumentList',instrumentList);
         $.ajax({
-            url: 'http://localhost/symphony/serviceprovider/studioInstrument', // Replace with your actual backend endpoint
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ selectedValues: selectedValues }),
+            method: 'POST',
+            url: 'http://localhost/symphony/serviceproviders/studioInstrument',
+            content:'application/json',
+            data: JSON.stringify({ instruments: instrumentList }),
             success: function(response) {
                 console.log('Backend response:', response);
+                document.querySelector('.submit').click();
             },
             error: function(error) {
                 console.error('Error:', error);

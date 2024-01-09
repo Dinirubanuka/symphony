@@ -3,7 +3,6 @@
 class serviceproviders extends Controller
 {
     private $serviceProviderModel;
-    private $selectedValues = array();
 
     public function __construct()
     {
@@ -591,7 +590,8 @@ class serviceproviders extends Controller
         }
     }
 
-    public function addStudio(){
+    public function addStudio()
+    {
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -640,19 +640,20 @@ class serviceproviders extends Controller
                 $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
                 $bool = move_uploaded_file($tmp3_name, $img_upload_path);
             }
+
             // Init data
             $data = [
-                'name'=> trim($_POST['StudioName']),
-                'rate'=>trim($_POST['rate']),
-                'airCondition'=>trim($_POST['airCondition']),
-                'instrument'=>$this->selectedValues,
-                'descriptionSounds'=>trim($_POST['descriptionSounds']),
-                'descriptionStudio'=>trim($_POST['descriptionStudio']),
-                'telephoneNumber'=>trim($_POST['number']),
-                'videoLink'=>trim($_POST['video']),
-                'photo_1'=>trim($_POST['photo_1']),
-                'photo_2'=>trim($_POST['photo_2']),
-                'photo_3'=>trim($_POST['photo_3']),
+                'name' => trim($_POST['StudioName']),
+                'rate' => trim($_POST['rate']),
+                'airCondition' => trim($_POST['airCondition']),
+                'instrument'=>$_SESSION['instrumentList'],
+                'descriptionSounds' => trim($_POST['descriptionSounds']),
+                'descriptionStudio' => trim($_POST['descriptionStudio']),
+                'telephoneNumber' => trim($_POST['number']),
+                'videoLink' => trim($_POST['video']),
+                'photo_1' => $new_img1_name,
+                'photo_2' => $new_img2_name,
+                'photo_3' => $new_img3_name
             ];
 
             if (empty($data['name'])) {
@@ -677,32 +678,28 @@ class serviceproviders extends Controller
 
             if (empty($data['name_err']) && empty($data['rate_err']) && empty($data['descriptionSounds_err']) && empty($data['descriptionStudio_err']) && empty($data['telephoneNumber_err'])) {
 
-                // Register serviceprovider
                 if ($this->serviceProviderModel->addStudio($data)) {
-                    // flash('register_success', 'You are registered and can log in');
                     redirect('serviceproviders/studio');
                 } else {
                     die('Something went wrong');
                 }
             } else {
-                // Load view with errors
                 $this->view('serviceproviders/addStudio', $data);
             }
 
         } else {
-            // Init data
             $data = [
-                'name'=> '',
-                'rate'=>'',
-                'airCondition'=>'',
-                'instrument'=>$this->selectedValues,
-                'descriptionSounds'=>'',
-                'descriptionStudio'=>'',
-                'telephoneNumber'=>'',
-                'videoLink'=>'',
-                'photo_1'=>'',
-                'photo_2'=>'',
-                'photo_3'=>''
+                'name' => '',
+                'rate' => '',
+                'airCondition' => '',
+                'instrument' => '',
+                'descriptionSounds' => '',
+                'descriptionStudio' => '',
+                'telephoneNumber' => '',
+                'videoLink' => '',
+                'photo_1' => '',
+                'photo_2' => '',
+                'photo_3' => ''
             ];
 
             // Load view
@@ -710,17 +707,16 @@ class serviceproviders extends Controller
         }
     }
 
-    public function studioInstrument(){
+    public function studioInstrument()
+    {
         $data = file_get_contents("php://input");
-        $decodedData = json_decode($data, true);
-        if (isset($decodedData['selectedValues'])) {
-             $this->selectedValues = $decodedData['selectedValues'];
-//            global $selectedValues;
-            foreach ($this->selectedValues as $value) {
-                echo $value . "\n";
-            }
+        $requestData = json_decode($data, true);
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $requestData && isset($requestData['instruments'])) {
+            $_SESSION['instrumentList'] = $requestData['instruments'];
+            echo json_encode(['success' => 'request success', 'instruments' => $_SESSION['instrumentList']]);
         } else {
-            echo 'Error: No selectedValues key in the JSON data';
+            echo json_encode(['error' => 'Invalid data format']);
         }
     }
 
@@ -1221,27 +1217,36 @@ class serviceproviders extends Controller
         redirect('pages/index');
     }
 
-    public function Instrument(){
+    public function Instrument()
+    {
         $inventory = $this->serviceProviderModel->inventory($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
         ];
         $this->view('serviceproviders/inventory', $data);
     }
-    public function Studio(){
+
+    public function Studio()
+    {
         $inventory = $this->serviceProviderModel->studio($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
         ];
-            $this->view('serviceproviders/studio');
+        $this->view('serviceproviders/studio');
     }
-    public function Singer(){
+
+    public function Singer()
+    {
 
     }
-    public function Band(){
+
+    public function Band()
+    {
 
     }
-    public function Musicians(){
+
+    public function Musicians()
+    {
 
     }
 }
