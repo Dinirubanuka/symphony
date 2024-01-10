@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2024 at 05:10 PM
+-- Generation Time: Jan 10, 2024 at 08:35 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -46,6 +46,57 @@ INSERT INTO `administrators` (`admin_id`, `admin_name`, `admin_email`, `admin_co
 (2, 'admin03@gmail.com', 'admin03@gmail.com', 2147483647, '333333333333333', 'admin03@gmail.com', '$2y$10$bxkmDjVr50DKfrqQf2tEXeWRnnvP3WTgRVzXzXfkStDg4rA0m/F5C'),
 (3, 'admin04@gmail.com', 'admin04@gmail.com', 2147483647, '121212121212', 'admin04@gmail.com', '$2y$10$6UJ09vjR/p8YOJbq0lLMzufUnBps9iIYItVx4TqUuGEC6jvo0pNQS'),
 (4, 'admin05@gmail.com', 'admin05@gmail.com', 1234567890, 'admin05@gmail.c', 'admin05@gmail.com', '$2y$10$sOQxgV32c0sTDlLwgq6IB.ZogTav3f8oyjPAWVyt/Qkat9YC8UZkS');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `availability`
+--
+
+CREATE TABLE `availability` (
+  `entry_id` int(10) NOT NULL,
+  `date` date NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `qty` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `availability`
+--
+
+INSERT INTO `availability` (`entry_id`, `date`, `product_id`, `qty`) VALUES
+(254, '2024-01-17', 21, 3),
+(255, '2024-01-18', 21, 3),
+(256, '2024-01-19', 21, 3),
+(257, '2024-01-20', 21, 3),
+(258, '2024-01-21', 21, 3),
+(259, '2024-01-22', 21, 3),
+(260, '2024-01-23', 21, 3),
+(261, '2024-01-24', 21, 3),
+(262, '2024-01-25', 21, 3),
+(263, '2024-01-26', 21, 3),
+(264, '2024-01-27', 21, 3),
+(265, '2024-01-28', 21, 3),
+(266, '2024-01-29', 21, 3),
+(274, '2024-01-16', 17, 1),
+(275, '2024-01-17', 17, 1),
+(276, '2024-01-18', 17, 1),
+(277, '2024-01-19', 17, 1),
+(278, '2024-01-20', 17, 1),
+(279, '2024-01-21', 17, 1),
+(280, '2024-01-22', 17, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bookmarks`
+--
+
+CREATE TABLE `bookmarks` (
+  `bookmark_id` int(11) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -93,6 +144,30 @@ INSERT INTO `moderators` (`moderator_id`, `moderator_name`, `moderator_email`, `
 (4, 'moderator04@gmail.com', 'moderator04@gmail.com', 12121212, 'moderator04@gma', 'moderator04@gmail.com', '$2y$10$RoZ.MvwI4m7ItPCRFs1qDOYsEvjrGDFeie1Q7CnBmn3Gt750T8C2i', 'User Account Moderator'),
 (5, 'moderator05@gmail.com', 'moderator05@gmail.com', 1234567890, 'moderator05@gma', 'moderator05@gmail.com', '$2y$10$3bWEbemGAY5JZoRTYNc6BeLEaEFzzry9Er1Sa8WErV3J2GbG1BdMm', 'User Support Moderator'),
 (6, 'moderator06@gmail.com', 'moderator06@gmail.com', 1234567890, 'moderator06@gma', 'moderator06@gmail.com', '$2y$10$ifp/RMqF16m7T5R1WEK9qOdkafczxIE5y1V2GKsh66Hf91E2SoeDC', 'User Account Moderator');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `order_id` int(11) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `sorder_id` mediumtext NOT NULL,
+  `total` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `user_id`, `sorder_id`, `total`) VALUES
+(10, 18, '33', 28865),
+(11, 18, '34,35', 98480),
+(12, 18, '36', 8285),
+(13, 18, '37', 18628),
+(17, 18, '38', 8285);
 
 -- --------------------------------------------------------
 
@@ -205,6 +280,39 @@ INSERT INTO `serviceproviders` (`serviceprovider_id`, `business_name`, `business
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `suborder`
+--
+
+CREATE TABLE `suborder` (
+  `sorder_id` int(11) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `serviceprovider_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `qty` int(10) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `days` int(10) NOT NULL,
+  `total` int(10) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `avail` mediumtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `suborder`
+--
+
+INSERT INTO `suborder` (`sorder_id`, `user_id`, `serviceprovider_id`, `product_id`, `qty`, `start_date`, `end_date`, `days`, `total`, `status`, `avail`) VALUES
+(33, 18, 18, 23, 1, '2024-01-11', '2024-01-31', 21, 27300, 'Rejected', '199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219'),
+(34, 18, 19, 21, 2, '2024-01-18', '2024-01-23', 6, 5400, 'Cancelled', '220,221,222,223,224,225'),
+(35, 18, 18, 24, 2, '2024-01-11', '2024-01-31', 21, 88200, 'Cancelled', '220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246'),
+(36, 18, 14, 17, 1, '2024-01-17', '2024-01-23', 7, 7700, 'Cancelled', '247,248,249,250,251,252,253'),
+(37, 18, 19, 21, 3, '2024-01-17', '2024-01-29', 13, 17550, 'Upcoming', '254,255,256,257,258,259,260,261,262,263,264,265,266'),
+(38, 18, 14, 17, 1, '2024-01-16', '2024-01-22', 7, 7700, 'Cancelled', '267,268,269,270,271,272,273'),
+(39, 18, 14, 17, 1, '2024-01-16', '2024-01-22', 7, 7700, 'Pending', '274,275,276,277,278,279,280');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -240,6 +348,19 @@ ALTER TABLE `administrators`
   ADD PRIMARY KEY (`admin_id`);
 
 --
+-- Indexes for table `availability`
+--
+ALTER TABLE `availability`
+  ADD PRIMARY KEY (`entry_id`),
+  ADD KEY `availability_ibfk_1` (`product_id`);
+
+--
+-- Indexes for table `bookmarks`
+--
+ALTER TABLE `bookmarks`
+  ADD PRIMARY KEY (`bookmark_id`);
+
+--
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
@@ -252,6 +373,13 @@ ALTER TABLE `cart`
 --
 ALTER TABLE `moderators`
   ADD PRIMARY KEY (`moderator_id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`order_id`) USING BTREE,
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `products`
@@ -275,6 +403,15 @@ ALTER TABLE `serviceproviders`
   ADD PRIMARY KEY (`serviceprovider_id`);
 
 --
+-- Indexes for table `suborder`
+--
+ALTER TABLE `suborder`
+  ADD PRIMARY KEY (`sorder_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `serviceprovider_id` (`serviceprovider_id`),
+  ADD KEY `suborder_ibfk_1` (`product_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -291,6 +428,18 @@ ALTER TABLE `administrators`
   MODIFY `admin_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `availability`
+--
+ALTER TABLE `availability`
+  MODIFY `entry_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=281;
+
+--
+-- AUTO_INCREMENT for table `bookmarks`
+--
+ALTER TABLE `bookmarks`
+  MODIFY `bookmark_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
@@ -301,6 +450,12 @@ ALTER TABLE `cart`
 --
 ALTER TABLE `moderators`
   MODIFY `moderator_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -321,6 +476,12 @@ ALTER TABLE `serviceproviders`
   MODIFY `serviceprovider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `suborder`
+--
+ALTER TABLE `suborder`
+  MODIFY `sorder_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -331,11 +492,24 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `availability`
+--
+ALTER TABLE `availability`
+  ADD CONSTRAINT `availability_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `cart`
 --
 ALTER TABLE `cart`
   ADD CONSTRAINT `fk_product_cart` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_user_cart` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`sorder_ids`) REFERENCES `suborder` (`sorder_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `products`
@@ -349,6 +523,14 @@ ALTER TABLE `products`
 ALTER TABLE `reviews`
   ADD CONSTRAINT `fk_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `suborder`
+--
+ALTER TABLE `suborder`
+  ADD CONSTRAINT `suborder_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `suborder_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `suborder_ibfk_3` FOREIGN KEY (`serviceprovider_id`) REFERENCES `serviceproviders` (`serviceprovider_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
