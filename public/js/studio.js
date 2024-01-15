@@ -147,7 +147,7 @@ function displaydata(data) {
                 `</div>` +
                 `<div class="item-info">` +
                 `<h3>Name:` + item.Title + `</h3>` +
-                `<button href="" onclick="addItem(` + item.product_id + `)" style="color: orange">see more details</button>` +
+                `<button href="" onclick="addItem(` + item.product_id + `, '` + instrumentList + `')" style="color: orange">see more details</button>` +
                 <!-- User reviews go here -->
                 `<div class="user-review">` +
                 `<a href="http://" style="font-size: 0.9rem;">Read Customer Reviews</a>` +
@@ -166,7 +166,7 @@ function displaydata(data) {
                 `<div class="addItem">` +
                 `<a href="" onclick="addItem(` + item.product_id + `)">X</a>` +
                 `<p>Edit details</p>` +
-                `<form action="http://localhost/symphony/serviceproviders/editStudio/`+item.product_id+`" className="form" method="post" encType="multipart/form-data">` +
+                `<form action="http://localhost/symphony/serviceproviders/editStudio/` + item.product_id + `" className="form" method="post" encType="multipart/form-data">` +
                 `<div class="input-box">` +
                 `<label>Studio name</label>` +
                 `<input type="text" name="StudioName" value="` + item.Title + `">` +
@@ -186,7 +186,7 @@ function displaydata(data) {
                 `<div class="input-box input-box` + item.product_id + `">` +
                 `<label>Select the instruments:</label>` +
                 `<div class="dropdown2 dropdown` + item.product_id + `" id="` + item.product_id + `">` +
-                `<div class="select-box" onclick="toggleOptions(` + item.product_id +`, '`+instrumentList+`')">` +
+                `<div class="select-box" onclick="toggleOptions(` + item.product_id + `)">` +
                 `<label>Select instruments</label>` +
                 `<div class="arrow"></div>` +
                 `</div>` +
@@ -456,9 +456,9 @@ function displaydata(data) {
                 `</div>` +
                 `</div>` +
                 `</div>` +
-                `<button id="submitBtn" class="submit" style="display: none"></button>` +
+                `<button id="submitBtn" class="submit`+item.product_id+`" style="display: none"></button>` +
                 `</form>` +
-                `<button id="submitBtn" onClick="submitForm(`+item.product_id+`)">Submit</button>`+
+                `<button id="submitBtn" onClick="submitForm(` + item.product_id + `)">Submit</button>` +
                 `</div>` +
                 ` </div>`;
 
@@ -478,29 +478,42 @@ function submitForm(productId) {
 
     var selectedValues = selectedCheckboxes.map(checkbox => checkbox.value);
     var instrumentList = selectedValues.join(' ');
-    console.log('selectedValues',selectedValues);
-    console.log('instrumentList',instrumentList);
+    console.log('selectedValues', selectedValues);
+    console.log('instrumentList', instrumentList);
     $.ajax({
         method: 'POST',
         url: 'http://localhost/symphony/serviceproviders/studioInstrument',
-        content:'application/json',
-        data: JSON.stringify({ instruments: instrumentList }),
-        success: function(response) {
+        content: 'application/json',
+        data: JSON.stringify({instruments: instrumentList}),
+        success: function (response) {
             console.log('Backend response:', response);
-            document.querySelector('.submit').click();
+            document.querySelector('.submit'+productId).click();
         },
-        error: function(error) {
+        error: function (error) {
             console.error('Error:', error);
         }
     });
 }
 
-function toggleOptions(productId,instrumentArray) {
+function toggleOptions(productId, instrumentArray) {
     var optionsContainer = document.querySelector('.dropdown' + productId + ' .options');
     optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
 
     // var optionsContainer = document.querySelector('.input-box' + item.product_id + ' .dropdown2 .options');
-        // var optionsContainer = document.getElementById(item.product_id);
+    // var optionsContainer = document.getElementById(item.product_id);
+}
+
+// function toggleCategory(category) {
+//   $('#' + category).toggle();
+//   updateDisplayedData();
+// }
+
+
+//item details
+function addItem(productId,instrumentArray) {
+    var element1 = document.querySelector('.item-modal' + productId);
+    element1.classList.toggle('toggled');
+    var optionsContainer = document.querySelector('.dropdown' + productId + ' .options');
     if (optionsContainer) {
         optionsContainer.querySelectorAll('.dropdown' + productId + ' .options .option input[type="checkbox"]').forEach(function (checkbox) {
             var checkboxValue = checkbox.value.trim();
@@ -511,18 +524,6 @@ function toggleOptions(productId,instrumentArray) {
     } else {
         console.error('optionsContainer is null. Check your selector or HTML structure.');
     }
-}
-
-// function toggleCategory(category) {
-//   $('#' + category).toggle();
-//   updateDisplayedData();
-// }
-
-
-//item details
-function addItem(productId) {
-    var element1 = document.querySelector('.item-modal' + productId);
-    element1.classList.toggle('toggled');
 }
 
 // add photo
