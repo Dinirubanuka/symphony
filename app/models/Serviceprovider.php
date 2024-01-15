@@ -326,6 +326,17 @@ class ServiceProvider
             return false;
         }
     }
+    public function deleteStudio($product_id){
+        $this->db->query('DELETE FROM studio WHERE product_id = :product_id');
+        $this->db->bind(':product_id', $product_id);
+
+        // Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function inventory($created_by)
     {

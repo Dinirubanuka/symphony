@@ -883,6 +883,14 @@ class serviceproviders extends Controller
             redirect('serviceproviders/inventory');
         }
     }
+    public function deleteStudio($product_id){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->serviceProviderModel->deleteStudio($product_id);
+            redirect('serviceproviders/inventory');
+        } else {
+            redirect('serviceproviders/inventory');
+        }
+    }
 
     public function editconfirm()
     {
