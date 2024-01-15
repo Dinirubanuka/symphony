@@ -13,10 +13,13 @@
         <form action="<?php echo URLROOT; ?>/serviceproviders/addStudio" class="form" method="post"
               enctype="multipart/form-data">
             <div class="input-box">
-                <label>Studio name</label>
+                <div class="1">
+                    <label>Studio name</label><br>
+                    <span class="invalid-feedback"><?php echo $data['name_err']; ?></span>
+                </div>
                 <input type="text" name="StudioName"
-                       class="<?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>"
-                       value="<?php echo $data['title']; ?>">
+                       class="<?php echo (!empty($data['name_err'])) ? 'is-invalid' : ''; ?>"
+                       value="<?php echo $data['name']; ?>">
             </div>
             <div class="input-box">
                 <label>Air condition</label>
@@ -26,8 +29,11 @@
                 </select>
             </div>
             <div class="input-box">
-                <label>Rate</label>
-                <input type="number" name="rate"></input>
+                <div class="1">
+                    <label>Rate</label><br>
+                    <span class="invalid-feedback"><?php echo $data['rate_err']; ?></span>
+                </div>
+                <input type="number" name="rate" class="<?php echo (!empty($data['rate_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['rate']; ?>"></input>
             </div>
             <!--instrument-->
             <div class="input-box">
@@ -262,64 +268,71 @@
                 </div>
             </div>
             <div class="input-box">
-                <label>Description about Instrument & sounds</label>
-                <textarea name="descriptionSounds" id="" cols="20" rows="10"></textarea>
+                <div class="1">
+                    <label>Description about Instrument & sounds</label>
+                    <span class="invalid-feedback"><?php echo $data['descriptionSounds_err']; ?></span>
+                </div>
+                <textarea name="descriptionSounds" id="" cols="20" rows="10" class="<?php echo (!empty($data['descriptionSounds_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['descriptionSounds']; ?>"></textarea>
             </div>
             <div class="input-box">
-                <label>Description About the Studio</label>
-                <textarea name="descriptionStudio" id="" cols="20" rows="10"></textarea>
+                <div class="1">
+                    <label>Description About the Studio</label><br>
+                    <span class="invalid-feedback"><?php echo $data['descriptionStudio_err']; ?></span>
+                </div>
+                <textarea name="descriptionStudio" id="" cols="20" rows="10" class="<?php echo (!empty($data['descriptionStudio_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['descriptionStudio']; ?>"></textarea>
             </div>
             <div class="input-box">
-                <label>Telephone-Number</label>
+                <div class="1">
+                    <label>Telephone-Number</label><br>
+                    <span class="invalid-feedback"><?php echo $data['telephoneNumber_err']; ?></span>
+                </div>
                 <input type="text" name="number"
-                       class="<?php echo (!empty($data['business_name_err'])) ? 'is-invalid' : ''; ?>"
+                       class="<?php echo (!empty($data['telephoneNumber_err'])) ? 'is-invalid' : ''; ?>"
                        value="<?php echo $data['']; ?>">
-                <span class="invalid-feedback"><?php echo $data['business_name_err']; ?></span>
             </div>
             <div class="input-box">
                 <label>Video <br> (Add Embeded link)</label>
                 <input type="text" name="video"
-                       class="<?php echo (!empty($data['business_name_err'])) ? 'is-invalid' : ''; ?>"
-                       value="<?php echo $data['']; ?>">
+                       value="<?php echo $data['videoLink']; ?>">
             </div>
             <!--                photos-->
-<!--            <div class="photo_container">-->
-<!--                <div class="input-box">-->
-<!--                    <label style="font-weight: bold">Add up to 3 photos (Must be 3 photos)</label>-->
-<!--                </div>-->
-<!--                <div class="photo-table">-->
-<!--                    <div class="photo-outer">-->
-<!--                        <div class="photo-inner">-->
-<!--                            <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_1"-->
-<!--                                 onclick="triggerInput(1)">-->
-<!--                            <input type="file" id="photo_1" accept=".jpg, .jpeg, .png, .HEIC" name="photo_1"-->
-<!--                                   class="--><?php //echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?><!--"-->
-<!--                                   value="--><?php //echo $data['photo_1']; ?><!--"-->
-<!--                                   onchange="previewImage(this, 'previewPhoto_1')" required>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="photo-outer">-->
-<!--                        <div class="photo-inner">-->
-<!--                            <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_2"-->
-<!--                                 onclick="triggerInput(2)">-->
-<!--                            <input type="file" id="photo_2" accept=".jpg, .jpeg, .png, .HEIC" name="photo_2"-->
-<!--                                   class="--><?php //echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?><!--"-->
-<!--                                   value="--><?php //echo $data['photo_2']; ?><!--"-->
-<!--                                   onchange="previewImage(this, 'previewPhoto_2')" required>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="photo-outer">-->
-<!--                        <div class="photo-inner">-->
-<!--                            <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_3"-->
-<!--                                 onclick="triggerInput(3)">-->
-<!--                            <input type="file" id="photo_3" accept=".jpg, .jpeg, .png, .HEIC" name="photo_3"-->
-<!--                                   class="--><?php //echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?><!--"-->
-<!--                                   value="--><?php //echo $data['photo_3']; ?><!--"-->
-<!--                                   onchange="previewImage(this, 'previewPhoto_3')" required>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <div class="photo_container">
+                <div class="input-box">
+                    <label style="font-weight: bold">Add up to 3 photos (Must be 3 photos)</label>
+                </div>
+                <div class="photo-table">
+                    <div class="photo-outer">
+                        <div class="photo-inner">
+                            <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_1"
+                                 onclick="triggerInput(1)">
+                            <input type="file" id="photo_1" accept=".jpg, .jpeg, .png, .HEIC" name="photo_1"
+                                   class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>"
+                                   value="<?php echo $data['photo_1']; ?>"
+                                   onchange="previewImage(this, 'previewPhoto_1')" required>
+                        </div>
+                    </div>
+                    <div class="photo-outer">
+                        <div class="photo-inner">
+                            <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_2"
+                                 onclick="triggerInput(2)">
+                            <input type="file" id="photo_2" accept=".jpg, .jpeg, .png, .HEIC" name="photo_2"
+                                   class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>"
+                                   value="<?php echo $data['photo_2']; ?>"
+                                   onchange="previewImage(this, 'previewPhoto_2')" required>
+                        </div>
+                    </div>
+                    <div class="photo-outer">
+                        <div class="photo-inner">
+                            <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_3"
+                                 onclick="triggerInput(3)">
+                            <input type="file" id="photo_3" accept=".jpg, .jpeg, .png, .HEIC" name="photo_3"
+                                   class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>"
+                                   value="<?php echo $data['photo_3']; ?>"
+                                   onchange="previewImage(this, 'previewPhoto_3')" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <button id="submitBtn" class="submit" style="display: none" >Submit</button>
         </form>
         <button id="submitBtn" onclick="submitForm()">Submit</button>

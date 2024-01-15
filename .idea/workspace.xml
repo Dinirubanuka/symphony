@@ -9,6 +9,11 @@
       <change beforePath="$PROJECT_DIR$/app/controllers/Serviceproviders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Serviceproviders.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/Serviceprovider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Serviceprovider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/serviceproviders/addStudio.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/serviceproviders/addStudio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/serviceproviders/studio.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/serviceproviders/studio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/sp-inventory.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/sp-inventory.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/studio.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/studio.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/sp-inventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/sp-inventory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/studio.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/studio.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +122,10 @@
       <workItem from="1702874957066" duration="15380000" />
       <workItem from="1704604308807" duration="2014000" />
       <workItem from="1704609398490" duration="20182000" />
-      <workItem from="1704761087177" duration="18321000" />
+      <workItem from="1704761087177" duration="38078000" />
+      <workItem from="1704935046683" duration="3104000" />
+      <workItem from="1705071912203" duration="10886000" />
+      <workItem from="1705300791960" duration="11352000" />
     </task>
     <servers />
   </component>
@@ -143,18 +151,27 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/public/js/sp-inventory.js</url>
-          <line>707</line>
+          <line>711</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/public/js/sp-inventory.js</url>
-          <line>721</line>
+          <line>725</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/controllers/Serviceproviders.php</url>
-          <line>225</line>
+          <line>237</line>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/models/Serviceprovider.php</url>
+          <line>158</line>
+          <properties>
+            <option name="className" value="\ServiceProvider" />
+            <option name="methodName" value="editItem" />
+          </properties>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

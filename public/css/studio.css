@@ -155,4 +155,11 @@ html {
 .option input[type="checkbox"] {
     margin-right: 5px; /* Adjust the value as needed for the desired space */
 }
-
+.form .invalid-feedback{
+    color: red;
+}
+.is-invalid {
+    border-color: #dc3545; /* Red border color */
+    background-color: #f8d7da; /* Light red background color */
+    color: #dc3545; /* Red text color */
+}

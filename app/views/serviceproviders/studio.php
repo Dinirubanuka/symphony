@@ -13,58 +13,16 @@
 <div class="upperCategory">
     <div class="categories">
         <div class="category">
-            <div class="category-name" onclick="toggleCategory('stringInstruments')">String Instruments</div>
-            <ul class="equipment-list" id="stringInstruments">
-                <li class="equipment-item"><input type="checkbox"> Electric Guitars</li>
-                <li class="equipment-item"><input type="checkbox"> Acoustic Guitars</li>
-                <li class="equipment-item"><input type="checkbox"> Violins</li>
-                <li class="equipment-item"><input type="checkbox"> Cellos</li>
-                <li class="equipment-item"><input type="checkbox"> Violas</li>
+            <div class="category-name" onclick="toggleCategory('Location')">Location</div>
+            <ul class="equipment-list" id="location">
+
             </ul>
         </div>
         <div class="category">
-            <div class="category-name" onclick="toggleCategory('woodwindInstruments')">Woodwind Instruments</div>
-            <ul class="equipment-list" id="woodwindInstruments">
-                <li class="equipment-item"><input type="checkbox"> Flute</li>
-                <li class="equipment-item"><input type="checkbox"> Clarinet</li>
-                <li class="equipment-item"><input type="checkbox"> Saxophone</li>
-            </ul>
-        </div>
-        <div class="category">
-            <div class="category-name" onclick="toggleCategory('brassInstruments')">Brass Instruments</div>
-            <ul class="equipment-list" id="brassInstruments">
-                <li class="equipment-item"><input type="checkbox"> Trumpet</li>
-                <li class="equipment-item"><input type="checkbox"> Trombone</li>
-                <li class="equipment-item"><input type="checkbox"> French Horn</li>
-            </ul>
-        </div>
-        <div class="category">
-            <div class="category-name" onclick="toggleCategory('percussionInstruments')">Percussion Instruments</div>
-            <ul class="equipment-list" id="percussionInstruments">
-                <li class="equipment-item"><input type="checkbox"> Drums</li>
-                <li class="equipment-item"><input type="checkbox"> Cymbals</li>
-            </ul>
-        </div>
-        <div class="category">
-            <div class="category-name" onclick="toggleCategory('keyboardInstruments')">Keyboard Instruments</div>
-            <ul class="equipment-list" id="keyboardInstruments">
-                <li class="equipment-item"><input type="checkbox"> Piano</li>
-                <li class="equipment-item"><input type="checkbox"> Organ</li>
-            </ul>
-        </div>
-        <div class="category">
-            <div class="category-name" onclick="toggleCategory('audioInstruments')">Audio</div>
-            <ul class="equipment-list" id="audioInstruments">
-                <li class="equipment-item"><input type="checkbox"> Headphones</li>
-                <li class="equipment-item"><input type="checkbox"> Receivers</li>
-                <li class="equipment-item"><input type="checkbox"> Amplifiers</li>
-                <li class="equipment-item"><input type="checkbox"> Speakers</li>
-                <li class="equipment-item"><input type="checkbox"> Subwoofers</li>
-                <li class="equipment-item"><input type="checkbox"> Tape Deks</li>
-                <li class="equipment-item"><input type="checkbox"> Truntables</li>
-                <li class="equipment-item"><input type="checkbox"> Microphones</li>
-                <li class="equipment-item"><input type="checkbox"> Mixers</li>
-                <li class="equipment-item"><input type="checkbox"> Recordings</li>
+            <div class="category-name" onclick="toggleCategory('AirCondition')">Air Condition</div>
+            <ul class="equipment-list" id="AirCondition">
+                <li class="equipment-item"><input type="checkbox"> Yes</li>
+                <li class="equipment-item"><input type="checkbox"> No</li>
             </ul>
         </div>
         <div class="category">
@@ -99,5 +57,18 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://kit.fontawesome.com/3376ff6b83.js" crossorigin="anonymous"></script>
 <script src="<?php echo URLROOT; ?>/js/studio.js"></script>
+<script>
+    var districts = ["Colombo", "Gampaha", "Kandy", "Jaffna", "Matara", "Nuwara Eliya", "Galle" , "Matara", "Hambanthota","Jaffna","Kilinochchi", "Mannar","Mullaitivu","Vavuniya","Batticola","Ampara","Trincomalee","Kurunegala","Puttalam","Anuradhapura","Polonnaruwa","Badulla","Monaragala","Ratnapura","Kegalle"];
+
+    var equipmentList = document.getElementById("location");
+
+    for (var i = 0; i < districts.length; i++) {
+        var district = districts[i];
+        var liElement = document.createElement("li");
+        liElement.className = "equipment-item";
+        liElement.innerHTML = '<input type="checkbox"> ' + district;
+        equipmentList.appendChild(liElement);
+    }
+</script>
 </body>
 </html>
