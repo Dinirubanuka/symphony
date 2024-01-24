@@ -659,6 +659,7 @@ class serviceproviders extends Controller
                 'rate' => trim($_POST['rate']),
                 'airCondition' => trim($_POST['airCondition']),
                 'instrument'=>$_SESSION['instrumentList'],
+                'location' => $_SESSION['locationList'],
                 'descriptionSounds' => trim($_POST['descriptionSounds']),
                 'descriptionStudio' => trim($_POST['descriptionStudio']),
                 'telephoneNumber' => trim($_POST['number']),
@@ -868,6 +869,7 @@ class serviceproviders extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && $requestData && isset($requestData['instruments'])) {
             $_SESSION['instrumentList'] = $requestData['instruments'];
+            $_SESSION['locationList'] = $requestData['location'];
             echo json_encode(['success' => 'request success', 'instruments' => $_SESSION['instrumentList']]);
         } else {
             echo json_encode(['error' => 'Invalid data format']);

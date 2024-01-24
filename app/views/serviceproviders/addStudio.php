@@ -35,15 +35,28 @@
                 </div>
                 <input type="number" name="rate" class="<?php echo (!empty($data['rate_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['rate']; ?>"></input>
             </div>
+<!--            locations-->
+            <div class="input-box">
+                <label>Select the Location:</label>
+                <div class="dropdown Location" id="location">
+                    <div class="select-box" onclick="toggleOptions('Location')">
+                        <label>Select Location</label>
+                        <div class="arrow"></div>
+                    </div>
+                    <div class="options optionsLocation">
+
+                    </div>
+                </div>
+            </div>
             <!--instrument-->
             <div class="input-box">
                 <label>Select the instruments:</label>
-                <div class="dropdown">
-                    <div class="select-box" onclick="toggleOptions()">
+                <div class="dropdown Instrument">
+                    <div class="select-box" onclick="toggleOptions('Instrument')">
                         <label>Select instruments</label>
                         <div class="arrow"></div>
                     </div>
-                    <div class="options">
+                    <div class="options optionsInstrument">
                         <div class="option">
                             <input type="checkbox" id="" name="Accordion" value="Accordion">
                             Accordion
@@ -341,24 +354,57 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="<?php echo URLROOT;?>/js/sp-additem.js"></script>
 <script>
-    function toggleOptions() {
-        var optionsContainer = document.querySelector('.dropdown .options');
-        optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
+    var districts = ["Colombo", "Gampaha", "Kandy", "Jaffna", "Matara", "Nuwara Eliya", "Galle" , "Matara", "Hambanthota","Jaffna","Kilinochchi", "Mannar","Mullaitivu","Vavuniya","Batticola","Ampara","Trincomalee","Kurunegala","Puttalam","Anuradhapura","Polonnaruwa","Badulla","Monaragala","Ratnapura","Kegalle"];
+
+    var optionsContainer = document.querySelector('.optionsLocation');
+
+    for (var i = 0; i < districts.length; i++) {
+        var district = districts[i];
+        var liElement = document.createElement("div");
+        liElement.classList.add('option');
+
+        var checkboxInput = document.createElement('input');
+        checkboxInput.type = 'checkbox';
+        checkboxInput.name = district;
+        checkboxInput.value = district;
+
+        var labelText = document.createTextNode(district);
+
+        liElement.appendChild(checkboxInput);
+        liElement.appendChild(labelText);
+
+        optionsContainer.appendChild(liElement);
+    }
+
+    function toggleOptions(pending) {
+        if (pending === 'Instrument'){
+            var optionsContainer = document.querySelector('.Instrument .optionsInstrument');
+            optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
+        }else{
+            var optionsContainer = document.querySelector('.Location .optionsLocation');
+            optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
+        }
+
     }
     function submitForm() {
-        var checkboxes = document.querySelectorAll('.options input[type="checkbox"]');
+        var checkboxesInstrument = document.querySelectorAll('.Instrument .optionsInstrument input[type="checkbox"]');
+        var checkboxesLocation = document.querySelectorAll('.Location .optionsLocation input[type="checkbox"]');
 
-        var selectedCheckboxes = Array.from(checkboxes).filter(checkbox => checkbox.checked);
+        var selectedCheckboxes = Array.from(checkboxesInstrument).filter(checkbox => checkbox.checked);
+        var selectedLocations = Array.from(checkboxesLocation).filter(checkbox => checkbox.checked);
 
         var selectedValues = selectedCheckboxes.map(checkbox => checkbox.value);
+        var locationValues = selectedLocations.map(checkbox => checkbox.value);
+
+        var locationList = locationValues.join(' ');
         var instrumentList = selectedValues.join(' ');
-        console.log('selectedValues',selectedValues);
+        console.log('locationList',locationList);
         console.log('instrumentList',instrumentList);
         $.ajax({
             method: 'POST',
             url: 'http://localhost/symphony/serviceproviders/studioInstrument',
             content:'application/json',
-            data: JSON.stringify({ instruments: instrumentList }),
+            data: JSON.stringify({ instruments: instrumentList , location:locationList }),
             success: function(response) {
                 console.log('Backend response:', response);
                 document.querySelector('.submit').click();

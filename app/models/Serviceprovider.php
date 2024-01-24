@@ -59,9 +59,10 @@ class ServiceProvider
     }
     public function addStudio($data){
         try{
-            $this->db->query('INSERT INTO studio (created_by, Title, instrument, descriptionSounds, descriptionStudio, telephoneNumber, videoLink, photo_1, photo_2, photo_3, airCondition, unit_price) VALUES (:created_by, :name, :instrument,:descriptionSounds, :descriptionStudio, :telephoneNumber, :videoLink, :photo_1, :photo_2, :photo_3, :airCondition, :unit_price)');
+            $this->db->query('INSERT INTO studio (created_by, Title, instrument, descriptionSounds, descriptionStudio, location, telephoneNumber, videoLink, photo_1, photo_2, photo_3, airCondition, unit_price) VALUES (:created_by, :name, :instrument,:descriptionSounds, :descriptionStudio, :location, :telephoneNumber, :videoLink, :photo_1, :photo_2, :photo_3, :airCondition, :unit_price)');
             $this->db->bind(':created_by', $_SESSION['serviceprovider_id']);
             $this->db->bind(':name', $data['name']);
+            $this->db->bind(':location',$data['location']);
             $this->db->bind(':unit_price', $data['rate']);
             $this->db->bind(':airCondition', $data['airCondition']);
             $this->db->bind(':instrument', $data['instrument']);

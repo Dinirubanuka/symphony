@@ -182,15 +182,129 @@ function displaydata(data) {
                 `<label>Rate</label>` +
                 `<input type="number" name="rate" value="` + item.unit_price + `"></input>` +
                 `</div>` +
+                // location
+                `<div class="input-box input-box` + item.product_id + `">` +
+                `<label>Select the Location:</label>` +
+                `<div class="dropdown2 dropdown` + item.product_id + `" id="Location` + item.product_id + `">` +
+                `<div class="select-box" onclick="toggleOptions('Location`+item.product_id+`',`+item.product_id+`)">` +
+                `<label>Select Location</label>` +
+                `<div class="arrow"></div>` +
+                `</div>` +
+                `<div class="options optionsLocation`+item.product_id+`">` +
+                // `<div class="input-box input-box`+ item.product_id +`">`+
+                //     `<label>Select the Location:</label>`+
+                //     `<div class="dropdown2 Location" id="location">`+
+                //         `<div class="select-box" onClick="toggleOptions('Location`+item.product_id+`',`+item.product_id+`)">`+
+                //             `<label>Select Location</label>`+
+                //             `<div class="arrow"></div>`+
+                //         `</div>`+
+                //         `<div className="options optionsLocation`+item.product_id+`">`+
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Colombo" value="Colombo">` +
+                `Colombo` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Gampaha" value="Gampaha">` +
+                `Gampaha` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Kandy" value="Kandy">` +
+                `Kandy` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Matara" value="Matara">` +
+                `Matara` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="NuwaraEliya" value="NuwaraEliya">` +
+                `Nuwara Eliya` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Galle" value="Galle">` +
+                `Galle` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Matara" value="Matara">` +
+                `Matara` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Hambanthota" value="Hambanthota">` +
+                `Hambanthota` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Jaffna" value="Jaffna">` +
+                `Jaffna` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Kilinochchi" value="Kilinochchi">` +
+                `Kilinochchi` +
+                `</div>` +`<div class="option">` +
+                `<input type="checkbox" id="" name="Mannar" value="Mannar">` +
+                `Mannar` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Mullaitivu" value="Mullaitivu">` +
+                `Mullaitivu` +
+                `</div>` +`<div class="option">` +
+                `<input type="checkbox" id="" name="Vavuniya" value="Vavuniya">` +
+                `Vavuniya` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Batticola" value="Batticola">` +
+                `Batticola` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Ampara" value="Ampara">` +
+                `Ampara` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Trincomalee" value="Trincomalee">` +
+                `Trincomalee` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Kurunegala" value="Kurunegala">` +
+                `Kurunegala` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Puttalam" value="Puttalam">` +
+                `Puttalam` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Anuradhapura" value="Trincomalee">` +
+                `Trincomalee` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Polonnaruwa" value="Kurunegala">` +
+                `Kurunegala` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Badulla" value="Badulla">` +
+                `Badulla` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Monaragala" value="Monaragala">` +
+                `Monaragala` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Ratnapura" value="Ratnapura">` +
+                `Ratnapura` +
+                `</div>` +
+                `<div class="option">` +
+                `<input type="checkbox" id="" name="Kegalle" value="Kegalle">` +
+                `Kegalle` +
+                `</div>` +
+                        `</div>`+
+                    `</div>`+
+                `</div>`+
                 <!--instrument-->
                 `<div class="input-box input-box` + item.product_id + `">` +
                 `<label>Select the instruments:</label>` +
-                `<div class="dropdown2 dropdown` + item.product_id + `" id="` + item.product_id + `">` +
-                `<div class="select-box" onclick="toggleOptions(` + item.product_id + `)">` +
-                `<label>Select instruments</label>` +
+                `<div class="dropdown2 dropdown` + item.product_id + `" id="Instrument` + item.product_id + `">` +
+                `<div class="select-box" onclick="toggleOptions('Instrument`+item.product_id+`',`+item.product_id+`)">` +
+                `<label>instruments</label>` +
                 `<div class="arrow"></div>` +
                 `</div>` +
-                `<div class="options">` +
+                `<div class="options optionsInstrument`+item.product_id+`">` +
                 `<div class="option">` +
                 `<input type="checkbox" id="" name="Accordion" value="Accordion">` +
                 `Accordion` +
@@ -495,25 +609,24 @@ function submitForm(productId) {
     });
 }
 
-function toggleOptions(productId, instrumentArray) {
-    var optionsContainer = document.querySelector('.dropdown' + productId + ' .options');
-    optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
-
-    // var optionsContainer = document.querySelector('.input-box' + item.product_id + ' .dropdown2 .options');
-    // var optionsContainer = document.getElementById(item.product_id);
+function toggleOptions(pending,productId) {
+    if (pending === 'Instrument'+productId){
+        var optionsContainer = document.querySelector('.optionsInstrument'+productId);
+        optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
+    }else{
+        var optionsContainer = document.querySelector('.optionsLocation'+productId);
+        optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
+    }
 }
-
-// function toggleCategory(category) {
-//   $('#' + category).toggle();
-//   updateDisplayedData();
-// }
-
 
 //item details
 function addItem(productId,instrumentArray) {
     var element1 = document.querySelector('.item-modal' + productId);
     element1.classList.toggle('toggled');
-    var optionsContainer = document.querySelector('.dropdown' + productId + ' .options');
+
+    //view selected instruments
+    // var optionsContainer = document.querySelector('.input-box .dropdown2 .Instrument .dropdown' + productId + ' .options');
+    var optionsContainer = document.getElementById('Instrument'+productId);
     if (optionsContainer) {
         optionsContainer.querySelectorAll('.dropdown' + productId + ' .options .option input[type="checkbox"]').forEach(function (checkbox) {
             var checkboxValue = checkbox.value.trim();
@@ -524,6 +637,28 @@ function addItem(productId,instrumentArray) {
     } else {
         console.error('optionsContainer is null. Check your selector or HTML structure.');
     }
+    // //add districts
+    // var districts = ["Colombo", "Gampaha", "Kandy", "Jaffna", "Matara", "Nuwara Eliya", "Galle", "Matara", "Hambanthota", "Kilinochchi", "Mannar", "Mullaitivu", "Vavuniya", "Batticola", "Ampara", "Trincomalee", "Kurunegala", "Puttalam", "Anuradhapura", "Polonnaruwa", "Badulla", "Monaragala", "Ratnapura", "Kegalle"];
+    //
+    // var optionsLoc = document.querySelector('.optionsLocation' + productId);
+    //
+    // for (var i = 0; i < districts.length; i++) {
+    //     var district = districts[i];
+    //     var liElement = document.createElement("div");
+    //     liElement.classList.add('option');
+    //
+    //     var checkboxInput = document.createElement('input');
+    //     checkboxInput.type = 'checkbox';
+    //     checkboxInput.name = district;
+    //     checkboxInput.value = district;
+    //
+    //     var labelText = document.createTextNode(district);
+    //
+    //     liElement.appendChild(checkboxInput);
+    //     liElement.appendChild(labelText);
+    //
+    //     optionsLoc.appendChild(liElement);
+    // }
 }
 
 // add photo
@@ -546,30 +681,26 @@ function previewImage(input, imgId) {
 }
 
 //search
-//     document.getElementById("search-item").addEventListener("keyup", search);
+    document.getElementById("search-item").addEventListener("keyup", search);
 
-// function search() {
-//     const searchBox = document.getElementById("search-item").value.toUpperCase();
-//     // const storeItems = document.getElementById("");
-//     const products = document.querySelectorAll(".item-container");
-//
-//
-//     products.forEach(product => {
-//         const titleElement = product.querySelector("h3");
-//         const brand = product.querySelector("p:nth-child(2)");
-//         const model = product.querySelector("p:nth-child(3)");
-//
-//         if (titleElement || brand || model) {
-//             const textValue = titleElement.textContent || titleElement.innerHTML;
-//             const brandValue = brand.textContent || brand.innerHTML;
-//             const modelValue = model.textContent || model.innerHTML;
-//
-//             if (textValue.toUpperCase().indexOf(searchBox) > -1 || brandValue.toUpperCase().indexOf(searchBox) > -1 || modelValue.toUpperCase().indexOf(searchBox) > -1) {
-//                 product.style.display = "";
-//             } else {
-//                 product.style.display = "none";
-//             }
-//         }
-//     });
-// }
+function search() {
+    const searchBox = document.getElementById("search-item").value.toUpperCase();
+    // const storeItems = document.getElementById("");
+    const products = document.querySelectorAll(".item-container");
+
+
+    products.forEach(product => {
+        const titleElement = product.querySelector("h3");
+
+        if (titleElement) {
+            const textValue = titleElement.textContent || titleElement.innerHTML;
+
+            if (textValue.toUpperCase().indexOf(searchBox) > -1 ) {
+                product.style.display = "";
+            } else {
+                product.style.display = "none";
+            }
+        }
+    });
+}
 
