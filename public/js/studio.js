@@ -125,6 +125,8 @@ function displaydata(data) {
             var instrumentList = item.instrument;
             console.log('instrument list', instrumentList);
             var instrumentArray = instrumentList.split(' ');
+            var locationList = item.location.split(' ');
+            console.log('locationList',locationList);
             console.log('instrumentArray', instrumentArray);
 
             console.log('Product_id:', item.product_id);
@@ -147,7 +149,7 @@ function displaydata(data) {
                 `</div>` +
                 `<div class="item-info">` +
                 `<h3>Name:` + item.Title + `</h3>` +
-                `<button href="" onclick="addItem(` + item.product_id + `, '` + instrumentList + `')" style="color: orange">see more details</button>` +
+                `<button href="" onclick="addItem(` + item.product_id + `, '` + instrumentList + `','`+locationList+`')" style="color: orange">see more details</button>` +
                 <!-- User reviews go here -->
                 `<div class="user-review">` +
                 `<a href="http://" style="font-size: 0.9rem;">Read Customer Reviews</a>` +
@@ -191,14 +193,6 @@ function displaydata(data) {
                 `<div class="arrow"></div>` +
                 `</div>` +
                 `<div class="options optionsLocation`+item.product_id+`">` +
-                // `<div class="input-box input-box`+ item.product_id +`">`+
-                //     `<label>Select the Location:</label>`+
-                //     `<div class="dropdown2 Location" id="location">`+
-                //         `<div class="select-box" onClick="toggleOptions('Location`+item.product_id+`',`+item.product_id+`)">`+
-                //             `<label>Select Location</label>`+
-                //             `<div class="arrow"></div>`+
-                //         `</div>`+
-                //         `<div className="options optionsLocation`+item.product_id+`">`+
                 `<div class="option">` +
                 `<input type="checkbox" id="" name="Colombo" value="Colombo">` +
                 `Colombo` +
@@ -620,12 +614,11 @@ function toggleOptions(pending,productId) {
 }
 
 //item details
-function addItem(productId,instrumentArray) {
+function addItem(productId,instrumentArray,LocationArray) {
     var element1 = document.querySelector('.item-modal' + productId);
     element1.classList.toggle('toggled');
 
     //view selected instruments
-    // var optionsContainer = document.querySelector('.input-box .dropdown2 .Instrument .dropdown' + productId + ' .options');
     var optionsContainer = document.getElementById('Instrument'+productId);
     if (optionsContainer) {
         optionsContainer.querySelectorAll('.dropdown' + productId + ' .options .option input[type="checkbox"]').forEach(function (checkbox) {
@@ -637,28 +630,19 @@ function addItem(productId,instrumentArray) {
     } else {
         console.error('optionsContainer is null. Check your selector or HTML structure.');
     }
-    // //add districts
-    // var districts = ["Colombo", "Gampaha", "Kandy", "Jaffna", "Matara", "Nuwara Eliya", "Galle", "Matara", "Hambanthota", "Kilinochchi", "Mannar", "Mullaitivu", "Vavuniya", "Batticola", "Ampara", "Trincomalee", "Kurunegala", "Puttalam", "Anuradhapura", "Polonnaruwa", "Badulla", "Monaragala", "Ratnapura", "Kegalle"];
-    //
-    // var optionsLoc = document.querySelector('.optionsLocation' + productId);
-    //
-    // for (var i = 0; i < districts.length; i++) {
-    //     var district = districts[i];
-    //     var liElement = document.createElement("div");
-    //     liElement.classList.add('option');
-    //
-    //     var checkboxInput = document.createElement('input');
-    //     checkboxInput.type = 'checkbox';
-    //     checkboxInput.name = district;
-    //     checkboxInput.value = district;
-    //
-    //     var labelText = document.createTextNode(district);
-    //
-    //     liElement.appendChild(checkboxInput);
-    //     liElement.appendChild(labelText);
-    //
-    //     optionsLoc.appendChild(liElement);
-    // }
+
+    //view selected locations
+    var optionsContainer = document.getElementById('Location'+productId);
+    if (optionsContainer) {
+        optionsContainer.querySelectorAll('.dropdown' + productId + ' .options .option input[type="checkbox"]').forEach(function (checkbox) {
+            var checkboxValue = checkbox.value.trim();
+            if (LocationArray.includes(checkboxValue)) {
+                checkbox.checked = true;
+            }
+        });
+    } else {
+        console.error('optionsContainer is null. Check your selector or HTML structure.');
+    }
 }
 
 // add photo
