@@ -688,3 +688,25 @@ function search() {
     });
 }
 
+// location sort
+function updateDisplayedData() {
+    var selectedCategories = $('.equipment-list input:checked').map(function () {
+        return $(this).parent().text().trim();
+    }).get();
+
+    var filteredData;
+
+    if (selectedCategories.length === 0) {
+        filteredData = JSON.parse(JSON.stringify(Orgdata));
+    } else {
+        filteredData = JSON.parse(JSON.stringify(Orgdata)).filter(function (item) {
+            return selectedCategories.some(function (selectedCategory) {
+                console.log(item.category);
+                return item.location.includes(selectedCategory);
+            });
+        });
+    }
+    displaydata(filteredData);
+    console.log('filteredData',filteredData);
+}
+

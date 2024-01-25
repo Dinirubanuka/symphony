@@ -14,7 +14,7 @@
     <div class="categories">
         <div class="category">
             <div class="category-name" onclick="toggleCategory('Location')">Location</div>
-            <ul class="equipment-list" id="location">
+            <ul class="equipment-list" id="location" onchange="updateDisplayedData()">
 
             </ul>
         </div>
