@@ -91,6 +91,7 @@ function Redirect() {
             console.log('response', response);
             displaydata($data);
             console.log('method');
+            console.log('org' , Orgdata);
         },
         error: function (error) {
             console.error('Error:', error);
@@ -138,7 +139,7 @@ function displaydata(data) {
             console.log('Photo 3:', item.photo_3);
             console.log('name:', item.Title);
             console.log('instrument:', item.instrument);
-            console.log('rate:', item.rate);
+            console.log('rate:', item.unit_price);
             console.log('telephonenumber:', item.telephoneNumber);
             console.log('videoLink:', item.videoLink);
             console.log('------------------------');
@@ -149,7 +150,7 @@ function displaydata(data) {
                 `</div>` +
                 `<div class="item-info">` +
                 `<h3>Name:` + item.Title + `</h3>` +
-                `<button href="" onclick="addItem(` + item.product_id + `, '` + instrumentList + `','` + locationList + `')" style="color: orange">see more details</button>` +
+                `<button href="" onclick="addItem(` + item.product_id + `, '` + instrumentList + `','` + locationList + `' , '`+ item.airCondition +`')" style="color: orange">see more details</button>` +
                 <!-- User reviews go here -->
                 `<div class="user-review">` +
                 `<a href="http://" style="font-size: 0.9rem;">Read Customer Reviews</a>` +
@@ -175,7 +176,7 @@ function displaydata(data) {
                 `</div>` +
                 `<div class="input-box">` +
                 `<label>Air condition</label>` +
-                `<select class="airCondition" name="airCondition">` +
+                `<select class="airCondition" name="airCondition" id = "airCondition" >` +
                 `<option value="yes">yes</option>` +
                 `<option value="no">no</option>` +
                 `</select>` +
@@ -579,6 +580,7 @@ function displaydata(data) {
     }
 }
 
+
 function submitForm(productId) {
     var checkboxes = document.querySelectorAll('.dropdown' + productId + ' .options .option input[type="checkbox"]');
 
@@ -614,7 +616,7 @@ function toggleOptions(pending, productId) {
 }
 
 //item details
-function addItem(productId, instrumentArray, LocationArray) {
+function addItem(productId, instrumentArray, LocationArray, airCondtion) {
     var element1 = document.querySelector('.item-modal' + productId);
     element1.classList.toggle('toggled');
 
@@ -642,6 +644,18 @@ function addItem(productId, instrumentArray, LocationArray) {
         });
     } else {
         console.error('optionsContainer is null. Check your selector or HTML structure.');
+    }
+
+    //air condition
+    var air = airCondtion ;
+    var selectConditon = document.getElementById("airCondition");
+
+    for (i = 0 ; i< selectConditon.options.length ; i++){
+        if (selectConditon.option[i].value === air){
+            selectConditon.option[i].selected =  true;
+        }else{
+            selectConditon.option[i].selected =  false;
+        }
     }
 }
 
@@ -701,12 +715,35 @@ function updateDisplayedData() {
     } else {
         filteredData = JSON.parse(JSON.stringify(Orgdata)).filter(function (item) {
             return selectedCategories.some(function (selectedCategory) {
-                console.log(item.category);
                 return item.location.includes(selectedCategory);
             });
         });
     }
     displaydata(filteredData);
     console.log('filteredData', filteredData);
+}
+
+function airCondition(){
+    var selectedArray = [];
+    var selectedCategories = $('.airCondition input:checked').map(function () {
+        return $(this).parent().text().trim();
+    }).get();
+
+    var filteredData;
+    if (selectedCategories.length === 0){
+        filteredData = JSON.parse(JSON.stringify(Orgdata));
+    }else{
+        // filteredData = JSON.parse(JSON.stringify(Orgdata));
+        // selectedArray = JSON.parse(JSON.stringify(Orgdata));
+        filteredData = JSON.parse(JSON.stringify(Orgdata)).filter(function (item) {
+            return selectedCategories.some(function (selectedCategory) {
+                return item.airCondition.includes(selectedCategory);
+            });
+        });
+    }
+    displaydata(filteredData);
+    console.log('selectedArray', selectedArray);
+    console.log('selectedCategories' , selectedCategories);
+
 }
 

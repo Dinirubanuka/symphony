@@ -20,7 +20,7 @@
         </div>
         <div class="category">
             <div class="category-name" onclick="toggleCategory('AirCondition')">Air Condition</div>
-            <ul class="equipment-list" id="AirCondition">
+            <ul class="equipment-list airCondition" id="AirCondition" onchange="airCondition()" >
                 <li class="equipment-item"><input type="checkbox"> Yes</li>
                 <li class="equipment-item"><input type="checkbox"> No</li>
             </ul>
