@@ -85,6 +85,35 @@ class ServiceProvider
             die($e->getMessage());
         }
     }
+    public function addSinger($data){
+        try{
+            $this->db->query('INSERT INTO singer (created_by, name, NickName, email, description, instrument, location, telephoneNumber, videoLink, photo_1, photo_2, photo_3, singerPhoto, unit_price) VALUES (:created_by, :name, :NickName, :email, :description, :instrument, :location, :telephoneNumber, :videoLink, :photo_1, :photo_2, :photo_3, :singer_photo, :unit_price)');
+            $this->db->bind(':created_by', $_SESSION['serviceprovider_id']);
+            $this->db->bind(':name', $data['name']);
+            $this->db->bind(':NickName', $data['NickName']);
+            $this->db->bind(':telephoneNumber', $data['telephoneNumber']);
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':unit_price', $data['rate']);
+            $this->db->bind(':location',$data['location']);
+            $this->db->bind(':instrument', $data['instrument']);
+            $this->db->bind(':description', $data['description']);
+            $this->db->bind(':videoLink', $data['videoLink']);
+            $this->db->bind(':photo_1', $data['photo_1']);
+            $this->db->bind(':photo_2', $data['photo_2']);
+            $this->db->bind(':photo_3', $data['photo_3']);
+            $this->db->bind(':singer_photo',$data['singer_photo']);
+
+            // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }catch (PDOException $e){
+            die($e->getMessage());
+        }
+    }
 
     public function editPhoto($product_id, $data, $photo_num)
     {
@@ -348,6 +377,18 @@ class ServiceProvider
     }
     public function studio($created_by){
         $this->db->query('SELECT * FROM studio WHERE created_by = :created_by');
+        $this->db->bind(':created_by', $created_by);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+    public function singer($created_by){
+        $this->db->query('SELECT * FROM singer WHERE created_by = :created_by');
+        $this->db->bind(':created_by', $created_by);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+    public function band($created_by){
+        $this->db->query('SELECT * FROM band WHERE created_by = :created_by');
         $this->db->bind(':created_by', $created_by);
         $results = $this->db->resultSet();
         return $results;

@@ -13,7 +13,7 @@
 <div class="upperCategory">
     <div class="categories">
         <div class="category">
-            <div class="category-name" onclick="toggleCategory('Location')">Location</div>
+            <div class="category-name" onclick="toggleCategory('location')">Location</div>
             <ul class="equipment-list" id="location" onchange="updateDisplayedData()">
 
             </ul>

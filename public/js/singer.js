@@ -4,7 +4,7 @@ var Orgdata;
 function toggleCategory(categoryId) {
     const categoryList = document.getElementById(categoryId);
     if (categoryId === 'price') {
-        categoryList.style.display = categoryList.style.display === "none" ? "block" : "none";
+        categoryList.style.display = categoryList.style.display === "none" ? "flex" : "none";
     } else {
         categoryList.style.display = categoryList.style.display === "none" ? "block" : "none";
     }
@@ -227,11 +227,8 @@ function displaydata(data) {
                 `<img class="carousel-image" src="http://localhost/symphony/img/serviceProvider/` + item.photo_1 + `" alt="Placeholder Image 1" style="display: block">` +
                 `</div>` +
                 `<div class="item-info">` +
-                `<h3>Title:` + item.Title + `</h3>` +
-                `<p>Brand: ` + item.brand + `</p>` +
-                `<p>Model:  ` + item.model + `</p>` +
-                `<p>Units Left:  ` + item.quantity + `</p>` +
-                `<p>Price(Lkr): ` + item.unit_price + `</p>` +
+                `<h3>Name:` + item.Title + `</h3>` +
+                `<p>Nick name: ` + item.brand + `</p>` +
                 `<button href="" onclick="addItem(` + item.product_id + `)" style="color: orange">see more details</button>` +
                 `<p>` + stockText + `</p>` +
                 <!-- User reviews go here -->
