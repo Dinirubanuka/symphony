@@ -54,7 +54,9 @@ class serviceproviders extends Controller
         echo json_encode($data);
         exit();
     }
-    public function fetchSingers(){
+
+    public function fetchSingers()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $inventory = $this->serviceProviderModel->singer($_SESSION['serviceprovider_id']);
             $data = [
@@ -66,7 +68,8 @@ class serviceproviders extends Controller
         exit();
     }
 
-    public function fetchStudio(){
+    public function fetchStudio()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $inventory = $this->serviceProviderModel->studio($_SESSION['serviceprovider_id']);
             $data = [
@@ -669,7 +672,7 @@ class serviceproviders extends Controller
                 'name' => trim($_POST['StudioName']),
                 'rate' => trim($_POST['rate']),
                 'airCondition' => trim($_POST['airCondition']),
-                'instrument'=>$_SESSION['instrumentList'],
+                'instrument' => $_SESSION['instrumentList'],
                 'location' => $_SESSION['locationList'],
                 'descriptionSounds' => trim($_POST['descriptionSounds']),
                 'descriptionStudio' => trim($_POST['descriptionStudio']),
@@ -678,11 +681,11 @@ class serviceproviders extends Controller
                 'photo_1' => $new_img1_name,
                 'photo_2' => $new_img2_name,
                 'photo_3' => $new_img3_name,
-                'name_err'=>'',
-                'rate_err'=>'',
-                'descriptionSounds_err'=>'',
-                'descriptionStudio_err'=>'',
-                'telephoneNumber_err'=>''
+                'name_err' => '',
+                'rate_err' => '',
+                'descriptionSounds_err' => '',
+                'descriptionStudio_err' => '',
+                'telephoneNumber_err' => ''
             ];
 
             if (empty($data['name'])) {
@@ -736,7 +739,8 @@ class serviceproviders extends Controller
         }
     }
 
-    public function addSinger(){
+    public function addSinger()
+    {
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -808,7 +812,7 @@ class serviceproviders extends Controller
                 'telephoneNumber' => trim($_POST['number']),
                 'email' => trim($_POST['email']),
                 'rate' => trim($_POST['rate']),
-                'instrument'=>$_SESSION['instrumentList'],
+                'instrument' => $_SESSION['instrumentList'],
                 'location' => $_SESSION['locationList'],
                 'videoLink' => trim($_POST['video']),
                 'description' => trim($_POST['description']),
@@ -816,10 +820,10 @@ class serviceproviders extends Controller
                 'photo_2' => $new_img2_name,
                 'photo_3' => $new_img3_name,
                 'singer_photo' => $new_img4_name,
-                'name_err'=>'',
-                'rate_err'=>'',
-                'description_err'=>'',
-                'telephoneNumber_err'=>''
+                'name_err' => '',
+                'rate_err' => '',
+                'description_err' => '',
+                'telephoneNumber_err' => ''
             ];
 
             if (empty($data['name'])) {
@@ -854,7 +858,7 @@ class serviceproviders extends Controller
                 'telephoneNumber' => '',
                 'email' => '',
                 'rate' => '',
-                'instrument'=> '',
+                'instrument' => '',
                 'location' => '',
                 'videoLink' => '',
                 'description' => '',
@@ -862,16 +866,17 @@ class serviceproviders extends Controller
                 'photo_2' => '',
                 'photo_3' => '',
                 'singer_photo' => '',
-                'name_err'=>'',
-                'rate_err'=>'',
-                'description_err'=>'',
-                'telephoneNumber_err'=>''
+                'name_err' => '',
+                'rate_err' => '',
+                'description_err' => '',
+                'telephoneNumber_err' => ''
             ];
 
             // Load view
             $this->view('serviceproviders/addSinger', $data);
         }
     }
+
     public function editStudio($product_id)
     {
         // Check for POST
@@ -946,16 +951,16 @@ class serviceproviders extends Controller
                 'name' => trim($_POST['StudioName']),
                 'rate' => trim($_POST['rate']),
                 'airCondition' => trim($_POST['airCondition']),
-                'instrument'=>$_SESSION['instrumentList'],
+                'instrument' => $_SESSION['instrumentList'],
                 'descriptionSounds' => trim($_POST['descriptionSounds']),
                 'descriptionStudio' => trim($_POST['descriptionStudio']),
                 'telephoneNumber' => trim($_POST['number']),
                 'videoLink' => trim($_POST['video']),
-                'name_err'=>'',
-                'rate_err'=>'',
-                'descriptionSounds_err'=>'',
-                'descriptionStudio_err'=>'',
-                'telephoneNumber_err'=>''
+                'name_err' => '',
+                'rate_err' => '',
+                'descriptionSounds_err' => '',
+                'descriptionStudio_err' => '',
+                'telephoneNumber_err' => ''
             ];
 
             if (empty($data['name'])) {
@@ -980,7 +985,7 @@ class serviceproviders extends Controller
 
             if (empty($data['name_err']) && empty($data['rate_err']) && empty($data['descriptionSounds_err']) && empty($data['descriptionStudio_err']) && empty($data['telephoneNumber_err'])) {
 
-                if ($this->serviceProviderModel->editStudio($product_id,$data)) {
+                if ($this->serviceProviderModel->editStudio($product_id, $data)) {
                     redirect('serviceproviders/studio');
                 } else {
                     die('Something went wrong');
@@ -1016,7 +1021,11 @@ class serviceproviders extends Controller
         $requestData = json_decode($data, true);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && $requestData && isset($requestData['instruments'])) {
-            $_SESSION['instrumentList'] = $requestData['instruments'];
+            if (empty($requestData['instruments'])) {
+                $_SESSION['instrumentList'] = "NULL";
+            } else {
+                $_SESSION['instrumentList'] = $requestData['instruments'];
+            }
             $_SESSION['locationList'] = $requestData['location'];
             echo json_encode(['success' => 'request success', 'instruments' => $_SESSION['instrumentList']]);
         } else {
@@ -1033,7 +1042,9 @@ class serviceproviders extends Controller
             redirect('serviceproviders/inventory');
         }
     }
-    public function deleteStudio($product_id){
+
+    public function deleteStudio($product_id)
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->serviceProviderModel->deleteStudio($product_id);
             redirect('serviceproviders/inventory');
@@ -1107,7 +1118,6 @@ class serviceproviders extends Controller
             $this->view('serviceproviders/additem', $data);
         }
     }
-
 
     public function edit()
     {
@@ -1556,7 +1566,8 @@ class serviceproviders extends Controller
         $this->view('serviceproviders/singer');
     }
 
-    public function Band(){
+    public function Band()
+    {
         $inventory = $this->serviceProviderModel->band($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
@@ -1564,12 +1575,16 @@ class serviceproviders extends Controller
         $this->view('serviceproviders/band');
     }
 
-    public function viewSinger($product_id){
-        $singerDetails = $this->serviceProviderModel->viewSinger($product_id);
-        if ($singerDetails){
-            $this->view('serviceproviders/viewSinger', $singerDetails);
-        }else{
-            die('no singer');
+    public function viewSinger($product_id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $singerDetails = $this->serviceProviderModel->viewSinger($product_id);
+            if ($singerDetails) {
+//            die(print_r($singerDetails));
+                $this->view('serviceproviders/viewSinger', $singerDetails);
+            } else {
+//                var_dump('singer fetch err..);
+            }
         }
     }
 }

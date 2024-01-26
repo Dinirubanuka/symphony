@@ -97,9 +97,14 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-
-.title , .hour, .mail{
+.singerName input{
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.edit{
     display: flex;
+    flex-direction: column;
     gap: 10px;
 }
 .middle-middle{

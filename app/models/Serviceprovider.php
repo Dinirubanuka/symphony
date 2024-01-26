@@ -411,9 +411,9 @@ class ServiceProvider
 
     public function viewSinger($created_by)
     {
-        $this->db->query('SELECT * FROM singer WHERE created_by = :created_by');
+        $this->db->query('SELECT * FROM singer WHERE product_id = :created_by');
         $this->db->bind(':created_by', $created_by);
-        $results = $this->db->resultSet();
+        $results = $this->db->single();
         return $results;
     }
 
