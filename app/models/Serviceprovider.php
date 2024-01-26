@@ -417,6 +417,43 @@ class ServiceProvider
         return $results;
     }
 
+    public function editSingerPhoto($id, $data){
+        try {
+            $this->db->query('UPDATE singer SET singerPhoto = :singerPhoto WHERE product_id = :product_id');
+            $this->db->bind(':singerPhoto', $data['singerPhoto']);
+            $this->db->bind(':product_id', $id);
+            $this->db->execute();
+        } catch (PDOException $e) {
+            echo "Database error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function updateSinger($data){
+        try{
+            $this->db->query('UPDATE TABLE singer SET name = :name , nickName = :NickName , telephoneNumber = :telephoneNumber , email = :email , unit_price = :rate , instrument = :instrument , location = :location ,videoLink = :videoLink , description = :description WHERE product_id = :product_id' );
+            $this->db->bind(':product_id', $data['product_id']);
+            $this->db->bind(':name', $data['name']);
+            $this->db->bind(':NickName', $data['NickName']);
+            $this->db->bind(':telephoneNumber', $data['telephoneNumber']);
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':rate', $data['rate']);
+            $this->db->bind(':instrument', $data['instrument']);
+            $this->db->bind(':location', $data['location']);
+            $this->db->bind(':videoLink', $data['videoLink']);
+            $this->db->bind(':description', $data['description']);
+
+            // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }catch (PDOException $e){
+            die($e->getMessage());
+        }
+    }
+
     public function verificationNumber($finalNumber)
     {
         try {

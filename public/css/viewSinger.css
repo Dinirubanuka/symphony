@@ -32,11 +32,13 @@ body {
 }
 
 /*----VIEW----*/
-.biggerBody{
+.outer{
     border: 1px solid #707370;
-    border-radius: 10px;
     padding:20px;
     margin: 0 40px;
+    border-radius: 10px;
+}
+.biggerBody{
     display: flex;
     flex-direction: column;
     gap:40px;
@@ -102,6 +104,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 .edit{
     display: flex;
     flex-direction: column;
