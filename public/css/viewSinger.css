@@ -1,0 +1,368 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+:root {
+    --dark-grey: #333333;
+    --medium-grey: #636363;
+    --light-grey: #eeeeee;
+    --ash: #f4f4f4;
+    --primary-color: #2b72fb;
+    --white: white;
+    --border: 1px solid var(--light-grey);
+    --shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+body {
+    font-family: inherit;
+    /* background-color: var(--white); */
+    color: var(--dark-grey);
+    height: 100vh;
+    /* display: grid; */
+    /* background-image: url(<?php echo BackgroundImageURL; ?>); */
+    background: linear-gradient(90deg, rgba(47,7,68,1) 32%, rgba(95,12,110,1) 100%);
+    background-size: cover;
+    background-position: center;
+}
+
+/*----VIEW----*/
+.biggerBody{
+    border: 1px solid #707370;
+    border-radius: 10px;
+    padding:20px;
+    margin: 0 40px;
+    display: flex;
+    flex-direction: column;
+    gap:40px;
+}
+.upperPart{
+    display: flex;
+    justify-content: space-between;
+}
+.upperLeft{
+    display: flex;
+    gap: 30px;
+}
+.upperRight{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    color: white;
+}
+.publicView a{
+    color: white;
+    border-radius: 30px;
+    border: 1px solid white;
+    height: 50px;
+    padding: 20px;
+    transition: 0.5s;
+}
+.publicView a:hover{
+    background: rgba(116, 37, 155, 0.96);
+}
+.singerNameLoc{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    /*align-items: center;*/
+    justify-content:center;
+}
+.singerName, .location {
+    display: flex;
+    gap: 10px;
+    color: white;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.location{
+    display: flex;
+    align-items: center;
+    color: #b0abab;
+}
+
+.titleHours{
+    display:flex;
+    justify-content: space-between;
+    color: white;
+}
+.titleHours input{
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.title , .hour, .mail{
+    display: flex;
+    gap: 10px;
+}
+.middle-middle{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    letter-spacing: 2px;
+}
+.select-options{
+    display: flex;
+    /*justify-content:center;*/
+    gap: 40px;
+    flex-direction: row;
+    letter-spacing: 2px;
+}
+.middle{
+    display:grid;
+    grid-template-columns: auto 40px;
+    column-gap: 100px;
+}
+.middle .descriptionContent input{
+    width: 100%;
+    border: 1px solid #707370;
+    color: #343131;
+    letter-spacing: 2px;
+    border-radius:10px;
+    padding: 15px;
+    line-height:1.6;
+    max-height: 250px;
+    overflow: hidden;
+}
+#seeMore{
+    display: none;
+}
+.video-upload{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    /*border: 1px solid white;*/
+    box-sizing: content-box;
+}
+.video-uploadBody{
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    color: white;
+}
+.video-link{
+    color: white;
+    padding: 10px;
+}
+.video-link input{
+    padding: 10px;
+    letter-spacing: 2px;
+    overflow: hidden;
+    color: #343131;
+    width: 460px;
+}
+
+.photo-outer{
+    width: 130px;
+    height: 129px;
+    overflow: hidden;
+    /* margin: 0 auto; */
+    /* border: 1px solid white; */
+    /* border-radius: 60% */
+}
+.photo-inner{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.photo-inner img{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    border-radius: 50%;
+}
+.photo {
+    top: 0;
+    left: 0;
+}
+
+.photo:first-child {
+    z-index: 1;
+}
+
+.photo-inner .photo:nth-child(2) {
+    position: absolute;
+    top:73%;
+    left:70%;
+    z-index: 2;
+    height:35px;
+    width:35px;
+    /* left: 20px; */
+}
+/* CSS to hide the modal initially */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    z-index: 1000;
+}
+
+.modal-toggled {
+    display: block;
+}
+
+.modal-content {
+    position: absolute;
+    z-index:100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 50px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content a{
+    position: absolute;
+    right:10px;
+    top:10px;
+}
+
+.deleteAcc a{
+    position: absolute;
+    right:10px;
+    top:10px;
+}
+.modal-content input[type = "submit"]{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: black;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+
+
+.modal-content input[type = "file"]{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: black;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+}
+.modal-content .delete-btn{
+    height: 55px;
+    width: 30%;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: 30px;
+    margin-left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: rgb(130, 106, 251);
+    border-radius: 2rem;
+}
+.modal-content button:hover {
+    background: rgb(88, 56, 250);
+}
+
+/*location dropdown*/
+.dropdown2 {
+    height: 42px;
+    width: 200px;
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown2 .select-box {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dropdown2 .select-box::after {
+    content: '\25BC';
+    /*font-size: 12px;*/
+    margin-left: 5px;
+}
+
+.dropdown2 .options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    display: none;
+    max-height: 240px;
+    overflow-y: auto;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.dropdown2 .option {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown2 .option .checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin-right: 5px;
+    position: relative;
+    cursor: pointer;
+}
+
+.option input[type="checkbox"] {
+    margin-right: 5px; /* Adjust the value as needed for the desired space */
+}
+.container .hidden{
+    display: none;
+}
+
+.video-section{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+@media screen and (max-width: 1550px) {
+    .video-upload{
+        display: grid;
+        grid-template-columns: auto auto;
+        box-sizing: content-box;
+    }
+    .video-section{
+        display: block;
+        /*grid-template-columns: auto ;*/
+    }
+}
+@media screen and (max-width: 1100px) {
+    .video-upload{
+        display: grid;
+        grid-template-columns: auto ;
+        box-sizing: content-box;
+    }
+}

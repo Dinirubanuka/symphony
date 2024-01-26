@@ -54,6 +54,17 @@ class serviceproviders extends Controller
         echo json_encode($data);
         exit();
     }
+    public function fetchSingers(){
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $inventory = $this->serviceProviderModel->singer($_SESSION['serviceprovider_id']);
+            $data = [
+                'inventory' => $inventory
+            ];
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit();
+    }
 
     public function fetchStudio(){
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -1544,11 +1555,21 @@ class serviceproviders extends Controller
         ];
         $this->view('serviceproviders/singer');
     }
+
     public function Band(){
         $inventory = $this->serviceProviderModel->band($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
         ];
         $this->view('serviceproviders/band');
+    }
+
+    public function viewSinger($product_id){
+        $singerDetails = $this->serviceProviderModel->viewSinger($product_id);
+        if ($singerDetails){
+            $this->view('serviceproviders/viewSinger', $singerDetails);
+        }else{
+            die('no singer');
+        }
     }
 }

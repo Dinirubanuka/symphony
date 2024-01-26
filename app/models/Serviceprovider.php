@@ -57,12 +57,14 @@ class ServiceProvider
         }
 
     }
-    public function addStudio($data){
-        try{
+
+    public function addStudio($data)
+    {
+        try {
             $this->db->query('INSERT INTO studio (created_by, Title, instrument, descriptionSounds, descriptionStudio, location, telephoneNumber, videoLink, photo_1, photo_2, photo_3, airCondition, unit_price) VALUES (:created_by, :name, :instrument,:descriptionSounds, :descriptionStudio, :location, :telephoneNumber, :videoLink, :photo_1, :photo_2, :photo_3, :airCondition, :unit_price)');
             $this->db->bind(':created_by', $_SESSION['serviceprovider_id']);
             $this->db->bind(':name', $data['name']);
-            $this->db->bind(':location',$data['location']);
+            $this->db->bind(':location', $data['location']);
             $this->db->bind(':unit_price', $data['rate']);
             $this->db->bind(':airCondition', $data['airCondition']);
             $this->db->bind(':instrument', $data['instrument']);
@@ -81,12 +83,14 @@ class ServiceProvider
                 return false;
             }
 
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
             die($e->getMessage());
         }
     }
-    public function addSinger($data){
-        try{
+
+    public function addSinger($data)
+    {
+        try {
             $this->db->query('INSERT INTO singer (created_by, name, NickName, email, description, instrument, location, telephoneNumber, videoLink, photo_1, photo_2, photo_3, singerPhoto, unit_price) VALUES (:created_by, :name, :NickName, :email, :description, :instrument, :location, :telephoneNumber, :videoLink, :photo_1, :photo_2, :photo_3, :singer_photo, :unit_price)');
             $this->db->bind(':created_by', $_SESSION['serviceprovider_id']);
             $this->db->bind(':name', $data['name']);
@@ -94,14 +98,14 @@ class ServiceProvider
             $this->db->bind(':telephoneNumber', $data['telephoneNumber']);
             $this->db->bind(':email', $data['email']);
             $this->db->bind(':unit_price', $data['rate']);
-            $this->db->bind(':location',$data['location']);
+            $this->db->bind(':location', $data['location']);
             $this->db->bind(':instrument', $data['instrument']);
             $this->db->bind(':description', $data['description']);
             $this->db->bind(':videoLink', $data['videoLink']);
             $this->db->bind(':photo_1', $data['photo_1']);
             $this->db->bind(':photo_2', $data['photo_2']);
             $this->db->bind(':photo_3', $data['photo_3']);
-            $this->db->bind(':singer_photo',$data['singer_photo']);
+            $this->db->bind(':singer_photo', $data['singer_photo']);
 
             // Execute
             if ($this->db->execute()) {
@@ -110,7 +114,7 @@ class ServiceProvider
                 return false;
             }
 
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
             die($e->getMessage());
         }
     }
@@ -150,6 +154,7 @@ class ServiceProvider
             }
         }
     }
+
     public function editStudioPhoto($product_id, $data, $photo_num)
     {
         if ($photo_num == 'photo_1') {
@@ -217,8 +222,10 @@ class ServiceProvider
         }
 
     }
-    public function editStudio($product_id, $data){
-        try{
+
+    public function editStudio($product_id, $data)
+    {
+        try {
             $this->db->query('UPDATE studio SET Title =:name , instrument = :instrument, descriptionSounds = :descriptionSounds, descriptionStudio =:descriptionStudio, videoLink =:videoLink, airCondition =:airCondition, unit_price =:unit_price WHERE product_id = :product_id');
             $this->db->bind(':name', $data['name']);
             $this->db->bind(':unit_price', $data['rate']);
@@ -237,7 +244,7 @@ class ServiceProvider
             }
 
 
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
             echo "Database error: " . $e->getMessage();
             return false;
         }
@@ -356,7 +363,9 @@ class ServiceProvider
             return false;
         }
     }
-    public function deleteStudio($product_id){
+
+    public function deleteStudio($product_id)
+    {
         $this->db->query('DELETE FROM studio WHERE product_id = :product_id');
         $this->db->bind(':product_id', $product_id);
 
@@ -375,20 +384,34 @@ class ServiceProvider
         $results = $this->db->resultSet();
         return $results;
     }
-    public function studio($created_by){
+
+    public function studio($created_by)
+    {
         $this->db->query('SELECT * FROM studio WHERE created_by = :created_by');
         $this->db->bind(':created_by', $created_by);
         $results = $this->db->resultSet();
         return $results;
     }
-    public function singer($created_by){
+
+    public function singer($created_by)
+    {
         $this->db->query('SELECT * FROM singer WHERE created_by = :created_by');
         $this->db->bind(':created_by', $created_by);
         $results = $this->db->resultSet();
         return $results;
     }
-    public function band($created_by){
+
+    public function band($created_by)
+    {
         $this->db->query('SELECT * FROM band WHERE created_by = :created_by');
+        $this->db->bind(':created_by', $created_by);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function viewSinger($created_by)
+    {
+        $this->db->query('SELECT * FROM singer WHERE created_by = :created_by');
         $this->db->bind(':created_by', $created_by);
         $results = $this->db->resultSet();
         return $results;
