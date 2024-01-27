@@ -431,7 +431,7 @@ class ServiceProvider
 
     public function updateSinger($data){
         try{
-            $this->db->query('UPDATE TABLE singer SET name = :name , nickName = :NickName , telephoneNumber = :telephoneNumber , email = :email , unit_price = :rate , instrument = :instrument , location = :location ,videoLink = :videoLink , description = :description WHERE product_id = :product_id' );
+            $this->db->query('UPDATE singer SET name = :name , nickName = :NickName , telephoneNumber = :telephoneNumber , email = :email , unit_price = :rate , instrument = :instrument , location = :location , videoLink = :videoLink , description = :description WHERE product_id = :product_id' );
             $this->db->bind(':product_id', $data['product_id']);
             $this->db->bind(':name', $data['name']);
             $this->db->bind(':NickName', $data['NickName']);

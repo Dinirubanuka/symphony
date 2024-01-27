@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b38043d5-52c0-4c15-8c01-780342c8c479" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/img/serviceProvider/IMG-65b38a5ccddc79.55882082.heic" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/serviceProvider/IMG-65b38a5cceebd8.66867371.heic" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/serviceProvider/IMG-65b38a5ccf0032.87096926.heic" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/serviceProvider/IMG-65b38a5ccf08f0.21097366.heic" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/Serviceproviders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Serviceproviders.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/Serviceprovider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Serviceprovider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/serviceproviders/addSinger.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/serviceproviders/addSinger.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/serviceproviders/viewSinger.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/serviceproviders/viewSinger.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/singer.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/singer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/viewSinger.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/viewSinger.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,29 +49,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "serviceprovider",
-    "last_opened_file_path": "/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;serviceprovider&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Applications/XAMPP/xamppfiles/htdocs/symphony/public/img&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/img" />
@@ -129,7 +124,9 @@
       <workItem from="1705393495945" duration="1205000" />
       <workItem from="1705998521321" duration="23867000" />
       <workItem from="1706145463950" duration="34894000" />
-      <workItem from="1706231393498" duration="32166000" />
+      <workItem from="1706231393498" duration="33678000" />
+      <workItem from="1706278260676" duration="183000" />
+      <workItem from="1706333738547" duration="4915000" />
     </task>
     <servers />
   </component>
@@ -172,6 +169,15 @@
           <url>file://$PROJECT_DIR$/app/models/Serviceprovider.php</url>
           <line>62</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/controllers/Serviceproviders.php</url>
+          <line>250</line>
+          <properties>
+            <option name="className" value="\serviceproviders" />
+            <option name="methodName" value="edititem" />
+          </properties>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -22,7 +22,7 @@
                                      onclick="triggerInput(4)">
                                 <input type="file" id="photo_4" accept=".jpg, .jpeg, .png, .HEIC" name="singer_photo"
                                        class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>"
-                                       value="<?php echo $data['photo_3']; ?>"
+                                       value="<?php echo $data['singer_photo']; ?>"
                                        onchange="previewImage(this, 'previewPhoto_4')" required>
                             </div>
                         </div>

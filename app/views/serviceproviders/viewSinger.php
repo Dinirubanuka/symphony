@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="<?php echo URLROOT ?>/css/viewSinger.css"/>
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/inventory.css"/>
     <title>Servie Provider Profile</title>
 </head>
 <body>
 <!-----------profile-nav-bar-------->
+<?php require_once APPROOT . '/views/inc/singer-nav.php'; ?>
 <!--------body-------->
 <div class="outer">
-    <form action="<?php echo URLROOT; ?>/Serviceproviders/updateSinger/<?php echo $data->created_by ?>" method="post">
+    <form action="<?php echo URLROOT; ?>/Serviceproviders/updateSinger/<?php echo $data->product_id ?>" method="post">
         <div class="biggerBody">
             <div class="upperPart">
                 <div class="upperLeft">
@@ -24,7 +26,7 @@
                                  onclick="triggerInput(4)">
                             <input type="file" id="photo_4" accept=".jpg, .jpeg, .png, .HEIC, .heic" name="singer_photo"
                                    class=""
-                                   value=""
+                                   value="<?php echo $data->singerPhoto; ?>"
                                    onchange="previewImage(this, 'previewPhoto_4')">
                         </div>
                     </div>
@@ -85,7 +87,7 @@
                     <div class="video-section">
                         <div class="video-link">
                             <label>Embedded link</label>
-                            <h2><input type="text" name="videoLink" value="<?php echo $data->videoLink; ?>"></input></h2>
+                            <h2><input type="text" name="videoLink" value="<?php echo $data->videoLink; ?>"></h2>
                         </div>
                         <div class="select-options">
                             <!--            location-->

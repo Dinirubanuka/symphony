@@ -1584,7 +1584,6 @@ class serviceproviders extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $singerDetails = $this->serviceProviderModel->viewSinger($product_id);
             if ($singerDetails) {
-//            die(print_r($singerDetails));
                 $this->view('serviceproviders/viewSinger', $singerDetails);
             } else {
 //                var_dump('singer fetch err..);
@@ -1600,7 +1599,28 @@ class serviceproviders extends Controller
             $error4 = $_FILES['singer_photo']['error'];
 
             if ($error4 === UPLOAD_ERR_NO_FILE) {
-                $new_img4_name = 'IMG-653fd611dd2445.48951448.png';
+                $data = [
+                    'product_id' => $id,
+                    'name' => trim($_POST['singerName']),
+                    'NickName' => trim($_POST['singerNickName']),
+                    'telephoneNumber' => trim($_POST['number']),
+                    'email' => trim($_POST['email']),
+                    'rate' => trim($_POST['rate']),
+                    'instrument' => $_SESSION['instrumentList'],
+                    'location' => $_SESSION['locationList'],
+                    'videoLink' => trim($_POST['videoLink']),
+                    'description' => trim($_POST['description']),
+                ];
+
+                if (!empty($data['name']) && !empty($data['NickName']) && !empty($data['telephoneNumber']) && !empty($data['email']) && !empty($data['rate'])  && !empty($data['videoLink']) && !empty($data['description']) ){
+                    if ($this->serviceProviderModel->updateSinger($data)) {
+                        redirect('serviceproviders/viewSinger/' . $id);
+                    } else {
+                        die('Something went wrong');
+                    }
+                }else{
+                    die('singer connot update...');
+                }
             } else {
                 $img_ex = pathinfo($img4_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
@@ -1613,32 +1633,32 @@ class serviceproviders extends Controller
                 ];
 
                 $this->serviceProviderModel->editSingerPhoto($id, $data);
-            }
-            $data = [
-                'product_id' => $id,
-                'name' => trim($_POST['singerName']),
-                'NickName' => trim($_POST['singerNickName']),
-                'telephoneNumber' => trim($_POST['number']),
-                'email' => trim($_POST['email']),
-                'rate' => trim($_POST['rate']),
-                'instrument' => $_SESSION['instrumentList'],
-                'location' => $_SESSION['locationList'],
-                'videoLink' => trim($_POST['video']),
-                'description' => trim($_POST['description']),
-            ];
 
-            if (!empty($data['name']) && !empty($data['NickName']) && !empty($data['telephoneNumber']) && !empty($data['email']) && !empty($data['rate'])  && !empty($data['videoLink']) && !empty($data['description']) ){
-                if ($this->serviceProviderModel->updateSinger($data)) {
-                    redirect('serviceproviders/viewSinger/' . $id);
-                } else {
-                    die('Something went wrong');
+                $data = [
+                    'product_id' => $id,
+                    'name' => trim($_POST['singerName']),
+                    'NickName' => trim($_POST['singerNickName']),
+                    'telephoneNumber' => trim($_POST['number']),
+                    'email' => trim($_POST['email']),
+                    'rate' => trim($_POST['rate']),
+                    'instrument' => $_SESSION['instrumentList'],
+                    'location' => $_SESSION['locationList'],
+                    'videoLink' => trim($_POST['videoLink']),
+                    'description' => trim($_POST['description']),
+                ];
+
+                if (!empty($data['name']) && !empty($data['NickName']) && !empty($data['telephoneNumber']) && !empty($data['email']) && !empty($data['rate'])  && !empty($data['videoLink']) && !empty($data['description']) ){
+                    if ($this->serviceProviderModel->updateSinger($data)) {
+                        redirect('serviceproviders/viewSinger/' . $id);
+                    } else {
+                        die('Something went wrong');
+                    }
+                }else{
+                    die('singer connot update...');
                 }
-            }else{
-
             }
-
         }else{
-
+            redirect('serviceproviders/singer');
         }
     }
 
