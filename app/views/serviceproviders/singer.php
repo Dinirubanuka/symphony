@@ -16,6 +16,9 @@
 
 <div class="upperCategory">
     <div class="categories">
+        <div class="heading" style="padding: 10px">
+            <h2>Singer Inventory</h2>
+        </div>
         <div class="category">
             <div class="category-name" onclick="toggleCategory('stringInstruments')">String Instruments</div>
             <ul class="equipment-list" id="stringInstruments" onchange="updateDisplayedData()">
@@ -100,9 +103,6 @@
                 </select>
             </div>
         </div>
-    </div>
-    <div class="heading" style="padding: 10px">
-        <h1>Singer Inventory</h1>
     </div>
     <div class="account-requests">
 

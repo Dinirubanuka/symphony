@@ -925,15 +925,12 @@ function search() {
 
     products.forEach(product => {
         const titleElement = product.querySelector("h3");
-        const brand = product.querySelector("p:nth-child(2)");
-        const model = product.querySelector("p:nth-child(3)");
+        const brand = product.querySelector("p:nth-child(1)");
 
-        if (titleElement || brand || model) {
+        if (titleElement || brand ) {
             const textValue = titleElement.textContent || titleElement.innerHTML;
             const brandValue = brand.textContent || brand.innerHTML;
-            const modelValue = model.textContent || model.innerHTML;
-
-            if (textValue.toUpperCase().indexOf(searchBox) > -1 || brandValue.toUpperCase().indexOf(searchBox) > -1 || modelValue.toUpperCase().indexOf(searchBox) > -1) {
+            if (textValue.toUpperCase().indexOf(searchBox) > -1 || brandValue.toUpperCase().indexOf(searchBox) > -1) {
                 product.style.display = "";
             } else {
                 product.style.display = "none";

@@ -914,7 +914,6 @@ document.getElementById("search-item").addEventListener("keyup", search);
 
 function search() {
     const searchBox = document.getElementById("search-item").value.toUpperCase();
-    // const storeItems = document.getElementById("");
     const products = document.querySelectorAll(".item-container");
 
 

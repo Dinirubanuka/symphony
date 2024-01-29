@@ -165,7 +165,7 @@
                 </form>
                 <a href="<?php echo URLROOT; ?>/serviceproviders/profile">
                     <img
-                        src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1695596792~exp=1695597392~hmac=a97f49fa9b5bcfc036ff0d5265cf9de48ccaf84f06e2c2ae4fbec0d753c343e3"
+                            src="<?php echo URLROOT; ?>/img/user.png"
                         width="30"
                         height="30"
                         alt="user image"

@@ -12,6 +12,9 @@
 <?php require_once APPROOT . '/views/inc/sp-studio-nav-bar.php'; ?>
 <div class="upperCategory">
     <div class="categories">
+        <div class="heading" style="padding: 10px">
+            <h2>Studio Inventory</h2>
+        </div>
         <div class="category">
             <div class="category-name" onclick="toggleCategory('location')">Location</div>
             <ul class="equipment-list" id="location" onchange="updateDisplayedData()">
@@ -50,9 +53,6 @@
                 </select>
             </div>
         </div>
-    </div>
-    <div class="heading" style="padding:10px">
-        <h1>Studio Inventory</h1>
     </div>
     <div class="account-requests">
 
