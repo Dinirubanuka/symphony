@@ -20,7 +20,7 @@
         </div>
         <div class="category">
             <div class="category-name" onclick="toggleCategory('AirCondition')">Air Condition</div>
-            <ul class="equipment-list airCondition" id="AirCondition" onchange="airCondition()" >
+            <ul class="equipment-list airCondition" id="AirCondition" onchange="airCondition()">
                 <li class="equipment-item"><input type="checkbox"> Yes</li>
                 <li class="equipment-item"><input type="checkbox"> No</li>
             </ul>
@@ -29,10 +29,12 @@
             <div class="category-name" onclick="toggleCategory('price')">Price</div>
             <ul class="equipment-list price" id="price">
                 <li class="equipment-item"><input type="number"
-                                                  style="width: 50px;border: 1px solid #dad7d7;padding: 10px;"></li>
+                                                  style="width: 50px;border: 1px solid #dad7d7;padding: 10px;"
+                                                  id="value1" onchange="price()"></li>
                 <li class="equipment-item" style="padding: 10px">-</li>
                 <li class="equipment-item"><input type="number"
-                                                  style="width: 50px;border: 1px solid #dad7d7;padding: 10px"></li>
+                                                  style="width: 50px;border: 1px solid #dad7d7;padding: 10px"
+                                                  id="value2" onchange="price()"></li>
             </ul>
         </div>
         <div class="category sort">
@@ -49,7 +51,11 @@
             </div>
         </div>
     </div>
+    <div class="heading" style="padding:10px">
+        <h1>Studio Inventory</h1>
+    </div>
     <div class="account-requests">
+
 
     </div>
 </div>
@@ -58,7 +64,7 @@
 <script src="https://kit.fontawesome.com/3376ff6b83.js" crossorigin="anonymous"></script>
 <script src="<?php echo URLROOT; ?>/js/studio.js"></script>
 <script>
-    var districts = ["Colombo", "Gampaha", "Kandy", "Jaffna", "Matara", "Nuwara Eliya", "Galle" , "Matara", "Hambanthota","Jaffna","Kilinochchi", "Mannar","Mullaitivu","Vavuniya","Batticola","Ampara","Trincomalee","Kurunegala","Puttalam","Anuradhapura","Polonnaruwa","Badulla","Monaragala","Ratnapura","Kegalle"];
+    var districts = ["Colombo", "Gampaha", "Kandy", "Jaffna", "Matara", "Nuwara Eliya", "Galle", "Matara", "Hambanthota", "Jaffna", "Kilinochchi", "Mannar", "Mullaitivu", "Vavuniya", "Batticola", "Ampara", "Trincomalee", "Kurunegala", "Puttalam", "Anuradhapura", "Polonnaruwa", "Badulla", "Monaragala", "Ratnapura", "Kegalle"];
 
     var equipmentList = document.getElementById("location");
 
