@@ -476,7 +476,7 @@ function updateDisplayedData() {
 //   updateDisplayedData();
 // }
 
-$('.equipment-list input').change(updateDisplayedData);
+// $('.equipment-list input').change(updateDisplayedData);
 
 //item details
 function addItem(productId) {
@@ -935,4 +935,24 @@ function search() {
             }
         }
     });
+}
+
+//price sort
+function price(){
+    var filterdArray = [];
+    value1 = document.getElementById("value1").value;
+    console.log(value1);
+    value2 = document.getElementById("value2").value;
+
+    if (value1.length == 0){
+        value1 = 0;
+    }
+    if (value2.length == 0){
+        value2 = 1000000000000; // define huge value when max value is not set
+    }
+
+    $data.forEach(item =>{
+        if(value1 <= item.unit_price && item.unit_price <= value2 ) filterdArray.push(item);
+    })
+    displaydata(filterdArray);
 }

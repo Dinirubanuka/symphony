@@ -14,7 +14,6 @@
 <!-----------profile-nav-bar-------->
 <?php require_once APPROOT . '/views/inc/singer-nav.php'; ?>
 
-<h1 style="color: white;text-align: center;padding-bottom: 20px;letter-spacing: 2px;">Inventory</h1>
 <div class="upperCategory">
     <div class="categories">
         <div class="category">
@@ -101,6 +100,9 @@
                 </select>
             </div>
         </div>
+    </div>
+    <div class="heading" style="padding: 10px">
+        <h1>Singer Inventory</h1>
     </div>
     <div class="account-requests">
 
