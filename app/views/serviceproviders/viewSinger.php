@@ -78,16 +78,14 @@
                 <!--    upload video-->
                 <div class="video-upload">
                     <div class="video-uploadBody">
-                        <video width="460" height="320" controls>
-                            <source src="movie.mp4" type="video/mp4">
-                            <source src="movie.ogg" type="video/ogg">
-                            Your browser does not support the video tag.
-                        </video>
+                        <iframe width="560" height="320"
+                                src="<?php echo $data->videoLink ?>" autoplay=1&mute=1">
+                        </iframe>
                     </div>
                     <div class="video-section">
                         <div class="video-link">
-                            <label>Embedded link</label>
-                            <h2><input type="text" name="videoLink" value="<?php echo $data->videoLink; ?>"></h2>
+                            <label>Add Embedded Source Link</label>
+                            <h2><input type="text" id="link" name="videoLink" value="<?php echo $data->videoLink; ?>" onchange="extractVideoId()"></h2>
                         </div>
                         <div class="select-options">
                             <!--            location-->
@@ -349,6 +347,40 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="app.js"></script>
 <script>
+    //add you tube video
+    function extractVideoId() {
+        var embeddedLink = document.getElementById('embeddedLink').value;
+
+        // Regular expression to match the YouTube video ID in the embedded link
+        var match = embeddedLink.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|.*[?&]v=|v\/|watch\?v=))(.*?)(?:[?&]|$)/);
+
+        if (match && match[1]) {
+            var videoId = match[1];
+        } else {
+            alert("Invalid YouTube link. Please enter a valid embedded link.");
+        }
+    }
+
+    $(document).ready(function () {
+        function updateVideo() {
+            var videoLink = $('#link').val();
+            var videoId = getYouTubeVideoId(videoLink);
+
+            if (videoId) {
+                var embedCode = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+                $('.video-uploadBody').html(embedCode);
+            }
+        }
+        $('#link').on('input', function () {
+            updateVideo();
+        });
+        function getYouTubeVideoId(url) {
+            var regExp = /^(?:(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11}))(?:\S+)?$/;
+            var match = url.match(regExp);
+            return (match && match[1]) ? match[1] : null;
+        }
+    });
+
     document.addEventListener('DOMContentLoaded', function () {
         var descriptionContent = document.getElementById('descriptionContent');
 
