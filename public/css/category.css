@@ -40,6 +40,7 @@
     display: flex;
     flex-direction: row;
 }
+
 .equipment-item {
     margin-top: 15px;
     margin-left: 20px;

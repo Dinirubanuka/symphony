@@ -1047,6 +1047,17 @@ class serviceproviders extends Controller
         }
     }
 
+    public function deleteSinger($product_id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->serviceProviderModel->deleteSinger($product_id);
+            redirect('serviceproviders/singer');
+        } else {
+            redirect('serviceproviders/singer');
+        }
+    }
+
+
     public function deleteStudio($product_id)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

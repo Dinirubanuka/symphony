@@ -89,6 +89,7 @@ function Redirect() {
             $data = JSON.parse(JSON.stringify(response.inventory));
             Orgdata = JSON.parse(JSON.stringify(response.inventory));
             console.log('response', response);
+            console.log('data' , $data);
             displaydata($data);
             console.log('method');
         },
@@ -99,12 +100,13 @@ function Redirect() {
 }
 
 function Delete(productId) {
-    var confirmed = confirm("Are you sure you want to delete this item?");
+    var confirmed = confirm("Are you sure you want to delete this singer?");
     if (confirmed) {
         $.ajax({
             method: 'POST',
-            url: 'http://localhost/symphony/serviceproviders/deleteitem/' + productId,
+            url: 'http://localhost/symphony/serviceproviders/deleteSinger/' + productId,
             success: function (response) {
+                console.log('response', response);
                 Redirect();
             },
             error: function (error) {
@@ -465,8 +467,8 @@ function updateDisplayedData() {
     } else {
         filteredData = JSON.parse(JSON.stringify(Orgdata)).filter(function (item) {
             return selectedCategories.some(function (selectedCategory) {
-                console.log(item.category);
-                return item.category.includes(selectedCategory);
+                console.log(item.location);
+                return item.location.includes(selectedCategory);
             });
         });
     }
@@ -479,7 +481,7 @@ function updateDisplayedData() {
 //   updateDisplayedData();
 // }
 
-$('.equipment-list input').change(updateDisplayedData);
+// $('.equipment-list input').change(updateDisplayedData);
 
 //item details
 function addItem(productId) {
@@ -938,4 +940,24 @@ function search() {
             }
         }
     });
+}
+
+//price sort
+function price(){
+    var filterdArray = [];
+    value1 = document.getElementById("value1").value;
+    console.log(value1);
+    value2 = document.getElementById("value2").value;
+
+    if (value1.length == 0){
+        value1 = 0;
+    }
+    if (value2.length == 0){
+        value2 = 1000000000000; // define huge value when max value is not set
+    }
+
+    $data.forEach(item =>{
+        if(value1 <= item.unit_price && item.unit_price <= value2 ) filterdArray.push(item);
+    })
+    displaydata(filterdArray);
 }
