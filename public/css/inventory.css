@@ -66,7 +66,7 @@ button {
 }
 
 .container {
-    background: rgba(0, 0, 0, 0.2);
+    background: black;
     position: sticky;
     z-index: 100;
     display: flex;
@@ -111,7 +111,11 @@ button {
 
 .menu-bar .nav-link:hover,
 .dropdown-link:hover {
-    color: var(--primary-color);
+    color: var(--medium-grey);
+}
+.menu-bar .nav-link:hover,
+.dropdown-link{
+    transition: 0.3s;
 }
 
 .nav-start,

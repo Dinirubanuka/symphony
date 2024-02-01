@@ -69,7 +69,7 @@ class Users extends Controller
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
                 $bool = move_uploaded_file($tmp_name, $img_upload_path);
                 if ($this->userModel->photoUpdate($new_img_name)) {
                     // flash('register_success', 'You are registered and can log in');
@@ -96,6 +96,25 @@ class Users extends Controller
         } else {
             $this->view('users/edit', $data);
         }
+    }
+
+    public function cancelOrder($order_id)
+    {   
+        $orders = $this->userModel->getOrders($_SESSION['user_id']);
+        foreach ($orders as $order) {
+            if ($order->sorder_id == $order_id) {
+                $order_data = json_decode(json_encode($order), true);
+            }
+        }
+        $resultString = implode(', ', json_decode(json_encode($order_data), true));
+        $resultArray = explode(', ', $resultString);
+        $finalArray = explode(',', $resultArray[10]);
+        var_dump($finalArray);
+        foreach ($finalArray as $entry_id) {
+            $this->userModel->removeAvailability($entry_id);
+        }
+        $this->userModel->changeOrderStatus($order_id, 'Cancelled');
+        redirect('users/orders');
     }
 
     public function edit()
@@ -245,7 +264,7 @@ class Users extends Controller
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
                 $bool = move_uploaded_file($tmp_name, $img_upload_path);
             }
             $data = [
@@ -515,12 +534,97 @@ class Users extends Controller
         $this->view('users/cart',$data);
     }
 
+
+    public function getSuborderDetails($suborders, $suborderID) {
+        foreach ($suborders as $suborder) {
+            if ($suborder['sorder_id'] == $suborderID) {
+                return $suborder;
+            }
+        }
+        return null;
+    }
+
+    public function orders(){
+        $orders = $this->userModel->getOrders($_SESSION['user_id']);
+        $completeOrders = $this->userModel->getCompleteOrders($_SESSION['user_id']);
+        $order_objects = [];
+        $today = strtotime(date("Y-m-d"));
+    
+        foreach ($orders as $order) {
+            $startDateTimestamp = strtotime($order->start_date);
+            $endDateTimestamp = strtotime($order->end_date);
+            if ($today >= $startDateTimestamp && $today <= $endDateTimestamp) {
+                $order->status = 'In-Progress';
+                $this->userModel->changeOrderStatus($order->sorder_id, 'In-Progress');
+            } elseif ($today > $endDateTimestamp) {
+                $order->status = 'Completed';
+                $this->userModel->changeOrderStatus($order->sorder_id, 'Completed');
+            }
+            $user_data = json_decode(json_encode($this->userModel->view($order->user_id)), true);
+            $product_data = json_decode(json_encode($this->userModel->getProductData($order->product_id)), true);
+            $serviceprovider_data = json_decode(json_encode($this->userModel->getServiceProviderData($order->serviceprovider_id)), true);
+            $order_data = json_decode(json_encode($order), true);
+            $order_data = array_merge($order_data, $user_data, $product_data, $serviceprovider_data); 
+            $order_objects[] = $order_data;
+        }
+    
+        $result = [];
+    
+        foreach ($completeOrders as $order) {
+            $orderDetails = $order;
+            $orderSuborderIDs = explode(',', $order->sorder_id);
+    
+            foreach ($orderSuborderIDs as $suborderID) {
+                $suborderDetails = $this->getSuborderDetails($order_objects, $suborderID);
+    
+                $orderIndex = array_search($orderDetails, array_column($result, 'order'));
+    
+                if ($orderIndex !== false) {
+                    // Order already exists, add the suborder to the existing order
+                    $result[$orderIndex]['suborders'][] = $suborderDetails;
+                } else {
+                    // Order doesn't exist, create a new entry
+                    $result[] = [
+                        'order' => $orderDetails,
+                        'suborders' => [$suborderDetails],
+                    ];
+                }
+            }
+        }
+        $user_data = json_decode(json_encode($this->userModel->view($order->user_id)), true);
+        $data = [
+            'orders' => $result,
+            'user_data' => $user_data
+        ];
+        
+        $this->view('users/orders', $data);
+    }
+    
+    
+
     public function placeOrder(){
         $cart = $this->userModel->cart($_SESSION['user_id']);
         $sorder_id = '';
+        $avail_ids = '';
         $total = 0; 
         foreach ($cart as $cartItem){
             $product_data = $this->userModel->viewItem($cartItem->product_id);
+            $startDateObj = new DateTime($cartItem->start_date);
+            $endDateObj = new DateTime($cartItem->end_date);
+            while ($startDateObj <= $endDateObj) {
+                $avail_data = [
+                    'product_id' => $cartItem->product_id,
+                    'date' => $startDateObj->format('Y-m-d'),
+                    'quantity' => $cartItem->quantity
+                ];
+                $entry_id = $this->userModel->setAvailability($avail_data);
+                if($avail_ids == ''){
+                    $avail_ids .= $entry_id;
+                } else {
+                    $avail_ids .= ','.$entry_id;
+                }
+                $startDateObj->add(new DateInterval('P1D'));
+            }
             $data = [
                 'user_id' => $_SESSION['user_id'],
                 'serviceprovider_id' => $product_data->created_by,
@@ -530,19 +634,9 @@ class Users extends Controller
                 'end_date' => $cartItem->end_date,
                 'days' => $cartItem->days,
                 'total' => $cartItem->total,
-                'status' => 'pending'
+                'status' => 'Pending',
+                'avail' => $avail_ids
             ];
-            $startDateObj = new DateTime($cartItem->start_date);
-            $endDateObj = new DateTime($cartItem->end_date);
-            while ($startDateObj <= $endDateObj) {
-                $avail_data = [
-                    'product_id' => $cartItem->product_id,
-                    'date' => $startDateObj->format('Y-m-d'),
-                    'quantity' => $cartItem->quantity
-                ];
-                $this->userModel->setAvailability($avail_data);
-                $startDateObj->add(new DateInterval('P1D'));
-            }
             $total = $total + $cartItem->total;
             $this->userModel->placeOrder($data);
             $result = $this->userModel->getSubOrderId($data);
@@ -631,6 +725,11 @@ class Users extends Controller
         $data = $this->userModel->viewItem($product_id);
         $reviews = $this->userModel->viewreviews($product_id);
         $user = $this->userModel->view($_SESSION['user_id']);
+        $purchased = false;
+        $productPurchased = $this->userModel->checkProductPurchased($product_id, $_SESSION['user_id'], 'Completed');
+        if($productPurchased){
+            $purchased = true;
+        }
         if($reviews){
             $count = 0;
             $star1 = 0;
@@ -702,7 +801,8 @@ class Users extends Controller
             'availability' => $availability,
             'quantity_selected' => $data_selected['quantity'],
             'start_date' => $data_selected['start_date'],
-            'end_date' => $data_selected['end_date']
+            'end_date' => $data_selected['end_date'],
+            'purchased' => $purchased
         ];
         $this->view('users/viewItem',$data);
     } else {
@@ -714,6 +814,7 @@ class Users extends Controller
             $data = $this->userModel->viewItem($product_id);
             $reviews = $this->userModel->viewreviews($product_id);
             $user = $this->userModel->view($_SESSION['user_id']);
+            $purchased = false;
             if($reviews){
                 $count = 0;
                 $star1 = 0;
@@ -755,6 +856,10 @@ class Users extends Controller
                 $count = 0;
             }
 
+            $productPurchased = $this->userModel->checkProductPurchased($product_id, $_SESSION['user_id'], 'Completed');
+            if($productPurchased){
+                $purchased = true;
+            }
         if($data){
             $data =[
                 'product_id'=>$data->product_id,
@@ -785,7 +890,8 @@ class Users extends Controller
                 'availability' => 'notChecked',
                 'quantity_selected' => '',
                 'start_date' => '',
-                'end_date' => ''
+                'end_date' => '',
+                'purchased' => $purchased
             ];
             $this->view('users/viewItem',$data);
         } else {
