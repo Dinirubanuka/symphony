@@ -223,6 +223,30 @@ class ServiceProvider
 
     }
 
+    public function getUserData($id)
+    {
+        $this->db->query('SELECT * FROM users WHERE id = :id');
+        $this->db->bind(':id', $id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function getProductData($product_id)
+    {
+        $this->db->query('SELECT * FROM products WHERE product_id = :product_id');
+        $this->db->bind(':product_id', $product_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function getOrders($serviceprovider_id)
+    {
+        $this->db->query('SELECT * FROM suborder WHERE serviceprovider_id = :serviceprovider_id');
+        $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+    
     public function editStudio($product_id, $data)
     {
         try {
@@ -242,13 +266,46 @@ class ServiceProvider
             } else {
                 return false;
             }
+        } catch (PDOException $e) {
+            echo "Database error: " . $e->getMessage();
+            return false;
+        }
+    }
+    
 
+    public function changeOrderStatus($sorder_id, $status)
+    {
+        try {
+            $this->db->query('UPDATE suborder SET status = :status WHERE sorder_id = :sorder_id');
+            $this->db->bind(':status', $status);
+            $this->db->bind(':sorder_id', $sorder_id);
+            $this->db->execute();
+            return true;
 
         } catch (PDOException $e) {
             echo "Database error: " . $e->getMessage();
             return false;
         }
+    }
 
+    public function getOrderData($sorder_id)
+    {
+        $this->db->query('SELECT * FROM suborder WHERE sorder_id = :sorder_id');
+        $this->db->bind(':sorder_id', $sorder_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function removeAvailability($entry_id)
+    {
+        $this->db->query('DELETE FROM availability WHERE entry_id = :entry_id');
+        $this->db->bind(':entry_id', $entry_id);
+        // Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // Regsiter user

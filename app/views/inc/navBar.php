@@ -137,7 +137,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a class="nav-link" href="/">Orders</a></li>
+                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/orders">Orders</a></li>
                     <li><a class="nav-link" href="/">Bookmarks</a></li>
                     <li><a class="nav-link" href="/">About</a></li>
                 </ul>
@@ -149,8 +149,11 @@
 <!--                    <input type="search" name="search" placeholder="Search" id = "search-item"/>-->
 <!--                    <i class="bx bx-search" aria-hidden="true"></i>-->
 <!--                </form>-->
-                <div class="cart">
+                <a href="<?php echo URLROOT; ?>/users/Instrument">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                </a>
 
+                <div class="cart">
                 </div>
                 <div class="notification">
                     <i class="fa-solid fa-bell"></i>

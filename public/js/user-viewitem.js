@@ -46,3 +46,5 @@ function changeRating(){
   starRatingWrapper.title = percentage;
   frontStars.style.width = percentage;
 }
+
+

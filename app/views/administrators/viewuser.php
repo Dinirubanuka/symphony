@@ -19,9 +19,6 @@
 <div class="mod">
     <div class="mod-above">
         <h2>Moderators</h2>
-        <a href="<?php echo URLROOT; ?>/administrators/addmoderator">
-            <button>Add Moderator</button>
-        </a>
     </div>
     <div class="mod-below">
         <table class="data-table">
@@ -30,25 +27,19 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Contact Number</th>
-                <th>NIC Number</th>
-                <th>Type</th>
+                <th>Address</th>
             </tr>
-            <?php foreach ($data['moderators'] as $moderator) : ?>
+            <?php foreach ($data['users'] as $user) : ?>
                 <tr class="data-table-tr">
-                    <td><?php echo $moderator->moderator_id; ?></td>
-                    <td><?php echo $moderator->moderator_name; ?></td>
-                    <td><?php echo $moderator->moderator_email; ?></td>
-                    <td><?php echo $moderator->moderator_contact_no; ?></td>
-                    <td><?php echo $moderator->moderator_nic; ?></td>
-                    <td><?php echo $moderator->type; ?></td>
+                    <td><?php echo $user->id; ?></td>
+                    <td><?php echo $user->name; ?></td>
+                    <td><?php echo $user->email; ?></td>
+                    <td><?php echo $user->TelephoneNumber; ?></td>
+                    <td><?php echo $user->address; ?></td>
                     <td class="data-table-action">
 
-                    <a class="mod-below-delete" onclick="deleteModerator(<?php echo $moderator->moderator_id; ?>)">
+                    <a class="mod-below-delete" onclick="deleteUser(<?php echo $user->id; ?>)">
                         <i class='bx bx-trash'></i>
-                    </a>
-
-                    <a href="<?php echo URLROOT; ?>/administrators/editmoderator/<?php echo $moderator->moderator_id; ?>" class="mod-below-edit">
-                        <i class='bx bx-edit'></i>
                     </a>
                     </td>
                 </tr>
@@ -60,11 +51,11 @@
 </div>
 </div>
 <script>
-    function deleteModerator(moderatorId) {
+    function deleteUser(userID) {
         // Display a confirmation dialog
-        if (confirm("Are you sure you want to delete this moderator?")) {
+        if (confirm("Are you sure you want to delete this user?")) {
             // Execute PHP code to delete the moderator
-            window.location.href = "<?php echo URLROOT; ?>/administrators/deletemoderator/" + moderatorId;
+            window.location.href = "<?php echo URLROOT; ?>/administrators/deleteuser/" + userID;
         }
     }
 </script>
