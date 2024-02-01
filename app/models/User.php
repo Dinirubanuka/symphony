@@ -282,6 +282,16 @@ class User
         return $results;
     }
 
+    public function checkProductPurchased($product_id, $user_id, $status)
+    {
+        $this->db->query('SELECT * FROM suborder WHERE product_id = :product_id AND user_id = :user_id AND status = :status');
+        $this->db->bind(':product_id', $product_id);
+        $this->db->bind(':user_id', $user_id);
+        $this->db->bind(':status', $status);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
     public function checkAvailability($data_check)
     {
         $this->db->query('SELECT * FROM availability WHERE product_id = :product_id AND date = :date');

@@ -149,6 +149,9 @@
                                     <input type="search" name="search" placeholder="Search" id = "search-item"/>
                                     <i class="bx bx-search" aria-hidden="true"></i>
                                 </form>
+                <a href="<?php echo URLROOT; ?>/users/index">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                </a>
                 <div class="cart">
 
                 </div>

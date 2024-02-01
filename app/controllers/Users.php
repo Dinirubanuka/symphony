@@ -69,7 +69,7 @@ class Users extends Controller
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
                 $bool = move_uploaded_file($tmp_name, $img_upload_path);
                 if ($this->userModel->photoUpdate($new_img_name)) {
                     // flash('register_success', 'You are registered and can log in');
@@ -264,7 +264,7 @@ class Users extends Controller
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
                 $bool = move_uploaded_file($tmp_name, $img_upload_path);
             }
             $data = [
@@ -725,6 +725,11 @@ class Users extends Controller
         $data = $this->userModel->viewItem($product_id);
         $reviews = $this->userModel->viewreviews($product_id);
         $user = $this->userModel->view($_SESSION['user_id']);
+        $purchased = false;
+        $productPurchased = $this->userModel->checkProductPurchased($product_id, $_SESSION['user_id'], 'Completed');
+        if($productPurchased){
+            $purchased = true;
+        }
         if($reviews){
             $count = 0;
             $star1 = 0;
@@ -796,7 +801,8 @@ class Users extends Controller
             'availability' => $availability,
             'quantity_selected' => $data_selected['quantity'],
             'start_date' => $data_selected['start_date'],
-            'end_date' => $data_selected['end_date']
+            'end_date' => $data_selected['end_date'],
+            'purchased' => $purchased
         ];
         $this->view('users/viewItem',$data);
     } else {
@@ -808,6 +814,7 @@ class Users extends Controller
             $data = $this->userModel->viewItem($product_id);
             $reviews = $this->userModel->viewreviews($product_id);
             $user = $this->userModel->view($_SESSION['user_id']);
+            $purchased = false;
             if($reviews){
                 $count = 0;
                 $star1 = 0;
@@ -849,6 +856,10 @@ class Users extends Controller
                 $count = 0;
             }
 
+            $productPurchased = $this->userModel->checkProductPurchased($product_id, $_SESSION['user_id'], 'Completed');
+            if($productPurchased){
+                $purchased = true;
+            }
         if($data){
             $data =[
                 'product_id'=>$data->product_id,
@@ -879,7 +890,8 @@ class Users extends Controller
                 'availability' => 'notChecked',
                 'quantity_selected' => '',
                 'start_date' => '',
-                'end_date' => ''
+                'end_date' => '',
+                'purchased' => $purchased
             ];
             $this->view('users/viewItem',$data);
         } else {

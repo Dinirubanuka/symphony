@@ -9,19 +9,6 @@
       $this->view('administrators/index');
     }
 
-    //view profile
-    public function profile(){
-      $administrator = $this->administratorModel->view($_SESSION['administrator_id']);
-      $data =[
-        'admin_name'=>$administrator->admin_name,
-        'admin_email'=>$administrator->admin_email,
-        'admin_contact_no'=>$administrator->admin_contact_no,
-        'admin_nic'=>$administrator->admin_nic,
-        'admin_address'=>$administrator->	admin_address,
-      ];
-      $this->view('administrators/profile',$data);
-    }
-
     public function register(){
       // Check for POST
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -138,114 +125,6 @@
       }
     }
 
-  //   public function editDetail($id){
-  //     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-  //      $administrator = $this->administratorModel->view($_SESSION['administrator_id']);
-  //     $data =[
-  //       'name'=>$administrator->name,
-  //       'email'=>$administrator->email,
-  //       'admin_contact_no'=>$administrator->TelephoneNumber,
-  //       'date'=>$administrator->BirthDate,
-  //       'address'=>$administrator->address,
-  //     ];
-  //     $this->view('administrators/edit',$data);
-  //   }else {
-  //   $this->view('administrators/edit',$data);
-  //   }
-  // }
-
-  //   public function edit(){
-  //      if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        
-  //       // Sanitize POST data
-  //       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-  //       $data =[
-  //         'name' => trim($_POST['name']),
-  //         'email' => trim($_POST['email']),
-  //         'admin_contact_no' => trim($_POST['admin_contact_no']),
-  //         'date' => trim($_POST['date']),
-  //         'address' => trim($_POST['address']),
-  //         'name_err' => '',
-  //         'email_err' => '',
-  //         'admin_contact_no_err' =>'',
-  //         'date_err' =>'',
-  //         'address_err' => '',
-  //       ];
-
-  //       // Validate Email
-  //       if(empty($data['email'])){
-  //         $data['email_err'] = 'Pleae enter email';
-  //       } else {
-  //         // Check email
-  //         $existingadministrator = $this->administratorModel->findadministratorByEmailEdit($data['email']);
-  //         if ($existingadministrator && $existingadministrator->id !== $_SESSION['administrator_id']) {
-  //         $data['email_err'] = 'Email is already taken';
-  //       }
-  //       }
-         
-
-  //       // Validate Name
-  //       if(empty($data['name'])){
-  //         $data['name_err'] = 'Pleae enter name';
-  //       }
-
-  //       // Validate telephone number
-  //       if(empty($data['admin_contact_no'])){
-  //         $data['admin_contact_no_err'] = 'Pleae enter telephone number';
-  //       }
-
-  //       // Validate Address
-  //       if(empty($data['address'])){
-  //         $data['address_err'] = 'Pleae enter address';
-  //       }
-
-  //       // Validate Date
-  //       if(empty($data['date'])){
-  //         $data['date_err'] = 'Pleae enter date';
-  //       }
-  //       // Make sure errors are empty
-  //       if(empty($data['email_err']) && empty($data['name_err']) && empty($data['admin_contact_no_err']) && empty($data['date_err']) && empty($data['address_err'])){
-  //         // Validated
-
-  //         // Update administrator
-         
-  //         if($this->administratorModel->update($data)){
-  //           // flash('register_success', 'You are registered and can log in');
-  //           redirect('administrators/profile');
-  //         }
-  //         else {
-  //           die('Something went wrong');
-  //         }
-  //       }else{
-  //           $this->view('administrators/edit', $data);
-  //     }
-      
-  //   }else {
-      
-  //     redirect('administrators/profile');
-  //   }
-  //   }
-
-  //   public function delete(){
-  //     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-  //       if($this->administratorModel->delete($_SESSION['administrator_id'])){
-  //         unset($_SESSION['administrator_id']);
-  //         unset($_SESSION['administrator_email']);
-  //         unset($_SESSION['administrator_name']);
-  //         session_destroy();
-  //         redirect('pages/index');
-  //       }
-  //       else {
-  //         die('Something went wrong');
-  //       }
-  //     }
-  //     else {
-  //       redirect('administrators/profile');
-  //     }
-  //   }
-  
-
     public function login(){
       // Check for POST
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -313,6 +192,54 @@
       }
     }
 
+    public function viewmoderator(){
+      $moderators = $this->administratorModel->getModerators();
+      $data = [
+        'moderators' => $moderators
+      ];
+      $this->view('administrators/viewmoderator', $data);
+    }
+
+    public function viewuser(){
+      $users = $this->administratorModel->getUsers();
+      $data = [
+        'users' => $users
+      ];
+      $this->view('administrators/viewuser', $data);
+    }
+
+    public function viewserviceprovider(){
+      $serviceproviders = $this->administratorModel->getServiceProviders();
+      $data = [
+        'serviceproviders' => $serviceproviders
+      ];
+      $this->view('administrators/viewserviceprovider', $data);
+    }
+
+    public function deletemoderator($id){
+      if($this->administratorModel->deleteModerator($id)){
+        redirect('administrators/viewmoderator');
+      } else {
+        die('Something went wrong');
+      }
+    }
+
+    public function deleteuser($id){
+      if($this->administratorModel->deleteUser($id)){
+        redirect('administrators/viewuser');
+      } else {
+        die('Something went wrong');
+      }
+    }
+
+    public function deleteserviceprovider($id){
+      if($this->administratorModel->deleteServiceProvider($id)){
+        redirect('administrators/viewserviceprovider');
+      } else {
+        die('Something went wrong');
+      }
+    }
+
     public function createadministratorSession($administrator){
       
       $_SESSION['administrator_id'] = $administrator->admin_id;
@@ -327,7 +254,7 @@
       unset($_SESSION['administrator_email']);
       unset($_SESSION['administrator_name']);
       session_destroy();
-      redirect('pages/index');
+      redirect('administrators/login');
     }
 
     public function addmoderator(){

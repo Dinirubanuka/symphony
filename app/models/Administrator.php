@@ -57,6 +57,64 @@
       
       }
 
+      public function getModerators(){
+        $this->db->query('SELECT * FROM moderators');
+        $results = $this->db->resultSet();
+        return $results;
+      }
+
+      public function deleteModerator($moderator_id){
+        $this->db->query('DELETE FROM moderators WHERE moderator_id = :moderator_id');
+        // Bind values
+        $this->db->bind(':moderator_id', $moderator_id);
+  
+        // Execute
+        if($this->db->execute()){
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      public function getUsers(){
+        $this->db->query('SELECT * FROM users');
+        $results = $this->db->resultSet();
+        return $results;
+      }
+      
+      
+      public function deleteUser($id){
+        $this->db->query('DELETE FROM users WHERE id = :id');
+        // Bind values
+        $this->db->bind(':id', $id);
+  
+        // Execute
+        if($this->db->execute()){
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      public function getServiceProviders(){
+        $this->db->query('SELECT * FROM serviceproviders');
+        $results = $this->db->resultSet();
+        return $results;
+      }
+
+      public function deleteServiceProvider($serviceprovider_id){
+        $this->db->query('DELETE FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id');
+        // Bind values
+        $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+  
+        // Execute
+        if($this->db->execute()){
+          return true;
+        } else {
+          return false;
+        }
+      }
+
 
     public function view($admin_id){
       $this->db->query('SELECT * FROM administrators WHERE admin_id = :admin_id'); 
@@ -64,42 +122,6 @@
       $results = $this->db->single();
       return $results;
     }
-
-//  public function update($data){
-//     try {
-//         $this->db->query('UPDATE users SET name  = :name , email = :email , TelephoneNumber = :TelephoneNumber , BirthDate = :BirthDate , address = :address WHERE id = :id');
-//         // Bind values
-//         $this->db->bind(':name', $data['name']);
-//         $this->db->bind(':email', $data['email']);
-//         $this->db->bind(':TelephoneNumber', $data['tel_Number']);
-//         $this->db->bind(':BirthDate', $data['date']);
-//         $this->db->bind(':address', $data['address']);
-//         $this->db->bind(':id', $_SESSION['user_id']);
-//         // Execute
-//         if($this->db->execute()){
-//             return true;
-//         } else {
-//             return false;
-//         }
-//     } catch (PDOException $e) {
-//         // Print the exception message
-//         echo "Database error: " . $e->getMessage();
-//         return false;
-//     }
-//   }
-
-    // public function delete($id){
-    //   $this->db->query('DELETE FROM users WHERE id = :id');
-    //   $this->db->bind(':id', $id);
-
-    //   // Execute
-    //   if($this->db->execute()){
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // }
-
 
     // Login User
     public function login($admin_email, $password){
@@ -146,21 +168,6 @@
         return false;
       }
     }
-
-    //  public function findUserByEmailEdit($email){
-    //   $this->db->query('SELECT * FROM users WHERE email = :email');
-    //   // Bind value
-    //   $this->db->bind(':email', $email);
-
-    //   $row = $this->db->single();
-
-    //   // Check row
-    //   if($this->db->rowCount() > 0){
-    //     return $row;
-    //   } else {
-    //     return false;
-    //   }
-    // }
 
     // Get User by ID
     public function getAdministratorById($admin_id){

@@ -140,24 +140,6 @@
                 Musicians
             </div>
         </div>
-        <div class="item">
-            <img src="<?php echo URLROOT; ?>/img/lighting.jpg" onclick="callFunction('Lighting')">
-            <div class="content">
-                Lighting
-            </div>
-        </div>
-        <div class="item">
-            <img src="<?php echo URLROOT; ?>/img/decoration.jpg" onclick="callFunction('Decoration')">
-            <div class="content">
-                Decoration
-            </div>
-        </div>
-        <div class="item">
-            <img src="<?php echo URLROOT; ?>/img/repair.jpg" onclick="callFunction('Repair')">
-            <div class="content">
-                Repair
-            </div>
-        </div>
     </div>
 </div>
 <script src="<?php echo URLROOT;?>/js/user-index.js"></script>

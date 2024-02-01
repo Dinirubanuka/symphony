@@ -58,6 +58,67 @@ class ServiceProvider
 
     }
 
+    public function addStudio($data)
+    {
+        try {
+            $this->db->query('INSERT INTO studio (created_by, Title, instrument, descriptionSounds, descriptionStudio, location, telephoneNumber, videoLink, photo_1, photo_2, photo_3, airCondition, unit_price) VALUES (:created_by, :name, :instrument,:descriptionSounds, :descriptionStudio, :location, :telephoneNumber, :videoLink, :photo_1, :photo_2, :photo_3, :airCondition, :unit_price)');
+            $this->db->bind(':created_by', $_SESSION['serviceprovider_id']);
+            $this->db->bind(':name', $data['name']);
+            $this->db->bind(':location', $data['location']);
+            $this->db->bind(':unit_price', $data['rate']);
+            $this->db->bind(':airCondition', $data['airCondition']);
+            $this->db->bind(':instrument', $data['instrument']);
+            $this->db->bind(':descriptionSounds', $data['descriptionSounds']);
+            $this->db->bind(':descriptionStudio', $data['descriptionStudio']);
+            $this->db->bind(':telephoneNumber', $data['telephoneNumber']);
+            $this->db->bind(':videoLink', $data['videoLink']);
+            $this->db->bind(':photo_1', $data['photo_1']);
+            $this->db->bind(':photo_2', $data['photo_2']);
+            $this->db->bind(':photo_3', $data['photo_3']);
+
+            // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function addSinger($data)
+    {
+        try {
+            $this->db->query('INSERT INTO singer (created_by, name, NickName, email, description, instrument, location, telephoneNumber, videoLink, photo_1, photo_2, photo_3, singerPhoto, unit_price) VALUES (:created_by, :name, :NickName, :email, :description, :instrument, :location, :telephoneNumber, :videoLink, :photo_1, :photo_2, :photo_3, :singer_photo, :unit_price)');
+            $this->db->bind(':created_by', $_SESSION['serviceprovider_id']);
+            $this->db->bind(':name', $data['name']);
+            $this->db->bind(':NickName', $data['NickName']);
+            $this->db->bind(':telephoneNumber', $data['telephoneNumber']);
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':unit_price', $data['rate']);
+            $this->db->bind(':location', $data['location']);
+            $this->db->bind(':instrument', $data['instrument']);
+            $this->db->bind(':description', $data['description']);
+            $this->db->bind(':videoLink', $data['videoLink']);
+            $this->db->bind(':photo_1', $data['photo_1']);
+            $this->db->bind(':photo_2', $data['photo_2']);
+            $this->db->bind(':photo_3', $data['photo_3']);
+            $this->db->bind(':singer_photo', $data['singer_photo']);
+
+            // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function editPhoto($product_id, $data, $photo_num)
     {
         if ($photo_num == 'photo_1') {
@@ -84,6 +145,42 @@ class ServiceProvider
         } else if ($photo_num == 'photo_3') {
             try {
                 $this->db->query('UPDATE products SET photo_3 = :photo_3 WHERE product_id = :product_id');
+                $this->db->bind(':photo_3', $data['photo_3']);
+                $this->db->bind(':product_id', $product_id);
+                $this->db->execute();
+            } catch (PDOException $e) {
+                echo "Database error: " . $e->getMessage();
+                return false;
+            }
+        }
+    }
+
+    public function editStudioPhoto($product_id, $data, $photo_num)
+    {
+        if ($photo_num == 'photo_1') {
+            try {
+                $this->db->query('UPDATE studio SET photo_1 = :photo_1 WHERE product_id = :product_id');
+                $this->db->bind(':photo_1', $data['photo_1']);
+                $this->db->bind(':product_id', $product_id);
+                $this->db->execute();
+            } catch (PDOException $e) {
+                echo "Database error: " . $e->getMessage();
+                return false;
+            }
+        } else if ($photo_num == 'photo_2') {
+            try {
+                $this->db->query('UPDATE studio SET photo_2 = :photo_2 WHERE product_id = :product_id');
+                $this->db->bind(':photo_2', $data['photo_2']);
+                $this->db->bind(':product_id', $product_id);
+                $this->db->execute();
+            } catch (PDOException $e) {
+                echo "Database error: " . $e->getMessage();
+                return false;
+            }
+
+        } else if ($photo_num == 'photo_3') {
+            try {
+                $this->db->query('UPDATE studio SET photo_3 = :photo_3 WHERE product_id = :product_id');
                 $this->db->bind(':photo_3', $data['photo_3']);
                 $this->db->bind(':product_id', $product_id);
                 $this->db->execute();
@@ -150,6 +247,31 @@ class ServiceProvider
         return $results;
     }
     
+    public function editStudio($product_id, $data)
+    {
+        try {
+            $this->db->query('UPDATE studio SET Title =:name , instrument = :instrument, descriptionSounds = :descriptionSounds, descriptionStudio =:descriptionStudio, videoLink =:videoLink, airCondition =:airCondition, unit_price =:unit_price WHERE product_id = :product_id');
+            $this->db->bind(':name', $data['name']);
+            $this->db->bind(':unit_price', $data['rate']);
+            $this->db->bind(':airCondition', $data['airCondition']);
+            $this->db->bind(':instrument', $data['instrument']);
+            $this->db->bind(':descriptionSounds', $data['descriptionSounds']);
+            $this->db->bind(':descriptionStudio', $data['descriptionStudio']);
+            $this->db->bind(':videoLink', $data['videoLink']);
+            $this->db->bind(':product_id', $product_id);
+
+            // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Database error: " . $e->getMessage();
+            return false;
+        }
+    }
+    
 
     public function changeOrderStatus($sorder_id, $status)
     {
@@ -159,6 +281,7 @@ class ServiceProvider
             $this->db->bind(':sorder_id', $sorder_id);
             $this->db->execute();
             return true;
+
         } catch (PDOException $e) {
             echo "Database error: " . $e->getMessage();
             return false;
@@ -297,6 +420,31 @@ class ServiceProvider
             return false;
         }
     }
+    public function deleteSinger($product_id)
+    {
+        $this->db->query('DELETE FROM singer WHERE product_id = :product_id');
+        $this->db->bind(':product_id', $product_id);
+
+        // Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function deleteStudio($product_id)
+    {
+        $this->db->query('DELETE FROM studio WHERE product_id = :product_id');
+        $this->db->bind(':product_id', $product_id);
+
+        // Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function inventory($created_by)
     {
@@ -304,6 +452,75 @@ class ServiceProvider
         $this->db->bind(':created_by', $created_by);
         $results = $this->db->resultSet();
         return $results;
+    }
+
+    public function studio($created_by)
+    {
+        $this->db->query('SELECT * FROM studio WHERE created_by = :created_by');
+        $this->db->bind(':created_by', $created_by);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function singer($created_by)
+    {
+        $this->db->query('SELECT * FROM singer WHERE created_by = :created_by');
+        $this->db->bind(':created_by', $created_by);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function band($created_by)
+    {
+        $this->db->query('SELECT * FROM band WHERE created_by = :created_by');
+        $this->db->bind(':created_by', $created_by);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function viewSinger($created_by)
+    {
+        $this->db->query('SELECT * FROM singer WHERE product_id = :created_by');
+        $this->db->bind(':created_by', $created_by);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function editSingerPhoto($id, $data){
+        try {
+            $this->db->query('UPDATE singer SET singerPhoto = :singerPhoto WHERE product_id = :product_id');
+            $this->db->bind(':singerPhoto', $data['singerPhoto']);
+            $this->db->bind(':product_id', $id);
+            $this->db->execute();
+        } catch (PDOException $e) {
+            echo "Database error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function updateSinger($data){
+        try{
+            $this->db->query('UPDATE singer SET name = :name , nickName = :NickName , telephoneNumber = :telephoneNumber , email = :email , unit_price = :rate , instrument = :instrument , location = :location , videoLink = :videoLink , description = :description WHERE product_id = :product_id' );
+            $this->db->bind(':product_id', $data['product_id']);
+            $this->db->bind(':name', $data['name']);
+            $this->db->bind(':NickName', $data['NickName']);
+            $this->db->bind(':telephoneNumber', $data['telephoneNumber']);
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':rate', $data['rate']);
+            $this->db->bind(':instrument', $data['instrument']);
+            $this->db->bind(':location', $data['location']);
+            $this->db->bind(':videoLink', $data['videoLink']);
+            $this->db->bind(':description', $data['description']);
+
+            // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }catch (PDOException $e){
+            die($e->getMessage());
+        }
     }
 
     public function verificationNumber($finalNumber)

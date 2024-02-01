@@ -6,6 +6,7 @@
     <title>Cart</title>
 
     <!-- Style CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-cart.css">
   </head>
   <body>
@@ -15,8 +16,11 @@
      <!-- Start DEMO HTML (Use the following code into your project)-->
 <header id="site-header">
 		<div class="container">
-			<h1>Cart</h1>
+			<h1><a href="<?php echo URLROOT; ?>/users/index">
+        	<i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+			Cart</h1>
 		</div>
+		
 	</header>
 
 	<div class="container">

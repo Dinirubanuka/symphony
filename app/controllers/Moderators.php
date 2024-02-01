@@ -23,114 +23,6 @@
       $this->view('moderators/profile',$data);
     }
 
-  //   public function editDetail($id){
-  //     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-  //      $moderator = $this->moderatorModel->view($_SESSION['moderator_id']);
-  //     $data =[
-  //       'name'=>$moderator->name,
-  //       'email'=>$moderator->email,
-  //       'moderator_contact_no'=>$moderator->TelephoneNumber,
-  //       'date'=>$moderator->BirthDate,
-  //       'address'=>$moderator->address,
-  //     ];
-  //     $this->view('moderators/edit',$data);
-  //   }else {
-  //   $this->view('moderators/edit',$data);
-  //   }
-  // }
-
-  //   public function edit(){
-  //      if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        
-  //       // Sanitize POST data
-  //       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-  //       $data =[
-  //         'name' => trim($_POST['name']),
-  //         'email' => trim($_POST['email']),
-  //         'moderator_contact_no' => trim($_POST['moderator_contact_no']),
-  //         'date' => trim($_POST['date']),
-  //         'address' => trim($_POST['address']),
-  //         'name_err' => '',
-  //         'email_err' => '',
-  //         'moderator_contact_no_err' =>'',
-  //         'date_err' =>'',
-  //         'address_err' => '',
-  //       ];
-
-  //       // Validate Email
-  //       if(empty($data['email'])){
-  //         $data['email_err'] = 'Pleae enter email';
-  //       } else {
-  //         // Check email
-  //         $existingmoderator = $this->moderatorModel->findmoderatorByEmailEdit($data['email']);
-  //         if ($existingmoderator && $existingmoderator->id !== $_SESSION['moderator_id']) {
-  //         $data['email_err'] = 'Email is already taken';
-  //       }
-  //       }
-         
-
-  //       // Validate Name
-  //       if(empty($data['name'])){
-  //         $data['name_err'] = 'Pleae enter name';
-  //       }
-
-  //       // Validate telephone number
-  //       if(empty($data['moderator_contact_no'])){
-  //         $data['moderator_contact_no_err'] = 'Pleae enter telephone number';
-  //       }
-
-  //       // Validate Address
-  //       if(empty($data['address'])){
-  //         $data['address_err'] = 'Pleae enter address';
-  //       }
-
-  //       // Validate Date
-  //       if(empty($data['date'])){
-  //         $data['date_err'] = 'Pleae enter date';
-  //       }
-  //       // Make sure errors are empty
-  //       if(empty($data['email_err']) && empty($data['name_err']) && empty($data['moderator_contact_no_err']) && empty($data['date_err']) && empty($data['address_err'])){
-  //         // Validated
-
-  //         // Update moderator
-         
-  //         if($this->moderatorModel->update($data)){
-  //           // flash('register_success', 'You are registered and can log in');
-  //           redirect('moderators/profile');
-  //         }
-  //         else {
-  //           die('Something went wrong');
-  //         }
-  //       }else{
-  //           $this->view('moderators/edit', $data);
-  //     }
-      
-  //   }else {
-      
-  //     redirect('moderators/profile');
-  //   }
-  //   }
-
-  //   public function delete(){
-  //     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-  //       if($this->moderatorModel->delete($_SESSION['moderator_id'])){
-  //         unset($_SESSION['moderator_id']);
-  //         unset($_SESSION['moderator_email']);
-  //         unset($_SESSION['moderator_name']);
-  //         session_destroy();
-  //         redirect('pages/index');
-  //       }
-  //       else {
-  //         die('Something went wrong');
-  //       }
-  //     }
-  //     else {
-  //       redirect('moderators/profile');
-  //     }
-  //   }
-  
-
     public function login(){
       // Check for POST
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -198,6 +90,38 @@
       }
     }
 
+    public function viewuser(){
+      $users = $this->moderatorModel->getUsers();
+      $data = [
+        'users' => $users
+      ];
+      $this->view('moderators/viewuser', $data);
+    }
+
+    public function viewserviceprovider(){
+      $serviceproviders = $this->moderatorModel->getServiceProviders();
+      $data = [
+        'serviceproviders' => $serviceproviders
+      ];
+      $this->view('moderators/viewserviceprovider', $data);
+    }
+
+    public function deleteuser($id){
+      if($this->moderatorModel->deleteUser($id)){
+        redirect('moderators/viewuser');
+      } else {
+        die('Something went wrong');
+      }
+    }
+
+    public function deleteserviceprovider($id){
+      if($this->moderatorModel->deleteServiceProvider($id)){
+        redirect('moderators/viewserviceprovider');
+      } else {
+        die('Something went wrong');
+      }
+    }
+
     public function createmoderatorSession($moderator){
       
       $_SESSION['moderator_id'] = $moderator->moderator_id;
@@ -212,6 +136,6 @@
       unset($_SESSION['moderator_email']);
       unset($_SESSION['moderator_name']);
       session_destroy();
-      redirect('pages/index');
+      redirect('moderators/login');
     }
 }

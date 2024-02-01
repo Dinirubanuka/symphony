@@ -92,7 +92,7 @@
                         <input type="date" id="toDate" name="toDate" value="<?php echo $data['end_date']; ?>" hidden>
                         <input type="number" id="quantity" name="quantity" value="<?php echo $data['quantity_selected']; ?>" hidden>
                     </div>                  
-                    <button id="addToCartBtn">Add to Cart</button>
+                    <button class="<?php echo $data['availability'] === 'available' ? 'addToCartBtn' : 'disabled-button'; ?>" <?php echo $data['availability'] === 'available' ? '' : 'disabled'; ?>>Add to Cart</button>
                     </form>
                 <button id="addToFavoritesBtn">Add to Favorites</button>
             </div>
@@ -221,9 +221,8 @@
         </div>
         <input type="hidden" id="name" name="name" value="<?php echo $data['name']; ?>">
         <input type="hidden" id="photo" name="photo" value="<?php echo $data['photo']; ?>">
-        <textarea rows="5" id="reviewDescription" name="reviewDescription"
-                  placeholder="Enter your review here"></textarea>
-        <button id="submitBtn" action="<?php echo URLROOT; ?>/users/addReview" method="post">Post Review</button>
+        <textarea rows="5" id="reviewDescription" name="reviewDescription" placeholder="Enter your review here" required></textarea>
+        <button class="<?php echo $data['purchased'] ? 'submitBtn' : 'disabled-button'; ?>" action="<?php echo URLROOT; ?>/users/addReview" method="post"  <?php echo $data['purchased'] ? '' : 'disabled'; ?>>Post Review</button>
         </form>
     </div>
 </div>
@@ -298,25 +297,17 @@ function checkAvailability() {
         var addToCartBtn = document.getElementById("addToCartBtn");
         var availabilityMessage = document.getElementById("availabilityMessage");
         if (availability === "notAvailable") {
-            // If the product is not available, disable the "Add to Cart" button
-            addToCartBtn.disabled = true;
             // Display a message in red color
             availabilityMessage.innerHTML = "Product not available!";
             availabilityMessage.style.color = "red";
         } else if (availability === "available") {
-            // If the product is available, enable the "Add to Cart" button
-            addToCartBtn.disabled = false;
             // Display a message in green color
             availabilityMessage.innerHTML = "Product available!";
             availabilityMessage.style.color = "green";
         } else if (availability === "notChecked") {
-            // If the value is "notChecked," disable the "Add to Cart" button
-            addToCartBtn.disabled = true;
             // Clear any previous messages
             availabilityMessage.innerHTML = "";
         }else if (availability === "alreadyInCart") {
-            // If the product is available, enable the "Add to Cart" button
-            addToCartBtn.disabled = true;
             // Display a message in green color
             availabilityMessage.innerHTML = "Product is already in cart!";
             availabilityMessage.style.color = "blue";
