@@ -10,7 +10,7 @@
 </head>
 <body>
 <!-----------profile-nav-bar-------->
-<?php require_once APPROOT . '/views/inc/index-nav.php'; ?>
+<?php require_once APPROOT . '/views/inc/sp-main-nav.php'; ?>
 <div class="slider">
     <!-- list Items -->
     <div class="list">

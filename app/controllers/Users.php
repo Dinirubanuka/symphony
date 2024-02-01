@@ -69,7 +69,7 @@ class Users extends Controller
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
                 $bool = move_uploaded_file($tmp_name, $img_upload_path);
                 if ($this->userModel->photoUpdate($new_img_name)) {
                     // flash('register_success', 'You are registered and can log in');
@@ -264,7 +264,7 @@ class Users extends Controller
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
                 $bool = move_uploaded_file($tmp_name, $img_upload_path);
             }
             $data = [
