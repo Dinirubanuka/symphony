@@ -1,226 +1,141 @@
 <?php
-class Moderators extends Controller
-{
+  class Moderators extends Controller {
     private $moderatorModel;
-    public function __construct()
-    {
-        $this->moderatorModel = $this->model('Moderator');
+    public function __construct(){
+      $this->moderatorModel = $this->model('Moderator');
     }
 
-    public function show()
-    {
-        // Get moderators
-        $moderators = $this->moderatorModel->getModerators();
+    public function index(){
+      $this->view('moderators/index');
+    }
 
-        $data = [
-            'moderators' => $moderators
+    //view profile
+    public function profile(){
+      $moderator = $this->moderatorModel->view($_SESSION['moderator_id']);
+      $data =[
+        'moderator_name'=>$moderator->moderator_name,
+        'moderator_email'=>$moderator->moderator_email,
+        'moderator_contact_no'=>$moderator->moderator_contact_no,
+        'moderator_nic'=>$moderator->moderator_nic,
+        'moderator_address'=>$moderator->moderator_address,
+        'type'=>$moderator->type,
+      ];
+      $this->view('moderators/profile',$data);
+    }
+
+    public function login(){
+      // Check for POST
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        // Process form
+        // Sanitize POST data
+        // $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        
+        // Init data
+        $data =[
+          'moderator_email' => trim($_POST['moderator_email']),
+          'password' => trim($_POST['password']),
+          'moderator_email_err' => '',
+          'password_err' => '',      
         ];
 
-        $this->view('moderators/show', $data);
+        // Validate Email
+        if(empty($data['moderator_email'])){
+          $data['moderator_email_err'] = 'Please enter email';
+        }
+
+        // Validate Password
+        if(empty($data['password'])){
+          $data['password_err'] = 'Please enter password';
+        }
+
+        // Check for moderator/email
+        if($this->moderatorModel->findmoderatorByEmail($data['moderator_email'])){
+          // moderator found
+        } else {
+          // moderator not found
+          $data['moderator_email_err'] = 'No moderator found';
+        }
+
+        // Make sure errors are empty
+        if(empty($data['moderator_email_err']) && empty($data['password_err'])){
+          // Validated
+          // Check and set logged in moderator
+          $loggedInmoderator = $this->moderatorModel->login($data['moderator_email'], $data['password']);
+
+          if($loggedInmoderator){
+            // Create Session
+            $this->createmoderatorSession($loggedInmoderator);
+          } else {
+            $data['password_err'] = 'Password incorrect';
+
+            $this->view('moderators/login', $data);
+          }
+        } else {
+          // Load view with errors
+          $this->view('moderators/login', $data);
+        }
+
+
+      } else {
+        // Init data
+        $data =[    
+          'moderator_email' => '',
+          'password' => '',
+          'moderator_email_err' => '',
+          'password_err' => '',        
+        ];
+
+        // Load view
+        $this->view('moderators/login', $data);
+      }
     }
 
-    public function add()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $data = [
-                'name' => trim($_POST['name']),
-                'email' => trim($_POST['email']),
-                'password' => trim($_POST['password']),
-                'confirm_password' => trim($_POST['confirm_password']),
-                'position' => trim($_POST['position']),
-                'name_err' => '',
-                'email_err' => '',
-                'password_err' => '',
-                'confirm_password_err' => '',
-                'position_err' => ''
-            ];
-
-            // Validate Email
-            if (empty($data['email'])) {
-                $data['email_err'] = 'Please enter email';
-            } else if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-                $data['email_err'] = 'Invalid email format';
-            } else {
-                // Check email
-                if ($this->moderatorModel->findModeratorByEmail($data['email'])) {
-                    $data['email_err'] = 'Email is already taken';
-                }
-            }
-
-
-            // Validate Name
-            if (empty($data['name'])) {
-                $data['name_err'] = 'Please enter name';
-            }
-
-            // Validate Password
-            if (empty($data['password'])) {
-                $data['password_err'] = 'Please enter password';
-            } elseif (strlen($data['password']) < 6) {
-                $data['password_err'] = 'Password must be at least 6 characters';
-            }
-
-            // Validate Confirm Password
-            if (empty($data['confirm_password'])) {
-                $data['confirm_password_err'] = 'Please confirm password';
-            } else {
-                if ($data['password'] != $data['confirm_password']) {
-                    $data['confirm_password_err'] = 'Passwords do not match';
-                }
-            }
-
-            // Validate Position
-            if (empty($data['position'])) {
-                $data['position_err'] = 'Please enter position';
-            }
-
-            // Make sure errors are empty
-            if (empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['position_err'])) {
-                // Validated
-
-                // Hash Password
-                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-
-                // Register Moderator
-                if ($this->moderatorModel->register($data)) {
-                    redirect('moderators/show');
-                } else {
-                    die('Something went wrong');
-                }
-            } else {
-                // Load view with errors
-                $this->view('moderators/add', $data);
-            }
-        } else {
-            // Init data
-            $data = [
-                'name' => '',
-                'email' => '',
-                'password' => '',
-                'confirm_password' => '',
-                'position' => '',
-                'name_err' => '',
-                'email_err' => '',
-                'password_err' => '',
-                'confirm_password_err' => '',
-                'position_err' => ''
-            ];
-
-            // Load view
-            $this->view('moderators/add', $data);
-        }
+    public function viewuser(){
+      $users = $this->moderatorModel->getUsers();
+      $data = [
+        'users' => $users
+      ];
+      $this->view('moderators/viewuser', $data);
     }
 
-    public function edit($id)
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Sanitize POST array
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $data = [
-                'id' => $id,
-                'name' => trim($_POST['name']),
-                'email' => trim($_POST['email']),
-                'password' => trim($_POST['password']),
-                'confirm_password' => trim($_POST['confirm_password']),
-                'position' => trim($_POST['position']),
-                'name_err' => '',
-                'email_err' => '',
-                'password_err' => '',
-                'confirm_password_err' => '',
-                'position_err' => ''
-            ];
-
-            // Validate Email
-            if (empty($data['email'])) {
-                $data['email_err'] = 'Please enter email';
-            } else {
-                // Check email
-                if ($this->moderatorModel->findModeratorByEmail($data['email'])) {
-                    $data['email_err'] = 'Email is already taken';
-                }
-            }
-
-            // Validate Name
-            if (empty($data['name'])) {
-                $data['name_err'] = 'Please enter name';
-            }
-
-            // Validate Password
-            if (empty($data['password'])) {
-                $data['password_err'] = 'Please enter password';
-            } elseif (strlen($data['password']) < 6) {
-                $data['password_err'] = 'Password must be at least 6 characters';
-            }
-
-            // Validate Confirm Password
-            if (empty($data['confirm_password'])) {
-                $data['confirm_password_err'] = 'Please confirm password';
-            } else {
-                if ($data['password'] != $data['confirm_password']) {
-                    $data['confirm_password_err'] = 'Passwords do not match';
-                }
-            }
-
-            // Validate Position
-            if (empty($data['position'])) {
-                $data['position_err'] = 'Please enter position';
-            }
-
-            // Make sure errors are empty
-            if (empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['position_err'])) {
-                // Validated
-
-                // Hash Password
-                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-
-                // Update Moderator
-                if ($this->moderatorModel->updateModerator($data)) {
-                    flash('moderator_message', 'Moderator Updated');
-                    redirect('moderators/show');
-                } else {
-                    die('Something went wrong');
-                }
-            } else {
-                // Load view with errors
-                $this->view('moderators/edit', $data);
-            }
-        } else {
-            // Get existing moderator from model
-            $moderator = $this->moderatorModel->getModeratorById($id);
-
-            $data = [
-                'id' => $id,
-                'name' => $moderator->name,
-                'email' => $moderator->email,
-                'password' => '',
-                'verify_password' => '',
-                'position' => $moderator->position,
-                'name_err' => '',
-                'email_err' => '',
-                'password_err' => '',
-                'confirm_password_err' => '',
-                'position_err' => ''
-            ];
-
-            $this->view('moderators/edit', $data);
-        }
+    public function viewserviceprovider(){
+      $serviceproviders = $this->moderatorModel->getServiceProviders();
+      $data = [
+        'serviceproviders' => $serviceproviders
+      ];
+      $this->view('moderators/viewserviceprovider', $data);
     }
 
-    public function delete($id)
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    public function deleteuser($id){
+      if($this->moderatorModel->deleteUser($id)){
+        redirect('moderators/viewuser');
+      } else {
+        die('Something went wrong');
+      }
+    }
 
-            if ($this->moderatorModel->deleteModerator($id)) {
-                flash('moderator_message', 'Moderator Removed');
-                redirect('moderators/show');
-            } else {
-                die('Something went wrong');
-            }
-        } else {
-            redirect('moderators/show');
-        }
+    public function deleteserviceprovider($id){
+      if($this->moderatorModel->deleteServiceProvider($id)){
+        redirect('moderators/viewserviceprovider');
+      } else {
+        die('Something went wrong');
+      }
+    }
+
+    public function createmoderatorSession($moderator){
+      
+      $_SESSION['moderator_id'] = $moderator->moderator_id;
+      $_SESSION['moderator_email'] = $moderator->moderator_email;
+      $_SESSION['moderator_name'] = $moderator->moderator_name;
+      redirect('moderators/index');
+      
+    }
+
+    public function logout(){
+      unset($_SESSION['moderator_id']);
+      unset($_SESSION['moderator_email']);
+      unset($_SESSION['moderator_name']);
+      session_destroy();
+      redirect('moderators/login');
     }
 }
