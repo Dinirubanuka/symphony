@@ -13,6 +13,7 @@ class serviceproviders extends Controller
     {
         $this->view('serviceproviders/index');
     }
+
     //view profile
     public function profile()
     {
@@ -780,7 +781,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img1_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'C:/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
+                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
                 $bool = move_uploaded_file($tmp1_name, $img_upload_path);
             }
 
@@ -790,7 +791,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img2_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'C:/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
+                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
                 $bool = move_uploaded_file($tmp2_name, $img_upload_path);
             }
 
@@ -800,7 +801,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img3_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'C:/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
+                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
                 $bool = move_uploaded_file($tmp3_name, $img_upload_path);
             }
 
@@ -810,7 +811,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img4_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img4_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'C:/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
+                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
                 $bool = move_uploaded_file($tmp4_name, $img_upload_path);
             }
 
@@ -1055,7 +1056,6 @@ class serviceproviders extends Controller
             redirect('serviceproviders/singer');
         }
     }
-
 
     public function deleteStudio($product_id)
     {
@@ -1537,7 +1537,7 @@ class serviceproviders extends Controller
     public function changeOrderStatus($order_id, $status)
     {
         $this->serviceProviderModel->changeOrderStatus($order_id, $status);
-        if($status === 'Rejected'){
+        if ($status === 'Rejected') {
             $order_data = $this->serviceProviderModel->getOrderData($order_id);
             $resultString = implode(', ', json_decode(json_encode($order_data), true));
             $resultArray = explode(', ', $resultString);
@@ -1549,7 +1549,8 @@ class serviceproviders extends Controller
         redirect('serviceproviders/orders');
     }
 
-    function compareOrderByStatus($a, $b) {
+    function compareOrderByStatus($a, $b)
+    {
         $statusOrder = [
             'Pending' => 1,
             'In-Progress' => 2,
@@ -1558,17 +1559,17 @@ class serviceproviders extends Controller
             'Rejected' => 5,
             'Cancelled' => 6,
         ];
-    
+
         // Get the numeric value for each status
         $statusA = $statusOrder[$a->status] ?? 0;
         $statusB = $statusOrder[$b->status] ?? 0;
-    
+
         // Compare based on the numeric order
         return $statusA - $statusB;
     }
 
     public function orders()
-    {   
+    {
         $orders = $this->serviceProviderModel->getOrders($_SESSION['serviceprovider_id']);
         $order_objects = [];
         $today = strtotime(date("Y-m-d"));
@@ -1586,19 +1587,19 @@ class serviceproviders extends Controller
             $product_data = json_decode(json_encode($this->serviceProviderModel->getProductData($order->product_id)), true);
             $serviceprovider_data = json_decode(json_encode($this->serviceProviderModel->view($order->serviceprovider_id)), true);
             $order_data = json_decode(json_encode($order), true);
-            
-            $order_data = array_merge($order_data, $user_data, $product_data, $serviceprovider_data); 
-        
+
+            $order_data = array_merge($order_data, $user_data, $product_data, $serviceprovider_data);
+
             $order_object = json_decode(json_encode($order_data));
-        
+
             $order_objects[] = $order_object;
-            usort($order_objects,[$this,  'compareOrderByStatus']);
+            usort($order_objects, [$this, 'compareOrderByStatus']);
         }
-        
+
         $data = [
             'orders' => $order_objects
         ];
-        
+
         $this->view('serviceproviders/orders', $data);
     }
 
@@ -1669,42 +1670,26 @@ class serviceproviders extends Controller
         }
     }
 
-    public function updateSinger($id){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $img4_name = $_FILES['singer_photo']['name'];
-            $img4_size = $_FILES['singer_photo']['size'];
-            $tmp4_name = $_FILES['singer_photo']['tmp_name'];
-            $error4 = $_FILES['singer_photo']['error'];
+    public function updateSinger($id)
+    {
+//        $singerPhoto = $this->serviceProviderModel->fetchSingerPhoto($id);
 
-            if ($error4 === UPLOAD_ERR_NO_FILE) {
-                $data = [
-                    'product_id' => $id,
-                    'name' => trim($_POST['singerName']),
-                    'NickName' => trim($_POST['singerNickName']),
-                    'telephoneNumber' => trim($_POST['number']),
-                    'email' => trim($_POST['email']),
-                    'rate' => trim($_POST['rate']),
-                    'instrument' => $_SESSION['instrumentList'],
-                    'location' => $_SESSION['locationList'],
-                    'videoLink' => trim($_POST['videoLink']),
-                    'description' => trim($_POST['description']),
-                ];
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_FILES['photo_4'])) {
+                $img4_name = $_FILES['photo_4']['name'];
+                $img4_size = $_FILES['photo_4']['size'];
+                $tmp4_name = $_FILES['photo_4']['tmp_name'];
+                $error4 = $_FILES['photo_4']['error'];
 
-                if (!empty($data['name']) && !empty($data['NickName']) && !empty($data['telephoneNumber']) && !empty($data['email']) && !empty($data['rate'])  && !empty($data['videoLink']) && !empty($data['description']) ){
-                    if ($this->serviceProviderModel->updateSinger($data)) {
-                        redirect('serviceproviders/viewSinger/' . $id);
-                    } else {
-                        die('Something went wrong');
-                    }
-                }else{
-                    die('singer connot update...');
+                if ($error4 === UPLOAD_ERR_NO_FILE) {
+                    $new_img4_name = 'IMG-656bdc23223334.62765635.png';
+                } else {
+                    $img_ex = pathinfo($img4_name, PATHINFO_EXTENSION);
+                    $img_ex_lc = strtolower($img_ex);
+                    $new_img4_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
+                    $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
+                    $bool = move_uploaded_file($tmp4_name, $img_upload_path);
                 }
-            } else {
-                $img_ex = pathinfo($img4_name, PATHINFO_EXTENSION);
-                $img_ex_lc = strtolower($img_ex);
-                $new_img4_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'C:/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
-                $bool = move_uploaded_file($tmp4_name, $img_upload_path);
 
                 $data = [
                     'singerPhoto' => $new_img4_name
@@ -1725,19 +1710,41 @@ class serviceproviders extends Controller
                     'description' => trim($_POST['description']),
                 ];
 
-                if (!empty($data['name']) && !empty($data['NickName']) && !empty($data['telephoneNumber']) && !empty($data['email']) && !empty($data['rate'])  && !empty($data['videoLink']) && !empty($data['description']) ){
+                if (!empty($data['name']) && !empty($data['NickName']) && !empty($data['telephoneNumber']) && !empty($data['email']) && !empty($data['rate']) && !empty($data['videoLink']) && !empty($data['description'])) {
                     if ($this->serviceProviderModel->updateSinger($data)) {
                         redirect('serviceproviders/viewSinger/' . $id);
                     } else {
                         die('Something went wrong');
                     }
-                }else{
+                } else {
+                    die('singer connot update...');
+                }
+            } else {
+                $data = [
+                    'product_id' => $id,
+                    'name' => trim($_POST['singerName']),
+                    'NickName' => trim($_POST['singerNickName']),
+                    'telephoneNumber' => trim($_POST['number']),
+                    'email' => trim($_POST['email']),
+                    'rate' => trim($_POST['rate']),
+                    'instrument' => $_SESSION['instrumentList'],
+                    'location' => $_SESSION['locationList'],
+                    'videoLink' => trim($_POST['videoLink']),
+                    'description' => trim($_POST['description']),
+                ];
+
+                if (!empty($data['name']) && !empty($data['NickName']) && !empty($data['telephoneNumber']) && !empty($data['email']) && !empty($data['rate']) && !empty($data['videoLink']) && !empty($data['description'])) {
+                    if ($this->serviceProviderModel->updateSinger($data)) {
+                        redirect('serviceproviders/viewSinger/' . $id);
+                    } else {
+                        die('Something went wrong');
+                    }
+                } else {
                     die('singer connot update...');
                 }
             }
-        }else{
+        } else {
             redirect('serviceproviders/singer');
         }
     }
-
 }

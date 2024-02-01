@@ -271,7 +271,6 @@ class ServiceProvider
             return false;
         }
     }
-    
 
     public function changeOrderStatus($sorder_id, $status)
     {
@@ -518,6 +517,18 @@ class ServiceProvider
             } else {
                 return false;
             }
+        }catch (PDOException $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function fetchSingerPhoto($id)
+    {
+        try{
+            $this->db->query('SELECT singerPhoto from singer WHERE product_id = :id');
+            $this->db->bind(':id', $id);
+            $results = $this->db->single();
+            return $results;
         }catch (PDOException $e){
             die($e->getMessage());
         }
