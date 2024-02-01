@@ -242,14 +242,7 @@
 .addItem .photo_container .photo-table .photo-outer{
   margin: 20px 5px 0 5px ;
   padding: 0;
-  /* position: relative; */
-  /*border:1px solid green;*/
-  /*max-width: 700px;*/
-  /*width: 100%;*/
-  /*background: #fff; */
-  /*padding: 25px;*/
   border-radius: 8px;
-  /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);*/
   width: 92px;
   height: 92px;
   overflow: hidden;
@@ -264,6 +257,66 @@
   height: 100%;
   object-fit:cover;
 }
+.addItem .input-box .dropdown2 {
+  width: 200px;
+  position: relative;
+  display: inline-block;
+}
+
+.addItem .input-box .dropdown2 .select-box {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.addItem .input-box .dropdown2 .select-box::after {
+  content: '\25BC';
+  /*font-size: 12px;*/
+  margin-left: 5px;
+}
+
+.addItem .input-box .dropdown2 .options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  display: none;
+  max-height: 150px;
+  overflow-y: auto;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.addItem .input-box .dropdown2 .option {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+}
+
+.addItem .input-box .dropdown2 .option .checkbox {
+  width: 20px;
+  height: 20px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 5px;
+  position: relative;
+  cursor: pointer;
+}
+.addItem .input-box .option input[type="checkbox"] {
+  margin-right: 5px; /* Adjust the value as needed for the desired space */
+}
+
 
 .bin img{
   position: relative;

@@ -90,18 +90,8 @@ function displaydata(data){
                 `<p>Units Left:  `+item.quantity+`</p>`+
                 `<p>Price(Lkr): `+item.unit_price+`</p>`+
                 `<p>`+stockText+`</p>`+
-                // <!-- Add cart -->
-                // `<div class="add-cart">`+
-                // `<a href="http://" style="font-size: 0.9rem;">Read Customer Reviews</a>`+
-                // `</div>`+
                 `</div>`+
                 `</div>`+
-                // `<div class="reviews">`+
-                // `<div class="bin">`+
-                // `<img src="http://localhost/symphony/img/bin.png" alt="bin-icon"  class = "bin" id="bin_<?php echo $inventory->product_id; ?>" onclick="Delete(`+item.product_id+`)"/>`+
-                // `</div>`+
-                // <!-- Add more reviews as needed -->
-                // `</div>`+
                 `</div>`;
         });
         accReq.innerHTML=req;
