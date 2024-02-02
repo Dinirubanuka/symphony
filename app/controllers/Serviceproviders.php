@@ -887,6 +887,144 @@ class serviceproviders extends Controller
         }
     }
 
+    public function addband()
+    {
+        // Check for POST
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {z
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $img1_name = $_FILES['photo_1']['name'];
+            $img1_size = $_FILES['photo_1']['size'];
+            $tmp1_name = $_FILES['photo_1']['tmp_name'];
+            $error1 = $_FILES['photo_1']['error'];
+
+            $img2_name = $_FILES['photo_2']['name'];
+            $img2_size = $_FILES['photo_2']['size'];
+            $tmp2_name = $_FILES['photo_2']['tmp_name'];
+            $error2 = $_FILES['photo_2']['error'];
+
+            $img3_name = $_FILES['photo_3']['name'];
+            $img3_size = $_FILES['photo_3']['size'];
+            $tmp3_name = $_FILES['photo_3']['tmp_name'];
+            $error3 = $_FILES['photo_3']['error'];
+
+            $img4_name = $_FILES['singer_photo']['name'];
+            $img4_size = $_FILES['singer_photo']['size'];
+            $tmp4_name = $_FILES['singer_photo']['tmp_name'];
+            $error4 = $_FILES['singer_photo']['error'];
+
+            if ($error1 === UPLOAD_ERR_NO_FILE) {
+                $new_img1_name = 'IMG-656bdc23223334.62765635.png';
+            } else {
+                $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
+                $new_img1_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
+                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
+                $bool = move_uploaded_file($tmp1_name, $img_upload_path);
+            }
+
+            if ($error2 === UPLOAD_ERR_NO_FILE) {
+                $new_img2_name = 'IMG-656bdc23223334.62765635.png';
+            } else {
+                $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
+                $new_img2_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
+                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
+                $bool = move_uploaded_file($tmp2_name, $img_upload_path);
+            }
+
+            if ($error3 === UPLOAD_ERR_NO_FILE) {
+                $new_img3_name = 'IMG-656bdc23223334.62765635.png';
+            } else {
+                $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
+                $new_img3_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
+                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
+                $bool = move_uploaded_file($tmp3_name, $img_upload_path);
+            }
+
+            if ($error4 === UPLOAD_ERR_NO_FILE) {
+                $new_img4_name = 'IMG-656bdc23223334.62765635.png';
+            } else {
+                $img_ex = pathinfo($img4_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
+                $new_img4_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
+                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
+                $bool = move_uploaded_file($tmp4_name, $img_upload_path);
+            }
+
+            // Init data
+            $data = [
+                'name' => trim($_POST['singerName']),
+                'NickName' => trim($_POST['singerNickName']),
+                'telephoneNumber' => trim($_POST['number']),
+                'email' => trim($_POST['email']),
+                'rate' => trim($_POST['rate']),
+                'instrument' => $_SESSION['instrumentList'],
+                'location' => $_SESSION['locationList'],
+                'videoLink' => trim($_POST['video']),
+                'description' => trim($_POST['description']),
+                'photo_1' => $new_img1_name,
+                'photo_2' => $new_img2_name,
+                'photo_3' => $new_img3_name,
+                'singer_photo' => $new_img4_name,
+                'name_err' => '',
+                'rate_err' => '',
+                'description_err' => '',
+                'telephoneNumber_err' => ''
+            ];
+
+            if (empty($data['name'])) {
+                $data['name_err'] = 'Name cannot be empty!';
+            }
+
+            if (empty($data['rate'])) {
+                $data['rate_err'] = 'Please enter your rate!';
+            }
+
+            if (empty($data['telephoneNumber'])) {
+                $data['telephoneNumber_err'] = 'Please enter the contact number!';
+            }
+
+            if (empty($data['description'])) {
+                $data['description_err'] = 'Please enter the description.';
+            }
+            if (empty($data['name_err']) && empty($data['rate_err']) && empty($data['description_err']) && empty($data['telephoneNumber_err'])) {
+                if ($this->serviceProviderModel->addSinger($data)) {
+                    redirect('serviceproviders/singer');
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                $this->view('serviceproviders/addSinger', $data);
+            }
+
+        } else {
+            $data = [
+                'name' => '',
+                'NickName' => '',
+                'telephoneNumber' => '',
+                'email' => '',
+                'rate' => '',
+                'instrument' => '',
+                'location' => '',
+                'videoLink' => '',
+                'description' => '',
+                'photo_1' => '',
+                'photo_2' => '',
+                'photo_3' => '',
+                'singer_photo' => '',
+                'name_err' => '',
+                'rate_err' => '',
+                'description_err' => '',
+                'telephoneNumber_err' => ''
+            ];
+
+            // Load view
+            $this->view('serviceproviders/addBand', $data);
+        }
+    }
+
     public function editStudio($product_id)
     {
         // Check for POST

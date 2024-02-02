@@ -5,10 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b38043d5-52c0-4c15-8c01-780342c8c479" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/views/inc/sp-band-nav.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/serviceproviders/addBand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/serviceproviders/band.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/band.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/serviceProvider/IMG-65bbc3d71b4876.42997512.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Input Forms/Samod/band.css" beforeDir="false" afterPath="$PROJECT_DIR$/Input Forms/Samod/band.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Input Forms/Samod/band.html" beforeDir="false" afterPath="$PROJECT_DIR$/Input Forms/Samod/band.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/Serviceproviders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Serviceproviders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Serviceprovider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Serviceprovider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/serviceproviders/viewSinger.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/serviceproviders/viewSinger.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/viewSinger.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/viewSinger.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +142,7 @@
       <workItem from="1706278260676" duration="183000" />
       <workItem from="1706333738547" duration="9060000" />
       <workItem from="1706405452181" duration="22055000" />
-      <workItem from="1706798515258" duration="5183000" />
+      <workItem from="1706798515258" duration="10705000" />
     </task>
     <servers />
   </component>
@@ -186,7 +193,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/controllers/Serviceproviders.php</url>
-          <line>1571</line>
+          <line>1709</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>

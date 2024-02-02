@@ -38,8 +38,8 @@
                         </div>
                         <div class="location">
                             <img src="http://localhost/symphony/img/location.png" alt="camera-icon" class="" id=""
-                                 style="height: 35px;width: 35px;z-index: 2;" onclick="myfunc()"/>
-                            <h4><?php echo $data->location; ?></h4>
+                                 style="height: 35px;width: 35px;z-index: 2;" onclick="myfunc()" />
+                            <h4 style="color: black"><?php echo $data->location; ?></h4>
                         </div>
                     </div>
                 </div>
