@@ -81,6 +81,20 @@ class serviceproviders extends Controller
         exit();
     }
 
+    public function fetchBand()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $inventory = $this->serviceProviderModel->band($_SESSION['serviceprovider_id']);
+            $data = [
+                'inventory' => $inventory
+            ];
+        }
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit();
+
+    }
+
     //thumbnail category
     public function inventoryAll()
     {
@@ -890,7 +904,7 @@ class serviceproviders extends Controller
     public function addband()
     {
         // Check for POST
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {z
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $img1_name = $_FILES['photo_1']['name'];
@@ -908,10 +922,15 @@ class serviceproviders extends Controller
             $tmp3_name = $_FILES['photo_3']['tmp_name'];
             $error3 = $_FILES['photo_3']['error'];
 
-            $img4_name = $_FILES['singer_photo']['name'];
-            $img4_size = $_FILES['singer_photo']['size'];
-            $tmp4_name = $_FILES['singer_photo']['tmp_name'];
-            $error4 = $_FILES['singer_photo']['error'];
+            $img4_name = $_FILES['leaderPhoto']['name'];
+            $img4_size = $_FILES['leaderPhoto']['size'];
+            $tmp4_name = $_FILES['leaderPhoto']['tmp_name'];
+            $error4 = $_FILES['leaderPhoto']['error'];
+
+            $img5_name = $_FILES['bandPhoto']['name'];
+            $img5_size = $_FILES['bandPhoto']['size'];
+            $tmp5_name = $_FILES['bandPhoto']['tmp_name'];
+            $error5 = $_FILES['bandPhoto']['error'];
 
             if ($error1 === UPLOAD_ERR_NO_FILE) {
                 $new_img1_name = 'IMG-656bdc23223334.62765635.png';
@@ -953,12 +972,24 @@ class serviceproviders extends Controller
                 $bool = move_uploaded_file($tmp4_name, $img_upload_path);
             }
 
+            if ($error5 === UPLOAD_ERR_NO_FILE) {
+                $new_img5_name = 'IMG-656bdc23223334.62765635.png';
+            } else {
+                $img_ex = pathinfo($img5_name, PATHINFO_EXTENSION);
+                $img_ex_lc = strtolower($img_ex);
+                $new_img5_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
+                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img5_name;
+                $bool = move_uploaded_file($tmp5_name, $img_upload_path);
+            }
+
+
             // Init data
             $data = [
-                'name' => trim($_POST['singerName']),
-                'NickName' => trim($_POST['singerNickName']),
+                'name' => trim($_POST['bandName']),
+                'leader'=> trim($_POST['leaderName']),
                 'telephoneNumber' => trim($_POST['number']),
                 'email' => trim($_POST['email']),
+                'memberCount' => trim($_POST['memberCount']),
                 'rate' => trim($_POST['rate']),
                 'instrument' => $_SESSION['instrumentList'],
                 'location' => $_SESSION['locationList'],
@@ -967,11 +998,12 @@ class serviceproviders extends Controller
                 'photo_1' => $new_img1_name,
                 'photo_2' => $new_img2_name,
                 'photo_3' => $new_img3_name,
-                'singer_photo' => $new_img4_name,
+                'leader_photo' => $new_img4_name,
+                'band_photo' => $new_img5_name,
                 'name_err' => '',
-                'rate_err' => '',
-                'description_err' => '',
-                'telephoneNumber_err' => ''
+                'telephoneNumber_err' => '',
+                'rate_err'=> '',
+                'description_err' => ''
             ];
 
             if (empty($data['name'])) {
@@ -990,34 +1022,32 @@ class serviceproviders extends Controller
                 $data['description_err'] = 'Please enter the description.';
             }
             if (empty($data['name_err']) && empty($data['rate_err']) && empty($data['description_err']) && empty($data['telephoneNumber_err'])) {
-                if ($this->serviceProviderModel->addSinger($data)) {
-                    redirect('serviceproviders/singer');
+                if ($this->serviceProviderModel->addBand($data)) {
+                    redirect('serviceproviders/band');
                 } else {
                     die('Something went wrong');
                 }
             } else {
-                $this->view('serviceproviders/addSinger', $data);
+                $this->view('serviceproviders/addBand', $data);
             }
 
         } else {
             $data = [
                 'name' => '',
-                'NickName' => '',
+                'leader'=> '',
                 'telephoneNumber' => '',
                 'email' => '',
+                'memberCount' => '',
                 'rate' => '',
                 'instrument' => '',
                 'location' => '',
-                'videoLink' => '',
+                'videoLink' =>'',
                 'description' => '',
                 'photo_1' => '',
                 'photo_2' => '',
                 'photo_3' => '',
-                'singer_photo' => '',
-                'name_err' => '',
-                'rate_err' => '',
-                'description_err' => '',
-                'telephoneNumber_err' => ''
+                'leader_photo' => '',
+                'band_photo' => ''
             ];
 
             // Load view

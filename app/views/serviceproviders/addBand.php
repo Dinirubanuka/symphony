@@ -15,35 +15,28 @@
 <!--            band name-->
             <div class="input-box">
                 <label>Name</label>
-                <input type="text" name="StudioName"
+                <input type="text" name="bandName"
                        class="<?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>"
                        value="<?php echo $data['title']; ?>">
             </div>
 <!--            band leader name-->
             <div class="input-box">
                 <label>Band leader name</label>
-                <input type="text" name="lederName"
+                <input type="text" name="leaderName"
                        class="<?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>"
                        value="<?php echo $data['title']; ?>">
             </div>
             <!--                email-->
             <div class="input-box">
                 <label>Email</label>
-                <input type="text" name="StudioName"
-                       class="<?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>"
-                       value="<?php echo $data['title']; ?>">
-            </div>
-<!--            nic-->
-            <div class="input-box">
-                <label>NIC</label>
-                <input type="number" name="NIC"
+                <input type="text" name="email"
                        class="<?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>"
                        value="<?php echo $data['title']; ?>">
             </div>
 <!--            telephone number-->
             <div class="input-box">
                 <label>Telephone Number</label>
-                <input type="number" name="StudioName"
+                <input type="number" name="number"
                        class="<?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>"
                        value="<?php echo $data['title']; ?>">
             </div>
@@ -57,16 +50,16 @@
 <!--            rate-->
             <div class="input-box">
                 <label>Rate</label>
-                <input type="number"></input>
+                <input type="number" name="rate"></input>
             </div>
             <div class="input-box">
                 <label>Description</label>
-                <textarea name="" id="" cols="20" rows="10"></textarea>
+                <textarea name="description" id="" cols="20" rows="10"></textarea>
             </div>
             <!--            video link-->
             <div class="input-box">
                 <label>Video <br> (Add Embeded link)</label>
-                <input type="text" name="business_name"
+                <input type="text" name="video"
                        class="<?php echo (!empty($data['business_name_err'])) ? 'is-invalid' : ''; ?>"
                        value="<?php echo $data['']; ?>">
             </div>
@@ -331,12 +324,11 @@
                 <div class="photo-table">
                     <div class="photo-outer">
                         <div class="photo-inner">
-                            <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_1"
-                                 onclick="triggerInput(1)">
-                            <input type="file" id="photo_1" accept=".jpg, .jpeg, .png, .HEIC" name="photo_1"
-                                   class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>"
-                                   value="<?php echo $data['photo_1']; ?>"
-                                   onchange="previewImage(this, 'previewPhoto_1')" required>
+                            <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_4"
+                                 onclick="triggerInput(4)">
+                            <input type="file" id="photo_4" accept=".jpg, .jpeg, .png, .HEIC" name="leaderPhoto"
+                                   value="<?php echo $data['leaderPhoto']; ?>"
+                                   onchange="previewImage(this, 'previewPhoto_4')" required>
                         </div>
                     </div>
                 </div>
@@ -349,12 +341,11 @@
                 <div class="photo-table">
                     <div class="photo-outer">
                         <div class="photo-inner">
-                            <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_1"
-                                 onclick="triggerInput(1)">
-                            <input type="file" id="photo_1" accept=".jpg, .jpeg, .png, .HEIC" name="photo_1"
-                                   class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>"
-                                   value="<?php echo $data['photo_1']; ?>"
-                                   onchange="previewImage(this, 'previewPhoto_1')" required>
+                            <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_5"
+                                 onclick="triggerInput(5)">
+                            <input type="file" id="photo_5" accept=".jpg, .jpeg, .png, .HEIC" name="bandPhoto"
+                                   value="<?php echo $data['bandPhoto']; ?>"
+                                   onchange="previewImage(this, 'previewPhoto_5')" required>
                         </div>
                     </div>
                 </div>
@@ -372,7 +363,7 @@
                             <input type="file" id="photo_1" accept=".jpg, .jpeg, .png, .HEIC" name="photo_1"
                                    class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>"
                                    value="<?php echo $data['photo_1']; ?>"
-                                   onchange="previewImage(this, 'previewPhoto_1')" required>
+                                   onchange="previewImage(this, 'previewPhoto_1')" >
                         </div>
                     </div>
                     <div class="photo-outer">
@@ -382,7 +373,7 @@
                             <input type="file" id="photo_2" accept=".jpg, .jpeg, .png, .HEIC" name="photo_2"
                                    class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>"
                                    value="<?php echo $data['photo_2']; ?>"
-                                   onchange="previewImage(this, 'previewPhoto_2')" required>
+                                   onchange="previewImage(this, 'previewPhoto_2')" >
                         </div>
                     </div>
                     <div class="photo-outer">
@@ -392,15 +383,17 @@
                             <input type="file" id="photo_3" accept=".jpg, .jpeg, .png, .HEIC" name="photo_3"
                                    class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>"
                                    value="<?php echo $data['photo_3']; ?>"
-                                   onchange="previewImage(this, 'previewPhoto_3')" required>
+                                   onchange="previewImage(this, 'previewPhoto_3')" >
                         </div>
                     </div>
                 </div>
             </div>
-            <button id="submitBtn">Submit</button>
+            <button id="" class="submit" style="display: none" >Submit</button>
         </form>
+        <button id="submitBtn" onclick="submitForm()">Submit</button>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     function showInstruments() {
         var selection = document.getElementById("selection");
@@ -424,6 +417,23 @@
 
     }
 
+    // add photo
+    function triggerInput(id){
+        document.getElementById("photo_"+id).click();
+    }
+    function previewImage(input, imgId) {
+        var preview = document.getElementById(imgId);
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
     var districts = ["Colombo", "Gampaha", "Kandy", "Jaffna", "Matara", "Nuwara Eliya", "Galle" , "Matara", "Hambanthota","Jaffna","Kilinochchi", "Mannar","Mullaitivu","Vavuniya","Batticola","Ampara","Trincomalee","Kurunegala","Puttalam","Anuradhapura","Polonnaruwa","Badulla","Monaragala","Ratnapura","Kegalle"];
 
     var optionsContainer = document.querySelector('.optionsLocation');
@@ -444,6 +454,35 @@
         liElement.appendChild(labelText);
 
         optionsContainer.appendChild(liElement);
+    }
+//add band locations and instruments
+    function submitForm() {
+        var checkboxesInstrument = document.querySelectorAll('.optionsInstrument input[type="checkbox"]');
+        var checkboxesLocation = document.querySelectorAll('.optionsLocation input[type="checkbox"]');
+
+        var selectedCheckboxes = Array.from(checkboxesInstrument).filter(checkbox => checkbox.checked);
+        var selectedLocations = Array.from(checkboxesLocation).filter(checkbox => checkbox.checked);
+
+        var selectedValues = selectedCheckboxes.map(checkbox => checkbox.value);
+        var locationValues = selectedLocations.map(checkbox => checkbox.value);
+
+        var locationList = locationValues.join(' ');
+        var instrumentList = selectedValues.join(' ');
+        console.log('locationList',locationList);
+        console.log('instrumentList',instrumentList);
+        $.ajax({
+            method: 'POST',
+            url: 'http://localhost/symphony/serviceproviders/studioInstrument',
+            content:'application/json',
+            data: JSON.stringify({ instruments: instrumentList , location:locationList }),
+            success: function(response) {
+                console.log('Backend response:', response);
+                document.querySelector('.submit').click();
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
     }
 </script>
 </body>

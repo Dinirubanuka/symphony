@@ -119,6 +119,39 @@ class ServiceProvider
         }
     }
 
+    public function addBand($data)
+    {
+        try {
+            $this->db->query('INSERT INTO band (created_by, Title, leaderName, telephoneNumber, email, memberCount, unit_price, instrument, location, videoLink, description, photo_1, photo_2, photo_3, leaderPhoto, bandPhoto ) VALUES (:created_by, :title, :leaderName, :telephoneNumber, :email, :memberCount, :unit_price, :instrument, :location, :videoLink, :description, :photo_1, :photo_2, :photo_3, :leaderPhoto, :bandPhoto)');
+            $this->db->bind(':created_by', $_SESSION['serviceprovider_id']);
+            $this->db->bind(':title', $data['name']);
+            $this->db->bind(':leaderName', $data['leader']);
+            $this->db->bind(':telephoneNumber', $data['telephoneNumber']);
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':memberCount', $data['memberCount']);
+            $this->db->bind(':unit_price', $data['rate']);
+            $this->db->bind(':instrument', $data['instrument']);
+            $this->db->bind(':location', $data['location']);
+            $this->db->bind(':videoLink', $data['videoLink']);
+            $this->db->bind(':description', $data['description']);
+            $this->db->bind(':photo_1', $data['photo_1']);
+            $this->db->bind(':photo_2', $data['photo_2']);
+            $this->db->bind(':photo_3', $data['photo_3']);
+            $this->db->bind(':bandPhoto', $data['band_photo']);
+            $this->db->bind(':leaderPhoto', $data['leader_photo']);
+
+            // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function editPhoto($product_id, $data, $photo_num)
     {
         if ($photo_num == 'photo_1') {
@@ -702,7 +735,7 @@ class ServiceProvider
     {
         $this->db->query('SELECT * FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id');
         // Bind value
-        $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+        $this->db->bind(':serviceprovider_id', $id);
 
         $row = $this->db->single();
 
