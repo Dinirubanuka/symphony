@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Support Form</title>
+    <style>
+        /* Add your styles here */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-section {
+    display: none;
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="contact-form">
+        <h2>Contact Support</h2>
+        <form id="supportForm">
+            <label for="inquiryType">Inquiry Type:</label>
+            <select id="inquiryType" name="inquiryType" onchange="showFormSection()">
+                <option value="">Select an Inquiry Type</option>
+                <option value="recoverAccount">Recover My Account</option>
+                <option value="technicalIssue">Technical Issue</option>
+                <option value="reportBug">Report a Bug</option>
+                <option value="billingIssue">Billing/Payment Issue</option>
+                <option value="refundPurchase">Refund a Purchase</option>
+                <option value="reportUser">Report a User</option>
+                <option value="question">Question</option>
+                <option value="other">Other</option>
+            </select>
+    
+            <div id="recoverAccountForm" class="form-section">
+                <label for="accountName">Account Name or Email:</label>
+                <input type="text" id="accountName" name="accountName" required>
+    
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" required>
+    
+                <label for="accountDescription">Description:</label>
+                <textarea id="accountDescription" name="accountDescription" rows="4" required></textarea>
+            </div>
+    
+            <div id="technicalIssueForm" class="form-section">
+                <label for="issueType">Issue Type:</label>
+                <input type="text" id="issueType" name="issueType" required>
+    
+                <label for="technicalDescription">Description:</label>
+                <textarea id="technicalDescription" name="technicalDescription" rows="4" required></textarea>
+    
+                <label for="technicalImages">Images (up to 3):</label>
+                <input type="file" id="technicalImages" name="technicalImages" accept="image/*" multiple>
+            </div>
+    
+            <div id="reportBugForm" class="form-section">
+                <label for="bugIssue">Issue:</label>
+                <input type="text" id="bugIssue" name="bugIssue" required>
+    
+                <label for="bugDescription">Description:</label>
+                <textarea id="bugDescription" name="bugDescription" rows="4" required></textarea>
+    
+                <label for="bugImages">Images (up to 3):</label>
+                <input type="file" id="bugImages" name="bugImages" accept="image/*" multiple>
+            </div>
+    
+            <div id="billingIssueForm" class="form-section">
+                <label for="billingIssue">Issue:</label>
+                <input type="text" id="billingIssue" name="billingIssue" required>
+    
+                <label for="billingExplanation">Brief Explanation:</label>
+                <textarea id="billingExplanation" name="billingExplanation" rows="4" required></textarea>
+            </div>
+    
+            <div id="refundPurchaseForm" class="form-section">
+                <label for="orderID">Order ID:</label>
+                <input type="text" id="orderID" name="orderID" required>
+    
+                <label for="orderDate">Order Date:</label>
+                <input type="date" id="orderDate" name="orderDate" required>
+    
+                <label for="refundReason">Reason for Refund:</label>
+                <textarea id="refundReason" name="refundReason" rows="4" required></textarea>
+            </div>
+    
+            <div id="reportUserForm" class="form-section">
+                <label for="userProfile">User's Name/Profile Link:</label>
+                <input type="text" id="userProfile" name="userProfile" required>
+    
+                <label for="reportReason">Reason:</label>
+                <textarea id="reportReason" name="reportReason" rows="4" required></textarea>
+            </div>
+    
+            <div id="questionForm" class="form-section">
+                <label for="userQuestion">Question:</label>
+                <textarea id="userQuestion" name="userQuestion" rows="4" required></textarea>
+    
+                <label for="questionDescription">Description:</label>
+                <textarea id="questionDescription" name="questionDescription" rows="4" required></textarea>
+            </div>
+    
+            <div id="otherForm" class="form-section">
+                <label for="otherType">Type:</label>
+                <input type="text" id="otherType" name="otherType" required>
+    
+                <label for="otherDescription">Description:</label>
+                <textarea id="otherDescription" name="otherDescription" rows="4" required></textarea>
+    
+                <label for="otherImages">Images (up to 3):</label>
+                <input type="file" id="otherImages" name="otherImages" accept="image/*" multiple>
+            </div>
+    
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+<script>
+    function showFormSection() {
+        var selectedValue = document.getElementById("inquiryType").value;
+        var formSections = document.getElementsByClassName("form-section");
+    
+        for (var i = 0; i < formSections.length; i++) {
+            formSections[i].style.display = "none";
+        }
+    
+        if (selectedValue !== "") {
+            document.getElementById(selectedValue + "Form").style.display = "block";
+        }
+    }
+    
+</script>
+</body>
+</html>
