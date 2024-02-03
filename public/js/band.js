@@ -236,8 +236,8 @@ function displaydata(data) {
                 `<img class="carousel-image" src="http://localhost/symphony/img/serviceProvider/` + item.bandPhoto + `" alt="Placeholder Image 1" style="display: block">` +
                 `</div>` +
                 `<div class="item-info">` +
-                `<h3>Name:` + item.name + `</h3>` +
-                `<p>Nick name: ` + item.nickName + `</p>` +
+                `<h3>Name:` + item.Title + `</h3>` +
+                `<p>Leader Name: ` + item.leaderName + `</p>` +
                 `<a href="http://localhost/symphony/serviceproviders/viewBand/`+item.product_id+`" style="color: orange">see more details</a>` +
                 `<p>` + stockText + `</p>` +
                 <!-- User reviews go here -->
@@ -926,12 +926,12 @@ function search() {
 
     products.forEach(product => {
         const titleElement = product.querySelector("h3");
-        const brand = product.querySelector("p:nth-child(1)");
+        // const brand = product.querySelector("p:nth-child(1)");
 
         if (titleElement || brand ) {
             const textValue = titleElement.textContent || titleElement.innerHTML;
-            const brandValue = brand.textContent || brand.innerHTML;
-            if (textValue.toUpperCase().indexOf(searchBox) > -1 || brandValue.toUpperCase().indexOf(searchBox) > -1) {
+            // const brandValue = brand.textContent || brand.innerHTML;
+            if (textValue.toUpperCase().indexOf(searchBox) > -1 ) {
                 product.style.display = "";
             } else {
                 product.style.display = "none";

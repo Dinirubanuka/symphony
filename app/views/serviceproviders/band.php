@@ -17,7 +17,7 @@
 <div class="upperCategory">
     <div class="categories">
         <div class="heading" style="padding: 10px">
-            <h2>Singer Inventory</h2>
+            <h2>Band Inventory</h2>
         </div>
         <div class="category">
             <div class="category-name" onclick="toggleCategory('stringInstruments')">String Instruments</div>
