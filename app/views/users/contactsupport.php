@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/inquiries.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-support.css"/>
   <title>Dashboard</title>
@@ -15,7 +17,7 @@
         <h2>Contact Support</h2>
         <form action="<?php echo URLROOT; ?>/users/contactsupport" class="form" id="supportForm"  method="post" enctype="multipart/form-data">
             <label for="inquiryType">Inquiry Type:</label>
-            <select id="inquiryType" name="inquiryType" onchange="showFormSection()">
+            <select id="inquiryType" name="inquiryType" onchange="showFormSection()" required>
                 <option value="">Select an Inquiry Type</option>
                 <option value="recoverAccount">Recover My Account</option>
                 <option value="technicalIssue">Technical Issue</option>

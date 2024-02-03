@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-inquiry.css">
-  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/nav-bar.css">  
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/chat.css" />
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-support.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"/>
 
@@ -20,28 +20,28 @@
 
     <div class="user-moderator-grid">
       <div class="user-section">
-      <h3>User Information</h3>
+      <h3>User Information</h3><br>
         <div class="profile-picture">
           <img src="<?php echo URLROOT; ?>/img/mag_img/<?php echo $data['user']->profile_photo ?>">
-        </div>
+        </div><br>
         <div class="user-details">
-          <p><strong>Name: </strong><?php echo $data['user']->name ?></p>
-          <p><strong>Email: </strong><?php echo $data['user']->email ?></p>
+          <p><strong>Name: </strong><?php echo $data['user']->name ?></p><br>
+          <p><strong>Email: </strong><?php echo $data['user']->email ?></p><br>
         </div>
       </div>
 
       <div class="moderator-section">
         <div class="moderator-details">
-          <h3>Moderator Information</h3>
-          <p><strong>Name: </strong><?php echo $data['moderator']->moderator_name ?></p>
-          <p><strong>Email: </strong><?php echo $data['moderator']->moderator_email ?></p>
-          <p><strong>Moderator ID: </strong><?php echo $data['moderator']->moderator_id  ?></p>
+          <h3>Moderator Information</h3><br>
+          <p><strong>Name: </strong><?php echo $data['moderator']->moderator_name ?></p><br>
+          <p><strong>Email: </strong><?php echo $data['moderator']->moderator_email ?></p><br>
+          <p><strong>Moderator ID: </strong><?php echo $data['moderator']->moderator_id  ?></p><br>
         </div>
       </div>
     </div>
 
     <div class="inquiry-content">
-      <h3>Inquiry Details</h3>
+      <h3>Inquiry Details</h3><br>
         <div><strong>Inquiry Type: </strong><?php echo $data['inquiry']->inquiryType ?></div><br>
         <div class="status-<?php echo $data['inquiry']->status ?>"><strong>Status:</strong> <?php echo $data['inquiry']->status ?></div><br>
         <?php if ($data['inquiry']->inquiryType == 'Recover Account'): ?>
@@ -50,7 +50,7 @@
             <div><strong>Description: </strong><?php echo $data['inquiry']->field_3; ?><br>
         <?php elseif ($data['inquiry']->inquiryType == 'Technical Issue'): ?>
             <div><strong>Issue Type: </strong><?php echo $data['inquiry']->field_1; ?><br><br>
-            <div><strong>Issue Description: </strong><?php echo $data['inquiry']->field_2; ?><br>
+            <div><strong>Issue Description: </strong><?php echo $data['inquiry']->field_2; ?><br><br>
             <div class="inquiry-image-container">
                 <img src="<?php echo URLROOT; ?>/img/inquiries/<?php echo $data['inquiry']->photo_1; ?>">
                 <img src="<?php echo URLROOT; ?>/img/inquiries/<?php echo $data['inquiry']->photo_2; ?>">
@@ -58,7 +58,7 @@
             </div>
         <?php elseif ($data['inquiry']->inquiryType == 'Report Bug'): ?>
             <div><strong>Bug: </strong><?php echo $data['inquiry']->field_1; ?><br><br>
-            <div><strong>Bug Description: </strong><?php echo $data['inquiry']->field_2; ?><br>
+            <div><strong>Bug Description: </strong><?php echo $data['inquiry']->field_2; ?><br>br
             <div class="inquiry-image-container">
                 <img src="<?php echo URLROOT; ?>/img/inquiries/<?php echo $data['inquiry']->photo_1; ?>">
                 <img src="<?php echo URLROOT; ?>/img/inquiries/<?php echo $data['inquiry']->photo_2; ?>">
@@ -78,7 +78,7 @@
             <div><strong>Description: </strong><?php echo $data['inquiry']->field_2; ?><br>
         <?php elseif ($data['inquiry']->inquiryType == 'Other'): ?>
             <div><strong>Type: </strong><?php echo $data['inquiry']->field_1; ?><br><br>
-            <div><strong>Description: </strong><?php echo $data['inquiry']->field_2; ?><br>
+            <div><strong>Description: </strong><?php echo $data['inquiry']->field_2; ?><br><br>
             <div class="inquiry-image-container">
                 <img src="<?php echo URLROOT; ?>/img/inquiries/<?php echo $data['inquiry']->photo_1; ?>">
                 <img src="<?php echo URLROOT; ?>/img/inquiries/<?php echo $data['inquiry']->photo_2; ?>">
@@ -138,7 +138,7 @@
                             ' . $chat->chat_data . '
                             </p>
         
-                            <span class="time">$chat->' . $chat->chat_date . '</span>
+                            <span class="time">' . $chat->chat_date . '</span>
                           </div>
                         </div>
                       </div>';

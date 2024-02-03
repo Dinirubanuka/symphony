@@ -7,7 +7,7 @@
     }
 
     public function view($moderator_id){
-      $this->db->query('SELECT * FROM moderators WHERE moderator_id = :moderator_id'); 
+      $this->db->query('SELECT * FROM moderators WHERE moderator_id = :moderator_id AND status = "Active"'); 
       $this->db->bind(':moderator_id', $moderator_id);
       $results = $this->db->single();
       return $results;
@@ -15,7 +15,7 @@
 
     // Login User
     public function login($moderator_email, $password){
-      $this->db->query('SELECT * FROM moderators WHERE moderator_email = :moderator_email');
+      $this->db->query('SELECT * FROM moderators WHERE moderator_email = :moderator_email AND status = "Active"');
       $this->db->bind(':moderator_email', $moderator_email);
 
       $row = $this->db->single();
@@ -79,7 +79,7 @@ public function addToInqChat($chat_id, $inquiry_id){
   }
 
     public function getUserData($id){
-      $this->db->query('SELECT * FROM users WHERE id = :id');
+      $this->db->query('SELECT * FROM users WHERE id = :id AND status = "Active"');
       $this->db->bind(':id', $id);
       $results = $this->db->single();
       return $results;
@@ -134,7 +134,7 @@ public function addToInqChat($chat_id, $inquiry_id){
     }
     // Find user by email
     public function findmoderatorByEmail($moderator_email){
-      $this->db->query('SELECT * FROM moderators WHERE moderator_email = :moderator_email');
+      $this->db->query('SELECT * FROM moderators WHERE moderator_email = :moderator_email AND status = "Active"');
       // Bind value
       $this->db->bind(':moderator_email', $moderator_email);
 
@@ -150,14 +150,14 @@ public function addToInqChat($chat_id, $inquiry_id){
 
 
     public function getUsers(){
-      $this->db->query('SELECT * FROM users');
+      $this->db->query('SELECT * FROM users WHERE status = "Active"');
       $results = $this->db->resultSet();
       return $results;
     }
     
     
     public function deleteUser($id){
-      $this->db->query('DELETE FROM users WHERE id = :id');
+      $this->db->query('UPDATE user SET status = "Deactive" WHERE id = :id');
       // Bind values
       $this->db->bind(':id', $id);
 
@@ -170,13 +170,13 @@ public function addToInqChat($chat_id, $inquiry_id){
     }
 
     public function getServiceProviders(){
-      $this->db->query('SELECT * FROM serviceproviders');
+      $this->db->query('SELECT * FROM serviceproviders WHERE status = "Active"');
       $results = $this->db->resultSet();
       return $results;
     }
 
     public function deleteServiceProvider($serviceprovider_id){
-      $this->db->query('DELETE FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id');
+      $this->db->query('UPDATE serviceproviders SET status = "Deactive" WHERE serviceprovider_id = :serviceprovider_id AND status = "Active"');
       // Bind values
       $this->db->bind(':serviceprovider_id', $serviceprovider_id);
 
@@ -190,7 +190,7 @@ public function addToInqChat($chat_id, $inquiry_id){
 
     // Get User by ID
     public function getmoderatorById($moderator_id){
-      $this->db->query('SELECT * FROM moderators WHERE moderator_id = :moderator_id');
+      $this->db->query('SELECT * FROM moderators WHERE moderator_id = :moderator_id AND status = "Active"');
       // Bind value
       $this->db->bind(':moderator_id', $moderator_id);
 

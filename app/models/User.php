@@ -23,7 +23,7 @@ class User
     {
         $name = $data['name'];
         $email = $data['email'];
-        $this->db->query('INSERT INTO users (name, email, TelephoneNumber, BirthDate, address, password,profile_photo ,gender,verification ) VALUES(:name, :email, :TelephoneNumber, :BirthDate, :address, :password, :photo,:gender,:verification )');
+        $this->db->query('INSERT INTO users (name, email, TelephoneNumber, BirthDate, address, password,profile_photo ,gender,verification, status ) VALUES(:name, :email, :TelephoneNumber, :BirthDate, :address, :password, :photo,:gender,:verification, :status)');
         $this->mail->isSMTP();                                            //Send using SMTP
         $this->mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $this->mail->SMTPAuth = true;                                   //Enable SMTP authentication
@@ -63,6 +63,7 @@ class User
             $this->db->bind(':photo', $data['photo']);
             $this->db->bind(':password', $data['password']);
             $this->db->bind(':verification', $verification_code);
+            $this->db->bind(':status', 'Active');
 
             // Execute
             if ($this->db->execute()) {
@@ -78,7 +79,7 @@ class User
     //view user
     public function view($id)
     {
-        $this->db->query('SELECT * FROM users WHERE id = :id');
+        $this->db->query('SELECT * FROM users WHERE id = :id AND status = "Active"');
         $this->db->bind(':id', $id);
         $results = $this->db->single();
         return $results;
@@ -196,7 +197,7 @@ class User
     }
 
     public function getModerator($moderator_id){
-        $this->db->query('SELECT * FROM moderators WHERE moderator_id = :moderator_id');
+        $this->db->query('SELECT * FROM moderators WHERE moderator_id = :moderator_id AND status = "Active"');
         $this->db->bind(':moderator_id', $moderator_id);
         $results = $this->db->single();
         return $results;
@@ -220,7 +221,7 @@ class User
     public function delete($id)
     {
 
-        $this->db->query('DELETE FROM users WHERE id = :id');
+        $this->db->query('UPDATE users SET status = "Deactive" WHERE id = :id');
         $this->db->bind(':id', $id);
 
         // Execute
@@ -285,7 +286,7 @@ class User
     // Login User
     public function login($email, $password)
     {
-        $this->db->query('SELECT * FROM users WHERE email = :email');
+        $this->db->query('SELECT * FROM users WHERE email = :email AND status = "Active"');
         $this->db->bind(':email', $email);
 
         $row = $this->db->single();
@@ -301,7 +302,7 @@ class User
     // Find user by email
     public function findUserByEmail($email)
     {
-        $this->db->query('SELECT * FROM users WHERE email = :email');
+        $this->db->query('SELECT * FROM users WHERE email = :email AND status = "Active"');
         // Bind value
         $this->db->bind(':email', $email);
 
@@ -317,7 +318,7 @@ class User
 
     public function findOtherUserByEmail($email, $id)
     {
-        $this->db->query('SELECT * FROM users WHERE email = :email AND id != :currentUserId');
+        $this->db->query('SELECT * FROM users WHERE email = :email AND id != :currentUserId AND status = "Active"');
         // Bind value
         $this->db->bind(':email', $email);
         $this->db->bind(':currentUserId', $id);
@@ -334,7 +335,7 @@ class User
 
     public function findUserByEmailEdit($email)
     {
-        $this->db->query('SELECT * FROM users WHERE email = :email');
+        $this->db->query('SELECT * FROM users WHERE email = :email AND status = "Active"');
         // Bind value
         $this->db->bind(':email', $email);
 
@@ -351,7 +352,7 @@ class User
     // Get User by ID
     public function getUserById($id)
     {
-        $this->db->query('SELECT * FROM users WHERE id = :id');
+        $this->db->query('SELECT * FROM users WHERE id = :id AND status = "Active"');
         // Bind value
         $this->db->bind(':id', $id);
 
@@ -361,7 +362,7 @@ class User
     }
 
     public function inventory(){
-        $this->db->query('SELECT * FROM products');
+        $this->db->query('SELECT * FROM products WHERE status = "Active"');
         $results = $this->db->resultSet();
         return $results;
     }
@@ -376,7 +377,7 @@ class User
 
     public function viewItem($product_id)
     {
-        $this->db->query('SELECT * FROM products WHERE product_id = :product_id');
+        $this->db->query('SELECT * FROM products WHERE product_id = :product_id AND status = "Active"');
         $this->db->bind(':product_id', $product_id);
         $results = $this->db->single();
         return $results;
@@ -512,7 +513,7 @@ class User
     }
 
     public function getServiceProviderData($serviceprovider_id){
-        $this->db->query('SELECT * FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id');
+        $this->db->query('SELECT * FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id AND status = "Active"');
         $this->db->bind(':serviceprovider_id', $serviceprovider_id);
         $results = $this->db->single();
         return $results;

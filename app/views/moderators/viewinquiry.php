@@ -165,7 +165,7 @@ function completeInquiry(inquiryId) {
                                 ' . $chat->chat_data . '
                                 </p>
             
-                                <span class="time">$chat->' . $chat->chat_date . '</span>
+                                <span class="time">' . $chat->chat_date . '</span>
                               </div>
                             </div>
                           </div>';

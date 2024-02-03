@@ -32,6 +32,7 @@
           <span class="invalid-feedback"><?php echo $data['password_err']; ?></span>
             <button>login</button>
             <p class="message">Not registered? <a href="<?php echo URLROOT; ?>/users/register">Create an account</a></p>
+            <p class="message">Not a Customer? <a href="<?php echo URLROOT; ?>/serviceproviders/serviceproviderlogin">Login as a Service Provider</a></p>
           </form>
         </div>
     </div>

@@ -59,7 +59,7 @@ button {
 
 .container {
     position: sticky;
-    background-color: #000000;
+    background-color: #242424;
     z-index: 100;
     display: flex;
     align-items: center;
