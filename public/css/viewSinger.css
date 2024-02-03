@@ -95,6 +95,10 @@ body {
     justify-content: space-between;
     color: white;
 }
+
+.titleHours label{
+    color: black;
+}
 .titleHours input{
     padding: 10px;
     border: 1px solid #ccc;

@@ -100,11 +100,11 @@ function Redirect() {
 }
 
 function Delete(productId) {
-    var confirmed = confirm("Are you sure you want to delete this singer?");
+    var confirmed = confirm("Are you sure you want to delete this Band?");
     if (confirmed) {
         $.ajax({
             method: 'POST',
-            url: 'http://localhost/symphony/serviceproviders/deleteSinger/' + productId,
+            url: 'http://localhost/symphony/serviceproviders/deleteBand/' + productId,
             success: function (response) {
                 console.log('response', response);
                 Redirect();
@@ -238,7 +238,7 @@ function displaydata(data) {
                 `<div class="item-info">` +
                 `<h3>Name:` + item.name + `</h3>` +
                 `<p>Nick name: ` + item.nickName + `</p>` +
-                `<a href="http://localhost/symphony/serviceproviders/viewSinger/`+item.product_id+`" style="color: orange">see more details</a>` +
+                `<a href="http://localhost/symphony/serviceproviders/viewBand/`+item.product_id+`" style="color: orange">see more details</a>` +
                 `<p>` + stockText + `</p>` +
                 <!-- User reviews go here -->
                 `<div class="user-review">` +

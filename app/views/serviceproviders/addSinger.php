@@ -380,7 +380,6 @@
             var optionsContainer = document.querySelector('.optionsInstrument');
             optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
         }
-
     }
 
     // add photo

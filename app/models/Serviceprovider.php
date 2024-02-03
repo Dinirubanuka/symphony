@@ -452,6 +452,7 @@ class ServiceProvider
             return false;
         }
     }
+
     public function deleteSinger($product_id)
     {
         $this->db->query('DELETE FROM singer WHERE product_id = :product_id');
@@ -468,6 +469,19 @@ class ServiceProvider
     public function deleteStudio($product_id)
     {
         $this->db->query('DELETE FROM studio WHERE product_id = :product_id');
+        $this->db->bind(':product_id', $product_id);
+
+        // Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function deleteBand($product_id)
+    {
+        $this->db->query('DELETE FROM band WHERE product_id = :product_id');
         $this->db->bind(':product_id', $product_id);
 
         // Execute
@@ -518,10 +532,30 @@ class ServiceProvider
         return $results;
     }
 
+    public function viewBand($created_by)
+    {
+        $this->db->query('SELECT * FROM band WHERE product_id = :created_by');
+        $this->db->bind(':created_by', $created_by);
+        $results = $this->db->single();
+        return $results;
+    }
+
     public function editSingerPhoto($id, $data){
         try {
             $this->db->query('UPDATE singer SET singerPhoto = :singerPhoto WHERE product_id = :product_id');
             $this->db->bind(':singerPhoto', $data['singerPhoto']);
+            $this->db->bind(':product_id', $id);
+            $this->db->execute();
+        } catch (PDOException $e) {
+            echo "Database error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function editBandPhoto($id, $data){
+        try {
+            $this->db->query('UPDATE band SET bandPhoto = :bandPhoto WHERE product_id = :product_id');
+            $this->db->bind(':bandPhoto', $data['bandPhoto']);
             $this->db->bind(':product_id', $id);
             $this->db->execute();
         } catch (PDOException $e) {
@@ -543,6 +577,32 @@ class ServiceProvider
             $this->db->bind(':location', $data['location']);
             $this->db->bind(':videoLink', $data['videoLink']);
             $this->db->bind(':description', $data['description']);
+
+            // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }catch (PDOException $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function updateBand($data){
+        try{
+            $this->db->query('UPDATE band SET Title = :name , telephoneNumber = :telephoneNumber , memberCount = :memberCount ,email = :email , unit_price = :rate , instrument = :instrument , location = :location , videoLink = :videoLink , Description = :description , leaderName = :leaderName WHERE product_id = :product_id' );
+            $this->db->bind(':product_id', $data['product_id']);
+            $this->db->bind(':name', $data['name']);
+            $this->db->bind(':memberCount', $data['memCount']);
+            $this->db->bind(':telephoneNumber', $data['telephoneNumber']);
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':rate', $data['rate']);
+            $this->db->bind(':instrument', $data['instrument']);
+            $this->db->bind(':location', $data['location']);
+            $this->db->bind(':videoLink', $data['videoLink']);
+            $this->db->bind(':description', $data['description']);
+            $this->db->bind(':leaderName', $data['leaderName']);
 
             // Execute
             if ($this->db->execute()) {

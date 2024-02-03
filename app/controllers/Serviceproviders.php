@@ -1235,6 +1235,16 @@ class serviceproviders extends Controller
         }
     }
 
+    public function deleteBand($product_id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->serviceProviderModel->deleteBand($product_id);
+            redirect('serviceproviders/band');
+        } else {
+            redirect('serviceproviders/band');
+        }
+    }
+
     public function editconfirm()
     {
         // Check for POST
@@ -1838,12 +1848,24 @@ class serviceproviders extends Controller
         }
     }
 
+    public function viewBand($product_id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $singerDetails = $this->serviceProviderModel->viewBand($product_id);
+            if ($singerDetails) {
+                $this->view('serviceproviders/viewBand', $singerDetails);
+            } else {
+//                var_dump('singer fetch err..);
+            }
+        }
+    }
+
     public function updateSinger($id)
     {
 //        $singerPhoto = $this->serviceProviderModel->fetchSingerPhoto($id);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_FILES['photo_4'])) {
+            if (!empty($_FILES['photo_4']['name'])) {
                 $img4_name = $_FILES['photo_4']['name'];
                 $img4_size = $_FILES['photo_4']['size'];
                 $tmp4_name = $_FILES['photo_4']['tmp_name'];
@@ -1913,6 +1935,87 @@ class serviceproviders extends Controller
             }
         } else {
             redirect('serviceproviders/singer');
+        }
+    }
+
+    public function updateBand($id)
+    {
+//        $singerPhoto = $this->serviceProviderModel->fetchSingerPhoto($id);
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (!empty($_FILES['photo_4']['name'])) {
+                $img4_name = $_FILES['photo_4']['name'];
+                $img4_size = $_FILES['photo_4']['size'];
+                $tmp4_name = $_FILES['photo_4']['tmp_name'];
+                $error4 = $_FILES['photo_4']['error'];
+
+                if ($error4 === UPLOAD_ERR_NO_FILE) {
+                    $new_img4_name = 'IMG-656bdc23223334.62765635.png';
+                } else {
+                    $img_ex = pathinfo($img4_name, PATHINFO_EXTENSION);
+                    $img_ex_lc = strtolower($img_ex);
+                    $new_img4_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
+                    $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
+                    $bool = move_uploaded_file($tmp4_name, $img_upload_path);
+                }
+
+                $data = [
+                    'bandPhoto' => $new_img4_name
+                ];
+
+                $this->serviceProviderModel->editBandPhoto($id, $data);
+
+                $data = [
+                    'name' => trim($_POST['bandName']),
+                    'leaderName' => trim($_POST['leaderName']),
+                    'memCount' => trim($_POST['memCount']),
+                    'telephoneNumber' => trim($_POST['number']),
+                    'email' => trim($_POST['email']),
+                    'rate' => trim($_POST['rate']),
+                    'instrument' => $_SESSION['instrumentList'],
+                    'location' => $_SESSION['locationList'],
+                    'videoLink' => trim($_POST['videoLink']),
+                    'description' => trim($_POST['description']),
+                ];
+
+
+                if (!empty($data['name']) && !empty($data['leaderName']) && !empty($data['telephoneNumber']) && !empty($data['email']) && !empty($data['rate']) && !empty($data['videoLink']) && !empty($data['description'])) {
+                    if ($this->serviceProviderModel->updateBand($data)) {
+                        redirect('serviceproviders/viewBand/' . $id);
+                    } else {
+                        die('Something went wrong');
+                    }
+                } else {
+                    die('band connot update...');
+                }
+            } else {
+
+                $data = [
+                    'product_id' => $id,
+                    'name' => trim($_POST['bandName']),
+                    'leaderName' => trim($_POST['leaderName']),
+                    'memCount' => trim($_POST['memCount']),
+                    'telephoneNumber' => trim($_POST['number']),
+                    'email' => trim($_POST['email']),
+                    'rate' => trim($_POST['rate']),
+                    'instrument' => $_SESSION['instrumentList'],
+                    'location' => $_SESSION['locationList'],
+                    'videoLink' => trim($_POST['videoLink']),
+                    'description' => trim($_POST['description']),
+                ];
+
+
+                if (!empty($data['name']) && !empty($data['leaderName']) && !empty($data['telephoneNumber']) && !empty($data['email']) && !empty($data['rate']) && !empty($data['videoLink']) && !empty($data['description'])) {
+                    if ($this->serviceProviderModel->updateBand($data)) {
+                        redirect('serviceproviders/viewBand/' . $id);
+                    } else {
+                        die('Something went wrong');
+                    }
+                } else {
+                    die('band connot update...');
+                }
+            }
+        } else {
+            redirect('serviceproviders/viewBand');
         }
     }
 }
