@@ -69,7 +69,7 @@ class Users extends Controller
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
+                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
                 $bool = move_uploaded_file($tmp_name, $img_upload_path);
                 if ($this->userModel->photoUpdate($new_img_name)) {
                     // flash('register_success', 'You are registered and can log in');
@@ -215,6 +215,288 @@ class Users extends Controller
         }
     }
 
+    public function sortInquries($inquiryData)
+    {
+        if ($inquiryData['inquiryType'] == 'recoverAccount') {
+            $data = [
+                'user_id' => $_SESSION['user_id'],
+                'inquiryType' => 'Recover Account',
+                'field_1' => $inquiryData['accountName'],
+                'field_2' => $inquiryData['phoneNumber'],
+                'field_3' => $inquiryData['accountDescription'],
+                'field_4' => '',
+                'field_5' => '',
+                'photo_1' => '',
+                'photo_2' => '',
+                'photo_3' => '',
+                'status' => 'Pending',
+                'moderator_id' => ''
+            ];
+        } else if ($inquiryData['inquiryType'] == 'technicalIssue') {
+            $data = [
+                'user_id' => $_SESSION['user_id'],
+                'inquiryType' => 'Technical Issue',
+                'field_1' => $inquiryData['issueType'],
+                'field_2' => $inquiryData['technicalDescription'],
+                'field_3' => '',
+                'field_4' => '',
+                'field_5' => '',
+                'photo_1' => $inquiryData['photo_1'],
+                'photo_2' => $inquiryData['photo_2'],
+                'photo_3' => $inquiryData['photo_3'],
+                'status' => 'Pending',
+                'moderator_id' => ''
+            ];
+        } else if ($inquiryData['inquiryType'] == 'reportBug') {
+            $data = [
+                'user_id' => $_SESSION['user_id'],
+                'inquiryType' => 'Report Bug',
+                'field_1' => $inquiryData['bugIssue'],
+                'field_2' => $inquiryData['bugDescription'],
+                'field_3' => '',
+                'field_4' => '',
+                'field_5' => '',
+                'photo_1' => $inquiryData['photo_1'],
+                'photo_2' => $inquiryData['photo_2'],
+                'photo_3' => $inquiryData['photo_3'],
+                'status' => 'Pending',
+                'moderator_id' => ''
+            ];
+        } else if ($inquiryData['inquiryType'] == 'billingIssue') {
+            $data = [
+                'user_id' => $_SESSION['user_id'],
+                'inquiryType' => 'Billing Issue',
+                'field_1' => $inquiryData['billingIssue'],
+                'field_2' => $inquiryData['billingExplanation'],
+                'field_3' => '',
+                'field_4' => '',
+                'field_5' => '',
+                'photo_1' => '',
+                'photo_2' => '',
+                'photo_3' => '',
+                'status' => 'Pending',
+                'moderator_id' => ''
+            ];
+        } else if ($inquiryData['inquiryType'] == 'refundPurchase') {
+            $data = [
+                'user_id' => $_SESSION['user_id'],
+                'inquiryType' => 'Refund Purchase',
+                'field_1' => $inquiryData['orderID'],
+                'field_2' => $inquiryData['refundReason'],
+                'field_3' => '',
+                'field_4' => '',
+                'field_5' => '',
+                'photo_1' => '',
+                'photo_2' => '',
+                'photo_3' => '',
+                'status' => 'Pending',
+                'moderator_id' => ''
+            ];
+        } else if ($inquiryData['inquiryType'] == 'reportUser') {
+            $data = [
+                'user_id' => $_SESSION['user_id'],
+                'inquiryType' => 'Report User',
+                'field_1' => $inquiryData['userProfile'],
+                'field_2' => $inquiryData['reportReason'],
+                'field_3' => '',
+                'field_4' => '',
+                'field_5' => '',
+                'photo_1' => '',
+                'photo_2' => '',
+                'photo_3' => '',
+                'status' => 'Pending',
+                'moderator_id' => ''
+            ];
+        } else if ($inquiryData['inquiryType'] == 'question'){
+            $data = [
+                'user_id' => $_SESSION['user_id'],
+                'inquiryType' => 'Question',
+                'field_1' => $inquiryData['userQuestion'],
+                'field_2' => $inquiryData['questionDescription'],
+                'field_3' => '',
+                'field_4' => '',
+                'field_5' => '',
+                'photo_1' => '',
+                'photo_2' => '',
+                'photo_3' => '',
+                'status' => 'Pending',
+                'moderator_id' => ''
+            ];
+        } else if ($inquiryData['inquiryType'] == 'other'){
+            $data = [
+                'user_id' => $_SESSION['user_id'],
+                'inquiryType' => 'Other',
+                'field_1' => $inquiryData['otherType'],
+                'field_2' => $inquiryData['otherDescription'],
+                'field_3' => '',
+                'field_4' => '',
+                'field_5' => '',
+                'photo_1' => $inquiryData['photo_1'],
+                'photo_2' => $inquiryData['photo_2'],
+                'photo_3' => $inquiryData['photo_3'],
+                'status' => 'Pending',
+                'moderator_id' => ''
+            ];
+        }
+        if($this->userModel->addInquiry($data)){
+            redirect('users/inquiries');
+        } else {
+            die('Something went wrong');
+        }
+    }
+
+    public function inquiries()
+    {
+        $inquiries = $this->userModel->getInquiries($_SESSION['user_id']);
+        $data = [
+            'inquiries' => $inquiries
+        ];
+        $this->view('users/inquiries', $data);
+    }
+
+    public function viewInquiry($inquiry_id)
+    {
+        $inquiry = $this->userModel->getInquiry($inquiry_id);
+        if($inquiry->status == 'Pending'){
+            $this->inquiries();
+        } else {
+            $chat = [];
+            $chatIds = $this->userModel->getInqIds($inquiry_id);
+            foreach ($chatIds as $chatId){
+                $chatData = $this->userModel->getModChat($chatId->chat_id);
+                array_push($chat, $chatData);
+            }
+            $mod_data = $this->userModel->getModerator($inquiry->moderator_id);
+            $user_data = $this->userModel->view($inquiry->user_id);
+            $data = [
+                'inquiry' => $inquiry,
+                'moderator' => $mod_data,
+                'user' => $user_data,
+                'chat' => $chat
+            ];
+            $this->view('users/viewinquiry', $data);
+        }
+    }
+
+    public function sendMessageMod($message, $inquiry_id, $moderator_id, $date){
+        $modifiedDate = str_replace('_', ' ', $date);
+        $modifiedMessage = str_replace('_', ' ', $message);
+        $data = [
+            'inquiry_id' => $inquiry_id,
+            'user_id' => $_SESSION['user_id'],
+            'moderator_id' => $moderator_id,
+            'chat_data' => $modifiedMessage,
+            'chat_date' => $modifiedDate,
+            'created_by' => 'user'
+        ];
+        $chat_id = $this->userModel->addChatUserToMod($data);
+        if($this->userModel->addToInqChat($chat_id, $inquiry_id)){
+            redirect('users/viewInquiry/'.$inquiry_id.'');
+        } else {
+            die('Something went wrong');
+        }
+    }
+
+    public function contactsupport(){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $inq_type = trim($_POST['inquiryType']);
+            if($inq_type == 'technicalIssue' || $inq_type == 'reportBug' || $inq_type == 'other'){
+                $img1_name = $_FILES['photo_1']['name'];
+                $img1_size = $_FILES['photo_1']['size'];
+                $tmp1_name = $_FILES['photo_1']['tmp_name'];
+                $error1 = $_FILES['photo_1']['error'];
+    
+                $img2_name = $_FILES['photo_2']['name'];
+                $img2_size = $_FILES['photo_2']['size'];
+                $tmp2_name = $_FILES['photo_2']['tmp_name'];
+                $error2 = $_FILES['photo_2']['error'];
+    
+                $img3_name = $_FILES['photo_3']['name'];
+                $img3_size = $_FILES['photo_3']['size'];
+                $tmp3_name = $_FILES['photo_3']['tmp_name'];
+                $error3 = $_FILES['photo_3']['error'];
+    
+                if ($error1 === UPLOAD_ERR_NO_FILE) {
+                    $new_img1_name = 'IMG-656bdc23223334.62765635.png';
+                } else {
+                    $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
+                    $img_ex_lc = strtolower($img_ex);
+                    $new_img1_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
+                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/inquiries/' . $new_img1_name;
+                    $bool = move_uploaded_file($tmp1_name, $img_upload_path);
+                }
+    
+                if ($error2 === UPLOAD_ERR_NO_FILE) {
+                    $new_img2_name = 'IMG-656bdc23223334.62765635.png';
+                } else {
+                    $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
+                    $img_ex_lc = strtolower($img_ex);
+                    $new_img2_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
+                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/inquiries/' . $new_img2_name;
+                    $bool = move_uploaded_file($tmp2_name, $img_upload_path);
+                }
+    
+                if ($error3 === UPLOAD_ERR_NO_FILE) {
+                    $new_img3_name = 'IMG-656bdc23223334.62765635.png';
+                } else {
+                    $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
+                    $img_ex_lc = strtolower($img_ex);
+                    $new_img3_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
+                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/inquiries/' . $new_img3_name;
+                    $bool = move_uploaded_file($tmp3_name, $img_upload_path);
+                }
+                $data = [
+                    'inquiryType' => trim($_POST['inquiryType']),
+                    'accountName' => trim($_POST['accountName']),
+                    'phoneNumber' => trim($_POST['phoneNumber']),
+                    'accountDescription' => trim($_POST['accountDescription']),
+                    'issueType' => trim($_POST['issueType']),
+                    'technicalDescription' => trim($_POST['technicalDescription']),
+                    'bugIssue' => trim($_POST['bugIssue']),
+                    'bugDescription' => trim($_POST['bugDescription']),
+                    'billingIssue' => trim($_POST['billingIssue']),
+                    'billingExplanation' => trim($_POST['billingExplanation']),
+                    'orderID' => trim($_POST['orderID']),
+                    'refundReason' => trim($_POST['refundReason']),
+                    'userProfile' => trim($_POST['userProfile']),
+                    'reportReason' => trim($_POST['reportReason']),
+                    'userQuestion' => trim($_POST['userQuestion']),
+                    'questionDescription' => trim($_POST['questionDescription']),
+                    'otherType' => trim($_POST['otherType']),
+                    'otherDescription' => trim($_POST['otherDescription']),
+                    'photo_1' => $new_img1_name,
+                    'photo_2' => $new_img2_name,
+                    'photo_3' => $new_img3_name
+                ];
+            } else {
+                $data = [
+                    'inquiryType' => trim($_POST['inquiryType']),
+                    'accountName' => trim($_POST['accountName']),
+                    'phoneNumber' => trim($_POST['phoneNumber']),
+                    'accountDescription' => trim($_POST['accountDescription']),
+                    'issueType' => trim($_POST['issueType']),
+                    'technicalDescription' => trim($_POST['technicalDescription']),
+                    'bugIssue' => trim($_POST['bugIssue']),
+                    'bugDescription' => trim($_POST['bugDescription']),
+                    'billingIssue' => trim($_POST['billingIssue']),
+                    'billingExplanation' => trim($_POST['billingExplanation']),
+                    'orderID' => trim($_POST['orderID']),
+                    'refundReason' => trim($_POST['refundReason']),
+                    'userProfile' => trim($_POST['userProfile']),
+                    'reportReason' => trim($_POST['reportReason']),
+                    'userQuestion' => trim($_POST['userQuestion']),
+                    'questionDescription' => trim($_POST['questionDescription']),
+                    'otherType' => trim($_POST['otherType']),
+                    'otherDescription' => trim($_POST['otherDescription']),
+                ];
+            }
+            $this->sortInquries($data);
+            } else {
+                $this->view('users/contactsupport');
+            }
+        }
+
     public function verification()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -264,7 +546,7 @@ class Users extends Controller
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
+                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
                 $bool = move_uploaded_file($tmp_name, $img_upload_path);
             }
             $data = [

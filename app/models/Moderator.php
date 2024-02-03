@@ -28,6 +28,110 @@
       }
     }
 
+    public function getUserChat($chat_id){
+      $this->db->query('SELECT * FROM chat_mod_user WHERE chat_id = :chat_id');
+      $this->db->bind(':chat_id', $chat_id);
+      $results = $this->db->single();
+      return $results;
+  }
+
+  public function addChatModtoUser($data){
+    $this->db->query('INSERT INTO chat_mod_user (user_id, moderator_id, created_by, chat_data, chat_date) VALUES(:user_id, :moderator_id, :created_by, :chat_data, :chat_date)');
+    try {
+        $this->db->bind(':user_id', $data['user_id']);
+        $this->db->bind(':moderator_id', $data['moderator_id']);
+        $this->db->bind(':created_by', $data['created_by']);
+        $this->db->bind(':chat_data', $data['chat_data']);
+        $this->db->bind(':chat_date', $data['chat_date']);
+
+        if ($this->db->execute()) {
+            $this->db->query('SELECT LAST_INSERT_ID() AS entry_id');
+            $result = $this->db->single();
+            return $result->entry_id;
+        } else {
+            return false;
+        }
+    } catch (PDOException $e) {
+        die($e->getMessage());
+    }
+}
+
+public function addToInqChat($chat_id, $inquiry_id){
+  $this->db->query('INSERT INTO inq_chat (chat_id, inquiry_id) VALUES(:chat_id, :inquiry_id)');
+  try {
+      $this->db->bind(':chat_id', $chat_id);
+      $this->db->bind(':inquiry_id', $inquiry_id);
+      if ($this->db->execute()) {
+          return true;
+      } else {
+          return false;
+      }
+  } catch (PDOException $e) {
+      die($e->getMessage());
+  }
+}
+
+    public function getInqIds($inquiry_id){
+      $this->db->query('SELECT * FROM inq_chat WHERE inquiry_id = :inquiry_id');
+      $this->db->bind(':inquiry_id', $inquiry_id);
+      $results = $this->db->resultSet();
+      return $results;
+  }
+
+    public function getUserData($id){
+      $this->db->query('SELECT * FROM users WHERE id = :id');
+      $this->db->bind(':id', $id);
+      $results = $this->db->single();
+      return $results;
+    }
+
+    public function getInquiry($inquiry_id){
+      $this->db->query('SELECT * FROM inquiries WHERE inquiry_id = :inquiry_id');
+      $this->db->bind(':inquiry_id', $inquiry_id);
+      $results = $this->db->single();
+      return $results;
+  }
+
+    public function getPendingInquiries(){
+      $this->db->query('SELECT * FROM inquiries WHERE status = "Pending"');
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getActiveInquiries($moderator_id){
+      $this->db->query('SELECT * FROM inquiries WHERE status = "In-Progress" AND moderator_id = :moderator_id');
+      $this->db->bind(':moderator_id', $moderator_id);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getCompletedInquiries($moderator_id){
+      $this->db->query('SELECT * FROM inquiries WHERE status = "Completed" AND moderator_id = :moderator_id');
+      $this->db->bind(':moderator_id', $moderator_id);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function approveInquiry($inquiry_id, $moderator_id){
+      $this->db->query('UPDATE inquiries SET status = "In-Progress", moderator_id = :moderator_id WHERE inquiry_id = :inquiry_id');
+      $this->db->bind(':inquiry_id', $inquiry_id);
+      $this->db->bind(':moderator_id', $moderator_id);
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function completeInquiry($inquiry_id){
+      $this->db->query('UPDATE inquiries SET status = "Completed" WHERE inquiry_id = :inquiry_id');
+      $this->db->bind(':inquiry_id', $inquiry_id);
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
     // Find user by email
     public function findmoderatorByEmail($moderator_email){
       $this->db->query('SELECT * FROM moderators WHERE moderator_email = :moderator_email');

@@ -114,6 +114,96 @@
       }
     }
 
+    public function pendinginquiries()
+    {
+        $inquiries_pending = $this->moderatorModel->getPendingInquiries();
+        $data = [
+            'pending' => $inquiries_pending,
+        ];
+        $this->view('moderators/pendinginquiries', $data);
+    }
+
+    public function activeinquiries()
+    {
+        $inquiries_active = $this->moderatorModel->getActiveInquiries($_SESSION['moderator_id']);
+        $data = [
+            'active' => $inquiries_active,
+        ];
+        $this->view('moderators/activeinquiries', $data);
+    }
+
+    public function completedinquiries()
+    {
+        $inquiries_completed = $this->moderatorModel->getCompletedInquiries($_SESSION['moderator_id']);
+        $data = [
+            'completed' => $inquiries_completed,
+        ];
+        $this->view('moderators/completedinquiries', $data);
+    }
+
+    public function viewInquiry($inquiry_id)
+    {
+        $inquiry = $this->moderatorModel->getInquiry($inquiry_id);
+        $user_data = $this->moderatorModel->getUserData($inquiry->user_id);
+        if($inquiry->status == 'Pending'){
+          $data = [
+              'inquiry' => $inquiry,
+              'user' => $user_data
+          ];
+        $this->view('moderators/viewinquiry', $data);
+        } else {
+            $chat = [];
+            $chatIds = $this->moderatorModel->getInqIds($inquiry_id);
+            foreach ($chatIds as $chatId){
+                $chatData = $this->moderatorModel->getUserChat($chatId->chat_id);
+                array_push($chat, $chatData);
+            }
+            $mod_data = $this->moderatorModel->view($inquiry->moderator_id);
+            $data = [
+                'inquiry' => $inquiry,
+                'moderator' => $mod_data,
+                'user' => $user_data,
+                'chat' => $chat
+            ];
+            $this->view('moderators/viewinquiry', $data);
+        }
+    }
+
+    public function sendMessageUser($message, $inquiry_id, $id, $date){
+      $modifiedDate = str_replace('_', ' ', $date);
+      $modifiedMessage = str_replace('_', ' ', $message);
+      $data = [
+          'inquiry_id' => $inquiry_id,
+          'user_id' => $id,
+          'moderator_id' => $_SESSION['moderator_id'],
+          'chat_data' => $modifiedMessage,
+          'chat_date' => $modifiedDate,
+          'created_by' => 'moderator'
+      ];
+      $chat_id = $this->moderatorModel->addChatModToUser($data);
+      if($this->moderatorModel->addToInqChat($chat_id, $inquiry_id)){
+          redirect('moderators/viewInquiry/'.$inquiry_id.'');
+      } else {
+          die('Something went wrong');
+      }
+  }
+
+    public function approveInquiry($inquiry_id){
+        if($this->moderatorModel->approveInquiry($inquiry_id, $_SESSION['moderator_id'])){
+            redirect('moderators/pendinginquiries');
+        } else {
+            die('Something went wrong');
+        }
+    }
+
+    public function completeInquiry($inquiry_id){
+        if($this->moderatorModel->completeInquiry($inquiry_id)){
+            redirect('moderators/activeinquiries');
+        } else {
+            die('Something went wrong');
+        }
+    }
+
     public function deleteserviceprovider($id){
       if($this->moderatorModel->deleteServiceProvider($id)){
         redirect('moderators/viewserviceprovider');

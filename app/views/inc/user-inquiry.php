@@ -139,13 +139,16 @@
                         </div>
                     </li>
                     <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/orders">Orders</a></li>
-                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/inquiries">Inquiries</a></li>
+                    <li><a class="nav-link" href="/">Bookmarks</a></li>
                     <li><a class="nav-link" href="/">About</a></li>
                 </ul>
             </nav>
         </div>
         <div class="nav-end">
             <div class="right-container">
+                <a href="<?php echo URLROOT; ?>/users/inquiries">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                </a>
                 <a href="<?php echo URLROOT; ?>/users/profile">
                     <img
                         src="<?php echo URLROOT; ?>/img/user.png"

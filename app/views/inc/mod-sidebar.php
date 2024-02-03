@@ -2,7 +2,7 @@
     <header>
         <div class="image-text">
             <span class="image">
-                <img src="logo.png" alt="">
+                <img src="<?php echo URLROOT; ?>/img/logo.png" alt="">
             </span>
 
             <div class="text logo-text">
@@ -25,10 +25,8 @@
                 </li>
 
                 <li id="mod_list" class="nav_link adminsidebar_mod ">
-                    <a href="<?php echo URLROOT; ?>/moderators/viewserviceprovider">
                         <i class='bx bx-user icon'></i>
-                        <span class="text nav-text">Sellers</span>
-                        <i class='bx bx-chevron-down icon'></i>
+                        <span class="text nav-text"><strong>Sellers</strong></span>
                     </a>
                 </li>
                 <!-- <ul id="mod_list_pop"> -->
@@ -67,9 +65,26 @@
                 </li>
 
                 <li class="nav_link">
-                    <a href="#">
                         <i class='bx bx-bar-chart-alt icon'></i>
-                        <span class="text nav-text">Inquiries</span>
+                        <span class="text nav-text"><strong>Inquiries</strong></span>
+                    </a>
+                </li>
+                <li class="nav_link_seller">
+                    <a href="<?php echo URLROOT; ?>/moderators/pendinginquiries">
+                        <i class='bx bx-bell icon'></i>
+                        <span class="text nav-text">Pending</span>
+                    </a>
+                </li>
+                <li class="nav_link_seller">
+                    <a href="<?php echo URLROOT; ?>/moderators/activeinquiries">
+                        <i class='bx bx-star icon'></i>
+                        <span class="text nav-text">Active</span>
+                    </a>
+                </li>
+                <li class="nav_link_seller">
+                    <a href="<?php echo URLROOT; ?>/moderators/completedinquiries">
+                        <i class='bx bx-user-check icon'></i>
+                        <span class="text nav-text">Completed</span>
                     </a>
                 </li>
 

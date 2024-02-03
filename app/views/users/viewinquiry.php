@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-inquiry.css">
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/nav-bar.css">  
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/chat.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"/>
+
+  <title>User Inquiry</title>
+</head>
+<body>
+<?php require_once APPROOT . '/views/inc/user-inquiry.php'; ?>
+  <div class="inquiry-container">
+    <div class="inquiry-header">
+      <h2>Inquiry ID: #<?php echo $data['inquiry']->inquiry_id ?></h2>
+    </div>
+
+    <div class="user-moderator-grid">
+      <div class="user-section">
+      <h3>User Information</h3>
+        <div class="profile-picture">
+          <img src="<?php echo URLROOT; ?>/img/mag_img/<?php echo $data['user']->profile_photo ?>">
+        </div>
+        <div class="user-details">
+          <p><strong>Name: </strong><?php echo $data['user']->name ?></p>
+          <p><strong>Email: </strong><?php echo $data['user']->email ?></p>
+        </div>
+      </div>
+
+      <div class="moderator-section">
+        <div class="moderator-details">
+          <h3>Moderator Information</h3>
+          <p><strong>Name: </strong><?php echo $data['moderator']->moderator_name ?></p>
+          <p><strong>Email: </strong><?php echo $data['moderator']->moderator_email ?></p>
+          <p><strong>Moderator ID: </strong><?php echo $data['moderator']->moderator_id  ?></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="inquiry-content">
+      <h3>Inquiry Details</h3>
+        <div><strong>Inquiry Type: </strong><?php echo $data['inquiry']->inquiryType ?></div><br>
+        <div class="status-<?php echo $data['inquiry']->status ?>"><strong>Status:</strong> <?php echo $data['inquiry']->status ?></div><br>
+        <?php if ($data['inquiry']->inquiryType == 'Recover Account'): ?>
+            <div><strong>Account Name: </strong><?php echo $data['inquiry']->field_1; ?><br><br>
+            <div><strong>Phone Number: </strong><?php echo $data['inquiry']->field_2; ?><br><br>
+            <div><strong>Description: </strong><?php echo $data['inquiry']->field_3; ?><br>
+        <?php elseif ($data['inquiry']->inquiryType == 'Technical Issue'): ?>
+            <div><strong>Issue Type: </strong><?php echo $data['inquiry']->field_1; ?><br><br>
+            <div><strong>Issue Description: </strong><?php echo $data['inquiry']->field_2; ?><br>
+            <div class="inquiry-image-container">
+                <img src="<?php echo URLROOT; ?>/img/inquiries/<?php echo $data['inquiry']->photo_1; ?>">
+                <img src="<?php echo URLROOT; ?>/img/inquiries/<?php echo $data['inquiry']->photo_2; ?>">
+                <img src="<?php echo URLROOT; ?>/img/inquiries/<?php echo $data['inquiry']->photo_3; ?>">
+            </div>
+        <?php elseif ($data['inquiry']->inquiryType == 'Report Bug'): ?>
+            <div><strong>Bug: </strong><?php echo $data['inquiry']->field_1; ?><br><br>
+            <div><strong>Bug Description: </strong><?php echo $data['inquiry']->field_2; ?><br>
+            <div class="inquiry-image-container">
+                <img src="<?php echo URLROOT; ?>/img/inquiries/<?php echo $data['inquiry']->photo_1; ?>">
+                <img src="<?php echo URLROOT; ?>/img/inquiries/<?php echo $data['inquiry']->photo_2; ?>">
+                <img src="<?php echo URLROOT; ?>/img/inquiries/<?php echo $data['inquiry']->photo_3; ?>">
+            </div>
+        <?php elseif ($data['inquiry']->inquiryType == 'Billing Issue'): ?>
+            <div><strong>Billing Issue: </strong><?php echo $data['inquiry']->field_1; ?><br><br>
+            <div><strong>Issue Explenation: </strong><?php echo $data['inquiry']->field_2; ?><br>
+        <?php elseif ($data['inquiry']->inquiryType == 'Refund Purchase'): ?>
+            <div><strong>Order ID: </strong><?php echo $data['inquiry']->field_1; ?><br><br>
+            <div><strong>Refund Reason: </strong><?php echo $data['inquiry']->field_2; ?><br>
+        <?php elseif ($data['inquiry']->inquiryType == 'Report User'): ?>
+            <div><strong>User Profile: </strong><?php echo $data['inquiry']->field_1; ?><br><br>
+            <div><strong>Reason: </strong><?php echo $data['inquiry']->field_2; ?><br>
+        <?php elseif ($data['inquiry']->inquiryType == 'Question'): ?>
+            <div><strong>Question: </strong><?php echo $data['inquiry']->field_1; ?><br><br>
+            <div><strong>Description: </strong><?php echo $data['inquiry']->field_2; ?><br>
+        <?php elseif ($data['inquiry']->inquiryType == 'Other'): ?>
+            <div><strong>Type: </strong><?php echo $data['inquiry']->field_1; ?><br><br>
+            <div><strong>Description: </strong><?php echo $data['inquiry']->field_2; ?><br>
+            <div class="inquiry-image-container">
+                <img src="<?php echo URLROOT; ?>/img/inquiries/<?php echo $data['inquiry']->photo_1; ?>">
+                <img src="<?php echo URLROOT; ?>/img/inquiries/<?php echo $data['inquiry']->photo_2; ?>">
+                <img src="<?php echo URLROOT; ?>/img/inquiries/<?php echo $data['inquiry']->photo_3; ?>">
+            </div>
+        <?php endif; ?>
+    </div>
+  </div>
+  <button <?php echo $data['inquiry']->status == 'Completed' ? 'style="display: none;"' : ''; ?> id="chat-button" onclick="toggleChat()">Open Chat</button>
+
+  <div id="chat-container" <?php echo $data['inquiry']->status == 'Completed' ? 'style="display: none;"' : ''; ?>>
+        <!-- msg-header section starts -->
+        <div class="msg-header">
+          <div class="container1">
+            <img src="http://localhost/symphony/img/moderator.jpg" class="msgimg" />
+            <div class="active">
+              <p><?php echo $data['moderator']->moderator_name; ?></p>
+            </div>
+            <!-- Minimize button -->
+          <div class="minimize-button" onclick="toggleChat()">
+            <i class="bi bi-dash-square"></i> <!-- You can use any icon you prefer -->
+        </div>
+          </div>
+        </div>
+        <!-- msg-header section ends -->
+  
+        <!-- Chat inbox  -->
+        <div class="chat-page">
+          <div class="msg-inbox">
+            <div class="chats">
+              <!-- Message container -->
+              <div class="msg-page">
+                <!-- Incoming messages -->
+                <?php foreach ($data['chat'] as $chat) :
+                      if ($chat->created_by == 'moderator'){
+                        echo '<div class="received-chats">
+                        <div class="received-chats-img">
+                          <img src="http://localhost/symphony/img/moderator.jpg"" />
+                        </div>
+                        <div class="received-msg">
+                          <div class="received-msg-inbox">
+                            <p>
+                              ' . $chat->chat_data . '
+                            </p>
+                            <span class="time">' . $chat->chat_date . '</span>
+                          </div>
+                        </div>
+                      </div>';
+                      } else {
+                        echo '<div class="outgoing-chats">
+                        <div class="outgoing-chats-img">
+                          <img src="http://localhost/symphony/img/mag_img/' . $data['user']->profile_photo . '" />
+                        </div>
+                        <div class="outgoing-msg">
+                          <div class="outgoing-chats-msg">
+                            <p>
+                            ' . $chat->chat_data . '
+                            </p>
+        
+                            <span class="time">$chat->' . $chat->chat_date . '</span>
+                          </div>
+                        </div>
+                      </div>';
+                      } ?>
+                <?php endforeach; ?>
+              </div>
+            </div>
+  
+            <!-- msg-bottom section -->
+  
+            <div class="msg-bottom">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Write message..."
+                />
+  
+                <span class="input-group-text send-icon">
+                  <i class="bi bi-send" onclick=""></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<script src="<?php echo URLROOT; ?>/js/user-mod-chat.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+            if (<?php echo json_encode($data['inquiry']->status == 'In-Progress'); ?>) {
+                toggleChat();
+            }
+});
+
+  function addNewMessage(messageText, isOutgoing) {
+    var newMessage = document.createElement('div');
+    newMessage.className = isOutgoing ? 'outgoing-chats' : 'received-chats';
+    var currentDateTime = getCurrentDateTime();
+    if(isOutgoing){
+        newMessage.innerHTML = `
+            <div class="outgoing-chats">
+                <div class="outgoing-chats-img">
+                    <img src="http://localhost/symphony/img/mag_img/' . $data['user']->profile_photo . '" />
+                </div>
+                <div class="outgoing-msg">
+                    <div class="outgoing-chats-msg">
+                        <p>
+                            ${messageText}
+                        </p>
+
+                        <span class="time">${currentDateTime}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    } else {
+        newMessage.innerHTML = `
+            <div class="received-chats">
+                <div class="received-chats-img">
+                    <img src="http://localhost/symphony/img/moderator.jpg" />
+                </div>
+                <div class="received-msg">
+                    <div class="received-msg-inbox">
+                        <p>
+                            ${messageText}
+                        </p>
+                        <span class="time">${currentDateTime}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    chatContainer.appendChild(newMessage);
+    var modifieddate = currentDateTime.replace(/ /g, "_");
+    var modifiedmessage = messageText.replace(/ /g, "_");
+    window.location.href = "<?php echo URLROOT; ?>/users/sendMessageMod/"+modifiedmessage+"/"+<?php echo $data['inquiry']->inquiry_id ?>+"/"+<?php echo $data['moderator']->moderator_id ?>+"/"+modifieddate;   
+}
+</script>
+</body>
+</html>

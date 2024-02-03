@@ -166,6 +166,57 @@ class User
         }
     }
 
+    public function addInquiry($data)
+    {
+        $this->db->query('INSERT INTO inquiries (user_id, inquiryType, field_1, field_2, field_3, field_4, field_5, photo_1, photo_2, photo_3, status, moderator_id) VALUES(:user_id, :inquiryType, :field_1, :field_2, :field_3, :field_4, :field_5, :photo_1, :photo_2, :photo_3, :status, :moderator_id)');
+        try {
+            $this->db->bind(':user_id', $data['user_id']);
+            $this->db->bind(':inquiryType', $data['inquiryType']);
+            $this->db->bind(':field_1', $data['field_1']);
+            $this->db->bind(':field_2', $data['field_2']);
+            $this->db->bind(':field_3', $data['field_3']);
+            $this->db->bind(':field_4', $data['field_4']);
+            $this->db->bind(':field_5', $data['field_5']);
+            $this->db->bind(':photo_1', $data['photo_1']);
+            $this->db->bind(':photo_2', $data['photo_2']);
+            $this->db->bind(':photo_3', $data['photo_3']);
+            $this->db->bind(':status', $data['status']);
+            $this->db->bind(':moderator_id', $data['moderator_id']);
+            
+            // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+
+            die($e->getMessage());
+        }
+    }
+
+    public function getModerator($moderator_id){
+        $this->db->query('SELECT * FROM moderators WHERE moderator_id = :moderator_id');
+        $this->db->bind(':moderator_id', $moderator_id);
+        $results = $this->db->single();
+        return $results;
+    }
+    
+    public function getInquiries($user_id)
+    {
+        $this->db->query('SELECT * FROM inquiries WHERE user_id = :user_id');
+        $this->db->bind(':user_id', $user_id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function getInquiry($inquiry_id){
+        $this->db->query('SELECT * FROM inquiries WHERE inquiry_id = :inquiry_id');
+        $this->db->bind(':inquiry_id', $inquiry_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
     public function delete($id)
     {
 
@@ -181,6 +232,55 @@ class User
         }
     }
 
+    public function addChatUserToMod($data){
+        $this->db->query('INSERT INTO chat_mod_user (user_id, moderator_id, created_by, chat_data, chat_date) VALUES(:user_id, :moderator_id, :created_by, :chat_data, :chat_date)');
+        try {
+            $this->db->bind(':user_id', $data['user_id']);
+            $this->db->bind(':moderator_id', $data['moderator_id']);
+            $this->db->bind(':created_by', $data['created_by']);
+            $this->db->bind(':chat_data', $data['chat_data']);
+            $this->db->bind(':chat_date', $data['chat_date']);
+
+            if ($this->db->execute()) {
+                $this->db->query('SELECT LAST_INSERT_ID() AS entry_id');
+                $result = $this->db->single();
+                return $result->entry_id;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function addToInqChat($chat_id, $inquiry_id){
+        $this->db->query('INSERT INTO inq_chat (chat_id, inquiry_id) VALUES(:chat_id, :inquiry_id)');
+        try {
+            $this->db->bind(':chat_id', $chat_id);
+            $this->db->bind(':inquiry_id', $inquiry_id);
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getInqIds($inquiry_id){
+        $this->db->query('SELECT * FROM inq_chat WHERE inquiry_id = :inquiry_id');
+        $this->db->bind(':inquiry_id', $inquiry_id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function getModChat($chat_id){
+        $this->db->query('SELECT * FROM chat_mod_user WHERE chat_id = :chat_id');
+        $this->db->bind(':chat_id', $chat_id);
+        $results = $this->db->single();
+        return $results;
+    }
 
     // Login User
     public function login($email, $password)

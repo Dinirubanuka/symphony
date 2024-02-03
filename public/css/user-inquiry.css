@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .inquiry-container {
+    max-width: 95%;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .inquiry-header {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .user-moderator-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .profile-picture img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+  
+  .user-details,
+  .moderator-details {
+    flex-grow: 1;
+  }
+  
+  .inquiry-content {
+    margin-top: 20px;
+  }
+  
+  .status-Pending {
+    color: #ff0000;
+}
+
+.status-In-Progress {
+    color: #008b2e;
+}
+
+.status-Completed {
+    color: #2f00ff;
+}
+
+.inquiry-image-container {
+  display: flex;
+}
+
+.inquiry-image-container img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover; 
+  margin-right: 10px;
+}
