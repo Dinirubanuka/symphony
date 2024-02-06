@@ -55,7 +55,7 @@
         // Display a confirmation dialog
         if (confirm("Are you sure you want to delete this user?")) {
             // Execute PHP code to delete the moderator
-            window.location.href = "<?php echo URLROOT; ?>/administrators/deleteuser/" + userID;
+            window.location.href = "<?php echo URLROOT; ?>/moderators/deleteuser/" + userID;
         }
     }
 </script>

@@ -245,3 +245,40 @@ nav ul.active {
         row-gap: 15px;
     }
 }
+
+.photo_container{
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;*/
+}
+.photo_container .photo-table{
+    display: flex;
+    gap: 20px;
+
+}
+.photo_container .photo-table .photo-outer{
+    margin: 20px 5px 0 5px ;
+    padding: 0;
+    /* position: relative; */
+    /*border:1px solid green;*/
+    /*max-width: 700px;*/
+    /*width: 100%;*/
+    /*background: #fff; */
+    /*padding: 25px;*/
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 92px;
+    height: 92px;
+    overflow: hidden;
+}
+.photo_container .photo-table .photo-outer .photo-inner{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.photo_container .photo-table .photo-outer .photo-inner img{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    /*border-radius: 50%;*/
+}

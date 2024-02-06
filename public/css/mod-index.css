@@ -518,3 +518,17 @@ body.dark .right-component .text{
     background-color:var(--primary-color-light);
     font-size: 15px;
 }
+
+.sp-icon {
+    cursor: pointer;
+    color: rgb(0, 0, 0); /* Change the color to your desired default color */
+    transition: color 0.3s ease;
+}
+
+.sp-icon:hover {
+    color: #007bff; /* Change the color to your desired hover color */
+}
+
+.status-Active {
+    color: #00ff55; /* Change the color to your desired active color */
+}

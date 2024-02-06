@@ -18,7 +18,14 @@
     <div class="right-component">
 <div class="mod">
     <div class="mod-above">
-        <h2>Moderators</h2>
+        <h2><?php if($data['status'] == 'Active'){
+            echo 'Active Service Providers';
+        } else if($data['status'] == 'Rejected'){
+            echo 'Rejected Service Providers';
+        } else if($data['status'] == 'Deactivated'){
+            echo 'Deactivated Service Providers';
+        } ?>
+        </h2>
     </div>
     <div class="mod-below">
         <table class="data-table">
@@ -33,7 +40,7 @@
             <?php foreach ($data['serviceproviders'] as $serviceprovider) : ?>
                 <tr class="data-table-tr">
                     <td><?php echo $serviceprovider->serviceprovider_id; ?></td>
-                    <td><?php echo $serviceprovider->business_name; ?></td>
+                    <td><div class = "sp-icon" onclick = "viewSP(<?php echo $serviceprovider->serviceprovider_id; ?>)"><?php echo $serviceprovider->business_name; ?></div></td>
                     <td><?php echo $serviceprovider->business_email; ?></td>
                     <td><?php echo $serviceprovider->business_contact_no; ?></td>
                     <td><?php echo $serviceprovider->business_address; ?></td>
@@ -57,8 +64,12 @@
         // Display a confirmation dialog
         if (confirm("Are you sure you want to delete this Service Provider?")) {
             // Execute PHP code to delete the moderator
-            window.location.href = "<?php echo URLROOT; ?>/administrators/deleteserviceprovider/" + serviceproviderID;
+            window.location.href = "<?php echo URLROOT; ?>/moderators/deleteserviceprovider/" + serviceproviderID;
         }
+    }
+
+    function viewSP(serviceproviderID) {
+        window.location.href = "<?php echo URLROOT; ?>/moderators/viewserviceprovider/" + serviceproviderID;
     }
 </script>
 </body>

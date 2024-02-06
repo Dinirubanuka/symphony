@@ -90,8 +90,64 @@
         <span class="invalid-feedback"><?php echo $data['about_err']; ?></span>
         </div>
 
+        <div class="photo_container">
+            <div class="input-box">
+                <label style="font-weight: bold">Add up to 5 photos of your Business (Optional)</label>
+            </div>
+            <div class="photo-table">
+                <div class="photo-outer">
+                    <div class="photo-inner">
+                        <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_1" onclick="triggerInput(1)">
+                        <input type="file" id="photo_1" accept=".jpg, .jpeg, .png, .HEIC" name="photo_1" onchange="previewImage(this, 'previewPhoto_1')">
+                    </div>
+                </div>
+                <div class="photo-outer">
+                    <div class="photo-inner">
+                        <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_2" onclick="triggerInput(2)">
+                        <input type="file" id="photo_2" accept=".jpg, .jpeg, .png, .HEIC" name="photo_2" onchange="previewImage(this, 'previewPhoto_2')">
+                    </div>
+                </div>
+                <div class="photo-outer">
+                    <div class="photo-inner">
+                        <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_3" onclick="triggerInput(3)">
+                        <input type="file" id="photo_3" accept=".jpg, .jpeg, .png, .HEIC" name="photo_3" onchange="previewImage(this, 'previewPhoto_3')">
+                    </div>
+                </div>
+                <div class="photo-outer">
+                    <div class="photo-inner">
+                        <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_4" onclick="triggerInput(4)">
+                        <input type="file" id="photo_4" accept=".jpg, .jpeg, .png, .HEIC" name="photo_4" onchange="previewImage(this, 'previewPhoto_4')">
+                    </div>
+                </div>
+                <div class="photo-outer">
+                    <div class="photo-inner">
+                        <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_5" onclick="triggerInput(5)">
+                        <input type="file" id="photo_5" accept=".jpg, .jpeg, .png, .HEIC" name="photo_5" onchange="previewImage(this, 'previewPhoto_5')">
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <button>Submit</button>
       </form>
     </section>
+<script>
+      function triggerInput(id){
+        document.getElementById("photo_"+id).click();
+    }
+    function previewImage(input, imgId) {
+        var preview = document.getElementById(imgId);
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
   </body>
 </html>

@@ -10,8 +10,6 @@
                 <span class="profession">Moderator</span>
             </div>
         </div>
-
-
     </header>
 
     <div class="menu-bar">
@@ -31,19 +29,19 @@
                 </li>
                 <!-- <ul id="mod_list_pop"> -->
                 <li class="nav_link_seller">
-                    <a href="<?php echo URLROOT; ?>/moderators/viewserviceprovider">
+                    <a href="<?php echo URLROOT; ?>/moderators/viewActiveSP">
                         <i class='bx bx-user-circle icon'></i>
-                        <span class="text nav-text">Pending</span>
+                        <span class="text nav-text">Active</span>
                     </a>
                 </li>
                 <li class="nav_link_seller">
-                    <a href="<?php echo URLROOT; ?>/moderators/viewserviceprovider">
+                    <a href="<?php echo URLROOT; ?>/moderators/viewRejectedSP">
                         <i class='bx bx-user-check icon'></i>
-                        <span class="text nav-text">Activated</span>
+                        <span class="text nav-text">Rejected</span>
                     </a>
                 </li>
                 <li class="nav_link_seller">
-                    <a href="<?php echo URLROOT; ?>/moderators/viewserviceprovider">
+                    <a href="<?php echo URLROOT; ?>/moderators/viewDeactivatedSP">
                         <i class='bx bx-user-x icon'></i>
                         <span class="text nav-text">Deactivated</span>
                     </a>
@@ -58,7 +56,7 @@
                 </li>
 
                 <li class="nav_link">
-                    <a href="#">
+                    <a href="<?php echo URLROOT; ?>/moderators/pendingrequest">
                         <i class='bx bx-chart icon'></i>
                         <span class="text nav-text">New Registrations</span>
                     </a>
@@ -89,7 +87,7 @@
                 </li>
 
                 <li class="nav_link">
-                    <a href="#">
+                    <a href="<?php echo URLROOT; ?>/moderators/eventpackages">
                         <i class='bx bx-notepad icon'></i>
                         <span class="text nav-text">Event Packages</span>
                     </a>
@@ -104,18 +102,6 @@
                     <i class='bx bx-log-out icon'></i>
                     <span class="text nav-text">Logout</span>
                 </a>
-            </li>
-
-            <li class="mode">
-                <div class="sun-moon">
-                    <i class='bx bx-moon icon moon'></i>
-                    <i class='bx bx-sun icon sun'></i>
-                </div>
-                <span class="mode-text text">Dark mode</span>
-
-                <div class="toggle-switch">
-                    <span class="switch"></span>
-                </div>
             </li>
 
         </div>

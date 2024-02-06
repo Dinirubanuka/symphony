@@ -88,20 +88,20 @@
                     <div class="photo-table">
                         <div class="photo-outer">
                             <div class="photo-inner">
-                                <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_1" onclick="triggerInput(1)">
-                                <input type="file" id="photo_1" accept=".jpg, .jpeg, .png, .HEIC" name="photo_1" onchange="previewImage(this, 'previewPhoto_1')">
+                                <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_4" onclick="triggerInput(4)">
+                                <input type="file" id="photo_4" accept=".jpg, .jpeg, .png, .HEIC" name="photo_4" onchange="previewImage(this, 'previewPhoto_4')">
                             </div>
                         </div>
                         <div class="photo-outer">
                             <div class="photo-inner">
-                                <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_2" onclick="triggerInput(2)">
-                                <input type="file" id="photo_2" accept=".jpg, .jpeg, .png, .HEIC" name="photo_2" onchange="previewImage(this, 'previewPhoto_2')">
+                                <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_5" onclick="triggerInput(5)">
+                                <input type="file" id="photo_5" accept=".jpg, .jpeg, .png, .HEIC" name="photo_5" onchange="previewImage(this, 'previewPhoto_5')">
                             </div>
                         </div>
                         <div class="photo-outer">
                             <div class="photo-inner">
-                                <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_3" onclick="triggerInput(3)">
-                                <input type="file" id="photo_3" accept=".jpg, .jpeg, .png, .HEIC" name="photo_3" onchange="previewImage(this, 'previewPhoto_3')">
+                                <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_6" onclick="triggerInput(6)">
+                                <input type="file" id="photo_6" accept=".jpg, .jpeg, .png, .HEIC" name="photo_6" onchange="previewImage(this, 'previewPhoto_6')">
                             </div>
                         </div>
                     </div>
@@ -155,20 +155,20 @@
                     <div class="photo-table">
                         <div class="photo-outer">
                             <div class="photo-inner">
-                                <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_1" onclick="triggerInput(1)">
-                                <input type="file" id="photo_1" accept=".jpg, .jpeg, .png, .HEIC" name="photo_1" onchange="previewImage(this, 'previewPhoto_1')">
+                                <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_7" onclick="triggerInput(7)">
+                                <input type="file" id="photo_7" accept=".jpg, .jpeg, .png, .HEIC" name="photo_7" onchange="previewImage(this, 'previewPhoto_7')">
                             </div>
                         </div>
                         <div class="photo-outer">
                             <div class="photo-inner">
-                                <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_2" onclick="triggerInput(2)">
-                                <input type="file" id="photo_2" accept=".jpg, .jpeg, .png, .HEIC" name="photo_2" onchange="previewImage(this, 'previewPhoto_2')">
+                                <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_8" onclick="triggerInput(8)">
+                                <input type="file" id="photo_8" accept=".jpg, .jpeg, .png, .HEIC" name="photo_8" onchange="previewImage(this, 'previewPhoto_8')">
                             </div>
                         </div>
                         <div class="photo-outer">
                             <div class="photo-inner">
-                                <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_3" onclick="triggerInput(3)">
-                                <input type="file" id="photo_3" accept=".jpg, .jpeg, .png, .HEIC" name="photo_3" onchange="previewImage(this, 'previewPhoto_3')">
+                                <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_9" onclick="triggerInput(9)">
+                                <input type="file" id="photo_9" accept=".jpg, .jpeg, .png, .HEIC" name="photo_9" onchange="previewImage(this, 'previewPhoto_9')">
                             </div>
                         </div>
                     </div>

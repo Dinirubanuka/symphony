@@ -402,20 +402,53 @@ class Users extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $inq_type = trim($_POST['inquiryType']);
             if($inq_type == 'technicalIssue' || $inq_type == 'reportBug' || $inq_type == 'other'){
-                $img1_name = $_FILES['photo_1']['name'];
-                $img1_size = $_FILES['photo_1']['size'];
-                $tmp1_name = $_FILES['photo_1']['tmp_name'];
-                $error1 = $_FILES['photo_1']['error'];
-    
-                $img2_name = $_FILES['photo_2']['name'];
-                $img2_size = $_FILES['photo_2']['size'];
-                $tmp2_name = $_FILES['photo_2']['tmp_name'];
-                $error2 = $_FILES['photo_2']['error'];
-    
-                $img3_name = $_FILES['photo_3']['name'];
-                $img3_size = $_FILES['photo_3']['size'];
-                $tmp3_name = $_FILES['photo_3']['tmp_name'];
-                $error3 = $_FILES['photo_3']['error'];
+
+                if($inq_type == 'technicalIssue'){
+                    $img1_name = $_FILES['photo_1']['name'];
+                    $img1_size = $_FILES['photo_1']['size'];
+                    $tmp1_name = $_FILES['photo_1']['tmp_name'];
+                    $error1 = $_FILES['photo_1']['error'];
+        
+                    $img2_name = $_FILES['photo_2']['name'];
+                    $img2_size = $_FILES['photo_2']['size'];
+                    $tmp2_name = $_FILES['photo_2']['tmp_name'];
+                    $error2 = $_FILES['photo_2']['error'];
+        
+                    $img3_name = $_FILES['photo_3']['name'];
+                    $img3_size = $_FILES['photo_3']['size'];
+                    $tmp3_name = $_FILES['photo_3']['tmp_name'];
+                    $error3 = $_FILES['photo_3']['error'];
+                } else if ($inq_type == 'reportBug'){
+                    $img1_name = $_FILES['photo_4']['name'];
+                    $img1_size = $_FILES['photo_4']['size'];
+                    $tmp1_name = $_FILES['photo_4']['tmp_name'];
+                    $error1 = $_FILES['photo_4']['error'];
+        
+                    $img2_name = $_FILES['photo_5']['name'];
+                    $img2_size = $_FILES['photo_5']['size'];
+                    $tmp2_name = $_FILES['photo_5']['tmp_name'];
+                    $error2 = $_FILES['photo_5']['error'];
+        
+                    $img3_name = $_FILES['photo_6']['name'];
+                    $img3_size = $_FILES['photo_6']['size'];
+                    $tmp3_name = $_FILES['photo_6']['tmp_name'];
+                    $error3 = $_FILES['photo_6']['error'];
+                } else if ($inq_type == 'other'){
+                    $img1_name = $_FILES['photo_7']['name'];
+                    $img1_size = $_FILES['photo_7']['size'];
+                    $tmp1_name = $_FILES['photo_7']['tmp_name'];
+                    $error1 = $_FILES['photo_7']['error'];
+        
+                    $img2_name = $_FILES['photo_8']['name'];
+                    $img2_size = $_FILES['photo_8']['size'];
+                    $tmp2_name = $_FILES['photo_8']['tmp_name'];
+                    $error2 = $_FILES['photo_8']['error'];
+        
+                    $img3_name = $_FILES['photo_9']['name'];
+                    $img3_size = $_FILES['photo_9']['size'];
+                    $tmp3_name = $_FILES['photo_9']['tmp_name'];
+                    $error3 = $_FILES['photo_9']['error'];
+                }
     
                 if ($error1 === UPLOAD_ERR_NO_FILE) {
                     $new_img1_name = 'IMG-656bdc23223334.62765635.png';

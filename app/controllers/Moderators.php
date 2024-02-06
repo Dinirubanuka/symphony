@@ -98,10 +98,29 @@
       $this->view('moderators/viewuser', $data);
     }
 
-    public function viewserviceprovider(){
+    public function viewActiveSP(){
       $serviceproviders = $this->moderatorModel->getServiceProviders();
       $data = [
-        'serviceproviders' => $serviceproviders
+        'serviceproviders' => $serviceproviders,
+        'status' => 'Active'
+      ];
+      $this->view('moderators/viewserviceprovider', $data);
+    }
+
+    public function viewRejectedSP(){
+      $serviceproviders = $this->moderatorModel->getRejectedServiceProviders();
+      $data = [
+        'serviceproviders' => $serviceproviders,
+        'status' => 'Rejected'
+      ];
+      $this->view('moderators/viewserviceprovider', $data);
+    }
+
+    public function viewDeactivatedSP(){
+      $serviceproviders = $this->moderatorModel->getDeactivatedServiceProviders();
+      $data = [
+        'serviceproviders' => $serviceproviders,
+        'status' => 'Deactivated'
       ];
       $this->view('moderators/viewserviceprovider', $data);
     }
@@ -109,6 +128,46 @@
     public function deleteuser($id){
       if($this->moderatorModel->deleteUser($id)){
         redirect('moderators/viewuser');
+      } else {
+        die('Something went wrong');
+      }
+    }
+
+    public function pendingrequest(){
+      $pending = $this->moderatorModel->getPendingRequests();
+      $data = [
+        'pending' => $pending
+      ];
+      $this->view('moderators/pendingrequest', $data);
+    }
+
+    public function viewPendingRequest($id){
+      $request = $this->moderatorModel->getRequest($id);
+      $data = [
+        'request' => $request
+      ];
+      $this->view('moderators/viewpendingrequest', $data);
+    }
+
+    public function viewserviceprovider($id){
+      $serviceprovider = $this->moderatorModel->getRequest($id);
+      $data = [
+        'request' => $serviceprovider
+      ];
+      $this->view('moderators/viewsp', $data);
+    }
+
+    public function acceptServiceProvider($id){
+      if($this->moderatorModel->acceptSP($id)){
+        redirect('moderators/pendingrequest');
+      } else {
+        die('Something went wrong');
+      }
+    }
+
+    public function rejectServiceProvider($id){
+      if($this->moderatorModel->rejectSP($id)){
+        redirect('moderators/pendingrequest');
       } else {
         die('Something went wrong');
       }

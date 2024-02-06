@@ -71,6 +71,39 @@ public function addToInqChat($chat_id, $inquiry_id){
   }
 }
 
+public function getPendingRequests(){
+  $this->db->query('SELECT * FROM serviceproviders WHERE status = "Pending"');
+  $results = $this->db->resultSet();
+  return $results;
+}
+
+public function getRequest($serviceprovider_id){
+  $this->db->query('SELECT * FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id');
+  $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+  $results = $this->db->single();
+  return $results;
+}
+
+public function acceptSP($serviceprovider_id){
+  $this->db->query('UPDATE serviceproviders SET status = "Active" WHERE serviceprovider_id = :serviceprovider_id');
+  $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+  if($this->db->execute()){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+public function rejectSP($serviceprovider_id){
+  $this->db->query('UPDATE serviceproviders SET status = "Rejected" WHERE serviceprovider_id = :serviceprovider_id');
+  $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+  if($this->db->execute()){
+    return true;
+  } else {
+    return false;
+  }
+}
+
     public function getInqIds($inquiry_id){
       $this->db->query('SELECT * FROM inq_chat WHERE inquiry_id = :inquiry_id');
       $this->db->bind(':inquiry_id', $inquiry_id);
@@ -157,7 +190,7 @@ public function addToInqChat($chat_id, $inquiry_id){
     
     
     public function deleteUser($id){
-      $this->db->query('UPDATE user SET status = "Deactive" WHERE id = :id');
+      $this->db->query('UPDATE users SET status = "Deactive" WHERE id = :id');
       // Bind values
       $this->db->bind(':id', $id);
 
@@ -171,6 +204,18 @@ public function addToInqChat($chat_id, $inquiry_id){
 
     public function getServiceProviders(){
       $this->db->query('SELECT * FROM serviceproviders WHERE status = "Active"');
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getRejectedServiceProviders(){
+      $this->db->query('SELECT * FROM serviceproviders WHERE status = "Rejected"');
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getDeactivatedServiceProviders(){
+      $this->db->query('SELECT * FROM serviceproviders WHERE status = "Deactivated"');
       $results = $this->db->resultSet();
       return $results;
     }

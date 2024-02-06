@@ -316,7 +316,7 @@ class ServiceProvider
     {
         $name = $data['business_name'];
         $email = $data['business_email'];
-        $this->db->query('INSERT INTO serviceproviders ( business_name, business_address, business_contact_no, business_email, password,  owner_name, owner_address, owner_contact_no, owner_nic, owner_email, about, profile_photo, verification, status) VALUES(:business_name, :business_address, :business_contact_no, :business_email, :password,  :owner_name, :owner_address, :owner_contact_no, :owner_nic, :owner_email, :about, :photo, :verification, :status)');
+        $this->db->query('INSERT INTO serviceproviders ( business_name, business_address, business_contact_no, business_email, password,  owner_name, owner_address, owner_contact_no, owner_nic, owner_email, about, profile_photo, verification, status, photo_1, photo_2, photo_3, photo_4, photo_5) VALUES(:business_name, :business_address, :business_contact_no, :business_email, :password,  :owner_name, :owner_address, :owner_contact_no, :owner_nic, :owner_email, :about, :photo, :verification, :status, :photo_1, :photo_2, :photo_3, :photo_4, :photo_5)');
         $this->mail->isSMTP();                                            //Send using SMTP
         $this->mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $this->mail->SMTPAuth = true;                                   //Enable SMTP authentication
@@ -360,6 +360,11 @@ class ServiceProvider
             $this->db->bind(':owner_email', $data['owner_email']);
             $this->db->bind(':about', $data['about']);
             $this->db->bind(':photo', $data['photo']);
+            $this->db->bind(':photo_1', $data['photo_1']);
+            $this->db->bind(':photo_2', $data['photo_2']);
+            $this->db->bind(':photo_3', $data['photo_3']);
+            $this->db->bind(':photo_4', $data['photo_4']);
+            $this->db->bind(':photo_5', $data['photo_5']);
             $this->db->bind(':verification', $verification_code);
             $this->db->bind(':status', 'Pending');
 
