@@ -307,7 +307,7 @@
                         </div>
                         <div class="option">
                             <input type="checkbox" id="" name="Violin" value="Violin">
-                            ViolinViolin
+                            Violin
                         </div>
                         <div class="option">
                             <input type="checkbox" id="" name="Xylophone" value="Xylophone">

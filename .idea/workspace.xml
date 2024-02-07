@@ -6,6 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b38043d5-52c0-4c15-8c01-780342c8c479" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/serviceproviders/addBand.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/serviceproviders/addBand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/serviceproviders/addSinger.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/serviceproviders/addSinger.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/serviceproviders/addStudio.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/serviceproviders/addStudio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/serviceproviders/band.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/serviceproviders/band.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/serviceproviders/inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/serviceproviders/inventory.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/serviceproviders/singer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/serviceproviders/singer.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -135,7 +140,7 @@
       <workItem from="1706405452181" duration="22055000" />
       <workItem from="1706798515258" duration="32615000" />
       <workItem from="1707143896966" duration="6968000" />
-      <workItem from="1707305860858" duration="3258000" />
+      <workItem from="1707305860858" duration="9658000" />
     </task>
     <servers />
   </component>
@@ -173,6 +178,12 @@
           <url>file://$PROJECT_DIR$/public/js/sp-inventory.js</url>
           <line>939</line>
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/public/js/singer.js</url>
+          <line>490</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/models/Serviceprovider.php</url>

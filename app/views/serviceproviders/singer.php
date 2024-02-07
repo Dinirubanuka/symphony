@@ -38,7 +38,6 @@
         <div class="category">
             <div class="category-name" onclick="toggleCategory('woodwindInstruments')">Woodwind Instruments</div>
             <ul class="equipment-list" id="woodwindInstruments" onchange="updateDisplayedData()">
-                <li class="equipment-item"><input type="checkbox"> Bansuri</li>
                 <li class="equipment-item"><input type="checkbox"> Bassoon</li>
                 <li class="equipment-item"><input type="checkbox"> Clarinet</li>
                 <li class="equipment-item"><input type="checkbox"> Dizi</li>
@@ -75,6 +74,9 @@
             <ul class="equipment-list" id="keyboardInstruments" onchange="updateDisplayedData()">
                 <li class="equipment-item"><input type="checkbox"> Piano</li>
                 <li class="equipment-item"><input type="checkbox"> Organ</li>
+                <li class="equipment-item"><input type="checkbox"> Digital Piano</li>
+                <li class="equipment-item"><input type="checkbox"> Harpsichord</li>
+                <li class="equipment-item"><input type="checkbox"> Synthesizer</li>
             </ul>
         </div>
         <div class="category">

@@ -27,13 +27,23 @@
                 <li class="equipment-item"><input type="checkbox"> Violins</li>
                 <li class="equipment-item"><input type="checkbox"> Cellos</li>
                 <li class="equipment-item"><input type="checkbox"> Violas</li>
+                <li class="equipment-item"><input type="checkbox"> Digital Piano</li>
+                <li class="equipment-item"><input type="checkbox"> Harp</li>
+                <li class="equipment-item"><input type="checkbox"> Mandolin</li>
+                <li class="equipment-item"><input type="checkbox"> Piano</li>
+                <li class="equipment-item"><input type="checkbox"> Sitar</li>
+                <li class="equipment-item"><input type="checkbox"> Veena</li>
             </ul>
         </div>
         <div class="category">
             <div class="category-name" onclick="toggleCategory('woodwindInstruments')">Woodwind Instruments</div>
             <ul class="equipment-list" id="woodwindInstruments" onchange="updateDisplayedData()">
-                <li class="equipment-item"><input type="checkbox"> Flute</li>
+                <li class="equipment-item"><input type="checkbox"> Bassoon</li>
                 <li class="equipment-item"><input type="checkbox"> Clarinet</li>
+                <li class="equipment-item"><input type="checkbox"> Dizi</li>
+                <li class="equipment-item"><input type="checkbox"> Flute</li>
+                <li class="equipment-item"><input type="checkbox"> Oboe</li>
+                <li class="equipment-item"><input type="checkbox"> Piccolo</li>
                 <li class="equipment-item"><input type="checkbox"> Saxophone</li>
             </ul>
         </div>
@@ -42,14 +52,21 @@
             <ul class="equipment-list" id="brassInstruments" onchange="updateDisplayedData()">
                 <li class="equipment-item"><input type="checkbox"> Trumpet</li>
                 <li class="equipment-item"><input type="checkbox"> Trombone</li>
+                <li class="equipment-item"><input type="checkbox"> Tuba</li>
                 <li class="equipment-item"><input type="checkbox"> French Horn</li>
             </ul>
         </div>
         <div class="category">
             <div class="category-name" onclick="toggleCategory('percussionInstruments')">Percussion Instruments</div>
             <ul class="equipment-list" id="percussionInstruments" onchange="updateDisplayedData()">
-                <li class="equipment-item"><input type="checkbox"> Drums</li>
-                <li class="equipment-item"><input type="checkbox"> Cymbals</li>
+                <li class="equipment-item"><input type="checkbox"> Bass Drum</li>
+                <li class="equipment-item"><input type="checkbox"> Cajon</li>
+                <li class="equipment-item"><input type="checkbox"> Congas</li>
+                <li class="equipment-item"><input type="checkbox"> Djembe</li>
+                <li class="equipment-item"><input type="checkbox"> Snare Drum</li>
+                <li class="equipment-item"><input type="checkbox"> Tabla</li>
+                <li class="equipment-item"><input type="checkbox"> Talking Drum</li>
+                <li class="equipment-item"><input type="checkbox"> Timpani</li>
             </ul>
         </div>
         <div class="category">
@@ -57,6 +74,9 @@
             <ul class="equipment-list" id="keyboardInstruments" onchange="updateDisplayedData()">
                 <li class="equipment-item"><input type="checkbox"> Piano</li>
                 <li class="equipment-item"><input type="checkbox"> Organ</li>
+                <li class="equipment-item"><input type="checkbox"> Digital Piano</li>
+                <li class="equipment-item"><input type="checkbox"> Harpsichord</li>
+                <li class="equipment-item"><input type="checkbox"> Synthesizer</li>
             </ul>
         </div>
         <div class="category">
