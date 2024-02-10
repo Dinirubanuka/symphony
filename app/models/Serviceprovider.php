@@ -119,6 +119,37 @@ class ServiceProvider
         }
     }
 
+    public function addMusician($data)
+    {
+        try {
+            $this->db->query('INSERT INTO musician (created_by, name, NickName, email, description, instrument, location, telephoneNumber, videoLink, photo_1, photo_2, photo_3, singerPhoto, unit_price) VALUES (:created_by, :name, :NickName, :email, :description, :instrument, :location, :telephoneNumber, :videoLink, :photo_1, :photo_2, :photo_3, :singer_photo, :unit_price)');
+            $this->db->bind(':created_by', $_SESSION['serviceprovider_id']);
+            $this->db->bind(':name', $data['name']);
+            $this->db->bind(':NickName', $data['NickName']);
+            $this->db->bind(':telephoneNumber', $data['telephoneNumber']);
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':unit_price', $data['rate']);
+            $this->db->bind(':location', $data['location']);
+            $this->db->bind(':instrument', $data['instrument']);
+            $this->db->bind(':description', $data['description']);
+            $this->db->bind(':videoLink', $data['videoLink']);
+            $this->db->bind(':photo_1', $data['photo_1']);
+            $this->db->bind(':photo_2', $data['photo_2']);
+            $this->db->bind(':photo_3', $data['photo_3']);
+            $this->db->bind(':singer_photo', $data['singer_photo']);
+
+            // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function addBand($data)
     {
         try {
@@ -524,9 +555,25 @@ class ServiceProvider
         return $results;
     }
 
+    public function musician($created_by)
+    {
+        $this->db->query('SELECT * FROM musician WHERE created_by = :created_by');
+        $this->db->bind(':created_by', $created_by);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
     public function viewSinger($created_by)
     {
         $this->db->query('SELECT * FROM singer WHERE product_id = :created_by');
+        $this->db->bind(':created_by', $created_by);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function viewMusicians($created_by)
+    {
+        $this->db->query('SELECT * FROM musician WHERE product_id = :created_by');
         $this->db->bind(':created_by', $created_by);
         $results = $this->db->single();
         return $results;
@@ -567,6 +614,31 @@ class ServiceProvider
     public function updateSinger($data){
         try{
             $this->db->query('UPDATE singer SET name = :name , nickName = :NickName , telephoneNumber = :telephoneNumber , email = :email , unit_price = :rate , instrument = :instrument , location = :location , videoLink = :videoLink , description = :description WHERE product_id = :product_id' );
+            $this->db->bind(':product_id', $data['product_id']);
+            $this->db->bind(':name', $data['name']);
+            $this->db->bind(':NickName', $data['NickName']);
+            $this->db->bind(':telephoneNumber', $data['telephoneNumber']);
+            $this->db->bind(':email', $data['email']);
+            $this->db->bind(':rate', $data['rate']);
+            $this->db->bind(':instrument', $data['instrument']);
+            $this->db->bind(':location', $data['location']);
+            $this->db->bind(':videoLink', $data['videoLink']);
+            $this->db->bind(':description', $data['description']);
+
+            // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }catch (PDOException $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function updateMusicians($data){
+        try{
+            $this->db->query('UPDATE musician SET name = :name , nickName = :NickName , telephoneNumber = :telephoneNumber , email = :email , unit_price = :rate , instrument = :instrument , location = :location , videoLink = :videoLink , description = :description WHERE product_id = :product_id' );
             $this->db->bind(':product_id', $data['product_id']);
             $this->db->bind(':name', $data['name']);
             $this->db->bind(':NickName', $data['NickName']);
