@@ -18,7 +18,14 @@
     <div class="right-component">
 <div class="mod">
     <div class="mod-above">
-        <h2>Moderators</h2>
+        <h2><?php if($data['status'] == 'Active'){
+            echo 'Active Users';
+        } else if($data['status'] == 'Banned'){
+            echo 'Banned Users';
+        } else if($data['status'] == 'Deactivated'){
+            echo 'Deactivated Users';
+        } ?>
+        </h2>
     </div>
     <div class="mod-below">
         <table class="data-table">
@@ -32,7 +39,7 @@
             <?php foreach ($data['users'] as $user) : ?>
                 <tr class="data-table-tr">
                     <td><?php echo $user->id; ?></td>
-                    <td><?php echo $user->name; ?></td>
+                    <td><div class = "sp-icon" onclick = "viewUser(<?php echo $user->id; ?>)"><?php echo $user->name; ?></div></td>
                     <td><?php echo $user->email; ?></td>
                     <td><?php echo $user->TelephoneNumber; ?></td>
                     <td><?php echo $user->address; ?></td>
@@ -57,6 +64,11 @@
             // Execute PHP code to delete the moderator
             window.location.href = "<?php echo URLROOT; ?>/moderators/deleteuser/" + userID;
         }
+    }
+
+    function viewUser(userID) {
+        // Execute PHP code to view the user
+        window.location.href = "<?php echo URLROOT; ?>/moderators/viewuser/" + userID;
     }
 </script>
 </body>

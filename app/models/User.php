@@ -23,7 +23,7 @@ class User
     {
         $name = $data['name'];
         $email = $data['email'];
-        $this->db->query('INSERT INTO users (name, email, TelephoneNumber, BirthDate, address, password,profile_photo ,gender,verification, status ) VALUES(:name, :email, :TelephoneNumber, :BirthDate, :address, :password, :photo,:gender,:verification, :status)');
+        $this->db->query('INSERT INTO users (name, email, TelephoneNumber, BirthDate, address, password,profile_photo ,gender,verification, status, registration_date ) VALUES(:name, :email, :TelephoneNumber, :BirthDate, :address, :password, :photo,:gender,:verification, :status, :registration_date)');
         $this->mail->isSMTP();                                            //Send using SMTP
         $this->mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $this->mail->SMTPAuth = true;                                   //Enable SMTP authentication
@@ -41,10 +41,10 @@ class User
 
         //Content
         $this->mail->isHTML(true);                                  //Set email format to HTML
-        $this->mail->Subject = 'Here is the subject';
+        $this->mail->Subject = 'Registeration - Symphony';
         $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
         $this->mail->Body = '<div id="overview" style="border: 1px solid #343131;margin: auto;width: 50%;text-align: center">
-          <h1 style="">Hello' . $name . '</h1>
+          <h1 style="">Hello ' . $name . '</h1>
           <p style="font-size: 18px;text-align: justify;width: 90%;margin: auto">Thank you for choosing Symphony. We are excited to have you on board!</p>
           <hr style="width:90%;color: #3d3b3b;opacity: 0.3;">
           <p style="font-size: 20px; color: #2e043a;">To complete your account creation, please use the following verification code:</p>
@@ -64,8 +64,75 @@ class User
             $this->db->bind(':password', $data['password']);
             $this->db->bind(':verification', $verification_code);
             $this->db->bind(':status', 'Active');
+            $this->db->bing(':registration_date', $registration_date);
 
             // Execute
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function sendRecoveryEmail($data){
+        $email = $data['email'];
+        $password = $data['password'];
+        $name = $data['name'];
+        $this->mail->isSMTP(); 
+        $this->mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $this->mail->SMTPAuth = true;                                   //Enable SMTP authentication
+        $this->mail->Username = 'symphonyuscs@gmail.com';                     //SMTP username
+        $this->mail->Password = 'wmoe qbsp fxcl bwqp';                               //SMTP password
+        $this->mail->Port = 587;        
+        $this->mail->setFrom('symphonyucsc@gmail.com', 'Symphony');
+        $this->mail->addAddress($email, $name);
+        $this->mail->isHTML(true);                                  //Set email format to HTML
+        $this->mail->Subject = 'Recover Account - Symphony';
+        $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+        $this->mail->Body = '<div id="overview" style="border: 1px solid #343131;margin: auto;width: 50%;text-align: center">
+          <h1 style="">Hello ' . $name . '</h1>
+          <p style="font-size: 18px;text-align: justify;width: 90%;margin: auto">Recover Account</p>
+          <hr style="width:90%;color: #3d3b3b;opacity: 0.3;">
+          <p style="font-size: 20px; color: #2e043a;">Please use the following temporary password to login to your Account!</p>
+          <p style="font-size: 24px; color: #333;  cursor: pointer; margin: 15px 10px;">' . $password . '</p>
+        </div>';
+        $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+        $this->mail->send(); 
+        try {
+            $this->db->query('UPDATE users SET password = :password WHERE email = :email');
+            $this->db->bind(':password', $data['password_hashed']);
+            $this->db->bind(':email', $email);
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function addRecoveryRequest($data){
+        $this->db->query('INSERT INTO recover_account_user (user_name, first_purchase_date, first_purchase_item, last_purchase_date, last_purchase_item, mobile_number, address, dob, gender, other, status, placed_on) VALUES(:user_name, :first_purchase_date, :first_purchase_item, :last_purchase_date, :last_purchase_item, :mobile_number, :address, :dob, :gender, :other, :status, :placed_on)');
+        try {
+            $this->db->bind(':user_name', $data['user_name']);
+            $this->db->bind(':first_purchase_date', $data['first_purchase_date']);
+            $this->db->bind(':first_purchase_item', $data['first_purchase_item']);
+            $this->db->bind(':last_purchase_date', $data['last_purchase_date']);
+            $this->db->bind(':last_purchase_item', $data['last_purchase_item']);
+            $this->db->bind(':mobile_number', $data['mobile_number']);
+            $this->db->bind(':address', $data['address']);
+            $this->db->bind(':dob', $data['dob']);
+            $this->db->bind(':gender', $data['gender']);
+            $this->db->bind(':other', $data['other']);
+            $this->db->bind(':status', $data['status']);
+            $this->db->bind(':contactEmail', $data['contactEmail']);
+            $this->db->bind(':placed_on', date('Y-m-d'));
+
             if ($this->db->execute()) {
                 return true;
             } else {
@@ -167,9 +234,43 @@ class User
         }
     }
 
+    public function addPreviousPassword($user_id, $password)
+    {
+        try {
+            $this->db->query('INSERT INTO user_passwords (user_id, password) VALUES(:user_id, :password)');
+            $this->db->bind(':user_id', $user_id);
+            $this->db->bind(':password', $password);
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            // Print the exception message
+            echo "Database error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function getPreviousPasswords($user_id)
+    {
+        $this->db->query('SELECT * FROM user_passwords WHERE user_id = :user_id');
+        $this->db->bind(':user_id', $user_id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function getUserByName($name)
+    {
+        $this->db->query('SELECT * FROM users WHERE name = :name AND status = "Active"');
+        $this->db->bind(':name', $name);
+        $results = $this->db->single();
+        return $results;
+    }
+
     public function addInquiry($data)
     {
-        $this->db->query('INSERT INTO inquiries (user_id, inquiryType, field_1, field_2, field_3, field_4, field_5, photo_1, photo_2, photo_3, status, moderator_id) VALUES(:user_id, :inquiryType, :field_1, :field_2, :field_3, :field_4, :field_5, :photo_1, :photo_2, :photo_3, :status, :moderator_id)');
+        $this->db->query('INSERT INTO inquiries (user_id, inquiryType, field_1, field_2, field_3, field_4, field_5, photo_1, photo_2, photo_3, status, moderator_id, placed_on) VALUES(:user_id, :inquiryType, :field_1, :field_2, :field_3, :field_4, :field_5, :photo_1, :photo_2, :photo_3, :status, :moderator_id, :placed_on)');
         try {
             $this->db->bind(':user_id', $data['user_id']);
             $this->db->bind(':inquiryType', $data['inquiryType']);
@@ -183,6 +284,7 @@ class User
             $this->db->bind(':photo_3', $data['photo_3']);
             $this->db->bind(':status', $data['status']);
             $this->db->bind(':moderator_id', $data['moderator_id']);
+            $this->db->bind(':placed_on', date('Y-m-d'));
             
             // Execute
             if ($this->db->execute()) {
@@ -299,6 +401,39 @@ class User
         }
     }
 
+    public function findBannedUserByEmail($email)
+    {
+        $this->db->query('SELECT * FROM users WHERE email = :email AND status = "Banned"');
+        // Bind value
+        $this->db->bind(':email', $email);
+
+        $row = $this->db->single();
+
+        // Check row
+        if ($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function addLoginHistory($data)
+    {
+        $this->db->query('INSERT INTO login_logout_logs (type, date_time, id) VALUES(:type, :date_time, :id)');
+        try {
+            $this->db->bind(':type', $data['type']);
+            $this->db->bind(':date_time', $data['date_time']);
+            $this->db->bind(':id', $data['id']);
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     // Find user by email
     public function findUserByEmail($email)
     {
@@ -314,6 +449,17 @@ class User
         } else {
             return false;
         }
+    }
+
+    public function getUserByEmail($email)
+    {
+        $this->db->query('SELECT * FROM users WHERE email = :email AND status = "Active"');
+        // Bind value
+        $this->db->bind(':email', $email);
+
+        $row = $this->db->single();
+
+        return $row;
     }
 
     public function findOtherUserByEmail($email, $id)
@@ -400,6 +546,20 @@ class User
         $this->db->bind(':date', $data_check['date']);
         $results = $this->db->resultSet();
         return $results;
+    }
+
+    public function changePassword($data)
+    {
+        try {
+            $this->db->query('UPDATE users SET password = :password WHERE id = :id');
+            $this->db->bind(':password', $data['new_password']);
+            $this->db->bind(':id', $data['user_id']);
+            $this->db->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Database error: " . $e->getMessage();
+            return false;
+        }
     }
 
     public function setNotAvailableCart($product_id, $user_id){
@@ -576,12 +736,13 @@ class User
     }
 
     public function placeOrderTotal($data_order){
-        $this->db->query('INSERT INTO orders (user_id, sorder_id, total) VALUES(:user_id, :sorder_id, :total)');
+        $this->db->query('INSERT INTO orders (user_id, sorder_id, total, order_placed_on) VALUES(:user_id, :sorder_id, :total, :order_placed_on)');
     
         try {
             $this->db->bind(':user_id', $data_order['user_id']);
             $this->db->bind(':sorder_id', $data_order['sorder_id']);
             $this->db->bind(':total', $data_order['total']);
+            $this->db->bind(':order_placed_on', $data_order['order_placed_on']);
             // Execute
             if ($this->db->execute()) {
                 return true;
@@ -633,7 +794,7 @@ class User
     public function addReview($data)
     {
 
-        $this->db->query('INSERT INTO reviews (product_id, user_id, rating, content, name, photo) VALUES(:product_id, :user_id, :rating, :content, :name, :photo)');
+        $this->db->query('INSERT INTO reviews (product_id, user_id, rating, content, name, photo, placed_on) VALUES(:product_id, :user_id, :rating, :content, :name, :photo, :placed_on)');
 
         try {
             $this->db->bind(':product_id', $data['product_id']);
@@ -642,6 +803,7 @@ class User
             $this->db->bind(':content', $data['content']);
             $this->db->bind(':name', $data['name']);
             $this->db->bind(':photo', $data['photo']);
+            $this->db->bind(':placed_on', date('Y-m-d'));
 
             // Execute
             if ($this->db->execute()) {

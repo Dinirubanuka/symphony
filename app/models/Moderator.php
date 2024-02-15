@@ -28,11 +28,66 @@
       }
     }
 
+    public function viewUserOrders($id){
+      $this->db->query('SELECT * FROM orders WHERE user_id = :id');
+      $this->db->bind(':id', $id);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getOrderData($order_id){
+      $this->db->query('SELECT * FROM orders WHERE order_id = :order_id');
+      $this->db->bind(':order_id', $order_id);
+      $results = $this->db->single();
+      return $results;
+    }
+
+    public function getSubOrderData($order_id){
+      $this->db->query('SELECT * FROM suborder WHERE sorder_id = :sorder_id');
+      $this->db->bind(':sorder_id', $order_id);
+      $results = $this->db->single();
+      return $results;
+    }
+
+    public function getProductData($product_id){
+      $this->db->query('SELECT * FROM products WHERE product_id = :product_id');
+      $this->db->bind(':product_id', $product_id);
+      $results = $this->db->single();
+      return $results;
+    }
+
     public function getUserChat($chat_id){
       $this->db->query('SELECT * FROM chat_mod_user WHERE chat_id = :chat_id');
       $this->db->bind(':chat_id', $chat_id);
       $results = $this->db->single();
       return $results;
+  }
+
+  public function getUser($id){
+    $this->db->query('SELECT * FROM users WHERE id = :id');
+    $this->db->bind(':id', $id);
+    $results = $this->db->single();
+    return $results;
+  }
+
+  public function banServiceProvider($serviceprovider_id){
+    $this->db->query('UPDATE serviceproviders SET status = "Banned" WHERE serviceprovider_id = :serviceprovider_id');
+    $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+    if($this->db->execute()){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function banUser($id){
+    $this->db->query('UPDATE users SET status = "Banned" WHERE id = :id');
+    $this->db->bind(':id', $id);
+    if($this->db->execute()){
+      return true;
+    } else {
+      return false;
+    }
   }
 
   public function addChatModtoUser($data){
@@ -187,7 +242,18 @@ public function rejectSP($serviceprovider_id){
       $results = $this->db->resultSet();
       return $results;
     }
-    
+
+    public function getBannedUsers(){
+      $this->db->query('SELECT * FROM users WHERE status = "Banned"');
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getDeactivatedUsers(){
+      $this->db->query('SELECT * FROM users WHERE status = "Deactivated"');
+      $results = $this->db->resultSet();
+      return $results;
+    }
     
     public function deleteUser($id){
       $this->db->query('UPDATE users SET status = "Deactive" WHERE id = :id');
@@ -216,6 +282,12 @@ public function rejectSP($serviceprovider_id){
 
     public function getDeactivatedServiceProviders(){
       $this->db->query('SELECT * FROM serviceproviders WHERE status = "Deactivated"');
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getBannedServiceProviders(){
+      $this->db->query('SELECT * FROM serviceproviders WHERE status = "Banned"');
       $results = $this->db->resultSet();
       return $results;
     }

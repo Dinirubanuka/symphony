@@ -147,6 +147,58 @@ body {
   color: #d80700; /* Change the color to your desired active color */
 }
 
+.status-Banned {
+  color: #7c0400; /* Change the color to your desired active color */
+}
+
 .status-Deactivated {
   color: #6d00eb; /* Change the color to your desired active color */
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-left: 10%;
+}
+
+.buttons button {
+  padding: 10px 20px;
+  font-size: 14px;
+  margin-right: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#banBtn {
+  background-color: #9b0a00;
+  color: #ffffff;
+}
+
+#banBtn:hover {
+  background-color: #c56d6d;
+  color: rgb(0, 0, 0);
+  transition: 0.3s;
+}
+
+#orderBtn {
+  background-color: #836b00;
+  color: #ffffff;
+}
+
+#orderBtn:hover {
+  background-color: #fce26e;
+  color: rgb(0, 0, 0);
+  transition: 0.3s;
+}
+
+#inventoryBtn {
+  background-color: #005a6b;
+  color: #ffffff;
+}
+
+#inventoryBtn:hover {
+  background-color: #6ed3e2;
+  color: rgb(0, 0, 0);
+  transition: 0.3s;
 }

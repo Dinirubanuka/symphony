@@ -316,7 +316,7 @@ class ServiceProvider
     {
         $name = $data['business_name'];
         $email = $data['business_email'];
-        $this->db->query('INSERT INTO serviceproviders ( business_name, business_address, business_contact_no, business_email, password,  owner_name, owner_address, owner_contact_no, owner_nic, owner_email, about, profile_photo, verification, status, photo_1, photo_2, photo_3, photo_4, photo_5) VALUES(:business_name, :business_address, :business_contact_no, :business_email, :password,  :owner_name, :owner_address, :owner_contact_no, :owner_nic, :owner_email, :about, :photo, :verification, :status, :photo_1, :photo_2, :photo_3, :photo_4, :photo_5)');
+        $this->db->query('INSERT INTO serviceproviders ( business_name, business_address, business_contact_no, business_email, password,  owner_name, owner_address, owner_contact_no, owner_nic, owner_email, about, profile_photo, verification, status, photo_R1, photo_R2, photo_R3, photo_R4, photo_R5, registration_date) VALUES(:business_name, :business_address, :business_contact_no, :business_email, :password,  :owner_name, :owner_address, :owner_contact_no, :owner_nic, :owner_email, :about, :photo, :verification, :status, :photo_1, :photo_2, :photo_3, :photo_4, :photo_5, :registration_date)');
         $this->mail->isSMTP();                                            //Send using SMTP
         $this->mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $this->mail->SMTPAuth = true;                                   //Enable SMTP authentication
@@ -367,6 +367,7 @@ class ServiceProvider
             $this->db->bind(':photo_5', $data['photo_5']);
             $this->db->bind(':verification', $verification_code);
             $this->db->bind(':status', 'Pending');
+            $this->db->bind(':registration_date', $data['registration_date']);
 
             // Execute
             if ($this->db->execute()) {
@@ -645,10 +646,43 @@ class ServiceProvider
         }
     }
 
+    public function addLoginHistory($data)
+    {
+        $this->db->query('INSERT INTO login_logout_logs (type, date_time, id) VALUES(:type, :date_time, :id)');
+        try {
+            $this->db->bind(':type', $data['type']);
+            $this->db->bind(':date_time', $data['date_time']);
+            $this->db->bind(':id', $data['id']);
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     // Find user by email
     public function findserviceproviderByEmail($business_email)
     {
         $this->db->query('SELECT * FROM serviceproviders WHERE business_email = :business_email AND status = "Active"');
+        // Bind value
+        $this->db->bind(':business_email', $business_email);
+
+        $row = $this->db->single();
+
+        // Check row
+        if ($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function findBannedServiceProviderByEmail($business_email)
+    {
+        $this->db->query('SELECT * FROM serviceproviders WHERE business_email = :business_email AND status = "Banned"');
         // Bind value
         $this->db->bind(':business_email', $business_email);
 

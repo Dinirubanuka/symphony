@@ -30,28 +30,52 @@
                 <!-- <ul id="mod_list_pop"> -->
                 <li class="nav_link_seller">
                     <a href="<?php echo URLROOT; ?>/moderators/viewActiveSP">
-                        <i class='bx bx-user-circle icon'></i>
+                        <i class='bx bx-user-check icon'></i>
                         <span class="text nav-text">Active</span>
                     </a>
                 </li>
                 <li class="nav_link_seller">
                     <a href="<?php echo URLROOT; ?>/moderators/viewRejectedSP">
-                        <i class='bx bx-user-check icon'></i>
+                        <i class='bx bx-unlink icon'></i>
                         <span class="text nav-text">Rejected</span>
                     </a>
                 </li>
                 <li class="nav_link_seller">
                     <a href="<?php echo URLROOT; ?>/moderators/viewDeactivatedSP">
-                        <i class='bx bx-user-x icon'></i>
+                        <i class='bx bx-trash icon'></i>
                         <span class="text nav-text">Deactivated</span>
+                    </a>
+                </li>
+                <li class="nav_link_seller">
+                    <a href="<?php echo URLROOT; ?>/moderators/viewBannedSP">
+                        <i class='bx bx-user-x icon'></i>
+                        <span class="text nav-text">Banned</span>
                     </a>
                 </li>
                 <!-- </ul> -->
 
-                <li class="nav_link">
-                    <a href="<?php echo URLROOT; ?>/moderators/viewuser">
+                <li id="mod_list" class="nav_link adminsidebar_mod ">
                         <i class='bx bx-user icon'></i>
-                        <span class="text nav-text">Customers</span>
+                        <span class="text nav-text"><strong>Customers</strong></span>
+                    </a>
+                </li>
+                <!-- <ul id="mod_list_pop"> -->
+                <li class="nav_link_seller">
+                    <a href="<?php echo URLROOT; ?>/moderators/viewActiveUser">
+                        <i class='bx bx-user-check icon'></i>
+                        <span class="text nav-text">Active</span>
+                    </a>
+                </li>
+                <li class="nav_link_seller">
+                    <a href="<?php echo URLROOT; ?>/moderators/viewDeactivatedUser">
+                        <i class='bx bx-trash icon'></i>
+                        <span class="text nav-text">Deactivated</span>
+                    </a>
+                </li>
+                <li class="nav_link_seller">
+                    <a href="<?php echo URLROOT; ?>/moderators/viewBannedUser">
+                        <i class='bx bx-user-x icon'></i>
+                        <span class="text nav-text">Banned</span>
                     </a>
                 </li>
 

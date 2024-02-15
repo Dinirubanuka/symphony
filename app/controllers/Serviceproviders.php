@@ -1397,6 +1397,7 @@ class serviceproviders extends Controller
                 'photo_3' => $new_img3_name,
                 'photo_4' => $new_img4_name,
                 'photo_5' => $new_img5_name,
+                'registration_date' => date('Y-m-d'),
                 'business_name_err' => '',
                 'password_err' => '',
                 'confirm_password_err' => '',
@@ -1574,6 +1575,9 @@ class serviceproviders extends Controller
             // Check for serviceprovider/email
             if ($this->serviceProviderModel->findserviceproviderByEmail($data['business_email'])) {
                 // serviceprovider found
+            } else if ($this->serviceProviderModel->findBannedServiceProviderByEmail($data['business_email'])) {
+                // Banned Account
+                $data['business_email_err'] = 'Sorry, Your account has been banned!';
             } else {
                 // serviceprovider not found
                 $data['business_email_err'] = 'No service provider found!';
@@ -1586,7 +1590,12 @@ class serviceproviders extends Controller
                 $loggedInserviceprovider = $this->serviceProviderModel->serviceproviderlogin($data['business_email'], $data['password']);
 
                 if ($loggedInserviceprovider) {
-                    // Create Session
+                    $loginData = [
+                        'type' => 'Service Provider - Login',
+                        'date_time' => date('Y-m-d H:i:s'),
+                        'id' => $loggedInserviceprovider->serviceprovider_id
+                    ];
+                    $this->serviceProviderModel->addLoginHistory($loginData);
                     $this->createserviceprovidersession($loggedInserviceprovider);
                 } else {
                     $data['password_err'] = 'Password incorrect';
@@ -1693,6 +1702,12 @@ class serviceproviders extends Controller
 
     public function logout()
     {
+        $loginData = [
+            'type' => 'Service Provider - Logout',
+            'date_time' => date('Y-m-d H:i:s'),
+            'id' => $_SESSION['serviceprovider_id']
+        ];
+        $this->serviceProviderModel->addLoginHistory($loginData);
         unset($_SESSION['serviceprovider_id']);
         unset($_SESSION['serviceprovider_email']);
         unset($_SESSION['serviceprovider_name']);

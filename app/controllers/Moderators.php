@@ -90,10 +90,29 @@
       }
     }
 
-    public function viewuser(){
+    public function viewActiveUser(){
       $users = $this->moderatorModel->getUsers();
       $data = [
-        'users' => $users
+        'users' => $users,
+        'status' => 'Active'
+      ];
+      $this->view('moderators/viewuser', $data);
+    }
+
+    public function viewBannedUser(){
+      $users = $this->moderatorModel->getBannedUsers();
+      $data = [
+        'users' => $users,
+        'status' => 'Banned'
+      ];
+      $this->view('moderators/viewuser', $data);
+    }
+
+    public function viewDeactivatedUser(){
+      $users = $this->moderatorModel->getDeactivatedUsers();
+      $data = [
+        'users' => $users,
+        'status' => 'Deactivated'
       ];
       $this->view('moderators/viewuser', $data);
     }
@@ -121,6 +140,15 @@
       $data = [
         'serviceproviders' => $serviceproviders,
         'status' => 'Deactivated'
+      ];
+      $this->view('moderators/viewserviceprovider', $data);
+    }
+
+    public function viewBannedSP(){
+      $serviceproviders = $this->moderatorModel->getBannedServiceProviders();
+      $data = [
+        'serviceproviders' => $serviceproviders,
+        'status' => 'Banned'
       ];
       $this->view('moderators/viewserviceprovider', $data);
     }
@@ -157,6 +185,30 @@
       $this->view('moderators/viewsp', $data);
     }
 
+    public function viewuser($id){
+      $user = $this->moderatorModel->getUser($id);
+      $data = [
+        'request' => $user
+      ];
+      $this->view('moderators/viewuser_single', $data);
+    }
+
+    public function banuser($id){
+      if($this->moderatorModel->banUser($id)){
+        redirect('moderators/index/');
+      } else {
+        die('Something went wrong');
+      }
+    }
+
+    public function banserviceprovider($id){
+      if($this->moderatorModel->banServiceProvider($id)){
+        redirect('moderators/index');
+      } else {
+        die('Something went wrong');
+      }
+    }
+
     public function acceptServiceProvider($id){
       if($this->moderatorModel->acceptSP($id)){
         redirect('moderators/pendingrequest');
@@ -171,6 +223,38 @@
       } else {
         die('Something went wrong');
       }
+    }
+
+    public function viewUserOrders($id){
+      $order = $this->moderatorModel->viewUserOrders($id);
+      $data = [
+        'order' => $order,
+        'user_id' => $id
+      ];
+      $this->view('moderators/viewuserorders', $data);
+    }
+
+    public function viewOrder($id){
+      $order = $this->moderatorModel->getOrderData($id);
+      $user_data = $this->moderatorModel->getUser($order->user_id);
+      $order_data = json_decode(json_encode($order), true);
+      $suborder_ids = explode(',', $order_data['sorder_id']);
+      $sub_orders = [];
+      foreach($suborder_ids as $suborder_id){
+        $suborder_obj = [];
+        $suborder = $this->moderatorModel->getSubOrderData($suborder_id);
+        $suborder_obj = [
+          'order_data' => $suborder,
+          'product_data' => $this->moderatorModel->getProductData($suborder->product_id)
+        ];
+        array_push($sub_orders, $suborder_obj);
+      }
+      $data = [
+        'order' => $order,
+        'user_data' => $user_data,
+        'suborders' => $sub_orders
+      ];
+      $this->view('moderators/viewuserorder', $data);
     }
 
     public function pendinginquiries()

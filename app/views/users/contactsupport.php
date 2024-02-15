@@ -19,7 +19,6 @@
             <label for="inquiryType">Inquiry Type:</label>
             <select id="inquiryType" name="inquiryType" onchange="showFormSection()" required>
                 <option value="">Select an Inquiry Type</option>
-                <option value="recoverAccount">Recover My Account</option>
                 <option value="technicalIssue">Technical Issue</option>
                 <option value="reportBug">Report a Bug</option>
                 <option value="billingIssue">Billing/Payment Issue</option>
@@ -28,17 +27,6 @@
                 <option value="question">Question</option>
                 <option value="other">Other</option>
             </select>
-    
-            <div id="recoverAccountForm" class="form-section">
-                <label for="accountName">User Name or Email:</label>
-                <input type="text" id="accountName" name="accountName">
-    
-                <label for="phoneNumber">Phone Number:</label>
-                <input type="text" id="phoneNumber" name="phoneNumber">
-    
-                <label for="accountDescription">Additional Data:</label>
-                <textarea id="accountDescription" name="accountDescription" rows="4"></textarea>
-            </div>
     
             <div id="technicalIssueForm" class="form-section">
                 <label for="issueType">Issue Type:</label>

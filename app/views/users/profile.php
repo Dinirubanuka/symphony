@@ -68,6 +68,7 @@
                     </div>
                 </form>
                 <div class="editButton" onclick="EditAcc()" id = "editButton">Edit Details</div>
+                <div class="pwButton" onclick="changePassword()" id = "changepwButton">Change Password</div>
                 <div class="delButton" id = "delButton" onclick="deleteAcc()">Remove account</div>
                 <div class="deleteAccUpper">
                     <div class="deleteAcc">
@@ -102,6 +103,10 @@
             } else {
                 alert("Logout canceled.");
             }
+        }
+
+        function changePassword() {
+            window.location.href = "<?php echo URLROOT; ?>/users/changePassword";
         }
     </script>
 </body>

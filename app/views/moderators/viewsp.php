@@ -21,6 +21,11 @@
           <div class="business-name">
             <h2><?php echo $data['request']->business_name ?><br><br></h2>
           </div>
+          <div class="buttons">
+            <button id="banBtn" onclick="banSP(<?php echo $data['request']->serviceprovider_id ?>)">Ban Account</button>
+            <button id="orderBtn">View Orders</button>
+            <button id="inventoryBtn">View Inventory</button>
+          </div>
         </div>
 
         <div class="bio-data">
@@ -69,20 +74,20 @@
         </div>
 
         <div class="photo-grid">
-          <div class="photo-item" onclick="openLightbox('<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_1 ?>')">
-            <img src="<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_1 ?>" alt="Photo 1">
+          <div class="photo-item" onclick="openLightbox('<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_R1 ?>')">
+            <img src="<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_R1 ?>" alt="Photo 1">
           </div>
-          <div class="photo-item" onclick="openLightbox('<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_2 ?>')">
-            <img src="<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_2 ?>" alt="Photo 2">
+          <div class="photo-item" onclick="openLightbox('<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_R2 ?>')">
+            <img src="<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_R2 ?>" alt="Photo 2">
           </div>
-          <div class="photo-item" onclick="openLightbox('<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_3 ?>')">
-            <img src="<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_3 ?>" alt="Photo 3">
+          <div class="photo-item" onclick="openLightbox('<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_R3 ?>')">
+            <img src="<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_R3 ?>" alt="Photo 3">
           </div>
-          <div class="photo-item" onclick="openLightbox('<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_4 ?>')">
-            <img src="<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_4 ?>" alt="Photo 4">
+          <div class="photo-item" onclick="openLightbox('<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_R4 ?>')">
+            <img src="<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_R4 ?>" alt="Photo 4">
           </div>
-          <div class="photo-item" onclick="openLightbox('<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_5 ?>')">
-            <img src="<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_5 ?>" alt="Photo 5">
+          <div class="photo-item" onclick="openLightbox('<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_R5 ?>')">
+            <img src="<?php echo URLROOT; ?>/img/sp_validations/<?php echo $data['request']->photo_R5 ?>" alt="Photo 5">
           </div>
         </div>
       </div>
@@ -98,6 +103,14 @@
 
         function closeLightbox() {
           document.getElementById('lightbox').style.display = 'none';
+        }
+
+        function banSP(serviceproviderID) {
+          // Display a confirmation dialog
+          if (confirm("Are you sure you want to ban this Service Provider?")) {
+              // Execute PHP code to delete the moderator
+              window.location.href = "<?php echo URLROOT; ?>/moderators/banserviceprovider/" + serviceproviderID;
+          }
         }
       </script>
     </div>

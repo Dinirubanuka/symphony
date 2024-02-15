@@ -24,6 +24,8 @@
             echo 'Rejected Service Providers';
         } else if($data['status'] == 'Deactivated'){
             echo 'Deactivated Service Providers';
+        } else if($data['status'] == 'Banned'){
+            echo 'Banned Service Providers';
         } ?>
         </h2>
     </div>
