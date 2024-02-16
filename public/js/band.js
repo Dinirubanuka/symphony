@@ -124,110 +124,10 @@ function displaydata(data) {
 
     if (inventory && inventory.length > 0) {
         inventory.forEach(function (item) {
-            console.log('Product ID:', item.product_id);
-            console.log('Created By:', item.created_by);
-            console.log('Category:', item.category);
-            console.log('createdDate:', item.createdDate);
-            console.log('number:', item.telephoneNumber);
-            console.log('name:', item.name);
-            console.log('Nickname:', item.nickName);
-            console.log('warranty:', item.warranty);
-            console.log('videoLink:', item.videoLink);
-            console.log('location:', item.location);
-            console.log('instrument:', item.instrument);
-            console.log('email:', item.email);
-            console.log('singerPhoto:', item.singerPhoto);
-            console.log('Unit Price:', item.unit_price);
-            console.log('Description:', item.Description);
-            console.log('Photo 1:', item.photo_1);
-            console.log('Photo 2:', item.photo_2);
-            console.log('Photo 3:', item.photo_3);
-            console.log('------------------------');
-
-            // var categoryString = item.category;
-            // var categoryArray = categoryString.split(' ');
-            // console.log(item.category);
-            // console.log(categoryArray);
-            //
-            // if (categoryArray[0] === 'Electric Guitars') {
-            //     item.category = 'Electric Guitars';
-            // } else if (categoryArray[0] === 'Acoustic Guitars') {
-            //     item.category = 'Acoustic Guitars';
-            // } else if (categoryArray[0] === 'Keyboard') {
-            //     item.category = 'Keyboard';
-            //     if (categoryArray[1] === 'Piano') {
-            //         item.keyboard = 'Piano';
-            //     } else if (categoryArray[1] === 'Organs') {
-            //         item.keyboard = 'Organs';
-            //     }
-            // } else if (categoryArray[0] === 'Band_And_Orchestra') {
-            //     item.category = 'Band_And_Orchestra';
-            //     if (categoryArray[1] === 'Woodwind') {
-            //         item.band = 'Woodwind';
-            //         if (categoryArray[2] === 'Flutes') {
-            //             item.woodwind = 'Flutes';
-            //         } else if (categoryArray[2] === 'Saxophones') {
-            //             item.woodwind = 'Saxophones';
-            //         } else if (categoryArray[2] === 'Clarinets') {
-            //             item.woodwind = 'Clarinets';
-            //         }
-            //     } else if (categoryArray[1] === 'Brass') {
-            //         item.band = 'Brass';
-            //         if (categoryArray[2] === 'Trumphet') {
-            //             item.brass = 'Trumphet';
-            //         } else if (categoryArray[2] === 'Trombones') {
-            //             item.brass = 'Trombones';
-            //         } else if (categoryArray[2] === 'FrenchHorns') {
-            //             item.brass = 'FrenchHorns';
-            //         }
-            //     } else if (categoryArray[1] === 'String') {
-            //         item.band = 'String';
-            //         if (categoryArray[2] === 'Violins') {
-            //             item.string = 'Violins';
-            //         } else if (categoryArray[2] === 'Cellos') {
-            //             item.string = 'Cellos';
-            //         } else if (categoryArray[2] === 'Violas') {
-            //             item.string = 'Violas';
-            //         }
-            //     }
-            // } else if (categoryArray[0] === 'Audio') {
-            //     item.category = 'Audio';
-            //     if (categoryArray[1] === 'Headphones') {
-            //         item.audio = 'Headphones';
-            //     } else if (categoryArray[1] === 'Receivers') {
-            //         item.audio = 'Receivers';
-            //     } else if (categoryArray[1] === 'Amplifiers') {
-            //         item.audio = 'Amplifiers';
-            //     }
-            //     if (categoryArray[1] === 'Speakers') {
-            //         item.audio = 'Speakers';
-            //     } else if (categoryArray[1] === 'Subwoofers') {
-            //         item.audio = 'Subwoofers';
-            //     } else if (categoryArray[1] === 'Tape_Decks') {
-            //         item.audio = 'Tape_Decks';
-            //     }
-            //     if (categoryArray[1] === 'Turntables') {
-            //         item.audio = 'Turntables';
-            //     } else if (categoryArray[1] === 'Microphones') {
-            //         item.audio = 'Microphones';
-            //     } else if (categoryArray[1] === 'Mixers') {
-            //         item.audio = 'Mixers';
-            //     } else if (categoryArray[1] === 'Recording') {
-            //         item.audio = 'Recording';
-            //     }
-            // } else if (categoryArray[0] === 'Percussion') {
-            //     item.category = 'Percussion';
-            //     if (categoryArray[1] === 'Cymbals') {
-            //         item.persussion = 'Cymbals';
-            //     } else if (categoryArray[1] === 'Drums') {
-            //         item.persussion = 'Drums';
-            //     }
-            // }
-
             var stockText = "";
-            // if (item.quantity <= 0) {
-            //     stockText = "Inventory not available";
-            // }
+            if (item.quantity <= 0) {
+                stockText = "Inventory not available";
+            }
 
             req += `<div class="item-container">` +
                 `<div class="item-details">` +
@@ -475,13 +375,6 @@ function updateDisplayedData() {
     displaydata(filteredData);
     console.log(filteredData);
 }
-
-// function toggleCategory(category) {
-//   $('#' + category).toggle();
-//   updateDisplayedData();
-// }
-
-// $('.equipment-list input').change(updateDisplayedData);
 
 //item details
 function addItem(productId) {

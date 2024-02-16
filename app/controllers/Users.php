@@ -510,7 +510,17 @@ class Users extends Controller
 
     public function Band()
     {
-        $this->view('users/band');
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $inventory = $this->userModel->band();
+            $data = [
+                'inventory' => $inventory
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            exit();
+        } else {
+            $this->view('users/band');
+        }
     }
 
     public function Musicians()
