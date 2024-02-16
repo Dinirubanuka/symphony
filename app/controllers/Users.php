@@ -99,7 +99,7 @@ class Users extends Controller
     }
 
     public function cancelOrder($order_id)
-    {   
+    {
         $orders = $this->userModel->getOrders($_SESSION['user_id']);
         foreach ($orders as $order) {
             if ($order->sorder_id == $order_id) {
@@ -478,6 +478,31 @@ class Users extends Controller
         $this->view('users/instrument');
     }
 
+    public function Studio()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $inventory = $this->userModel->studio();
+            $data = [
+                'inventory' => $inventory
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            exit();
+        } else{
+            $this->view('users/studio');
+        }
+    }
+
+    public function Band()
+    {
+        $this->view('users/band');
+    }
+
+    public function Musicians()
+    {
+        $this->view('users/musicians');
+    }
+
     public function inventory()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -524,7 +549,7 @@ class Users extends Controller
                 $subtotal = $subtotal + ($cartItem->total);
             }
             $total = $subtotal + $subtotal*0.05 + 200.00;
-            
+
             $data =[
                 'cart' => $cart,
                 'subtotal' => $subtotal,
@@ -549,7 +574,7 @@ class Users extends Controller
         $completeOrders = $this->userModel->getCompleteOrders($_SESSION['user_id']);
         $order_objects = [];
         $today = strtotime(date("Y-m-d"));
-    
+
         foreach ($orders as $order) {
             $startDateTimestamp = strtotime($order->start_date);
             $endDateTimestamp = strtotime($order->end_date);
@@ -564,21 +589,21 @@ class Users extends Controller
             $product_data = json_decode(json_encode($this->userModel->getProductData($order->product_id)), true);
             $serviceprovider_data = json_decode(json_encode($this->userModel->getServiceProviderData($order->serviceprovider_id)), true);
             $order_data = json_decode(json_encode($order), true);
-            $order_data = array_merge($order_data, $user_data, $product_data, $serviceprovider_data); 
+            $order_data = array_merge($order_data, $user_data, $product_data, $serviceprovider_data);
             $order_objects[] = $order_data;
         }
-    
+
         $result = [];
-    
+
         foreach ($completeOrders as $order) {
             $orderDetails = $order;
             $orderSuborderIDs = explode(',', $order->sorder_id);
-    
+
             foreach ($orderSuborderIDs as $suborderID) {
                 $suborderDetails = $this->getSuborderDetails($order_objects, $suborderID);
-    
+
                 $orderIndex = array_search($orderDetails, array_column($result, 'order'));
-    
+
                 if ($orderIndex !== false) {
                     // Order already exists, add the suborder to the existing order
                     $result[$orderIndex]['suborders'][] = $suborderDetails;
@@ -596,17 +621,17 @@ class Users extends Controller
             'orders' => $result,
             'user_data' => $user_data
         ];
-        
+
         $this->view('users/orders', $data);
     }
-    
-    
+
+
 
     public function placeOrder(){
         $cart = $this->userModel->cart($_SESSION['user_id']);
         $sorder_id = '';
         $avail_ids = '';
-        $total = 0; 
+        $total = 0;
         foreach ($cart as $cartItem){
             $product_data = $this->userModel->viewItem($cartItem->product_id);
             $startDateObj = new DateTime($cartItem->start_date);
@@ -672,7 +697,7 @@ class Users extends Controller
             $subtotal = $subtotal + ($cartItem->total);
         }
         $total = $subtotal + $subtotal*0.05 + 200.00;
-        
+
         $data =[
             'cart' => $cart,
             'subtotal' => $subtotal,
@@ -764,7 +789,7 @@ class Users extends Controller
         } else {
             $rating = 0;
             $star1 = 0;
-            $star2 = 0; 
+            $star2 = 0;
             $star3 = 0;
             $star4 = 0;
             $star5 = 0;
@@ -849,7 +874,7 @@ class Users extends Controller
             } else {
                 $rating = 0;
                 $star1 = 0;
-                $star2 = 0; 
+                $star2 = 0;
                 $star3 = 0;
                 $star4 = 0;
                 $star5 = 0;

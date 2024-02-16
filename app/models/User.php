@@ -266,6 +266,24 @@ class User
         return $results;
     }
 
+    public function studio(){
+        $this->db->query('SELECT * FROM studio');
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function singer(){
+        $this->db->query('SELECT * FROM singer');
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function band(){
+        $this->db->query('SELECT * FROM band');
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
     public function cart($user_id)
     {
         $this->db->query('SELECT * FROM products INNER JOIN cart WHERE products.product_id = cart.product_id AND cart.user_id = :user_id');
