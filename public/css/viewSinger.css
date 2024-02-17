@@ -24,10 +24,9 @@ body {
     /* background-color: var(--white); */
     color: var(--dark-grey);
     height: 100vh;
-    background: #ffffff;
     /* display: grid; */
     /* background-image: url(<?php echo BackgroundImageURL; ?>); */
-    /*background: linear-gradient(90deg, rgba(47,7,68,1) 32%, rgba(95,12,110,1) 100%);*/
+    background: linear-gradient(90deg, rgba(47,7,68,1) 32%, rgba(95,12,110,1) 100%);
     background-size: cover;
     background-position: center;
 }
@@ -94,10 +93,6 @@ body {
     display:flex;
     justify-content: space-between;
     color: white;
-}
-
-.titleHours label{
-    color: black;
 }
 .titleHours input{
     padding: 10px;

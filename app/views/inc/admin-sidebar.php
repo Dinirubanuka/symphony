@@ -31,25 +31,27 @@
                     </a>
                 </li>
 
-                <li id="mod_list" class="nav_link adminsidebar_mod " onclick="toggleSeller()">
+                <li id="mod_list" class="nav_link adminsidebar_mod ">
+                    <a href="<?php echo URLROOT; ?>/administrators/viewserviceprovider">
                         <i class='bx bx-user icon'></i>
                         <span class="text nav-text">Sellers</span>
                         <i class='bx bx-chevron-down icon'></i>
+                    </a>
                 </li>
                 <!-- <ul id="mod_list_pop"> -->
-                <li class="nav_link_seller" style="display: none">
+                <li class="nav_link_seller">
                     <a href="<?php echo URLROOT; ?>/administrators/viewserviceprovider">
                         <i class='bx bx-user-circle icon'></i>
                         <span class="text nav-text">Pending</span>
                     </a>
                 </li>
-                <li class="nav_link_seller" style="display: none">
+                <li class="nav_link_seller">
                     <a href="<?php echo URLROOT; ?>/administrators/viewserviceprovider">
                         <i class='bx bx-user-check icon'></i>
                         <span class="text nav-text">Activated</span>
                     </a>
                 </li>
-                <li class="nav_link_seller" style="display: none">
+                <li class="nav_link_seller">
                     <a href="<?php echo URLROOT; ?>/administrators/viewserviceprovider">
                         <i class='bx bx-user-x icon'></i>
                         <span class="text nav-text">Deactivated</span>
@@ -65,7 +67,7 @@
                 </li>
 
                 <li class="nav_link">
-                    <a href="<?php echo URLROOT; ?>/administrators/viewSales">
+                    <a href="#">
                         <i class='bx bx-chart icon'></i>
                         <span class="text nav-text">Sales</span>
                     </a>
@@ -123,7 +125,7 @@
     var mod_list_pop = document.getElementById("mod_list_pop");
     mod_list_pop.style.height = "0px";
 
-    mod_list.addEventListener("click", function () {
+    mod_list.addEventListener("click", function() {
         if (mod_list_pop.style.height === "0px") {
             mod_list_pop.style.height = "105px";
             mod_list_pop.style.visibility = "visible";
@@ -145,19 +147,4 @@
 
         }
     });
-
-    function toggleSeller() {
-        var sellerElements = document.querySelectorAll(".nav_link_seller");
-
-        sellerElements.forEach(function (sellerElement) {
-            var currentDisplay = window.getComputedStyle(sellerElement).display;
-
-            if (currentDisplay === 'none') {
-                sellerElement.style.display = 'block';
-            } else {
-                sellerElement.style.display = 'none';
-            }
-        });
-    }
-
 </script>

@@ -1,100 +1,39 @@
-/* Import Google font - Poppins */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-/* ---navbar--- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body {
-    min-height: 100vh;
-    background: rgb(47,7,68);
-    background: linear-gradient(90deg, rgba(47,7,68,1) 32%, rgba(95,12,110,1) 100%);
-}
-html {
-    font-size: 62.5%;
-}
-*{
-    font-family: "Poppins", sans-serif;
-}
-.container {
-    margin: 7% auto ;
-    /* position: relative; */
-    /*border:1px solid green;*/
-    max-width: 700px;
-    width: 100%;
-    background: #fff;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
-.container p{
-    font-size: 4rem;
-    font-weight: 800;
-    text-align: center;
-}
-.container .input-box{
-    /*border: 1px solid black;*/
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
-    justify-content: space-evenly;
-    gap:60px;
-    margin-top: 20px;
-}
-.container .input-box label{
-    font-size: 1.5rem;
-}
-.container .description{
-    display: flex;
-    flex-direction: row;
-    gap: 24%;
-}
-.container .description .textArea{
-    margin-top:20px;
-}
-.container .photo_container{
+.form-box{
+    border: 1px solid #707070;
     display: flex;
     flex-direction: column;
-    /*align-items: center;*/
+    gap: 10px;
+    padding:20px;
+    border-radius: 10px;
 }
-.container .photo_container .photo-table{
-    display: flex;
-    gap: 20px;
+
+.input-box{
+    display: grid;
+    grid-template-columns: 300px auto;
+    padding: 10px;
+}
+
+.input-box > input{
+    border-radius:5px ;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.input-box .work-photos{
+    display:flex;
+    flex-direction:row;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 
 }
-.container .photo_container .photo-table .photo-outer{
-    margin: 20px 5px 0 5px ;
-    padding: 0;
-    /* position: relative; */
-    /*border:1px solid green;*/
-    /*max-width: 700px;*/
-    /*width: 100%;*/
-    /*background: #fff; */
-    /*padding: 25px;*/
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    width: 92px;
-    height: 92px;
-    overflow: hidden;
-}
-.container .photo_container .photo-table .photo-outer .photo-inner{
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-.container .photo_container .photo-table .photo-outer .photo-inner img{
-    width: 100%;
-    height: 100%;
-    object-fit:cover;
-    /*border-radius: 50%;*/
-}
-#submitBtn{
-    position: relative;
+
+.input-box .work-photos > input{
     padding: 10px;
-    left: 90%;
-    border-radius:5px ;
-    border-color:snow ;
+}
+
+.input-box >textarea{
+    border: 1px solid #ccc;
+    border-radius: 10px;
 }
 .dropdown {
     width: 200px;
@@ -115,7 +54,7 @@ html {
 
 .dropdown .select-box::after {
     content: '\25BC';
-    /*font-size: 12px;*/
+    font-size: 12px;
     margin-left: 5px;
 }
 
@@ -152,7 +91,3 @@ html {
     position: relative;
     cursor: pointer;
 }
-.option input[type="checkbox"] {
-    margin-right: 5px; /* Adjust the value as needed for the desired space */
-}
-

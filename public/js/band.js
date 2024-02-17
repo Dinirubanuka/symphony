@@ -83,7 +83,7 @@ Redirect();
 function Redirect() {
     $.ajax({
         method: 'GET',
-        url: 'http://localhost/symphony/serviceproviders/fetchBand',
+        url: 'http://localhost/symphony/serviceproviders/fetchSingers',
         dataType: 'json',
         success: function (response) {
             $data = JSON.parse(JSON.stringify(response.inventory));
@@ -100,11 +100,11 @@ function Redirect() {
 }
 
 function Delete(productId) {
-    var confirmed = confirm("Are you sure you want to delete this Band?");
+    var confirmed = confirm("Are you sure you want to delete this singer?");
     if (confirmed) {
         $.ajax({
             method: 'POST',
-            url: 'http://localhost/symphony/serviceproviders/deleteBand/' + productId,
+            url: 'http://localhost/symphony/serviceproviders/deleteSinger/' + productId,
             success: function (response) {
                 console.log('response', response);
                 Redirect();
@@ -124,121 +124,20 @@ function displaydata(data) {
 
     if (inventory && inventory.length > 0) {
         inventory.forEach(function (item) {
-            console.log('Product ID:', item.product_id);
-            console.log('Created By:', item.created_by);
-            console.log('createdDate:', item.createdDate);
-            console.log('leaderName:', item.leaderName);
-            console.log('number:', item.telephoneNumber);
-            console.log('email:', item.email);
-            console.log('memberCount:', item.memberCount);
-            console.log('rate:', item.unit_price);
-            console.log('name of the band:', item.Title);
-            console.log('warranty:', item.warranty);
-            console.log('videoLink:', item.videoLink);
-            console.log('location:', item.location);
-            console.log('instrument:', item.instrument);
-            console.log('Description:', item.Description);
-            console.log('Photo 1:', item.photo_1);
-            console.log('Photo 2:', item.photo_2);
-            console.log('Photo 3:', item.photo_3);
-            console.log('bandPhoto:', item.bandPhoto);
-            console.log('leaderPhoto:', item.leaderPhoto);
-            console.log('------------------------');
-
-            // var categoryString = item.category;
-            // var categoryArray = categoryString.split(' ');
-            // console.log(item.category);
-            // console.log(categoryArray);
-            //
-            // if (categoryArray[0] === 'Electric Guitars') {
-            //     item.category = 'Electric Guitars';
-            // } else if (categoryArray[0] === 'Acoustic Guitars') {
-            //     item.category = 'Acoustic Guitars';
-            // } else if (categoryArray[0] === 'Keyboard') {
-            //     item.category = 'Keyboard';
-            //     if (categoryArray[1] === 'Piano') {
-            //         item.keyboard = 'Piano';
-            //     } else if (categoryArray[1] === 'Organs') {
-            //         item.keyboard = 'Organs';
-            //     }
-            // } else if (categoryArray[0] === 'Band_And_Orchestra') {
-            //     item.category = 'Band_And_Orchestra';
-            //     if (categoryArray[1] === 'Woodwind') {
-            //         item.band = 'Woodwind';
-            //         if (categoryArray[2] === 'Flutes') {
-            //             item.woodwind = 'Flutes';
-            //         } else if (categoryArray[2] === 'Saxophones') {
-            //             item.woodwind = 'Saxophones';
-            //         } else if (categoryArray[2] === 'Clarinets') {
-            //             item.woodwind = 'Clarinets';
-            //         }
-            //     } else if (categoryArray[1] === 'Brass') {
-            //         item.band = 'Brass';
-            //         if (categoryArray[2] === 'Trumphet') {
-            //             item.brass = 'Trumphet';
-            //         } else if (categoryArray[2] === 'Trombones') {
-            //             item.brass = 'Trombones';
-            //         } else if (categoryArray[2] === 'FrenchHorns') {
-            //             item.brass = 'FrenchHorns';
-            //         }
-            //     } else if (categoryArray[1] === 'String') {
-            //         item.band = 'String';
-            //         if (categoryArray[2] === 'Violins') {
-            //             item.string = 'Violins';
-            //         } else if (categoryArray[2] === 'Cellos') {
-            //             item.string = 'Cellos';
-            //         } else if (categoryArray[2] === 'Violas') {
-            //             item.string = 'Violas';
-            //         }
-            //     }
-            // } else if (categoryArray[0] === 'Audio') {
-            //     item.category = 'Audio';
-            //     if (categoryArray[1] === 'Headphones') {
-            //         item.audio = 'Headphones';
-            //     } else if (categoryArray[1] === 'Receivers') {
-            //         item.audio = 'Receivers';
-            //     } else if (categoryArray[1] === 'Amplifiers') {
-            //         item.audio = 'Amplifiers';
-            //     }
-            //     if (categoryArray[1] === 'Speakers') {
-            //         item.audio = 'Speakers';
-            //     } else if (categoryArray[1] === 'Subwoofers') {
-            //         item.audio = 'Subwoofers';
-            //     } else if (categoryArray[1] === 'Tape_Decks') {
-            //         item.audio = 'Tape_Decks';
-            //     }
-            //     if (categoryArray[1] === 'Turntables') {
-            //         item.audio = 'Turntables';
-            //     } else if (categoryArray[1] === 'Microphones') {
-            //         item.audio = 'Microphones';
-            //     } else if (categoryArray[1] === 'Mixers') {
-            //         item.audio = 'Mixers';
-            //     } else if (categoryArray[1] === 'Recording') {
-            //         item.audio = 'Recording';
-            //     }
-            // } else if (categoryArray[0] === 'Percussion') {
-            //     item.category = 'Percussion';
-            //     if (categoryArray[1] === 'Cymbals') {
-            //         item.persussion = 'Cymbals';
-            //     } else if (categoryArray[1] === 'Drums') {
-            //         item.persussion = 'Drums';
-            //     }
-            // }
-
             var stockText = "";
-            // if (item.quantity <= 0) {
-            //     stockText = "Inventory not available";
-            // }
+            if (item.quantity <= 0) {
+                stockText = "Inventory not available";
+            }
 
             req += `<div class="item-container">` +
                 `<div class="item-details">` +
                 `<div class="image-carousel">` +
-                `<img class="carousel-image" src="http://localhost/symphony/img/serviceProvider/` + item.bandPhoto + `" alt="Placeholder Image 1" style="display: block">` +
+                `<img class="carousel-image" src="http://localhost/symphony/img/serviceProvider/` + item.photo_1 + `" alt="Placeholder Image 1" style="display: block">` +
                 `</div>` +
                 `<div class="item-info">` +
-                `<h3>Name:` + item.Title + `</h3>` +
-                `<p>Leader Name: ` + item.leaderName + `</p>` +
-                `<a href="http://localhost/symphony/serviceproviders/viewBand/`+item.product_id+`" style="color: orange">see more details</a>` +
+                `<h3>Name:` + item.name + `</h3>` +
+                `<p>Nick name: ` + item.nickName + `</p>` +
+                `<a href="http://localhost/symphony/serviceproviders/viewSinger/`+item.product_id+`" style="color: orange">see more details</a>` +
                 `<p>` + stockText + `</p>` +
                 <!-- User reviews go here -->
                 `<div class="user-review">` +
@@ -476,13 +375,6 @@ function updateDisplayedData() {
     displaydata(filteredData);
     console.log(filteredData);
 }
-
-// function toggleCategory(category) {
-//   $('#' + category).toggle();
-//   updateDisplayedData();
-// }
-
-// $('.equipment-list input').change(updateDisplayedData);
 
 //item details
 function addItem(productId) {
@@ -926,12 +818,12 @@ function search() {
 
     products.forEach(product => {
         const titleElement = product.querySelector("h3");
-        // const brand = product.querySelector("p:nth-child(1)");
+        const brand = product.querySelector("p:nth-child(1)");
 
         if (titleElement || brand ) {
             const textValue = titleElement.textContent || titleElement.innerHTML;
-            // const brandValue = brand.textContent || brand.innerHTML;
-            if (textValue.toUpperCase().indexOf(searchBox) > -1 ) {
+            const brandValue = brand.textContent || brand.innerHTML;
+            if (textValue.toUpperCase().indexOf(searchBox) > -1 || brandValue.toUpperCase().indexOf(searchBox) > -1) {
                 product.style.display = "";
             } else {
                 product.style.display = "none";

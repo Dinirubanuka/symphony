@@ -1,69 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-  <link rel="stylesheet" href="<?php echo URLROOT ?>/css/band.css"/>
+  <meta charset="UTF-8">
+  <title>Band</title>
+  <link rel="stylesheet" href="band.css">
+</head>
 <body>
-<!-------------register-form----------->
-<div class="register">
-  <div class="container">
-    <p>Band Registration</p>
-    <form action="<?php echo URLROOT; ?>/serviceproviders/band" class="form" method="post"
-          enctype="multipart/form-data">
+<section class="container">
+  <h3>Band registration</h3>
+  <form action="" class="form" method="post" enctype="multipart/form-data">
+    <div class="form-box">
       <div class="input-box">
-        <label>Name</label>
-        <input type="text" name="StudioName"
-               class="<?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>"
-               value="<?php echo $data['title']; ?>">
-      </div>
-      <div class="input-box">
-        <label>Band leader name</label>
-        <input type="text" name="lederName"
-               class="<?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>"
-               value="<?php echo $data['title']; ?>">
-      </div>
-      <div class="input-box">
-        <label>Email</label>
-        <input type="text" name="StudioName"
-               class="<?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>"
-               value="<?php echo $data['title']; ?>">
-      </div>
-      <div class="input-box">
-        <label>NIC</label>
-        <input type="number" name="NIC"
-               class="<?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>"
-               value="<?php echo $data['title']; ?>">
-      </div>
-      <div class="input-box">
-        <label>Telephone Number</label>
-        <input type="number" name="StudioName"
-               class="<?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>"
-               value="<?php echo $data['title']; ?>">
+        <label>Band name</label>
+        <input type="text" name="business_name" class="<?php echo (!empty($data['business_name_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['']; ?>">
+        <span class="invalid-feedback"><?php echo $data['business_name_err']; ?></span>
       </div>
       <div class="input-box">
         <label>Member count</label>
-        <input type="number" name="memberCount"
-               class="<?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>"
-               value="<?php echo $data['title']; ?>">
+        <input type="number" min="3" max="15" name="business_name" class="<?php echo (!empty($data['business_name_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['']; ?>">
+        <span class="invalid-feedback"><?php echo $data['business_name_err']; ?></span>
       </div>
       <div class="input-box">
-        <label>Rate</label>
-        <input type="number"></input>
+        <label>Band leader name</label>
+        <input type="text" name="business_name" class="<?php echo (!empty($data['business_name_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['']; ?>">
+        <span class="invalid-feedback"><?php echo $data['business_name_err']; ?></span>
+      </div>
+      <div class="input-box">
+        <label>Tele-Number</label>
+        <input type="text" name="business_name" class="<?php echo (!empty($data['business_name_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['']; ?>">
+        <span class="invalid-feedback"><?php echo $data['business_name_err']; ?></span>
+      </div>
+      <div class="input-box">
+        <label>NIC</label>
+        <input type="text" name="business_name" class="<?php echo (!empty($data['business_name_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['']; ?>">
+        <span class="invalid-feedback"><?php echo $data['business_name_err']; ?></span>
+      </div>
+      <div class="input-box">
+        <label>Email</label>
+        <input type="text" name="business_name" class="<?php echo (!empty($data['business_name_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['']; ?>">
+        <span class="invalid-feedback"><?php echo $data['business_name_err']; ?></span>
+      </div>
+      <div class="input-box">
+        <label>Photo (Leader) </label>
+        <input type="file" id="Leaderphoto" accept=".jpg, .jpeg, .png, .HEIC" >
+      </div>
+      <div class="input-box">
+        <label>Photo (Band) </label>
+        <input type="file" id="Band photo" accept=".jpg, .jpeg, .png, .HEIC" >
       </div>
       <div class="input-box">
         <label>Description</label>
         <textarea name="" id="" cols="20" rows="10"></textarea>
       </div>
       <div class="input-box">
-        <label>Video <br> (Add Embeded link)</label>
-        <input type="text" name="business_name"
-               class="<?php echo (!empty($data['business_name_err'])) ? 'is-invalid' : ''; ?>"
-               value="<?php echo $data['']; ?>">
+        <label>Work photos (optional) </label>
+        <div class="work-photos">
+          <input type="file" id="work-photo1" accept=".jpg, .jpeg, .png, .HEIC" >
+          <input type="file" id="work-photo2" accept=".jpg, .jpeg, .png, .HEIC" >
+          <input type="file" id="work-photo3" accept=".jpg, .jpeg, .png, .HEIC" >
+        </div>
       </div>
-      <div class="input-box hidden" id="hidden">
-        <label>Select the instruments you can play:</label>
+      <div class="input-box">
+        <label>Video <br> (Add Embeded link)</label>
+        <input type="text" name="business_name" class="<?php echo (!empty($data['business_name_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['']; ?>">
+      </div>
+      <!--instrument-->
+      <div class="input-box" >
+        <label>Select the instruments:</label>
         <div class="dropdown">
           <div class="select-box" onclick="toggleOptions()">
             Select instruments
@@ -293,89 +296,15 @@
           </div>
         </div>
       </div>
-      <!--            leader image-->
-      <div class="photo_container">
-        <div class="input-box">
-          <label style="font-weight: bold">Leader photo</label>
-        </div>
-        <div class="photo-table">
-          <div class="photo-outer">
-            <div class="photo-inner">
-              <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_1"
-                   onclick="triggerInput(1)">
-              <input type="file" id="photo_1" accept=".jpg, .jpeg, .png, .HEIC" name="photo_1"
-                     class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>"
-                     value="<?php echo $data['photo_1']; ?>"
-                     onchange="previewImage(this, 'previewPhoto_1')" required>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--            band photo-->
-      <div class="photo_container">
-        <div class="input-box">
-          <label style="font-weight: bold">Band photo</label>
-        </div>
-        <div class="photo-table">
-          <div class="photo-outer">
-            <div class="photo-inner">
-              <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_1"
-                   onclick="triggerInput(1)">
-              <input type="file" id="photo_1" accept=".jpg, .jpeg, .png, .HEIC" name="photo_1"
-                     class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>"
-                     value="<?php echo $data['photo_1']; ?>"
-                     onchange="previewImage(this, 'previewPhoto_1')" required>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--            work photo-->
-      <div class="photo_container">
-        <div class="input-box">
-          <label style="font-weight: bold">Work photos(optional)</label>
-        </div>
-        <div class="photo-table">
-          <div class="photo-outer">
-            <div class="photo-inner">
-              <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_1"
-                   onclick="triggerInput(1)">
-              <input type="file" id="photo_1" accept=".jpg, .jpeg, .png, .HEIC" name="photo_1"
-                     class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>"
-                     value="<?php echo $data['photo_1']; ?>"
-                     onchange="previewImage(this, 'previewPhoto_1')" required>
-            </div>
-          </div>
-          <div class="photo-outer">
-            <div class="photo-inner">
-              <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_2"
-                   onclick="triggerInput(2)">
-              <input type="file" id="photo_2" accept=".jpg, .jpeg, .png, .HEIC" name="photo_2"
-                     class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>"
-                     value="<?php echo $data['photo_2']; ?>"
-                     onchange="previewImage(this, 'previewPhoto_2')" required>
-            </div>
-          </div>
-          <div class="photo-outer">
-            <div class="photo-inner">
-              <img src="http://localhost/symphony/img/add-image.png" id="previewPhoto_3"
-                   onclick="triggerInput(3)">
-              <input type="file" id="photo_3" accept=".jpg, .jpeg, .png, .HEIC" name="photo_3"
-                     class="<?php echo (!empty($data['photo_err'])) ? 'is-invalid' : ''; ?>"
-                     value="<?php echo $data['photo_3']; ?>"
-                     onchange="previewImage(this, 'previewPhoto_3')" required>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button id="submitBtn">Submit</button>
-    </form>
-  </div>
-</div>
+    </div>
+  </form>
+</section>
 <script>
   function toggleOptions() {
     var optionsContainer = document.querySelector('.dropdown .options');
     optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
   }
 </script>
+
 </body>
 </html>

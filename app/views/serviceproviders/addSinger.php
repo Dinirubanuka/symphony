@@ -308,7 +308,7 @@
                         </div>
                         <div class="option">
                             <input type="checkbox" id="" name="Violin" value="Violin">
-                            Violin
+                            ViolinViolin
                         </div>
                         <div class="option">
                             <input type="checkbox" id="" name="Xylophone" value="Xylophone">
@@ -361,7 +361,6 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    document.body.appendChild(container);
     function showInstruments() {
         var selection = document.getElementById("selection");
         var instruments = document.getElementById("hidden");
@@ -381,6 +380,7 @@
             var optionsContainer = document.querySelector('.optionsInstrument');
             optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
         }
+
     }
 
     // add photo

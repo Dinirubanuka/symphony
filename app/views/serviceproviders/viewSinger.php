@@ -14,7 +14,7 @@
 <?php require_once APPROOT . '/views/inc/singer-nav.php'; ?>
 <!--------body-------->
 <div class="outer">
-    <form action="<?php echo URLROOT; ?>/Serviceproviders/updateSinger/<?php echo $data->product_id ?>" method="post" enctype="multipart/form-data">
+    <form action="<?php echo URLROOT; ?>/Serviceproviders/updateSinger/<?php echo $data->product_id ?>" method="post">
         <div class="biggerBody">
             <div class="upperPart">
                 <div class="upperLeft">
@@ -24,12 +24,10 @@
                             <img src="http://localhost/symphony/img/serviceProvider/<?php echo $data->singerPhoto ?>"
                                  id="previewPhoto_4"
                                  onclick="triggerInput(4)">
-                            <input type="file" id="photo_4" accept=".jpg, .jpeg, .png, .HEIC" name="photo_4"
+                            <input type="file" id="photo_4" accept=".jpg, .jpeg, .png, .HEIC, .heic" name="singer_photo"
+                                   class=""
                                    value="<?php echo $data->singerPhoto; ?>"
                                    onchange="previewImage(this, 'previewPhoto_4')">
-<!--                            <input type="file" id="photo_4" accept=".jpg, .jpeg, .png, .HEIC, .heic" name="photo_4"-->
-<!--                                   value="--><?php //echo $data->singerPhoto; ?><!--"-->
-<!--                                   onchange="previewImage(this, 'previewPhoto_4')">-->
                         </div>
                     </div>
                     <div class="singerNameLoc">
@@ -38,8 +36,8 @@
                         </div>
                         <div class="location">
                             <img src="http://localhost/symphony/img/location.png" alt="camera-icon" class="" id=""
-                                 style="height: 35px;width: 35px;z-index: 2;" onclick="myfunc()" />
-                            <h4 style="color: black"><?php echo $data->location; ?></h4>
+                                 style="height: 35px;width: 35px;z-index: 2;" onclick="myfunc()"/>
+                            <h4><?php echo $data->location; ?></h4>
                         </div>
                     </div>
                 </div>
