@@ -13,10 +13,7 @@
   <!-------------register-form----------->
     <div class="register">
       <section class="container">
-      <p>Registration Form - Customer</p><br>
-      <div style="text-align: center;">
-        <h2>Not a Customer? <a href="<?php echo URLROOT; ?>/serviceproviders/serviceproviderregister">Register as a Service Provider</a></h2>
-      </div>
+      <p>Registration Form</p>
       <form action="<?php echo URLROOT; ?>/users/register" class="form" method="post" enctype="multipart/form-data">
         <div class="input-box">
           <label>Full Name</label>

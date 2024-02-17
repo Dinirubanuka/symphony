@@ -445,7 +445,7 @@ button {
     /* top: 50%;
     left: 60%;
     transform: translate(-50%, -50%); */
-    max-width: 800px;
+    max-width: 700px;
     width: 100%;
     background: rgba(21, 20, 20, 0.08);
     padding: 25px;
@@ -482,9 +482,13 @@ button {
 }
 .llink{
     display: flex;
-    width: 60%;
+    justify-content: space-between;
+    /*width: 45%;*/
 }
-
+form{
+    /* border: 1px solid black; */
+    /* padding: 5%; */
+}
 .edit-link input[type = "submit"]{
     display: none;
     /* border-radius: 30%;
@@ -558,7 +562,7 @@ position: relative;
     font-size: 1rem;
     font-weight: 400;
     /* margin-top: 30px; */
-    margin-left: 5%;
+    /* margin-left: 50%; */
     /* transform: translate(-50%, -50%); */
     border: none;
     cursor: pointer;
@@ -567,29 +571,6 @@ position: relative;
     border-radius: 2rem;
     text-align:center;
 }
-.pwButton{
-    padding: 0 15%;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    /* border: 1px solid green; */
-    background-color: #6e0a41;
-    height: 55px;
-    width: 50%;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 400;
-    /* margin-top: 30px; */
-    margin-left: 15%;
-    /* transform: translate(-50%, -50%); */
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    background: rgb(130, 106, 251);
-    border-radius: 2rem;
-    text-align:center;
-}
-
 .delButton{
     padding: 0 15%;
     display:flex;
@@ -603,7 +584,7 @@ position: relative;
     font-size: 1rem;
     font-weight: 400;
     /* margin-top: 30px; */
-    margin-left: 15%;
+    margin-left: 20%;
     /* transform: translate(-50%, -50%); */
     border: none;
     cursor: pointer;

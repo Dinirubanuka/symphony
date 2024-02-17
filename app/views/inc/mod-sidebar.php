@@ -2,7 +2,7 @@
     <header>
         <div class="image-text">
             <span class="image">
-                <img src="<?php echo URLROOT; ?>/img/logo.png" alt="">
+                <img src="logo.png" alt="">
             </span>
 
             <div class="text logo-text">
@@ -10,6 +10,8 @@
                 <span class="profession">Moderator</span>
             </div>
         </div>
+
+
     </header>
 
     <div class="menu-bar">
@@ -23,95 +25,56 @@
                 </li>
 
                 <li id="mod_list" class="nav_link adminsidebar_mod ">
+                    <a href="<?php echo URLROOT; ?>/moderators/viewserviceprovider">
                         <i class='bx bx-user icon'></i>
-                        <span class="text nav-text"><strong>Sellers</strong></span>
+                        <span class="text nav-text">Sellers</span>
+                        <i class='bx bx-chevron-down icon'></i>
                     </a>
                 </li>
                 <!-- <ul id="mod_list_pop"> -->
                 <li class="nav_link_seller">
-                    <a href="<?php echo URLROOT; ?>/moderators/viewActiveSP">
+                    <a href="<?php echo URLROOT; ?>/moderators/viewserviceprovider">
+                        <i class='bx bx-user-circle icon'></i>
+                        <span class="text nav-text">Pending</span>
+                    </a>
+                </li>
+                <li class="nav_link_seller">
+                    <a href="<?php echo URLROOT; ?>/moderators/viewserviceprovider">
                         <i class='bx bx-user-check icon'></i>
-                        <span class="text nav-text">Active</span>
+                        <span class="text nav-text">Activated</span>
                     </a>
                 </li>
                 <li class="nav_link_seller">
-                    <a href="<?php echo URLROOT; ?>/moderators/viewRejectedSP">
-                        <i class='bx bx-unlink icon'></i>
-                        <span class="text nav-text">Rejected</span>
-                    </a>
-                </li>
-                <li class="nav_link_seller">
-                    <a href="<?php echo URLROOT; ?>/moderators/viewDeactivatedSP">
-                        <i class='bx bx-trash icon'></i>
-                        <span class="text nav-text">Deactivated</span>
-                    </a>
-                </li>
-                <li class="nav_link_seller">
-                    <a href="<?php echo URLROOT; ?>/moderators/viewBannedSP">
+                    <a href="<?php echo URLROOT; ?>/moderators/viewserviceprovider">
                         <i class='bx bx-user-x icon'></i>
-                        <span class="text nav-text">Banned</span>
+                        <span class="text nav-text">Deactivated</span>
                     </a>
                 </li>
                 <!-- </ul> -->
 
-                <li id="mod_list" class="nav_link adminsidebar_mod ">
+                <li class="nav_link">
+                    <a href="<?php echo URLROOT; ?>/moderators/viewuser">
                         <i class='bx bx-user icon'></i>
-                        <span class="text nav-text"><strong>Customers</strong></span>
-                    </a>
-                </li>
-                <!-- <ul id="mod_list_pop"> -->
-                <li class="nav_link_seller">
-                    <a href="<?php echo URLROOT; ?>/moderators/viewActiveUser">
-                        <i class='bx bx-user-check icon'></i>
-                        <span class="text nav-text">Active</span>
-                    </a>
-                </li>
-                <li class="nav_link_seller">
-                    <a href="<?php echo URLROOT; ?>/moderators/viewDeactivatedUser">
-                        <i class='bx bx-trash icon'></i>
-                        <span class="text nav-text">Deactivated</span>
-                    </a>
-                </li>
-                <li class="nav_link_seller">
-                    <a href="<?php echo URLROOT; ?>/moderators/viewBannedUser">
-                        <i class='bx bx-user-x icon'></i>
-                        <span class="text nav-text">Banned</span>
+                        <span class="text nav-text">Customers</span>
                     </a>
                 </li>
 
                 <li class="nav_link">
-                    <a href="<?php echo URLROOT; ?>/moderators/pendingrequest">
+                    <a href="#">
                         <i class='bx bx-chart icon'></i>
                         <span class="text nav-text">New Registrations</span>
                     </a>
                 </li>
 
                 <li class="nav_link">
+                    <a href="#">
                         <i class='bx bx-bar-chart-alt icon'></i>
-                        <span class="text nav-text"><strong>Inquiries</strong></span>
-                    </a>
-                </li>
-                <li class="nav_link_seller">
-                    <a href="<?php echo URLROOT; ?>/moderators/pendinginquiries">
-                        <i class='bx bx-bell icon'></i>
-                        <span class="text nav-text">Pending</span>
-                    </a>
-                </li>
-                <li class="nav_link_seller">
-                    <a href="<?php echo URLROOT; ?>/moderators/activeinquiries">
-                        <i class='bx bx-star icon'></i>
-                        <span class="text nav-text">Active</span>
-                    </a>
-                </li>
-                <li class="nav_link_seller">
-                    <a href="<?php echo URLROOT; ?>/moderators/completedinquiries">
-                        <i class='bx bx-user-check icon'></i>
-                        <span class="text nav-text">Completed</span>
+                        <span class="text nav-text">Inquiries</span>
                     </a>
                 </li>
 
                 <li class="nav_link">
-                    <a href="<?php echo URLROOT; ?>/moderators/eventpackages">
+                    <a href="#">
                         <i class='bx bx-notepad icon'></i>
                         <span class="text nav-text">Event Packages</span>
                     </a>
@@ -126,6 +89,18 @@
                     <i class='bx bx-log-out icon'></i>
                     <span class="text nav-text">Logout</span>
                 </a>
+            </li>
+
+            <li class="mode">
+                <div class="sun-moon">
+                    <i class='bx bx-moon icon moon'></i>
+                    <i class='bx bx-sun icon sun'></i>
+                </div>
+                <span class="mode-text text">Dark mode</span>
+
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
             </li>
 
         </div>

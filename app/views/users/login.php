@@ -31,9 +31,7 @@
         <input type="password" placeholder="Password" name="password" class="<?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['password']; ?>">
           <span class="invalid-feedback"><?php echo $data['password_err']; ?></span>
             <button>login</button>
-          <p class="message" style="padding-left: 36%;"><a href="<?php echo URLROOT; ?>/users/forgotpassword">Forgot Password?</a></p>
             <p class="message">Not registered? <a href="<?php echo URLROOT; ?>/users/register">Create an account</a></p>
-            <p class="message">Not a Customer? <a href="<?php echo URLROOT; ?>/serviceproviders/serviceproviderlogin">Login as a Service Provider</a></p>
           </form>
         </div>
     </div>

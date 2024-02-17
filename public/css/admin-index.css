@@ -73,7 +73,7 @@ body.dark{
     list-style: none;
     display: flex;
     align-items: center;
-    margin-top: 0px;
+    margin-top: 5px;
     margin-left: 10px;
 }
 
@@ -136,7 +136,7 @@ body.dark .sidebar .nav_link_seller a:hover .text{
     flex-direction: column;
 }
 header .image-text{
-    margin-top: 10px;
+    margin-top: 15px;
 }
 header .image-text .name { 
     font-size: 16px;
@@ -187,7 +187,7 @@ body.dark .sidebar header .toggle{
 }
 
 .sidebar .menu{
-    margin-top: 10px;
+    margin-top: 40px;
 }
 
 .sidebar li.search-box{
@@ -306,6 +306,16 @@ body.dark .switch::before{
     left: 20px;
 }
 
+.home{
+    position: absolute;
+    top: 0;
+    top: 0;
+    left: 250px;
+    height: 100vh;
+    width: calc(100% - 250px);
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+}
 .home .text{
     font-size: 30px;
     font-weight: 500;
