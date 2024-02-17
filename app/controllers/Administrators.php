@@ -192,6 +192,16 @@
       }
     }
 
+    public function viewSales()
+    {
+        $users = $this->administratorModel->getSales();
+        $data = [
+            'sales' => $users
+        ];
+//        die(print_r($users));
+        $this->view('administrators/viewSales', $data);
+    }
+
     public function viewmoderator(){
       $moderators = $this->administratorModel->getModerators();
       $data = [

@@ -1,4 +1,2 @@
 .idea
 .DS_Store
-public/css/user-viewItem.css
-app/views/users/viewItem.php
