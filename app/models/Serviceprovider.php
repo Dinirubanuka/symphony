@@ -21,7 +21,7 @@ class ServiceProvider
     public function additem($data)
     {
 
-        $this->db->query('INSERT INTO products (created_by, category, brand, model, quantity, unit_price, photo_1, photo_2, photo_3, Title, Description, outOfStock, warranty) VALUES(:created_by, :category, :brand, :model, :quantity, :unit_price, :photo_1, :photo_2, :photo_3, :title, :description, :outOfStock, :warranty)');
+        $this->db->query('INSERT INTO products (created_by, category, brand, model, quantity, unit_price, photo_1, photo_2, photo_3, Title, Description, outOfStock, warranty, status) VALUES(:created_by, :category, :brand, :model, :quantity, :unit_price, :photo_1, :photo_2, :photo_3, :title, :description, :outOfStock, :warranty, :status)');
 
         if ($data['category'] !== 'Brass') {
             $data['bandOrchestraCategories'] = null;
@@ -44,6 +44,7 @@ class ServiceProvider
             $this->db->bind(':outOfStock', $data['outOfStock']);
             $this->db->bind(':outOfStock', $data['outOfStock']);
             $this->db->bind(':warranty', $data['warranty']);
+            $this->db->bind(':status', 'Active');
 
             // Execute
             if ($this->db->execute()) {
@@ -61,7 +62,7 @@ class ServiceProvider
     public function addStudio($data)
     {
         try {
-            $this->db->query('INSERT INTO studio (created_by, Title, instrument, descriptionSounds, descriptionStudio, location, telephoneNumber, videoLink, photo_1, photo_2, photo_3, airCondition, unit_price) VALUES (:created_by, :name, :instrument,:descriptionSounds, :descriptionStudio, :location, :telephoneNumber, :videoLink, :photo_1, :photo_2, :photo_3, :airCondition, :unit_price)');
+            $this->db->query('INSERT INTO studio (created_by, Title, instrument, descriptionSounds, descriptionStudio, location, telephoneNumber, videoLink, photo_1, photo_2, photo_3, airCondition, unit_price, status) VALUES (:created_by, :name, :instrument,:descriptionSounds, :descriptionStudio, :location, :telephoneNumber, :videoLink, :photo_1, :photo_2, :photo_3, :airCondition, :unit_price, :status)');
             $this->db->bind(':created_by', $_SESSION['serviceprovider_id']);
             $this->db->bind(':name', $data['name']);
             $this->db->bind(':location', $data['location']);
@@ -75,6 +76,7 @@ class ServiceProvider
             $this->db->bind(':photo_1', $data['photo_1']);
             $this->db->bind(':photo_2', $data['photo_2']);
             $this->db->bind(':photo_3', $data['photo_3']);
+            $this->db->bind(':status', 'Active');
 
             // Execute
             if ($this->db->execute()) {
@@ -91,7 +93,7 @@ class ServiceProvider
     public function addSinger($data)
     {
         try {
-            $this->db->query('INSERT INTO singer (created_by, name, NickName, email, description, instrument, location, telephoneNumber, videoLink, photo_1, photo_2, photo_3, singerPhoto, unit_price) VALUES (:created_by, :name, :NickName, :email, :description, :instrument, :location, :telephoneNumber, :videoLink, :photo_1, :photo_2, :photo_3, :singer_photo, :unit_price)');
+            $this->db->query('INSERT INTO singer (created_by, name, NickName, email, description, instrument, location, telephoneNumber, videoLink, photo_1, photo_2, photo_3, singerPhoto, unit_price, status) VALUES (:created_by, :name, :NickName, :email, :description, :instrument, :location, :telephoneNumber, :videoLink, :photo_1, :photo_2, :photo_3, :singer_photo, :unit_price, :status)');
             $this->db->bind(':created_by', $_SESSION['serviceprovider_id']);
             $this->db->bind(':name', $data['name']);
             $this->db->bind(':NickName', $data['NickName']);
@@ -106,6 +108,7 @@ class ServiceProvider
             $this->db->bind(':photo_2', $data['photo_2']);
             $this->db->bind(':photo_3', $data['photo_3']);
             $this->db->bind(':singer_photo', $data['singer_photo']);
+            $this->db->bind(':status', 'Active');
 
             // Execute
             if ($this->db->execute()) {
@@ -225,7 +228,7 @@ class ServiceProvider
 
     public function getUserData($id)
     {
-        $this->db->query('SELECT * FROM users WHERE id = :id');
+        $this->db->query('SELECT * FROM users WHERE id = :id AND status = "Active"');
         $this->db->bind(':id', $id);
         $results = $this->db->single();
         return $results;
@@ -233,7 +236,7 @@ class ServiceProvider
 
     public function getProductData($product_id)
     {
-        $this->db->query('SELECT * FROM products WHERE product_id = :product_id');
+        $this->db->query('SELECT * FROM products WHERE product_id = :product_id AND status = "Active"');
         $this->db->bind(':product_id', $product_id);
         $results = $this->db->single();
         return $results;
@@ -313,7 +316,7 @@ class ServiceProvider
     {
         $name = $data['business_name'];
         $email = $data['business_email'];
-        $this->db->query('INSERT INTO serviceproviders ( business_name, business_address, business_contact_no, business_email, password,  owner_name, owner_address, owner_contact_no, owner_nic, owner_email, about, profile_photo, verification) VALUES(:business_name, :business_address, :business_contact_no, :business_email, :password,  :owner_name, :owner_address, :owner_contact_no, :owner_nic, :owner_email, :about, :photo, :verification)');
+        $this->db->query('INSERT INTO serviceproviders ( business_name, business_address, business_contact_no, business_email, password,  owner_name, owner_address, owner_contact_no, owner_nic, owner_email, about, profile_photo, verification, status, photo_R1, photo_R2, photo_R3, photo_R4, photo_R5, registration_date) VALUES(:business_name, :business_address, :business_contact_no, :business_email, :password,  :owner_name, :owner_address, :owner_contact_no, :owner_nic, :owner_email, :about, :photo, :verification, :status, :photo_1, :photo_2, :photo_3, :photo_4, :photo_5, :registration_date)');
         $this->mail->isSMTP();                                            //Send using SMTP
         $this->mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $this->mail->SMTPAuth = true;                                   //Enable SMTP authentication
@@ -357,7 +360,14 @@ class ServiceProvider
             $this->db->bind(':owner_email', $data['owner_email']);
             $this->db->bind(':about', $data['about']);
             $this->db->bind(':photo', $data['photo']);
+            $this->db->bind(':photo_1', $data['photo_1']);
+            $this->db->bind(':photo_2', $data['photo_2']);
+            $this->db->bind(':photo_3', $data['photo_3']);
+            $this->db->bind(':photo_4', $data['photo_4']);
+            $this->db->bind(':photo_5', $data['photo_5']);
             $this->db->bind(':verification', $verification_code);
+            $this->db->bind(':status', 'Pending');
+            $this->db->bind(':registration_date', $data['registration_date']);
 
             // Execute
             if ($this->db->execute()) {
@@ -373,7 +383,7 @@ class ServiceProvider
 
     public function view($serviceprovider_id)
     {
-        $this->db->query('SELECT * FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id');
+        $this->db->query('SELECT * FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id AND status = "Active"');
         $this->db->bind(':serviceprovider_id', $serviceprovider_id);
         $results = $this->db->single();
         return $results;
@@ -381,7 +391,7 @@ class ServiceProvider
 
     public function viewItem($product_id)
     {
-        $this->db->query('SELECT * FROM products WHERE product_id = :product_id');
+        $this->db->query('SELECT * FROM products WHERE product_id = :product_id AND status = "Active"');
         $this->db->bind(':product_id', $product_id);
         $results = $this->db->single();
         return $results;
@@ -410,7 +420,7 @@ class ServiceProvider
 
     public function deleteitem($product_id)
     {
-        $this->db->query('DELETE FROM products WHERE product_id = :product_id');
+        $this->db->query('UPDATE products SET status = "Deactive" WHERE product_id = :product_id');
         $this->db->bind(':product_id', $product_id);
 
         // Execute
@@ -422,7 +432,7 @@ class ServiceProvider
     }
     public function deleteSinger($product_id)
     {
-        $this->db->query('DELETE FROM singer WHERE product_id = :product_id');
+        $this->db->query('UPDATE singer SET status = "Deactive" WHERE product_id = :product_id');
         $this->db->bind(':product_id', $product_id);
 
         // Execute
@@ -435,7 +445,7 @@ class ServiceProvider
 
     public function deleteStudio($product_id)
     {
-        $this->db->query('DELETE FROM studio WHERE product_id = :product_id');
+        $this->db->query('UPDATE studio SET status = "Deactive" WHERE product_id = :product_id');
         $this->db->bind(':product_id', $product_id);
 
         // Execute
@@ -448,7 +458,7 @@ class ServiceProvider
 
     public function inventory($created_by)
     {
-        $this->db->query('SELECT * FROM products WHERE created_by = :created_by');
+        $this->db->query('SELECT * FROM products WHERE created_by = :created_by AND status = "Active"');
         $this->db->bind(':created_by', $created_by);
         $results = $this->db->resultSet();
         return $results;
@@ -456,7 +466,7 @@ class ServiceProvider
 
     public function studio($created_by)
     {
-        $this->db->query('SELECT * FROM studio WHERE created_by = :created_by');
+        $this->db->query('SELECT * FROM studio WHERE created_by = :created_by AND status = "Active"');
         $this->db->bind(':created_by', $created_by);
         $results = $this->db->resultSet();
         return $results;
@@ -464,7 +474,7 @@ class ServiceProvider
 
     public function singer($created_by)
     {
-        $this->db->query('SELECT * FROM singer WHERE created_by = :created_by');
+        $this->db->query('SELECT * FROM singer WHERE created_by = :created_by AND status = "Active"');
         $this->db->bind(':created_by', $created_by);
         $results = $this->db->resultSet();
         return $results;
@@ -472,7 +482,7 @@ class ServiceProvider
 
     public function band($created_by)
     {
-        $this->db->query('SELECT * FROM band WHERE created_by = :created_by');
+        $this->db->query('SELECT * FROM band WHERE created_by = :created_by AND status = "Active"');
         $this->db->bind(':created_by', $created_by);
         $results = $this->db->resultSet();
         return $results;
@@ -480,7 +490,7 @@ class ServiceProvider
 
     public function viewSinger($created_by)
     {
-        $this->db->query('SELECT * FROM singer WHERE product_id = :created_by');
+        $this->db->query('SELECT * FROM singer WHERE product_id = :created_by AND status = "Active"');
         $this->db->bind(':created_by', $created_by);
         $results = $this->db->single();
         return $results;
@@ -609,7 +619,7 @@ class ServiceProvider
 
     public function delete($serviceprovider_id)
     {
-        $this->db->query('DELETE FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id');
+        $this->db->query('UPDATE serviceproviders SET status = "Deactive" WHERE serviceprovider_id = :serviceprovider_id');
         $this->db->bind(':serviceprovider_id', $serviceprovider_id);
 
         // Execute
@@ -623,7 +633,7 @@ class ServiceProvider
     // Login User
     public function serviceproviderlogin($business_email, $password)
     {
-        $this->db->query('SELECT * FROM serviceproviders WHERE business_email = :business_email');
+        $this->db->query('SELECT * FROM serviceproviders WHERE business_email = :business_email AND status = "Active"');
         $this->db->bind(':business_email', $business_email);
 
         $row = $this->db->single();
@@ -636,10 +646,43 @@ class ServiceProvider
         }
     }
 
+    public function addLoginHistory($data)
+    {
+        $this->db->query('INSERT INTO login_logout_logs (type, date_time, id) VALUES(:type, :date_time, :id)');
+        try {
+            $this->db->bind(':type', $data['type']);
+            $this->db->bind(':date_time', $data['date_time']);
+            $this->db->bind(':id', $data['id']);
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     // Find user by email
     public function findserviceproviderByEmail($business_email)
     {
-        $this->db->query('SELECT * FROM serviceproviders WHERE business_email = :business_email');
+        $this->db->query('SELECT * FROM serviceproviders WHERE business_email = :business_email AND status = "Active"');
+        // Bind value
+        $this->db->bind(':business_email', $business_email);
+
+        $row = $this->db->single();
+
+        // Check row
+        if ($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function findBannedServiceProviderByEmail($business_email)
+    {
+        $this->db->query('SELECT * FROM serviceproviders WHERE business_email = :business_email AND status = "Banned"');
         // Bind value
         $this->db->bind(':business_email', $business_email);
 
@@ -655,7 +698,7 @@ class ServiceProvider
 
     public function findOtherServiceProviderByEmail($business_email, $serviceprovider_id)
     {
-        $this->db->query('SELECT * FROM serviceproviders WHERE business_email = :business_email AND serviceprovider_id != :currentSPId');
+        $this->db->query('SELECT * FROM serviceproviders WHERE business_email = :business_email AND serviceprovider_id != :currentSPId AND status = "Active"');
         // Bind value
         $this->db->bind(':business_email', $business_email);
         $this->db->bind(':currentSPId', $serviceprovider_id);
@@ -672,7 +715,7 @@ class ServiceProvider
 
     public function findserviceproviderByEmailEdit($business_email)
     {
-        $this->db->query('SELECT * FROM serviceproviders WHERE business_email = :business_email');
+        $this->db->query('SELECT * FROM serviceproviders WHERE business_email = :business_email AND status = "Active"');
         // Bind value
         $this->db->bind(':business_email', $business_email);
 
@@ -689,7 +732,7 @@ class ServiceProvider
     // Get User by ID
     public function getServiceProviderById($id)
     {
-        $this->db->query('SELECT * FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id');
+        $this->db->query('SELECT * FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id AND status = "Active"');
         // Bind value
         $this->db->bind(':serviceprovider_id', $serviceprovider_id);
 
