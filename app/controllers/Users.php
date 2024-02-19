@@ -152,7 +152,7 @@ class Users extends Controller
             'user_id' => $_SESSION['user_id'],
             'log_type' => 'Order Cancel',
             'date_and_time' => date('Y-m-d H:i:s'),
-            'data' => 'User cancelled an order'
+            'data' => 'User cancelled an order with order id: ' . $order_id . ' and sub order id: ' . $sorder_id
         ];
         $this->userModel->addLogData($log_data);
         redirect('users/orders');
@@ -409,7 +409,7 @@ class Users extends Controller
                 'user_id' => $_SESSION['user_id'],
                 'log_type' => 'Inquiry',
                 'date_and_time' => date('Y-m-d H:i:s'),
-                'data' => 'User made an inquiry'
+                'data' => 'User made an inquiry with inquiry type: ' . $inquiryData['inquiryType']
             ];
             $this->userModel->addLogData($log_data);
             redirect('users/inquiries');
@@ -460,7 +460,7 @@ class Users extends Controller
                 'user_id' => $_SESSION['user_id'],
                 'log_type' => 'View Inquiry',
                 'date_and_time' => date('Y-m-d H:i:s'),
-                'data' => 'User viewed an inquiry'
+                'data' => 'User viewed an inquiry with inquiry id: ' . $inquiry_id . ' and inquiry type: ' . $inquiry->inquiryType
             ];
             $this->userModel->addLogData($log_data);
             $this->view('users/viewinquiry', $data);
@@ -485,7 +485,7 @@ class Users extends Controller
                 'user_id' => $_SESSION['user_id'],
                 'log_type' => 'Send Message',
                 'date_and_time' => date('Y-m-d H:i:s'),
-                'data' => 'User sent a message to a moderator'
+                'data' => 'User sent a message to a moderator with inquiry id: ' . $inquiry_id . ' and moderator id: ' . $moderator_id
             ];
             $this->userModel->addLogData($log_data);
             redirect('users/viewInquiry/'.$inquiry_id.'');
@@ -1091,8 +1091,8 @@ class Users extends Controller
                 // Check and set logged in user
                 $loggedInUser = $this->userModel->login($data['email'], $data['password']);
                 $log_data = [
-                    'type' => 'User',
-                    'date_time' => date('Y-m-d H:i:s'),
+                    'user_type' => 'Customer',
+                    'date_and_time' => date('Y-m-d H:i:s'),
                     'user_id' => $loggedInUser->id,
                     'log_type' => 'Login',
                     'data' => 'User logged in'
@@ -1141,8 +1141,8 @@ class Users extends Controller
     public function logout()
     {
         $log_data = [
-            'type' => 'User',
-            'date_time' => date('Y-m-d H:i:s'),
+            'user_type' => 'Customer',
+            'date_and_time' => date('Y-m-d H:i:s'),
             'user_id' => $_SESSION['user_id'],
             'log_type' => 'Logout',
             'data' => 'User logged out'
@@ -1618,7 +1618,7 @@ class Users extends Controller
                 'user_id' => $_SESSION['user_id'],
                 'log_type' => 'Check Availability',
                 'date_and_time' => date('Y-m-d H:i:s'),
-                'data' => 'User checked the availability of an item'
+                'data' => "User checked the availability of an $type  with product id $product_id"
             ];
             $this->userModel->addLogData($log_data);
             if($avalability){
@@ -2049,7 +2049,7 @@ class Users extends Controller
                     'user_id' => $_SESSION['user_id'],
                     'log_type' => 'View Instrument',
                     'date_and_time' => date('Y-m-d H:i:s'),
-                    'data' => 'User viewed an instrument'
+                    'data' => 'User viewed an instrument with product id '.$product_id
                 ];
                 $this->userModel->addLogData($log_data);
                 $this->view('users/viewItem',$data);
@@ -2100,7 +2100,7 @@ class Users extends Controller
                     'user_id' => $_SESSION['user_id'],
                     'log_type' => 'View Studio',
                     'date_and_time' => date('Y-m-d H:i:s'),
-                    'data' => 'User viewed an studio'
+                    'data' => 'User viewed an studio with product id '.$product_id
                 ];
                 $this->userModel->addLogData($log_data);
                 $this->view('users/viewItem',$data);
@@ -2152,7 +2152,7 @@ class Users extends Controller
                     'user_id' => $_SESSION['user_id'],
                     'log_type' => 'View Singer',
                     'date_and_time' => date('Y-m-d H:i:s'),
-                    'data' => 'User viewed a singer'
+                    'data' => 'User viewed a singer with product id '.$product_id
                 ];
                 $this->userModel->addLogData($log_data);
                 $this->view('users/viewItem',$data);
@@ -2204,7 +2204,7 @@ class Users extends Controller
                     'user_id' => $_SESSION['user_id'],
                     'log_type' => 'View Musician',
                     'date_and_time' => date('Y-m-d H:i:s'),
-                    'data' => 'User viewed a musician'
+                    'data' => 'User viewed a musician with product id '.$product_id
                 ];
                 $this->userModel->addLogData($log_data);
                 $this->view('users/viewItem',$data);
@@ -2257,7 +2257,7 @@ class Users extends Controller
                     'user_id' => $_SESSION['user_id'],
                     'log_type' => 'View Band',
                     'date_and_time' => date('Y-m-d H:i:s'),
-                    'data' => 'User viewed a band'
+                    'data' => 'User viewed a band with product id '.$product_id
                 ];
                 $this->userModel->addLogData($log_data);
                 $this->view('users/viewItem',$data);
@@ -2337,7 +2337,7 @@ class Users extends Controller
                             'user_id' => $_SESSION['user_id'],
                             'log_type' => 'Add to Cart',
                             'date_and_time' => date('Y-m-d H:i:s'),
-                            'data' => 'User added an Instrument to the cart'
+                            'data' => 'User added an Instrument to the cart with the id of '.$product_id
                         ]; 
                         $this->userModel->addLogData($log_data);
                         redirect('users/viewItem/'.$product_id);
@@ -2347,7 +2347,7 @@ class Users extends Controller
                             'user_id' => $_SESSION['user_id'],
                             'log_type' => 'Add to Cart',
                             'date_and_time' => date('Y-m-d H:i:s'),
-                            'data' => 'User added a Studio to the cart'
+                            'data' => 'User added a Studio to the cart with the id of '.$product_id
                         ];
                         $this->userModel->addLogData($log_data);
                         redirect('users/viewStudio/'.$product_id);
@@ -2357,7 +2357,7 @@ class Users extends Controller
                             'user_id' => $_SESSION['user_id'],
                             'log_type' => 'Add to Cart',
                             'date_and_time' => date('Y-m-d H:i:s'),
-                            'data' => 'User added a Singer to the cart'
+                            'data' => 'User added a Singer to the cart with the id of '.$product_id
                         ];
                         $this->userModel->addLogData($log_data);
                         redirect('users/viewSinger/'.$product_id);
@@ -2367,7 +2367,7 @@ class Users extends Controller
                             'user_id' => $_SESSION['user_id'],
                             'log_type' => 'Add to Cart',
                             'date_and_time' => date('Y-m-d H:i:s'),
-                            'data' => 'User added a Band to the cart'
+                            'data' => 'User added a Band to the cart with the id of '.$product_id
                         ];
                         $this->userModel->addLogData($log_data);
                         redirect('users/viewBand/'.$product_id);
@@ -2377,7 +2377,7 @@ class Users extends Controller
                             'user_id' => $_SESSION['user_id'],
                             'log_type' => 'Add to Cart',
                             'date_and_time' => date('Y-m-d H:i:s'),
-                            'data' => 'User added a Musician to the cart'
+                            'data' => 'User added a Musician to the cart with the id of '.$product_id
                         ];
                         $this->userModel->addLogData($log_data);
                         redirect('users/viewMusician/'.$product_id);
