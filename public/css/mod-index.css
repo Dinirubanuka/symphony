@@ -532,3 +532,27 @@ body.dark .right-component .text{
 .status-Active {
     color: #00ff55; /* Change the color to your desired active color */
 }
+
+.status-Pending {
+    color: #3366cc;
+}
+
+.status-Upcoming {
+    color: #4CAF50;
+}
+
+.status-In-Progress {
+    color: #b68b14;
+}
+
+.status-Rejected {
+    color: #ff4d4d;
+}
+
+.status-Cancelled {
+    color: #ff4d4d;
+}
+
+.status-Completed {
+    color: #ea00ff;
+}

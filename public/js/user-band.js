@@ -143,7 +143,7 @@ function search() {
 }
 
 function viewItem(productId) {
-    window.location.href = 'http://localhost/symphony/users/viewItem/' + productId;
+    window.location.href = 'http://localhost/symphony/users/viewBand/' + productId;
 }
 
 //price sort

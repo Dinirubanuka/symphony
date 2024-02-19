@@ -234,9 +234,41 @@ class ServiceProvider
         return $results;
     }
 
-    public function getProductData($product_id)
+    public function getItemData($product_id)
     {
         $this->db->query('SELECT * FROM products WHERE product_id = :product_id AND status = "Active"');
+        $this->db->bind(':product_id', $product_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function getStudioData($product_id)
+    {
+        $this->db->query('SELECT * FROM studio WHERE product_id = :product_id AND status = "Active"');
+        $this->db->bind(':product_id', $product_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function getBandData($product_id)
+    {
+        $this->db->query('SELECT * FROM band WHERE product_id = :product_id AND status = "Active"');
+        $this->db->bind(':product_id', $product_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function getSingerData($product_id)
+    {
+        $this->db->query('SELECT * FROM singer WHERE product_id = :product_id AND status = "Active"');
+        $this->db->bind(':product_id', $product_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function getMusicianData($product_id)
+    {
+        $this->db->query('SELECT * FROM musician WHERE product_id = :product_id AND status = "Active"');
         $this->db->bind(':product_id', $product_id);
         $results = $this->db->single();
         return $results;

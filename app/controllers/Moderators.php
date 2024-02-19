@@ -90,6 +90,244 @@
       }
     }
 
+    public function viewProduct($type, $product_id){
+      if($type == 'Equipment'){
+        $data = $this->moderatorModel->getEquipmentData($product_id);
+      } else if ($type == 'Studio'){
+        $data = $this->moderatorModel->getStudioData($product_id);
+      } else if ($type == 'Band'){
+        $data = $this->moderatorModel->getBandData($product_id);
+      } else if ($type == 'Singer'){
+        $data = $this->moderatorModel->getSingerData($product_id);
+      } else if ($type == 'Musician'){
+        $data = $this->moderatorModel->getMusicianData($product_id);
+      }
+      $sp_data = $this->moderatorModel->getSP($data->created_by);
+      $reviews = $this->moderatorModel->getReviews($product_id, $type);
+      if($reviews){
+        $count = 0;
+        $star1 = 0;
+        $star2 = 0;
+        $star3 = 0;
+        $star4 = 0;
+        $star5 = 0;
+        $rating = 0;
+        foreach ($reviews as $review){
+            $count = $count + 1;
+            switch ($review->rating) {
+                case 1:
+                    $star1 = $star1 + 1;
+                    break;
+                case 2:
+                    $star2 = $star2 + 1;
+                    break;
+                case 3:
+                    $star3 = $star3 + 1;
+                    break;
+                case 4:
+                    $star4 = $star4 + 1;
+                    break;
+                case 5:
+                    $star5 = $star5 + 1;
+                    break;
+            }
+        }
+        if($count != 0){
+            $rating = ($star1 + $star2*2 + $star3*3 + $star4*4 + $star5*5)/$count;
+        }
+      } else {
+          $rating = 0;
+          $star1 = 0;
+          $star2 = 0; 
+          $star3 = 0;
+          $star4 = 0;
+          $star5 = 0;
+          $count = 0;
+      }
+      if($data){
+        if ($type == 'Equipment'){
+            $data =[
+                'product_id'=>$data->product_id,
+                'created_by'=>$data->created_by,
+                'category'=>$data->category,
+                'brand'=>$data->brand,
+                'model'=>$data->model,
+                'quantity'=>$data->quantity,
+                'unit_price'=>$data->unit_price,
+                'photo_1'=>$data->photo_1,
+                'photo_2'=>$data->photo_2,
+                'photo_3'=>$data->photo_3,
+                'Title'=>$data->Title,
+                'Description'=>$data->Description,
+                'outOfStock'=>$data->outOfStock,
+                'createdDate'=>$data->createdDate,
+                'warranty'=>$data->warranty,
+                'reviews'=>$reviews,
+                'rating'=>$rating,
+                'count'=>$count,
+                'star1'=>$star1,
+                'star2'=>$star2,
+                'star3'=>$star3,
+                'star4'=>$star4,
+                'star5'=>$star5,
+                'type' => $type,
+                'sp_data' => $sp_data
+            ];
+        } else if ($type == 'Studio'){
+            $data = [
+                'product_id' => $data->product_id,
+                'created_by' => $data->created_by,
+                'category' => $data->category,
+                'brand' => $data->brand,
+                'model' => $data->model,
+                'quantity' => $data->quantity,
+                'unit_price' => $data->unit_price,
+                'photo_1' => $data->photo_1,
+                'photo_2' => $data->photo_2,
+                'photo_3' => $data->photo_3,
+                'Title' => $data->Title,
+                'Description' => $data->Description,
+                'outOfStock' => $data->outOfStock,
+                'createdDate' => $data->createdDate,
+                'warranty' => $data->warranty,
+                'location' => $data->location,
+                'instrument' => $data->instrument,
+                'descriptionSounds' => $data->descriptionSounds,
+                'descriptionStudio' => $data->descriptionStudio,
+                'telephoneNumber' => $data->telephoneNumber,
+                'videoLink' => $data->videoLink,
+                'airCondition' => $data->airCondition,
+                'status' => $data->status,
+                'reviews'=>$reviews,
+                'rating'=>$rating,
+                'count'=>$count,
+                'star1'=>$star1,
+                'star2'=>$star2,
+                'star3'=>$star3,
+                'star4'=>$star4,
+                'star5'=>$star5,
+                'type' => $type,
+                'sp_data' => $sp_data
+            ];
+        } else if ($type == 'Singer'){
+            $data = [
+                'product_id' => $data->product_id,
+                'created_by' => $data->created_by,
+                'category' => $data->category,
+                'brand' => $data->brand,
+                'model' => $data->model,
+                'quantity' => $data->quantity,
+                'unit_price' => $data->unit_price,
+                'photo_1' => $data->photo_1,
+                'photo_2' => $data->photo_2,
+                'photo_3' => $data->photo_3,
+                'Title' => $data->Title,
+                'Description' => $data->Description,
+                'outOfStock' => $data->outOfStock,
+                'createdDate' => $data->createdDate,
+                'warranty' => $data->warranty,
+                'singer_name' => $data->name,
+                'nickName' => $data->nickName,
+                'telephoneNumber' => $data->telephoneNumber,
+                'videoLink' => $data->videoLink,
+                'location' => $data->location,
+                'instrument' => $data->instrument,
+                'singerPhoto' => $data->singerPhoto,
+                'email' => $data->email,
+                'status' => $data->status,
+                'reviews'=>$reviews,
+                'rating'=>$rating,
+                'count'=>$count,
+                'star1'=>$star1,
+                'star2'=>$star2,
+                'star3'=>$star3,
+                'star4'=>$star4,
+                'star5'=>$star5,
+                'type' => $type,
+                'sp_data' => $sp_data
+            ];
+        } else if ($type == 'Musician'){
+            $data = [
+                'product_id' => $data->product_id,
+                'created_by' => $data->created_by,
+                'category' => $data->category,
+                'brand' => $data->brand,
+                'model' => $data->model,
+                'quantity' => $data->quantity,
+                'unit_price' => $data->unit_price,
+                'photo_1' => $data->photo_1,
+                'photo_2' => $data->photo_2,
+                'photo_3' => $data->photo_3,
+                'Title' => $data->Title,
+                'Description' => $data->Description,
+                'outOfStock' => $data->outOfStock,
+                'createdDate' => $data->createdDate,
+                'warranty' => $data->warranty,
+                'musician_name' => $data->name,
+                'nickName' => $data->nickName,
+                'telephoneNumber' => $data->telephoneNumber,
+                'videoLink' => $data->videoLink,
+                'location' => $data->location,
+                'instrument' => $data->instrument,
+                'singerPhoto' => $data->singerPhoto,
+                'email' => $data->email,
+                'status' => $data->status,
+                'reviews'=>$reviews,
+                'rating'=>$rating,
+                'count'=>$count,
+                'star1'=>$star1,
+                'star2'=>$star2,
+                'star3'=>$star3,
+                'star4'=>$star4,
+                'star5'=>$star5,
+                'type' => $type,
+                'sp_data' => $sp_data
+            ];
+        } else if ($type == 'Band'){
+            $data = [
+                'product_id' => $data->product_id,
+                'created_by' => $data->created_by,
+                'category' => $data->category,
+                'brand' => $data->brand,
+                'model' => $data->model,
+                'unit_price' => $data->unit_price,
+                'quantity' => $data->quantity,
+                'photo_1' => $data->photo_1,
+                'photo_2' => $data->photo_2,
+                'photo_3' => $data->photo_3,
+                'Title' => $data->Title,
+                'Description' => $data->Description,
+                'outOfStock' => $data->outOfStock,
+                'createdDate' => $data->createdDate,
+                'warranty' => $data->warranty,
+                'videoLink' => $data->videoLink,
+                'instrument' => $data->instrument,
+                'email' => $data->email,
+                'telephoneNumber' => $data->telephoneNumber,
+                'memberCount' => $data->memberCount,
+                'leaderPhoto' => $data->leaderPhoto,
+                'bandPhoto' => $data->bandPhoto,
+                'location' => $data->location,
+                'leaderName' => $data->leaderName,
+                'status' => $data->status,
+                'reviews'=>$reviews,
+                'rating'=>$rating,
+                'count'=>$count,
+                'star1'=>$star1,
+                'star2'=>$star2,
+                'star3'=>$star3,
+                'star4'=>$star4,
+                'star5'=>$star5,
+                'type' => $type,
+                'sp_data' => $sp_data
+            ];
+          } 
+        } else {
+            die('Item Not Found!');
+        }
+      $this->view('moderators/viewitem', $data);
+    }
+
     public function viewActiveUser(){
       $users = $this->moderatorModel->getUsers();
       $data = [
@@ -170,7 +408,7 @@
     }
 
     public function viewPendingRequest($id){
-      $request = $this->moderatorModel->getRequest($id);
+      $request = $this->moderatorModel->getSP($id);
       $data = [
         'request' => $request
       ];
@@ -178,7 +416,7 @@
     }
 
     public function viewserviceprovider($id){
-      $serviceprovider = $this->moderatorModel->getRequest($id);
+      $serviceprovider = $this->moderatorModel->getSP($id);
       $data = [
         'request' => $serviceprovider
       ];
@@ -195,7 +433,7 @@
 
     public function banuser($id){
       if($this->moderatorModel->banUser($id)){
-        redirect('moderators/index/');
+        redirect('moderators/viewBannedUser/');
       } else {
         die('Something went wrong');
       }
@@ -203,7 +441,23 @@
 
     public function banserviceprovider($id){
       if($this->moderatorModel->banServiceProvider($id)){
-        redirect('moderators/index');
+        redirect('moderators/viewBannedSP');
+      } else {
+        die('Something went wrong');
+      }
+    }
+
+    public function unbanserviceprovider($id){
+      if($this->moderatorModel->unbanServiceProvider($id)){
+        redirect('moderators/viewActiveSP');
+      } else {
+        die('Something went wrong');
+      }
+    }
+
+    public function unbanuser($id){
+      if($this->moderatorModel->unbanUser($id)){
+        redirect('moderators/viewActiveUser');
       } else {
         die('Something went wrong');
       }
@@ -234,6 +488,15 @@
       $this->view('moderators/viewuserorders', $data);
     }
 
+    public function viewSPOrders($id){
+      $order = $this->moderatorModel->viewSPOrders($id);
+      $data = [
+        'order' => $order,
+        'sp_id' => $id
+      ];
+      $this->view('moderators/viewsporders', $data);
+    }
+
     public function viewOrder($id){
       $order = $this->moderatorModel->getOrderData($id);
       $user_data = $this->moderatorModel->getUser($order->user_id);
@@ -243,9 +506,20 @@
       foreach($suborder_ids as $suborder_id){
         $suborder_obj = [];
         $suborder = $this->moderatorModel->getSubOrderData($suborder_id);
+        if($suborder->type == 'Equipment'){
+          $product_data = $this->moderatorModel->getEquipmentData($suborder->product_id);
+        } else if ($suborder->type == 'Studio'){
+          $product_data = $this->moderatorModel->getStudioData($suborder->product_id);
+        } else if ($suborder->type == 'Band'){
+          $product_data = $this->moderatorModel->getBandData($suborder->product_id);
+        } else if ($suborder->type == 'Singer'){
+          $product_data = $this->moderatorModel->getSingerData($suborder->product_id);
+        } else if ($suborder->type == 'Musician'){
+          $product_data = $this->moderatorModel->getMusicianData($suborder->product_id);
+        }
         $suborder_obj = [
           'order_data' => $suborder,
-          'product_data' => $this->moderatorModel->getProductData($suborder->product_id)
+          'product_data' => $product_data
         ];
         array_push($sub_orders, $suborder_obj);
       }
@@ -255,6 +529,28 @@
         'suborders' => $sub_orders
       ];
       $this->view('moderators/viewuserorder', $data);
+    }
+
+    public function viewSubOrder($id){
+      $suborder = $this->moderatorModel->getSubOrderData($id);
+      $user_data = $this->moderatorModel->getUser($suborder->user_id);
+      if($suborder->type == 'Equipment'){
+        $product_data = $this->moderatorModel->getEquipmentData($suborder->product_id);
+      } else if ($suborder->type == 'Studio'){
+        $product_data = $this->moderatorModel->getStudioData($suborder->product_id);
+      } else if ($suborder->type == 'Band'){
+        $product_data = $this->moderatorModel->getBandData($suborder->product_id);
+      } else if ($suborder->type == 'Singer'){
+        $product_data = $this->moderatorModel->getSingerData($suborder->product_id);
+      } else if ($suborder->type == 'Musician'){
+        $product_data = $this->moderatorModel->getMusicianData($suborder->product_id);
+      }
+      $data = [
+        'order_data' => $suborder,
+        'product_data' => $product_data,
+        'user_data' => $user_data
+      ];
+      $this->view('moderators/viewsporder', $data);
     }
 
     public function pendinginquiries()

@@ -18,7 +18,7 @@
     </div>
     <div class="right-component">
         <div class="title">
-          <h2>View Order - #<?php echo $data['order']->order_id ?></h2>
+          <h2>View Order - #<?php echo $data['order_data']->sorder_id ?></h2>
         </div>
         <div class="orders-container">
               <div class="invoice-details">
@@ -50,25 +50,23 @@
                               <th>Total</th>
                           </tr>
                       </thead>
-                      <?php foreach($data['suborders'] as $suborder) : ?>
                       <tbody>
                           <tr>
-                              <td><img src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $suborder['product_data']->photo_1; ?>" style="width:100px; height:100px;" alt="Item 1"></td>
-                              <td><div class = "sp-icon" onclick = "viewSP(<?php echo $suborder['product_data']->created_by; ?>)"><?php echo $suborder['product_data']->created_by ?></div></td>
-                              <td><div product_id = "<?php echo $suborder['product_data']->product_id; ?>" product_type = "<?php echo $suborder['order_data']->type; ?>" class = "sp-icon" onclick = "viewProduct(this)"><?php echo $suborder['product_data']->Title ?> - <?php echo $suborder['product_data']->product_id ?></div></td>   
-                              <td><?php echo $suborder['order_data']->qty ?></td>
-                              <td>LKR. <?php echo $suborder['product_data']->unit_price ?></td>
-                              <td><?php echo $suborder['order_data']->start_date ?></td>
-                              <td><?php echo $suborder['order_data']->end_date ?></td>
-                              <td class="status-<?php echo $suborder['order_data']->status ?>"><?php echo $suborder['order_data']->status ?></td>
-                              <td>LKR. <?php echo $suborder['order_data']->total ?></td>
+                              <td><img src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $data['product_data']->photo_1; ?>" style="width:100px; height:100px;" alt="Item 1"></td>
+                              <td><div class = "sp-icon" onclick = "viewSP(<?php echo $data['product_data']->created_by; ?>)"><?php echo $data['product_data']->created_by ?></div></td>
+                              <td><div product_id = "<?php echo $data['product_data']->product_id; ?>" product_type = "<?php echo $data['order_data']->type; ?>" class = "sp-icon" onclick = "viewProduct(this)"><?php echo $data['product_data']->Title ?> - <?php echo $data['product_data']->product_id ?></div></td>   
+                              <td><?php echo $data['order_data']->qty ?></td>
+                              <td>LKR. <?php echo $data['product_data']->unit_price ?></td>
+                              <td><?php echo $data['order_data']->start_date ?></td>
+                              <td><?php echo $data['order_data']->end_date ?></td>
+                              <td class="status-<?php echo $data['order_data']->status ?>"><?php echo $data['order_data']->status ?></td>
+                              <td>LKR. <?php echo $data['order_data']->total ?></td>
                           </tr>
                       </tbody>
-                      <?php endforeach; ?>
                       <tfoot>
                           <tr>
                               <td colspan="9" style="text-align: right;"><strong>Total:</strong></td>
-                              <td>LKR. <?php echo $data['order']->total ?></td>
+                              <td>LKR. <?php echo $data['order_data']->total ?></td>
                           </tr>
                       </tfoot>
                   </table>
@@ -85,7 +83,7 @@
       function viewProduct(element) {
             var ProductID = element.getAttribute('product_id');
             var ProductType = element.getAttribute('product_type');
-            window.location.href = "<?php echo URLROOT; ?>/moderators/viewProduct/" + ProductType + "/" + ProductID;
+          window.location.href = "<?php echo URLROOT; ?>/moderators/viewProduct/" + ProductType + "/" + ProductID;
       }
   </script>
   </body>

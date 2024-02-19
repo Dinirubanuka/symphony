@@ -495,6 +495,24 @@ class User
         }
     }
 
+    public function addLogData($data){
+        $this->db->query('INSERT INTO logs (user_type, user_id, date_and_time, log_type, data) VALUES(:user_type, :user_id, :date_and_time, :log_type, :data)');
+        try {
+            $this->db->bind(':user_type', $data['user_type']);
+            $this->db->bind(':user_id', $data['user_id']);
+            $this->db->bind(':date_and_time', $data['date_and_time']);
+            $this->db->bind(':log_type', $data['log_type']);
+            $this->db->bind(':data', $data['data']);
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     // Get User by ID
     public function getUserById($id)
     {
@@ -539,7 +557,7 @@ class User
 
     public function cart($user_id)
     {
-        $this->db->query('SELECT * FROM products INNER JOIN cart WHERE products.product_id = cart.product_id AND cart.user_id = :user_id');
+        $this->db->query('SELECT * FROM  cart WHERE user_id = :user_id');
         $this->db->bind(':user_id', $user_id);
         $results = $this->db->resultSet();
         return $results;
@@ -549,6 +567,38 @@ class User
     {
         $this->db->query('SELECT * FROM products WHERE product_id = :product_id AND status = "Active"');
         $this->db->bind(':product_id', $product_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function viewStudio($studio_id)
+    {
+        $this->db->query('SELECT * FROM studio WHERE product_id = :product_id AND status = "Active"');
+        $this->db->bind(':product_id', $studio_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function viewSinger($singer_id)
+    {
+        $this->db->query('SELECT * FROM singer WHERE product_id = :product_id AND status = "Active"');
+        $this->db->bind(':product_id', $singer_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function viewBand($band_id)
+    {
+        $this->db->query('SELECT * FROM band WHERE product_id = :product_id AND status = "Active"');
+        $this->db->bind(':product_id', $band_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function viewMusician($musician_id)
+    {
+        $this->db->query('SELECT * FROM musician WHERE product_id = :product_id AND status = "Active"');
+        $this->db->bind(':product_id', $musician_id);
         $results = $this->db->single();
         return $results;
     }
@@ -565,9 +615,10 @@ class User
 
     public function checkAvailability($data_check)
     {
-        $this->db->query('SELECT * FROM availability WHERE product_id = :product_id AND date = :date');
+        $this->db->query('SELECT * FROM availability WHERE product_id = :product_id AND date = :date AND type = :type');
         $this->db->bind(':product_id', $data_check['product_id']);
         $this->db->bind(':date', $data_check['date']);
+        $this->db->bind(':type', $data_check['type']);
         $results = $this->db->resultSet();
         return $results;
     }
@@ -586,13 +637,14 @@ class User
         }
     }
 
-    public function setNotAvailableCart($product_id, $user_id){
+    public function setNotAvailableCart($product_id, $user_id, $type){
         try {
-            $this->db->query('UPDATE cart SET availability  = :availability  WHERE product_id = :product_id AND user_id = :user_id');
+            $this->db->query('UPDATE cart SET availability  = :availability  WHERE product_id = :product_id AND user_id = :user_id AND type = :type');
             // Bind values
             $this->db->bind(':product_id', $product_id);
             $this->db->bind(':user_id', $user_id);
             $this->db->bind(':availability', 'notAvailable');
+            $this->db->bind(':type', 'type');
             // Execute
             if ($this->db->execute()) {
                 return true;
@@ -606,17 +658,18 @@ class User
         }
     }
 
-    public function viewReviews($product_id)
+    public function viewReviews($product_id, $type)
     {
-        $this->db->query('SELECT * FROM reviews WHERE product_id = :product_id');
+        $this->db->query('SELECT * FROM reviews WHERE product_id = :product_id AND type = :type');
         $this->db->bind(':product_id', $product_id);
+        $this->db->bind(':type', $type);
         $results = $this->db->resultSet();
         return $results;
     }
 
     public function addToCart($data)
     {
-        $this->db->query('INSERT INTO cart (user_id, product_id, quantity, start_date, end_date, days, total, availability) VALUES(:user_id, :product_id, :quantity, :start_date, :end_date, :days, :total, :availability)');
+        $this->db->query('INSERT INTO cart (user_id, product_id, quantity, start_date, end_date, days, total, availability, type) VALUES(:user_id, :product_id, :quantity, :start_date, :end_date, :days, :total, :availability, :type)');
 
         try {
             $this->db->bind(':user_id', $data['user_id']);
@@ -627,6 +680,7 @@ class User
             $this->db->bind(':days', $data['days']);
             $this->db->bind(':total', $data['total']);
             $this->db->bind(':availability', $data['availability']);
+            $this->db->bind(':type', $data['type']);
 
             // Execute
             if ($this->db->execute()) {
@@ -688,10 +742,57 @@ class User
         }
     }
 
-    public function getProductData($product_id)
+    public function updateFinalOrder($amount, $order_id){
+        try {
+            $this->db->query('UPDATE orders SET total = total - :amount WHERE order_id = :order_id');
+            $this->db->bind(':amount', $amount);
+            $this->db->bind(':order_id', $order_id);
+            $this->db->execute();
+    
+            return true;
+        } catch (PDOException $e) {
+            echo "Database error: " . $e->getMessage();
+            return false;
+        }
+    }
+    
+
+    public function getItemData($product_id)
     {
         $this->db->query('SELECT * FROM products WHERE product_id = :product_id');
         $this->db->bind(':product_id', $product_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function getStudioData($studio_id)
+    {
+        $this->db->query('SELECT * FROM studio WHERE product_id = :product_id');
+        $this->db->bind(':product_id', $studio_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function getSingerData($singer_id)
+    {
+        $this->db->query('SELECT * FROM singer WHERE product_id = :product_id');
+        $this->db->bind(':product_id', $singer_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function getBandData($band_id)
+    {
+        $this->db->query('SELECT * FROM band WHERE product_id = :product_id');
+        $this->db->bind(':product_id', $band_id);
+        $results = $this->db->single();
+        return $results;
+    }
+
+    public function getMusicianData($musician_id)
+    {
+        $this->db->query('SELECT * FROM musician WHERE product_id = :product_id');
+        $this->db->bind(':product_id', $musician_id);
         $results = $this->db->single();
         return $results;
     }
@@ -704,7 +805,7 @@ class User
     }
 
     public function getSubOrderId($data){
-        $this->db->query('SELECT sorder_id FROM suborder WHERE user_id = :user_id AND serviceprovider_id = :serviceprovider_id AND product_id = :product_id AND qty = :qty AND start_date = :start_date AND end_date = :end_date AND days = :days AND total = :total AND status = :status');
+        $this->db->query('SELECT sorder_id FROM suborder WHERE user_id = :user_id AND serviceprovider_id = :serviceprovider_id AND product_id = :product_id AND qty = :qty AND start_date = :start_date AND end_date = :end_date AND days = :days AND total = :total AND status = :status AND type = :type AND order_placed_on = :order_placed_on');
         $this->db->bind(':user_id', $data['user_id']);
         $this->db->bind(':serviceprovider_id', $data['serviceprovider_id']);
         $this->db->bind(':product_id', $data['product_id']);
@@ -714,13 +815,15 @@ class User
         $this->db->bind(':days', $data['days']);
         $this->db->bind(':total', $data['total']);
         $this->db->bind(':status', $data['status']);
+        $this->db->bind(':type', $data['type']);
+        $this->db->bind(':order_placed_on', $data['order_placed_on']);
         $results = $this->db->single();
         return $results;
     }
 
     public function placeOrder($data)
     {
-            $this->db->query('INSERT INTO suborder (user_id, serviceprovider_id, product_id, qty, start_date, end_date, days, total, status, avail) VALUES(:user_id, :serviceprovider_id, :product_id, :qty, :start_date, :end_date, :days, :total, :status, :avail)');
+            $this->db->query('INSERT INTO suborder (user_id, serviceprovider_id, product_id, qty, start_date, end_date, days, total, status, avail, type, order_placed_on) VALUES(:user_id, :serviceprovider_id, :product_id, :qty, :start_date, :end_date, :days, :total, :status, :avail , :type, :order_placed_on)');
     
             try {
                 $this->db->bind(':user_id', $data['user_id']);
@@ -733,6 +836,9 @@ class User
                 $this->db->bind(':total', $data['total']);
                 $this->db->bind(':status', $data['status']);
                 $this->db->bind(':avail', $data['avail']);
+                $this->db->bind(':type', $data['type']);
+                $this->db->bind(':order_placed_on', $data['order_placed_on']);
+
                 // Execute
                 if ($this->db->execute()) {
                     return true;
@@ -780,12 +886,13 @@ class User
     }
 
     public function setAvailability($data){
-        $this->db->query('INSERT INTO availability (product_id, date, qty) VALUES(:product_id, :date, :qty)');
+        $this->db->query('INSERT INTO availability (product_id, date, qty, type) VALUES(:product_id, :date, :qty , :type)');
     
         try {
             $this->db->bind(':product_id', $data['product_id']);
             $this->db->bind(':date', $data['date']);
             $this->db->bind(':qty', $data['quantity']);
+            $this->db->bind(':type', $data['type']);
             
             if ($this->db->execute()) {
                 $this->db->query('SELECT LAST_INSERT_ID() AS entry_id');
@@ -818,7 +925,7 @@ class User
     public function addReview($data)
     {
 
-        $this->db->query('INSERT INTO reviews (product_id, user_id, rating, content, name, photo, placed_on) VALUES(:product_id, :user_id, :rating, :content, :name, :photo, :placed_on)');
+        $this->db->query('INSERT INTO reviews (product_id, user_id, rating, content, name, photo, placed_on, type) VALUES(:product_id, :user_id, :rating, :content, :name, :photo, :placed_on , :type)');
 
         try {
             $this->db->bind(':product_id', $data['product_id']);
@@ -828,6 +935,8 @@ class User
             $this->db->bind(':name', $data['name']);
             $this->db->bind(':photo', $data['photo']);
             $this->db->bind(':placed_on', date('Y-m-d'));
+            $this->db->bind(':type', $data['category']);
+
 
             // Execute
             if ($this->db->execute()) {

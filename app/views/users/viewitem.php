@@ -55,14 +55,44 @@
     <div class="item-container">
         <div class="item-details">
             <div class="item-info">
-            <form action="<?php echo URLROOT; ?>/users/checkAvailability/<?php echo $data['product_id']; ?>" class="form" method="post" enctype="multipart/form-data" id="addToCartForm">
+            <form action="<?php echo URLROOT; ?>/users/checkAvailability/<?php echo $data['type']; ?>/<?php echo $data['product_id']; ?>" class="form" method="post" enctype="multipart/form-data" id="addToCartForm">
                     <h1><?php echo $data['Title']; ?></h1>
-                    <h3>Category: <?php echo $data['category']; ?></h3>
-                    <h3>Brand: <?php echo $data['brand']; ?></h3>
-                    <p>Model: <?php echo $data['model']; ?></p>
-                    <p>Units Available: <?php echo $data['quantity']; ?></p>
-                    <p>Price: <?php echo $data['unit_price']; ?></p>
-                    <p>Warranty available until: <?php echo $data['warranty']; ?></p>
+                    <h3><div <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>Category: <?php echo $data['category']; ?></div></h3>
+                    <h3><div <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>Brand: <?php echo $data['brand']; ?></div></h3>
+                    <p><div <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>Model: <?php echo $data['model']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>Units Available: <?php echo $data['quantity']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>Warranty available until: <?php echo $data['warranty']; ?></div></p>
+                    <h3><div <?php echo ($data['type'] == 'Studio') ? '' : 'style="display: none;"'; ?>>Locations: <?php echo $data['location']; ?></div></h3>
+                    <p><div <?php echo ($data['type'] == 'Studio') ? '' : 'style="display: none;"'; ?>>Instrument: <?php echo $data['instrument']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Studio') ? '' : 'style="display: none;"'; ?>>Description Sounds: <?php echo $data['descriptionSounds']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Studio') ? '' : 'style="display: none;"'; ?>>Description Studio: <?php echo $data['descriptionStudio']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Studio') ? '' : 'style="display: none;"'; ?>>Telephone Number: <?php echo $data['telephoneNumber']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Studio') ? '' : 'style="display: none;"'; ?>>Video Link: <?php echo $data['videoLink']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Studio') ? '' : 'style="display: none;"'; ?>>Air Condition: <?php echo $data['airCondition']; ?></div></p>
+                    <h3><div <?php echo ($data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>Leader Name: <?php echo $data['leaderName']; ?></div></h3>
+                    <p><div <?php echo ($data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>Member Count: <?php echo $data['memberCount']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>Leader Photo: <?php echo $data['leaderPhoto']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>Band Photo: <?php echo $data['bandPhoto']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>Location: <?php echo $data['location']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>Instrument: <?php echo $data['instrument']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>Email: <?php echo $data['email']; ?></div></p>
+                    <h3><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>Name: <?php echo $data['musician_name']; ?></div></h3>
+                    <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>NickName: <?php echo $data['nickName']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>Telephone Number: <?php echo $data['telephoneNumber']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>Video Link: <?php echo $data['videoLink']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>Location: <?php echo $data['location']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>Instrument: <?php echo $data['instrument']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>Singer Photo: <?php echo $data['singerPhoto']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>Email: <?php echo $data['email']; ?></div></p>
+                    <h3><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Name: <?php echo $data['singer_name']; ?></div></h3>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>NickName: <?php echo $data['nickName']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Telephone Number: <?php echo $data['telephoneNumber']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Video Link: <?php echo $data['videoLink']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Location: <?php echo $data['location']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Instrument: <?php echo $data['instrument']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Singer Photo: <?php echo $data['singerPhoto']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Email: <?php echo $data['email']; ?></div></p>
+                    <p>Price per day: <?php echo $data['unit_price']; ?></p>
                     <p>Last Modified: <?php echo $data['createdDate']; ?></p>
                     <p>Description: <?php echo $data['Description']; ?></p>
 
@@ -76,7 +106,7 @@
                         <input type="date" id="toDate" name="toDate" min="" max="" value="<?php echo $data['end_date']; ?>" required>
                     <br><br>
                     <label id="product_id" name="product_id" value="<?php echo $data['product_id']; ?>"></label>
-                    <div class="number-input-container">
+                    <div class="number-input-container"  <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>
                         <label for="amount">Quantity:</label>
                         <input type="number" id="quantity" name="quantity" value="<?php echo $data['quantity_selected']; ?>" required>
                     </div>
@@ -91,8 +121,11 @@
                         <input type="date" id="fromDate" name="fromDate" value="<?php echo $data['start_date']; ?>" hidden>
                         <input type="date" id="toDate" name="toDate" value="<?php echo $data['end_date']; ?>" hidden>
                         <input type="number" id="quantity" name="quantity" value="<?php echo $data['quantity_selected']; ?>" hidden>
-                    </div>                  
-                    <button class="<?php echo $data['availability'] === 'available' ? 'addToCartBtn' : 'disabled-button'; ?>" <?php echo $data['availability'] === 'available' ? '' : 'disabled'; ?>>Add to Cart</button>
+                        <input type="text" id="type" name="type" value="<?php echo $data['type']; ?>" hidden>
+                    </div>
+                    <div <?php echo ($data['availability'] == 'available') ? '' : 'style="display: none;"'; ?>>             
+                        <button class="<?php echo $data['availability'] === 'available' ? 'addToCartBtn' : 'disabled-button'; ?>" <?php echo $data['availability'] === 'available' ? '' : 'disabled'; ?>>Add to Cart</button>
+                    </div>   
                     </form>
                 <button id="addToFavoritesBtn">Add to Favorites</button>
             </div>
@@ -221,6 +254,7 @@
         </div>
         <input type="hidden" id="name" name="name" value="<?php echo $data['name']; ?>">
         <input type="hidden" id="photo" name="photo" value="<?php echo $data['photo']; ?>">
+        <input type="hidden" id="categoty" name="category" value="<?php echo $data['category']; ?>">
         <textarea rows="5" id="reviewDescription" name="reviewDescription" placeholder="Enter your review here" required></textarea>
         <button class="<?php echo $data['purchased'] ? 'submitBtn' : 'disabled-button'; ?>" action="<?php echo URLROOT; ?>/users/addReview" method="post"  <?php echo $data['purchased'] ? '' : 'disabled'; ?>>Post Review</button>
         </form>

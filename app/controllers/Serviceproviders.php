@@ -140,7 +140,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img1_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
+                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
                 $bool = move_uploaded_file($tmp1_name, $img_upload_path);
             }
 
@@ -150,7 +150,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img2_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
+                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
                 $bool = move_uploaded_file($tmp2_name, $img_upload_path);
             }
 
@@ -160,7 +160,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img3_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
+                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
                 $bool = move_uploaded_file($tmp3_name, $img_upload_path);
             }
 
@@ -170,7 +170,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img4_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img4_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
+                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
                 $bool = move_uploaded_file($tmp4_name, $img_upload_path);
             }
 
@@ -285,7 +285,7 @@ class serviceproviders extends Controller
                     $img_ex = pathinfo($img4_name, PATHINFO_EXTENSION);
                     $img_ex_lc = strtolower($img_ex);
                     $new_img4_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                    $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
+                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
                     $bool = move_uploaded_file($tmp4_name, $img_upload_path);
                 }
 
@@ -384,7 +384,7 @@ class serviceproviders extends Controller
                     $img_ex = pathinfo($img4_name, PATHINFO_EXTENSION);
                     $img_ex_lc = strtolower($img_ex);
                     $new_img4_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                    $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
+                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
                     $bool = move_uploaded_file($tmp4_name, $img_upload_path);
                 }
 
@@ -1292,7 +1292,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img1_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
+                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
                 $bool = move_uploaded_file($tmp1_name, $img_upload_path);
             }
 
@@ -1302,7 +1302,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img2_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
+                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
                 $bool = move_uploaded_file($tmp2_name, $img_upload_path);
             }
 
@@ -1312,7 +1312,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img3_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
+                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
                 $bool = move_uploaded_file($tmp3_name, $img_upload_path);
             }
 
@@ -1322,7 +1322,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img4_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img4_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
+                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
                 $bool = move_uploaded_file($tmp4_name, $img_upload_path);
             }
 
@@ -1332,7 +1332,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img5_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img5_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img5_name;
+                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img5_name;
                 $bool = move_uploaded_file($tmp5_name, $img_upload_path);
             }
 
@@ -2186,22 +2186,34 @@ class serviceproviders extends Controller
         foreach ($orders as $order) {
             $startDateTimestamp = strtotime($order->start_date);
             $endDateTimestamp = strtotime($order->end_date);
-            if ($today >= $startDateTimestamp && $today <= $endDateTimestamp) {
+            if ($today >= $startDateTimestamp && $today <= $endDateTimestamp && $order->status == 'Upcoming') {
                 $order->status = 'In-Progress';
                 $this->serviceProviderModel->changeOrderStatus($order->sorder_id, 'In-Progress');
-            } elseif ($today > $endDateTimestamp) {
+            } elseif ($today > $endDateTimestamp && $order->status == 'In-Progress') {
                 $order->status = 'Completed';
                 $this->serviceProviderModel->changeOrderStatus($order->sorder_id, 'Completed');
             }
             $user_data = json_decode(json_encode($this->serviceProviderModel->getUserData($order->user_id)), true);
-            $product_data = json_decode(json_encode($this->serviceProviderModel->getProductData($order->product_id)), true);
-            $serviceprovider_data = json_decode(json_encode($this->serviceProviderModel->view($order->serviceprovider_id)), true);
+            if ($order->type == 'Equipment'){
+                $product_data = json_decode(json_encode($this->serviceProviderModel->getItemData($order->product_id)), true);
+            } else if ($order->type == 'Studio'){
+                $product_data = json_decode(json_encode($this->serviceProviderModel->getStudioData($order->product_id)), true);
+            } else if ($order->type == 'Singer'){
+                $product_data = json_decode(json_encode($this->serviceProviderModel->getSingerData($order->product_id)), true);
+            } else if ($order->type == 'Band'){
+                $product_data = json_decode(json_encode($this->serviceProviderModel->getBandData($order->product_id)), true);
+            } else if ($order->type == 'Musician'){
+                $product_data = json_decode(json_encode($this->serviceProviderModel->getMusicianData($order->product_id)), true);
+            }
+            if (isset($user_data['status'])) {
+                unset($user_data['status']);
+            }
+            if (isset($product_data['status'])) {
+                unset($product_data['status']);
+            }
             $order_data = json_decode(json_encode($order), true);
-            
-            $order_data = array_merge($order_data, $user_data, $product_data, $serviceprovider_data); 
-        
+            $order_data = array_merge($order_data, $user_data, $product_data); 
             $order_object = json_decode(json_encode($order_data));
-        
             $order_objects[] = $order_object;
             usort($order_objects,[$this,  'compareOrderByStatus']);
         }
@@ -2303,7 +2315,7 @@ class serviceproviders extends Controller
                     $img_ex = pathinfo($img4_name, PATHINFO_EXTENSION);
                     $img_ex_lc = strtolower($img_ex);
                     $new_img4_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                    $img_upload_path = '/Applications/xampp/xamppfiles/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
+                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
                     $bool = move_uploaded_file($tmp4_name, $img_upload_path);
                 }
 

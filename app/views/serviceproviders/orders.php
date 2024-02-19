@@ -25,7 +25,7 @@
         <div class="order-details">
             <div><strong>Order ID: </strong><?php echo $order->sorder_id ?></div>
             <div><strong>User Name: </strong><?php echo $order->name ?></div>
-            <div><strong>Product Title: </strong><?php echo $order->category ?></div>
+            <div><strong>Type: </strong><?php echo $order->category ?></div>
             <div><strong>Quantity: </strong><?php echo $order->qty ?></div>
             <div><strong>From Date: </strong> <?php echo $order->start_date ?></div>
             <div><strong>To Date: </strong> <?php echo $order->end_date ?></div>

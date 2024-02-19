@@ -30,14 +30,14 @@
 		<?php foreach($data['cart'] as $cart) : ?>
 			<article class="product">
 				<header>
-					<a class="remove" href="#" onclick="removeFromCart(<?php echo $cart->product_id; ?>)">
-						<img src="http://localhost/symphony/img/serviceProvider/<?php echo $cart->photo_1; ?>" style="width:220px; height:229px;">
+				<a input_product_id="<?php echo $cart->product_data->product_id; ?>" input_product_type="<?php echo $cart->product_data->type; ?>" class="remove" onclick="removeFromCart(this);">
+						<img src="http://localhost/symphony/img/serviceProvider/<?php echo $cart->product_data->photo_1; ?>" style="width:220px; height:229px;">
 						<h3>Remove product</h3>
 					</a>
 				</header>
 
 				<div class="content">
-					<h1><?php echo $cart->Title; ?></h1>
+					<h1><?php echo $cart->product_data->Title; ?></h1>
 					<p>Quantity: <?php echo $cart->quantity; ?></p>
 					<p>From: <?php echo $cart->start_date; ?> - To: <?php echo $cart->end_date; ?></p>
 	
@@ -57,7 +57,7 @@
 					<?php endif; ?>
 
 					<h2 class="price">
-						x<?php echo $cart->unit_price; ?> Rs.
+						x<?php echo $cart->product_data->unit_price; ?> Rs.
 					</h2>
 				</footer>
 			</article>
@@ -104,13 +104,16 @@
     });
 
 	//Remove from cart logic
-	function removeFromCart(productId) {
+	function removeFromCart(element) {
         // You can add additional confirmation logic if needed
         var confirmation = confirm('Are you sure you want to remove this product from the cart?');
-
+		var productId = element.getAttribute('input_product_id');
+		var type = element.getAttribute('input_product_type');
+		console.log(productId);
+		console.log(type);
         if (confirmation) {
             // Redirect to the removefromcart action with the product ID
-            window.location.href = "<?php echo URLROOT; ?>/users/removefromcart/" + productId;
+            window.location.href = "<?php echo URLROOT; ?>/users/removefromcart/" + productId + "/" + type;
         }
     }
 </script>

@@ -67,7 +67,7 @@
                         <td><?php echo $suborder['end_date'] ?></td>
                         <td class="status-<?php echo $suborder['status'] ?>"><?php echo $suborder['status'] ?></td>
                         <td>LKR. <?php echo $suborder['total'] ?></td>
-                        <td><button class="<?php echo $disableButton ? 'disabled-button' : 'cancel-btn'; ?>" <?php echo $disableButton ? 'disabled' : ''; ?> onclick="confirmAction(<?php echo $suborder['sorder_id'] ?>)">Cancel Order</button></td>
+                        <td><button order_id="<?php echo $orders['order']->order_id; ?>" sub_order_id="<?php echo $suborder['sorder_id'] ?>" class="<?php echo $disableButton ? 'disabled-button' : 'cancel-btn'; ?>" <?php echo $disableButton ? 'disabled' : ''; ?> onclick="confirmAction(this)">Cancel Order</button></td>
                     </tr>
                 </tbody>
                 <?php endforeach; ?>
@@ -127,10 +127,12 @@ function printInvoice(cardIndex) {
         document.body.removeChild(iframe);
     }, 1000);
 }
-function confirmAction(orderId, status) {
+function confirmAction(button) {
+    var orderId = $(button).attr('order_id');
+    var subOrderId = $(button).attr('sub_order_id');
         var confirmationMessage = 'Are you sure you want to Cancel the order?';
         if (confirm(confirmationMessage)) {
-            var url = '<?php echo URLROOT; ?>/users/cancelOrder/' + orderId;
+            var url = '<?php echo URLROOT; ?>/users/cancelOrder/' + orderId + '/' + subOrderId;
             window.location.href = url;
         }
 }

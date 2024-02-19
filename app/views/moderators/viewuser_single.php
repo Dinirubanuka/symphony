@@ -22,8 +22,13 @@
             <h2><?php echo $data['request']->name ?><br><br></h2>
           </div>
           <div class="buttons">
-            <button id="banBtn" onclick="banUser(<?php echo $data['request']->id ?>)">Ban Account</button>
-            <button id="orderBtn" onclick="viewUserOrders(<?php echo $data['request']->id ?>)">View Orders</button>
+            <div <?php echo $data['request']->status == 'Banned' ? 'style="display: none;"' : ''; ?>>
+              <button id="banBtn" onclick="banUser(<?php echo $data['request']->id ?>)">Ban Account</button>
+            </div>
+            <div <?php echo $data['request']->status == 'Banned' ? '' : 'style="display: none;"'; ?>>
+              <button id="banBtn" onclick="unbanUser(<?php echo $data['request']->id ?>)">Unban Account</button>
+            </div>
+              <button id="orderBtn" onclick="viewUserOrders(<?php echo $data['request']->id ?>)">View Orders</button>
           </div>
         </div>
 
@@ -76,6 +81,12 @@
         function banUser(userID) {
           if (confirm("Are you sure you want to ban this user?")) {
               window.location.href = "<?php echo URLROOT; ?>/moderators/banuser/" + userID;
+          }
+        }
+
+        function unbanUser(userID) {
+          if (confirm("Are you sure you want to unban this user?")) {
+              window.location.href = "<?php echo URLROOT; ?>/moderators/unbanuser/" + userID;
           }
         }
 

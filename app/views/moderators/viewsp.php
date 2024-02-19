@@ -22,8 +22,13 @@
             <h2><?php echo $data['request']->business_name ?><br><br></h2>
           </div>
           <div class="buttons">
-            <button id="banBtn" onclick="banSP(<?php echo $data['request']->serviceprovider_id ?>)">Ban Account</button>
-            <button id="orderBtn">View Orders</button>
+            <div <?php echo $data['request']->status == 'Banned' ? 'style="display: none;"' : ''; ?>>
+              <button id="banBtn" onclick="banSP(<?php echo $data['request']->serviceprovider_id ?>)">Ban Account</button>
+            </div>
+            <div <?php echo $data['request']->status == 'Banned' ? '' : 'style="display: none;"'; ?>>
+              <button id="banBtn" onclick="unbanSP(<?php echo $data['request']->serviceprovider_id ?>)">Unban Account</button>
+            </div>
+              <button id="orderBtn" onclick="viewSPOrders(<?php echo $data['request']->serviceprovider_id ?>)">View Orders</button>
             <button id="inventoryBtn">View Inventory</button>
           </div>
         </div>
@@ -111,6 +116,18 @@
               // Execute PHP code to delete the moderator
               window.location.href = "<?php echo URLROOT; ?>/moderators/banserviceprovider/" + serviceproviderID;
           }
+        }
+
+        function unbanSP(serviceproviderID) {
+          // Display a confirmation dialog
+          if (confirm("Are you sure you want to unban this Service Provider?")) {
+              // Execute PHP code to delete the moderator
+              window.location.href = "<?php echo URLROOT; ?>/moderators/unbanserviceprovider/" + serviceproviderID;
+          }
+        }
+
+        function viewSPOrders(serviceproviderID) {
+          window.location.href = "<?php echo URLROOT; ?>/moderators/viewSPOrders/" + serviceproviderID;
         }
       </script>
     </div>

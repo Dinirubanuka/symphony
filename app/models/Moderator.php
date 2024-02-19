@@ -28,8 +28,23 @@
       }
     }
 
+    public function getReviews($product_id, $type){
+      $this->db->query('SELECT * FROM reviews WHERE product_id = :product_id AND type = :type');
+      $this->db->bind(':product_id', $product_id);
+      $this->db->bind(':type', $type);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
     public function viewUserOrders($id){
       $this->db->query('SELECT * FROM orders WHERE user_id = :id');
+      $this->db->bind(':id', $id);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function viewSPOrders($id){
+      $this->db->query('SELECT * FROM suborder WHERE serviceprovider_id = :id');
       $this->db->bind(':id', $id);
       $results = $this->db->resultSet();
       return $results;
@@ -49,8 +64,36 @@
       return $results;
     }
 
-    public function getProductData($product_id){
+    public function getEquipmentData($product_id){
       $this->db->query('SELECT * FROM products WHERE product_id = :product_id');
+      $this->db->bind(':product_id', $product_id);
+      $results = $this->db->single();
+      return $results;
+    }
+
+    public function getStudioData($product_id){
+      $this->db->query('SELECT * FROM studio WHERE product_id = :product_id');
+      $this->db->bind(':product_id', $product_id);
+      $results = $this->db->single();
+      return $results;
+    }
+
+    public function getBandData($product_id){
+      $this->db->query('SELECT * FROM band WHERE product_id = :product_id');
+      $this->db->bind(':product_id', $product_id);
+      $results = $this->db->single();
+      return $results;
+    }
+
+    public function getSingerData($product_id){
+      $this->db->query('SELECT * FROM singer WHERE product_id = :product_id');
+      $this->db->bind(':product_id', $product_id);
+      $results = $this->db->single();
+      return $results;
+    }
+
+    public function getMusicianData($product_id){
+      $this->db->query('SELECT * FROM musician WHERE product_id = :product_id');
       $this->db->bind(':product_id', $product_id);
       $results = $this->db->single();
       return $results;
@@ -80,8 +123,28 @@
     }
   }
 
+  public function unbanServiceProvider($serviceprovider_id){
+    $this->db->query('UPDATE serviceproviders SET status = "Active" WHERE serviceprovider_id = :serviceprovider_id');
+    $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+    if($this->db->execute()){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   public function banUser($id){
     $this->db->query('UPDATE users SET status = "Banned" WHERE id = :id');
+    $this->db->bind(':id', $id);
+    if($this->db->execute()){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function unbanUser($id){
+    $this->db->query('UPDATE users SET status = "Active" WHERE id = :id');
     $this->db->bind(':id', $id);
     if($this->db->execute()){
       return true;
@@ -132,7 +195,7 @@ public function getPendingRequests(){
   return $results;
 }
 
-public function getRequest($serviceprovider_id){
+public function getSP($serviceprovider_id){
   $this->db->query('SELECT * FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id');
   $this->db->bind(':serviceprovider_id', $serviceprovider_id);
   $results = $this->db->single();
