@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2024 at 02:43 PM
+-- Generation Time: Feb 20, 2024 at 07:10 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -240,6 +240,13 @@ CREATE TABLE `cart` (
   `type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `user_id`, `product_id`, `quantity`, `start_date`, `end_date`, `days`, `total`, `availability`, `type`) VALUES
+(70, 18, 3, 1, '2024-02-23', '2024-02-29', 7, 700, 'available', 'Studio');
+
 -- --------------------------------------------------------
 
 --
@@ -265,7 +272,8 @@ INSERT INTO `chat_mod_user` (`chat_id`, `user_id`, `moderator_id`, `created_by`,
 (5, 18, 1, 'moderator', 'jhterjh3 j5k4ik5wd FWGW G', '12:25:09 PM | February 6 2024'),
 (6, 18, 1, 'user', 'BGETR', '12:25:29 PM | February 6 2024'),
 (7, 18, 1, 'user', 'rgbbe', '12:25:33 PM | February 6 2024'),
-(8, 18, 1, 'user', 'hello', '7:09:47 PM | February 19 2024');
+(8, 18, 1, 'user', 'hello', '7:09:47 PM | February 19 2024'),
+(9, 18, 1, 'user', 'hi', '7:29:20 PM | February 19 2024');
 
 -- --------------------------------------------------------
 
@@ -323,7 +331,8 @@ INSERT INTO `inq_chat` (`inq_chat_id`, `chat_id`, `inquiry_id`) VALUES
 (3, 5, 1),
 (4, 6, 1),
 (5, 7, 1),
-(6, 8, 4);
+(6, 8, 4),
+(7, 9, 4);
 
 -- --------------------------------------------------------
 
@@ -403,25 +412,22 @@ CREATE TABLE `logs` (
 --
 
 INSERT INTO `logs` (`log_id`, `user_type`, `user_id`, `date_and_time`, `log_type`, `data`) VALUES
-(1, 'Customer', 18, '2024-02-19 14:12:51', 'View Profile', 'User viewed their profile'),
-(2, 'Customer', 18, '2024-02-19 14:13:04', 'View Profile', 'User viewed their profile'),
-(3, 'Customer', 18, '2024-02-19 14:16:53', 'View Profile', 'User viewed their profile'),
-(4, 'Customer', 18, '2024-02-19 14:17:25', 'View Profile', 'User viewed their profile'),
-(5, 'Customer', 18, '2024-02-19 14:17:29', 'View Profile', 'User viewed their profile'),
-(6, 'Customer', 18, '2024-02-19 14:18:06', 'View Profile', 'User viewed their profile'),
-(7, 'Customer', 18, '2024-02-19 14:18:13', 'Profile Update', 'User views profile update page'),
-(8, 'Customer', 18, '2024-02-19 14:18:14', 'View Profile', 'User viewed their profile'),
-(9, 'Customer', 18, '2024-02-19 14:39:34', 'View Profile', 'User viewed their profile'),
-(10, 'Customer', 18, '2024-02-19 14:39:37', 'View Inquiries', 'User viewed their inquiries'),
-(11, 'Customer', 18, '2024-02-19 14:39:37', 'View Inquiries', 'User viewed their inquiries'),
-(12, 'Customer', 18, '2024-02-19 14:39:40', 'View Inquiries', 'User viewed their inquiries'),
-(13, 'Customer', 18, '2024-02-19 14:39:41', 'View Inquiry', 'User viewed an inquiry'),
-(14, 'Customer', 18, '2024-02-19 14:39:47', 'Send Message', 'User sent a message to a moderator'),
-(15, 'Customer', 18, '2024-02-19 14:39:47', 'View Inquiry', 'User viewed an inquiry'),
-(16, 'Customer', 18, '2024-02-19 14:39:49', 'View Inquiries', 'User viewed their inquiries'),
-(17, 'Customer', 18, '2024-02-19 14:39:56', 'View Singers', 'User viewed the singers available'),
-(18, 'Customer', 18, '2024-02-19 14:39:57', 'View Singer', 'User viewed a singer'),
-(19, 'Customer', 18, '2024-02-19 14:40:00', 'View Instruments', 'User viewed the instruments available');
+(44, 'Customer', 19, '2024-02-19 15:04:36', 'Logout', 'User logged out'),
+(45, 'Customer', 19, '2024-02-20 06:24:28', 'Login', 'User logged in'),
+(46, 'Customer', 19, '2024-02-20 06:24:33', 'View Profile', 'User viewed their profile'),
+(47, 'Customer', 19, '2024-02-20 06:24:54', 'Password Change', 'User changed their password using change password'),
+(48, 'Customer', 19, '2024-02-20 06:24:54', 'Logout', 'User logged out'),
+(49, 'Customer', 18, '2024-02-20 06:25:26', 'Login', 'User logged in'),
+(50, 'Customer', 18, '2024-02-20 06:25:28', 'View Profile', 'User viewed their profile'),
+(51, 'Customer', 18, '2024-02-20 06:26:06', 'Password Change', 'User changed their password using change password'),
+(52, 'Customer', 18, '2024-02-20 06:26:06', 'Logout', 'User logged out'),
+(53, 'Customer', 18, '2024-02-20 06:26:10', 'Login', 'User logged in'),
+(54, 'Customer', 18, '2024-02-20 06:32:12', 'Logout', 'User logged out'),
+(55, 'Customer', 19, '2024-02-20 06:32:19', 'Login', 'User logged in'),
+(56, 'Customer', 19, '2024-02-20 06:32:34', 'View Profile', 'User viewed their profile'),
+(57, 'Customer', 19, '2024-02-20 06:33:01', 'Password Change', 'User changed their password using change password'),
+(58, 'Customer', 19, '2024-02-20 06:33:01', 'Logout', 'User logged out'),
+(59, 'Customer', 19, '2024-02-20 06:33:04', 'Login', 'User logged in');
 
 -- --------------------------------------------------------
 
@@ -572,28 +578,30 @@ INSERT INTO `products` (`product_id`, `created_by`, `category`, `brand`, `model`
 
 CREATE TABLE `recover_account_user` (
   `recover_id` int(11) NOT NULL,
-  `user_name` varchar(255) NOT NULL,
-  `first_purchase_date` date NOT NULL,
-  `first_purchase_item` varchar(255) NOT NULL,
-  `last_purchase_date` date NOT NULL,
-  `last_purchase_item` varchar(255) NOT NULL,
-  `mobile_number` int(13) NOT NULL,
-  `address` text NOT NULL,
-  `dob` date NOT NULL,
-  `gender` varchar(255) NOT NULL,
-  `other` text NOT NULL,
+  `user_name` varchar(255) NOT NULL DEFAULT 'Not Given',
+  `first_purchase_date` date NOT NULL DEFAULT '1400-01-01',
+  `first_purchase_item` varchar(255) NOT NULL DEFAULT 'Not Given',
+  `last_purchase_date` date NOT NULL DEFAULT '1400-01-01',
+  `last_purchase_item` varchar(255) NOT NULL DEFAULT 'Not Given',
+  `account_created_on` date DEFAULT '1400-01-01',
+  `mobile_number` int(13) NOT NULL DEFAULT 0,
+  `address` text NOT NULL DEFAULT 'Not Given',
+  `dob` date NOT NULL DEFAULT '1400-01-01',
+  `gender` varchar(255) NOT NULL DEFAULT 'Not Given',
+  `other` text NOT NULL DEFAULT 'Not Given',
   `status` varchar(255) NOT NULL,
-  `placed_on` date DEFAULT NULL,
-  `contactEmail` varchar(255) DEFAULT NULL
+  `placed_on` date NOT NULL,
+  `contactEmail` varchar(255) DEFAULT 'Not Given'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `recover_account_user`
 --
 
-INSERT INTO `recover_account_user` (`recover_id`, `user_name`, `first_purchase_date`, `first_purchase_item`, `last_purchase_date`, `last_purchase_item`, `mobile_number`, `address`, `dob`, `gender`, `other`, `status`, `placed_on`, `contactEmail`) VALUES
-(1, 'test', '2024-02-14', 'gfqag', '2023-06-13', 'hello', 0, 'gtest', '2024-02-01', 'male', 'geqwagev', 'Pending', NULL, NULL),
-(2, 'test', '2024-02-14', 'gfqag', '2023-06-13', 'hello', 0, 'gtest', '2024-02-01', 'male', 'geqwagev', 'Pending', NULL, NULL);
+INSERT INTO `recover_account_user` (`recover_id`, `user_name`, `first_purchase_date`, `first_purchase_item`, `last_purchase_date`, `last_purchase_item`, `account_created_on`, `mobile_number`, `address`, `dob`, `gender`, `other`, `status`, `placed_on`, `contactEmail`) VALUES
+(3, 'test', '2024-02-22', 'gfqag', '2024-02-07', 'hello', '2024-02-07', 0, 'gtest', '2024-02-22', 'male', 'thetheh', 'Accepted', '2024-02-20', 'gayathradissa@gmail.com'),
+(4, 'test', '2024-02-22', 'gfqag', '2024-02-07', 'hello', '2024-02-07', 0, 'gtest', '2024-02-22', 'male', 'thetheh', 'Rejected', '2024-02-20', 'gayathradissa@gmail.com'),
+(5, 'Gayathra', '0000-00-00', 'gfqag', '2021-02-03', 'test 23', '0000-00-00', 712056046, 'hg g hwsb gwgwgwe', '2000-03-31', 'male', '', 'Pending', '2024-02-20', 'itsaeox98@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -771,20 +779,20 @@ CREATE TABLE `suborder` (
 --
 
 INSERT INTO `suborder` (`sorder_id`, `user_id`, `serviceprovider_id`, `product_id`, `qty`, `start_date`, `end_date`, `days`, `total`, `status`, `avail`, `type`, `order_placed_on`) VALUES
-(33, 18, 18, 23, 1, '2024-01-11', '2024-01-31', 21, 27300, 'Completed', '199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219', 'Equipment', NULL),
-(34, 18, 19, 21, 2, '2024-01-18', '2024-01-23', 6, 5400, 'Completed', '220,221,222,223,224,225', 'Equipment', NULL),
-(35, 18, 18, 24, 2, '2024-01-11', '2024-01-31', 21, 88200, 'Completed', '220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246', 'Equipment', NULL),
-(36, 18, 14, 17, 1, '2024-01-17', '2024-01-23', 7, 7700, 'Completed', '247,248,249,250,251,252,253', 'Equipment', NULL),
-(37, 18, 19, 21, 3, '2024-01-17', '2024-01-29', 13, 17550, 'Completed', '254,255,256,257,258,259,260,261,262,263,264,265,266', 'Equipment', NULL),
-(38, 18, 14, 17, 1, '2024-01-16', '2024-01-22', 7, 7700, 'Completed', '267,268,269,270,271,272,273', 'Equipment', NULL),
-(39, 18, 14, 17, 1, '2024-01-16', '2024-01-22', 7, 7700, 'Completed', '274,275,276,277,278,279,280', 'Equipment', NULL),
-(40, 18, 18, 23, 1, '2024-01-14', '2024-01-23', 10, 13000, 'Completed', '281,282,283,284,285,286,287,288,289,290', 'Equipment', NULL),
-(41, 18, 14, 18, 8, '2024-01-13', '2024-01-31', 19, 45600, 'Completed', '291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309', 'Equipment', NULL),
-(42, 18, 19, 21, 1, '2024-02-15', '2024-02-27', 13, 5850, 'Cancelled', '310,311,312,313,314,315,316,317,318,319,320,321,322', 'Equipment', NULL),
-(43, 18, 18, 23, 1, '2024-02-05', '2024-02-23', 19, 24700, 'In-Progress', '310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341', 'Equipment', NULL),
-(44, 18, 19, 20, 2, '2024-01-17', '2024-01-30', 14, 16800, 'Completed', '342,343,344,345,346,347,348,349,350,351,352,353,354,355', 'Equipment', NULL),
-(45, 18, 14, 17, 1, '2024-02-14', '2024-02-20', 7, 7700, 'In-Progress', '356,357,358,359,360,361,362', 'Equipment', NULL),
-(46, 18, 14, 18, 4, '2024-02-29', '2024-03-08', 9, 10800, 'Upcoming', '363,364,365,366,367,368,369,370,371', 'Equipment', NULL),
+(33, 18, 18, 23, 1, '2024-01-11', '2024-01-31', 21, 27300, 'Completed', '199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219', 'Equipment', '2024-02-19'),
+(34, 18, 19, 21, 2, '2024-01-18', '2024-01-23', 6, 5400, 'Completed', '220,221,222,223,224,225', 'Equipment', '2024-02-12'),
+(35, 18, 18, 24, 2, '2024-01-11', '2024-01-31', 21, 88200, 'Completed', '220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246', 'Equipment', '2024-02-19'),
+(36, 18, 14, 17, 1, '2024-01-17', '2024-01-23', 7, 7700, 'Completed', '247,248,249,250,251,252,253', 'Equipment', '2024-02-19'),
+(37, 18, 19, 21, 3, '2024-01-17', '2024-01-29', 13, 17550, 'Completed', '254,255,256,257,258,259,260,261,262,263,264,265,266', 'Equipment', '2024-02-19'),
+(38, 18, 14, 17, 1, '2024-01-16', '2024-01-22', 7, 7700, 'Completed', '267,268,269,270,271,272,273', 'Equipment', '2024-02-19'),
+(39, 18, 14, 17, 1, '2024-01-16', '2024-01-22', 7, 7700, 'Completed', '274,275,276,277,278,279,280', 'Equipment', '2024-02-19'),
+(40, 18, 18, 23, 1, '2024-01-14', '2024-01-23', 10, 13000, 'Completed', '281,282,283,284,285,286,287,288,289,290', 'Equipment', '2024-02-19'),
+(41, 18, 14, 18, 8, '2024-01-13', '2024-01-31', 19, 45600, 'Completed', '291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309', 'Equipment', '2024-02-19'),
+(42, 18, 19, 21, 1, '2024-02-15', '2024-02-27', 13, 5850, 'Cancelled', '310,311,312,313,314,315,316,317,318,319,320,321,322', 'Equipment', '2024-02-19'),
+(43, 18, 18, 23, 1, '2024-02-05', '2024-02-23', 19, 24700, 'In-Progress', '310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341', 'Equipment', '2024-02-19'),
+(44, 18, 19, 20, 2, '2024-01-17', '2024-01-30', 14, 16800, 'Completed', '342,343,344,345,346,347,348,349,350,351,352,353,354,355', 'Equipment', '2024-02-19'),
+(45, 18, 14, 17, 1, '2024-02-14', '2024-02-20', 7, 7700, 'In-Progress', '356,357,358,359,360,361,362', 'Equipment', '2024-02-19'),
+(46, 18, 14, 18, 4, '2024-02-29', '2024-03-08', 9, 10800, 'Upcoming', '363,364,365,366,367,368,369,370,371', 'Equipment', '2024-02-19'),
 (47, 18, 18, 24, 2, '2024-02-28', '2024-02-29', 2, 8400, 'Cancelled', '372,373', 'Equipment', '2024-02-19'),
 (48, 18, 1, 8, 1, '2024-02-22', '2024-02-28', 7, 469000, 'Pending', '372,373,374,375,376,377,378,379,380', 'Singer', '2024-02-19'),
 (49, 18, 14, 11, 1, '2024-02-22', '2024-02-23', 2, 2600, 'Upcoming', '381,382', 'Singer', '2024-02-19');
@@ -815,8 +823,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `TelephoneNumber`, `BirthDate`, `address`, `password`, `gender`, `profile_photo`, `verification`, `status`, `registration_date`) VALUES
-(18, 'Gayathra Dissanayake', 'gayathradissa@gmail.com', 1234565789, '2000-03-31', 'test  test  test', '$2y$10$HDBV2E9OySy5aBFMrKQgxukavzsiyYVlQGGWez8TTAKHr43bieE1i', 'male', 'IMG-65864fca5956f6.45090781.jpeg', 681741, 'Active', '2023-11-01'),
-(19, 'Test 02', 'itsaeox98@gmail.com', 1234567890, '2024-01-23', 'itsaeox98@gmail.com', '$2y$10$iXs/M1wv31i9FmBCYwP4nOT2IJnaQ5Cf9r.zKvvYgBLtexXs8.qEW', 'male', 'IMG-6592556e970157.07537984.png', 119619, 'Active', '2023-11-01');
+(18, 'Gayathra Dissanayake', 'gayathradissa@gmail.com', 1234565789, '2000-03-31', 'test  test  test', '$2y$10$rGgNvX/xlY1X2uRCVSWUl.UnyP4sWCA8xfdu2vNSXZf9SpStWwioq', 'male', 'IMG-65864fca5956f6.45090781.jpeg', 681741, 'Active', '2023-11-01'),
+(19, 'Test 02', 'itsaeox98@gmail.com', 1234567890, '2024-01-23', 'itsaeox98@gmail.com', '$2y$10$QkEmYPYl5TQMk76hUkvS1uSGRz7GnEJYszq0uOdl5jLonz9HRomvC', 'male', 'IMG-6592556e970157.07537984.png', 119619, 'Active', '2023-11-01');
 
 -- --------------------------------------------------------
 
@@ -838,7 +846,10 @@ INSERT INTO `user_passwords` (`user_pw_id`, `user_id`, `password`) VALUES
 (1, 18, '$2y$10$hkSH/wYeUySbtSotZgYu/Oic5SP/ULTNupKXFtdDecNG/gVIPrmNS'),
 (2, 18, '$2y$10$/AB6mGXXQhvl3VCUqZknyeh6NazYa/7tV6peZcJV1CmaxUkNC4aAm'),
 (3, 18, '$2y$10$PZbxoBJHeppTTcdRi2hzG.LRdcpS1rPsNoO4S372/umbFiCH.KRI2'),
-(4, 18, '$2y$10$dC5dIi.OzMmnFWRdm.ooKOzm73JDRA.LmVt5lFpj/3c.hjdjj1w.O');
+(4, 18, '$2y$10$dC5dIi.OzMmnFWRdm.ooKOzm73JDRA.LmVt5lFpj/3c.hjdjj1w.O'),
+(5, 19, '$2y$10$iXs/M1wv31i9FmBCYwP4nOT2IJnaQ5Cf9r.zKvvYgBLtexXs8.qEW'),
+(6, 18, '$2y$10$iXs/M1wv31i9FmBCYwP4nOT2IJnaQ5Cf9r.zKvvYgBLtexXs8.qEW'),
+(7, 19, '$2y$10$jGEsBANDB6kp6rACb4rPu.gwJ2gvDPoMINZgCxR.z9VVkR9yPzIEa');
 
 --
 -- Indexes for dumped tables
@@ -1023,13 +1034,13 @@ ALTER TABLE `bookmarks`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `cart_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `chat_mod_user`
 --
 ALTER TABLE `chat_mod_user`
-  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `inquiries`
@@ -1041,7 +1052,7 @@ ALTER TABLE `inquiries`
 -- AUTO_INCREMENT for table `inq_chat`
 --
 ALTER TABLE `inq_chat`
-  MODIFY `inq_chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `inq_chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `login_logout_logs`
@@ -1053,7 +1064,7 @@ ALTER TABLE `login_logout_logs`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `moderators`
@@ -1083,7 +1094,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `recover_account_user`
 --
 ALTER TABLE `recover_account_user`
-  MODIFY `recover_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `recover_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `reviews`
@@ -1125,7 +1136,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_passwords`
 --
 ALTER TABLE `user_passwords`
-  MODIFY `user_pw_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_pw_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables

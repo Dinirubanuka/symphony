@@ -90,6 +90,126 @@
       }
     }
 
+    public function pendingrecoverrequests(){
+      $recover = $this->moderatorModel->getRecoverRequests('Pending');
+      $data = [
+        'status' => 'Pending',
+        'recover' => $recover
+      ];
+      $this->view('moderators/viewrecoverrequests', $data);
+    }
+
+    public function acceptedrecoverrequests(){
+      $recover = $this->moderatorModel->getRecoverRequests('Accepted');
+      $data = [
+        'status' => 'Accepted',
+        'recover' => $recover
+      ];
+      $this->view('moderators/viewrecoverrequests', $data);
+    }
+
+    public function rejectedrecoverrequests(){
+      $recover = $this->moderatorModel->getRecoverRequests('Rejected');
+      $data = [
+        'status' => 'Rejected',
+        'recover' => $recover
+      ];
+      $this->view('moderators/viewrecoverrequests', $data);
+    }
+
+    public function viewRecoverRequest($id){
+      $recover = $this->moderatorModel->getRecoverRequest($id);
+      $users = $this->moderatorModel->getAllUsers();
+      $transformedUsers = [];
+      
+      foreach ($users as $user) {
+          // Convert stdClass object to an associative array
+          $userArray = json_decode(json_encode($user), true);
+          $userOrders = $this->moderatorModel->viewUserSubOrders($userArray['id']);
+          $purchases = [];
+          foreach ($userOrders as $userOrder){
+            $purchaseArray = json_decode(json_encode($userOrder), true);
+            if($purchaseArray['type'] == 'Equipment'){
+              $product = $this->moderatorModel->getEquipmentData($purchaseArray['product_id']);
+            } else if ($purchaseArray['type'] == 'Studio'){
+              $product = $this->moderatorModel->getStudioData($purchaseArray['product_id']);
+            } else if ($purchaseArray['type'] == 'Band'){
+              $product = $this->moderatorModel->getBandData($purchaseArray['product_id']);
+            } else if ($purchaseArray['type'] == 'Singer'){
+              $product = $this->moderatorModel->getSingerData($purchaseArray['product_id']);
+            } else if ($purchaseArray['type'] == 'Musician'){
+              $product = $this->moderatorModel->getMusicianData($purchaseArray['product_id']);
+            }
+            $purchase = [
+              'Product ID' => $purchaseArray['product_id'],
+              'Product Name' => $product->Title,
+              'Order Placed On' => $purchaseArray['order_placed_on'],
+            ];
+            $purchases[] = $purchase;
+          }
+
+          $transformedUser = [
+              'User ID' => $userArray['id'],
+              'User Name' => $userArray['name'],
+              'Purchases' => $purchases,
+              'Account Created On' => $userArray['registration_date'],
+              'Contact No' => $userArray['TelephoneNumber'],
+              'E-mail' => $userArray['email'],
+              'Birth Date' => $userArray['BirthDate'],
+              'Address' => $userArray['address'],
+              'Gender' => $userArray['gender'],
+              'Status' => $userArray['status'],
+          ];
+      
+          $transformedUsers[] = $transformedUser;
+      }
+      $data = [
+        'recover' => $recover,
+        'user' => $transformedUsers
+      ];
+      $this->view('moderators/viewrecoverrequest', $data);
+    }
+
+    public function changeUserPassword($id, $email, $req_id){
+        $length = 16;
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $password = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomIndex = rand(0, strlen($characters) - 1);
+            $password .= $characters[$randomIndex];
+        }
+        $password_hashed = password_hash($password, PASSWORD_DEFAULT);
+        $data_user = [
+          'id' => $id,
+          'password_hashed' => $password_hashed
+        ];
+        $user = $this->moderatorModel->getUser($id);
+        $data_email = [
+          'name' => $user->name,
+          'email' => $email,
+          'user_email' => $user->email,
+          'password' => $password
+        ];
+        if($this->moderatorModel->changeUserPassword($data_user)){
+          if($this->moderatorModel->sendPasswordEmail($data_email)){
+            $this->moderatorModel->updateRecoverRequest($req_id, 'Accepted');
+            redirect('moderators/pendingrecoverrequests');
+          } else {
+            die('Something went wrong');
+          }
+        } else {
+          die('Something went wrong');
+        }
+    }
+
+    public function rejectRecoverRequest($id){
+      if($this->moderatorModel->updateRecoverRequest($id, 'Rejected')){
+        redirect('moderators/pendingrecoverrequests');
+      } else {
+        die('Something went wrong');
+      }
+    }
+
     public function viewProduct($type, $product_id){
       if($type == 'Equipment'){
         $data = $this->moderatorModel->getEquipmentData($product_id);

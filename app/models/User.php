@@ -117,13 +117,14 @@ class User
     }
 
     public function addRecoveryRequest($data){
-        $this->db->query('INSERT INTO recover_account_user (user_name, first_purchase_date, first_purchase_item, last_purchase_date, last_purchase_item, mobile_number, address, dob, gender, other, status, placed_on) VALUES(:user_name, :first_purchase_date, :first_purchase_item, :last_purchase_date, :last_purchase_item, :mobile_number, :address, :dob, :gender, :other, :status, :placed_on)');
+        $this->db->query('INSERT INTO recover_account_user (user_name, first_purchase_date, first_purchase_item, last_purchase_date, last_purchase_item, account_created_on, mobile_number, address, dob, gender, other, status, contactEmail, placed_on) VALUES(:user_name, :first_purchase_date, :first_purchase_item, :last_purchase_date, :last_purchase_item, :account_created_on, :mobile_number, :address, :dob, :gender, :other, :status, :contactEmail, :placed_on)');
         try {
             $this->db->bind(':user_name', $data['user_name']);
             $this->db->bind(':first_purchase_date', $data['first_purchase_date']);
             $this->db->bind(':first_purchase_item', $data['first_purchase_item']);
             $this->db->bind(':last_purchase_date', $data['last_purchase_date']);
             $this->db->bind(':last_purchase_item', $data['last_purchase_item']);
+            $this->db->bind(':account_created_on', $data['account_created_on']);
             $this->db->bind(':mobile_number', $data['mobile_number']);
             $this->db->bind(':address', $data['address']);
             $this->db->bind(':dob', $data['dob']);

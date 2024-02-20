@@ -1014,6 +1014,7 @@ class Users extends Controller
                     'first_purchase_item' => trim($_POST['firstPurchase']),
                     'last_purchase_date' => trim($_POST['lastPurchaseDate']),
                     'last_purchase_item' => trim($_POST['lastPurchase']),
+                    'account_created_on' => trim($_POST['accountCreatedDate']),
                     'mobile_number' => trim($_POST['mobileNumber']),
                     'address' => trim($_POST['address']),
                     'dob' => trim($_POST['dob']),
@@ -1027,14 +1028,6 @@ class Users extends Controller
                     $data = [
                         'message' => $message
                     ];
-                    $log_data = [
-                        'user_type' => 'Customer',
-                        'user_id' => $user_data->id,
-                        'log_type' => 'Forgot Password',
-                        'date_and_time' => date('Y-m-d H:i:s'),
-                        'data' => 'User requested to recover their account using other method'
-                    ];
-                    $this->userModel->addLogData($log_data);
                     $this->view('users/forgotpassword', $data);
                 } else {
                     die('Something went wrong');

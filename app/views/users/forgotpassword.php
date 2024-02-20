@@ -70,6 +70,9 @@
             <label for="firstPurchaseDate">First Purchase Date:</label>
             <input type="date" id="firstPurchaseDate" name="firstPurchaseDate">
 
+            <label for="accountCreatedDate">Account Created Date:</label>
+            <input type="date" id="accountCreatedDate" name="accountCreatedDate">
+
             <label for="mobileNumber">Mobile Number:</label>
             <input type="text" id="mobileNumber" name="mobileNumber">
 

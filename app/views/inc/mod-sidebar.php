@@ -111,6 +111,30 @@
                 </li>
 
                 <li class="nav_link">
+                        <i class='bx bx-bar-chart-alt icon'></i>
+                        <span class="text nav-text"><strong>Recovery Requests</strong></span>
+                    </a>
+                </li>
+                <li class="nav_link_seller">
+                    <a href="<?php echo URLROOT; ?>/moderators/pendingrecoverrequests">
+                        <i class='bx bx-bell icon'></i>
+                        <span class="text nav-text">Pending</span>
+                    </a>
+                </li>
+                <li class="nav_link_seller">
+                    <a href="<?php echo URLROOT; ?>/moderators/acceptedrecoverrequests">
+                        <i class='bx bx-user-check icon'></i>
+                        <span class="text nav-text">Accepted</span>
+                    </a>
+                </li>
+                <li class="nav_link_seller">
+                    <a href="<?php echo URLROOT; ?>/moderators/rejectedrecoverrequests">
+                        <i class='bx bx-user-x icon'></i>
+                        <span class="text nav-text">Rejected</span>
+                    </a>
+                </li>
+
+                <li class="nav_link">
                     <a href="<?php echo URLROOT; ?>/moderators/eventpackages">
                         <i class='bx bx-notepad icon'></i>
                         <span class="text nav-text">Event Packages</span>

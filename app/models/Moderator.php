@@ -1,9 +1,19 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require 'vendor/autoload.php';
+
   class Moderator {
     private $db;
+    private $mail;
 
     public function __construct(){
       $this->db = new Database;
+      $this->mail = new PHPMailer(true);
     }
 
     public function view($moderator_id){
@@ -28,6 +38,87 @@
       }
     }
 
+    public function getRecoverRequests($status){
+      $this->db->query('SELECT * FROM recover_account_user WHERE status = :status');
+      $this->db->bind(':status', $status);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getRecoverRequest($recover_id){
+      $this->db->query('SELECT * FROM recover_account_user WHERE recover_id = :recover_id');
+      $this->db->bind(':recover_id', $recover_id);
+      $results = $this->db->single();
+      return $results;
+    }
+
+    public function updateRecoverRequest($request_id, $status){
+      $this->db->query('UPDATE recover_account_user SET status = :status WHERE recover_id = :recover_id');
+      $this->db->bind(':recover_id', $request_id);
+      $this->db->bind(':status', $status);
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function changeUserPassword($data){
+      $this->db->query('UPDATE users SET password = :password WHERE id = :id');
+      try {
+          $this->db->bind(':id', $data['id']);
+          $this->db->bind(':password', $data['password_hashed']);
+          if ($this->db->execute()) {
+              return true;
+          } else {
+              return false;
+          }
+      } catch (PDOException $e) {
+          die($e->getMessage());
+      }
+    }
+
+    public function sendPasswordEmail($data){
+      $name = $data['name'];
+      $email = $data['email'];
+      $user_email = $data['user_email'];
+      $pw = $data['password'];
+      $this->mail->isSMTP();                                            //Send using SMTP
+      $this->mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
+      $this->mail->SMTPAuth = true;                                   //Enable SMTP authentication
+      $this->mail->Username = 'symphonyuscs@gmail.com';                     //SMTP username
+      $this->mail->Password = 'wmoe qbsp fxcl bwqp';                               //SMTP password
+      $this->mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+      //Recipients
+      $this->mail->setFrom('symphonyucsc@gmail.com', 'Symphony');
+      $this->mail->addAddress($email, $name);     //Add a recipient
+
+      //Attachments
+//    $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+//    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+      //Content
+      $this->mail->isHTML(true);                                  //Set email format to HTML
+      $this->mail->Subject = 'Recover Account - Symphony';
+      $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+      $this->mail->Body = '<div id="overview" style="border: 1px solid #343131;margin: auto;width: 50%;text-align: center">
+        <h1 style="">Hello ' . $name . '</h1>
+        <p style="font-size: 18px;text-align: justify;width: 90%;margin: auto">You have requested to recover you account.</p>
+        <hr style="width:90%;color: #3d3b3b;opacity: 0.3;">
+        <p style="font-size: 20px; color: #2e043a;">Please login to symphony using the following credentials, make sure to change your password once you log in. Thank you!</p>
+        <p style="font-size: 24px; color: #333;  cursor: pointer; margin: 15px 10px;">Email: ' . $user_email . '</p>
+        <p style="font-size: 24px; color: #333;  cursor: pointer; margin: 15px 10px;">Password: ' . $pw . '</p>
+      </div>';
+      $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+      if($this->mail->send()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     public function getReviews($product_id, $type){
       $this->db->query('SELECT * FROM reviews WHERE product_id = :product_id AND type = :type');
       $this->db->bind(':product_id', $product_id);
@@ -38,6 +129,13 @@
 
     public function viewUserOrders($id){
       $this->db->query('SELECT * FROM orders WHERE user_id = :id');
+      $this->db->bind(':id', $id);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function viewUserSubOrders($id){
+      $this->db->query('SELECT * FROM suborder WHERE user_id = :id');
       $this->db->bind(':id', $id);
       $results = $this->db->resultSet();
       return $results;
@@ -299,6 +397,11 @@ public function rejectSP($serviceprovider_id){
       }
     }
 
+    public function getAllUsers(){
+      $this->db->query('SELECT * FROM users');
+      $results = $this->db->resultSet();
+      return $results;
+    }
 
     public function getUsers(){
       $this->db->query('SELECT * FROM users WHERE status = "Active"');
