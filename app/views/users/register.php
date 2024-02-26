@@ -70,6 +70,25 @@
           <label>Confirm Password</label>
           <input type="password" name="confirm_password" class="<?php echo (!empty($data['confirm_password_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['confirm_password']; ?>">
           <span class="invalid-feedback"><?php echo $data['confirm_password_err']; ?></span>
+        </div>
+        <div class="input-box">
+            <label for="securityQuestion">Security Question</label>
+            <select id="securityQuestion" name="securityQuestion" class="<?php echo (!empty($data['security_question_err'])) ? 'is-invalid' : ''; ?>">
+                <option value="" selected disabled>Select a Security Question</option>
+                <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                <option value="In which city were you born?">In which city were you born?</option>
+                <option value="What is the name of your first pet?">What is the name of your first pet?</option>
+                <option value="What is your favorite childhood book?">What is your favorite childhood book?</option>
+                <option value="What is the model of your first car?">What is the model of your first car?</option>
+            </select>
+            <span class="invalid-feedback"><?php echo $data['security_question_err']; ?></span>
+        </div>
+
+        <div class="input-box">
+            <label for="securityAnswer">Answer</label>
+            <input type="text" name="securityAnswer" class="<?php echo (!empty($data['security_answer_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['security_answer']; ?>">
+            <span class="invalid-feedback"><?php echo $data['security_answer_err']; ?></span>
+        </div>
         <button>Submit</button>
       </form>
     </section>

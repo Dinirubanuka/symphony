@@ -58,6 +58,12 @@
                     <strong>Gender: </strong><?php echo $data['recover']->gender ?>
                 </div><br>
                 <div>
+                    <strong>Sequrity Question: </strong><?php echo $data['recover']->securityQuestion ?>
+                </div><br>
+                <div>
+                    <strong>Answer: </strong><?php echo $data['recover']->securityAnswer ?>
+                </div><br>
+                <div>
                     <strong>Other Details: </strong><?php echo $data['recover']->other ?>
                 </div><br>
                 <div>
@@ -100,6 +106,7 @@
             <th>Contact Number</th>
             <th>Address</th>
             <th>Gender</th>
+            <th>Similarity Percentage</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -114,8 +121,23 @@
             <td><?php echo $user['Address']; ?></td>
             <td><?php echo $user['Gender']; ?></td>
             <td>
+                <div class="similarity-<?php    if($user['Similarity Percentage'] >= 80) {
+                                                    echo 'very-high';
+                                                } else if($user['Similarity Percentage'] >= 60) {
+                                                    echo 'high';
+                                                } else if($user['Similarity Percentage'] >= 40) {
+                                                    echo 'medium';
+                                                } else if($user['Similarity Percentage'] >= 20) {
+                                                    echo 'low';
+                                                } else {
+                                                    echo 'very-low';
+                                                }?> "> 
+                    <?php echo $user['Similarity Percentage']; ?>%
+                </div>
+            </td>
+            <td>
                 <button id="selectBtn" onclick="selectUser('<?php echo $user['User ID']; ?>')">
-                Select
+                    Select
                 </button>
             </td>
             </tr>
@@ -219,10 +241,24 @@ var selectedUserDetails = null;
 }
 
 function rejectRequest(recover_id) {
-    if(confirm(`Are you sure you want to reject the recover request with ID ${recover_id}?`)) {
-        window.location.href = `<?php echo URLROOT; ?>/moderators/rejectRecoverRequest/${recover_id}`;
+    // Show a prompt to enter the reason for rejection
+    var rejectionReason = prompt("Please enter the reason for rejecting the recover request:");
+
+    // If the user provides a reason and clicks "OK", proceed with rejection
+    if (rejectionReason !== null && rejectionReason !== "") {
+        // URL encode the reason to include it in the URL
+        var encodedReason = rejectionReason.replace(/ /g, '_');
+        
+        if (confirm(`Are you sure you want to reject the recover request with ID ${recover_id}?`)) {
+            // Redirect to the rejection URL with the encoded reason
+            window.location.href = `<?php echo URLROOT; ?>/moderators/rejectRecoverRequest/${recover_id}/${encodedReason}`;
+        }
+    } else {
+        // If the user clicks "Cancel" or provides an empty reason, do nothing
+        alert('Rejection canceled. Please provide a valid reason.');
     }
 }
+
 </script>
 
 </body>

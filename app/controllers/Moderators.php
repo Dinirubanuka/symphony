@@ -6,7 +6,11 @@
     }
 
     public function index(){
-      $this->view('moderators/index');
+      $mod_data = $this->moderatorModel->view($_SESSION['moderator_id']);
+      $data = [
+        'mod_data' => $mod_data
+      ];
+      $this->view('moderators/index', $data);
     }
 
     //view profile
@@ -63,6 +67,14 @@
           $loggedInmoderator = $this->moderatorModel->login($data['moderator_email'], $data['password']);
 
           if($loggedInmoderator){
+            $log_data = [
+              'user_type' => 'Moderator',
+              'user_id' => $loggedInmoderator->moderator_id,
+              'log_type' => 'Login',
+              'date_and_time' => date('Y-m-d H:i:s'),
+              'data' => 'Moderator logged in'
+            ];
+            $this->moderatorModel->addLogData($log_data);
             // Create Session
             $this->createmoderatorSession($loggedInmoderator);
           } else {
@@ -96,7 +108,15 @@
         'status' => 'Pending',
         'recover' => $recover
       ];
-      $this->view('moderators/viewrecoverrequests', $data);
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'Manage Recover Requests',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed pending recover requests'
+      ];
+      $this->moderatorModel->addLogData($log_data);
+        $this->view('moderators/viewrecoverrequests', $data);
     }
 
     public function acceptedrecoverrequests(){
@@ -105,6 +125,14 @@
         'status' => 'Accepted',
         'recover' => $recover
       ];
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'Manage Recover Requests',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed accepted recover requests'
+      ];
+      $this->moderatorModel->addLogData($log_data);
       $this->view('moderators/viewrecoverrequests', $data);
     }
 
@@ -114,7 +142,116 @@
         'status' => 'Rejected',
         'recover' => $recover
       ];
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'Manage Recover Requests',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed rejected recover requests'
+      ];
+      $this->moderatorModel->addLogData($log_data);
       $this->view('moderators/viewrecoverrequests', $data);
+    }
+
+    function calculateSimilarityPercentage($user_data , $recover_data){
+      $similarityPercentage = 0;
+      $divideBy = 7;
+      $similarityName = 0;
+      $similarityFirstPurchaseName = 0;
+      $similarityLastPurchaseName = 0;
+      $similarityFirstPurchaseDate = 0;
+      $similarityLastPurchaseDate = 0;
+      $similarityAccountCreatedDate = 0;
+      $similarityContactNo = 0;
+      $similarityBirthDate = 0;
+      $similarityAddress = 0;
+      $similaritySecurityQuestion = 0;
+      $similarityAnswer = 0;
+      //Check username similarity
+      similar_text($user_data['user']['User Name'], $recover_data['recover']->user_name, $similarityName);
+      $userPurchases = $user_data['user']['Purchases'];
+
+      //Sort user purchases by date
+      usort($userPurchases, function ($a, $b) {
+          return strtotime($a['Order Placed On']) - strtotime($b['Order Placed On']);
+      });
+      $firstPurchase = reset($userPurchases);
+      $lastPurchase = end($userPurchases);
+
+      //Check first purchase name similarity
+      if(isset($firstPurchase['Product Name'])){
+        similar_text($firstPurchase['Product Name'], $recover_data['recover']->first_purchase_item, $similarityFirstPurchaseName);
+        $divideBy = $divideBy + 1;
+      } else {
+        $similarityFirstPurchaseName = 0;
+      }
+      //Check last purchase name similarity
+      if(isset($lastPurchase['Product Name'])){
+        similar_text($lastPurchase['Product Name'], $recover_data['recover']->last_purchase_item, $similarityLastPurchaseName);
+        $divideBy = $divideBy + 1;
+      } else {
+        $similarityLastPurchaseName = 0;
+      }
+      
+      //Check first purchase date similarity
+      if(isset($firstPurchase['Order Placed On'])){
+        $dateTime1 = new DateTime($firstPurchase['Order Placed On']);
+        $dateTime2 = new DateTime($recover_data['recover']->first_purchase_date);
+        $monthSimilarity = ($dateTime1->format('m') == $dateTime2->format('m')) ? 0.3 : 0;
+        $dayDifference = abs($dateTime1->format('d') - $dateTime2->format('d'));
+        $daySimilarity = ($dayDifference <= 3) ? 0.4 : 0;
+        $fullDateSimilarity = ($dateTime1->format('Y-m-d') == $dateTime2->format('Y-m-d')) ? 0.3 : 0;
+        $similarityScore = $monthSimilarity + $daySimilarity + $fullDateSimilarity;
+        $similarityFirstPurchaseDate = $similarityScore * 100;
+        $divideBy = $divideBy + 1;
+      } else {
+        $similarityFirstPurchaseDate = 0;
+      }
+
+      //Check last purchase date similarity
+      if(isset($lastPurchase['Order Placed On'])){
+        $dateTime3 = new DateTime($lastPurchase['Order Placed On']);
+        $dateTime4 = new DateTime($recover_data['recover']->last_purchase_date);
+        $monthSimilarity2 = ($dateTime3->format('m') == $dateTime4->format('m')) ? 0.3 : 0;
+        $dayDifference2 = abs($dateTime3->format('d') - $dateTime4->format('d'));
+        $daySimilarity2 = ($dayDifference2 <= 3) ? 0.4 : 0;
+        $fullDateSimilarity2 = ($dateTime3->format('Y-m-d') == $dateTime4->format('Y-m-d')) ? 0.3 : 0;
+        $similarityScore2 = $monthSimilarity2 + $daySimilarity2 + $fullDateSimilarity2;
+        $similarityLastPurchaseDate = $similarityScore2 * 100;
+        $divideBy = $divideBy + 1;
+      } else {
+        $similarityLastPurchaseDate = 0;
+      }
+
+      //Check account created date similarity
+      $dateTime5 = new DateTime($user_data['user']['Account Created On']);
+      $dateTime6 = new DateTime($recover_data['recover']->account_created_on);
+      $monthSimilarity3 = ($dateTime5->format('m') == $dateTime6->format('m')) ? 0.3 : 0;
+      $dayDifference3 = abs($dateTime5->format('d') - $dateTime6->format('d'));
+      $daySimilarity3 = ($dayDifference3 <= 3) ? 0.4 : 0;
+      $fullDateSimilarity3 = ($dateTime5->format('Y-m-d') == $dateTime6->format('Y-m-d')) ? 0.3 : 0;
+      $similarityScore3 = $monthSimilarity3 + $daySimilarity3 + $fullDateSimilarity3;
+      $similarityAccountCreatedDate = $similarityScore3 * 100;
+
+      //Check contact no similarity
+      $similarityContactNo = ($user_data['user']['Contact No'] === $recover_data['recover']->mobile_number) ? 100 : 0;
+      //Check birth date similarity
+      $similarityBirthDate = ($user_data['user']['Birth Date'] === $recover_data['recover']->dob) ? 100 : 0;
+      //Check address similarity
+      similar_text($user_data['user']['Address'], $recover_data['recover']->address, $similarityAddress);
+      //Check security question similarity
+      $similaritySecurityQuestion = ($user_data['user']['Security Question'] === $recover_data['recover']->securityQuestion) ? 100 : 0;
+      //Check answer similarity
+      $answer = strtolower($user_data['user']['Answer']);
+      $recoverAnswer = strtolower($recover_data['recover']->securityAnswer); 
+      if ($answer === $recoverAnswer) {
+          $similarityAnswer = 100;
+      } else {
+          $similarityAnswer = 0;
+      }
+      $similarityValue = $similarityName + $similarityFirstPurchaseName + $similarityLastPurchaseName + $similarityFirstPurchaseDate + $similarityLastPurchaseDate + $similarityAccountCreatedDate + $similarityContactNo + $similarityBirthDate + $similarityAddress + $similaritySecurityQuestion + $similarityAnswer;
+      $similarityPercentage = $similarityValue / $divideBy;
+      return round($similarityPercentage, 2);
     }
 
     public function viewRecoverRequest($id){
@@ -147,7 +284,7 @@
             ];
             $purchases[] = $purchase;
           }
-
+          $sec_data = $this->moderatorModel->getSecurityData($userArray['id']);
           $transformedUser = [
               'User ID' => $userArray['id'],
               'User Name' => $userArray['name'],
@@ -158,15 +295,43 @@
               'Birth Date' => $userArray['BirthDate'],
               'Address' => $userArray['address'],
               'Gender' => $userArray['gender'],
+              'Security Question' => 'Not Available',
+              'Answer' => 'Not Available',
               'Status' => $userArray['status'],
           ];
-      
+          
+          // Check if $sec_data is an object and has 'question' and 'answer' properties
+          if (is_object($sec_data) && isset($sec_data->question, $sec_data->answer)) {
+              $transformedUser['Security Question'] = $sec_data->question .'?';
+              $transformedUser['Answer'] = $sec_data->answer;
+          }
+          $compareSet_1 = [
+            'user' => $transformedUser,
+          ];
+    
+          $compareSet_2 = [
+            'recover' => $recover,
+          ];
+    
+          $similarityPercentage = $this->calculateSimilarityPercentage($compareSet_1, $compareSet_2); 
+
+          $transformedUser['Similarity Percentage'] = $similarityPercentage;       
           $transformedUsers[] = $transformedUser;
       }
+
       $data = [
         'recover' => $recover,
         'user' => $transformedUsers
       ];
+
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'Manage Recover Requests',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed recover request '.$id.' details'
+      ];
+      $this->moderatorModel->addLogData($log_data);
       $this->view('moderators/viewrecoverrequest', $data);
     }
 
@@ -193,17 +358,57 @@
         if($this->moderatorModel->changeUserPassword($data_user)){
           if($this->moderatorModel->sendPasswordEmail($data_email)){
             $this->moderatorModel->updateRecoverRequest($req_id, 'Accepted');
+            $log_data = [
+              'user_type' => 'Moderator',
+              'user_id' => $_SESSION['moderator_id'],
+              'log_type' => 'Manage Recover Requests',
+              'date_and_time' => date('Y-m-d H:i:s'),
+              'data' => 'Moderator accepted recover request '.$req_id.' and changed password for user '.$id
+            ];
+            $this->moderatorModel->addLogData($log_data);
             redirect('moderators/pendingrecoverrequests');
           } else {
-            die('Something went wrong');
+            $log_data = [
+              'user_type' => 'Moderator',
+              'user_id' => $_SESSION['moderator_id'],
+              'log_type' => 'Manage Recover Requests',
+              'date_and_time' => date('Y-m-d H:i:s'),
+              'data' => 'Moderator accepted recover request '.$req_id.' but failed to send password email to user '.$id
+            ];
+            $this->moderatorModel->addLogData($log_data);
+            die('Something went wrong while sending email');
           }
         } else {
+          $log_data = [
+            'user_type' => 'Moderator',
+            'user_id' => $_SESSION['moderator_id'],
+            'log_type' => 'Manage Recover Requests',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Moderator accepted recover request '.$req_id.' but failed to change password for the user '.$id
+          ];
+          $this->moderatorModel->addLogData($log_data);
           die('Something went wrong');
         }
     }
 
-    public function rejectRecoverRequest($id){
+    public function rejectRecoverRequest($id, $encodedReason){
+      $decodeddReason = str_replace('_', ' ', $encodedReason);
+      $request_data = $this->moderatorModel->getRecoverRequest($id);
+      $email_data = [
+        'name' => $request_data->user_name,
+        'email' => $request_data->email,
+        'reason' => $decodeddReason
+      ];
       if($this->moderatorModel->updateRecoverRequest($id, 'Rejected')){
+        $this->moderatorModel->sendRecoverRejectionEmail($email_data);
+        $log_data = [
+          'user_type' => 'Moderator',
+          'user_id' => $_SESSION['moderator_id'],
+          'log_type' => 'Manage Recover Requests',
+          'date_and_time' => date('Y-m-d H:i:s'),
+          'data' => 'Moderator rejected recover request '.$id .' with reason '.$decodeddReason
+        ];
+        $this->moderatorModel->addLogData($log_data);
         redirect('moderators/pendingrecoverrequests');
       } else {
         die('Something went wrong');
@@ -443,8 +648,23 @@
             ];
           } 
         } else {
+          $log_data = [
+            'user_type' => 'Moderator',
+            'user_id' => $_SESSION['moderator_id'],
+            'log_type' => 'View Product',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Moderator tried to view a product that does not exist'
+          ];
             die('Item Not Found!');
         }
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'View Product',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed product '.$product_id.' details of type '.$type
+      ];
+      $this->moderatorModel->addLogData($log_data);
       $this->view('moderators/viewitem', $data);
     }
 
@@ -454,6 +674,14 @@
         'users' => $users,
         'status' => 'Active'
       ];
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'View Users',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed active users'
+      ];
+      $this->moderatorModel->addLogData($log_data);
       $this->view('moderators/viewuser', $data);
     }
 
@@ -463,6 +691,14 @@
         'users' => $users,
         'status' => 'Banned'
       ];
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'View Users',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed banned users'
+      ];
+      $this->moderatorModel->addLogData($log_data);
       $this->view('moderators/viewuser', $data);
     }
 
@@ -472,6 +708,14 @@
         'users' => $users,
         'status' => 'Deactivated'
       ];
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'View Users',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed deactivated users'
+      ];
+      $this->moderatorModel->addLogData($log_data);
       $this->view('moderators/viewuser', $data);
     }
 
@@ -481,6 +725,14 @@
         'serviceproviders' => $serviceproviders,
         'status' => 'Active'
       ];
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'View Service Providers',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed active service providers'
+      ];
+      $this->moderatorModel->addLogData($log_data);
       $this->view('moderators/viewserviceprovider', $data);
     }
 
@@ -490,6 +742,14 @@
         'serviceproviders' => $serviceproviders,
         'status' => 'Rejected'
       ];
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'View Service Providers',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed rejected service providers'
+      ];
+      $this->moderatorModel->addLogData($log_data);
       $this->view('moderators/viewserviceprovider', $data);
     }
 
@@ -499,6 +759,14 @@
         'serviceproviders' => $serviceproviders,
         'status' => 'Deactivated'
       ];
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'View Service Providers',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed deactivated service providers'
+      ];
+      $this->moderatorModel->addLogData($log_data);
       $this->view('moderators/viewserviceprovider', $data);
     }
 
@@ -508,13 +776,37 @@
         'serviceproviders' => $serviceproviders,
         'status' => 'Banned'
       ];
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'View Service Providers',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed banned service providers'
+      ];
+      $this->moderatorModel->addLogData($log_data);
       $this->view('moderators/viewserviceprovider', $data);
     }
 
     public function deleteuser($id){
       if($this->moderatorModel->deleteUser($id)){
+        $log_data = [
+          'user_type' => 'Moderator',
+          'user_id' => $_SESSION['moderator_id'],
+          'log_type' => 'Delete User',
+          'date_and_time' => date('Y-m-d H:i:s'),
+          'data' => 'Moderator deleted user '.$id
+        ];
+        $this->moderatorModel->addLogData($log_data);
         redirect('moderators/viewuser');
       } else {
+        $log_data = [
+          'user_type' => 'Moderator',
+          'user_id' => $_SESSION['moderator_id'],
+          'log_type' => 'Delete User',
+          'date_and_time' => date('Y-m-d H:i:s'),
+          'data' => 'Moderator failed to delete user '.$id
+        ];
+        $this->moderatorModel->addLogData($log_data);
         die('Something went wrong');
       }
     }
@@ -524,6 +816,14 @@
       $data = [
         'pending' => $pending
       ];
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'Manage Service Provider Requests',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed pending service provider requests'
+      ];
+      $this->moderatorModel->addLogData($log_data);
       $this->view('moderators/pendingrequest', $data);
     }
 
@@ -532,6 +832,14 @@
       $data = [
         'request' => $request
       ];
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'Manage Service Provider Requests',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed pending service provider request '.$id.' details'
+      ];
+      $this->moderatorModel->addLogData($log_data);
       $this->view('moderators/viewpendingrequest', $data);
     }
 
@@ -540,6 +848,14 @@
       $data = [
         'request' => $serviceprovider
       ];
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'Manage Service Providers',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed service provider '.$id.' details'
+      ];
+      $this->moderatorModel->addLogData($log_data);
       $this->view('moderators/viewsp', $data);
     }
 
@@ -548,53 +864,175 @@
       $data = [
         'request' => $user
       ];
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'Manage Users',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed user '.$id.' details'
+      ];
+      $this->moderatorModel->addLogData($log_data);
       $this->view('moderators/viewuser_single', $data);
     }
 
-    public function banuser($id){
+    public function banuser($id, $encodedReason){
+      $decodedReason = str_replace('_', ' ', $encodedReason);
+      $user = $this->moderatorModel->getUser($id);
       if($this->moderatorModel->banUser($id)){
+        $this->moderatorModel->sendBanUserEmail($user->email, $user->name , $decodedReason);
+        $log_data = [
+          'user_type' => 'Moderator',
+          'user_id' => $_SESSION['moderator_id'],
+          'log_type' => 'Ban User',
+          'date_and_time' => date('Y-m-d H:i:s'),
+          'data' => 'Moderator banned user '.$id
+        ];
+        $this->moderatorModel->addLogData($log_data);
         redirect('moderators/viewBannedUser/');
       } else {
+        $log_data = [
+          'user_type' => 'Moderator',
+          'user_id' => $_SESSION['moderator_id'],
+          'log_type' => 'Ban User',
+          'date_and_time' => date('Y-m-d H:i:s'),
+          'data' => 'Moderator failed to ban user '.$id
+        ];
+        $this->moderatorModel->addLogData($log_data);
         die('Something went wrong');
       }
     }
 
-    public function banserviceprovider($id){
+    public function banserviceprovider($id, $encodedReason){
+      $decodeddReason = str_replace('_', ' ', $encodedReason);
+      $sp = $this->moderatorModel->getSP($id);
       if($this->moderatorModel->banServiceProvider($id)){
+        $this->moderatorModel->sendBanSPEmail($sp->business_email, $sp->business_name, $decodeddReason);
+        $log_data = [
+          'user_type' => 'Moderator',
+          'user_id' => $_SESSION['moderator_id'],
+          'log_type' => 'Ban Service Provider',
+          'date_and_time' => date('Y-m-d H:i:s'),
+          'data' => 'Moderator banned service provider '.$id .' with reason '.$decodeddReason
+        ];
+        $this->moderatorModel->addLogData($log_data);
         redirect('moderators/viewBannedSP');
       } else {
+        $log_data = [
+          'user_type' => 'Moderator',
+          'user_id' => $_SESSION['moderator_id'],
+          'log_type' => 'Ban Service Provider',
+          'date_and_time' => date('Y-m-d H:i:s'),
+          'data' => 'Moderator failed to ban service provider '.$id .' with reason '.$decodeddReason
+        ];
+        $this->moderatorModel->addLogData($log_data);
         die('Something went wrong');
       }
     }
 
     public function unbanserviceprovider($id){
+      $sp = $this->moderatorModel->getSP($id);
+      $email_data = [
+        'name' => $sp->business_name,
+        'email' => $sp->business_email
+      ];
       if($this->moderatorModel->unbanServiceProvider($id)){
+        $this->moderatorModel->sendUnbanSPEmail($email_data);
+        $log_data = [
+          'user_type' => 'Moderator',
+          'user_id' => $_SESSION['moderator_id'],
+          'log_type' => 'Unban Service Provider',
+          'date_and_time' => date('Y-m-d H:i:s'),
+          'data' => 'Moderator lifted the ban on service provider '.$id
+        ];
+        $this->moderatorModel->addLogData($log_data);
         redirect('moderators/viewActiveSP');
       } else {
+        $log_data = [
+          'user_type' => 'Moderator',
+          'user_id' => $_SESSION['moderator_id'],
+          'log_type' => 'Unban Service Provider',
+          'date_and_time' => date('Y-m-d H:i:s'),
+          'data' => 'Moderator failed to lift the ban on service provider '.$id
+        ];
+        $this->moderatorModel->addLogData($log_data);
         die('Something went wrong');
       }
     }
 
     public function unbanuser($id){
+      $user = $this->moderatorModel->getUser($id);
+      $email_data = [
+        'name' => $user->name,
+        'email' => $user->email
+      ];
       if($this->moderatorModel->unbanUser($id)){
+        $this->moderatorModel->sendUnbanUserEmail($email_data);
+        $log_data = [
+          'user_type' => 'Moderator',
+          'user_id' => $_SESSION['moderator_id'],
+          'log_type' => 'Unban User',
+          'date_and_time' => date('Y-m-d H:i:s'),
+          'data' => 'Moderator lifted the ban on user '.$id
+        ];
+        $this->moderatorModel->addLogData($log_data);
         redirect('moderators/viewActiveUser');
       } else {
+        $log_data = [
+          'user_type' => 'Moderator',
+          'user_id' => $_SESSION['moderator_id'],
+          'log_type' => 'Unban User',
+          'date_and_time' => date('Y-m-d H:i:s'),
+          'data' => 'Moderator failed to lift the ban on user '.$id
+        ];
+        $this->moderatorModel->addLogData($log_data);
         die('Something went wrong');
       }
     }
 
     public function acceptServiceProvider($id){
       if($this->moderatorModel->acceptSP($id)){
+        $log_data = [
+          'user_type' => 'Moderator',
+          'user_id' => $_SESSION['moderator_id'],
+          'log_type' => 'Manage Service Provider Requests',
+          'date_and_time' => date('Y-m-d H:i:s'),
+          'data' => 'Moderator accepted service provider request '.$id
+        ];
+        $this->moderatorModel->addLogData($log_data);
         redirect('moderators/pendingrequest');
       } else {
+        $log_data = [
+          'user_type' => 'Moderator',
+          'user_id' => $_SESSION['moderator_id'],
+          'log_type' => 'Manage Service Provider Requests',
+          'date_and_time' => date('Y-m-d H:i:s'),
+          'data' => 'Moderator failed to accept service provider request '.$id
+        ];
+        $this->moderatorModel->addLogData($log_data);
         die('Something went wrong');
       }
     }
 
     public function rejectServiceProvider($id){
       if($this->moderatorModel->rejectSP($id)){
+        $log_data = [
+          'user_type' => 'Moderator',
+          'user_id' => $_SESSION['moderator_id'],
+          'log_type' => 'Manage Service Provider Requests',
+          'date_and_time' => date('Y-m-d H:i:s'),
+          'data' => 'Moderator rejected service provider request '.$id
+        ];
+        $this->moderatorModel->addLogData($log_data);
         redirect('moderators/pendingrequest');
       } else {
+        $log_data = [
+          'user_type' => 'Moderator',
+          'user_id' => $_SESSION['moderator_id'],
+          'log_type' => 'Manage Service Provider Requests',
+          'date_and_time' => date('Y-m-d H:i:s'),
+          'data' => 'Moderator failed to reject service provider request '.$id
+        ];
+        $this->moderatorModel->addLogData($log_data);
         die('Something went wrong');
       }
     }
@@ -605,6 +1043,14 @@
         'order' => $order,
         'user_id' => $id
       ];
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'View User Orders',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed user '.$id.' orders'
+      ];
+      $this->moderatorModel->addLogData($log_data);
       $this->view('moderators/viewuserorders', $data);
     }
 
@@ -614,6 +1060,14 @@
         'order' => $order,
         'sp_id' => $id
       ];
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'View Service Provider Orders',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed service provider '.$id.' orders'
+      ];
+      $this->moderatorModel->addLogData($log_data);
       $this->view('moderators/viewsporders', $data);
     }
 
@@ -648,6 +1102,13 @@
         'user_data' => $user_data,
         'suborders' => $sub_orders
       ];
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'View User Order',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed order '.$id.' details'
+      ];
       $this->view('moderators/viewuserorder', $data);
     }
 
@@ -670,6 +1131,13 @@
         'product_data' => $product_data,
         'user_data' => $user_data
       ];
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'View Servive Provider Order',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator viewed suborder '.$id.' details'
+      ];
       $this->view('moderators/viewsporder', $data);
     }
 
@@ -679,6 +1147,14 @@
         $data = [
             'pending' => $inquiries_pending,
         ];
+        $log_data = [
+            'user_type' => 'Moderator',
+            'user_id' => $_SESSION['moderator_id'],
+            'log_type' => 'View Inquiries',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Moderator viewed pending inquiries'
+        ];
+        $this->moderatorModel->addLogData($log_data);
         $this->view('moderators/pendinginquiries', $data);
     }
 
@@ -688,6 +1164,14 @@
         $data = [
             'active' => $inquiries_active,
         ];
+        $log_data = [
+            'user_type' => 'Moderator',
+            'user_id' => $_SESSION['moderator_id'],
+            'log_type' => 'View Inquiries',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Moderator viewed active inquiries'
+        ];
+        $this->moderatorModel->addLogData($log_data);
         $this->view('moderators/activeinquiries', $data);
     }
 
@@ -697,6 +1181,14 @@
         $data = [
             'completed' => $inquiries_completed,
         ];
+        $log_data = [
+            'user_type' => 'Moderator',
+            'user_id' => $_SESSION['moderator_id'],
+            'log_type' => 'View Inquiries',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Moderator viewed completed inquiries'
+        ];
+        $this->moderatorModel->addLogData($log_data);
         $this->view('moderators/completedinquiries', $data);
     }
 
@@ -709,6 +1201,14 @@
               'inquiry' => $inquiry,
               'user' => $user_data
           ];
+          $log_data = [
+              'user_type' => 'Moderator',
+              'user_id' => $_SESSION['moderator_id'],
+              'log_type' => 'View Inquiry',
+              'date_and_time' => date('Y-m-d H:i:s'),
+              'data' => 'Moderator viewed pending inquiry '.$inquiry_id.' details'
+          ];
+          $this->moderatorModel->addLogData($log_data);
         $this->view('moderators/viewinquiry', $data);
         } else {
             $chat = [];
@@ -724,6 +1224,14 @@
                 'user' => $user_data,
                 'chat' => $chat
             ];
+            $log_data = [
+                'user_type' => 'Moderator',
+                'user_id' => $_SESSION['moderator_id'],
+                'log_type' => 'View Inquiry',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'Moderator viewed inquiry '.$inquiry_id.' details'
+            ];
+            $this->moderatorModel->addLogData($log_data);
             $this->view('moderators/viewinquiry', $data);
         }
     }
@@ -741,33 +1249,97 @@
       ];
       $chat_id = $this->moderatorModel->addChatModToUser($data);
       if($this->moderatorModel->addToInqChat($chat_id, $inquiry_id)){
+        $log_data = [
+            'user_type' => 'Moderator',
+            'user_id' => $_SESSION['moderator_id'],
+            'log_type' => 'Send Message',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Moderator sent a message to user '.$id.' regarding inquiry '.$inquiry_id
+        ];
+        $this->moderatorModel->addLogData($log_data);
           redirect('moderators/viewInquiry/'.$inquiry_id.'');
       } else {
-          die('Something went wrong');
+        $log_data = [
+            'user_type' => 'Moderator',
+            'user_id' => $_SESSION['moderator_id'],
+            'log_type' => 'Send Message',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Moderator failed to send a message to user '.$id.' regarding inquiry '.$inquiry_id
+        ];
+        $this->moderatorModel->addLogData($log_data);
+          die('Something went wrong in sending message');
       }
   }
 
     public function approveInquiry($inquiry_id){
         if($this->moderatorModel->approveInquiry($inquiry_id, $_SESSION['moderator_id'])){
+          $log_data = [
+              'user_type' => 'Moderator',
+              'user_id' => $_SESSION['moderator_id'],
+              'log_type' => 'Approve Inquiry',
+              'date_and_time' => date('Y-m-d H:i:s'),
+              'data' => "Moderator approved inquiry $inquiry_id and assign to self"
+          ];
+          $this->moderatorModel->addLogData($log_data);
             redirect('moderators/pendinginquiries');
         } else {
+          $log_data = [
+              'user_type' => 'Moderator',
+              'user_id' => $_SESSION['moderator_id'],
+              'log_type' => 'Approve Inquiry',
+              'date_and_time' => date('Y-m-d H:i:s'),
+              'data' => "Moderator failed to approve inquiry $inquiry_id and assign to self"
+          ];
+          $this->moderatorModel->addLogData($log_data);
             die('Something went wrong');
         }
     }
 
     public function completeInquiry($inquiry_id){
         if($this->moderatorModel->completeInquiry($inquiry_id)){
+          $log_data = [
+              'user_type' => 'Moderator',
+              'user_id' => $_SESSION['moderator_id'],
+              'log_type' => 'Complete Inquiry',
+              'date_and_time' => date('Y-m-d H:i:s'),
+              'data' => 'Moderator completed inquiry '.$inquiry_id
+          ];
+          $this->moderatorModel->addLogData($log_data);
             redirect('moderators/activeinquiries');
         } else {
-            die('Something went wrong');
+          $log_data = [
+              'user_type' => 'Moderator',
+              'user_id' => $_SESSION['moderator_id'],
+              'log_type' => 'Complete Inquiry',
+              'date_and_time' => date('Y-m-d H:i:s'),
+              'data' => "Moderator failed to mark the inquiry $inquiry_id as completed"
+          ];
+          $this->moderatorModel->addLogData($log_data);
+            die('Something went wrong in completing inquiry');
         }
     }
 
     public function deleteserviceprovider($id){
       if($this->moderatorModel->deleteServiceProvider($id)){
+        $log_data = [
+          'user_type' => 'Moderator',
+          'user_id' => $_SESSION['moderator_id'],
+          'log_type' => 'Delete Service Provider',
+          'date_and_time' => date('Y-m-d H:i:s'),
+          'data' => 'Moderator deleted service provider '.$id
+        ];
+        $this->moderatorModel->addLogData($log_data);
         redirect('moderators/viewserviceprovider');
       } else {
-        die('Something went wrong');
+        $log_data = [
+          'user_type' => 'Moderator',
+          'user_id' => $_SESSION['moderator_id'],
+          'log_type' => 'Delete Service Provider',
+          'date_and_time' => date('Y-m-d H:i:s'),
+          'data' => 'Moderator failed to delete service provider '.$id
+        ];
+        $this->moderatorModel->addLogData($log_data);
+        die('Something went wrong in deleting service provider');
       }
     }
 
@@ -781,6 +1353,14 @@
     }
 
     public function logout(){
+      $log_data = [
+        'user_type' => 'Moderator',
+        'user_id' => $_SESSION['moderator_id'],
+        'log_type' => 'Logout',
+        'date_and_time' => date('Y-m-d H:i:s'),
+        'data' => 'Moderator logged out'
+      ];
+      $this->moderatorModel->addLogData($log_data);
       unset($_SESSION['moderator_id']);
       unset($_SESSION['moderator_email']);
       unset($_SESSION['moderator_name']);

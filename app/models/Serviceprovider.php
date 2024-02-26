@@ -158,6 +158,24 @@ class ServiceProvider
         }
     }
 
+    public function addLogData($data){
+        $this->db->query('INSERT INTO logs (user_type, user_id, date_and_time, log_type, data) VALUES(:user_type, :user_id, :date_and_time, :log_type, :data)');
+        try {
+            $this->db->bind(':user_type', $data['user_type']);
+            $this->db->bind(':user_id', $data['user_id']);
+            $this->db->bind(':date_and_time', $data['date_and_time']);
+            $this->db->bind(':log_type', $data['log_type']);
+            $this->db->bind(':data', $data['data']);
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+    
     public function editStudioPhoto($product_id, $data, $photo_num)
     {
         if ($photo_num == 'photo_1') {
@@ -280,6 +298,24 @@ class ServiceProvider
         $this->db->bind(':serviceprovider_id', $serviceprovider_id);
         $results = $this->db->resultSet();
         return $results;
+    }
+
+    public function getFullOrderData(){
+        $this->db->query('SELECT * FROM orders');
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function updateFullOrderPrice($order_id, $reduce_price){
+        try {
+            $this->db->query('UPDATE orders SET total = total - :reduce_price WHERE order_id = :order_id');
+            $this->db->bind(':reduce_price', $reduce_price);
+            $this->db->bind(':order_id', $order_id);
+            $this->db->execute();
+        } catch (PDOException $e) {
+            echo "Database error: " . $e->getMessage();
+            return false;
+        }
     }
     
     public function editStudio($product_id, $data)

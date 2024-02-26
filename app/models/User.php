@@ -64,7 +64,7 @@ class User
             $this->db->bind(':password', $data['password']);
             $this->db->bind(':verification', $verification_code);
             $this->db->bind(':status', 'Active');
-            $this->db->bing(':registration_date', $registration_date);
+            $this->db->bind(':registration_date', $data['registration_date']);
 
             // Execute
             if ($this->db->execute()) {
@@ -116,8 +116,25 @@ class User
         }
     }
 
+    public function addSecurityQuestion($data){
+        $this->db->query('INSERT INTO sec_queation (user_type, user_id, question, answer) VALUES(:user_type, :user_id, :question, :answer)');
+        try {
+            $this->db->bind(':user_type', 'Customer');
+            $this->db->bind(':user_id', $data['user_id']);
+            $this->db->bind(':question', $data['question']);
+            $this->db->bind(':answer', $data['answer']);
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function addRecoveryRequest($data){
-        $this->db->query('INSERT INTO recover_account_user (user_name, first_purchase_date, first_purchase_item, last_purchase_date, last_purchase_item, account_created_on, mobile_number, address, dob, gender, other, status, contactEmail, placed_on) VALUES(:user_name, :first_purchase_date, :first_purchase_item, :last_purchase_date, :last_purchase_item, :account_created_on, :mobile_number, :address, :dob, :gender, :other, :status, :contactEmail, :placed_on)');
+        $this->db->query('INSERT INTO recover_account_user (user_name, first_purchase_date, first_purchase_item, last_purchase_date, last_purchase_item, account_created_on, mobile_number, address, dob, gender, other, status, contactEmail, securityQuestion, securityAnswer, placed_on) VALUES(:user_name, :first_purchase_date, :first_purchase_item, :last_purchase_date, :last_purchase_item, :account_created_on, :mobile_number, :address, :dob, :gender, :other, :status, :contactEmail, :securityQuestion, :securityAnswer, :placed_on)');
         try {
             $this->db->bind(':user_name', $data['user_name']);
             $this->db->bind(':first_purchase_date', $data['first_purchase_date']);
@@ -132,6 +149,8 @@ class User
             $this->db->bind(':other', $data['other']);
             $this->db->bind(':status', $data['status']);
             $this->db->bind(':contactEmail', $data['contactEmail']);
+            $this->db->bind(':securityQuestion', $data['securityQuestion']);
+            $this->db->bind(':securityAnswer', $data['securityAnswer']);
             $this->db->bind(':placed_on', date('Y-m-d'));
 
             if ($this->db->execute()) {
@@ -450,6 +469,17 @@ class User
         } else {
             return false;
         }
+    }
+
+    public function getUserIdByEmail($email)
+    {
+        $this->db->query('SELECT id FROM users WHERE email = :email AND status = "Active"');
+        // Bind value
+        $this->db->bind(':email', $email);
+
+        $row = $this->db->single();
+
+        return $row;
     }
 
     public function getUserByEmail($email)

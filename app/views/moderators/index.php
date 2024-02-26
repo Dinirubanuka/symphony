@@ -17,7 +17,9 @@
       <?php require APPROOT . '/views/inc/mod-sidebar.php'; ?>
     </div>
     <div class="right-component">
-        <h2></h2>
+      <div class="top">
+        <h2>Welcome back!  #<?php echo $data['mod_data']->moderator_name; ?></h2>
+      </div>
     </div>
   </div>
   </body>

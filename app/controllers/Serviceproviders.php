@@ -29,6 +29,14 @@ class serviceproviders extends Controller
             'about' => $serviceprovider->about,
             'photo' => $serviceprovider->profile_photo
         ];
+        $log_data = [
+            'user_type' => 'Service Provider',
+            'user_id' => $_SESSION['serviceprovider_id'],
+            'log_type' => 'Manage Profile',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Service Provider has viewed their profile'
+        ];
+        $this->serviceProviderModel->addLogData($log_data);
         $this->view('serviceproviders/profile', $data);
     }
 
@@ -37,6 +45,13 @@ class serviceproviders extends Controller
         $inventory = $this->serviceProviderModel->inventory($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
+        ];
+        $log_data = [
+            'user_type' => 'Service Provider',
+            'user_id' => $_SESSION['serviceprovider_id'],
+            'log_type' => 'Manage Inventory',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Service Provider has viewed their Equipment Inventory'
         ];
         $this->view('serviceproviders/inventory', $data);
     }
@@ -62,6 +77,14 @@ class serviceproviders extends Controller
                 'inventory' => $inventory
             ];
         }
+        $log_data = [
+            'user_type' => 'Service Provider',
+            'user_id' => $_SESSION['serviceprovider_id'],
+            'log_type' => 'Manage Inventory',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Service Provider has viewed their Singer Inventory'
+        ];
+        $this->serviceProviderModel->addLogData($log_data);
         header('Content-Type: application/json');
         echo json_encode($data);
         exit();
@@ -75,6 +98,14 @@ class serviceproviders extends Controller
                 'inventory' => $inventory
             ];
         }
+        $log_data = [
+            'user_type' => 'Service Provider',
+            'user_id' => $_SESSION['serviceprovider_id'],
+            'log_type' => 'Manage Inventory',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Service Provider has viewed their Studio Inventory'
+        ];
+        $this->serviceProviderModel->addLogData($log_data);
         header('Content-Type: application/json');
         echo json_encode($data);
         exit();
@@ -88,6 +119,14 @@ class serviceproviders extends Controller
                 'inventory' => $inventory
             ];
         }
+        $log_data = [
+            'user_type' => 'Service Provider',
+            'user_id' => $_SESSION['serviceprovider_id'],
+            'log_type' => 'Manage Inventory',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Service Provider has viewed their Band Inventory'
+        ];
+        $this->serviceProviderModel->addLogData($log_data);
         header('Content-Type: application/json');
         echo json_encode($data);
         exit();
@@ -102,6 +141,14 @@ class serviceproviders extends Controller
                 'inventory' => $inventory
             ];
         }
+        $log_data = [
+            'user_type' => 'Service Provider',
+            'user_id' => $_SESSION['serviceprovider_id'],
+            'log_type' => 'Manage Inventory',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Service Provider has viewed their Musician Inventory'
+        ];
+        $this->serviceProviderModel->addLogData($log_data);
         header('Content-Type: application/json');
         echo json_encode($data);
         exit();
@@ -212,11 +259,35 @@ class serviceproviders extends Controller
             }
             if (empty($data['name_err']) && empty($data['rate_err']) && empty($data['description_err']) && empty($data['telephoneNumber_err'])) {
                 if ($this->serviceProviderModel->addMusician($data)) {
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Add Musician',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has added a new Musician to their inventory'
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
                     redirect('serviceproviders/musicians');
                 } else {
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Inventory',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has failed to add a new Musician to their inventory'
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
                     die('Something went wrong');
                 }
             } else {
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'Manage Inventory',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has failed to provide the required information to add a new Musician to their inventory'
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
                 $this->view('serviceproviders/addMusicians', $data);
             }
 
@@ -241,6 +312,14 @@ class serviceproviders extends Controller
                 'telephoneNumber_err' => ''
             ];
 
+            $log_data = [
+                'user_type' => 'Service Provider',
+                'user_id' => $_SESSION['serviceprovider_id'],
+                'log_type' => 'Manage Inventory',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'Service Provider has viewed the page to add a new Musician to their inventory'
+            ];
+            $this->serviceProviderModel->addLogData($log_data);
             // Load view
             $this->view('serviceproviders/addMusician', $data);
         }
@@ -252,6 +331,14 @@ class serviceproviders extends Controller
         $data = [
             'inventory' => $inventory
         ];
+        $log_data = [
+            'user_type' => 'Service Provider',
+            'user_id' => $_SESSION['serviceprovider_id'],
+            'log_type' => 'Manage Inventory',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Service Provider has viewed their Musician Inventory'
+        ];
+        $this->serviceProviderModel->addLogData($log_data);
         $this->view('serviceproviders/musician');
     }
 
@@ -261,9 +348,25 @@ class serviceproviders extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $singerDetails = $this->serviceProviderModel->viewMusicians($product_id);
             if ($singerDetails) {
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'View Musician',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has viewed the details of a Musician with th ID ' . $product_id
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
                 $this->view('serviceproviders/viewMusicians', $singerDetails);
             } else {
-//                var_dump('singer fetch err..);
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'View Musician',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has failed to view the details of a Musician with th ID ' . $product_id
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
+                die('failed to fetch singer details either the singer does not exist or the id is wrong');
             }
         }
     }
@@ -310,12 +413,35 @@ class serviceproviders extends Controller
 
                 if (!empty($data['name']) && !empty($data['NickName']) && !empty($data['telephoneNumber']) && !empty($data['email']) && !empty($data['rate']) && !empty($data['videoLink']) && !empty($data['description'])) {
                     if ($this->serviceProviderModel->updateSinger($data)) {
-                        redirect('serviceproviders/viewMusicians/' . $id);
+                        $log_data = [
+                            'user_type' => 'Service Provider',
+                            'user_id' => $_SESSION['serviceprovider_id'],
+                            'log_type' => 'Manage Inventory',
+                            'date_and_time' => date('Y-m-d H:i:s'),
+                            'data' => 'Service Provider has updated the details of a Musician with th ID ' . $id
+                        ];
+                        $this->serviceProviderModel->addLogData($log_data);
                     } else {
-                        die('Something went wrong');
+                        $log_data = [
+                            'user_type' => 'Service Provider',
+                            'user_id' => $_SESSION['serviceprovider_id'],
+                            'log_type' => 'Manage Inventory',
+                            'date_and_time' => date('Y-m-d H:i:s'),
+                            'data' => 'Service Provider has failed to update the details of a Musician with th ID ' . $id
+                        ];
+                        $this->serviceProviderModel->addLogData($log_data);
+                        die('Something went wrong while updating the singer details');
                     }
                 } else {
-                    die('singer connot update...');
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Inventory',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has failed to provide the required information to update the details of a Musician with th ID ' . $id
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
+                    redirect('serviceproviders/viewMusicians/' . $id);
                 }
             } else {
                 $data = [
@@ -333,12 +459,36 @@ class serviceproviders extends Controller
 
                 if (!empty($data['name']) && !empty($data['NickName']) && !empty($data['telephoneNumber']) && !empty($data['email']) && !empty($data['rate']) && !empty($data['videoLink']) && !empty($data['description'])) {
                     if ($this->serviceProviderModel->updateMusicians($data)) {
+                        $log_data = [
+                            'user_type' => 'Service Provider',
+                            'user_id' => $_SESSION['serviceprovider_id'],
+                            'log_type' => 'Manage Inventory',
+                            'date_and_time' => date('Y-m-d H:i:s'),
+                            'data' => 'Service Provider has updated the details of a Musician with th ID ' . $id
+                        ];
+                        $this->serviceProviderModel->addLogData($log_data);
                         redirect('serviceproviders/viewMusicians/' . $id);
                     } else {
-                        die('Something went wrong');
+                        $log_data = [
+                            'user_type' => 'Service Provider',
+                            'user_id' => $_SESSION['serviceprovider_id'],
+                            'log_type' => 'Manage Inventory',
+                            'date_and_time' => date('Y-m-d H:i:s'),
+                            'data' => 'Service Provider has failed to update the details of a Musician with th ID ' . $id
+                        ];
+                        $this->serviceProviderModel->addLogData($log_data);
+                        die('Something went wrong while updating the singer details');
                     }
                 } else {
-                    die('singer connot update...');
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Inventory',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has failed to provide the required information to update the details of a Musician with th ID ' . $id
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
+                    redirect('serviceproviders/viewMusicians/' . $id);
                 }
             }
         } else {
@@ -350,6 +500,14 @@ class serviceproviders extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->serviceProviderModel->deleteBand($product_id);
+            $log_data = [
+                'user_type' => 'Service Provider',
+                'user_id' => $_SESSION['serviceprovider_id'],
+                'log_type' => 'Manage Inventory',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'Service Provider has deleted a Band with the ID ' . $product_id
+            ];
+            $this->serviceProviderModel->addLogData($log_data);
             redirect('serviceproviders/band');
         } else {
             redirect('serviceproviders/band');
@@ -361,9 +519,25 @@ class serviceproviders extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $singerDetails = $this->serviceProviderModel->viewBand($product_id);
             if ($singerDetails) {
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'Manage Inventory',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has viewed the details of a Band with the ID ' . $product_id
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
                 $this->view('serviceproviders/viewBand', $singerDetails);
             } else {
-//                var_dump('singer fetch err..);
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'Manage Inventory',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has failed to view the details of a Band with the ID ' . $product_id
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
+                die('failed to fetch band details either the band does not exist or the id is wrong');
             }
         }
     }
@@ -410,12 +584,36 @@ class serviceproviders extends Controller
 
                 if (!empty($data['name']) && !empty($data['leaderName']) && !empty($data['telephoneNumber']) && !empty($data['email']) && !empty($data['rate']) && !empty($data['videoLink']) && !empty($data['description'])) {
                     if ($this->serviceProviderModel->updateBand($data)) {
+                        $log_data = [
+                            'user_type' => 'Service Provider',
+                            'user_id' => $_SESSION['serviceprovider_id'],
+                            'log_type' => 'Manage Inventory',
+                            'date_and_time' => date('Y-m-d H:i:s'),
+                            'data' => 'Service Provider has updated the details of a Band with th ID ' . $id
+                        ];
+                        $this->serviceProviderModel->addLogData($log_data);
                         redirect('serviceproviders/viewBand/' . $id);
                     } else {
-                        die('Something went wrong');
+                        $log_data = [
+                            'user_type' => 'Service Provider',
+                            'user_id' => $_SESSION['serviceprovider_id'],
+                            'log_type' => 'Manage Inventory',
+                            'date_and_time' => date('Y-m-d H:i:s'),
+                            'data' => 'Service Provider has failed to update the details of a Band with th ID ' . $id
+                        ];
+                        $this->serviceProviderModel->addLogData($log_data);
+                        die('Something went wrong while updating the band details');
                     }
                 } else {
-                    die('band connot update...');
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Inventory',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has failed to provide the required information to update the details of a Band with th ID ' . $id
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
+                    redirect('serviceproviders/viewBand/' . $id);
                 }
             } else {
 
@@ -436,12 +634,36 @@ class serviceproviders extends Controller
 
                 if (!empty($data['name']) && !empty($data['leaderName']) && !empty($data['telephoneNumber']) && !empty($data['email']) && !empty($data['rate']) && !empty($data['videoLink']) && !empty($data['description'])) {
                     if ($this->serviceProviderModel->updateBand($data)) {
+                        $log_data = [
+                            'user_type' => 'Service Provider',
+                            'user_id' => $_SESSION['serviceprovider_id'],
+                            'log_type' => 'Manage Inventory',
+                            'date_and_time' => date('Y-m-d H:i:s'),
+                            'data' => 'Service Provider has updated the details of a Band with th ID ' . $id
+                        ];
+                        $this->serviceProviderModel->addLogData($log_data);
                         redirect('serviceproviders/viewBand/' . $id);
                     } else {
-                        die('Something went wrong');
+                        $log_data = [
+                            'user_type' => 'Service Provider',
+                            'user_id' => $_SESSION['serviceprovider_id'],
+                            'log_type' => 'Manage Inventory',
+                            'date_and_time' => date('Y-m-d H:i:s'),
+                            'data' => 'Service Provider has failed to update the details of a Band with th ID ' . $id
+                        ];
+                        $this->serviceProviderModel->addLogData($log_data);
+                        die('Something went wrong while updating the band details');
                     }
                 } else {
-                    die('band connot update...');
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Inventory',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has failed to provide the required information to update the details of a Band with th ID ' . $id
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
+                    redirect('serviceproviders/viewBand/' . $id);
                 }
             }
         } else {
@@ -562,10 +784,25 @@ class serviceproviders extends Controller
                 $new_img_name = 'IMG-653fd611dd2445.48951448.png';
 
                 if ($this->serviceProviderModel->photoUpdate($new_img_name)) {
-                    // flash('register_success', 'You are registered and can log in');
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Profile',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has updated their profile photo to the default photo'
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
                     redirect('serviceproviders/profile');
                 } else {
-                    die('Something went wrong');
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Profile',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has failed to update their profile photo to the default photo'
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
+                    die('Something went wrong while updating the profile photo to the default photo');
                 }
             } else {
 
@@ -577,9 +814,25 @@ class serviceproviders extends Controller
 
                 if ($this->serviceProviderModel->photoUpdate($new_img_name)) {
                     // flash('register_success', 'You are registered and can log in');
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Profile',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has updated their profile photo'
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
                     redirect('serviceproviders/profile');
                 } else {
-                    die('Something went wrong');
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Profile',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has failed to update their profile photo'
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
+                    die('Something went wrong while updating the profile photo');
                 }
             }
 
@@ -610,8 +863,24 @@ class serviceproviders extends Controller
                 'owner_email_err' => '',
                 'about_err' => '',
             ];
+            $log_data = [
+                'user_type' => 'Service Provider',
+                'user_id' => $_SESSION['serviceprovider_id'],
+                'log_type' => 'Manage Profile',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'Service Provider has viewed the page to edit their details'
+            ];
+            $this->serviceProviderModel->addLogData($log_data);
             $this->view('serviceproviders/edit', $data);
         } else {
+            $log_data = [
+                'user_type' => 'Service Provider',
+                'user_id' => $_SESSION['serviceprovider_id'],
+                'log_type' => 'Manage Profile',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'Service Provider has viewed the page to edit their details'
+            ];
+            $this->serviceProviderModel->addLogData($log_data);
             $this->view('serviceproviders/edit', $data);
         }
     }
@@ -766,13 +1035,36 @@ class serviceproviders extends Controller
 
                 // Register serviceprovider
                 if ($this->serviceProviderModel->editItem($product_id, $data)) {
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Inventory',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has updated the details of an item with the ID ' . $product_id
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
                     // flash('register_success', 'You are registered and can log in');
                     redirect('serviceproviders/inventory');
                 } else {
-                    die('Something went wrong');
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Inventory',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has failed to update the details of an item with the ID ' . $product_id
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
+                    die('Something went wrong while updating the item details');
                 }
             } else {
-                // Load view with errors
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'Manage Inventory',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has failed to provide the required information to update the details of an item with the ID ' . $product_id
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
                 $this->view('serviceproviders/additem', $data);
             }
 
@@ -943,12 +1235,34 @@ class serviceproviders extends Controller
 
                 // Register serviceprovider
                 if ($this->serviceProviderModel->additem($data)) {
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Add Instrument',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has added a new item to their inventory'
+                    ];
                     // flash('register_success', 'You are registered and can log in');
                     redirect('serviceproviders/inventory');
                 } else {
-                    die('Something went wrong');
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Inventory',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has failed to add a new item to their inventory'
+                    ];
+                    die('Something went wrong while adding the item to the inventory');
                 }
             } else {
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'Manage Inventory',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has failed to provide the required information to add a new item to their inventory'
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
                 // Load view with errors
                 $this->view('serviceproviders/additem', $data);
             }
@@ -988,6 +1302,14 @@ class serviceproviders extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->serviceProviderModel->deleteitem($product_id);
+            $log_data = [
+                'user_type' => 'Service Provider',
+                'user_id' => $_SESSION['serviceprovider_id'],
+                'log_type' => 'Manage Inventory',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'Service Provider has deleted an item from their inventory with the ID ' . $product_id
+            ];
+            $this->serviceProviderModel->addLogData($log_data);
             redirect('serviceproviders/inventory');
         } else {
             redirect('serviceproviders/inventory');
@@ -1089,11 +1411,35 @@ class serviceproviders extends Controller
             if (empty($data['name_err']) && empty($data['rate_err']) && empty($data['descriptionSounds_err']) && empty($data['descriptionStudio_err']) && empty($data['telephoneNumber_err'])) {
 
                 if ($this->serviceProviderModel->addStudio($data)) {
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Add Studio',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has added a new studio to their inventory'
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data); 
                     redirect('serviceproviders/studio');
                 } else {
-                    die('Something went wrong');
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Inventory',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has failed to add a new studio to their inventory'
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
+                    die('Something went wrong while adding the studio to the inventory');
                 }
             } else {
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'Manage Inventory',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has failed to provide the required information to add a new studio to their inventory'
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
                 $this->view('serviceproviders/addStudio', $data);
             }
 
@@ -1221,11 +1567,35 @@ class serviceproviders extends Controller
             }
             if (empty($data['name_err']) && empty($data['rate_err']) && empty($data['description_err']) && empty($data['telephoneNumber_err'])) {
                 if ($this->serviceProviderModel->addSinger($data)) {
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Add Singer',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has added a new singer to their inventory'
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
                     redirect('serviceproviders/singer');
                 } else {
-                    die('Something went wrong');
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Inventory',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has failed to add a new singer to their inventory'
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
+                    die('Something went wrong while adding the singer to the inventory');
                 }
             } else {
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'Manage Inventory',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has failed to provide the required information to add a new singer to their inventory'
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
                 $this->view('serviceproviders/addSinger', $data);
             }
 
@@ -1377,11 +1747,35 @@ class serviceproviders extends Controller
             }
             if (empty($data['name_err']) && empty($data['rate_err']) && empty($data['description_err']) && empty($data['telephoneNumber_err'])) {
                 if ($this->serviceProviderModel->addBand($data)) {
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Add Band',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has added a new band to their inventory'
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
                     redirect('serviceproviders/band');
                 } else {
-                    die('Something went wrong');
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Inventory',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has failed to add a new band to their inventory'
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
+                    die('Something went wrong while adding the band to the inventory');
                 }
             } else {
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'Manage Inventory',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has failed to provide the required information to add a new band to their inventory'
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
                 $this->view('serviceproviders/addBand', $data);
             }
 
@@ -1518,11 +1912,35 @@ class serviceproviders extends Controller
             if (empty($data['name_err']) && empty($data['rate_err']) && empty($data['descriptionSounds_err']) && empty($data['descriptionStudio_err']) && empty($data['telephoneNumber_err'])) {
 
                 if ($this->serviceProviderModel->editStudio($product_id, $data)) {
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Inventory',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has edited a studio in their inventory with the ID ' . $product_id
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
                     redirect('serviceproviders/studio');
                 } else {
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Inventory',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has failed to edit a studio in their inventory with the ID ' . $product_id
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
                     die('Something went wrong');
                 }
             } else {
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'Manage Inventory',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has failed to provide the required information to edit a studio in their inventory with the ID ' . $product_id
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
                 $this->view('serviceproviders/addStudio', $data);
             }
 
@@ -1573,6 +1991,14 @@ class serviceproviders extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->serviceProviderModel->deleteSinger($product_id);
+            $log_data = [
+                'user_type' => 'Service Provider',
+                'user_id' => $_SESSION['serviceprovider_id'],
+                'log_type' => 'Manage Inventory',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'Service Provider has deleted a singer from their inventory with the ID ' . $product_id
+            ];
+            $this->serviceProviderModel->addLogData($log_data);
             redirect('serviceproviders/singer');
         } else {
             redirect('serviceproviders/singer');
@@ -1584,6 +2010,14 @@ class serviceproviders extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->serviceProviderModel->deleteStudio($product_id);
+            $log_data = [
+                'user_type' => 'Service Provider',
+                'user_id' => $_SESSION['serviceprovider_id'],
+                'log_type' => 'Manage Inventory',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'Service Provider has deleted a studio from their inventory with the ID ' . $product_id
+            ];
+            $this->serviceProviderModel->addLogData($log_data);
             redirect('serviceproviders/inventory');
         } else {
             redirect('serviceproviders/inventory');
@@ -1744,12 +2178,36 @@ class serviceproviders extends Controller
 
                 // Update serviceprovider
                 if ($this->serviceProviderModel->update($data)) {
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Profile',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has edited their profile'
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
                     // flash('register_success', 'You are registered and can log in');
                     redirect('serviceproviders/profile');
                 } else {
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Profile',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has failed to edit their profile'
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
                     die('Something went wrong ');
                 }
             } else {
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'Manage Profile',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has failed to provide the required information to edit their profile'
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
                 $this->view('serviceproviders/edit', $data);
             }
 
@@ -1762,6 +2220,14 @@ class serviceproviders extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($this->serviceProviderModel->delete($_SESSION['serviceprovider_id'])) {
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'Account Delete',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has deleted their profile'
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
                 unset($_SESSION['serviceprovider_id']);
                 unset($_SESSION['serviceprovider_email']);
                 unset($_SESSION['serviceprovider_name']);
@@ -1795,8 +2261,24 @@ class serviceproviders extends Controller
                 $combinedNumber = $_POST['char1'] . $_POST['char2'] . $_POST['char3'] . $_POST['char4'] . $_POST['char5'] . $_POST['char6'];
                 $result = $this->serviceProviderModel->verificationNumber($combinedNumber);
                 if ($result) {
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Verification',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has verified their account'
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
                     $this->view('serviceproviders/succesfull', $data);
                 } else {
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Verification',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has failed to verify their account Invalid OTP'
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
                     $data = ['validation_err' => 'Invalid OTP'];
                     $this->view('serviceproviders/verification', $data);
                 }
@@ -2025,10 +2507,18 @@ class serviceproviders extends Controller
 
                 // Register serviceprovider
                 if ($this->serviceProviderModel->register($data)) {
+                    $sp_id = $this->serviceProviderModel->findserviceproviderByEmail($data['business_email'])->serviceprovider_id;
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $sp_id,
+                        'log_type' => 'Registration',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has created an account'
+                    ];
                     // flash('register_success', 'You are registered and can log in');
                     $this->view('serviceproviders/verification');
                 } else {
-                    die('Something went wrong');
+                    die('Something went wrong while registering');
                 }
             } else {
                 // Load view with errors
@@ -2113,12 +2603,13 @@ class serviceproviders extends Controller
                 $loggedInserviceprovider = $this->serviceProviderModel->serviceproviderlogin($data['business_email'], $data['password']);
 
                 if ($loggedInserviceprovider) {
-                    $loginData = [
-                        'type' => 'Service Provider - Login',
-                        'date_time' => date('Y-m-d H:i:s'),
-                        'id' => $loggedInserviceprovider->serviceprovider_id
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $loggedInserviceprovider->serviceprovider_id,
+                        'log_type' => 'Login',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has logged in'
                     ];
-                    $this->serviceProviderModel->addLoginHistory($loginData);
                     $this->createserviceprovidersession($loggedInserviceprovider);
                 } else {
                     $data['password_err'] = 'Password incorrect';
@@ -2149,7 +2640,38 @@ class serviceproviders extends Controller
     {
         $this->serviceProviderModel->changeOrderStatus($order_id, $status);
         if($status === 'Rejected'){
+            $log_data = [
+                'user_type' => 'Service Provider',
+                'user_id' => $_SESSION['serviceprovider_id'],
+                'log_type' => 'Reject Order',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'Service Provider has rejected an order with the ID ' . $order_id
+            ];
+            $this->serviceProviderModel->addLogData($log_data);
+        } else if($status === 'Upcoming'){
+            $log_data = [
+                'user_type' => 'Service Provider',
+                'user_id' => $_SESSION['serviceprovider_id'],
+                'log_type' => 'Accept Order',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'Service Provider has accepted an order with the ID ' . $order_id
+            ];
+            $this->serviceProviderModel->addLogData($log_data);
+        }
+        if($status === 'Rejected'){
+            $full_order_data = $this->serviceProviderModel->getFullOrderData();
+            $full_order_id = 0;
+            foreach ($full_order_data as $order) {
+                $full_order_id = $order->order_id;
+                $suborder_ids = explode(',', $order->sorder_id);
+                foreach ($suborder_ids as $suborder_id) {
+                    if($suborder_id == $order_id){
+                        break 2;
+                    }
+                }
+            }
             $order_data = $this->serviceProviderModel->getOrderData($order_id);
+            $this->serviceProviderModel->updateFullOrderPrice($full_order_id, $order_data->total);
             $resultString = implode(', ', json_decode(json_encode($order_data), true));
             $resultArray = explode(', ', $resultString);
             $finalArray = explode(',', $resultArray[10]);
@@ -2221,7 +2743,14 @@ class serviceproviders extends Controller
         $data = [
             'orders' => $order_objects
         ];
-        
+        $log_data = [
+            'user_type' => 'Service Provider',
+            'user_id' => $_SESSION['serviceprovider_id'],
+            'log_type' => 'View Orders',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Service Provider has viewed their orders'
+        ];
+        $this->serviceProviderModel->addLogData($log_data);
         $this->view('serviceproviders/orders', $data);
     }
 
@@ -2237,12 +2766,14 @@ class serviceproviders extends Controller
 
     public function logout()
     {
-        $loginData = [
-            'type' => 'Service Provider - Logout',
-            'date_time' => date('Y-m-d H:i:s'),
-            'id' => $_SESSION['serviceprovider_id']
+        $log_data = [
+            'user_type' => 'Service Provider',
+            'user_id' => $_SESSION['serviceprovider_id'],
+            'log_type' => 'Logout',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Service Provider has logged out'
         ];
-        $this->serviceProviderModel->addLoginHistory($loginData);
+        $this->serviceProviderModel->addLogData($log_data);
         unset($_SESSION['serviceprovider_id']);
         unset($_SESSION['serviceprovider_email']);
         unset($_SESSION['serviceprovider_name']);
@@ -2256,6 +2787,14 @@ class serviceproviders extends Controller
         $data = [
             'inventory' => $inventory
         ];
+        $log_data = [
+            'user_type' => 'Service Provider',
+            'user_id' => $_SESSION['serviceprovider_id'],
+            'log_type' => 'Manage Inventory',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Service Provider has viewed their Instrument inventory'
+        ];
+        $this->serviceProviderModel->addLogData($log_data);
         $this->view('serviceproviders/inventory', $data);
     }
 
@@ -2265,6 +2804,14 @@ class serviceproviders extends Controller
         $data = [
             'inventory' => $inventory
         ];
+        $log_data = [
+            'user_type' => 'Service Provider',
+            'user_id' => $_SESSION['serviceprovider_id'],
+            'log_type' => 'Manage Inventory',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Service Provider has viewed their Studio inventory'
+        ];
+        $this->serviceProviderModel->addLogData($log_data);
         $this->view('serviceproviders/studio');
     }
 
@@ -2274,6 +2821,14 @@ class serviceproviders extends Controller
         $data = [
             'inventory' => $inventory
         ];
+        $log_data = [
+            'user_type' => 'Service Provider',
+            'user_id' => $_SESSION['serviceprovider_id'],
+            'log_type' => 'Manage Inventory',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Service Provider has viewed their Singer inventory'
+        ];
+        $this->serviceProviderModel->addLogData($log_data);
         $this->view('serviceproviders/singer');
     }
 
@@ -2283,6 +2838,14 @@ class serviceproviders extends Controller
         $data = [
             'inventory' => $inventory
         ];
+        $log_data = [
+            'user_type' => 'Service Provider',
+            'user_id' => $_SESSION['serviceprovider_id'],
+            'log_type' => 'Manage Inventory',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'Service Provider has viewed their Band inventory'
+        ];
+        $this->serviceProviderModel->addLogData($log_data);
         $this->view('serviceproviders/band');
     }
 
@@ -2291,6 +2854,14 @@ class serviceproviders extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $singerDetails = $this->serviceProviderModel->viewSinger($product_id);
             if ($singerDetails) {
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'Manage Inventory',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has viewed a Singer with ID ' . $product_id
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
                 $this->view('serviceproviders/viewSinger', $singerDetails);
             } else {
 //                var_dump('singer fetch err..);
@@ -2340,12 +2911,36 @@ class serviceproviders extends Controller
 
                 if (!empty($data['name']) && !empty($data['NickName']) && !empty($data['telephoneNumber']) && !empty($data['email']) && !empty($data['rate']) && !empty($data['videoLink']) && !empty($data['description'])) {
                     if ($this->serviceProviderModel->updateSinger($data)) {
+                        $log_data = [
+                            'user_type' => 'Service Provider',
+                            'user_id' => $_SESSION['serviceprovider_id'],
+                            'log_type' => 'Manage Inventory',
+                            'date_and_time' => date('Y-m-d H:i:s'),
+                            'data' => 'Service Provider has updated a Singer with ID ' . $id
+                        ];
+                        $this->serviceProviderModel->addLogData($log_data);
                         redirect('serviceproviders/viewSinger/' . $id);
                     } else {
-                        die('Something went wrong');
+                        $log_data = [
+                            'user_type' => 'Service Provider',
+                            'user_id' => $_SESSION['serviceprovider_id'],
+                            'log_type' => 'Manage Inventory',
+                            'date_and_time' => date('Y-m-d H:i:s'),
+                            'data' => 'Service Provider has failed to update a Singer with ID ' . $id
+                        ];
+                        $this->serviceProviderModel->addLogData($log_data);
+                        die('Something went wrong while updating the singer');
                     }
                 } else {
-                    die('singer connot update...');
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Inventory',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has failed to provide the required information to update a Singer with ID ' . $id
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
+                    redirect('serviceproviders/viewSinger/' . $id);
                 }
             } else {
                 $data = [
@@ -2363,12 +2958,36 @@ class serviceproviders extends Controller
 
                 if (!empty($data['name']) && !empty($data['NickName']) && !empty($data['telephoneNumber']) && !empty($data['email']) && !empty($data['rate']) && !empty($data['videoLink']) && !empty($data['description'])) {
                     if ($this->serviceProviderModel->updateSinger($data)) {
+                        $log_data = [
+                            'user_type' => 'Service Provider',
+                            'user_id' => $_SESSION['serviceprovider_id'],
+                            'log_type' => 'Manage Inventory',
+                            'date_and_time' => date('Y-m-d H:i:s'),
+                            'data' => 'Service Provider has updated a Singer with ID ' . $id
+                        ];
+                        $this->serviceProviderModel->addLogData($log_data);
                         redirect('serviceproviders/viewSinger/' . $id);
                     } else {
-                        die('Something went wrong');
+                        $log_data = [
+                            'user_type' => 'Service Provider',
+                            'user_id' => $_SESSION['serviceprovider_id'],
+                            'log_type' => 'Manage Inventory',
+                            'date_and_time' => date('Y-m-d H:i:s'),
+                            'data' => 'Service Provider has failed to update a Singer with ID ' . $id
+                        ];
+                        $this->serviceProviderModel->addLogData($log_data);
+                        die('Something went wrong while updating the singer');
                     }
                 } else {
-                    die('singer connot update...');
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Manage Inventory',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has failed to provide the required information to update a Singer with ID ' . $id
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
+                    redirect('serviceproviders/viewSinger/' . $id);
                 }
             }
         } else {

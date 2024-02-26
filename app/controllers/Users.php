@@ -42,7 +42,7 @@ class Users extends Controller
         $log_data = [
             'user_type' => 'Customer',
             'user_id' => $_SESSION['user_id'],
-            'log_type' => 'View Profile',
+            'log_type' => 'Manage Profile',
             'date_and_time' => date('Y-m-d H:i:s'),
             'data' => 'User viewed their profile'
         ];
@@ -72,14 +72,14 @@ class Users extends Controller
                     $log_data = [
                         'user_type' => 'Customer',
                         'user_id' => $_SESSION['user_id'],
-                        'log_type' => 'Profile Photo Update',
+                        'log_type' => 'Manage Profile',
                         'date_and_time' => date('Y-m-d H:i:s'),
-                        'data' => 'User failed to upload a photo'
+                        'data' => 'User failed to upload a new profile photo'
                     ];
                     $this->userModel->addLogData($log_data);
                     redirect('users/profile');
                 } else {
-                    die('Something went wrong');
+                    die('Something went wrong with photo update');
                 }
             } else {
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
@@ -92,14 +92,14 @@ class Users extends Controller
                     $log_data = [
                         'user_type' => 'Customer',
                         'user_id' => $_SESSION['user_id'],
-                        'log_type' => 'Profile Photo Update',
+                        'log_type' => 'Manage Profile',
                         'date_and_time' => date('Y-m-d H:i:s'),
-                        'data' => 'User uploaded a photo'
+                        'data' => 'User uploaded a new profile photo photo'
                     ];
                     $this->userModel->addLogData($log_data);
                     redirect('users/profile');
                 } else {
-                    die('Something went wrong');
+                    die('Something went wrong with photo update');
                 }
             }
         }
@@ -119,9 +119,9 @@ class Users extends Controller
             $log_data = [
                 'user_type' => 'Customer',
                 'user_id' => $_SESSION['user_id'],
-                'log_type' => 'Profile Update',
+                'log_type' => 'Manage Profile',
                 'date_and_time' => date('Y-m-d H:i:s'),
-                'data' => 'User views profile update page'
+                'data' => 'User viewed the profile update page'
             ];
             $this->userModel->addLogData($log_data);
             $this->view('users/edit', $data);
@@ -224,13 +224,21 @@ class Users extends Controller
                     $log_data = [
                         'user_type' => 'Customer',
                         'user_id' => $_SESSION['user_id'],
-                        'log_type' => 'Profile Update',
+                        'log_type' => 'Manage Profile',
                         'date_and_time' => date('Y-m-d H:i:s'),
-                        'data' => 'User updated their profile'
+                        'data' => 'User updated their profile information'
                     ];
                     $this->userModel->addLogData($log_data);
                     redirect('users/profile');
                 } else {
+                    $log_data = [
+                        'user_type' => 'Customer',
+                        'user_id' => $_SESSION['user_id'],
+                        'log_type' => 'Manage Profile',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'User failed to update their profile information'
+                    ];
+                    $this->userModel->addLogData($log_data);
                     die('Something went wrong');
                 }
             } else {
@@ -239,7 +247,6 @@ class Users extends Controller
             }
 
         } else {
-
             redirect('users/profile');
         }
     }
@@ -407,13 +414,21 @@ class Users extends Controller
             $log_data = [
                 'user_type' => 'Customer',
                 'user_id' => $_SESSION['user_id'],
-                'log_type' => 'Inquiry',
+                'log_type' => 'Add Inquiry',
                 'date_and_time' => date('Y-m-d H:i:s'),
                 'data' => 'User made an inquiry with inquiry type: ' . $inquiryData['inquiryType']
             ];
             $this->userModel->addLogData($log_data);
             redirect('users/inquiries');
         } else {
+            $log_data = [
+                'user_type' => 'Customer',
+                'user_id' => $_SESSION['user_id'],
+                'log_type' => 'Add Inquiry',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'User failed to make an inquiry with inquiry type: ' . $inquiryData['inquiryType']
+            ];
+            $this->userModel->addLogData($log_data);
             die('Something went wrong');
         }
     }
@@ -439,6 +454,14 @@ class Users extends Controller
     {
         $inquiry = $this->userModel->getInquiry($inquiry_id);
         if($inquiry->status == 'Pending'){
+            $log_data = [
+                'user_type' => 'Customer',
+                'user_id' => $_SESSION['user_id'],
+                'log_type' => 'View Inquiry',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'User tried to view an inquiry with inquiry id: ' . $inquiry_id . ' and inquiry type: ' . $inquiry->inquiryType . ' but it is still pending'
+            ];
+            $this->userModel->addLogData($log_data);
             $this->inquiries();
         } else {
             $chat = [];
@@ -490,6 +513,14 @@ class Users extends Controller
             $this->userModel->addLogData($log_data);
             redirect('users/viewInquiry/'.$inquiry_id.'');
         } else {
+            $log_data = [
+                'user_type' => 'Customer',
+                'user_id' => $_SESSION['user_id'],
+                'log_type' => 'Send Message',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'User failed to send a message to a moderator with inquiry id: ' . $inquiry_id . ' and moderator id: ' . $moderator_id
+            ];
+            $this->userModel->addLogData($log_data);
             die('Something went wrong');
         }
     }
@@ -662,11 +693,19 @@ class Users extends Controller
                             'user_id' => $_SESSION['user_id'],
                             'log_type' => 'Password Change',
                             'date_and_time' => date('Y-m-d H:i:s'),
-                            'data' => 'User changed their password using change password'
+                            'data' => 'User changed their password while logged in'
                         ];
                         $this->userModel->addLogData($log_data);
                         $this->logout();
                     } else {
+                        $log_data = [
+                            'user_type' => 'Customer',
+                            'user_id' => $_SESSION['user_id'],
+                            'log_type' => 'Password Change',
+                            'date_and_time' => date('Y-m-d H:i:s'),
+                            'data' => 'User failed to change their password while logged in'
+                        ];
+                        $this->userModel->addLogData($log_data);
                         die('Something went wrong');
                     }
                 } else {
@@ -685,6 +724,14 @@ class Users extends Controller
                 'new_password_err' => '',
                 'confirm_password_err' => ''
             ];
+            $log_data = [
+                'user_type' => 'Customer',
+                'user_id' => $_SESSION['user_id'],
+                'log_type' => 'Password Change',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'User viewed the change password page while logged in'
+            ];
+            $this->userModel->addLogData($log_data);
             $this->view('users/changepassword', $data);
         }
     }
@@ -730,9 +777,24 @@ class Users extends Controller
                     $this->userModel->addLogData($log_data);
                     $this->view('users/forgotpassword', $data); 
                 } else {
+                    $log_data = [
+                        'user_type' => 'Customer',
+                        'user_id' => $user_id,
+                        'log_type' => 'Password Change',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'User failed to change their password using forgot password'
+                    ];
+                    $this->userModel->addLogData($log_data);
                     die('Something went wrong');
                 }
             } else {
+                $log_data = [
+                    'user_type' => 'Customer',
+                    'user_id' => $user_id,
+                    'log_type' => 'Password Change',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'User failed to input the correct details to change their password using forgot password'
+                ];
                 $this->view('users/changepassword_lo', $data);
             }
         } else {
@@ -770,11 +832,19 @@ class Users extends Controller
                         'user_id' => $_SESSION['user_id'],
                         'log_type' => 'Verification',
                         'date_and_time' => date('Y-m-d H:i:s'),
-                        'data' => 'User verified their account'
+                        'data' => 'User verified their account successfully '
                     ];
                     $this->userModel->addLogData($log_data);
                     $this->view('users/succesfull', $data);
                 } else {
+                    $log_data = [
+                        'user_type' => 'Customer',
+                        'user_id' => $_SESSION['user_id'],
+                        'log_type' => 'Verification',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'User failed to verify their account'
+                    ];
+                    $this->userModel->addLogData($log_data);
                     $data = ['validation_err' => 'Invalid OTP'];
                     $this->view('users/verification', $data);
                 }
@@ -817,13 +887,17 @@ class Users extends Controller
                 'confirm_password' => trim($_POST['confirm_password']),
                 'photo' => $new_img_name,
                 'registration_date' => date('Y-m-d'),
+                'question' => trim($_POST['securityQuestion']),
+                'answer' => trim($_POST['securityAnswer']),
                 'name_err' => '',
                 'email_err' => '',
                 'tel_Number_err' => '',
                 'date_err' => '',
                 'address_err' => '',
                 'password_err' => '',
-                'confirm_password_err' => ''
+                'confirm_password_err' => '',
+                'security_question_err' => '',
+                'security_answer_err' => ''
             ];
             // Validate Email
             if (empty($data['email'])) {
@@ -862,6 +936,15 @@ class Users extends Controller
                 $data['date_err'] = 'Pleae enter date';
             }
 
+            if (empty($data['question'])) {
+                $data['security_question_err'] = 'Please select a security question';
+            }
+
+            // Validate Date
+            if (empty($data['answer'])) {
+                $data['security_answer_err'] = 'Please enter an answer to the security question';
+            }
+
             // Validate Password
             if (empty($data['password'])) {
                 $data['password_err'] = 'Pleae enter password';
@@ -879,7 +962,7 @@ class Users extends Controller
             }
 
             // Make sure errors are empty
-            if (empty($data['email_err']) && empty($data['name_err']) && empty($data['tel_Number_err']) && empty($data['date_err']) && empty($data['address_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])) {
+            if (empty($data['email_err']) && empty($data['name_err']) && empty($data['tel_Number_err']) && empty($data['date_err']) && empty($data['address_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['security_question_err']) && empty($data['security_answer_err'])){
                 // Validated
 
                 // Hash Password
@@ -887,9 +970,16 @@ class Users extends Controller
 
                 // Register User
                 if ($this->userModel->register($data)) {
+                    $user_id = $this->userModel->getUserIdByEmail($data['email']);
+                    $sec_data = [
+                        'user_id' => $user_id->id,
+                        'question' => $data['question'],
+                        'answer' => $data['answer']
+                    ];
+                    $this->userModel->addSecurityQuestion($sec_data);
                     $log_data = [
                         'user_type' => 'Customer',
-                        'user_id' => $this->userModel->getUserId($data['email']),
+                        'user_id' => $user_id->id,
                         'log_type' => 'Registration',
                         'date_and_time' => date('Y-m-d H:i:s'),
                         'data' => 'User registered - Waiting for verification'
@@ -923,7 +1013,9 @@ class Users extends Controller
                 'date_err' => '',
                 'address_err' => '',
                 'password_err' => '',
-                'confirm_password_err' => ''
+                'confirm_password_err' => '',
+                'security_question_err' => '',
+                'security_answer_err' => ''
             ];
 
             // Load view
@@ -967,7 +1059,7 @@ class Users extends Controller
                 $log_data = [
                     'user_type' => 'Customer',
                     'user_id' => $user_data->id,
-                    'log_type' => 'Forgot Password',
+                    'log_type' => 'Password Change',
                     'date_and_time' => date('Y-m-d H:i:s'),
                     'data' => 'User requested to recover their account using email method'
                 ];
@@ -994,13 +1086,21 @@ class Users extends Controller
                     $log_data = [
                         'user_type' => 'Customer',
                         'user_id' => $user_data->id,
-                        'log_type' => 'Forgot Password',
+                        'log_type' => 'Password Change',
                         'date_and_time' => date('Y-m-d H:i:s'),
                         'data' => 'User requested to recover their account using password method'
                     ];
                     $this->userModel->addLogData($log_data);
                     $this->view('users/changepassword_lo', $data);
                 } else {
+                    $log_data = [
+                        'user_type' => 'Customer',
+                        'user_id' => $user_data->id,
+                        'log_type' => 'Password Change',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'User failed to enter a previous password to recover their account using password method'
+                    ];
+                    $this->userModel->addLogData($log_data);
                     $message = "The password you entered is not a previous password. Please enter a previous password to recover your account.";
                     $data = [
                         'message' => $message
@@ -1021,6 +1121,8 @@ class Users extends Controller
                     'gender' => trim($_POST['gender']),
                     'other' => trim($_POST['otherInfo']),
                     'contactEmail' => trim($_POST['contactEmail']),
+                    'securityQuestion' => trim($_POST['securityQuestion']),
+                    'securityAnswer' => trim($_POST['securityAnswer']),
                     'status' => 'Pending'
                 ];
                 if($this->userModel->addRecoveryRequest($data)){
@@ -1337,7 +1439,7 @@ class Users extends Controller
         $log_data = [
             'user_type' => 'Customer',
             'user_id' => $_SESSION['user_id'],
-            'log_type' => 'View Cart',
+            'log_type' => 'Manage Cart',
             'date_and_time' => date('Y-m-d H:i:s'),
             'data' => 'User viewed their cart'
         ];
@@ -1556,9 +1658,9 @@ class Users extends Controller
         $log_data = [
             'user_type' => 'Customer',
             'user_id' => $_SESSION['user_id'],
-            'log_type' => 'Remove from Cart',
+            'log_type' => 'Manage Cart',
             'date_and_time' => date('Y-m-d H:i:s'),
-            'data' => 'User removed an item from their cart'
+            'data' => 'User removed an '.$type.' with product id '.$product_id.' from their cart'
         ];
         $this->userModel->addLogData($log_data);
         $this->view('users/cart',$data);
@@ -1620,7 +1722,7 @@ class Users extends Controller
                 $this->viewAllAC($type, 'notAvailable', $data);
             }
         } else {
-            die('Something went wrong');
+            die('Something went wrong in checkAvailability');
         }
     }
 
@@ -2256,7 +2358,7 @@ class Users extends Controller
                 $this->view('users/viewItem',$data);
             } 
         } else {
-            die('Something went wrong');
+            die('Something went wrong while viewing the product');
         }
     }
 
@@ -2328,7 +2430,7 @@ class Users extends Controller
                         $log_data = [
                             'user_type' => 'Customer',
                             'user_id' => $_SESSION['user_id'],
-                            'log_type' => 'Add to Cart',
+                            'log_type' => 'Manage Cart',
                             'date_and_time' => date('Y-m-d H:i:s'),
                             'data' => 'User added an Instrument to the cart with the id of '.$product_id
                         ]; 
@@ -2338,7 +2440,7 @@ class Users extends Controller
                         $log_data = [
                             'user_type' => 'Customer',
                             'user_id' => $_SESSION['user_id'],
-                            'log_type' => 'Add to Cart',
+                            'log_type' => 'Manage Cart',
                             'date_and_time' => date('Y-m-d H:i:s'),
                             'data' => 'User added a Studio to the cart with the id of '.$product_id
                         ];
@@ -2348,7 +2450,7 @@ class Users extends Controller
                         $log_data = [
                             'user_type' => 'Customer',
                             'user_id' => $_SESSION['user_id'],
-                            'log_type' => 'Add to Cart',
+                            'log_type' => 'Manage Cart',
                             'date_and_time' => date('Y-m-d H:i:s'),
                             'data' => 'User added a Singer to the cart with the id of '.$product_id
                         ];
@@ -2358,7 +2460,7 @@ class Users extends Controller
                         $log_data = [
                             'user_type' => 'Customer',
                             'user_id' => $_SESSION['user_id'],
-                            'log_type' => 'Add to Cart',
+                            'log_type' => 'Manage Cart',
                             'date_and_time' => date('Y-m-d H:i:s'),
                             'data' => 'User added a Band to the cart with the id of '.$product_id
                         ];
@@ -2368,7 +2470,7 @@ class Users extends Controller
                         $log_data = [
                             'user_type' => 'Customer',
                             'user_id' => $_SESSION['user_id'],
-                            'log_type' => 'Add to Cart',
+                            'log_type' => 'Manage Cart',
                             'date_and_time' => date('Y-m-d H:i:s'),
                             'data' => 'User added a Musician to the cart with the id of '.$product_id
                         ];
@@ -2376,7 +2478,7 @@ class Users extends Controller
                         redirect('users/viewMusician/'.$product_id);
                     }
                 } else {
-                    die('Something went wrong');
+                    die('Something went wrong while adding to the cart');
                 }
             }
         } else {
@@ -2483,7 +2585,7 @@ class Users extends Controller
                         redirect('users/viewMusician/'.$product_id);
                     }
                 } else {
-                    die('Something went wrong');
+                    die('Something went wrong while adding the review');
                 }
             }
         } else {

@@ -38,6 +38,32 @@ require 'vendor/autoload.php';
       }
     }
 
+    public function getSecurityData($user_id){
+      $this->db->query('SELECT * FROM sec_queation WHERE user_id = :user_id AND user_type = :user_type');
+      $this->db->bind(':user_id', $user_id);
+      $this->db->bind(':user_type', 'Customer');
+      $results = $this->db->single();
+      return $results;
+    }
+
+    public function addLogData($data){
+      $this->db->query('INSERT INTO logs (user_type, user_id, date_and_time, log_type, data) VALUES(:user_type, :user_id, :date_and_time, :log_type, :data)');
+      try {
+          $this->db->bind(':user_type', $data['user_type']);
+          $this->db->bind(':user_id', $data['user_id']);
+          $this->db->bind(':date_and_time', $data['date_and_time']);
+          $this->db->bind(':log_type', $data['log_type']);
+          $this->db->bind(':data', $data['data']);
+          if ($this->db->execute()) {
+              return true;
+          } else {
+              return false;
+          }
+      } catch (PDOException $e) {
+          die($e->getMessage());
+      }
+  }
+
     public function getRecoverRequests($status){
       $this->db->query('SELECT * FROM recover_account_user WHERE status = :status');
       $this->db->bind(':status', $status);
@@ -112,6 +138,187 @@ require 'vendor/autoload.php';
       </div>';
       $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
+      if($this->mail->send()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function sendBanUserEmail($email, $name, $reason){
+      $this->mail->isSMTP();                                            //Send using SMTP
+      $this->mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
+      $this->mail->SMTPAuth = true;                                   //Enable SMTP authentication
+      $this->mail->Username = 'symphonyuscs@gmail.com';                     //SMTP username
+      $this->mail->Password = 'wmoe qbsp fxcl bwqp';                               //SMTP password
+      $this->mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+      //Recipients
+      $this->mail->setFrom('symphonyucsc@gmail.com', 'Symphony');
+      $this->mail->addAddress($email, $name);     //Add a recipient
+
+      //Attachments
+//    $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+//    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+      //Content
+      $this->mail->isHTML(true);                                  //Set email format to HTML
+      $this->mail->Subject = 'Ban Account - Symphony';
+      $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+      $this->mail->Body = '<div id="overview" style="border: 1px solid #343131;margin: auto;width: 50%;text-align: center">
+        <h1 style="">Hello ' . $name . '</h1>
+        <p style="font-size: 18px;text-align: justify;width: 90%;margin: auto">We are sorry to inform you that your user account has been banned from Symphony due to the following reason. If you think we have made a mistake you can connect us through Symphony Login->Forgot Password->Other. Please make sure to specify your reason in detail. Thank you!</p>
+        <hr style="width:90%;color: #3d3b3b;opacity: 0.3;">
+        <p style="font-size: 20px; color: #2e043a;"> ' . $reason . ' </p>
+      </div>';
+      $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+      if($this->mail->send()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function sendUnbanUserEmail($data){
+      $name = $data['name'];
+      $email = $data['email'];
+      $this->mail->isSMTP();                                            //Send using SMTP
+      $this->mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
+      $this->mail->SMTPAuth = true;                                   //Enable SMTP authentication
+      $this->mail->Username = 'symphonyuscs@gmail.com';                     //SMTP username
+      $this->mail->Password = 'wmoe qbsp fxcl bwqp';                               //SMTP password
+      $this->mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+      //Recipients
+      $this->mail->setFrom('symphonyucsc@gmail.com', 'Symphony');
+      $this->mail->addAddress($email, $name);     //Add a recipient
+
+      //Attachments
+//    $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+//    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+      //Content
+      $this->mail->isHTML(true);                                  //Set email format to HTML
+      $this->mail->Subject = 'Unban Account - Symphony';
+      $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+      $this->mail->Body = '<div id="overview" style="border: 1px solid #343131;margin: auto;width: 50%;text-align: center">
+        <h1 style="">Hello ' . $name . '</h1>
+        <p style="font-size: 18px;text-align: justify;width: 90%;margin: auto">We are pleased to inform you that your User account has been unbanned from Symphony! You can use your email and password to log into your account. Thank you!</p>
+        <hr style="width:90%;color: #3d3b3b;opacity: 0.3;">
+      </div>';
+      $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+      if($this->mail->send()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+
+    public function sendBanSPEmail($email, $name, $reason){
+      $this->mail->isSMTP();                                            //Send using SMTP
+      $this->mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
+      $this->mail->SMTPAuth = true;                                   //Enable SMTP authentication
+      $this->mail->Username = 'symphonyuscs@gmail.com';                     //SMTP username
+      $this->mail->Password = 'wmoe qbsp fxcl bwqp';                               //SMTP password
+      $this->mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+      //Recipients
+      $this->mail->setFrom('symphonyucsc@gmail.com', 'Symphony');
+      $this->mail->addAddress($email, $name);     //Add a recipient
+
+      //Attachments
+//    $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+//    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+      //Content
+      $this->mail->isHTML(true);                                  //Set email format to HTML
+      $this->mail->Subject = 'Ban Account - Symphony';
+      $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+      $this->mail->Body = '<div id="overview" style="border: 1px solid #343131;margin: auto;width: 50%;text-align: center">
+        <h1 style="">Hello ' . $name . '</h1>
+        <p style="font-size: 18px;text-align: justify;width: 90%;margin: auto">We are sorry to inform you that your service provider account has been banned from Symphony due to the following reason. If you think we have made a mistake you can connect us through Symphony Login->Forgot Password->Other. Please make sure to specify your reason in detail. Thank you!</p>
+        <hr style="width:90%;color: #3d3b3b;opacity: 0.3;">
+        <p style="font-size: 20px; color: #2e043a;"> ' . $reason . ' </p>
+      </div>';
+      $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+      if($this->mail->send()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function sendUnbanSPEmail($data){
+      $name = $data['name'];
+      $email = $data['email'];
+      $this->mail->isSMTP();                                            //Send using SMTP
+      $this->mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
+      $this->mail->SMTPAuth = true;                                   //Enable SMTP authentication
+      $this->mail->Username = 'symphonyuscs@gmail.com';                     //SMTP username
+      $this->mail->Password = 'wmoe qbsp fxcl bwqp';                               //SMTP password
+      $this->mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+      //Recipients
+      $this->mail->setFrom('symphonyucsc@gmail.com', 'Symphony');
+      $this->mail->addAddress($email, $name);     //Add a recipient
+
+      //Attachments
+//    $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+//    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+      //Content
+      $this->mail->isHTML(true);                                  //Set email format to HTML
+      $this->mail->Subject = 'Unban Account - Symphony';
+      $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+      $this->mail->Body = '<div id="overview" style="border: 1px solid #343131;margin: auto;width: 50%;text-align: center">
+        <h1 style="">Hello ' . $name . '</h1>
+        <p style="font-size: 18px;text-align: justify;width: 90%;margin: auto">We are pleased to inform you that your Service Provider account has been unbanned from Symphony! You can use your email and password to log into your account. Thank you!</p>
+        <hr style="width:90%;color: #3d3b3b;opacity: 0.3;">
+      </div>';
+      $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+      if($this->mail->send()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function sendRecoverRejectionEmail($data){
+      $name = $data['name'];
+      $email = $data['email'];
+      $reason = $data['reason'];
+      $this->mail->isSMTP();                                            //Send using SMTP
+      $this->mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
+      $this->mail->SMTPAuth = true;                                   //Enable SMTP authentication
+      $this->mail->Username = 'symphonyuscs@gmail.com';                     //SMTP username
+      $this->mail->Password = 'wmoe qbsp fxcl bwqp';                               //SMTP password
+      $this->mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    
+      //Recipients
+      $this->mail->setFrom('symphonyucsc@gmail.com', 'Symphony');
+      $this->mail->addAddress($email, $name);     //Add a recipient
+    
+      //Attachments
+      // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+      // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+    
+      //Content
+      $this->mail->isHTML(true);                                  //Set email format to HTML
+      $this->mail->Subject = 'Reject Account Recovery - Symphony';
+      $verification_code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
+      $this->mail->Body = '<div id="overview" style="border: 1px solid #343131;margin: auto;width: 50%;text-align: center">
+        <h1 style="">Hello ' . $name . '</h1>
+        <p style="font-size: 18px;text-align: justify;width: 90%;margin: auto">We are sorry to inform you that your request to recover a user account with the user name ' . $name . ' has been rejected due to the following reason. Thank you!</p>
+        <hr style="width:90%;color: #3d3b3b;opacity: 0.3;">
+        <p style="font-size: 20px; color: #2e043a;"> ' . $reason . ' </p>
+      </div>';
+      $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    
       if($this->mail->send()){
         return true;
       } else {

@@ -111,10 +111,20 @@
         }
 
         function banSP(serviceproviderID) {
-          // Display a confirmation dialog
-          if (confirm("Are you sure you want to ban this Service Provider?")) {
-              // Execute PHP code to delete the moderator
-              window.location.href = "<?php echo URLROOT; ?>/moderators/banserviceprovider/" + serviceproviderID;
+          var rejectionReason = prompt("Please enter the reason for banning the Service Provider:");
+          
+          if (rejectionReason !== null && rejectionReason !== "") {
+              // URL encode the reason to include it in the URL
+              var encodedReason = rejectionReason.replace(/ /g, '_');
+              
+              // Display a confirmation dialog
+              if (confirm("Are you sure you want to ban this Service Provider?")) {
+                  // Execute PHP code to delete the moderator
+                  window.location.href = "<?php echo URLROOT; ?>/moderators/banserviceprovider/" + serviceproviderID + "/" + encodedReason;
+              }
+            } else {
+              // If the user clicks "Cancel" or provides an empty reason, do nothing
+              alert('Ban canceled. Please provide a valid reason.');
           }
         }
 

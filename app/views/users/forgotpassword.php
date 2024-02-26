@@ -88,6 +88,18 @@
             <label for="otherInfo">Any other information:</label>
             <textarea id="otherInfo" name="otherInfo"></textarea>
             
+            <label for="securityQuestion">Select the Security Question:</label>
+            <select id="securityQuestion" name="securityQuestion">
+                <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                <option value="In which city were you born?">In which city were you born?</option>
+                <option value="What is the name of your first pet?">What is the name of your first pet?</option>
+                <option value="What is your favorite childhood book?">What is your favorite childhood book?</option>
+                <option value="What is the model of your first car?">What is the model of your first car?</option>
+            </select>
+            
+            <label for="securityAnswer">Answer:</label>
+            <textarea id="securityAnswer" name="securityAnswer"></textarea>
+
             <div>
                 <b>Please provide an email for us to contact you.</b>
             </div><br>
