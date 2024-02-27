@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2024 at 07:10 AM
+-- Generation Time: Feb 27, 2024 at 06:19 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -158,15 +158,26 @@ INSERT INTO `availability` (`entry_id`, `date`, `product_id`, `qty`, `type`) VAL
 (369, '2024-03-06', 18, 4, ''),
 (370, '2024-03-07', 18, 4, ''),
 (371, '2024-03-08', 18, 4, ''),
-(374, '2024-02-22', 8, 1, 'Singer'),
-(375, '2024-02-23', 8, 1, 'Singer'),
-(376, '2024-02-24', 8, 1, 'Singer'),
-(377, '2024-02-25', 8, 1, 'Singer'),
-(378, '2024-02-26', 8, 1, 'Singer'),
-(379, '2024-02-27', 8, 1, 'Singer'),
-(380, '2024-02-28', 8, 1, 'Singer'),
 (381, '2024-02-22', 11, 1, 'Singer'),
-(382, '2024-02-23', 11, 1, 'Singer');
+(382, '2024-02-23', 11, 1, 'Singer'),
+(390, '2024-03-14', 24, 2, 'Equipment'),
+(391, '2024-03-15', 24, 2, 'Equipment'),
+(392, '2024-03-16', 24, 2, 'Equipment'),
+(393, '2024-03-17', 24, 2, 'Equipment'),
+(394, '2024-03-18', 24, 2, 'Equipment'),
+(395, '2024-03-19', 24, 2, 'Equipment'),
+(396, '2024-03-20', 24, 2, 'Equipment'),
+(397, '2024-03-21', 24, 2, 'Equipment'),
+(408, '2024-04-18', 17, 1, 'Equipment'),
+(409, '2024-04-19', 17, 1, 'Equipment'),
+(410, '2024-04-20', 17, 1, 'Equipment'),
+(411, '2024-04-25', 3, 1, 'Studio'),
+(412, '2024-04-26', 3, 1, 'Studio'),
+(413, '2024-04-18', 17, 1, 'Equipment'),
+(414, '2024-04-19', 17, 1, 'Equipment'),
+(415, '2024-04-20', 17, 1, 'Equipment'),
+(416, '2024-04-25', 3, 1, 'Studio'),
+(417, '2024-04-26', 3, 1, 'Studio');
 
 -- --------------------------------------------------------
 
@@ -237,15 +248,9 @@ CREATE TABLE `cart` (
   `days` int(10) NOT NULL,
   `total` int(10) NOT NULL,
   `availability` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL
+  `type` varchar(255) NOT NULL,
+  `extra` int(255) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`cart_id`, `user_id`, `product_id`, `quantity`, `start_date`, `end_date`, `days`, `total`, `availability`, `type`) VALUES
-(70, 18, 3, 1, '2024-02-23', '2024-02-29', 7, 700, 'available', 'Studio');
 
 -- --------------------------------------------------------
 
@@ -427,7 +432,418 @@ INSERT INTO `logs` (`log_id`, `user_type`, `user_id`, `date_and_time`, `log_type
 (56, 'Customer', 19, '2024-02-20 06:32:34', 'View Profile', 'User viewed their profile'),
 (57, 'Customer', 19, '2024-02-20 06:33:01', 'Password Change', 'User changed their password using change password'),
 (58, 'Customer', 19, '2024-02-20 06:33:01', 'Logout', 'User logged out'),
-(59, 'Customer', 19, '2024-02-20 06:33:04', 'Login', 'User logged in');
+(59, 'Customer', 19, '2024-02-20 06:33:04', 'Login', 'User logged in'),
+(60, 'Customer', 18, '2024-02-22 20:11:30', 'Login', 'User logged in'),
+(61, 'Customer', 18, '2024-02-22 20:11:45', 'View Instruments', 'User viewed the instruments available'),
+(62, 'Customer', 18, '2024-02-22 20:11:48', 'View Instrument', 'User viewed an instrument with product id 24'),
+(63, 'Customer', 18, '2024-02-22 20:11:57', 'Check Availability', 'User checked the availability of an Equipment  with product id 24'),
+(64, 'Customer', 18, '2024-02-22 20:11:59', 'Add to Cart', 'User added an Instrument to the cart with the id of 24'),
+(65, 'Customer', 18, '2024-02-22 20:11:59', 'View Instrument', 'User viewed an instrument with product id 24'),
+(66, 'Customer', 18, '2024-02-22 20:12:00', 'View Cart', 'User viewed their cart'),
+(67, 'Customer', 18, '2024-02-22 20:12:02', 'View Instrument', 'User viewed an instrument with product id 24'),
+(68, 'Customer', 18, '2024-02-22 20:12:05', 'View Profile', 'User viewed their profile'),
+(69, 'Customer', 18, '2024-02-22 20:12:10', 'View Orders', 'User viewed their orders'),
+(70, 'Customer', 18, '2024-02-22 20:12:10', 'View Instruments', 'User viewed the instruments available'),
+(71, 'Customer', 18, '2024-02-22 20:12:14', 'View Orders', 'User viewed their orders'),
+(72, 'Customer', 18, '2024-02-22 20:12:14', 'View Instruments', 'User viewed the instruments available'),
+(73, 'Customer', 18, '2024-02-22 20:12:16', 'View Orders', 'User viewed their orders'),
+(74, 'Customer', 18, '2024-02-22 20:12:16', 'View Instruments', 'User viewed the instruments available'),
+(75, 'Customer', 18, '2024-02-22 20:12:20', 'View Inquiries', 'User viewed their inquiries'),
+(76, 'Customer', 18, '2024-02-22 20:12:58', 'View Instruments', 'User viewed the instruments available'),
+(77, 'Customer', 18, '2024-02-22 20:12:59', 'View Instrument', 'User viewed an instrument with product id 18'),
+(78, 'Customer', 18, '2024-02-22 20:13:08', 'View Singers', 'User viewed the singers available'),
+(79, 'Customer', 18, '2024-02-22 20:13:58', 'View Instruments', 'User viewed the instruments available'),
+(80, 'Customer', 18, '2024-02-22 20:14:38', 'View Instrument', 'User viewed an instrument with product id 17'),
+(81, 'Customer', 18, '2024-02-22 20:15:29', 'View Instruments', 'User viewed the instruments available'),
+(82, 'Customer', 18, '2024-02-22 20:15:30', 'View Instrument', 'User viewed an instrument with product id 18'),
+(83, 'Customer', 18, '2024-02-22 20:16:05', 'View Singers', 'User viewed the singers available'),
+(84, 'Customer', 18, '2024-02-22 20:16:14', 'View Profile', 'User viewed their profile'),
+(85, 'Customer', 18, '2024-02-22 20:17:23', 'View Orders', 'User viewed their orders'),
+(86, 'Customer', 18, '2024-02-22 20:17:24', 'View Instruments', 'User viewed the instruments available'),
+(87, 'Customer', 18, '2024-02-22 20:17:28', 'View Instruments', 'User viewed the instruments available'),
+(88, 'Customer', 18, '2024-02-22 20:17:32', 'View Cart', 'User viewed their cart'),
+(89, 'Customer', 18, '2024-02-22 20:17:35', 'View Instruments', 'User viewed the instruments available'),
+(90, 'Customer', 18, '2024-02-22 20:17:53', 'View Instruments', 'User viewed the instruments available'),
+(91, 'Customer', 18, '2024-02-22 20:18:17', 'View Musicians', 'User viewed the musicians available'),
+(92, 'Customer', 18, '2024-02-22 20:18:24', 'View Bands', 'User viewed the bands available'),
+(93, 'Customer', 18, '2024-02-22 20:18:30', 'View Studios', 'User viewed the studios available'),
+(94, 'Customer', 18, '2024-02-22 20:18:46', 'View Studios', 'User viewed the studios available'),
+(95, 'Customer', 18, '2024-02-22 20:18:49', 'View Studio', 'User viewed an studio with product id 3'),
+(96, 'Customer', 18, '2024-02-22 20:20:00', 'View Profile', 'User viewed their profile'),
+(97, 'Customer', 18, '2024-02-22 20:20:19', 'View Orders', 'User viewed their orders'),
+(98, 'Customer', 18, '2024-02-22 20:20:20', 'View Instruments', 'User viewed the instruments available'),
+(99, 'Customer', 18, '2024-02-23 06:12:33', 'Login', 'User logged in'),
+(100, 'Customer', 18, '2024-02-23 06:12:35', 'View Orders', 'User viewed their orders'),
+(101, 'Customer', 18, '2024-02-23 06:12:36', 'View Instruments', 'User viewed the instruments available'),
+(102, 'Customer', 18, '2024-02-23 06:12:42', 'Order Cancel', 'User cancelled an order with order id: 24 and sub order id: 48'),
+(103, 'Customer', 18, '2024-02-23 06:12:42', 'View Orders', 'User viewed their orders'),
+(104, 'Customer', 18, '2024-02-23 06:12:42', 'View Instruments', 'User viewed the instruments available'),
+(105, 'Customer', 18, '2024-02-23 06:13:14', 'Manage Cart', 'User viewed their cart'),
+(106, 'Customer', 18, '2024-02-23 06:13:18', 'Place Order', 'User placed an order'),
+(107, 'Customer', 18, '2024-02-23 06:13:20', 'Logout', 'User logged out'),
+(108, 'Service Provider', 14, '2024-02-23 06:13:28', 'View Orders', 'Service Provider has viewed their orders'),
+(109, 'Service Provider', 14, '2024-02-23 06:13:34', 'Logout', 'Service Provider has logged out'),
+(110, 'Service Provider', 18, '2024-02-23 06:13:43', 'View Orders', 'Service Provider has viewed their orders'),
+(111, 'Service Provider', 18, '2024-02-23 06:13:48', 'View Orders', 'Service Provider has viewed their orders'),
+(112, 'Customer', 18, '2024-02-24 03:35:56', 'Login', 'User logged in'),
+(113, 'Customer', 18, '2024-02-24 03:35:59', 'View Instruments', 'User viewed the instruments available'),
+(114, 'Customer', 18, '2024-02-24 03:36:22', 'View Instrument', 'User viewed an instrument with product id 17'),
+(115, 'Customer', 18, '2024-02-24 03:36:29', 'Check Availability', 'User checked the availability of an Equipment  with product id 17'),
+(116, 'Customer', 18, '2024-02-24 03:36:31', 'Manage Cart', 'User added an Instrument to the cart with the id of 17'),
+(117, 'Customer', 18, '2024-02-24 03:36:31', 'View Instrument', 'User viewed an instrument with product id 17'),
+(118, 'Customer', 18, '2024-02-24 03:36:44', 'View Instruments', 'User viewed the instruments available'),
+(119, 'Customer', 18, '2024-02-24 03:36:47', 'View Instrument', 'User viewed an instrument with product id 20'),
+(120, 'Customer', 18, '2024-02-24 03:36:55', 'Check Availability', 'User checked the availability of an Equipment  with product id 20'),
+(121, 'Customer', 18, '2024-02-24 03:36:57', 'Manage Cart', 'User added an Instrument to the cart with the id of 20'),
+(122, 'Customer', 18, '2024-02-24 03:36:57', 'View Instrument', 'User viewed an instrument with product id 20'),
+(123, 'Customer', 18, '2024-02-24 03:36:58', 'Manage Cart', 'User viewed their cart'),
+(124, 'Customer', 18, '2024-02-24 03:37:01', 'Place Order', 'User placed an order'),
+(125, 'Customer', 18, '2024-02-24 03:37:12', 'View Orders', 'User viewed their orders'),
+(126, 'Customer', 18, '2024-02-24 03:37:12', 'View Instruments', 'User viewed the instruments available'),
+(127, 'Customer', 18, '2024-02-24 03:37:30', 'Order Cancel', 'User cancelled an order with order id: 26 and sub order id: 50'),
+(128, 'Customer', 18, '2024-02-24 03:37:30', 'View Orders', 'User viewed their orders'),
+(129, 'Customer', 18, '2024-02-24 03:37:30', 'View Instruments', 'User viewed the instruments available'),
+(130, 'Service Provider', 14, '2024-02-24 03:41:26', 'View Orders', 'Service Provider has viewed their orders'),
+(131, 'Service Provider', 14, '2024-02-24 03:48:06', 'View Orders', 'Service Provider has viewed their orders'),
+(132, 'Service Provider', 14, '2024-02-24 03:48:11', 'View Orders', 'Service Provider has viewed their orders'),
+(133, 'Service Provider', 14, '2024-02-24 03:48:32', 'View Orders', 'Service Provider has viewed their orders'),
+(134, 'Service Provider', 14, '2024-02-24 03:50:13', 'View Orders', 'Service Provider has viewed their orders'),
+(135, 'Service Provider', 14, '2024-02-24 03:50:16', 'View Orders', 'Service Provider has viewed their orders'),
+(136, 'Service Provider', 14, '2024-02-24 03:50:36', 'View Orders', 'Service Provider has viewed their orders'),
+(137, 'Service Provider', 14, '2024-02-24 03:50:37', 'View Orders', 'Service Provider has viewed their orders'),
+(138, 'Service Provider', 14, '2024-02-24 03:50:39', 'View Orders', 'Service Provider has viewed their orders'),
+(139, 'Service Provider', 14, '2024-02-24 03:51:06', 'View Orders', 'Service Provider has viewed their orders'),
+(140, 'Service Provider', 14, '2024-02-24 04:57:46', 'Reject Order', 'Service Provider has rejected an order with the ID 52'),
+(141, 'Service Provider', 14, '2024-02-24 04:57:46', 'View Orders', 'Service Provider has viewed their orders'),
+(142, 'Service Provider', 14, '2024-02-24 04:59:30', 'View Orders', 'Service Provider has viewed their orders'),
+(143, 'Service Provider', 14, '2024-02-24 05:04:29', 'Reject Order', 'Service Provider has rejected an order with the ID 52'),
+(144, 'Service Provider', 14, '2024-02-24 05:04:34', 'Reject Order', 'Service Provider has rejected an order with the ID 52'),
+(145, 'Service Provider', 14, '2024-02-24 05:04:34', 'View Orders', 'Service Provider has viewed their orders'),
+(146, 'Customer', 18, '2024-02-24 05:28:33', 'Logout', 'User logged out'),
+(147, 'Customer', 18, '2024-02-24 05:28:42', 'Login', 'User logged in'),
+(148, 'Customer', 18, '2024-02-24 05:28:44', 'View Orders', 'User viewed their orders'),
+(149, 'Customer', 18, '2024-02-24 05:28:45', 'View Instruments', 'User viewed the instruments available'),
+(150, 'Customer', 18, '2024-02-24 05:29:04', 'Order Cancel', 'User cancelled an order with order id: 27 and sub order id: 53'),
+(151, 'Customer', 18, '2024-02-24 05:29:04', 'View Orders', 'User viewed their orders'),
+(152, 'Customer', 18, '2024-02-24 05:29:04', 'View Instruments', 'User viewed the instruments available'),
+(153, 'Customer', 18, '2024-02-24 05:38:43', 'Logout', 'User logged out'),
+(154, 'Customer', 26, '2024-02-24 05:59:38', 'Registration', 'User registered - Waiting for verification'),
+(155, 'Customer', 26, '2024-02-24 06:00:12', 'Login', 'User logged in'),
+(156, 'Customer', 26, '2024-02-24 06:00:15', 'Logout', 'User logged out'),
+(157, 'Service Provider', 14, '2024-02-24 06:07:59', 'Logout', 'Service Provider has logged out'),
+(158, 'Moderator', 1, '2024-02-24 06:08:11', 'Login', 'Moderator logged in'),
+(159, 'Moderator', 1, '2024-02-24 06:08:18', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(160, 'Moderator', 1, '2024-02-24 06:18:07', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(161, 'Moderator', 1, '2024-02-24 06:20:25', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(162, 'Moderator', 1, '2024-02-24 06:27:25', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(163, 'Moderator', 1, '2024-02-24 06:28:03', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(164, 'Moderator', 1, '2024-02-24 06:28:41', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(165, 'Moderator', 1, '2024-02-24 06:29:22', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(166, 'Moderator', 1, '2024-02-24 06:30:01', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(167, 'Moderator', 1, '2024-02-24 06:30:02', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(168, 'Moderator', 1, '2024-02-24 06:30:02', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(169, 'Moderator', 1, '2024-02-24 06:30:02', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(170, 'Moderator', 1, '2024-02-24 06:30:02', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(171, 'Moderator', 1, '2024-02-24 06:30:03', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(172, 'Moderator', 1, '2024-02-24 06:30:24', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(173, 'Moderator', 1, '2024-02-24 06:30:25', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(174, 'Moderator', 1, '2024-02-24 06:30:25', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(175, 'Moderator', 1, '2024-02-24 06:30:25', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(176, 'Moderator', 1, '2024-02-24 06:35:19', 'Login', 'Moderator logged in'),
+(177, 'Moderator', 1, '2024-02-24 06:35:22', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(178, 'Moderator', 1, '2024-02-24 06:36:06', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(179, 'Moderator', 1, '2024-02-24 06:37:13', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(180, 'Moderator', 1, '2024-02-24 06:39:24', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(181, 'Moderator', 1, '2024-02-24 06:39:25', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(182, 'Moderator', 1, '2024-02-24 06:39:25', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(183, 'Moderator', 1, '2024-02-24 06:39:25', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(184, 'Moderator', 1, '2024-02-24 06:39:26', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(185, 'Moderator', 1, '2024-02-24 06:39:26', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(186, 'Moderator', 1, '2024-02-24 06:44:00', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(187, 'Moderator', 1, '2024-02-24 06:44:26', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(188, 'Moderator', 1, '2024-02-24 06:46:17', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(189, 'Moderator', 1, '2024-02-24 06:46:18', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(190, 'Moderator', 1, '2024-02-24 06:46:43', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(191, 'Moderator', 1, '2024-02-25 05:02:19', 'Login', 'Moderator logged in'),
+(192, 'Moderator', 1, '2024-02-25 05:02:21', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(193, 'Moderator', 1, '2024-02-25 05:02:22', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(194, 'Moderator', 1, '2024-02-25 05:02:43', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(195, 'Moderator', 1, '2024-02-25 05:26:02', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(196, 'Moderator', 1, '2024-02-25 05:26:32', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(197, 'Moderator', 1, '2024-02-25 05:31:43', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(198, 'Moderator', 1, '2024-02-25 05:31:59', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(199, 'Moderator', 1, '2024-02-25 05:37:32', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(200, 'Moderator', 1, '2024-02-25 05:38:50', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(201, 'Moderator', 1, '2024-02-25 05:40:22', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(202, 'Moderator', 1, '2024-02-25 05:42:23', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(203, 'Moderator', 1, '2024-02-25 05:49:16', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(204, 'Moderator', 1, '2024-02-25 05:49:32', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(205, 'Moderator', 1, '2024-02-25 06:03:38', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(206, 'Moderator', 1, '2024-02-25 06:04:57', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(207, 'Moderator', 1, '2024-02-25 06:11:28', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(208, 'Moderator', 1, '2024-02-25 06:16:44', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(209, 'Moderator', 1, '2024-02-25 06:18:02', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(210, 'Moderator', 1, '2024-02-25 06:18:21', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(211, 'Moderator', 1, '2024-02-25 06:20:11', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(212, 'Moderator', 1, '2024-02-25 06:22:02', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(213, 'Moderator', 1, '2024-02-25 06:23:01', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(214, 'Moderator', 1, '2024-02-25 06:23:52', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(215, 'Moderator', 1, '2024-02-25 06:24:32', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(216, 'Moderator', 1, '2024-02-25 06:25:51', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(217, 'Moderator', 1, '2024-02-25 06:26:09', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(218, 'Moderator', 1, '2024-02-25 06:28:22', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(219, 'Moderator', 1, '2024-02-25 06:29:39', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(220, 'Moderator', 1, '2024-02-25 06:30:27', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(221, 'Moderator', 1, '2024-02-25 06:30:27', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(222, 'Moderator', 1, '2024-02-25 06:30:27', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(223, 'Moderator', 1, '2024-02-25 06:32:33', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(224, 'Moderator', 1, '2024-02-25 06:32:34', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(225, 'Moderator', 1, '2024-02-25 06:32:34', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(226, 'Moderator', 1, '2024-02-25 06:32:34', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(227, 'Moderator', 1, '2024-02-25 06:33:50', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(228, 'Moderator', 1, '2024-02-25 06:36:59', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(229, 'Moderator', 1, '2024-02-25 06:36:59', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(230, 'Moderator', 1, '2024-02-25 06:36:59', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(231, 'Moderator', 1, '2024-02-25 06:36:59', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(232, 'Moderator', 1, '2024-02-25 06:40:44', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(233, 'Moderator', 1, '2024-02-25 06:40:44', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(234, 'Moderator', 1, '2024-02-25 06:40:44', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(235, 'Moderator', 1, '2024-02-25 06:43:49', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(236, 'Moderator', 1, '2024-02-25 06:43:50', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(237, 'Moderator', 1, '2024-02-25 06:43:50', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(238, 'Moderator', 1, '2024-02-25 06:44:10', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(239, 'Moderator', 1, '2024-02-25 07:05:25', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(240, 'Moderator', 1, '2024-02-25 07:05:27', 'Manage Recover Requests', 'Moderator viewed recover request 6 details'),
+(241, 'Moderator', 1, '2024-02-25 07:07:05', 'Manage Recover Requests', 'Moderator viewed recover request 6 details'),
+(242, 'Moderator', 1, '2024-02-25 07:07:07', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(243, 'Moderator', 1, '2024-02-25 07:07:09', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(244, 'Moderator', 1, '2024-02-25 07:09:59', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(245, 'Moderator', 1, '2024-02-25 07:10:14', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(246, 'Moderator', 1, '2024-02-25 07:11:19', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(247, 'Moderator', 1, '2024-02-25 07:11:57', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(248, 'Moderator', 1, '2024-02-25 07:13:10', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(249, 'Moderator', 1, '2024-02-25 07:15:18', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(250, 'Moderator', 1, '2024-02-25 07:16:13', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(251, 'Moderator', 1, '2024-02-25 07:17:08', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(252, 'Moderator', 1, '2024-02-25 07:17:23', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(253, 'Moderator', 1, '2024-02-25 07:17:50', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(254, 'Moderator', 1, '2024-02-25 08:49:24', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(255, 'Moderator', 1, '2024-02-25 08:51:41', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(256, 'Moderator', 1, '2024-02-25 08:51:43', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(257, 'Moderator', 1, '2024-02-25 08:51:43', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(258, 'Moderator', 1, '2024-02-25 08:51:54', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(259, 'Moderator', 1, '2024-02-25 08:53:13', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(260, 'Moderator', 1, '2024-02-25 08:53:14', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(261, 'Moderator', 1, '2024-02-25 08:53:20', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(262, 'Moderator', 1, '2024-02-25 08:53:30', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(263, 'Moderator', 1, '2024-02-25 08:53:30', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(264, 'Moderator', 1, '2024-02-25 08:53:39', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(265, 'Moderator', 1, '2024-02-25 09:20:17', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(266, 'Moderator', 1, '2024-02-25 09:20:20', 'View Service Providers', 'Moderator viewed active service providers'),
+(267, 'Moderator', 1, '2024-02-25 09:20:21', 'View Users', 'Moderator viewed active users'),
+(268, 'Moderator', 1, '2024-02-25 09:20:26', 'Manage Users', 'Moderator viewed user 18 details'),
+(269, 'Moderator', 1, '2024-02-25 09:20:38', 'Ban User', 'Moderator banned user 18'),
+(270, 'Moderator', 1, '2024-02-25 09:20:38', 'View Users', 'Moderator viewed banned users'),
+(271, 'Moderator', 1, '2024-02-25 09:20:53', 'Manage Users', 'Moderator viewed user 18 details'),
+(272, 'Moderator', 1, '2024-02-25 09:20:58', 'Unban User', 'Moderator lifted the ban on user 18'),
+(273, 'Moderator', 1, '2024-02-25 09:20:58', 'View Users', 'Moderator viewed active users'),
+(274, 'Moderator', 1, '2024-02-25 09:21:33', 'View Service Providers', 'Moderator viewed active service providers'),
+(275, 'Moderator', 1, '2024-02-25 09:21:35', 'Manage Service Providers', 'Moderator viewed service provider 14 details'),
+(276, 'Moderator', 1, '2024-02-25 09:22:32', 'Ban Service Provider', 'Moderator banned service provider 14 with reason ban reason'),
+(277, 'Moderator', 1, '2024-02-25 09:22:32', 'View Service Providers', 'Moderator viewed banned service providers'),
+(278, 'Moderator', 1, '2024-02-25 09:23:03', 'Manage Service Providers', 'Moderator viewed service provider 14 details'),
+(279, 'Moderator', 1, '2024-02-25 09:23:31', 'Unban Service Provider', 'Moderator lifted the ban on service provider 14'),
+(280, 'Moderator', 1, '2024-02-25 09:23:31', 'View Service Providers', 'Moderator viewed active service providers'),
+(281, 'Moderator', 1, '2024-02-25 09:23:47', 'View Users', 'Moderator viewed banned users'),
+(282, 'Moderator', 1, '2024-02-25 09:23:48', 'View Users', 'Moderator viewed deactivated users'),
+(283, 'Moderator', 1, '2024-02-25 09:23:49', 'View Service Providers', 'Moderator viewed banned service providers'),
+(284, 'Moderator', 1, '2024-02-25 09:23:50', 'View Service Providers', 'Moderator viewed deactivated service providers'),
+(285, 'Moderator', 1, '2024-02-25 09:23:51', 'View Service Providers', 'Moderator viewed banned service providers'),
+(286, 'Moderator', 1, '2024-02-25 09:24:14', 'Manage Recover Requests', 'Moderator viewed rejected recover requests'),
+(287, 'Moderator', 1, '2024-02-25 09:24:26', 'Manage Recover Requests', 'Moderator viewed recover request 4 details'),
+(288, 'Moderator', 1, '2024-02-25 09:24:33', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(289, 'Moderator', 1, '2024-02-25 09:24:35', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(290, 'Moderator', 1, '2024-02-25 09:24:40', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(291, 'Moderator', 1, '2024-02-25 09:24:42', 'Manage Recover Requests', 'Moderator viewed recover request 6 details'),
+(292, 'Moderator', 1, '2024-02-25 09:24:47', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(293, 'Moderator', 1, '2024-02-25 09:24:48', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(294, 'Moderator', 1, '2024-02-25 09:25:28', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(295, 'Moderator', 1, '2024-02-25 09:25:29', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(296, 'Moderator', 1, '2024-02-25 09:25:51', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(297, 'Moderator', 1, '2024-02-25 09:25:52', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(298, 'Moderator', 1, '2024-02-25 09:26:09', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(299, 'Moderator', 1, '2024-02-25 09:26:12', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(300, 'Customer', 18, '2024-02-27 06:03:26', 'Login', 'User logged in'),
+(301, 'Customer', 18, '2024-02-27 06:03:30', 'View Instruments', 'User viewed the instruments available'),
+(302, 'Customer', 18, '2024-02-27 06:03:46', 'Manage Cart', 'User viewed their cart'),
+(303, 'Customer', 18, '2024-02-27 06:04:53', 'Manage Cart', 'User viewed their cart'),
+(304, 'Customer', 18, '2024-02-27 06:05:49', 'Manage Cart', 'User viewed their cart'),
+(305, 'Customer', 18, '2024-02-27 06:05:54', 'View Instruments', 'User viewed the instruments available'),
+(306, 'Customer', 18, '2024-02-27 06:05:56', 'View Instrument', 'User viewed an instrument with product id 17'),
+(307, 'Customer', 18, '2024-02-27 06:06:01', 'View Instruments', 'User viewed the instruments available'),
+(308, 'Customer', 18, '2024-02-27 06:06:06', 'View Orders', 'User viewed their orders'),
+(309, 'Customer', 18, '2024-02-27 06:06:07', 'View Instruments', 'User viewed the instruments available'),
+(310, 'Customer', 18, '2024-02-27 06:07:21', 'Manage Cart', 'User viewed their cart'),
+(311, 'Customer', 18, '2024-02-27 06:07:32', 'View Instruments', 'User viewed the instruments available'),
+(312, 'Customer', 18, '2024-02-27 06:08:10', 'View Instruments', 'User viewed the instruments available'),
+(313, 'Customer', 18, '2024-02-27 06:08:18', 'View Instruments', 'User viewed the instruments available'),
+(314, 'Customer', 18, '2024-02-27 06:08:18', 'View Instruments', 'User viewed the instruments available'),
+(315, 'Customer', 18, '2024-02-27 06:08:20', 'View Instrument', 'User viewed an instrument with product id 18'),
+(316, 'Customer', 18, '2024-02-27 06:08:22', 'View Instruments', 'User viewed the instruments available'),
+(317, 'Customer', 18, '2024-02-27 06:08:30', 'Manage Cart', 'User viewed their cart'),
+(318, 'Customer', 18, '2024-02-27 06:08:36', 'View Instruments', 'User viewed the instruments available'),
+(319, 'Customer', 18, '2024-02-27 06:08:38', 'View Instrument', 'User viewed an instrument with product id 17'),
+(320, 'Customer', 18, '2024-02-27 06:08:48', 'Check Availability', 'User checked the availability of an Equipment  with product id 17'),
+(321, 'Customer', 18, '2024-02-27 06:09:00', 'Check Availability', 'User checked the availability of an Equipment  with product id 17'),
+(322, 'Customer', 18, '2024-02-27 06:09:07', 'Manage Cart', 'User added an Instrument to the cart with the id of 17'),
+(323, 'Customer', 18, '2024-02-27 06:09:07', 'View Instrument', 'User viewed an instrument with product id 17'),
+(324, 'Customer', 18, '2024-02-27 06:09:09', 'Manage Cart', 'User viewed their cart'),
+(325, 'Customer', 18, '2024-02-27 06:09:20', 'View Studios', 'User viewed the studios available'),
+(326, 'Customer', 18, '2024-02-27 06:09:21', 'View Studio', 'User viewed an studio with product id 3'),
+(327, 'Customer', 18, '2024-02-27 06:09:27', 'Check Availability', 'User checked the availability of an Studio  with product id 3'),
+(328, 'Customer', 18, '2024-02-27 06:09:28', 'Manage Cart', 'User added a Studio to the cart with the id of 3'),
+(329, 'Customer', 18, '2024-02-27 06:09:28', 'View Studio', 'User viewed an studio with product id 3'),
+(330, 'Customer', 18, '2024-02-27 06:09:30', 'Manage Cart', 'User viewed their cart'),
+(331, 'Customer', 18, '2024-02-27 06:16:32', 'Manage Cart', 'User viewed their cart'),
+(332, 'Customer', 18, '2024-02-27 06:16:34', 'Manage Cart', 'User viewed their cart'),
+(333, 'Customer', 18, '2024-02-27 06:16:35', 'Manage Cart', 'User viewed their cart'),
+(334, 'Customer', 18, '2024-02-27 06:16:59', 'Place Order', 'User placed an order'),
+(335, 'Customer', 18, '2024-02-27 06:17:33', 'View Orders', 'User viewed their orders'),
+(336, 'Customer', 18, '2024-02-27 06:17:34', 'View Instruments', 'User viewed the instruments available'),
+(337, 'Customer', 18, '2024-02-27 06:17:37', 'View Orders', 'User viewed their orders'),
+(338, 'Customer', 18, '2024-02-27 06:17:37', 'View Instruments', 'User viewed the instruments available'),
+(339, 'Customer', 18, '2024-02-27 06:22:02', 'View Orders', 'User viewed their orders'),
+(340, 'Customer', 18, '2024-02-27 06:22:03', 'View Instruments', 'User viewed the instruments available'),
+(341, 'Customer', 18, '2024-02-27 06:22:03', 'View Orders', 'User viewed their orders'),
+(342, 'Customer', 18, '2024-02-27 06:22:03', 'View Instruments', 'User viewed the instruments available'),
+(343, 'Customer', 18, '2024-02-27 06:22:20', 'View Orders', 'User viewed their orders'),
+(344, 'Customer', 18, '2024-02-27 06:22:20', 'View Instruments', 'User viewed the instruments available'),
+(345, 'Customer', 18, '2024-02-27 06:22:21', 'View Orders', 'User viewed their orders'),
+(346, 'Customer', 18, '2024-02-27 06:22:21', 'View Instruments', 'User viewed the instruments available'),
+(347, 'Customer', 18, '2024-02-27 06:22:21', 'View Orders', 'User viewed their orders'),
+(348, 'Customer', 18, '2024-02-27 06:22:22', 'View Instruments', 'User viewed the instruments available'),
+(349, 'Customer', 18, '2024-02-27 06:22:22', 'View Orders', 'User viewed their orders'),
+(350, 'Customer', 18, '2024-02-27 06:22:22', 'View Instruments', 'User viewed the instruments available'),
+(351, 'Customer', 18, '2024-02-27 06:22:24', 'View Orders', 'User viewed their orders'),
+(352, 'Customer', 18, '2024-02-27 06:22:24', 'View Instruments', 'User viewed the instruments available'),
+(353, 'Customer', 18, '2024-02-27 06:27:48', 'View Orders', 'User viewed their orders'),
+(354, 'Customer', 18, '2024-02-27 06:27:57', 'View Orders', 'User viewed their orders'),
+(355, 'Customer', 18, '2024-02-27 06:27:58', 'View Orders', 'User viewed their orders'),
+(356, 'Customer', 18, '2024-02-27 06:28:29', 'View Orders', 'User viewed their orders'),
+(357, 'Customer', 18, '2024-02-27 06:28:30', 'View Instruments', 'User viewed the instruments available'),
+(358, 'Customer', 18, '2024-02-27 06:31:03', 'View Orders', 'User viewed their orders'),
+(359, 'Customer', 18, '2024-02-27 06:31:03', 'View Instruments', 'User viewed the instruments available'),
+(360, 'Customer', 18, '2024-02-27 06:34:32', 'View Orders', 'User viewed their orders'),
+(361, 'Customer', 18, '2024-02-27 06:34:33', 'View Instruments', 'User viewed the instruments available'),
+(362, 'Customer', 18, '2024-02-27 06:40:41', 'View Orders', 'User viewed their orders'),
+(363, 'Customer', 18, '2024-02-27 06:40:41', 'View Instruments', 'User viewed the instruments available'),
+(364, 'Customer', 18, '2024-02-27 06:42:25', 'View Orders', 'User viewed their orders'),
+(365, 'Customer', 18, '2024-02-27 06:42:25', 'View Instruments', 'User viewed the instruments available'),
+(366, 'Customer', 18, '2024-02-27 06:43:25', 'View Orders', 'User viewed their orders'),
+(367, 'Customer', 18, '2024-02-27 06:43:25', 'View Instruments', 'User viewed the instruments available'),
+(368, 'Customer', 18, '2024-02-27 06:44:08', 'View Orders', 'User viewed their orders'),
+(369, 'Customer', 18, '2024-02-27 06:44:08', 'View Instruments', 'User viewed the instruments available'),
+(370, 'Customer', 18, '2024-02-27 06:44:22', 'View Orders', 'User viewed their orders'),
+(371, 'Customer', 18, '2024-02-27 06:44:22', 'View Instruments', 'User viewed the instruments available'),
+(372, 'Customer', 18, '2024-02-27 06:54:53', 'View Orders', 'User viewed their orders'),
+(373, 'Customer', 18, '2024-02-27 06:54:54', 'View Instruments', 'User viewed the instruments available'),
+(374, 'Customer', 18, '2024-02-27 06:56:33', 'View Orders', 'User viewed their orders'),
+(375, 'Customer', 18, '2024-02-27 06:56:33', 'View Instruments', 'User viewed the instruments available'),
+(376, 'Customer', 18, '2024-02-27 06:56:54', 'View Instruments', 'User viewed the instruments available'),
+(377, 'Customer', 18, '2024-02-27 06:56:55', 'View Instrument', 'User viewed an instrument with product id 18'),
+(378, 'Customer', 18, '2024-02-27 06:57:00', 'View Instruments', 'User viewed the instruments available'),
+(379, 'Customer', 18, '2024-02-27 06:57:01', 'View Instrument', 'User viewed an instrument with product id 20'),
+(380, 'Customer', 18, '2024-02-27 06:57:05', 'View Instruments', 'User viewed the instruments available'),
+(381, 'Customer', 18, '2024-02-27 07:00:39', 'View Instruments', 'User viewed the instruments available'),
+(382, 'Customer', 18, '2024-02-27 07:00:39', 'View Orders', 'User viewed their orders'),
+(383, 'Customer', 18, '2024-02-27 07:00:39', 'View Instruments', 'User viewed the instruments available'),
+(384, 'Customer', 18, '2024-02-27 07:00:41', 'View Instrument', 'User viewed an instrument with product id 23'),
+(385, 'Customer', 18, '2024-02-27 07:00:43', 'View Orders', 'User viewed their orders'),
+(386, 'Customer', 18, '2024-02-27 07:00:43', 'View Instruments', 'User viewed the instruments available'),
+(387, 'Customer', 18, '2024-02-27 07:00:46', 'View Instrument', 'User viewed an instrument with product id 21'),
+(388, 'Customer', 18, '2024-02-27 07:00:48', 'View Orders', 'User viewed their orders'),
+(389, 'Customer', 18, '2024-02-27 07:00:48', 'View Instruments', 'User viewed the instruments available'),
+(390, 'Customer', 18, '2024-02-27 07:00:54', 'View Instrument', 'User viewed an instrument with product id 17'),
+(391, 'Customer', 18, '2024-02-27 07:00:57', 'View Orders', 'User viewed their orders'),
+(392, 'Customer', 18, '2024-02-27 07:00:57', 'View Instruments', 'User viewed the instruments available'),
+(393, 'Customer', 18, '2024-02-27 07:03:29', 'View Orders', 'User viewed their orders'),
+(394, 'Customer', 18, '2024-02-27 07:03:30', 'View Instruments', 'User viewed the instruments available'),
+(395, 'Customer', 18, '2024-02-27 07:14:47', 'Logout', 'User logged out'),
+(396, 'Service Provider', 14, '2024-02-27 07:14:54', 'View Orders', 'Service Provider has viewed their orders'),
+(397, 'Service Provider', 14, '2024-02-27 07:15:42', 'View Orders', 'Service Provider has viewed their orders'),
+(398, 'Service Provider', 14, '2024-02-27 07:17:21', 'View Orders', 'Service Provider has viewed their orders'),
+(399, 'Service Provider', 14, '2024-02-27 07:18:02', 'View Orders', 'Service Provider has viewed their orders'),
+(400, 'Service Provider', 14, '2024-02-27 07:19:09', 'View Orders', 'Service Provider has viewed their orders'),
+(401, 'Service Provider', 14, '2024-02-27 07:21:12', 'View Orders', 'Service Provider has viewed their orders'),
+(402, 'Service Provider', 14, '2024-02-27 07:21:15', 'View Orders', 'Service Provider has viewed their orders'),
+(403, 'Service Provider', 14, '2024-02-27 07:21:19', 'View Orders', 'Service Provider has viewed their orders'),
+(404, 'Service Provider', 14, '2024-02-27 07:21:42', 'View Orders', 'Service Provider has viewed their orders'),
+(405, 'Service Provider', 14, '2024-02-27 07:21:57', 'View Orders', 'Service Provider has viewed their orders'),
+(406, 'Service Provider', 14, '2024-02-27 07:21:59', 'Manage Profile', 'Service Provider has viewed their profile'),
+(407, 'Service Provider', 14, '2024-02-27 07:22:02', 'Manage Inventory', 'Service Provider has viewed their Musician Inventory'),
+(408, 'Service Provider', 14, '2024-02-27 07:22:02', 'Manage Inventory', 'Service Provider has viewed their Musician Inventory'),
+(409, 'Service Provider', 14, '2024-02-27 07:22:06', 'View Musician', 'Service Provider has viewed the details of a Musician with th ID 15'),
+(410, 'Service Provider', 14, '2024-02-27 07:22:06', 'View Musician', 'Service Provider has failed to view the details of a Musician with th ID app.js'),
+(411, 'Service Provider', 14, '2024-02-27 07:22:10', 'Manage Inventory', 'Service Provider has viewed their Musician Inventory'),
+(412, 'Service Provider', 14, '2024-02-27 07:22:10', 'Manage Inventory', 'Service Provider has viewed their Musician Inventory'),
+(413, 'Service Provider', 14, '2024-02-27 07:22:23', 'Logout', 'Service Provider has logged out'),
+(414, 'Moderator', 1, '2024-02-27 07:22:30', 'Login', 'Moderator logged in'),
+(415, 'Moderator', 1, '2024-02-27 07:22:35', 'View Service Providers', 'Moderator viewed active service providers'),
+(416, 'Moderator', 1, '2024-02-27 07:22:36', 'Manage Service Providers', 'Moderator viewed service provider 14 details'),
+(417, 'Moderator', 1, '2024-02-27 07:22:37', 'View Service Provider Orders', 'Moderator viewed service provider 14 orders'),
+(418, 'Moderator', 1, '2024-02-27 07:23:10', 'View Users', 'Moderator viewed active users'),
+(419, 'Moderator', 1, '2024-02-27 07:23:11', 'Manage Users', 'Moderator viewed user 18 details'),
+(420, 'Moderator', 1, '2024-02-27 07:23:12', 'View User Orders', 'Moderator viewed user 18 orders'),
+(421, 'Moderator', 1, '2024-02-27 07:24:28', 'Manage Service Provider Requests', 'Moderator viewed pending service provider requests'),
+(422, 'Moderator', 1, '2024-02-27 07:24:30', 'View Users', 'Moderator viewed active users'),
+(423, 'Moderator', 1, '2024-02-27 07:24:37', 'View Users', 'Moderator viewed deactivated users'),
+(424, 'Moderator', 1, '2024-02-27 07:24:42', 'Manage Recover Requests', 'Moderator viewed rejected recover requests'),
+(425, 'Moderator', 1, '2024-02-27 07:24:45', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(426, 'Moderator', 1, '2024-02-27 07:24:48', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(427, 'Moderator', 1, '2024-02-27 07:24:57', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(428, 'Moderator', 1, '2024-02-27 07:24:58', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(429, 'Moderator', 1, '2024-02-27 10:18:32', 'View Service Providers', 'Moderator viewed active service providers'),
+(430, 'Moderator', 1, '2024-02-27 10:18:35', 'View Service Providers', 'Moderator viewed rejected service providers'),
+(431, 'Moderator', 1, '2024-02-27 10:18:37', 'View Service Providers', 'Moderator viewed deactivated service providers'),
+(432, 'Moderator', 1, '2024-02-27 10:18:37', 'View Service Providers', 'Moderator viewed banned service providers'),
+(433, 'Moderator', 1, '2024-02-27 10:18:38', 'View Users', 'Moderator viewed deactivated users'),
+(434, 'Moderator', 1, '2024-02-27 10:18:39', 'View Inquiries', 'Moderator viewed pending inquiries'),
+(435, 'Moderator', 1, '2024-02-27 10:18:44', 'View Service Providers', 'Moderator viewed active service providers'),
+(436, 'Moderator', 1, '2024-02-27 10:35:21', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(437, 'Service Provider', 14, '2024-02-27 10:36:32', 'Logout', 'Service Provider has logged out'),
+(438, 'Service Provider', 14, '2024-02-27 10:36:57', 'Login', 'Service Provider has logged in'),
+(439, 'Moderator', 1, '2024-02-27 10:38:41', 'Login', 'Moderator logged in'),
+(440, 'Customer', 18, '2024-02-27 11:12:08', 'Login', 'User logged in'),
+(441, 'Customer', 18, '2024-02-27 11:12:09', 'Logout', 'User logged out'),
+(442, 'Customer', 18, '2024-02-27 11:12:13', 'Login', 'User logged in'),
+(443, 'Customer', 18, '2024-02-27 11:12:14', 'Logout', 'User logged out'),
+(444, 'Customer', 18, '2024-02-27 11:12:17', 'Login', 'User logged in'),
+(445, 'Customer', 18, '2024-02-27 11:12:19', 'Logout', 'User logged out'),
+(446, 'Moderator', 1, '2024-02-27 11:12:32', 'Login', 'Moderator logged in'),
+(447, 'Moderator', 1, '2024-02-27 12:00:17', 'View Users', 'Moderator viewed active users'),
+(448, 'Moderator', 1, '2024-02-27 12:00:25', 'Manage Users', 'Moderator viewed user 24 details'),
+(449, 'Moderator', 1, '2024-02-27 12:00:55', 'Manage Users', 'Moderator viewed user 24 details'),
+(450, 'Moderator', 1, '2024-02-27 12:00:58', 'View Users', 'Moderator viewed active users'),
+(451, 'Moderator', 1, '2024-02-27 12:00:59', 'View Users', 'Moderator viewed deactivated users'),
+(452, 'Moderator', 1, '2024-02-27 12:01:00', 'View Users', 'Moderator viewed banned users'),
+(453, 'Moderator', 1, '2024-02-27 12:01:12', 'View Users', 'Moderator viewed banned users'),
+(454, 'Moderator', 1, '2024-02-27 12:01:13', 'View Users', 'Moderator viewed deactivated users'),
+(455, 'Moderator', 1, '2024-02-27 12:01:14', 'View Users', 'Moderator viewed active users'),
+(456, 'Moderator', 1, '2024-02-27 12:01:14', 'View Users', 'Moderator viewed deactivated users'),
+(457, 'Moderator', 1, '2024-02-27 12:01:15', 'View Users', 'Moderator viewed deactivated users'),
+(458, 'Moderator', 1, '2024-02-27 12:01:16', 'Manage Users', 'Moderator viewed user 21 details'),
+(459, 'Moderator', 1, '2024-02-27 12:14:14', 'View Inquiries', 'Moderator viewed pending inquiries'),
+(460, 'Moderator', 1, '2024-02-27 12:14:15', 'View Inquiry', 'Moderator viewed pending inquiry 2 details'),
+(461, 'Moderator', 1, '2024-02-27 12:14:21', 'Manage Recover Requests', 'Moderator viewed accepted recover requests'),
+(462, 'Moderator', 1, '2024-02-27 12:14:23', 'Manage Recover Requests', 'Moderator viewed recover request 3 details'),
+(463, 'Moderator', 1, '2024-02-27 12:14:26', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(464, 'Moderator', 1, '2024-02-27 12:14:28', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(465, 'Moderator', 1, '2024-02-27 12:14:41', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(466, 'Moderator', 1, '2024-02-27 12:14:43', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(467, 'Moderator', 1, '2024-02-27 12:15:03', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(468, 'Moderator', 1, '2024-02-27 12:15:04', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(469, 'Moderator', 1, '2024-02-27 12:15:20', 'View Users', 'Moderator viewed deactivated users'),
+(470, 'Moderator', 1, '2024-02-27 12:15:21', 'Manage Recover Requests', 'Moderator viewed recover request 7 details');
 
 -- --------------------------------------------------------
 
@@ -511,27 +927,31 @@ CREATE TABLE `orders` (
   `user_id` int(10) NOT NULL,
   `sorder_id` mediumtext NOT NULL,
   `total` int(10) NOT NULL,
-  `order_placed_on` date NOT NULL
+  `order_placed_on` date NOT NULL,
+  `deposit` int(255) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `user_id`, `sorder_id`, `total`, `order_placed_on`) VALUES
-(10, 18, '33', 28865, '2024-02-01'),
-(11, 18, '34,35', 98480, '2024-02-01'),
-(12, 18, '36', 8285, '2024-02-01'),
-(13, 18, '37', 18628, '2024-02-01'),
-(17, 18, '38', 8285, '2024-02-01'),
-(18, 18, '40', 13850, '2024-02-01'),
-(19, 18, '41', 48080, '2024-02-01'),
-(20, 18, '42,43', 32278, '2024-02-01'),
-(21, 18, '44', 17840, '2024-02-01'),
-(22, 18, '45', 8285, '2024-02-01'),
-(23, 18, '46', 11540, '2024-02-17'),
-(24, 18, '47,48', 493070, '2024-02-19'),
-(25, 18, '49', 2930, '2024-02-19');
+INSERT INTO `orders` (`order_id`, `user_id`, `sorder_id`, `total`, `order_placed_on`, `deposit`) VALUES
+(10, 18, '33', 28865, '2024-02-01', 0),
+(11, 18, '34,35', 98480, '2024-02-01', 0),
+(12, 18, '36', 8285, '2024-02-01', 0),
+(13, 18, '37', 18628, '2024-02-01', 0),
+(17, 18, '38', 8285, '2024-02-01', 0),
+(18, 18, '40', 13850, '2024-02-01', 0),
+(19, 18, '41', 48080, '2024-02-01', 0),
+(20, 18, '42,43', 32278, '2024-02-01', 0),
+(21, 18, '44', 17840, '2024-02-01', 0),
+(22, 18, '45', 8285, '2024-02-01', 0),
+(23, 18, '46', 11540, '2024-02-17', 0),
+(24, 18, '47,48', 24070, '2024-02-19', 0),
+(25, 18, '49', 2930, '2024-02-19', 0),
+(26, 18, '50,51', 35515, '2024-02-23', 0),
+(27, 18, '52,53', 200, '2024-02-24', 0),
+(28, 18, '54,55', 7340, '2024-02-27', 3300);
 
 -- --------------------------------------------------------
 
@@ -591,17 +1011,21 @@ CREATE TABLE `recover_account_user` (
   `other` text NOT NULL DEFAULT 'Not Given',
   `status` varchar(255) NOT NULL,
   `placed_on` date NOT NULL,
-  `contactEmail` varchar(255) DEFAULT 'Not Given'
+  `contactEmail` varchar(255) DEFAULT 'Not Given',
+  `securityQuestion` varchar(255) NOT NULL DEFAULT 'Not Given',
+  `securityAnswer` varchar(255) NOT NULL DEFAULT 'Not Given'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `recover_account_user`
 --
 
-INSERT INTO `recover_account_user` (`recover_id`, `user_name`, `first_purchase_date`, `first_purchase_item`, `last_purchase_date`, `last_purchase_item`, `account_created_on`, `mobile_number`, `address`, `dob`, `gender`, `other`, `status`, `placed_on`, `contactEmail`) VALUES
-(3, 'test', '2024-02-22', 'gfqag', '2024-02-07', 'hello', '2024-02-07', 0, 'gtest', '2024-02-22', 'male', 'thetheh', 'Accepted', '2024-02-20', 'gayathradissa@gmail.com'),
-(4, 'test', '2024-02-22', 'gfqag', '2024-02-07', 'hello', '2024-02-07', 0, 'gtest', '2024-02-22', 'male', 'thetheh', 'Rejected', '2024-02-20', 'gayathradissa@gmail.com'),
-(5, 'Gayathra', '0000-00-00', 'gfqag', '2021-02-03', 'test 23', '0000-00-00', 712056046, 'hg g hwsb gwgwgwe', '2000-03-31', 'male', '', 'Pending', '2024-02-20', 'itsaeox98@gmail.com');
+INSERT INTO `recover_account_user` (`recover_id`, `user_name`, `first_purchase_date`, `first_purchase_item`, `last_purchase_date`, `last_purchase_item`, `account_created_on`, `mobile_number`, `address`, `dob`, `gender`, `other`, `status`, `placed_on`, `contactEmail`, `securityQuestion`, `securityAnswer`) VALUES
+(3, 'test', '2024-02-22', 'gfqag', '2024-02-07', 'hello', '2024-02-07', 0, 'gtest', '2024-02-22', 'male', 'thetheh', 'Accepted', '2024-02-20', 'gayathradissa@gmail.com', 'Not Given', 'Not Given'),
+(4, 'test', '2024-02-22', 'gfqag', '2024-02-07', 'hello', '2024-02-07', 0, 'gtest', '2024-02-22', 'male', 'thetheh', 'Rejected', '2024-02-20', 'gayathradissa@gmail.com', 'Not Given', 'Not Given'),
+(5, 'Gayathra', '0000-00-00', 'gfqag', '2021-02-03', 'test 23', '0000-00-00', 712056046, 'hg g hwsb gwgwgwe', '2000-03-31', 'male', '', 'Pending', '2024-02-20', 'itsaeox98@gmail.com', 'Not Given', 'Not Given'),
+(6, 'user_05', '0000-00-00', '', '0000-00-00', '', '2024-02-24', 722899088, 'user_05@gmail.com', '2000-03-31', 'male', '', 'Pending', '2024-02-25', 'gayathradissa@gmail.com', 'What is your mother\'s maiden name?', 'Eroshini'),
+(7, 'user_09', '0000-00-00', '', '0000-00-00', '', '2024-02-24', 1234567890, 'user_09@gmail.com', '2024-02-08', 'male', '', 'Pending', '2024-02-25', 'thedarksoul776@gmail.com', 'What is the model of your first car?', 'onmi');
 
 -- --------------------------------------------------------
 
@@ -630,6 +1054,27 @@ INSERT INTO `reviews` (`review_id`, `product_id`, `user_id`, `rating`, `content`
 (37, 8, 18, 4, 'uewshwsg4e', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-02-18', 'Singer'),
 (38, 8, 18, 5, 'g gbwsrhwgw', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-02-18', 'Singer'),
 (39, 2, 18, 3, 'hello', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-02-18', 'Band');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sec_queation`
+--
+
+CREATE TABLE `sec_queation` (
+  `sec_id` int(11) NOT NULL,
+  `user_type` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `question` varchar(255) NOT NULL,
+  `answer` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sec_queation`
+--
+
+INSERT INTO `sec_queation` (`sec_id`, `user_type`, `user_id`, `question`, `answer`) VALUES
+(1, 'Customer', 26, 'What is the model of your first car', 'onmi');
 
 -- --------------------------------------------------------
 
@@ -771,31 +1216,41 @@ CREATE TABLE `suborder` (
   `status` varchar(255) NOT NULL,
   `avail` mediumtext NOT NULL,
   `type` varchar(255) NOT NULL,
-  `order_placed_on` date DEFAULT NULL
+  `order_placed_on` date DEFAULT NULL,
+  `extra` int(255) NOT NULL DEFAULT 0,
+  `fine` int(255) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `suborder`
 --
 
-INSERT INTO `suborder` (`sorder_id`, `user_id`, `serviceprovider_id`, `product_id`, `qty`, `start_date`, `end_date`, `days`, `total`, `status`, `avail`, `type`, `order_placed_on`) VALUES
-(33, 18, 18, 23, 1, '2024-01-11', '2024-01-31', 21, 27300, 'Completed', '199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219', 'Equipment', '2024-02-19'),
-(34, 18, 19, 21, 2, '2024-01-18', '2024-01-23', 6, 5400, 'Completed', '220,221,222,223,224,225', 'Equipment', '2024-02-12'),
-(35, 18, 18, 24, 2, '2024-01-11', '2024-01-31', 21, 88200, 'Completed', '220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246', 'Equipment', '2024-02-19'),
-(36, 18, 14, 17, 1, '2024-01-17', '2024-01-23', 7, 7700, 'Completed', '247,248,249,250,251,252,253', 'Equipment', '2024-02-19'),
-(37, 18, 19, 21, 3, '2024-01-17', '2024-01-29', 13, 17550, 'Completed', '254,255,256,257,258,259,260,261,262,263,264,265,266', 'Equipment', '2024-02-19'),
-(38, 18, 14, 17, 1, '2024-01-16', '2024-01-22', 7, 7700, 'Completed', '267,268,269,270,271,272,273', 'Equipment', '2024-02-19'),
-(39, 18, 14, 17, 1, '2024-01-16', '2024-01-22', 7, 7700, 'Completed', '274,275,276,277,278,279,280', 'Equipment', '2024-02-19'),
-(40, 18, 18, 23, 1, '2024-01-14', '2024-01-23', 10, 13000, 'Completed', '281,282,283,284,285,286,287,288,289,290', 'Equipment', '2024-02-19'),
-(41, 18, 14, 18, 8, '2024-01-13', '2024-01-31', 19, 45600, 'Completed', '291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309', 'Equipment', '2024-02-19'),
-(42, 18, 19, 21, 1, '2024-02-15', '2024-02-27', 13, 5850, 'Cancelled', '310,311,312,313,314,315,316,317,318,319,320,321,322', 'Equipment', '2024-02-19'),
-(43, 18, 18, 23, 1, '2024-02-05', '2024-02-23', 19, 24700, 'In-Progress', '310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341', 'Equipment', '2024-02-19'),
-(44, 18, 19, 20, 2, '2024-01-17', '2024-01-30', 14, 16800, 'Completed', '342,343,344,345,346,347,348,349,350,351,352,353,354,355', 'Equipment', '2024-02-19'),
-(45, 18, 14, 17, 1, '2024-02-14', '2024-02-20', 7, 7700, 'In-Progress', '356,357,358,359,360,361,362', 'Equipment', '2024-02-19'),
-(46, 18, 14, 18, 4, '2024-02-29', '2024-03-08', 9, 10800, 'Upcoming', '363,364,365,366,367,368,369,370,371', 'Equipment', '2024-02-19'),
-(47, 18, 18, 24, 2, '2024-02-28', '2024-02-29', 2, 8400, 'Cancelled', '372,373', 'Equipment', '2024-02-19'),
-(48, 18, 1, 8, 1, '2024-02-22', '2024-02-28', 7, 469000, 'Pending', '372,373,374,375,376,377,378,379,380', 'Singer', '2024-02-19'),
-(49, 18, 14, 11, 1, '2024-02-22', '2024-02-23', 2, 2600, 'Upcoming', '381,382', 'Singer', '2024-02-19');
+INSERT INTO `suborder` (`sorder_id`, `user_id`, `serviceprovider_id`, `product_id`, `qty`, `start_date`, `end_date`, `days`, `total`, `status`, `avail`, `type`, `order_placed_on`, `extra`, `fine`) VALUES
+(33, 18, 18, 23, 1, '2024-01-11', '2024-01-31', 21, 27300, 'Completed', '199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219', 'Equipment', '2024-02-19', 0, 0),
+(34, 18, 19, 21, 2, '2024-01-18', '2024-01-23', 6, 5400, 'Completed', '220,221,222,223,224,225', 'Equipment', '2024-02-12', 0, 0),
+(35, 18, 18, 24, 2, '2024-01-11', '2024-01-31', 21, 88200, 'Completed', '220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246', 'Equipment', '2024-02-19', 0, 0),
+(36, 18, 14, 17, 1, '2024-01-17', '2024-01-23', 7, 7700, 'Completed', '247,248,249,250,251,252,253', 'Equipment', '2024-02-19', 0, 0),
+(37, 18, 19, 21, 3, '2024-01-17', '2024-01-29', 13, 17550, 'Completed', '254,255,256,257,258,259,260,261,262,263,264,265,266', 'Equipment', '2024-02-19', 0, 0),
+(38, 18, 14, 17, 1, '2024-01-16', '2024-01-22', 7, 7700, 'Completed', '267,268,269,270,271,272,273', 'Equipment', '2024-02-19', 0, 0),
+(39, 18, 14, 17, 1, '2024-01-16', '2024-01-22', 7, 7700, 'Completed', '274,275,276,277,278,279,280', 'Equipment', '2024-02-19', 0, 0),
+(40, 18, 18, 23, 1, '2024-01-14', '2024-01-23', 10, 13000, 'Completed', '281,282,283,284,285,286,287,288,289,290', 'Equipment', '2024-02-19', 0, 0),
+(41, 18, 14, 18, 8, '2024-01-13', '2024-01-31', 19, 45600, 'Completed', '291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309', 'Equipment', '2024-02-19', 0, 0),
+(42, 18, 19, 21, 1, '2024-02-15', '2024-02-27', 13, 5850, 'Cancelled', '310,311,312,313,314,315,316,317,318,319,320,321,322', 'Equipment', '2024-02-19', 0, 0),
+(43, 18, 18, 23, 1, '2024-02-05', '2024-02-23', 19, 24700, 'Completed', '310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341', 'Equipment', '2024-02-19', 0, 0),
+(44, 18, 19, 20, 2, '2024-01-17', '2024-01-30', 14, 16800, 'Completed', '342,343,344,345,346,347,348,349,350,351,352,353,354,355', 'Equipment', '2024-02-19', 0, 0),
+(45, 18, 14, 17, 1, '2024-02-14', '2024-02-20', 7, 7700, 'Completed', '356,357,358,359,360,361,362', 'Equipment', '2024-02-19', 0, 0),
+(46, 18, 14, 18, 4, '2024-02-29', '2024-03-08', 9, 10800, 'Upcoming', '363,364,365,366,367,368,369,370,371', 'Equipment', '2024-02-19', 0, 0),
+(47, 18, 18, 24, 2, '2024-02-28', '2024-02-29', 2, 8400, 'Cancelled', '372,373', 'Equipment', '2024-02-19', 0, 0),
+(48, 18, 1, 8, 1, '2024-02-22', '2024-02-28', 7, 469000, 'In-Progress', '372,373,374,375,376,377,378,379,380', 'Singer', '2024-02-19', 0, 0),
+(49, 18, 14, 11, 1, '2024-02-22', '2024-02-23', 2, 2600, 'Completed', '381,382', 'Singer', '2024-02-19', 0, 0),
+(50, 18, 1, 3, 1, '2024-02-23', '2024-02-29', 7, 700, 'Cancelled', '383,384,385,386,387,388,389', 'Studio', '2024-02-23', 0, 0),
+(51, 18, 18, 24, 2, '2024-03-14', '2024-03-21', 8, 33600, 'Upcoming', '383,384,385,386,387,388,389,390,391,392,393,394,395,396,397', 'Equipment', '2024-02-23', 0, 0),
+(52, 18, 14, 17, 1, '2024-02-29', '2024-03-02', 3, 3300, 'Rejected', '398,399,400', 'Equipment', '2024-02-24', 0, 0),
+(53, 18, 19, 20, 2, '2024-03-14', '2024-03-20', 7, 8400, 'Cancelled', '398,399,400,401,402,403,404,405,406,407', 'Equipment', '2024-02-24', 0, 0),
+(54, 18, 14, 17, 1, '2024-04-18', '2024-04-20', 3, 3300, 'Pending', '408,409,410', 'Equipment', '2024-02-27', 3300, 0),
+(55, 18, 1, 3, 1, '2024-04-25', '2024-04-26', 2, 200, 'Pending', '408,409,410,411,412', 'Studio', '2024-02-27', 0, 0),
+(56, 18, 14, 17, 1, '2024-04-18', '2024-04-20', 3, 3300, 'Pending', '413,414,415', 'Equipment', '2024-02-27', 3300, 0),
+(57, 18, 1, 3, 1, '2024-04-25', '2024-04-26', 2, 200, 'Pending', '413,414,415,416,417', 'Studio', '2024-02-27', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -824,7 +1279,14 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `TelephoneNumber`, `BirthDate`, `address`, `password`, `gender`, `profile_photo`, `verification`, `status`, `registration_date`) VALUES
 (18, 'Gayathra Dissanayake', 'gayathradissa@gmail.com', 1234565789, '2000-03-31', 'test  test  test', '$2y$10$rGgNvX/xlY1X2uRCVSWUl.UnyP4sWCA8xfdu2vNSXZf9SpStWwioq', 'male', 'IMG-65864fca5956f6.45090781.jpeg', 681741, 'Active', '2023-11-01'),
-(19, 'Test 02', 'itsaeox98@gmail.com', 1234567890, '2024-01-23', 'itsaeox98@gmail.com', '$2y$10$QkEmYPYl5TQMk76hUkvS1uSGRz7GnEJYszq0uOdl5jLonz9HRomvC', 'male', 'IMG-6592556e970157.07537984.png', 119619, 'Active', '2023-11-01');
+(19, 'Test 02', 'itsaeox98@gmail.com', 1234567890, '2024-01-23', 'itsaeox98@gmail.com', '$2y$10$QkEmYPYl5TQMk76hUkvS1uSGRz7GnEJYszq0uOdl5jLonz9HRomvC', 'male', 'IMG-6592556e970157.07537984.png', 119619, 'Active', '2023-11-01'),
+(20, 'user_03', 'user_03@gmail.com', 722899088, '2000-03-31', 'user_03@gmail.com', '$2y$10$GCrNihZkcSpEzS.b6Nt3Ou26jMenS.l6v9abYqYZzc6QeJdfc3b4e', 'male', 'IMG-65d97578a84687.85209747.jpeg', 218512, 'Active', '2024-02-24'),
+(21, 'user_04', 'user_04@gmail.com', 722899088, '2000-03-31', 'user_04@gmail.com', '$2y$10$4Gui65HDHyCVnsuG7fCj2.kGi.4yosNRkSR.4Vtu5bOI7MnJhoG9e', 'male', 'IMG-653fd611dd2445.48951448.png', 242995, 'Deactivated', '2024-02-24'),
+(22, 'user_05', 'user_05@gmail.com', 722899088, '2000-03-31', 'user_04@gmail.com', '$2y$10$FZazLReP3w52NeURN8qP8.4dhdueye77d7rTYvqNeUuHly7bCwmMC', 'male', 'IMG-653fd611dd2445.48951448.png', 158828, 'Active', '2024-02-24'),
+(23, 'user_06', 'user_06@gmail.com', 1234567890, '2024-02-08', 'user_06@gmail.com', '$2y$10$n0vIHJOUZDw8xX9B6U1c0eqaavPxctnuHos/nHqeJfvptH5Ym5b4m', 'male', 'IMG-65d976dfdb7643.92903837.jpg', 281179, 'Active', '2024-02-24'),
+(24, 'user_07', 'user_07@gmail.com', 1234567890, '2024-02-08', 'user_06@gmail.com', '$2y$10$LBbMysvUMMAC7uNSD/cete7SXUN.9x17yIziOEaFYfCqK8zotrXky', 'male', 'IMG-653fd611dd2445.48951448.png', 130625, 'Banned', '2024-02-24'),
+(25, 'user_08', 'user_08@gmail.com', 1234567890, '2024-02-08', 'user_06@gmail.com', '$2y$10$z4nYaVJIQXchnam4fkfWQ.ra1iIW.gq/oSKfYx/2q.33Xyz3NX0I2', 'male', 'IMG-653fd611dd2445.48951448.png', 599546, 'Banned', '2024-02-24'),
+(26, 'user_09', 'user_09@gmail.com', 1234567890, '2024-02-08', 'user_09@gmail.com', '$2y$10$9cgQ9cpE0O7i7KZ3VZFTYefw5DSCPZtCu0CQndWNoFApILBdaScVe', 'male', 'IMG-653fd611dd2445.48951448.png', 356274, 'Active', '2024-02-24');
 
 -- --------------------------------------------------------
 
@@ -964,6 +1426,12 @@ ALTER TABLE `reviews`
   ADD KEY `fk_user` (`user_id`);
 
 --
+-- Indexes for table `sec_queation`
+--
+ALTER TABLE `sec_queation`
+  ADD PRIMARY KEY (`sec_id`);
+
+--
 -- Indexes for table `serviceproviders`
 --
 ALTER TABLE `serviceproviders`
@@ -1016,7 +1484,7 @@ ALTER TABLE `administrators`
 -- AUTO_INCREMENT for table `availability`
 --
 ALTER TABLE `availability`
-  MODIFY `entry_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=383;
+  MODIFY `entry_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=418;
 
 --
 -- AUTO_INCREMENT for table `band`
@@ -1034,7 +1502,7 @@ ALTER TABLE `bookmarks`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `cart_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `chat_mod_user`
@@ -1064,7 +1532,7 @@ ALTER TABLE `login_logout_logs`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=471;
 
 --
 -- AUTO_INCREMENT for table `moderators`
@@ -1082,7 +1550,7 @@ ALTER TABLE `musician`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -1094,13 +1562,19 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `recover_account_user`
 --
 ALTER TABLE `recover_account_user`
-  MODIFY `recover_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `recover_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
   MODIFY `review_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `sec_queation`
+--
+ALTER TABLE `sec_queation`
+  MODIFY `sec_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `serviceproviders`
@@ -1124,13 +1598,13 @@ ALTER TABLE `studio`
 -- AUTO_INCREMENT for table `suborder`
 --
 ALTER TABLE `suborder`
-  MODIFY `sorder_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `sorder_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `user_passwords`
