@@ -52,12 +52,12 @@
 						<?php $atLeastOneNotAvailable = true; ?>
 					<?php else : ?>
 						<h2 class="full-price">
-							<?php echo $cart->total?> Rs.
+						LKR. <?php echo $cart->total?>
 						</h2>
 					<?php endif; ?>
 
 					<h2 class="price">
-						x<?php echo $cart->product_data->unit_price; ?> Rs.
+						x LKR.<?php echo $cart->product_data->unit_price; ?>
 					</h2>
 				</footer>
 			</article>
@@ -69,13 +69,13 @@
 		<div class="container clearfix">
 
 			<div class="left">
-				<h2 class="subtotal">Subtotal: <span><?php echo $data['subtotal']; ?></span> Rs.</h2>
-				<h3 class="tax">Taxes (5%)</h3>
-				<h3 class="shipping">Service Charge: <span>200.00</span> Rs.</h3>
+				<h2 class="subtotal">Subtotal: LKR. <span><?php echo $data['subtotal']; ?></span> </h2>
+				<h3 class="tax">Deposit Value: LKR. <span><?php echo $data['extra_charge']; ?></span></h3>
+				<h3 class="shipping">Service Charge: LKR. <span>200.00</span> </h3>
 			</div>
 
 			<div class="right">
-				<h1 class="total">Total: <span><?php echo $data['total'];; ?></span> Rs.</h1>
+				<h1 class="total">Total: LKR. <span><?php echo $data['total'];; ?></span> </h1>
 				<a id="checkOutBtn" class="btn"> Checkout </a>
 			</div>
 

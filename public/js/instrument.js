@@ -88,7 +88,7 @@ function displaydata(data){
                 `<p>Brand: `+item.brand+`</p>`+
                 `<p>Model:  `+item.model+`</p>`+
                 `<p>Units Left:  `+item.quantity+`</p>`+
-                `<p>Price(Lkr): `+item.unit_price+`</p>`+
+                `<p>Price(LKR): `+item.unit_price+`</p>`+
                 `<p>`+stockText+`</p>`+
                 `</div>`+
                 `</div>`+

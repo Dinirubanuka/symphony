@@ -73,7 +73,7 @@ function displaydata(data){
                 `<h3>Title:`+item.Title+`</h3>`+
                 `<p>Air condition: `+item.airCondition+`</p>`+
                 `<p>Locations:  `+item.location+`</p>`+
-                `<p>Price(Lkr): `+item.unit_price+`</p>`+
+                `<p>Price(LKR): `+item.unit_price+`</p>`+
                 `<p>`+stockText+`</p>`+
                 `</div>`+
                 `</div>`+

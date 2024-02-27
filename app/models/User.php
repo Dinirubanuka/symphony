@@ -700,7 +700,7 @@ class User
 
     public function addToCart($data)
     {
-        $this->db->query('INSERT INTO cart (user_id, product_id, quantity, start_date, end_date, days, total, availability, type) VALUES(:user_id, :product_id, :quantity, :start_date, :end_date, :days, :total, :availability, :type)');
+        $this->db->query('INSERT INTO cart (user_id, product_id, quantity, start_date, end_date, days, total, availability, type, extra) VALUES(:user_id, :product_id, :quantity, :start_date, :end_date, :days, :total, :availability, :type, :extra)');
 
         try {
             $this->db->bind(':user_id', $data['user_id']);
@@ -712,6 +712,8 @@ class User
             $this->db->bind(':total', $data['total']);
             $this->db->bind(':availability', $data['availability']);
             $this->db->bind(':type', $data['type']);
+            $this->db->bind(':extra', $data['extra']);
+
 
             // Execute
             if ($this->db->execute()) {
@@ -741,6 +743,19 @@ class User
         if ($this->db->execute()) {
             return true;
         } else {
+            return false;
+        }
+    }
+
+    public function addFine($fine, $sorder_id){
+        try {
+            $this->db->query('UPDATE suborder SET fine = :fine WHERE sorder_id = :sorder_id');
+            $this->db->bind(':fine', $fine);
+            $this->db->bind(':sorder_id', $sorder_id);
+            $this->db->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Database error: " . $e->getMessage();
             return false;
         }
     }
@@ -854,7 +869,7 @@ class User
 
     public function placeOrder($data)
     {
-            $this->db->query('INSERT INTO suborder (user_id, serviceprovider_id, product_id, qty, start_date, end_date, days, total, status, avail, type, order_placed_on) VALUES(:user_id, :serviceprovider_id, :product_id, :qty, :start_date, :end_date, :days, :total, :status, :avail , :type, :order_placed_on)');
+            $this->db->query('INSERT INTO suborder (user_id, serviceprovider_id, product_id, qty, start_date, end_date, days, total, status, avail, type, order_placed_on, extra) VALUES(:user_id, :serviceprovider_id, :product_id, :qty, :start_date, :end_date, :days, :total, :status, :avail , :type, :order_placed_on, :extra)');
     
             try {
                 $this->db->bind(':user_id', $data['user_id']);
@@ -869,6 +884,7 @@ class User
                 $this->db->bind(':avail', $data['avail']);
                 $this->db->bind(':type', $data['type']);
                 $this->db->bind(':order_placed_on', $data['order_placed_on']);
+                $this->db->bind(':extra', $data['extra']);
 
                 // Execute
                 if ($this->db->execute()) {
@@ -897,13 +913,14 @@ class User
     }
 
     public function placeOrderTotal($data_order){
-        $this->db->query('INSERT INTO orders (user_id, sorder_id, total, order_placed_on) VALUES(:user_id, :sorder_id, :total, :order_placed_on)');
+        $this->db->query('INSERT INTO orders (user_id, sorder_id, total, order_placed_on, deposit) VALUES(:user_id, :sorder_id, :total, :order_placed_on, :deposit)');
     
         try {
             $this->db->bind(':user_id', $data_order['user_id']);
             $this->db->bind(':sorder_id', $data_order['sorder_id']);
             $this->db->bind(':total', $data_order['total']);
             $this->db->bind(':order_placed_on', $data_order['order_placed_on']);
+            $this->db->bind(':deposit', $data_order['deposit']);
             // Execute
             if ($this->db->execute()) {
                 return true;
@@ -911,7 +928,6 @@ class User
                 return false;
             }
         } catch (PDOException $e) {
-
             die($e->getMessage());
         }
     }

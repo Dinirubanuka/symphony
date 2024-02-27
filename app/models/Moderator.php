@@ -404,6 +404,36 @@ require 'vendor/autoload.php';
       return $results;
     }
 
+    public function getInstrumentCount(){
+      $this->db->query('SELECT COUNT(*) as count FROM products');
+      $results = $this->db->single();
+      return $results;
+    }
+
+    public function getStudioCount(){
+      $this->db->query('SELECT COUNT(*) as count FROM studio');
+      $results = $this->db->single();
+      return $results;
+    }
+
+    public function getBandCount(){
+      $this->db->query('SELECT COUNT(*) as count FROM band');
+      $results = $this->db->single();
+      return $results;
+    }
+
+    public function getSingerCount(){
+      $this->db->query('SELECT COUNT(*) as count FROM singer');
+      $results = $this->db->single();
+      return $results;
+    }
+
+    public function getMusicianCount(){
+      $this->db->query('SELECT COUNT(*) as count FROM musician');
+      $results = $this->db->single();
+      return $results;
+    }
+
     public function getUserChat($chat_id){
       $this->db->query('SELECT * FROM chat_mod_user WHERE chat_id = :chat_id');
       $this->db->bind(':chat_id', $chat_id);
@@ -415,6 +445,12 @@ require 'vendor/autoload.php';
     $this->db->query('SELECT * FROM users WHERE id = :id');
     $this->db->bind(':id', $id);
     $results = $this->db->single();
+    return $results;
+  }
+
+  public function getLogs(){
+    $this->db->query('SELECT * FROM logs');
+    $results = $this->db->resultSet();
     return $results;
   }
 
@@ -606,6 +642,12 @@ public function rejectSP($serviceprovider_id){
 
     public function getAllUsers(){
       $this->db->query('SELECT * FROM users');
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getAllSP(){
+      $this->db->query('SELECT * FROM serviceproviders');
       $results = $this->db->resultSet();
       return $results;
     }

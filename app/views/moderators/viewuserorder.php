@@ -67,7 +67,7 @@
                       <?php endforeach; ?>
                       <tfoot>
                           <tr>
-                              <td colspan="9" style="text-align: right;"><strong>Total:</strong></td>
+                              <td colspan="8" style="text-align: right;"><strong>Total:</strong></td>
                               <td>LKR. <?php echo $data['order']->total ?></td>
                           </tr>
                       </tfoot>

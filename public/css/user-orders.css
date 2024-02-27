@@ -73,7 +73,7 @@ h2 {
 
 .cancel-btn {
     background-color: #f7a3a3;
-    color: #fff;
+    color: #000000;
     border: none;
     padding: 5px 10px;
     border-radius: 3px;
@@ -81,7 +81,38 @@ h2 {
 }
 
 .cancel-btn:hover {
+    color: rgb(255, 255, 255);
     background-color: #ff4646;
+    transition: 0.2s ease-in-out;
+}
+
+.mark-complete-btn {
+    background-color: #6bb66b;
+    color: #000000;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.mark-complete-btn:hover {
+    color: rgb(255, 255, 255);
+    background-color: #1b7e1b;
+    transition: 0.2s ease-in-out;
+}
+
+.review-btn {
+    background-color: #dfc982;
+    color: #000000;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.review-btn:hover {
+    color: rgb(255, 255, 255);
+    background-color: #a88d33;
     transition: 0.2s ease-in-out;
 }
 

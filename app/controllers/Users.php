@@ -158,6 +158,30 @@ class Users extends Controller
         redirect('users/orders');
     }
 
+    public function completeOrder($order_id, $sorder_id)
+    {
+        $order_data = $this->userModel->getOrderData($sorder_id);
+        $today = date('Y-m-d');
+        $end_data = $order_data->end_date;
+        $today_timestamp = strtotime($today);
+        $end_date_timestamp = strtotime($end_date);
+        $day_difference = ($today_timestamp - $end_date_timestamp) / (60 * 60 * 24);
+        if ($day_difference > 0) {
+            $fine = $day_difference * ($order_data->extra / 3);
+            $this->userModel->addFine($fine, $sorder_id);
+        }
+        $this->userModel->changeOrderStatus($sorder_id, 'Completed');
+        $log_data = [
+            'user_type' => 'Customer',
+            'user_id' => $_SESSION['user_id'],
+            'log_type' => 'Order Complete',
+            'date_and_time' => date('Y-m-d H:i:s'),
+            'data' => 'User completed an order with order id: ' . $order_id . ' and sub order id: ' . $sorder_id
+        ];
+        $this->userModel->addLogData($log_data);
+        redirect('users/orders');
+    }
+
     public function edit()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -1372,6 +1396,7 @@ class Users extends Controller
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
             $cart_ini = $this->userModel->cart($_SESSION['user_id']);
             $subtotal = 0;
+            $extra_charge = 0;
             foreach ($cart_ini as $cartItem){
                 $startDateObj = new DateTime($cartItem->start_date);
                 $endDateObj = new DateTime($cartItem->end_date);
@@ -1409,6 +1434,7 @@ class Users extends Controller
                 if($cartItem->availability === 'notAvailable'){
                     continue;
                 }
+                $extra_charge = $extra_charge + $cartItem->extra;
                 $subtotal = $subtotal + ($cartItem->total);
                 if ($cartItem->type == 'Equipment'){
                     $product_data = $this->userModel->viewItem($cartItem->product_id);
@@ -1428,12 +1454,13 @@ class Users extends Controller
                 }
                 $cartItem->product_data = $product_data;
             }
-            $total = $subtotal + $subtotal*0.05 + 200.00;
+            $total = $subtotal + $subtotal*0.05 + 200.00 + $extra_charge;
             
             $data =[
                 'cart' => $cart,
                 'subtotal' => $subtotal,
-                'total' => $total
+                'total' => $total,
+                'extra_charge' => $extra_charge,
             ];
         }
         $log_data = [
@@ -1468,9 +1495,6 @@ class Users extends Controller
             if ($today >= $startDateTimestamp && $today <= $endDateTimestamp && $order->status == 'Upcoming') {
                 $order->status = 'In-Progress';
                 $this->userModel->changeOrderStatus($order->sorder_id, 'In-Progress');
-            } elseif ($today > $endDateTimestamp && $order->status == 'In-Progress') {
-                $order->status = 'Completed';
-                $this->userModel->changeOrderStatus($order->sorder_id, 'Completed');
             }
             $user_data = json_decode(json_encode($this->userModel->view($order->user_id)), true);
             if ($order->type == 'Equipment'){
@@ -1539,6 +1563,7 @@ class Users extends Controller
         $sorder_id = '';
         $avail_ids = '';
         $total = 0; 
+        $order_deposit = 0;
         $today = date("Y-m-d");
         foreach ($cart as $cartItem){
             if ($cartItem->type == 'Equipment'){
@@ -1586,9 +1611,11 @@ class Users extends Controller
                 'status' => 'Pending',
                 'avail' => $avail_ids,
                 'type' => $cartItem->type,
-                'order_placed_on' => $today
+                'order_placed_on' => $today,
+                'extra' => $cartItem->extra
             ];
-            $total = $total + $cartItem->total;
+            $total = $total + $cartItem->total + $cartItem->extra;
+            $order_deposit = $order_deposit + $cartItem->extra;
             $this->userModel->placeOrder($data);
             $result = $this->userModel->getSubOrderId($data);
             $temp = $result->sorder_id;
@@ -1604,6 +1631,7 @@ class Users extends Controller
             'sorder_id' => $sorder_id,
             'total' => $total,
             'order_placed_on' => $today,
+            'deposit' => $order_deposit,
         ];
         if($this->userModel->placeOrderTotal($data_order)){
             $log_data = [
@@ -2367,6 +2395,7 @@ class Users extends Controller
         // Check for POST
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $cart = $this->userModel->cart($_SESSION['user_id']);
+            $extra = 0;
             $cart_data_check =[
                 'product_id' => $product_id,
                 'type' => trim($_POST['type']),
@@ -2391,6 +2420,7 @@ class Users extends Controller
             }
             if ($cart_data_check['type'] == 'Equipment'){
                 $product_data = $this->userModel->viewItem($product_id);
+                $extra = $product_data->unit_price * 3;
             } else if ($cart_data_check['type'] == 'Studio'){
                 $product_data = $this->userModel->viewStudio($product_id);
             } else if ($cart_data_check['type'] == 'Singer'){
@@ -2408,6 +2438,7 @@ class Users extends Controller
                 'start_date' =>trim($_POST['fromDate']),
                 'end_date' =>trim($_POST['toDate']),
                 'user_id' => $_SESSION['user_id'],
+                'extra' => $extra,
                 'days' => $days,
                 'total' => $total,
                 'availability' => 'available',

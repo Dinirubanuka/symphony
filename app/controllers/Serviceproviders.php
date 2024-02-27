@@ -2610,6 +2610,7 @@ class serviceproviders extends Controller
                         'date_and_time' => date('Y-m-d H:i:s'),
                         'data' => 'Service Provider has logged in'
                     ];
+                    $this->serviceProviderModel->addLogData($log_data);
                     $this->createserviceprovidersession($loggedInserviceprovider);
                 } else {
                     $data['password_err'] = 'Password incorrect';
@@ -2711,9 +2712,6 @@ class serviceproviders extends Controller
             if ($today >= $startDateTimestamp && $today <= $endDateTimestamp && $order->status == 'Upcoming') {
                 $order->status = 'In-Progress';
                 $this->serviceProviderModel->changeOrderStatus($order->sorder_id, 'In-Progress');
-            } elseif ($today > $endDateTimestamp && $order->status == 'In-Progress') {
-                $order->status = 'Completed';
-                $this->serviceProviderModel->changeOrderStatus($order->sorder_id, 'Completed');
             }
             $user_data = json_decode(json_encode($this->serviceProviderModel->getUserData($order->user_id)), true);
             if ($order->type == 'Equipment'){

@@ -82,7 +82,7 @@
                         <p>Brand: <?php echo $inventory->brand; ?></p>
                         <p>Model:  <?php echo $inventory->model; ?></p>
                         <p>Units Left:  <?php echo $inventory->quantity; ?></p>
-                        <p>Price(Lkr): <?php echo $inventory->unit_price; ?></p>
+                        <p>Price(LKR): <?php echo $inventory->unit_price; ?></p>
                         <form action = "<?php echo URLROOT; ?>/users/viewitem/<?php echo $inventory->product_id; ?>" method ="post">
                             <button href="" style="color: orange">see more details</button>
                         </form>

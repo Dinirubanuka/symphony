@@ -153,7 +153,7 @@
                 </div>
                 <!--                Unit price-->
                 <div class="input-box">
-                    <label>Unit Price (Lkr)</label>
+                    <label>Unit Price (LKR)</label>
                     <input type="number" required name="unit_price" class="<?php echo (!empty($data['unit_price_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['unit_price']; ?>">
                 </div>
 <!--                warranty date-->

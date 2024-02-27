@@ -30,9 +30,11 @@
             <div><strong>From Date: </strong> <?php echo $order->start_date ?></div>
             <div><strong>To Date: </strong> <?php echo $order->end_date ?></div>
             <div><strong>Total: </strong> <?php echo $order->total ?></div>
+            <div class="deposit-div" <><strong>Deposit: </strong> <?php echo $order->extra ?></div>
+            <div class="fine-div" <?php echo $order->status == 'Completed' ? '' : 'style="display: none;"';?>><strong>Fine: </strong> <?php echo $order->fine ?></div>
             <div class="status-<?php echo $order->status ?>"><strong>Status:</strong> <?php echo $order->status ?></div>
         </div>
-        <div class="order-actions">
+        <div class="order-actions" <?php echo $order->status == 'Pending' ? '' : 'style="display: none;"';?>>
             <button class="<?php echo $disableButton ? 'disabled-button' : 'accept-btn'; ?>" <?php echo $disableButton ? 'disabled' : ''; ?> onclick="confirmAction(<?php echo $order->sorder_id; ?>, 'Upcoming')">Accept Order</button>
 
             <button class="<?php echo $disableButton ? 'disabled-button' : 'reject-btn'; ?>" <?php echo $disableButton ? 'disabled' : ''; ?> onclick="confirmAction(<?php echo $order->sorder_id; ?>, 'Rejected')">Reject Order</button>

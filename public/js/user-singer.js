@@ -73,7 +73,7 @@ function displaydata(data){
                 `<h3>Nick Name:`+item.nickName+`</h3>`+
                 `<h3>Name:`+item.name+`</h3>`+
                 `<p>Locations:  `+item.location+`</p>`+
-                `<p>Price(Lkr): `+item.unit_price+`</p>`+
+                `<p>Price(LKR): `+item.unit_price+`</p>`+
                 `</div>`+
                 `</div>`+
                 `</div>`;

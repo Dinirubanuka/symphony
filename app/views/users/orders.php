@@ -52,13 +52,14 @@
                         <th>End Date</th>
                         <th>Status</th>
                         <th>Total</th>
+                        <th>Diposit</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <?php foreach($orders['suborders'] as $suborder) : ?>
                 <tbody>
                     <tr>
-                        <?php $disableButton = ($suborder['status'] === 'Pending') ? false : true; ?>
+                        <?php $orderStatus = $suborder['status']; ?>
                         <td><img src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $suborder['photo_1']; ?>" style="width:100px; height:100px;" alt="Item 1"></td>
                         <td><?php echo $suborder['category'] ?></td>
                         <td><?php echo $suborder['qty'] ?></td>
@@ -67,7 +68,24 @@
                         <td><?php echo $suborder['end_date'] ?></td>
                         <td class="status-<?php echo $suborder['status'] ?>"><?php echo $suborder['status'] ?></td>
                         <td>LKR. <?php echo $suborder['total'] ?></td>
-                        <td><button order_id="<?php echo $orders['order']->order_id; ?>" sub_order_id="<?php echo $suborder['sorder_id'] ?>" class="<?php echo $disableButton ? 'disabled-button' : 'cancel-btn'; ?>" <?php echo $disableButton ? 'disabled' : ''; ?> onclick="confirmAction(this)">Cancel Order</button></td>
+                        <td>LKR. <?php echo $suborder['extra'] ?></td>
+                        <td>
+                            <div <?php echo $orderStatus == 'Pending' ? '' : 'style="display: none;"';?>>
+                                <button order_id="<?php echo $orders['order']->order_id; ?>" sub_order_id="<?php echo $suborder['sorder_id'] ?>" class="cancel-btn" onclick="cancelOrder(this)">
+                                    Cancel Order
+                                </button>
+                            </div>
+                            <div <?php echo $orderStatus == 'In-Progress' ? '' : 'style="display: none;"';?>>
+                                <button order_id="<?php echo $orders['order']->order_id; ?>" sub_order_id="<?php echo $suborder['sorder_id'] ?>" class="mark-complete-btn" onclick="completeOrder(this)">
+                                    Complete Order
+                                </button>
+                            </div>
+                            <div <?php echo $orderStatus == 'Completed' ? '' : 'style="display: none;"';?>>
+                                <button product_id="<?php echo $suborder['product_id']; ?>" product_type="<?php echo $suborder['type']; ?>" class="review-btn" onclick="addReview(this)">
+                                    Add Review
+                                </button>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
                 <?php endforeach; ?>
@@ -127,7 +145,8 @@ function printInvoice(cardIndex) {
         document.body.removeChild(iframe);
     }, 1000);
 }
-function confirmAction(button) {
+
+function cancelOrder(button) {
     var orderId = $(button).attr('order_id');
     var subOrderId = $(button).attr('sub_order_id');
         var confirmationMessage = 'Are you sure you want to Cancel the order?';
@@ -137,6 +156,36 @@ function confirmAction(button) {
         }
 }
 
+function completeOrder(button) {
+    var orderId = $(button).attr('order_id');
+    var subOrderId = $(button).attr('sub_order_id');
+        var confirmationMessage = 'Are you sure you want to mark the order as completed?';
+        if (confirm(confirmationMessage)) {
+            var url = '<?php echo URLROOT; ?>/users/completeOrder/' + orderId + '/' + subOrderId;
+            window.location.href = url;
+        }
+}
+
+function addReview(button) {
+    var productID = $(button).attr('product_id');
+    var product_type = $(button).attr('product_type');
+    if (product_type == 'Equipment') {
+        var url = '<?php echo URLROOT; ?>/users/viewItem/' + productID;
+        window.location.href = url;
+    } else if (product_type == 'Studio') {
+        var url = '<?php echo URLROOT; ?>/users/viewStudio/' + productID;
+        window.location.href = url;
+    } else if (product_type == 'Singer') {
+        var url = '<?php echo URLROOT; ?>/users/viewSinger/' + productID;
+        window.location.href = url;
+    } else if (product_type == 'Musician') {
+        var url = '<?php echo URLROOT; ?>/users/viewMusician/' + productID;
+        window.location.href = url;
+    } else if (product_type == 'Band') {
+        var url = '<?php echo URLROOT; ?>/users/viewBand/' + productID;
+        window.location.href = url;
+    }
+}
     
 function downloadPDF(cardIndex) {
     const invoiceCard = $('.invoice-card-' + cardIndex).eq(cardIndex).clone();

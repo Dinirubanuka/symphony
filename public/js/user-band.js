@@ -79,7 +79,7 @@ function displaydata(data) {
                 `<h3>Title:` + item.Title + `</h3>` +
                 `<h3>Leader Name:` + item.leaderName + `</h3>` +
                 `<p>Locations:  ` + item.location + `</p>` +
-                `<p>Price(Lkr): ` + item.unit_price + `</p>` +
+                `<p>Price(LKR): ` + item.unit_price + `</p>` +
                 `</div>` +
                 `</div>` +
                 `</div>`;
