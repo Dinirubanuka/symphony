@@ -77,6 +77,7 @@ function toggleCategory(categoryId) {
 // Display data
 const accReq = document.querySelector(".account-requests");
 const cart = document.querySelector(".cart");
+const cart1 =  document.querySelector(".cart1")
 function cartItems() {
     $.ajax({
         method: 'GET',
@@ -98,6 +99,7 @@ function showCartItems(count){
         `<i class="fa-solid fa-cart-plus" ></i>`+
         `</a>`;
     cart.innerHTML=text;
+    cart1.innerHTML=text;
 }
 Redirect();
 function Redirect() {

@@ -152,6 +152,27 @@
                         </div>
                     </li>
                     <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/orders">Orders</a></li>
+                    <li><a href="<?php echo URLROOT; ?>/users/index" class="nav-link off">Back</a></li>
+                    <li>
+                        <div class="cart">
+
+                        </div>
+                    </li>
+                    <!--                add notification link here-->
+                    <li><div class="notification off">
+                        <a>
+                            <i class="fa-solid fa-bell"></i>
+                        </a>
+                    </div></li>
+                    <li><a href="<?php echo URLROOT; ?>/users/profile" class="off">
+                        <img
+                                src="<?php echo URLROOT; ?>/img/user.png"
+                                width="30"
+                                height="30"
+                                alt="user image"
+                        />
+                        </a></li>
+                    <li><a class="btn btn-primary" href="<?php echo URLROOT; ?>/users/logout" style="color: black">Log out</a></li>
                 </ul>
             </nav>
         </div>
@@ -161,19 +182,19 @@
                     <input type="search" name="search" placeholder="Search" id="search-item"/>
                     <i class="bx bx-search" aria-hidden="true"></i>
                 </form>
-                <a href="<?php echo URLROOT; ?>/users/index">
+                <a href="<?php echo URLROOT; ?>/users/index" class="on">
                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
                 </a>
                 <div class="cart">
 
                 </div>
                 <!--                add notification link here-->
-                <div class="notification">
+                <div class="notification on">
                     <a>
                         <i class="fa-solid fa-bell"></i>
                     </a>
                 </div>
-                <a href="<?php echo URLROOT; ?>/users/profile">
+                <a href="<?php echo URLROOT; ?>/users/profile" class="on">
                     <img
                             src="<?php echo URLROOT; ?>/img/user.png"
                             width="30"
@@ -181,7 +202,7 @@
                             alt="user image"
                     />
                 </a>
-                <a class="btn btn-primary" href="<?php echo URLROOT; ?>/users/logout">Log out</a>
+<!--                <a class="btn btn-primary" href="--><?php //echo URLROOT; ?><!--/users/logout">Log out</a>-->
             </div>
             <button
                     id="hamburger"

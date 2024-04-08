@@ -294,16 +294,10 @@ button {
     }
 }
 
-@media (max-width: 600px) {
-    .right-container {
-        display: none;
-    }
-}
-
 .cart .badge {
     position: absolute;
-    top: -30px;
-    right: -5px;
+    top: -19px;
+    right: -6px;
     padding: 2px 5px;
     border-radius: 50%;
     background: red;

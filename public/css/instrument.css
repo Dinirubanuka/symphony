@@ -196,6 +196,9 @@ button {
 .right-container img {
     border-radius: 50%;
 }
+.off{
+    display: none;
+}
 
 .search input {
     background-color: var(--ash);
@@ -272,6 +275,14 @@ button {
         background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
         backdrop-filter: blur(5px); /* Blur effect */
     }
+    .menu.show,
+    .off{
+        display: block;
+    }
+    .menu.show,
+    .on{
+        display: none;
+    }
 
     .dropdown ul {
         padding-left: 0.3rem;
@@ -305,8 +316,8 @@ button {
 }
 
 @media (max-width: 600px) {
-    .right-container {
-        display: none;
+    .search {
+        display: block;
     }
 }
 body {
@@ -428,7 +439,6 @@ body {
 }
 @media (max-width: 414px) {
     .categories {
-        border: 1px solid red;
         width: 150px;
         padding: 0;
     }
@@ -444,7 +454,6 @@ body {
         width: 138px;
     }
     .account-requests {
-        border: 1px solid red;
         position: absolute;
         top: 90px;
         display: flex;
