@@ -1193,7 +1193,6 @@ class Users extends Controller
             if (empty($data['password'])) {
                 $data['password_err'] = 'Please enter password';
             }
-
             // Check for user/email
             if ($this->userModel->findUserByEmail($data['email'])) {
                 // User found

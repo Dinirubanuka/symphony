@@ -26,7 +26,9 @@
                             <ul role="menu">
                                 <li role="menuitem">
                                     <a class="dropdown-link" href="#best-of-the-day">
-                                        <img width="48" height="48" src="https://img.icons8.com/emoji/48/folded-hands-emoji.png" alt="folded-hands-emoji"/>
+                                        <img width="48" height="48"
+                                             src="https://img.icons8.com/emoji/48/folded-hands-emoji.png"
+                                             alt="folded-hands-emoji"/>
                                         <div>
                           <span class="dropdown-link-title"
                           >Best of the day</span
@@ -37,7 +39,8 @@
                                 </li>
                                 <li role="menuitem">
                                     <a class="dropdown-link" href="#featured-streams">
-                                        <img width="48" height="48" src="https://img.icons8.com/nolan/64/filled-star.png" alt="filled-star"/>
+                                        <img width="48" height="48"
+                                             src="https://img.icons8.com/nolan/64/filled-star.png" alt="filled-star"/>
                                         <div>
                           <span class="dropdown-link-title"
                           >Featured</span
@@ -48,7 +51,9 @@
                                 </li>
                                 <li role="menuitem">
                                     <a class="dropdown-link" href="#subscriptions">
-                                        <img width="48" height="48" src="https://img.icons8.com/nolan/64/video-playlist.png" alt="video-playlist"/>
+                                        <img width="48" height="48"
+                                             src="https://img.icons8.com/nolan/64/video-playlist.png"
+                                             alt="video-playlist"/>
                                         <div>
                                             <span class="dropdown-link-title">Subscriptions</span>
                                             <p>Gain exclusive access</p>
@@ -57,7 +62,9 @@
                                 </li>
                                 <li role="menuitem">
                                     <a class="dropdown-link" href="#creative-feed">
-                                        <img width="48" height="48" src="https://img.icons8.com/external-wanicon-lineal-color-wanicon/64/external-trending-influencer-marketing-wanicon-lineal-color-wanicon.png" alt="external-trending-influencer-marketing-wanicon-lineal-color-wanicon"/>
+                                        <img width="48" height="48"
+                                             src="https://img.icons8.com/external-wanicon-lineal-color-wanicon/64/external-trending-influencer-marketing-wanicon-lineal-color-wanicon.png"
+                                             alt="external-trending-influencer-marketing-wanicon-lineal-color-wanicon"/>
                                         <div>
                                             <span class="dropdown-link-title">Trending</span>
                                             <p>See trending purchases</p>
@@ -72,25 +79,32 @@
                                 </li>
                                 <li role="menuitem">
                                     <a class="dropdown-link" href="#adobe-xd">
-                                        <img width="40" height="40" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-studio-coworking-space-flaticons-lineal-color-flat-icons-3.png" alt="external-studio-coworking-space-flaticons-lineal-color-flat-icons-3"/>
+                                        <img width="40" height="40"
+                                             src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-studio-coworking-space-flaticons-lineal-color-flat-icons-3.png"
+                                             alt="external-studio-coworking-space-flaticons-lineal-color-flat-icons-3"/>
                                         Studios
                                     </a>
                                 </li>
                                 <li role="menuitem">
                                     <a class="dropdown-link" href="#after-effect">
-                                        <img width="40" height="40" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-band-music-flaticons-lineal-color-flat-icons-2.png" alt="external-band-music-flaticons-lineal-color-flat-icons-2"/>
+                                        <img width="40" height="40"
+                                             src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-band-music-flaticons-lineal-color-flat-icons-2.png"
+                                             alt="external-band-music-flaticons-lineal-color-flat-icons-2"/>
                                         Bands
                                     </a>
                                 </li>
                                 <li role="menuitem">
                                     <a class="dropdown-link" href="#sketch">
-                                        <img width="40" height="40" src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-band-event-management-flaticons-lineal-color-flat-icons.png" alt="external-band-event-management-flaticons-lineal-color-flat-icons"/>
+                                        <img width="40" height="40"
+                                             src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-band-event-management-flaticons-lineal-color-flat-icons.png"
+                                             alt="external-band-event-management-flaticons-lineal-color-flat-icons"/>
                                         Equipment
                                     </a>
                                 </li>
                                 <li role="menuitem">
                                     <a class="dropdown-link" href="#indesign">
-                                        <img width="40" height="40" src="https://img.icons8.com/ios/50/guitarist.png" alt="guitarist"/>
+                                        <img width="40" height="40" src="https://img.icons8.com/ios/50/guitarist.png"
+                                             alt="guitarist"/>
                                         Solo Musicians
                                     </a>
                                 </li>
@@ -138,25 +152,26 @@
                         </div>
                     </li>
                     <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/orders">Orders</a></li>
-                    <li><a class="nav-link" href="/">Bookmarks</a></li>
-                    <li><a class="nav-link" href="/">About</a></li>
                 </ul>
             </nav>
         </div>
         <div class="nav-end">
             <div class="right-container">
-                                <form class="search" role="search">
-                                    <input type="search" name="search" placeholder="Search" id = "search-item"/>
-                                    <i class="bx bx-search" aria-hidden="true"></i>
-                                </form>
+                <form class="search" role="search">
+                    <input type="search" name="search" placeholder="Search" id="search-item"/>
+                    <i class="bx bx-search" aria-hidden="true"></i>
+                </form>
                 <a href="<?php echo URLROOT; ?>/users/index">
                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
                 </a>
                 <div class="cart">
 
                 </div>
+                <!--                add notification link here-->
                 <div class="notification">
-                    <i class="fa-solid fa-bell"></i>
+                    <a>
+                        <i class="fa-solid fa-bell"></i>
+                    </a>
                 </div>
                 <a href="<?php echo URLROOT; ?>/users/profile">
                     <img

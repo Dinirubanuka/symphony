@@ -50,7 +50,7 @@ button {
 }
 
 .nav-menu .container {
-    background: rgba(0,0,0,0.2);
+    background: black;
     position: sticky;
     z-index: 100;
     display: flex;
@@ -182,6 +182,9 @@ button {
 .right-container img {
     border-radius: 50%;
 }
+.right-container a{
+    color: white;
+}
 
 .search input {
     background-color: var(--ash);
@@ -306,4 +309,9 @@ button {
     background: red;
     color: white;
     font-size: small;
+}
+@media (max-width: 414px) {
+    .nav-menu .container{
+        padding: 0 8px 0;
+    }
 }
