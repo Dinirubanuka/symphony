@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Instrument</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/instrument.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/nav-bar.css">
 </head>

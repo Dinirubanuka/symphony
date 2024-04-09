@@ -1,6 +1,3 @@
-* {
-    box-sizing: border-box;
-}
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap");
 
 * {
@@ -263,7 +260,10 @@ button {
         transform: none;
         box-shadow: none;
     }
-
+    .account-requests{
+        position: absolute;
+        top: 0;
+    }
     .menu.show,
     .dropdown.active {
         display: block;
@@ -455,7 +455,7 @@ body {
     }
     .account-requests {
         position: absolute;
-        top: 90px;
+        top: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
