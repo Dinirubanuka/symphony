@@ -37,17 +37,17 @@
             <div class="column">
                 <img class="demo cursor"
                      src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $data['photo_1']; ?>"
-                     style="width:190px; height:190px;" onclick="currentSlide(1)">
+                      onclick="currentSlide(1)">
             </div>
             <div class="column">
                 <img class="demo cursor"
                      src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $data['photo_2']; ?>"
-                     style="width:190px; height:190px;" onclick="currentSlide(2)">
+                     onclick="currentSlide(2)">
             </div>
             <div class="column">
                 <img class="demo cursor"
                      src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $data['photo_3']; ?>"
-                     style="width:190px; height:190px;" onclick="currentSlide(3)">
+                      onclick="currentSlide(3)">
             </div>
         </div>
     </div>
@@ -101,10 +101,11 @@
                     <div class="date-picker-container">
                         <label for="fromDate">From Date:</label>
                         <input type="date" id="fromDate" name="fromDate" min="" max="" value="<?php echo $data['start_date']; ?>" required>
+                        <br><br>
 
                         <label for="toDate">To Date:</label>
-                        <input type="date" id="toDate" name="toDate" min="" max="" value="<?php echo $data['end_date']; ?>" required>
-                    <br><br>
+                        <input type="date" id="toDate" name="toDate" min="" max="" value="<?php echo $data['end_date']; ?>" required><br>
+                    <br>
                     <label id="product_id" name="product_id" value="<?php echo $data['product_id']; ?>"></label>
                     <div class="number-input-container"  <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>
                         <label for="amount">Quantity:</label>
@@ -143,27 +144,28 @@
                       var count = '{$data['count']}';
                       var rating = '{$data['rating']}';</script>"; ?>
     <div class="overrall-rating">
-        <span class="heading">User Rating</span>
-        <div class="star-rating" title="70%">
-            <div class="back-stars">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
+        <div class="rate-header">
+            <span class="heading">User Rating</span>
+            <div class="star-rating" title="70%">
+                <div class="back-stars">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
 
-                <div class="front-stars" style="width: 70%" id="front-stars">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <div class="front-stars" style="width: 70%" id="front-stars">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </div>
                 </div>
             </div>
+            <p><?php echo round($data['rating'], 2); ?> average based on <?php echo $data['count']; ?> reviews.</p>
+            <hr style="border:3px solid #f1f1f1">
         </div>
-        <p><?php echo round($data['rating'], 2); ?> average based on <?php echo $data['count']; ?> reviews.</p>
-        <hr style="border:3px solid #f1f1f1">
-
         <div class="progress">
             <div class="side">
                 <div>5 star</div>

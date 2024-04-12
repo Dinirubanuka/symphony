@@ -36,8 +36,7 @@ body {
   background-color: #f2f2f2; /* Optional: Set background color for the right side */
 }
 .wrapper .item-container {
-  max-width: 800px;
-  margin: 20px auto;
+  margin: 20px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -255,7 +254,6 @@ body {
   max-width: 48%;
   align-items: center;
   font-size: 3em;
-  justify-content: center;
   margin-top: 10px;
 }
 .back-stars {
@@ -472,4 +470,63 @@ font-size: 0.8em;
 color: #000000;
 top: 50%;
 font-weight: 500;
+}
+.rate-header{
+  display: flex;
+  flex-direction: column;
+}
+.row .column .demo{
+  height: 190px;
+  width: 190px;
+}
+
+@media (max-width: 1100px) {
+  .wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+  .star-rating{
+    font-size: 2em;
+  }
+  .wrapper .item-container{
+    width: 800px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 660px) {
+  .rating{
+    display: flex;
+    flex-direction: column;
+  }
+  .row .column .demo{
+    height: 150px;
+    width: 150px;
+  }
+  .mySlides{
+    height: 300px;
+    width: 300px;
+  }
+  .wrapper .item-container{
+    margin: auto;
+    width: 500px;
+  }
+}
+
+@media (max-width: 424px) {
+  .row .column .demo{
+    height: 100px;
+    width: 100px;
+  }
+  .mySlides{
+    height: 200px;
+    width: 200px;
+  }
+  .wrapper .item-container{
+    margin: 20px;
+  }
+  .wrapper .item-container{
+    margin: auto;
+    width: 350px;
+  }
 }
