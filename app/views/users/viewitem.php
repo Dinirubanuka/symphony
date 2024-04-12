@@ -8,7 +8,6 @@
     <title>Store Inventory Item</title>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-viewItem.css"
     ">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/instrument.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/nav-bar.css"
     ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
