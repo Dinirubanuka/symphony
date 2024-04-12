@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap");
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
 :root {
     --dark-grey: #333333;
     --medium-grey: #636363;
@@ -106,6 +113,11 @@ button {
     display: flex;
     align-items: center;
 }
+
+.nav-end i{
+    color: white;
+}
+
 .search input[type="search"]{
     background: rgba(0, 0, 0, 0.5);
     color: white;
@@ -186,6 +198,10 @@ button {
     color: white;
 }
 
+.off{
+     display: none;
+ }
+
 .search input {
     background-color: var(--ash);
     border: none;
@@ -257,9 +273,29 @@ button {
         transform: none;
         box-shadow: none;
     }
+    .account-requests{
+        position: absolute;
+        top: 0;
+    }
 
     .menu.show,
     .dropdown.active {
+        display: block;
+        color: black;
+        z-index: 100000;
+    }
+    .menu.show,
+    .upperCategory{
+        background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+        backdrop-filter: blur(5px); /* Blur effect */
+    }
+
+    .menu.show,
+    .on{
+        display: none;
+    }
+    .menu.show,
+    .off{
         display: block;
     }
 
@@ -291,6 +327,12 @@ button {
     .menu-bar > li:not(:last-child) {
         padding-bottom: 0.5rem;
         border-bottom: var(--border);
+    }
+}
+
+@media (max-width: 600px) {
+    .search {
+        display: block;
     }
 }
 

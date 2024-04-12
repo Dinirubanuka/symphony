@@ -8,13 +8,14 @@
     <title>Store Inventory Item</title>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-viewItem.css"
     ">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/instrument.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/nav-bar.css"
     ">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body onload="changeRating(); checkAvailability() ">
 <!------------nav-bar-------->
- <?php require_once APPROOT . '/views/inc/navBar.php'; ?>
+<?php require_once APPROOT . '/views/inc/viewNavBar.php'; ?>
 
 <div class="wrapper">
     <div class="container">
@@ -123,9 +124,9 @@
                         <input type="number" id="quantity" name="quantity" value="<?php echo $data['quantity_selected']; ?>" hidden>
                         <input type="text" id="type" name="type" value="<?php echo $data['type']; ?>" hidden>
                     </div>
-                    <div <?php echo ($data['availability'] == 'available') ? '' : 'style="display: none;"'; ?>>             
+                    <div <?php echo ($data['availability'] == 'available') ? '' : 'style="display: none;"'; ?>>
                         <button class="<?php echo $data['availability'] === 'available' ? 'addToCartBtn' : 'disabled-button'; ?>" <?php echo $data['availability'] === 'available' ? '' : 'disabled'; ?>>Add to Cart</button>
-                    </div>   
+                    </div>
                     </form>
                 <button id="addToFavoritesBtn">Add to Favorites</button>
             </div>

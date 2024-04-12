@@ -189,7 +189,7 @@
 
                 </div>
                 <!--                add notification link here-->
-                <div class="notification on">
+                <div class="on notification ">
                     <a>
                         <i class="fa-solid fa-bell"></i>
                     </a>
