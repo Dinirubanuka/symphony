@@ -11,6 +11,7 @@
     --shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
+
 ul {
     list-style: none;
 }
@@ -29,7 +30,7 @@ button {
 
 #checkOutBtn {
     display: block;
-    /*background-color: var(--primary-color);*/
+    background-color: rgb(9, 8, 8);;
     color: var(--white);
     text-align: center;
     padding: 0.6rem 1.4rem;

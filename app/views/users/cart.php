@@ -11,7 +11,7 @@
 </head>
 <body>
 <?php require_once APPROOT . '/views/inc/viewNavBar.php'; ?>
-<main>
+<main class="main">
     <div class="container">
         <?php $atLeastOneNotAvailable = false; ?>
         <section id="cart">
@@ -24,35 +24,39 @@
                                input_product_type="<?php echo $cart->product_data->type; ?>" class="remove"
                                onclick="removeFromCart(this);">
                                 <img src="http://localhost/symphony/img/serviceProvider/<?php echo $cart->product_data->photo_1; ?>"
-                                     style="width:220px; height:229px;">
+                                >
                                 <h3>Remove product</h3>
                             </a>
                         </header>
 
-                        <div class="content">
-                            <h1><?php echo $cart->product_data->Title; ?></h1>
-                            <p>Quantity: <?php echo $cart->quantity; ?></p>
-                            <p>From: <?php echo $cart->start_date; ?> - To: <?php echo $cart->end_date; ?></p>
+                        <div class="upcontent">
+                            <div class="content">
+                                <h1><?php echo $cart->product_data->Title; ?></h1>
+                                <p>Quantity: <?php echo $cart->quantity; ?></p>
+                                <p>From: <?php echo $cart->start_date; ?> - To: <?php echo $cart->end_date; ?></p>
 
 
+                            </div>
+
+                            <footer class="content">
+                                <?php if ($cart->availability === 'notAvailable') : ?>
+                                    <h2 class="full-price" style="color: red;">
+                                        Not available
+                                    </h2>
+                                    <?php $atLeastOneNotAvailable = true; ?>
+                                <?php else : ?>
+                                    <h2 class="full-price">
+                                        LKR. <?php echo $cart->total ?>
+                                    </h2>
+                                <?php endif; ?>
+
+                                <h2 class="price">
+                                    x LKR.<?php echo $cart->product_data->unit_price; ?>
+                                </h2>
+                            </footer>
                         </div>
 
-                        <footer class="content">
-                            <?php if ($cart->availability === 'notAvailable') : ?>
-                                <h2 class="full-price" style="color: red;">
-                                    Not available
-                                </h2>
-                                <?php $atLeastOneNotAvailable = true; ?>
-                            <?php else : ?>
-                                <h2 class="full-price">
-                                    LKR. <?php echo $cart->total ?>
-                                </h2>
-                            <?php endif; ?>
 
-                            <h2 class="price">
-                                x LKR.<?php echo $cart->product_data->unit_price; ?>
-                            </h2>
-                        </footer>
                     </article>
                 <?php endforeach; ?>
         </section>
@@ -69,7 +73,7 @@
 
             <div class="right">
                 <h1 class="total">Total: LKR. <span><?php echo $data['total'];; ?></span></h1>
-                <a id="checkOutBtn" class="btn"> Checkout </a>
+                <a id="checkOutBtn" class="btn123" style="cursor: pointer;"> Checkout </a>
             </div>
 
         </div>
