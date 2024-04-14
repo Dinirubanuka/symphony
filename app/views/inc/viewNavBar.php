@@ -172,7 +172,7 @@
                                 alt="user image"
                         />
                         </a></li>
-                    <li><a class="btn btn-primary" href="<?php echo URLROOT; ?>/users/logout" style="color: black">Log out</a></li>
+                    <li><a class="off btn btn-primary" href="<?php echo URLROOT; ?>/users/logout" style="color: black">Log out</a></li>
                 </ul>
             </nav>
         </div>
@@ -202,7 +202,6 @@
                             alt="user image"
                     />
                 </a>
-<!--                <a class="btn btn-primary" href="--><?php //echo URLROOT; ?><!--/users/logout">Log out</a>-->
             </div>
             <button
                     id="hamburger"

@@ -1,4 +1,9 @@
-
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Inter", sans-serif;
+}
 
 body {
 	background: #eee;
@@ -29,18 +34,18 @@ body {
 	margin: 0;
 }
 
-a {
-	color: #000;
-	text-decoration: none;
+/*a {*/
+/*	color: #000;*/
+/*	text-decoration: none;*/
 
-	-webkit-transition: color .2s linear;
-	-moz-transition: color .2s linear;
-	-ms-transition: color .2s linear;
-	-o-transition: color .2s linear;
-	transition: color .2s linear;
-}
+/*	-webkit-transition: color .2s linear;*/
+/*	-moz-transition: color .2s linear;*/
+/*	-ms-transition: color .2s linear;*/
+/*	-o-transition: color .2s linear;*/
+/*	transition: color .2s linear;*/
+/*}*/
 
-a:hover {
+#cart a:hover {
 	color: #53b5aa;
 }
 
@@ -74,7 +79,6 @@ a:hover {
 .container {
 	font-family: 'Open Sans', sans-serif;
 	margin: 0 auto;
-	width: 980px;
 }
 
 #cart {
@@ -299,26 +303,6 @@ a:hover {
 
 .right {
 	float: right;
-}
-
-.btn {
-	background: #53b5aa;
-	border: 1px solid #999;
-	border-style: none none solid none;
-	cursor: pointer;
-	display: block;
-	color: #fff;
-	font-size: 20px;
-	font-weight: 300;
-	padding: 16px 0;
-	width: 290px;
-	text-align: center;
-
-	-webkit-transition: all .2s linear;
-	-moz-transition: all .2s linear;
-	-ms-transition: all .2s linear;
-	-o-transition: all .2s linear;
-	transition: all .2s linear;
 }
 
 .btn:hover {
