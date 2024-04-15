@@ -144,6 +144,7 @@ body {
 	padding: 0;
 	position: relative;
 	height: 195px;
+	width: 195px;
 }
 
 .product header:hover img {
@@ -272,7 +273,8 @@ body {
 }
 
 #site-footer {
-	padding: 40px;
+	padding: 40px
+
 }
 
 #site-footer h1 {
@@ -363,7 +365,7 @@ body {
 		padding: 0;
 	}
 	.product img{
-		width: 180px;
+		width: 195px;
 	}
 
 	.product header h3 {
@@ -381,12 +383,6 @@ body {
 		right: 0;
 		left: 0;
 
-		-webkit-transition: bottom .2s linear;
-		-moz-transition: bottom .2s linear;
-		-ms-transition: bottom .2s linear;
-		-o-transition: bottom .2s linear;
-		transition: bottom .2s linear;
-
 	}
 
 	.product .content {
@@ -398,6 +394,8 @@ body {
 		margin-top: 40px;
 		padding:0 20px ;
 		margin-right: 40px;
+		height: 350px;
+
 	}
 
 	#site-footer h1 {
@@ -442,18 +440,13 @@ body {
 		right: 0;
 		left: 0;
 
-		-webkit-transition: bottom .2s linear;
-		-moz-transition: bottom .2s linear;
-		-ms-transition: bottom .2s linear;
-		-o-transition: bottom .2s linear;
-		transition: bottom .2s linear;
-
 	}
 
 	.product .content {
 		height: 140px;
 		padding: 0 25px;
 		width: 95%;
+		font-size: 1rem;
 	}
 
 	.content h1{
@@ -463,6 +456,8 @@ body {
 		margin-top: 40px;
 		padding:0 20px ;
 		margin-right: 40px;
+		height: 350px;
+
 	}
 
 	#site-footer h1 {
@@ -497,4 +492,74 @@ body {
 		bottom: 64px;
 	}
 
+}
+@media (max-width: 800px) {
+	.product{
+		display: flex;
+		flex-direction: column;
+		height: auto;
+		align-items: center;
+	}
+	.product header{
+		width: 194px;
+	}
+}
+
+@media (max-width: 600px){
+	.product footer .full-price{
+		padding: 0 20px;
+	}
+	.product footer .price{
+		padding: 0 20px;
+	}
+
+}
+
+@media (max-width: 550px){
+	.product header{
+		width: 150px;
+		height: 150px;
+	}
+
+	.product header:hover h3{
+		bottom: 51px;
+	}
+	.product img{
+		object-fit: cover;
+		width: 150px;
+		height: 150px;
+	}
+
+	.product header h3 {
+		background-color: rgba(255, 255, 255, 0.5); /* White background with some transparency */
+		backdrop-filter: blur(10px); /* Add a blur effect */
+		color: #fff;
+		font-size: 18px;
+		font-weight: 300;
+		line-height: 43px;
+		margin: auto 0;
+		padding: 3px;
+		position: absolute;
+		bottom: -60px;
+		right: 0;
+		left: 0;
+	}
+
+	.product .content{
+		height: 140px;
+		width: 100%;
+		font-size: 0.9rem;
+	}
+
+	.product footer .full-price{
+		font-size: 0.9rem;
+	}
+	.product footer .price{
+		font-size: 0.9rem;
+	}
+
+	#site-footer{
+		font-size: 0.9rem;
+		height: 350px;
+	}
 }
