@@ -20,7 +20,7 @@
       --medium-grey: #636363;
       --light-grey: #eeeeee;
       --ash: #f4f4f4;
-      --primary-color: #2b72fb;
+      --primary-color: #3f2c2c;
       --white: white;
       --border: 1px solid var(--light-grey);
       --shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,

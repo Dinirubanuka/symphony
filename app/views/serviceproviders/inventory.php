@@ -15,12 +15,14 @@
 <!-----------profile-nav-bar-------->
 <?php require_once APPROOT . '/views/inc/sp-index-nav.php'; ?>
 
-<h1 style="color: white;text-align: center;padding-bottom: 20px;letter-spacing: 2px;">Inventory</h1>
 <div class="upperCategory">
     <div class="categories">
+        <div class="heading" style="padding: 10px">
+            <h2>Instrument Inventory</h2>
+        </div>
         <div class="category">
             <div class="category-name" onclick="toggleCategory('stringInstruments')">String Instruments</div>
-            <ul class="equipment-list" id="stringInstruments">
+            <ul class="equipment-list" id="stringInstruments" onchange="updateDisplayedData()">
                 <li class="equipment-item"><input type="checkbox"> Electric Guitars</li>
                 <li class="equipment-item"><input type="checkbox"> Acoustic Guitars</li>
                 <li class="equipment-item"><input type="checkbox"> Violins</li>
@@ -30,7 +32,7 @@
         </div>
         <div class="category">
             <div class="category-name" onclick="toggleCategory('woodwindInstruments')">Woodwind Instruments</div>
-            <ul class="equipment-list" id="woodwindInstruments">
+            <ul class="equipment-list" id="woodwindInstruments" onchange="updateDisplayedData()" >
                 <li class="equipment-item"><input type="checkbox"> Flute</li>
                 <li class="equipment-item"><input type="checkbox"> Clarinet</li>
                 <li class="equipment-item"><input type="checkbox"> Saxophone</li>
@@ -38,7 +40,7 @@
         </div>
         <div class="category">
             <div class="category-name" onclick="toggleCategory('brassInstruments')">Brass Instruments</div>
-            <ul class="equipment-list" id="brassInstruments">
+            <ul class="equipment-list" id="brassInstruments" onchange="updateDisplayedData()" >
                 <li class="equipment-item"><input type="checkbox"> Trumpet</li>
                 <li class="equipment-item"><input type="checkbox"> Trombone</li>
                 <li class="equipment-item"><input type="checkbox"> French Horn</li>
@@ -46,21 +48,21 @@
         </div>
         <div class="category">
             <div class="category-name" onclick="toggleCategory('percussionInstruments')">Percussion Instruments</div>
-            <ul class="equipment-list" id="percussionInstruments">
+            <ul class="equipment-list" id="percussionInstruments" onchange="updateDisplayedData()">
                 <li class="equipment-item"><input type="checkbox"> Drums</li>
                 <li class="equipment-item"><input type="checkbox"> Cymbals</li>
             </ul>
         </div>
         <div class="category">
             <div class="category-name" onclick="toggleCategory('keyboardInstruments')">Keyboard Instruments</div>
-            <ul class="equipment-list" id="keyboardInstruments">
+            <ul class="equipment-list" id="keyboardInstruments" onchange="updateDisplayedData()">
                 <li class="equipment-item"><input type="checkbox"> Piano</li>
                 <li class="equipment-item"><input type="checkbox"> Organ</li>
             </ul>
         </div>
         <div class="category">
             <div class="category-name" onclick="toggleCategory('audioInstruments')">Audio</div>
-            <ul class="equipment-list" id="audioInstruments">
+            <ul class="equipment-list" id="audioInstruments" onchange="updateDisplayedData()">
                 <li class="equipment-item"><input type="checkbox"> Headphones</li>
                 <li class="equipment-item"><input type="checkbox"> Receivers</li>
                 <li class="equipment-item"><input type="checkbox"> Amplifiers</li>
@@ -75,12 +77,12 @@
         </div>
         <div class="category">
             <div class="category-name" onclick="toggleCategory('price')">Price</div>
-            <ul class="equipment-list price" id="price">
+            <ul class="equipment-list price" id="price" >
                 <li class="equipment-item"><input type="number"
-                                                  style="width: 50px;border: 1px solid #dad7d7;padding: 10px;"></li>
+                                                  style="width: 50px;border: 1px solid #dad7d7;padding: 10px;" onchange="price()" id="value1"></li>
                 <li class="equipment-item" style="padding: 10px">-</li>
                 <li class="equipment-item"><input type="number"
-                                                  style="width: 50px;border: 1px solid #dad7d7;padding: 10px"></li>
+                                                  style="width: 50px;border: 1px solid #dad7d7;padding: 10px" onchange="price()" id="value2"></li>
             </ul>
         </div>
         <div class="category sort">

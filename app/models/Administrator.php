@@ -64,7 +64,6 @@ class Administrator
     return $results;
   }
 
-
   public function deleteModerator($moderator_id)
   {
     $this->db->query('DELETE FROM moderators WHERE moderator_id = :moderator_id');
@@ -108,6 +107,27 @@ class Administrator
     return $results;
   }
 
+  public function getPendingServiceProviders()
+  {
+    $this->db->query('SELECT * FROM serviceproviders WHERE verification > 100000 AND verification < 150000');
+    $results = $this->db->resultSet();
+    return $results;
+  }
+
+  public function getActivatedServiceProviders()
+  {
+    $this->db->query('SELECT * FROM serviceproviders WHERE verification > 150000 AND verification < 200000');
+    $results = $this->db->resultSet();
+    return $results;
+  }
+
+  public function getDeactivatedServiceProviders()
+  {
+    $this->db->query('SELECT * FROM serviceproviders WHERE verification > 200000');
+    $results = $this->db->resultSet();
+    return $results;
+  }
+
   public function getServiceProvider($serviceprovider_id)
   {
     $this->db->query('SELECT * FROM serviceproviders WHERE serviceprovider_id = :serviceprovider_id');
@@ -115,8 +135,6 @@ class Administrator
     $result = $this->db->single(); // Use fetch instead of resultSet
     return $result;
   }
-
-
 
   public function deleteServiceProvider($serviceprovider_id)
   {

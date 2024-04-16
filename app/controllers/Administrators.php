@@ -39,7 +39,7 @@ class Administrators extends Controller
         'confirm_password_err' => ''
       ];
 
-      //Validate Email
+      // Validate Email
       if (empty($data['admin_email'])) {
         $data['admin_email_err'] = 'Please enter email';
       } else {
@@ -49,17 +49,17 @@ class Administrators extends Controller
         }
       }
 
-      //Validate Name
+      // Validate Name
       if (empty($data['admin_name'])) {
         $data['admin_name_err'] = 'Please enter name';
       }
 
-      //Validate telephone number
+      // Validate telephone number
       if (empty($data['admin_contact_no'])) {
         $data['admin_contact_no_err'] = 'Please enter telephone number';
       }
 
-      //Validate Address
+      // Validate Address
       if (empty($data['admin_address'])) {
         $data['admin_address_err'] = 'Please enter address';
       }
@@ -218,6 +218,33 @@ class Administrators extends Controller
       'serviceproviders' => $serviceproviders
     ];
     $this->view('administrators/viewserviceprovider', $data);
+  }
+
+  public function viewpendingserviceprovider()
+  {
+    $serviceproviders = $this->administratorModel->getPendingServiceProviders();
+    $data = [
+      'serviceproviders' => $serviceproviders
+    ];
+    $this->view('administrators/viewpendingserviceprovider', $data);
+  }
+
+  public function viewactivatedserviceprovider()
+  {
+    $serviceproviders = $this->administratorModel->getActivatedServiceProviders();
+    $data = [
+      'serviceproviders' => $serviceproviders
+    ];
+    $this->view('administrators/viewactivatedserviceprovider', $data);
+  }
+
+  public function viewdeactivatedserviceprovider()
+  {
+    $serviceproviders = $this->administratorModel->getDeactivatedServiceProviders();
+    $data = [
+      'serviceproviders' => $serviceproviders
+    ];
+    $this->view('administrators/viewdeactivatedserviceprovider', $data);
   }
 
   public function viewsingleserviceprovider($id)

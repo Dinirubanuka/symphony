@@ -7,19 +7,45 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/admin-index.css">
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
   <title><?php echo SITENAME; ?></title>
 </head>
 
-<<body>
+<body>
   <div class="container_body">
     <div class="adminsidebar">
       <?php require APPROOT . '/views/inc/admin-sidebar.php'; ?>
     </div>
     <div class="right-component">
-        <h2>Home</h2>
+      <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
     </div>
   </div>
-  <script src="<?php echo URLROOT; ?>/js/main.js"></script>
-  </body>
 
-  </html>
+  <script>
+    const xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+    const yValues = [55, 49, 44, 24, 15];
+    const barColors = ["red", "green", "blue", "orange", "brown"];
+
+    new Chart("myChart", {
+      type: "bar",
+      data: {
+        labels: xValues,
+        datasets: [{
+          backgroundColor: barColors,
+          data: yValues
+        }]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        title: {
+          display: true,
+          text: "World Wine Production 2018"
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

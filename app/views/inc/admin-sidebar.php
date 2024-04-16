@@ -40,19 +40,19 @@
                 </li>
                 <!-- <ul id="mod_list_pop"> -->
                 <li class="nav_link_seller">
-                    <a href="<?php echo URLROOT; ?>/administrators/viewserviceprovider">
+                    <a href="<?php echo URLROOT; ?>/administrators/viewpendingserviceprovider">
                         <i class='bx bx-user-circle icon'></i>
                         <span class="text nav-text">Pending</span>
                     </a>
                 </li>
                 <li class="nav_link_seller">
-                    <a href="<?php echo URLROOT; ?>/administrators/viewserviceprovider">
+                    <a href="<?php echo URLROOT; ?>/administrators/viewactivatedserviceprovider">
                         <i class='bx bx-user-check icon'></i>
                         <span class="text nav-text">Activated</span>
                     </a>
                 </li>
                 <li class="nav_link_seller">
-                    <a href="<?php echo URLROOT; ?>/administrators/viewserviceprovider">
+                    <a href="<?php echo URLROOT; ?>/administrators/viewdeactivatedserviceprovider">
                         <i class='bx bx-user-x icon'></i>
                         <span class="text nav-text">Deactivated</span>
                     </a>
