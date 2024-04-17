@@ -121,6 +121,21 @@ class Administrator
     return $results;
   }
 
+  public function updateServiceProviderStateById($data)
+  {
+    $this->db->query('UPDATE serviceproviders SET verification = :verification WHERE id = :id');
+    // Bind values
+    $this->db->bind(':verification', $data['verification']);
+
+    // Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
   public function getDeactivatedServiceProviders()
   {
     $this->db->query('SELECT * FROM serviceproviders WHERE verification > 200000');

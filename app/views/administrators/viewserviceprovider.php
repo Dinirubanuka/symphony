@@ -40,9 +40,7 @@
                                 <td><?php echo $serviceprovider->owner_nic; ?></td>
                                 <td class="data-table-action">
 
-                                    <a class="mod-below-delete" onclick="deleteServiceProvider(<?php echo $serviceprovider->serviceprovider_id; ?>)">
-                                        <i class='bx bx-trash'></i>
-                                    </a>
+
                                     <a href="<?php echo URLROOT; ?>/administrators/viewsingleserviceprovider/<?php echo $serviceprovider->serviceprovider_id; ?>" class="mod-below-edit">
                                         <i class='bx bx-edit'></i>
                                     </a>
@@ -55,15 +53,7 @@
             </div>
         </div>
     </div>
-    <script>
-        function deleteServiceProvider(serviceproviderID) {
-            // Display a confirmation dialog
-            if (confirm("Are you sure you want to delete this Service Provider?")) {
-                // Execute PHP code to delete the moderator
-                window.location.href = "<?php echo URLROOT; ?>/administrators/deleteserviceprovider/" + serviceproviderID;
-            }
-        }
-    </script>
+
 </body>
 
 </html>

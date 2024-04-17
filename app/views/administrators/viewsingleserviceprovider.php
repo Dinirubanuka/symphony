@@ -108,13 +108,23 @@
                         <span class="viewsinglesp_container_span">Owner Email: <?php echo $data['serviceprovider']->owner_email ?></span>
                     </div>
                     <div class="viewsinglesp_container_btn_div">
-                        <button class="viewsinglesp_container_btn_rej">Reject</button>
-                        <button class="viewsinglesp_container_btn_acc">Accept</button>
+                        <button class="viewsinglesp_container_btn_rej" onclick="deleteServiceProvider(<?php echo $data['serviceprovider']->serviceprovider_id; ?>)">Reject</button>
+                        <button class="viewsinglesp_container_btn_acc" onclick="location.href='<?php echo URLROOT; ?>administrators/changeserviceproviderstate/' + $serviceprovider->serviceprovider_id">Accept</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function deleteServiceProvider(serviceproviderId) {
+            // Display a confirmation dialog
+            if (confirm("Are you sure you want to delete this service provider?")) {
+                // Execute PHP code to delete the moderator
+                window.location.href = "<?php echo URLROOT; ?>/administrators/deleteserviceprovider/" + serviceproviderId;
+            }
+        }
+    </script>
 </body>
 
 </html>

@@ -256,6 +256,18 @@ class Administrators extends Controller
     $this->view('administrators/viewsingleserviceprovider', $data);
   }
 
+  public function changeserviceproviderstate($id)
+  {
+    $currentserviceprovider = $this->administratorModel->getServiceProvider($id);
+
+    $data = [
+      'verification' => $currentserviceprovider->verification + 50000
+    ];
+
+    // Update the state value in the database
+    $this->administratorModel->updateServiceProviderStateById($id, $data);
+  }
+
   public function deletemoderator($id)
   {
     if ($this->administratorModel->deleteModerator($id)) {
