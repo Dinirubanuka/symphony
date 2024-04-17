@@ -1,7 +1,7 @@
-<header id="nav-menu" aria-label="navigation bar">
+<header id="nav-menu" aria-label="navigation bar" class="nav-menu">
     <div class="container">
         <div class="nav-start">
-            <a class="logo" href="http://localhost/symphony/serviceproviders/index">
+            <a class="logo" href="http://localhost/symphony/users/index">
                 <img
                         src="<?php echo logo; ?>"
                         width="35"
@@ -151,9 +151,20 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/orders">Orders</a></li>
-                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/inventory">Inventory</a></li>
-                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/additem">Add Instrument</a></li>
+                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/orders">Orders</a></li>
+                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/orders">Inventory</a></li>
+                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/orders">Add Instrument</a></li>
+
+                    <!--                add notification link here-->
+                    <li><a href="<?php echo URLROOT; ?>/serviceproviders/profile" class="off">
+                            <img
+                                    src="<?php echo URLROOT; ?>/img/user.png"
+                                    width="30"
+                                    height="30"
+                                    alt="user image"
+                            />
+                        </a></li>
+                    <li><a class="off btn btn-primary" href="<?php echo URLROOT; ?>/serviceproviders/logout" style="color: black">Log out</a></li>
                 </ul>
             </nav>
         </div>
@@ -163,10 +174,8 @@
                     <input type="search" name="search" placeholder="Search" id="search-item"/>
                     <i class="bx bx-search" aria-hidden="true"></i>
                 </form>
-                <a href="<?php echo URLROOT; ?>/serviceproviders/index">
-                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                </a>
-                <a href="<?php echo URLROOT; ?>/serviceproviders/profile">
+                <!--                add notification link here-->
+                <a href="<?php echo URLROOT; ?>/serviceproviders/profile" class="on">
                     <img
                             src="<?php echo URLROOT; ?>/img/user.png"
                             width="30"
@@ -174,9 +183,7 @@
                             alt="user image"
                     />
                 </a>
-                <a class="btn btn-primary" href="<?php echo URLROOT; ?>/serviceproviders/logout">Log out</a>
             </div>
-
             <button
                     id="hamburger"
                     aria-label="hamburger"
