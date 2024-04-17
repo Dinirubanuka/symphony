@@ -159,6 +159,10 @@ body {
     padding: 10px;
     color: white;
 }
+.video-uploadBody iframe{
+    height: 320px;
+    width: 560px;
+}
 .video-link{
     color: white;
     padding: 10px;
@@ -377,5 +381,16 @@ body {
         display: grid;
         grid-template-columns: auto ;
         box-sizing: content-box;
+    }
+}
+@media (max-width: 1000px) {
+    .titleHours{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .video-uploadBody iframe{
+        height: 320px;
+        width: 500px;
     }
 }

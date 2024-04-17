@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Instrument</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/sp-inventory.css"/>
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/inventory.css"/>
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/category.css"/>
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/nav-bar.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/instrument.css">
 </head>
 <body>
 <!--navigation bar-->

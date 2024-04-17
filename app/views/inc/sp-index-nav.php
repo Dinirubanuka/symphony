@@ -1,7 +1,7 @@
 <header id="nav-menu" aria-label="navigation bar" class="nav-menu">
     <div class="container">
         <div class="nav-start">
-            <a class="logo" href="http://localhost/symphony/users/index">
+            <a class="logo" href="http://localhost/symphony/serviceproviders/index">
                 <img
                         src="<?php echo logo; ?>"
                         width="35"
@@ -151,9 +151,9 @@
                             </ul>
                         </div>
                     </li>
-                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/orders">Orders</a></li>
-                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/orders">Inventory</a></li>
-                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/orders">Add Instrument</a></li>
+                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/orders">Orders</a></li>
+                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/inventory">Inventory</a></li>
+                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/additem">Add Instrument</a></li>
 
                     <!--                add notification link here-->
                     <li><a href="<?php echo URLROOT; ?>/serviceproviders/profile" class="off">

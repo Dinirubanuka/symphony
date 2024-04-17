@@ -1,23 +1,23 @@
-<header id="nav-menu" aria-label="navigation bar">
+<header id="nav-menu" aria-label="navigation bar" class="nav-menu">
     <div class="container">
         <div class="nav-start">
             <a class="logo" href="http://localhost/symphony/serviceproviders/index">
                 <img
-                    src="<?php echo logo; ?>"
-                    width="35"
-                    height="35"
-                    alt="Inc Logo"
+                        src="<?php echo logo; ?>"
+                        width="35"
+                        height="35"
+                        alt="Inc Logo"
                 />
             </a>
             <nav class="menu">
                 <ul class="menu-bar">
                     <li>
                         <button
-                            class="nav-link dropdown-btn"
-                            data-dropdown="dropdown1"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            aria-label="browse"
+                                class="nav-link dropdown-btn"
+                                data-dropdown="dropdown1"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                aria-label="browse"
                         >
                             Browse
                             <i class="bx bx-chevron-down" aria-hidden="true"></i>
@@ -113,11 +113,11 @@
                     </li>
                     <li>
                         <button
-                            class="nav-link dropdown-btn"
-                            data-dropdown="dropdown2"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            aria-label="discover"
+                                class="nav-link dropdown-btn"
+                                data-dropdown="dropdown2"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                aria-label="discover"
                         >
                             Discover
                             <i class="bx bx-chevron-down" aria-hidden="true"></i>
@@ -152,8 +152,19 @@
                         </div>
                     </li>
                     <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/orders">Orders</a></li>
-                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/inventory">Inventory</a></li>
+                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/studio">Inventory</a></li>
                     <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/addStudio">Add Studio</a></li>
+
+                    <!--                add notification link here-->
+                    <li><a href="<?php echo URLROOT; ?>/serviceproviders/profile" class="off">
+                            <img
+                                    src="<?php echo URLROOT; ?>/img/user.png"
+                                    width="30"
+                                    height="30"
+                                    alt="user image"
+                            />
+                        </a></li>
+                    <li><a class="off btn btn-primary" href="<?php echo URLROOT; ?>/serviceproviders/logout" style="color: black">Log out</a></li>
                 </ul>
             </nav>
         </div>
@@ -163,22 +174,21 @@
                     <input type="search" name="search" placeholder="Search" id="search-item"/>
                     <i class="bx bx-search" aria-hidden="true"></i>
                 </form>
-                <a href="<?php echo URLROOT; ?>/serviceproviders/profile">
+                <!--                add notification link here-->
+                <a href="<?php echo URLROOT; ?>/serviceproviders/profile" class="on">
                     <img
                             src="<?php echo URLROOT; ?>/img/user.png"
-                        width="30"
-                        height="30"
-                        alt="user image"
+                            width="30"
+                            height="30"
+                            alt="user image"
                     />
                 </a>
-                <a class="btn btn-primary" href="<?php echo URLROOT; ?>/serviceproviders/logout">Log out</a>
             </div>
-
             <button
-                id="hamburger"
-                aria-label="hamburger"
-                aria-haspopup="true"
-                aria-expanded="false"
+                    id="hamburger"
+                    aria-label="hamburger"
+                    aria-haspopup="true"
+                    aria-expanded="false"
             >
                 <i class="bx bx-menu" aria-hidden="true"></i>
             </button>

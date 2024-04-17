@@ -7,6 +7,7 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="<?php echo URLROOT ?>/css/viewSinger.css"/>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/inventory.css"/>
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/nav-bar.css">
     <title>Servie Provider Profile</title>
 </head>
 <body>
@@ -80,7 +81,7 @@
                 <!--    upload video-->
                 <div class="video-upload">
                     <div class="video-uploadBody">
-                        <iframe width="560" height="320"
+                        <iframe
                                 src="<?php echo $data->videoLink ?>" autoplay=1&mute=1">
                         </iframe>
                     </div>
