@@ -152,7 +152,7 @@
                         </div>
                     </li>
                     <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/orders">Orders</a></li>
-                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/studio">Inventory</a></li>
+                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/singer">Inventory</a></li>
                     <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/addsinger">Add Singer</a></li>
 
                     <!--                add notification link here-->
