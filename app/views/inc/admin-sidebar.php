@@ -1,13 +1,9 @@
 <nav class="sidebar">
     <header>
         <div class="image-text">
-            <span class="image">
-                <img src="logo.png" alt="">
-            </span>
 
             <div class="text logo-text">
-                <span class="name">Symphony</span>
-                <span class="profession">Admin</span>
+                <h2 class="name">Symphony-Admin</h2>
             </div>
         </div>
 
