@@ -152,7 +152,7 @@ body {
   cursor: pointer;
   border: none;
   border-radius: 4px;
-  color: black; /* Set font color to black */
+  color: #ffffff; /* Set font color to black */
 }
 
 .disabled-button {
@@ -183,23 +183,23 @@ body {
 }
 
 #addToFavoritesBtn {
-  background-color: #71c971;
+  background-color: #090808;
   transition: background-color 0.3s;
 }
 
 #addToFavoritesBtn:hover {
-  background-color: #008000;
+  background-color: #6f7375;
   color: black;
 }
 
 #availabilityChkBtn {
-  background-color: #7194c9;
+  background-color: #090808;
   transition: background-color 0.3s;
 }
 
 #availabilityChkBtn:hover {
-  background-color: #1c58ff;
-  color: black;
+  background-color: #6f7375;
+  color: #ffffff;
 }
 
 
@@ -529,4 +529,38 @@ font-weight: 500;
     margin: auto;
     width: 350px;
   }
+}
+
+.singerPhoto{
+  height: 150px;
+  width: 150px;
+}
+
+.singerPhoto img{
+  border-radius: 50%;
+  object-fit: cover;
+  height: 150px;
+  width: 150px;
+}
+
+.singerDetails{
+  height: 40px;
+  display: flex;
+  gap: 8px;
+}
+
+.videoBox iframe{
+  height: 200px;
+  width: 320px;
+}
+
+.contactBox{
+  display: flex;
+  gap: 8px;
+}
+
+.emailBox{
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 5px;
 }

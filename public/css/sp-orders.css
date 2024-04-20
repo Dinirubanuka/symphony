@@ -27,11 +27,13 @@ body {
 
 .order-image {
     text-align: center;
+
 }
 
 .order-image img {
+    height: 213.3px;
+    object-fit: cover;
     max-width: 100%;
-    height: auto;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
@@ -73,17 +75,17 @@ body {
     margin: 0 8px;
     border: none;
     cursor: pointer;
-    background-color: #b3caf5;
+    background-color: #3e4346;
     border-radius: 4px;
     transition: background-color 0.3s ease;
 }
 
 .accept-btn:hover, .reject-btn:hover {
-    background-color: #76a6ee;
+    background-color: #6f7375;
 }
 
 .accept-btn {
-    color: #1a1a1a;
+    color: #ffffff;
 }
 
 .reject-btn {
@@ -129,4 +131,14 @@ body {
 
 .deposit-div {
     color : #2c9930;
+}
+
+@media (max-width: 1100px){
+    .order-actions{
+        display: flex;
+    }
+    .accept-btn, .reject-btn{
+        padding: 4px 9px;
+    }
+
 }
