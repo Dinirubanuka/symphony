@@ -14,7 +14,7 @@
 </head>
 <body onload="changeRating(); checkAvailability() ">
 <!------------nav-bar-------->
-<?php require_once APPROOT . '/views/inc/viewNavBar.php'; ?>
+ <?php require_once APPROOT . '/views/inc/navBar.php'; ?>
 
 <div class="wrapper">
     <div class="container">
@@ -37,17 +37,17 @@
             <div class="column">
                 <img class="demo cursor"
                      src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $data['photo_1']; ?>"
-                      onclick="currentSlide(1)">
+                     style="width:190px; height:190px;" onclick="currentSlide(1)">
             </div>
             <div class="column">
                 <img class="demo cursor"
                      src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $data['photo_2']; ?>"
-                     onclick="currentSlide(2)">
+                     style="width:190px; height:190px;" onclick="currentSlide(2)">
             </div>
             <div class="column">
                 <img class="demo cursor"
                      src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $data['photo_3']; ?>"
-                      onclick="currentSlide(3)">
+                     style="width:190px; height:190px;" onclick="currentSlide(3)">
             </div>
         </div>
     </div>
@@ -56,11 +56,7 @@
         <div class="item-details">
             <div class="item-info">
             <form action="<?php echo URLROOT; ?>/users/checkAvailability/<?php echo $data['type']; ?>/<?php echo $data['product_id']; ?>" class="form" method="post" enctype="multipart/form-data" id="addToCartForm">
-                <div class=" <?php echo ($data['type'] === 'Singer') ? 'singerPhoto': ''; ?>">
-                    <?php if ($data['type'] === 'Singer'): ?>
-                        <img src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $data['singerPhoto']; ?>" alt="singer photo">
-                    <?php endif; ?>
-                </div>
+                    <h1><?php echo $data['Title']; ?></h1>
                     <h3><div <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>Category: <?php echo $data['category']; ?></div></h3>
                     <h3><div <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>Brand: <?php echo $data['brand']; ?></div></h3>
                     <p><div <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>Model: <?php echo $data['model']; ?></div></p>
@@ -81,51 +77,38 @@
                     <p><div <?php echo ($data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>Instrument: <?php echo $data['instrument']; ?></div></p>
                     <p><div <?php echo ($data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>Email: <?php echo $data['email']; ?></div></p>
                     <h3><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>Name: <?php echo $data['musician_name']; ?></div></h3>
-                    <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>NickName: (<?php echo $data['nickName']; ?>)</div></p>
+                    <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>NickName: <?php echo $data['nickName']; ?></div></p>
                     <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>Telephone Number: <?php echo $data['telephoneNumber']; ?></div></p>
                     <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>Video Link: <?php echo $data['videoLink']; ?></div></p>
                     <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>Location: <?php echo $data['location']; ?></div></p>
                     <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>Instrument: <?php echo $data['instrument']; ?></div></p>
                     <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>Singer Photo: <?php echo $data['singerPhoto']; ?></div></p>
                     <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>Email: <?php echo $data['email']; ?></div></p>
-
-                <div class="<?php echo ($data['type']) == 'Singer' ? 'singerDetails': '' ?>">
-                    <h3><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>><?php echo $data['singer_name']; ?></div></h3>
-                    <h4><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>(<?php echo $data['nickName']; ?>)</div></h4>
-                </div>
-                <?php if ($data['type'] === 'Singer') : ?>
-                    <h4>Rate: <?php echo $data['unit_price']; ?><span> /per day</span></h4>
-                <?php endif; ?>
-
-                <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>><img src="http://localhost/symphony/img/location-pin.png" alt="camera-icon" class="" id="" style="height: 16px;width: 16px;"> <?php echo $data['location']; ?></div></p>
-                <p>Description: <?php echo $data['Description']; ?></p>
-                <div class="contactBox">
-                    <div class="emailBox">
-                        <div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>><img src="http://localhost/symphony/img/email.png" alt="camera-icon" class="" id="" style="height: 16px;width: 16px;"></div>
-                        <div><?php echo $data['email']; ?></div>
-                    </div>
-                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>><img src="http://localhost/symphony/img/telephone-call.png" alt="camera-icon" class="" id="" style="height: 16px;width: 16px;">   <?php echo $data['telephoneNumber']; ?></div></p>
-                </div>
-                <div class="videoBox">
-                    <iframe src="<?php echo $data['videoLink']; ?>"></iframe>
-                </div>
+                    <h3><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Name: <?php echo $data['singer_name']; ?></div></h3>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>NickName: <?php echo $data['nickName']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Telephone Number: <?php echo $data['telephoneNumber']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Video Link: <?php echo $data['videoLink']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Location: <?php echo $data['location']; ?></div></p>
                     <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Instrument: <?php echo $data['instrument']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Singer Photo: <?php echo $data['singerPhoto']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Email: <?php echo $data['email']; ?></div></p>
+                    <p>Price per day: <?php echo $data['unit_price']; ?></p>
                     <p>Last Modified: <?php echo $data['createdDate']; ?></p>
+                    <p>Description: <?php echo $data['Description']; ?></p>
 
                     <!-- Add to cart and add to favorites buttons -->
 
                     <div class="date-picker-container">
                         <label for="fromDate">From Date:</label>
                         <input type="date" id="fromDate" name="fromDate" min="" max="" value="<?php echo $data['start_date']; ?>" required>
-                        <br><br>
 
                         <label for="toDate">To Date:</label>
-                        <input type="date" id="toDate" name="toDate" min="" max="" value="<?php echo $data['end_date']; ?>" required><br>
-                    <br>
+                        <input type="date" id="toDate" name="toDate" min="" max="" value="<?php echo $data['end_date']; ?>" required>
+                    <br><br>
                     <label id="product_id" name="product_id" value="<?php echo $data['product_id']; ?>"></label>
                     <div class="number-input-container"  <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>
                         <label for="amount">Quantity:</label>
-                        <input type="number" id="quantity" name="quantity" value="<?php echo $data['quantity_selected']; ?>" required>
+                        <input type="number" id="quantity" name="quantity" value="<?php echo $data['quantity_selected']; ?>" required min="1">
                     </div>
                     </div>
                     <br>
@@ -140,9 +123,9 @@
                         <input type="number" id="quantity" name="quantity" value="<?php echo $data['quantity_selected']; ?>" hidden>
                         <input type="text" id="type" name="type" value="<?php echo $data['type']; ?>" hidden>
                     </div>
-                    <div <?php echo ($data['availability'] == 'available') ? '' : 'style="display: none;"'; ?>>
+                    <div <?php echo ($data['availability'] == 'available') ? '' : 'style="display: none;"'; ?>>             
                         <button class="<?php echo $data['availability'] === 'available' ? 'addToCartBtn' : 'disabled-button'; ?>" <?php echo $data['availability'] === 'available' ? '' : 'disabled'; ?>>Add to Cart</button>
-                    </div>
+                    </div>   
                     </form>
                 <button id="addToFavoritesBtn">Add to Favorites</button>
             </div>
@@ -160,28 +143,27 @@
                       var count = '{$data['count']}';
                       var rating = '{$data['rating']}';</script>"; ?>
     <div class="overrall-rating">
-        <div class="rate-header">
-            <span class="heading">User Rating</span>
-            <div class="star-rating" title="70%">
-                <div class="back-stars">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
+        <span class="heading">User Rating</span>
+        <div class="star-rating" title="70%">
+            <div class="back-stars">
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
 
-                    <div class="front-stars" style="width: 70%" id="front-stars">
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
+                <div class="front-stars" style="width: 70%" id="front-stars">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
                 </div>
             </div>
-            <p><?php echo round($data['rating'], 2); ?> average based on <?php echo $data['count']; ?> reviews.</p>
-            <hr style="border:3px solid #f1f1f1">
         </div>
+        <p><?php echo round($data['rating'], 2); ?> average based on <?php echo $data['count']; ?> reviews.</p>
+        <hr style="border:3px solid #f1f1f1">
+
         <div class="progress">
             <div class="side">
                 <div>5 star</div>

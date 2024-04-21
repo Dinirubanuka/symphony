@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/mod-index.css">
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/userlist.css">
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+  <title><?php echo SITENAME; ?></title>
+</head>
+
+<body>
+  <div class="container_body">
+    <div class="adminsidebar">
+      <?php require APPROOT . '/views/inc/admin-sidebar.php'; ?>
+    </div>
+    <div class="right-component">
+<div class="mod">
+    <div class="mod-below">
+        <table class="data-table">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            <?php foreach ($data['all_users'] as $user) : ?>
+                <tr class="data-table-tr">
+                    <td><?php echo $user->id; ?></td>
+                    <td><?php echo $user->name; ?></td>
+                    <td><?php echo $user->email; ?></td>
+                    <td style="color: purple;">User</td>
+                    <td><?php echo $user->status; ?></td>
+                    <td><div class = "sp-icon" onclick = "generateUser(<?php echo $user->id; ?>)">Generate Logs</div></td>
+                </tr>
+            <?php endforeach; ?>
+
+            <?php foreach ($data['all_sp'] as $user) : ?>
+                <tr class="data-table-tr">
+                    <td><?php echo $user->serviceprovider_id ; ?></td>
+                    <td><?php echo $user->business_name; ?></div></td>
+                    <td><?php echo $user->business_email; ?></td>
+                    <td style="color: green;">Service Provider</td>
+                    <td><?php echo $user->status; ?></td>
+                    <td><div class = "sp-icon" onclick = "generateSP(<?php echo $user->serviceprovider_id; ?>)">Generate Logs</div></td>
+                </tr>
+            <?php endforeach; ?>
+
+            <?php foreach ($data['all_moderators'] as $user) : ?>
+                <tr class="data-table-tr">
+                    <td><?php echo $user->moderator_id  ; ?></td>
+                    <td><?php echo $user->moderator_name; ?></div></td>
+                    <td><?php echo $user->moderator_email; ?></td>
+                    <td style="color: red;">Moderator</td>
+                    <td><?php echo $user->status; ?></td>
+                    <td><div class = "sp-icon" onclick = "generateMOD(<?php echo $user->moderator_id ; ?>)">Generate Logs</div></td>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<script>
+    function generateUser(userID) {
+        window.location.href = "<?php echo URLROOT; ?>/administrators/generateUserLog/" + userID;
+    }
+
+    function generateSP(serviceproviderID) {
+        window.location.href = "<?php echo URLROOT; ?>/administrators/generateSPLog/" + serviceproviderID;
+    }
+
+    function generateMOD(moderatorID) {
+        window.location.href = "<?php echo URLROOT; ?>/administrators/generateModLog/" + moderatorID;
+    }
+</script>
+</body>
+
+</html>

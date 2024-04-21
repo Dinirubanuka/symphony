@@ -11,7 +11,6 @@
     --shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
-
 ul {
     list-style: none;
 }
@@ -28,9 +27,9 @@ button {
     color: inherit;
 }
 
-#checkOutBtn {
+.btn {
     display: block;
-    background-color: rgb(9, 8, 8);;
+    /*background-color: var(--primary-color);*/
     color: var(--white);
     text-align: center;
     padding: 0.6rem 1.4rem;
@@ -51,7 +50,7 @@ button {
 }
 
 .nav-menu .container {
-    background: black;
+    background: rgba(0,0,0,0.2);
     position: sticky;
     z-index: 100;
     display: flex;
@@ -107,11 +106,6 @@ button {
     display: flex;
     align-items: center;
 }
-
-.nav-end i{
-    color: white;
-}
-
 .search input[type="search"]{
     background: rgba(0, 0, 0, 0.5);
     color: white;
@@ -188,13 +182,6 @@ button {
 .right-container img {
     border-radius: 50%;
 }
-.right-container a{
-    color: white;
-}
-
-.off{
-     display: none;
- }
 
 .search input {
     background-color: var(--ash);
@@ -267,29 +254,9 @@ button {
         transform: none;
         box-shadow: none;
     }
-    .account-requests{
-        position: absolute;
-        top: 0;
-    }
 
     .menu.show,
     .dropdown.active {
-        display: block;
-        color: black;
-        z-index: 100000;
-    }
-    .menu.show,
-    .upperCategory{
-        background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
-        backdrop-filter: blur(5px); /* Blur effect */
-    }
-
-    .menu.show,
-    .on{
-        display: none;
-    }
-    .menu.show,
-    .off{
         display: block;
     }
 
@@ -325,23 +292,18 @@ button {
 }
 
 @media (max-width: 600px) {
-    .search {
-        display: block;
+    .right-container {
+        display: none;
     }
 }
 
 .cart .badge {
     position: absolute;
-    top: -19px;
-    right: -6px;
+    top: -30px;
+    right: -5px;
     padding: 2px 5px;
     border-radius: 50%;
     background: red;
     color: white;
     font-size: small;
-}
-@media (max-width: 414px) {
-    .nav-menu .container{
-        padding: 0 8px 0;
-    }
 }

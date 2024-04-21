@@ -634,12 +634,13 @@ class User
         return $results;
     }
 
-    public function checkProductPurchased($product_id, $user_id, $status)
+    public function checkProductPurchased($product_id, $user_id, $status, $type)
     {
-        $this->db->query('SELECT * FROM suborder WHERE product_id = :product_id AND user_id = :user_id AND status = :status');
+        $this->db->query('SELECT * FROM suborder WHERE product_id = :product_id AND user_id = :user_id AND status = :status AND type = :type');
         $this->db->bind(':product_id', $product_id);
         $this->db->bind(':user_id', $user_id);
         $this->db->bind(':status', $status);
+        $this->db->bind(':type', $type);
         $results = $this->db->resultSet();
         return $results;
     }

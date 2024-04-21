@@ -1193,6 +1193,7 @@ class Users extends Controller
             if (empty($data['password'])) {
                 $data['password_err'] = 'Please enter password';
             }
+
             // Check for user/email
             if ($this->userModel->findUserByEmail($data['email'])) {
                 // User found
@@ -1771,12 +1772,12 @@ class Users extends Controller
             $data = $this->userModel->viewMusician($product_id);
             $reviews = $this->userModel->viewreviews($product_id, $type);
         }
+        $purchased = false;
         $user = $this->userModel->view($_SESSION['user_id']);
-        $purchased = true;
-        // $productPurchased = $this->userModel->checkProductPurchased($product_id, $_SESSION['user_id'], 'Completed');
-        // if($productPurchased){
-        //     $purchased = true;
-        // }
+        $productPurchased = $this->userModel->checkProductPurchased($product_id, $_SESSION['user_id'], 'Completed', $type);
+        if($productPurchased){
+            $purchased = true;
+        }
         if($reviews){
             $count = 0;
             $star1 = 0;
@@ -2085,7 +2086,7 @@ class Users extends Controller
             $reviews = $this->userModel->viewreviews($product_id, $type);
         }
         $user = $this->userModel->view($_SESSION['user_id']);
-        $purchased = true;
+        $purchased = false;
         if($reviews){
             $count = 0;
             $star1 = 0;
@@ -2126,11 +2127,10 @@ class Users extends Controller
             $star5 = 0;
             $count = 0;
         }
-
-        // $productPurchased = $this->userModel->checkProductPurchased($product_id, $_SESSION['user_id'], 'Completed');
-        // if($productPurchased){
-        //     $purchased = true;
-        // }
+        $productPurchased = $this->userModel->checkProductPurchased($product_id, $_SESSION['user_id'], 'Completed', $type);
+        if($productPurchased){
+            $purchased = true;
+        }
         if($data){
             if ($type == 'Equipment'){
                 $data =[

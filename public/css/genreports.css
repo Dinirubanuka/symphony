@@ -1,0 +1,60 @@
+/* Styles for the dropdown */
+.dropdown {
+    display: none;
+  }
+  /* Styles for checkbox */
+  .customize input[type="checkbox"] {
+    display: none;
+  }
+  .customize label {
+    cursor: pointer;
+  }
+  .customize input[type="checkbox"] + label:before {
+    content: "\2713";
+    border: 1px solid #000;
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+  .customize input[type="checkbox"]:checked + label:before {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .title {
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+
+  .container {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .date-selectors {
+    margin-top: 10px;
+  }
+  
+  button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  

@@ -140,7 +140,6 @@
                         <span class="text nav-text">Event Packages</span>
                     </a>
                 </li>
-
             </ul>
         </div>
 
