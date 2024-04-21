@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2024 at 06:19 PM
+-- Generation Time: Apr 21, 2024 at 01:36 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -252,6 +252,13 @@ CREATE TABLE `cart` (
   `extra` int(255) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `user_id`, `product_id`, `quantity`, `start_date`, `end_date`, `days`, `total`, `availability`, `type`, `extra`) VALUES
+(76, 18, 20, 2, '2024-03-29', '2024-04-03', 6, 7200, 'available', 'Equipment', 1800);
+
 -- --------------------------------------------------------
 
 --
@@ -278,7 +285,8 @@ INSERT INTO `chat_mod_user` (`chat_id`, `user_id`, `moderator_id`, `created_by`,
 (6, 18, 1, 'user', 'BGETR', '12:25:29 PM | February 6 2024'),
 (7, 18, 1, 'user', 'rgbbe', '12:25:33 PM | February 6 2024'),
 (8, 18, 1, 'user', 'hello', '7:09:47 PM | February 19 2024'),
-(9, 18, 1, 'user', 'hi', '7:29:20 PM | February 19 2024');
+(9, 18, 1, 'user', 'hi', '7:29:20 PM | February 19 2024'),
+(10, 18, 1, 'moderator', 'hewsh', '12:54:03 AM | March 23 2024');
 
 -- --------------------------------------------------------
 
@@ -310,7 +318,7 @@ CREATE TABLE `inquiries` (
 INSERT INTO `inquiries` (`inquiry_id`, `user_id`, `inquiryType`, `field_1`, `field_2`, `field_3`, `field_4`, `field_5`, `photo_1`, `photo_2`, `photo_3`, `status`, `moderator_id`, `placed_on`) VALUES
 (1, 18, 'Technical Issue', 'egwsjhedrje', 'h4rwhg4wg', '', '', '', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'Completed', 1, NULL),
 (2, 18, 'Technical Issue', 'nwsr', 'j,truf,m', '', '', '', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'Pending', 0, NULL),
-(3, 18, 'Technical Issue', 'gbwrsvsloj kbqweuikfhq', 'wrhw fqefwf', '', '', '', 'IMG-65c1e3564de106.71069130.jpg', 'IMG-65c1e3564df517.77863469.jpg', 'IMG-65c1e3564df998.02290386.jpg', 'Pending', 0, NULL),
+(3, 18, 'Technical Issue', 'gbwrsvsloj kbqweuikfhq', 'wrhw fqefwf', '', '', '', 'IMG-65c1e3564de106.71069130.jpg', 'IMG-65c1e3564df517.77863469.jpg', 'IMG-65c1e3564df998.02290386.jpg', 'In-Progress', 1, NULL),
 (4, 18, 'Other', 'f bqknecl; qnhilofh q', 'qilo;bekhq vwhvf', '', '', '', 'IMG-65c1e36d67d473.29055626.jpeg', 'IMG-65c1e36d67df29.80862974.png', 'IMG-65c1e36d67e355.60262304.jpeg', 'In-Progress', 1, NULL),
 (5, 18, 'Recover Account', '', '', '', '', '', 'IMG-656bdc23223334.62765635.png', '', '', 'In-Progress', 1, NULL);
 
@@ -337,7 +345,8 @@ INSERT INTO `inq_chat` (`inq_chat_id`, `chat_id`, `inquiry_id`) VALUES
 (4, 6, 1),
 (5, 7, 1),
 (6, 8, 4),
-(7, 9, 4);
+(7, 9, 4),
+(8, 10, 4);
 
 -- --------------------------------------------------------
 
@@ -843,7 +852,289 @@ INSERT INTO `logs` (`log_id`, `user_type`, `user_id`, `date_and_time`, `log_type
 (467, 'Moderator', 1, '2024-02-27 12:15:03', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
 (468, 'Moderator', 1, '2024-02-27 12:15:04', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
 (469, 'Moderator', 1, '2024-02-27 12:15:20', 'View Users', 'Moderator viewed deactivated users'),
-(470, 'Moderator', 1, '2024-02-27 12:15:21', 'Manage Recover Requests', 'Moderator viewed recover request 7 details');
+(470, 'Moderator', 1, '2024-02-27 12:15:21', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(471, 'Customer', 18, '2024-03-22 20:18:37', 'Login', 'User logged in'),
+(472, 'Customer', 18, '2024-03-22 20:18:48', 'View Instruments', 'User viewed the instruments available'),
+(473, 'Customer', 18, '2024-03-22 20:18:51', 'View Instrument', 'User viewed an instrument with product id 20'),
+(474, 'Customer', 18, '2024-03-22 20:18:57', 'Add Review', 'User added a review to an Instrument with the id of 20'),
+(475, 'Customer', 18, '2024-03-22 20:18:57', 'View Instrument', 'User viewed an instrument with product id 20'),
+(476, 'Customer', 18, '2024-03-22 20:19:28', 'Check Availability', 'User checked the availability of an Equipment  with product id 20'),
+(477, 'Customer', 18, '2024-03-22 20:19:29', 'Manage Cart', 'User added an Instrument to the cart with the id of 20'),
+(478, 'Customer', 18, '2024-03-22 20:19:29', 'View Instrument', 'User viewed an instrument with product id 20'),
+(479, 'Customer', 18, '2024-03-22 20:19:31', 'Manage Cart', 'User viewed their cart'),
+(480, 'Customer', 18, '2024-03-22 20:19:34', 'Manage Cart', 'User viewed their cart'),
+(481, 'Customer', 18, '2024-03-22 20:19:36', 'View Studios', 'User viewed the studios available'),
+(482, 'Customer', 18, '2024-03-22 20:19:39', 'View Singers', 'User viewed the singers available'),
+(483, 'Customer', 18, '2024-03-22 20:19:42', 'View Orders', 'User viewed their orders'),
+(484, 'Customer', 18, '2024-03-22 20:19:43', 'View Instruments', 'User viewed the instruments available'),
+(485, 'Customer', 18, '2024-03-22 20:19:57', 'View Inquiries', 'User viewed their inquiries'),
+(486, 'Customer', 18, '2024-03-22 20:20:06', 'Manage Profile', 'User viewed their profile'),
+(487, 'Customer', 18, '2024-03-22 20:20:24', 'Logout', 'User logged out'),
+(488, 'Service Provider', 14, '2024-03-22 20:20:32', 'Login', 'Service Provider has logged in'),
+(489, 'Service Provider', 14, '2024-03-22 20:20:36', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(490, 'Service Provider', 14, '2024-03-22 20:20:42', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(491, 'Service Provider', 14, '2024-03-22 20:20:45', 'View Orders', 'Service Provider has viewed their orders'),
+(492, 'Service Provider', 14, '2024-03-22 20:21:32', 'Manage Profile', 'Service Provider has viewed their profile'),
+(493, 'Service Provider', 14, '2024-03-22 20:21:36', 'Logout', 'Service Provider has logged out'),
+(494, 'Moderator', 1, '2024-03-22 20:21:47', 'Login', 'Moderator logged in'),
+(495, 'Moderator', 1, '2024-03-22 20:22:10', 'View Service Providers', 'Moderator viewed active service providers'),
+(496, 'Moderator', 1, '2024-03-22 20:22:11', 'Manage Service Providers', 'Moderator viewed service provider 14 details'),
+(497, 'Moderator', 1, '2024-03-22 20:22:15', 'View Service Providers', 'Moderator viewed active service providers'),
+(498, 'Moderator', 1, '2024-03-22 20:22:16', 'View Service Providers', 'Moderator viewed rejected service providers'),
+(499, 'Moderator', 1, '2024-03-22 20:22:17', 'View Service Providers', 'Moderator viewed deactivated service providers'),
+(500, 'Moderator', 1, '2024-03-22 20:22:17', 'View Service Providers', 'Moderator viewed banned service providers'),
+(501, 'Moderator', 1, '2024-03-22 20:22:18', 'View Users', 'Moderator viewed active users'),
+(502, 'Moderator', 1, '2024-03-22 20:22:20', 'Manage Service Provider Requests', 'Moderator viewed pending service provider requests'),
+(503, 'Moderator', 1, '2024-03-22 20:22:26', 'View Service Providers', 'Moderator viewed active service providers'),
+(504, 'Moderator', 1, '2024-03-22 20:23:04', 'View Service Providers', 'Moderator viewed active service providers'),
+(505, 'Moderator', 1, '2024-03-22 20:23:05', 'Manage Service Provider Requests', 'Moderator viewed pending service provider requests'),
+(506, 'Moderator', 1, '2024-03-22 20:23:08', 'Manage Service Provider Requests', 'Moderator viewed pending service provider request 19 details'),
+(507, 'Moderator', 1, '2024-03-22 20:23:22', 'Manage Service Provider Requests', 'Moderator accepted service provider request 19'),
+(508, 'Moderator', 1, '2024-03-22 20:23:22', 'Manage Service Provider Requests', 'Moderator viewed pending service provider requests'),
+(509, 'Moderator', 1, '2024-03-22 20:23:25', 'View Inquiries', 'Moderator viewed pending inquiries'),
+(510, 'Moderator', 1, '2024-03-22 20:23:41', 'View Inquiries', 'Moderator viewed pending inquiries'),
+(511, 'Moderator', 1, '2024-03-22 20:23:42', 'View Inquiries', 'Moderator viewed active inquiries'),
+(512, 'Moderator', 1, '2024-03-22 20:23:43', 'View Inquiries', 'Moderator viewed pending inquiries'),
+(513, 'Moderator', 1, '2024-03-22 20:23:44', 'View Inquiry', 'Moderator viewed pending inquiry 3 details'),
+(514, 'Moderator', 1, '2024-03-22 20:23:47', 'Approve Inquiry', 'Moderator approved inquiry 3 and assign to self'),
+(515, 'Moderator', 1, '2024-03-22 20:23:47', 'View Inquiries', 'Moderator viewed pending inquiries'),
+(516, 'Moderator', 1, '2024-03-22 20:23:49', 'View Inquiries', 'Moderator viewed pending inquiries'),
+(517, 'Moderator', 1, '2024-03-22 20:23:53', 'View Inquiries', 'Moderator viewed active inquiries');
+INSERT INTO `logs` (`log_id`, `user_type`, `user_id`, `date_and_time`, `log_type`, `data`) VALUES
+(518, 'Moderator', 1, '2024-03-22 20:23:58', 'View Inquiry', 'Moderator viewed inquiry 4 details'),
+(519, 'Moderator', 1, '2024-03-22 20:24:03', 'Send Message', 'Moderator sent a message to user 18 regarding inquiry 4'),
+(520, 'Moderator', 1, '2024-03-22 20:24:03', 'View Inquiry', 'Moderator viewed inquiry 4 details'),
+(521, 'Moderator', 1, '2024-03-22 20:24:58', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(522, 'Moderator', 1, '2024-03-22 20:25:10', 'Manage Recover Requests', 'Moderator viewed recover request 5 details'),
+(523, 'Moderator', 1, '2024-03-22 20:25:39', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(524, 'Moderator', 1, '2024-03-22 20:25:41', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(525, 'Moderator', 1, '2024-03-22 20:26:30', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(526, 'Moderator', 1, '2024-03-22 20:27:41', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(527, 'Moderator', 1, '2024-03-22 20:27:42', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(528, 'Moderator', 1, '2024-03-22 20:27:43', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(529, 'Moderator', 1, '2024-03-22 20:27:46', 'View Service Providers', 'Moderator viewed banned service providers'),
+(530, 'Moderator', 1, '2024-03-22 20:27:47', 'Manage Service Providers', 'Moderator viewed service provider 20 details'),
+(531, 'Moderator', 1, '2024-03-22 20:27:52', 'View Service Provider Orders', 'Moderator viewed service provider 20 orders'),
+(532, 'Moderator', 1, '2024-03-22 20:27:55', 'View Service Providers', 'Moderator viewed active service providers'),
+(533, 'Moderator', 1, '2024-03-22 20:27:56', 'Manage Service Providers', 'Moderator viewed service provider 14 details'),
+(534, 'Moderator', 1, '2024-03-22 20:27:57', 'View Service Provider Orders', 'Moderator viewed service provider 14 orders'),
+(535, 'Moderator', 1, '2024-03-22 20:28:03', 'View Service Provider Orders', 'Moderator viewed service provider 14 orders'),
+(536, 'Moderator', 1, '2024-03-22 20:28:12', 'View Service Providers', 'Moderator viewed active service providers'),
+(537, 'Moderator', 1, '2024-03-22 20:28:14', 'Manage Service Providers', 'Moderator viewed service provider 14 details'),
+(538, 'Moderator', 1, '2024-03-22 20:28:25', 'View Service Provider Orders', 'Moderator viewed service provider 14 orders'),
+(539, 'Moderator', 1, '2024-03-22 20:28:26', 'View Product', 'Moderator viewed product 17 details of type Equipment'),
+(540, 'Moderator', 1, '2024-03-22 20:28:29', 'View Users', 'Moderator viewed active users'),
+(541, 'Customer', 18, '2024-04-06 11:24:31', 'Login', 'User logged in'),
+(542, 'Moderator', 1, '2024-04-12 07:25:31', 'Manage Recover Requests', 'Moderator viewed accepted recover requests'),
+(543, 'Moderator', 1, '2024-04-12 07:25:37', 'Manage Recover Requests', 'Moderator viewed recover request 3 details'),
+(544, 'Moderator', 1, '2024-04-12 07:25:37', 'Manage Recover Requests', 'Moderator viewed recover request logo.png details'),
+(545, 'Moderator', 1, '2024-04-12 07:25:48', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(546, 'Moderator', 1, '2024-04-12 07:25:50', 'Manage Recover Requests', 'Moderator viewed recover request 7 details'),
+(547, 'Moderator', 1, '2024-04-12 07:25:50', 'Manage Recover Requests', 'Moderator viewed recover request logo.png details'),
+(548, 'Moderator', 1, '2024-04-12 07:25:57', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(549, 'Moderator', 1, '2024-04-12 07:26:04', 'Manage Recover Requests', 'Moderator viewed pending recover requests'),
+(550, 'Administrator', 1, '2024-04-12 07:36:35', 'Manage Recover Requests', 'Administrator viewed pending recover requests'),
+(551, 'Administrator', 1, '2024-04-12 07:37:17', 'View Service Providers', 'Administrator viewed active service providers'),
+(552, 'Administrator', 1, '2024-04-12 07:37:31', 'View Service Providers', 'Administrator viewed rejected service providers'),
+(553, 'Administrator', 1, '2024-04-12 07:37:32', 'View Service Providers', 'Administrator viewed deactivated service providers'),
+(554, 'Administrator', 1, '2024-04-12 07:37:34', 'View Service Providers', 'Administrator viewed banned service providers'),
+(555, 'Administrator', 1, '2024-04-12 07:37:48', 'View Users', 'Administrator viewed active users'),
+(556, 'Moderator', 1, '2024-04-12 07:39:42', 'Login', 'Moderator logged in'),
+(557, 'Moderator', 1, '2024-04-12 07:39:44', 'View Service Providers', 'Moderator viewed active service providers'),
+(558, 'Moderator', 1, '2024-04-12 07:39:49', 'Manage Service Providers', 'Moderator viewed service provider 14 details'),
+(559, 'Moderator', 1, '2024-04-12 07:39:56', 'View Service Providers', 'Moderator viewed rejected service providers'),
+(560, 'Moderator', 1, '2024-04-12 07:39:58', 'View Service Providers', 'Moderator viewed banned service providers'),
+(561, 'Moderator', 1, '2024-04-12 07:39:59', 'Manage Service Providers', 'Moderator viewed service provider 20 details'),
+(562, 'Administrator', 1, '2024-04-12 07:40:10', 'View Service Providers', 'Administrator viewed active service providers'),
+(563, 'Administrator', 1, '2024-04-12 07:40:34', 'View Service Providers', 'Administrator viewed active service providers'),
+(564, 'Administrator', 1, '2024-04-12 07:44:39', 'View Service Providers', 'Administrator viewed active service providers'),
+(565, 'Administrator', 1, '2024-04-12 07:47:04', 'Manage Service Providers', 'Administrator viewed service provider 18 details'),
+(566, 'Administrator', 1, '2024-04-12 07:47:04', 'Manage Service Providers', 'Administrator viewed service provider logo.png details'),
+(567, 'Administrator', 1, '2024-04-12 07:47:10', 'View Service Providers', 'Administrator viewed active service providers'),
+(568, 'Administrator', 1, '2024-04-12 07:47:11', 'Manage Service Providers', 'Administrator viewed service provider 14 details'),
+(569, 'Administrator', 1, '2024-04-12 07:47:11', 'Manage Service Providers', 'Administrator viewed service provider logo.png details'),
+(570, 'Administrator', 1, '2024-04-12 07:47:24', 'Ban Service Provider', 'Administrator banned service provider 14 with reason this is a ban request'),
+(571, 'Administrator', 1, '2024-04-12 07:47:24', 'View Service Providers', 'Administrator viewed banned service providers'),
+(572, 'Administrator', 1, '2024-04-12 07:47:35', 'Manage Service Providers', 'Administrator viewed service provider 14 details'),
+(573, 'Administrator', 1, '2024-04-12 07:47:35', 'Manage Service Providers', 'Administrator viewed service provider logo.png details'),
+(574, 'Administrator', 1, '2024-04-12 07:47:42', 'Unban Service Provider', 'Administrator lifted the ban on service provider 14'),
+(575, 'Administrator', 1, '2024-04-12 07:47:42', 'View Service Providers', 'Administrator viewed active service providers'),
+(576, 'Administrator', 1, '2024-04-12 07:47:57', 'View Service Providers', 'Administrator viewed active service providers'),
+(577, 'Administrator', 1, '2024-04-12 07:47:59', 'Manage Service Providers', 'Administrator viewed service provider 14 details'),
+(578, 'Administrator', 1, '2024-04-12 07:47:59', 'Manage Service Providers', 'Administrator viewed service provider logo.png details'),
+(579, 'Administrator', 1, '2024-04-12 07:48:00', 'View Service Providers', 'Administrator viewed active service providers'),
+(580, 'Administrator', 1, '2024-04-12 07:48:02', 'View Users', 'Administrator viewed active users'),
+(581, 'Administrator', 1, '2024-04-12 07:48:03', 'Manage Users', 'Administrator viewed user 18 details'),
+(582, 'Administrator', 1, '2024-04-12 07:48:04', 'Manage Users', 'Administrator viewed user logo.png details'),
+(583, 'Administrator', 1, '2024-04-12 07:48:06', 'View User Orders', 'Administrator viewed user 18 orders'),
+(584, 'Administrator', 1, '2024-04-12 07:48:07', 'View User Orders', 'Administrator viewed user logo.png orders'),
+(585, 'Administrator', 1, '2024-04-12 07:48:08', 'Manage Users', 'Administrator viewed user 18 details'),
+(586, 'Administrator', 1, '2024-04-12 07:48:08', 'Manage Users', 'Administrator viewed user logo.png details'),
+(587, 'Administrator', 1, '2024-04-12 07:48:09', 'View User Orders', 'Administrator viewed user 18 orders'),
+(588, 'Administrator', 1, '2024-04-12 07:48:10', 'View User Orders', 'Administrator viewed user logo.png orders'),
+(589, 'Administrator', 1, '2024-04-12 07:48:12', 'View User Orders', 'Administrator viewed user 18 orders'),
+(590, 'Administrator', 1, '2024-04-12 07:48:12', 'View User Orders', 'Administrator viewed user logo.png orders'),
+(591, 'Administrator', 1, '2024-04-12 07:48:14', 'Manage Recover Requests', 'Administrator viewed pending recover requests'),
+(592, 'Administrator', 1, '2024-04-12 07:48:19', 'Manage Recover Requests', 'Administrator viewed rejected recover requests'),
+(593, 'Administrator', 1, '2024-04-12 07:48:20', 'View Users', 'Administrator viewed deactivated users'),
+(594, 'Customer', 18, '2024-04-17 06:09:03', 'Login', 'User logged in'),
+(595, 'Customer', 18, '2024-04-17 06:09:05', 'View Instruments', 'User viewed the instruments available'),
+(596, 'Customer', 18, '2024-04-17 06:09:06', 'View Instrument', 'User viewed an instrument with product id 18'),
+(597, 'Customer', 18, '2024-04-17 06:17:04', 'View Instrument', 'User viewed an instrument with product id 18'),
+(598, 'Customer', 18, '2024-04-17 06:17:18', 'View Instruments', 'User viewed the instruments available'),
+(599, 'Customer', 18, '2024-04-17 06:17:19', 'View Instrument', 'User viewed an instrument with product id 21'),
+(600, 'Customer', 18, '2024-04-17 06:17:33', 'View Instruments', 'User viewed the instruments available'),
+(601, 'Customer', 18, '2024-04-17 06:17:35', 'View Instrument', 'User viewed an instrument with product id 17'),
+(602, 'Customer', 18, '2024-04-17 06:17:36', 'View Instruments', 'User viewed the instruments available'),
+(603, 'Customer', 18, '2024-04-17 06:17:37', 'View Instrument', 'User viewed an instrument with product id 18'),
+(604, 'Customer', 18, '2024-04-17 06:17:38', 'View Instruments', 'User viewed the instruments available'),
+(605, 'Customer', 18, '2024-04-17 06:17:39', 'View Instrument', 'User viewed an instrument with product id 20'),
+(606, 'Customer', 18, '2024-04-17 06:17:41', 'View Instruments', 'User viewed the instruments available'),
+(607, 'Customer', 18, '2024-04-17 06:17:42', 'View Instrument', 'User viewed an instrument with product id 21'),
+(608, 'Customer', 18, '2024-04-17 06:17:46', 'View Instruments', 'User viewed the instruments available'),
+(609, 'Customer', 18, '2024-04-17 06:17:48', 'View Instrument', 'User viewed an instrument with product id 23'),
+(610, 'Customer', 18, '2024-04-17 06:17:51', 'View Instruments', 'User viewed the instruments available'),
+(611, 'Customer', 18, '2024-04-17 06:17:52', 'View Instrument', 'User viewed an instrument with product id 24'),
+(612, 'Customer', 18, '2024-04-17 06:18:00', 'View Instruments', 'User viewed the instruments available'),
+(613, 'Customer', 18, '2024-04-17 06:18:03', 'View Bands', 'User viewed the bands available'),
+(614, 'Customer', 18, '2024-04-17 06:18:04', 'View Band', 'User viewed a band with product id 2'),
+(615, 'Customer', 18, '2024-04-17 06:18:10', 'Add Review', 'User added a review to a Band with the id of 2'),
+(616, 'Customer', 18, '2024-04-17 06:18:10', 'View Band', 'User viewed a band with product id 2'),
+(617, 'Customer', 18, '2024-04-17 06:18:40', 'View Band', 'User viewed a band with product id 2'),
+(618, 'Customer', 18, '2024-04-17 06:20:25', 'View Band', 'User viewed a band with product id 2'),
+(619, 'Customer', 18, '2024-04-17 06:20:46', 'Add Review', 'User added a review to a Band with the id of 2'),
+(620, 'Customer', 18, '2024-04-17 06:20:46', 'View Band', 'User viewed a band with product id 2'),
+(621, 'Customer', 18, '2024-04-17 06:21:49', 'View Band', 'User viewed a band with product id 2'),
+(622, 'Customer', 18, '2024-04-17 06:21:54', 'View Band', 'User viewed a band with product id 2'),
+(623, 'Customer', 18, '2024-04-17 06:21:55', 'View Band', 'User viewed a band with product id 2'),
+(624, 'Customer', 18, '2024-04-17 06:21:55', 'View Bands', 'User viewed the bands available'),
+(625, 'Customer', 18, '2024-04-17 06:21:59', 'View Instruments', 'User viewed the instruments available'),
+(626, 'Customer', 18, '2024-04-17 06:22:00', 'View Instrument', 'User viewed an instrument with product id 18'),
+(627, 'Customer', 18, '2024-04-17 06:22:03', 'View Instruments', 'User viewed the instruments available'),
+(628, 'Customer', 18, '2024-04-17 06:22:09', 'View Musicians', 'User viewed the musicians available'),
+(629, 'Customer', 18, '2024-04-17 06:22:10', 'View Musician', 'User viewed a musician with product id 15'),
+(630, 'Customer', 18, '2024-04-17 06:23:56', 'Logout', 'User logged out'),
+(631, 'Administrator', 1, '2024-04-17 06:26:45', 'Generate Reports', 'Administrator viewed reports'),
+(632, 'Administrator', 1, '2024-04-17 06:33:39', 'View Service Providers', 'Administrator viewed active service providers'),
+(633, 'Administrator', 1, '2024-04-17 06:33:40', 'View Service Providers', 'Administrator viewed rejected service providers'),
+(634, 'Administrator', 1, '2024-04-17 06:33:40', 'View Service Providers', 'Administrator viewed deactivated service providers'),
+(635, 'Administrator', 1, '2024-04-17 06:33:41', 'View Service Providers', 'Administrator viewed banned service providers'),
+(636, 'Administrator', 1, '2024-04-17 06:33:43', 'Manage Service Provider Requests', 'Administrator viewed pending service provider requests'),
+(637, 'Administrator', 1, '2024-04-17 06:39:38', 'Generate Reports', 'Administrator viewed reports'),
+(638, 'Administrator', 1, '2024-04-17 06:39:42', 'Generate Reports', 'Administrator viewed reports'),
+(639, 'Administrator', 1, '2024-04-17 06:52:21', 'Generate Reports', 'Administrator viewed reports'),
+(640, 'Administrator', 1, '2024-04-17 06:53:30', 'View Service Providers', 'Administrator viewed active service providers'),
+(641, 'Administrator', 1, '2024-04-17 06:53:35', 'View Users', 'Administrator viewed active users'),
+(642, 'Administrator', 1, '2024-04-17 06:53:51', 'View Users', 'Administrator viewed active users'),
+(643, 'Administrator', 1, '2024-04-17 07:12:47', 'View Service Providers', 'Administrator viewed active service providers'),
+(644, 'Administrator', 1, '2024-04-17 07:12:48', 'View Service Providers', 'Administrator viewed rejected service providers'),
+(645, 'Administrator', 1, '2024-04-17 07:12:49', 'View Service Providers', 'Administrator viewed deactivated service providers'),
+(646, 'Administrator', 1, '2024-04-17 07:12:50', 'View Service Providers', 'Administrator viewed banned service providers'),
+(647, 'Administrator', 1, '2024-04-17 07:12:55', 'View Users', 'Administrator viewed active users'),
+(648, 'Administrator', 1, '2024-04-17 07:17:25', 'Generate Reports', 'Administrator viewed reports'),
+(649, 'Administrator', 1, '2024-04-17 07:18:34', 'View Service Providers', 'Administrator viewed active service providers'),
+(650, 'Administrator', 1, '2024-04-17 07:20:01', 'View Service Providers', 'Administrator viewed active service providers'),
+(651, 'Administrator', 1, '2024-04-17 07:20:02', 'Manage Service Providers', 'Administrator viewed service provider 14 details'),
+(652, 'Administrator', 1, '2024-04-17 07:20:02', 'Manage Service Providers', 'Administrator viewed service provider logo.png details'),
+(653, 'Administrator', 1, '2024-04-17 07:20:07', 'View Users', 'Administrator viewed active users'),
+(654, 'Administrator', 1, '2024-04-17 07:20:08', 'Manage Users', 'Administrator viewed user 22 details'),
+(655, 'Administrator', 1, '2024-04-17 07:20:08', 'Manage Users', 'Administrator viewed user logo.png details'),
+(656, 'Administrator', 1, '2024-04-17 07:20:11', 'View User Orders', 'Administrator viewed user 22 orders'),
+(657, 'Administrator', 1, '2024-04-17 07:20:11', 'View User Orders', 'Administrator viewed user logo.png orders'),
+(658, 'Administrator', 1, '2024-04-17 07:20:16', 'Generate Reports', 'Administrator viewed reports'),
+(659, 'Customer', 18, '2024-04-18 19:41:39', 'Login', 'User logged in'),
+(660, 'Administrator', 1, '2024-04-19 07:02:06', 'Login', 'Administrator logged in'),
+(661, 'Administrator', 1, '2024-04-19 07:02:10', 'Generate Reports', 'Administrator viewed reports'),
+(662, 'Administrator', 1, '2024-04-19 08:00:10', 'Generate Reports', 'Administrator viewed reports'),
+(663, 'Customer', 18, '2024-04-19 10:28:49', 'Login', 'User logged in'),
+(664, 'Customer', 18, '2024-04-19 10:28:51', 'Logout', 'User logged out'),
+(665, 'Administrator', 1, '2024-04-19 10:29:00', 'Login', 'Administrator logged in'),
+(666, 'Administrator', 1, '2024-04-19 10:29:20', 'Generate Reports', 'Administrator viewed reports'),
+(667, 'Administrator', 1, '2024-04-19 10:56:34', 'Generate Reports', 'Administrator viewed reports'),
+(668, 'Administrator', 1, '2024-04-19 11:19:02', 'Generate Reports', 'Administrator viewed reports'),
+(669, 'Administrator', 1, '2024-04-19 11:22:53', 'Generate Reports', 'Administrator viewed reports'),
+(670, 'Administrator', 1, '2024-04-19 11:40:41', 'View Service Providers', 'Administrator viewed active service providers'),
+(671, 'Administrator', 1, '2024-04-19 11:40:48', 'Generate Reports', 'Administrator viewed reports'),
+(672, 'Administrator', 1, '2024-04-19 11:40:57', 'Generate Reports', 'Administrator viewed reports'),
+(673, 'Administrator', 1, '2024-04-19 11:41:57', 'Generate Reports', 'Administrator viewed reports'),
+(674, 'Administrator', 1, '2024-04-19 11:42:33', 'Generate Reports', 'Administrator viewed reports'),
+(675, 'Administrator', 1, '2024-04-19 11:43:20', 'Manage Service Provider Requests', 'Administrator viewed pending service provider requests'),
+(676, 'Administrator', 1, '2024-04-19 11:43:21', 'Manage Recover Requests', 'Administrator viewed pending recover requests'),
+(677, 'Administrator', 1, '2024-04-19 11:43:25', 'Manage Recover Requests', 'Administrator viewed recover request 5 details'),
+(678, 'Administrator', 1, '2024-04-19 11:43:25', 'Manage Recover Requests', 'Administrator viewed recover request logo.png details'),
+(679, 'Administrator', 1, '2024-04-19 11:43:26', 'View Users', 'Administrator viewed active users'),
+(680, 'Administrator', 1, '2024-04-19 11:43:28', 'Manage Users', 'Administrator viewed user 18 details'),
+(681, 'Administrator', 1, '2024-04-19 11:43:28', 'Manage Users', 'Administrator viewed user logo.png details'),
+(682, 'Administrator', 1, '2024-04-19 11:43:29', 'Manage Recover Requests', 'Administrator viewed pending recover requests'),
+(683, 'Administrator', 1, '2024-04-19 11:43:30', 'Manage Recover Requests', 'Administrator viewed recover request 5 details'),
+(684, 'Administrator', 1, '2024-04-19 11:43:30', 'Manage Recover Requests', 'Administrator viewed recover request logo.png details'),
+(685, 'Administrator', 1, '2024-04-19 11:43:44', 'Generate Reports', 'Administrator viewed reports'),
+(686, 'Administrator', 1, '2024-04-19 11:44:04', 'Generate Reports', 'Administrator viewed reports'),
+(687, 'Administrator', 1, '2024-04-19 11:44:16', 'Generate Reports', 'Administrator viewed reports'),
+(688, 'Administrator', 1, '2024-04-19 11:44:54', 'View Users', 'Administrator viewed active users'),
+(689, 'Administrator', 1, '2024-04-19 11:44:55', 'Manage Users', 'Administrator viewed user 18 details'),
+(690, 'Administrator', 1, '2024-04-19 11:44:55', 'Manage Users', 'Administrator viewed user logo.png details'),
+(691, 'Administrator', 1, '2024-04-19 11:44:56', 'View User Orders', 'Administrator viewed user 18 orders'),
+(692, 'Administrator', 1, '2024-04-19 11:44:56', 'View User Orders', 'Administrator viewed user logo.png orders'),
+(693, 'Administrator', 1, '2024-04-19 11:45:05', 'View User Orders', 'Administrator viewed user 18 orders'),
+(694, 'Administrator', 1, '2024-04-19 11:45:06', 'View User Orders', 'Administrator viewed user logo.png orders'),
+(695, 'Administrator', 1, '2024-04-19 11:45:07', 'Manage Users', 'Administrator viewed user 18 details'),
+(696, 'Administrator', 1, '2024-04-19 11:45:07', 'Manage Users', 'Administrator viewed user logo.png details'),
+(697, 'Service Provider', 14, '2024-04-19 11:46:08', 'Login', 'Service Provider has logged in'),
+(698, 'Service Provider', 14, '2024-04-19 11:46:24', 'View Orders', 'Service Provider has viewed their orders'),
+(699, 'Service Provider', 14, '2024-04-19 11:48:13', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(700, 'Service Provider', 14, '2024-04-19 11:53:22', 'Logout', 'Service Provider has logged out'),
+(701, 'Customer', 18, '2024-04-19 11:53:27', 'Login', 'User logged in'),
+(702, 'Customer', 18, '2024-04-19 11:53:29', 'View Orders', 'User viewed their orders'),
+(703, 'Customer', 18, '2024-04-19 11:53:30', 'View Instruments', 'User viewed the instruments available'),
+(704, 'Administrator', 1, '2024-04-19 11:56:31', 'Login', 'Administrator logged in'),
+(705, 'Administrator', 1, '2024-04-19 11:56:36', 'Logout', 'Administrator logged out'),
+(706, 'Administrator', 1, '2024-04-19 12:06:29', 'Login', 'Administrator logged in'),
+(707, 'Administrator', 1, '2024-04-19 12:06:31', 'View Users', 'Administrator viewed active users'),
+(708, 'Administrator', 1, '2024-04-19 12:06:31', 'View Users', 'Administrator viewed deactivated users'),
+(709, 'Administrator', 1, '2024-04-19 12:06:33', 'Manage Users', 'Administrator viewed user 21 details'),
+(710, 'Administrator', 1, '2024-04-19 12:06:34', 'Manage Users', 'Administrator viewed user logo.png details'),
+(711, 'Administrator', 1, '2024-04-19 12:06:37', 'Manage Recover Requests', 'Administrator viewed pending recover requests'),
+(712, 'Administrator', 1, '2024-04-19 12:06:40', 'Manage Recover Requests', 'Administrator viewed recover request 5 details'),
+(713, 'Administrator', 1, '2024-04-19 12:06:40', 'Manage Recover Requests', 'Administrator viewed recover request logo.png details'),
+(714, 'Administrator', 1, '2024-04-19 12:06:45', 'Generate Reports', 'Administrator viewed reports'),
+(715, 'Administrator', 1, '2024-04-19 12:06:55', 'Manage Recover Requests', 'Administrator viewed recover request 5 details'),
+(716, 'Administrator', 1, '2024-04-19 12:06:55', 'Manage Recover Requests', 'Administrator viewed recover request logo.png details'),
+(717, 'Administrator', 1, '2024-04-19 12:06:56', 'Manage Recover Requests', 'Administrator viewed pending recover requests'),
+(718, 'Administrator', 1, '2024-04-19 12:06:57', 'Logout', 'Administrator logged out'),
+(719, 'Customer', 18, '2024-04-19 12:07:05', 'Login', 'User logged in'),
+(720, 'Customer', 18, '2024-04-19 12:07:07', 'View Orders', 'User viewed their orders'),
+(721, 'Customer', 18, '2024-04-19 12:07:07', 'View Instruments', 'User viewed the instruments available'),
+(722, 'Customer', 18, '2024-04-19 12:07:11', 'View Singers', 'User viewed the singers available'),
+(723, 'Customer', 18, '2024-04-19 12:07:13', 'View Singer', 'User viewed a singer with product id 8'),
+(724, 'Customer', 18, '2024-04-19 12:07:23', 'View Instruments', 'User viewed the instruments available'),
+(725, 'Customer', 18, '2024-04-19 12:07:25', 'View Singer', 'User viewed a singer with product id 8'),
+(726, 'Customer', 18, '2024-04-19 12:07:27', 'View Singers', 'User viewed the singers available'),
+(727, 'Customer', 18, '2024-04-19 12:07:35', 'View Bands', 'User viewed the bands available'),
+(728, 'Customer', 18, '2024-04-19 12:07:37', 'View Band', 'User viewed a band with product id 2'),
+(729, 'Customer', 18, '2024-04-19 12:07:38', 'View Instruments', 'User viewed the instruments available'),
+(730, 'Customer', 18, '2024-04-19 12:08:13', 'View Instrument', 'User viewed an instrument with product id 17'),
+(731, 'Customer', 18, '2024-04-19 12:08:19', 'View Instruments', 'User viewed the instruments available'),
+(732, 'Customer', 18, '2024-04-19 12:08:22', 'View Band', 'User viewed a band with product id 2'),
+(733, 'Customer', 18, '2024-04-19 12:08:27', 'View Bands', 'User viewed the bands available'),
+(734, 'Customer', 18, '2024-04-19 12:08:28', 'View Band', 'User viewed a band with product id 2'),
+(735, 'Moderator', 1, '2024-04-19 12:11:36', 'Login', 'Moderator logged in'),
+(736, 'Moderator', 1, '2024-04-19 12:13:07', 'Logout', 'Moderator logged out'),
+(737, 'Customer', 18, '2024-04-19 12:13:14', 'Login', 'User logged in'),
+(738, 'Customer', 18, '2024-04-19 12:14:20', 'View Bands', 'User viewed the bands available'),
+(739, 'Customer', 18, '2024-04-19 12:15:09', 'View Band', 'User viewed a band with product id 2'),
+(740, 'Administrator', 1, '2024-04-21 09:31:51', 'Login', 'Administrator logged in'),
+(741, 'Administrator', 1, '2024-04-21 09:31:54', 'Generate Reports', 'Administrator viewed reports'),
+(742, 'Administrator', 1, '2024-04-21 12:10:13', 'Generate Reports', 'Administrator viewed reports'),
+(743, 'Administrator', 1, '2024-04-21 12:16:47', 'Generate Reports', 'Administrator viewed reports'),
+(744, 'Administrator', 1, '2024-04-21 12:17:06', 'Generate Reports', 'Administrator viewed reports'),
+(745, 'Administrator', 1, '2024-04-21 12:17:11', 'Generate Reports', 'Administrator viewed reports'),
+(746, 'Administrator', 1, '2024-04-21 12:21:32', 'Generate Reports', 'Administrator viewed reports'),
+(747, 'Administrator', 1, '2024-04-21 12:21:36', 'Generate Reports', 'Administrator viewed reports'),
+(748, 'Administrator', 1, '2024-04-21 12:21:40', 'Generate Reports', 'Administrator viewed reports'),
+(749, 'Administrator', 1, '2024-04-21 13:09:03', 'Generate Reports', 'Administrator viewed reports'),
+(750, 'Administrator', 1, '2024-04-21 13:13:10', 'Generate Reports', 'Administrator viewed reports'),
+(751, 'Administrator', 1, '2024-04-21 13:30:36', 'Generate Reports', 'Administrator viewed reports');
 
 -- --------------------------------------------------------
 
@@ -1053,7 +1344,10 @@ INSERT INTO `reviews` (`review_id`, `product_id`, `user_id`, `rating`, `content`
 (36, 20, 18, 3, 'gqagaeg', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-02-18', 'Equipment'),
 (37, 8, 18, 4, 'uewshwsg4e', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-02-18', 'Singer'),
 (38, 8, 18, 5, 'g gbwsrhwgw', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-02-18', 'Singer'),
-(39, 2, 18, 3, 'hello', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-02-18', 'Band');
+(39, 2, 18, 3, 'hello', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-02-18', 'Band'),
+(40, 20, 18, 4, 'vnjezavlk', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-03-22', 'Equipment'),
+(41, 2, 18, 3, 'jr6yttr', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-04-17', 'Band'),
+(42, 2, 18, 3, 'herllo', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-04-17', 'Band');
 
 -- --------------------------------------------------------
 
@@ -1502,13 +1796,13 @@ ALTER TABLE `bookmarks`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `cart_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `chat_mod_user`
 --
 ALTER TABLE `chat_mod_user`
-  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `inquiries`
@@ -1520,7 +1814,7 @@ ALTER TABLE `inquiries`
 -- AUTO_INCREMENT for table `inq_chat`
 --
 ALTER TABLE `inq_chat`
-  MODIFY `inq_chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `inq_chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `login_logout_logs`
@@ -1532,7 +1826,7 @@ ALTER TABLE `login_logout_logs`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=471;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=752;
 
 --
 -- AUTO_INCREMENT for table `moderators`
@@ -1568,7 +1862,7 @@ ALTER TABLE `recover_account_user`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `review_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `review_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `sec_queation`
