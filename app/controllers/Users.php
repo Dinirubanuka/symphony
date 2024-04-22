@@ -1554,8 +1554,6 @@ class Users extends Controller
         $this->userModel->addLogData($log_data);
         $this->view('users/orders', $data);
     }
-    
-    
 
     public function placeOrder(){
         $cart = $this->userModel->cart($_SESSION['user_id']);
@@ -1754,6 +1752,7 @@ class Users extends Controller
     }
 
     public function viewAllAC($type, $availability, $data_selected){
+        die('hi');
         $product_id = $data_selected['product_id'];
         if($type == 'Equipment'){
             $data = $this->userModel->viewItem($product_id);
@@ -2035,6 +2034,7 @@ class Users extends Controller
         die('Something went wrong');
     }
 }
+
     public function viewItem($product_id){
         $type = 'Equipment';
         $this->viewAll($product_id, $type);
@@ -2064,6 +2064,8 @@ class Users extends Controller
         if($type == 'Equipment'){
             $data = $this->userModel->viewItem($product_id);
             $reviews = $this->userModel->viewreviews($product_id, $type);
+            $spDetails = $this->userModel->getUserById(18);
+//            die(print_r($spDetails));
         }
         if($type == 'Studio'){
             $data = $this->userModel->viewStudio($product_id);
@@ -2164,7 +2166,9 @@ class Users extends Controller
                     'start_date' => '',
                     'end_date' => '',
                     'purchased' => $purchased,
-                    'type' => $type
+                    'type' => $type,
+                    'email' => $spDetails->email,
+                    'telephoneNumber' => $spDetails->TelephoneNumber
                 ];
                 $log_data = [
                     'user_type' => 'Customer',

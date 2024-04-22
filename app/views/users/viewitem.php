@@ -101,15 +101,18 @@
                 <p>Description: <?php echo $data['Description']; ?></p>
                 <div class="contactBox">
                     <div class="emailBox">
-                        <div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>><img src="http://localhost/symphony/img/email.png" alt="camera-icon" class="" id="" style="height: 16px;width: 16px;"></div>
+                        <div><img src="http://localhost/symphony/img/email.png" alt="camera-icon" class="" id="" style="height: 16px;width: 16px;"></div>
                         <div><?php echo $data['email']; ?></div>
                     </div>
-                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>><img src="http://localhost/symphony/img/telephone-call.png" alt="camera-icon" class="" id="" style="height: 16px;width: 16px;">   <?php echo $data['telephoneNumber']; ?></div></p>
+                    <p><div><img src="http://localhost/symphony/img/telephone-call.png" alt="camera-icon" class="" id="" style="height: 16px;width: 16px;">   <?php echo $data['telephoneNumber']; ?></div></p>
                 </div>
-                <div class="videoBox">
-                    <iframe src="<?php echo $data['videoLink']; ?>"></iframe>
-                </div>
-                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Instrument: <?php echo $data['instrument']; ?></div></p>
+                <?php if ($data['type'] != 'Equipment') : ?>
+                    <div class="videoBox">
+                        <iframe src="<?php echo $data['videoLink']; ?>"></iframe>
+                    </div>
+                <?php endif; ?>
+
+                <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Instrument: <?php echo $data['instrument']; ?></div></p>
                     <p>Last Modified: <?php echo $data['createdDate']; ?></p>
 
                     <!-- Add to cart and add to favorites buttons -->
