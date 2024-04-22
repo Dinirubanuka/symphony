@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Instrument</title>
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/instrument.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/nav-bar.css">
 </head>
@@ -50,9 +50,10 @@
         </div>
     </div>
 </div>
-<div class="account-requests" style="position: absolute; top: 100px;">
+<div class="account-requests">
 
 
+</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

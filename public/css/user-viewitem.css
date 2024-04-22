@@ -36,7 +36,8 @@ body {
   background-color: #f2f2f2; /* Optional: Set background color for the right side */
 }
 .wrapper .item-container {
-  margin: 20px;
+  max-width: 800px;
+  margin: 20px auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -152,7 +153,7 @@ body {
   cursor: pointer;
   border: none;
   border-radius: 4px;
-  color: #ffffff; /* Set font color to black */
+  color: black; /* Set font color to black */
 }
 
 .disabled-button {
@@ -183,23 +184,23 @@ body {
 }
 
 #addToFavoritesBtn {
-  background-color: #090808;
+  background-color: #71c971;
   transition: background-color 0.3s;
 }
 
 #addToFavoritesBtn:hover {
-  background-color: #6f7375;
+  background-color: #008000;
   color: black;
 }
 
 #availabilityChkBtn {
-  background-color: #090808;
+  background-color: #7194c9;
   transition: background-color 0.3s;
 }
 
 #availabilityChkBtn:hover {
-  background-color: #6f7375;
-  color: #ffffff;
+  background-color: #1c58ff;
+  color: black;
 }
 
 
@@ -254,6 +255,7 @@ body {
   max-width: 48%;
   align-items: center;
   font-size: 3em;
+  justify-content: center;
   margin-top: 10px;
 }
 .back-stars {
@@ -470,97 +472,4 @@ font-size: 0.8em;
 color: #000000;
 top: 50%;
 font-weight: 500;
-}
-.rate-header{
-  display: flex;
-  flex-direction: column;
-}
-.row .column .demo{
-  height: 190px;
-  width: 190px;
-}
-
-@media (max-width: 1100px) {
-  .wrapper{
-    display: flex;
-    flex-direction: column;
-  }
-  .star-rating{
-    font-size: 2em;
-  }
-  .wrapper .item-container{
-    width: 800px;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 660px) {
-  .rating{
-    display: flex;
-    flex-direction: column;
-  }
-  .row .column .demo{
-    height: 150px;
-    width: 150px;
-  }
-  .mySlides{
-    height: 300px;
-    width: 300px;
-  }
-  .wrapper .item-container{
-    margin: auto;
-    width: 400px;
-  }
-}
-
-@media (max-width: 424px) {
-  .row .column .demo{
-    height: 100px;
-    width: 100px;
-  }
-  .mySlides{
-    height: 200px;
-    width: 200px;
-  }
-  .wrapper .item-container{
-    margin: 20px;
-  }
-  .wrapper .item-container{
-    margin: auto;
-    width: 350px;
-  }
-}
-
-.singerPhoto{
-  height: 150px;
-  width: 150px;
-}
-
-.singerPhoto img{
-  border-radius: 50%;
-  object-fit: cover;
-  height: 150px;
-  width: 150px;
-}
-
-.singerDetails{
-  height: 40px;
-  display: flex;
-  gap: 8px;
-}
-
-.videoBox iframe{
-  height: 200px;
-  width: 320px;
-}
-
-.contactBox{
-  display: flex;
-  gap: 8px;
-}
-
-.emailBox{
-  display: grid;
-  grid-template-columns: auto auto;
-  column-gap: 5px;
 }
