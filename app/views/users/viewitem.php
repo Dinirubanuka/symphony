@@ -18,6 +18,7 @@
 
 <div class="wrapper">
     <div class="container">
+        <h2>owner :<?php echo $data['name']?></h2>
         <div class="slides">
             <div class="mySlides">
                 <img src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $data['photo_1']; ?>">
@@ -56,6 +57,7 @@
         <div class="item-details">
             <div class="item-info">
             <form action="<?php echo URLROOT; ?>/users/checkAvailability/<?php echo $data['type']; ?>/<?php echo $data['product_id']; ?>" class="form" method="post" enctype="multipart/form-data" id="addToCartForm">
+                <h1><?php echo ($data['type'])?></h1>
                 <div class=" <?php echo ($data['type'] === 'Singer') ? 'singerPhoto': ''; ?>">
                     <?php if ($data['type'] === 'Singer'): ?>
                         <img src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $data['singerPhoto']; ?>" alt="singer photo">
