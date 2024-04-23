@@ -2064,7 +2064,7 @@ class Users extends Controller
         if($type == 'Equipment'){
             $data = $this->userModel->viewItem($product_id);
             $reviews = $this->userModel->viewreviews($product_id, $type);
-            $spDetails = $this->userModel->getUserById($data->created_by);
+            $spDetails = $this->userModel->getServiceProviderData($data->created_by);
         }
         if($type == 'Studio'){
             $data = $this->userModel->viewStudio($product_id);
@@ -2166,8 +2166,8 @@ class Users extends Controller
                     'end_date' => '',
                     'purchased' => $purchased,
                     'type' => $type,
-                    'email' => $spDetails->email,
-                    'telephoneNumber' => $spDetails->TelephoneNumber
+                    'email' => $spDetails->business_address,
+                    'telephoneNumber' => $spDetails->owner_contact_no
                 ];
                 $log_data = [
                     'user_type' => 'Customer',
