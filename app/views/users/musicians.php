@@ -90,19 +90,19 @@
                                                     onchange="price()" id="value2"></li>
             </ul>
         </div>
-        <div class="category sort">
-            <div class="category-name" onclick="toggleCategory('sort')">Sort</div>
-            <div class="sort-section">
-                <select id="sort">
-                    <option value="name-asc">Name (A-Z)</option>
-                    <option value="name-desc">Name (Z-A)</option>
-                    <option value="price-asc">Price (Low to High)</option>
-                    <option value="price-desc">Price (High to Low)</option>
-                    <option value="date-asc">Date Added (Oldest First)</option>
-                    <option value="date-desc">Date Added (Newest First)</option>
-                </select>
-            </div>
-        </div>
+<!--        <div class="category sort">-->
+<!--            <div class="category-name" onclick="toggleCategory('sort')">Sort</div>-->
+<!--            <div class="sort-section">-->
+<!--                <select id="sort">-->
+<!--                    <option value="name-asc">Name (A-Z)</option>-->
+<!--                    <option value="name-desc">Name (Z-A)</option>-->
+<!--                    <option value="price-asc">Price (Low to High)</option>-->
+<!--                    <option value="price-desc">Price (High to Low)</option>-->
+<!--                    <option value="date-asc">Date Added (Oldest First)</option>-->
+<!--                    <option value="date-desc">Date Added (Newest First)</option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
     <div class="account-requests">
 
