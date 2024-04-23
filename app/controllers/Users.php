@@ -2064,8 +2064,7 @@ class Users extends Controller
         if($type == 'Equipment'){
             $data = $this->userModel->viewItem($product_id);
             $reviews = $this->userModel->viewreviews($product_id, $type);
-            $spDetails = $this->userModel->getUserById(18);
-//            die(print_r($spDetails));
+            $spDetails = $this->userModel->getUserById($data->created_by);
         }
         if($type == 'Studio'){
             $data = $this->userModel->viewStudio($product_id);
