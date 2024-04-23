@@ -1012,7 +1012,10 @@
                 'star4'=>$star4,
                 'star5'=>$star5,
                 'type' => $type,
-                'sp_data' => $sp_data
+                'sp_data' => $sp_data,
+                'email' => $sp_data->business_address,
+                'telephoneNumber' => $sp_data->owner_contact_no,
+                'name' => $sp_data->business_name
             ];
         } else if ($type == 'Studio'){
             $data = [
@@ -1048,7 +1051,8 @@
                 'star4'=>$star4,
                 'star5'=>$star5,
                 'type' => $type,
-                'sp_data' => $sp_data
+                'sp_data' => $sp_data,
+                'name' => $sp_data->business_name
             ];
         } else if ($type == 'Singer'){
             $data = [
@@ -1085,7 +1089,8 @@
                 'star4'=>$star4,
                 'star5'=>$star5,
                 'type' => $type,
-                'sp_data' => $sp_data
+                'sp_data' => $sp_data,
+                'name' => $data->name
             ];
         } else if ($type == 'Musician'){
             $data = [
@@ -1122,7 +1127,8 @@
                 'star4'=>$star4,
                 'star5'=>$star5,
                 'type' => $type,
-                'sp_data' => $sp_data
+                'sp_data' => $sp_data,
+                'name' => $data->name
             ];
         } else if ($type == 'Band'){
             $data = [
@@ -1160,7 +1166,8 @@
                 'star4'=>$star4,
                 'star5'=>$star5,
                 'type' => $type,
-                'sp_data' => $sp_data
+                'sp_data' => $sp_data,
+                'name' => $data->name
             ];
           } 
         } else {
