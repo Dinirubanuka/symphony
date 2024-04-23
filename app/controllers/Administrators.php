@@ -2498,4 +2498,12 @@
           $this->view('administrators/addmoderator', $data);
       }
       }
+
+      public function viewSPInvetory($id)
+      {
+          $data = $this->administratorModel->viewSPInvetory($id);
+          die(print_r($data));
+          $this->view('administrators/viewSpInventory', $data);
+
+      }
   }
