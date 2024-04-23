@@ -12,6 +12,9 @@
 <?php require_once APPROOT . '/views/inc/viewNavBar.php'; ?>
 <div class="categories">
     <div class="category">
+        <div class="heading" style="padding: 10px">
+            <h2>Studios</h2>
+        </div>
         <div class="category-name" onclick="toggleCategory('location')">Location</div>
         <ul class="equipment-list" id="location" onchange="updateDisplayedData()">
 
