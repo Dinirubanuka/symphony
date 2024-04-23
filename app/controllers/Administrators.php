@@ -3,6 +3,7 @@
     private $administratorModel;
     public function __construct(){
       $this->administratorModel = $this->model('Administrator');
+        $this->userModel = $this->model('User');
     }
 
     public function index(){
