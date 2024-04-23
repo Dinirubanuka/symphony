@@ -15,10 +15,21 @@
 <body onload="changeRating(); checkAvailability() ">
 <!------------nav-bar-------->
 <?php require_once APPROOT . '/views/inc/viewNavBar.php'; ?>
+<div class="upperHome">
+    <a href="<?php echo URLROOT?>/users/index"><img src="http://localhost/symphony/img/home.png" alt="camera-icon" class="" id="" style="height: 30px;width: 30px;"></a>
+    <div class="categoryArrow">
+        <img src="http://localhost/symphony/img/right-arrow.png" alt="camera-icon" class="" id="" style="height: 20px;width: 20px;">
+    </div>
+    <div class="categoryType">
+        <a href="<?php echo URLROOT?>/users/<?php echo ($data['type'] == 'Band' || $data['type'] == 'Singer' || $data['type'] == 'Musician' || $data['type'] == 'Studio') ? $data['type'] : ($data['type'] == 'Equipment' ? 'Instrument' : '') ?>">
+            <?php echo ($data['type'])?>
+        </a>
+    </div>
+</div>
 
+<h2>owner :<?php echo $data['name']?></h2>
 <div class="wrapper">
     <div class="container">
-        <h2>owner :<?php echo $data['name']?></h2>
         <div class="slides">
             <div class="mySlides">
                 <img src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $data['photo_1']; ?>">

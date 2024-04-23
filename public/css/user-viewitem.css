@@ -564,3 +564,41 @@ font-weight: 500;
   grid-template-columns: auto auto;
   column-gap: 5px;
 }
+
+.upperHome{
+  display: flex;
+}
+
+.upperHome img{
+  /*border: 1px solid red;*/
+  padding: 0;
+  margin: 5px 0 0 5px;
+}
+
+.categoryType{
+  /*border: 1px solid red;*/
+  padding-top: 11px;
+}
+
+.categoryType a{
+  background-color: rgba(206, 205, 205, 0.8);
+  border-radius: 10px;
+  opacity: 0.8;
+  font-weight: bolder;
+  padding: 5px;
+  color: #090808;
+}
+.categoryType a:hover{
+  background-color: rgb(9, 8, 8);
+  color: #ffffff;
+  border-radius: 10px;
+  transition: background-color 0.5s;
+}
+.categoryType:hover{
+  scale: 1.02;
+  transition: 0.5s;
+}
+
+.categoryArrow{
+  padding: 5px 3px 0 0;
+}
