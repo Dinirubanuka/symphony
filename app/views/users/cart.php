@@ -71,10 +71,10 @@
 			<div class="left">
 				<h2 class="subtotal">Subtotal: LKR. <span><?php echo $data['subtotal']; ?></span> </h2>
 				<h3 class="tax">Deposit Value: LKR. <span><?php echo $data['extra_charge']; ?></span></h3>
-				<h3 class="shipping">Service Charge: LKR. <span>200.00</span> </h3>
+				<h3 class="shipping">Service Charge: LKR. <span><?php echo $data['count'] == 0 ? '0.00' : '200.00'; ?></span> </h3>
 			</div>
 
-			<div class="right">
+			<div class="right" <?php echo $data['count'] == 0 ? 'hidden' : ''; ?>>
 				<h1 class="total">Total: LKR. <span><?php echo $data['total'];; ?></span> </h1>
 				<a id="checkOutBtn" class="btn"> Checkout </a>
 			</div>

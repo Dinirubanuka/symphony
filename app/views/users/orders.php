@@ -46,13 +46,13 @@
                     <tr>
                         <th>Image</th>
                         <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Unit Price</th>
                         <th>Start Date</th>
                         <th>End Date</th>
-                        <th>Status</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
                         <th>Total</th>
                         <th>Diposit</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -62,13 +62,13 @@
                         <?php $orderStatus = $suborder['status']; ?>
                         <td><img src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $suborder['photo_1']; ?>" style="width:100px; height:100px;" alt="Item 1"></td>
                         <td><?php echo $suborder['category'] ?></td>
-                        <td><?php echo $suborder['qty'] ?></td>
-                        <td>LKR. <?php echo $suborder['unit_price'] ?></td>
                         <td><?php echo $suborder['start_date'] ?></td>
                         <td><?php echo $suborder['end_date'] ?></td>
-                        <td class="status-<?php echo $suborder['status'] ?>"><?php echo $suborder['status'] ?></td>
+                        <td><?php echo $suborder['qty'] ?></td>
+                        <td>LKR. <?php echo $suborder['unit_price'] ?></td>
                         <td>LKR. <?php echo $suborder['total'] ?></td>
                         <td>LKR. <?php echo $suborder['extra'] ?></td>
+                        <td class="status-<?php echo $suborder['status'] ?>"><?php echo $suborder['status'] ?></td>
                         <td>
                             <div <?php echo $orderStatus == 'Pending' ? '' : 'style="display: none;"';?>>
                                 <button order_id="<?php echo $orders['order']->order_id; ?>" sub_order_id="<?php echo $suborder['sorder_id'] ?>" class="cancel-btn" onclick="cancelOrder(this)">
@@ -91,7 +91,7 @@
                 <?php endforeach; ?>
                 <tfoot>
                     <tr>
-                        <td colspan="8" style="text-align: right;"><strong>Total:</strong></td>
+                        <td colspan="6" style="text-align: right;"><strong>Total:</strong></td>
                         <td>LKR. <?php echo $orders['order']->total ?></td>
                     </tr>
                 </tfoot>
