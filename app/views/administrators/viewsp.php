@@ -29,7 +29,7 @@
               <button id="banBtn" onclick="unbanSP(<?php echo $data['request']->serviceprovider_id ?>)">Unban Account</button>
             </div>
               <button id="orderBtn" onclick="viewSPOrders(<?php echo $data['request']->serviceprovider_id ?>)">View Orders</button>
-            <button id="inventoryBtn" onclick="viewSPInvetory(<?php echo $data['request']->serviceprovider_id ?>)">View Inventory</button>
+            <button id="inventoryBtn">View Inventory</button>
           </div>
         </div>
 
@@ -138,10 +138,6 @@
 
         function viewSPOrders(serviceproviderID) {
           window.location.href = "<?php echo URLROOT; ?>/administrators/viewSPOrders/" + serviceproviderID;
-        }
-
-        function viewSPInvetory(serviceproviderID){
-            window.location.href = "<?php echo URLROOT; ?>/administrators/viewSPInvetory/" + serviceproviderID;
         }
       </script>
     </div>

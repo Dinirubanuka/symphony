@@ -156,7 +156,22 @@
 
                 </div>
                 <div class="notification">
-                    <i class="fa-solid fa-bell"></i>
+                <button class="notification-btn" id="notificationBtn"><i class="fa-solid fa-bell"></i></button>
+                <p class="badge">0</p>    
+                <div class="notification-wrapper">
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <ul class="notification-list">
+                        <!-- Dummy data for notifications -->
+                        <li class="notification-item">Notification 1 <button class="close-btn">×</button></li>
+                        <li class="notification-item">Notification 2 <button class="close-btn">×</button></li>
+                        <li class="notification-item">Notification 3 <button class="close-btn">×</button></li>
+                        <li class="notification-item">Notification 4 <button class="close-btn">×</button></li>
+                        <li class="notification-item">Notification 5 <button class="close-btn">×</button></li>
+                        <!-- End of dummy data -->
+                        </ul>
+                        <button class="mark-all-as-read-btn">Mark All as Read</button>
+                    </div>
+                    </div>
                 </div>
                 <a href="<?php echo URLROOT; ?>/users/profile">
                     <img

@@ -5,6 +5,7 @@
     <title>Instrument</title>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/instrument.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/nav-bar.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-notifications.css">
 </head>
 <body>
 <!--navigation bar-->
@@ -98,5 +99,6 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://kit.fontawesome.com/3376ff6b83.js" crossorigin="anonymous"></script>
 <script src="<?php echo URLROOT; ?>/js/instrument.js"></script>
+<script src="<?php echo URLROOT; ?>/js/user-notifications.js"></script>
 </body>
 </html>

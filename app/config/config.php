@@ -2,7 +2,7 @@
   // DB Params
   define('DB_HOST', 'localhost');
   define('DB_USER', 'root');
-  define('DB_PASS', '');
+  define('DB_PASS', 'FelIX7889');
   define('DB_NAME', 'symphony');
 
   // App Root
