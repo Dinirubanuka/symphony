@@ -986,36 +986,4 @@ class ServiceProvider
         }
     }
 
-    public function addNotification($data)
-    {
-        $this->db->query('INSERT INTO notifications (user_type, user_id, date_time, status, data) VALUES(:user_type, :user_id, :date_time, :status, :data)');
-        try {
-            $this->db->bind(':user_type', $data['user_type']);
-            $this->db->bind(':user_id', $data['user_id']);
-            $this->db->bind(':date_time', $data['date_time']);
-            $this->db->bind(':status', $data['status']);
-            $this->db->bind(':data', $data['data']);
-
-            // Execute
-            if ($this->db->execute()) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (PDOException $e) {
-
-            die($e->getMessage());
-        }
-    }
-
-    public function getNotifications($user_id, $date_time)
-    {
-        $this->db->query('SELECT * FROM notifications WHERE user_id = :user_id AND user_type = :user_type AND date_time <= :date_time AND status = :status ORDER BY date_time DESC');
-        $this->db->bind(':user_type', 'Serviceprovider');
-        $this->db->bind(':status', 'Unread');
-        $this->db->bind(':user_id', $user_id);
-        $this->db->bind(':date_time', $date_time);
-        $results = $this->db->single();
-        return $results;
-    }
 }

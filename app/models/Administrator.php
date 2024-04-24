@@ -780,4 +780,37 @@ require 'vendor/autoload.php';
     return $results;
   }
 
+  public function viewSPInvetory($id)
+  {
+      $this->db->query('SELECT * FROM products WHERE created_by = :id');
+      $this->db->bind(':id', $id);
+      $instruments = $this->db->resultSet();
+
+      $this->db->query('SELECT * FROM musician WHERE created_by = :id');
+      $this->db->bind(':id', $id);
+      $musician = $this->db->resultSet();
+
+      $this->db->query('SELECT * FROM band WHERE created_by = :id');
+      $this->db->bind(':id', $id);
+      $band = $this->db->resultSet();
+
+      $this->db->query('SELECT * FROM studio WHERE created_by = :id');
+      $this->db->bind(':id', $id);
+      $studio = $this->db->resultSet();
+
+      $this->db->query('SELECT * FROM singer WHERE created_by = :id');
+      $this->db->bind(':id', $id);
+      $singer = $this->db->resultSet();
+
+      $data = [
+          'instruments' => $instruments,
+          'musician' => $musician,
+          'band' => $band,
+          'studio' => $studio,
+          'singer' => $singer
+      ];
+
+      return $data;
+  }
+
 }
