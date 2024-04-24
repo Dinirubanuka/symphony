@@ -1,3 +1,70 @@
+
+const dropdownBtn = document.querySelectorAll(".dropdown-btn");
+const dropdown = document.querySelectorAll(".dropdown");
+const hamburgerBtn = document.getElementById("hamburger");
+const navMenu = document.querySelector(".menu");
+const links = document.querySelectorAll(".dropdown a");
+
+function setAriaExpandedFalse() {
+    dropdownBtn.forEach((btn) => btn.setAttribute("aria-expanded", "false"));
+}
+
+function closeDropdownMenu() {
+    dropdown.forEach((drop) => {
+        drop.classList.remove("active");
+        drop.addEventListener("click", (e) => e.stopPropagation());
+    });
+}
+
+function toggleHamburger() {
+    navMenu.classList.toggle("show");
+}
+
+dropdownBtn.forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+        const dropdownIndex = e.currentTarget.dataset.dropdown;
+        const dropdownElement = document.getElementById(dropdownIndex);
+
+        dropdownElement.classList.toggle("active");
+        dropdown.forEach((drop) => {
+            if (drop.id !== btn.dataset["dropdown"]) {
+                drop.classList.remove("active");
+            }
+        });
+        e.stopPropagation();
+        btn.setAttribute(
+            "aria-expanded",
+            btn.getAttribute("aria-expanded") === "false" ? "true" : "false"
+        );
+    });
+});
+
+// close dropdown menu when the dropdown links are clicked
+links.forEach((link) =>
+    link.addEventListener("click", () => {
+        closeDropdownMenu();
+        setAriaExpandedFalse();
+        toggleHamburger();
+    })
+);
+
+// close dropdown menu when you click on the document body
+document.documentElement.addEventListener("click", () => {
+    closeDropdownMenu();
+    setAriaExpandedFalse();
+});
+
+// close dropdown when the escape key is pressed
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        closeDropdownMenu();
+        setAriaExpandedFalse();
+    }
+});
+
+hamburgerBtn.addEventListener("click", toggleHamburger);
+
+
 var $data;
 var Orgdata;
 function toggleCategory(categoryId) {
@@ -12,6 +79,8 @@ function toggleCategory(categoryId) {
 // Display data
 const accReq = document.querySelector(".account-requests");
 const cart = document.querySelector(".cart");
+const notifications = document.querySelector(".notification");
+
 function cartItems() {
     $.ajax({
         method: 'GET',
@@ -44,8 +113,13 @@ function Redirect() {
         success: function (response) {
             $data = JSON.parse(JSON.stringify(response.inventory));
             Orgdata = JSON.parse(JSON.stringify(response.inventory));
+            $notifications = JSON.parse(JSON.stringify(response.notifications));
+            $notificationsCount = JSON.parse(JSON.stringify(response.count));
+            console.log('notifications',$notifications);
+            console.log('notificationsCount',$notificationsCount);
             console.log('response',response);
             displaydata($data);
+            displayNotifications($notifications, $notificationsCount);
             console.log('method');
         },
         error: function (error) {
@@ -53,6 +127,64 @@ function Redirect() {
         }
     });
 }
+
+function displayNotifications(notificationsData, count) {
+    let text = "";
+    text += `<button class="notification-btn" id="notificationBtn"><i class="fa-solid fa-bell"></i></button>` +
+        `<p class="badge">` + count + `</p>` +
+        `<div class="notification-wrapper">` +
+        `<div class="notification-dropdown" id="notificationDropdown">` +
+        `<ul class="notification-list">`;
+
+    // Assuming notificationsData is an array of notification texts
+    notificationsData.forEach(function (notification, index) {
+        text += `<li class="notification-item">` + notification.data + ` <button class="close-btn">x</button></li>`;
+    });
+
+    text += `</ul>` +
+        `<button class="mark-all-as-read-btn">Mark All as Read</button>` +
+        `</div>` +
+        `</div>`;
+    notifications.innerHTML = text;
+
+    // Add event listeners to the newly created elements
+    addEventListeners();
+}
+
+function addEventListeners() {
+    const notificationBtn = document.getElementById('notificationBtn');
+    const notificationDropdown = document.getElementById('notificationDropdown');
+
+    // Toggle dropdown menu when notification button is clicked
+    notificationBtn.addEventListener('click', function () {
+        if (notificationDropdown.style.display === 'block') {
+            notificationDropdown.style.display = 'none';
+        } else {
+            notificationDropdown.style.display = 'block';
+        }
+    });
+
+    // Close notification when close button is clicked
+    const closeButtons = document.querySelectorAll('.close-btn');
+    closeButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            const notificationItem = button.parentNode;
+            notificationItem.style.display = 'none';
+        });
+    });
+
+    // Mark all notifications as read when "Mark All as Read" button is clicked
+    const markAllAsReadBtn = document.querySelector('.mark-all-as-read-btn');
+    markAllAsReadBtn.addEventListener('click', function () {
+        const notificationItems = document.querySelectorAll('.notification-item');
+        notificationItems.forEach(function (item) {
+            item.style.display = 'none';
+        });
+        window.location.href = 'http://localhost/symphony/users/markNotifications';
+    });
+}
+
+
 function displaydata(data){
     var inventory = data;
     let req = "";

@@ -7,11 +7,12 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="<?php echo URLROOT ?>/css/viewSinger.css"/>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/inventory.css"/>
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/nav-bar.css">
     <title>Servie Provider Profile</title>
 </head>
 <body>
 <!-----------profile-nav-bar-------->
-<?php require_once APPROOT . '/views/inc/singer-nav.php'; ?>
+<?php require_once APPROOT . '/views/inc/musician-nav.php'; ?>
 <!--------body-------->
 <div class="outer">
     <form action="<?php echo URLROOT; ?>/Serviceproviders/updateMusicians/<?php echo $data->product_id ?>" method="post" enctype="multipart/form-data">
@@ -349,6 +350,82 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="app.js"></script>
 <script>
+        var $data;
+    var Orgdata;
+
+    function toggleCategory(categoryId) {
+        const categoryList = document.getElementById(categoryId);
+        if (categoryId === 'price') {
+            categoryList.style.display = categoryList.style.display === "none" ? "flex" : "none";
+        } else {
+            categoryList.style.display = categoryList.style.display === "none" ? "block" : "none";
+        }
+    }
+
+    const dropdownBtn = document.querySelectorAll(".dropdown-btn");
+    const dropdown = document.querySelectorAll(".dropdown");
+    const hamburgerBtn = document.getElementById("hamburger");
+    const navMenu = document.querySelector(".menu");
+    const links = document.querySelectorAll(".dropdown a");
+
+    function setAriaExpandedFalse() {
+        dropdownBtn.forEach((btn) => btn.setAttribute("aria-expanded", "false"));
+    }
+
+    function closeDropdownMenu() {
+        dropdown.forEach((drop) => {
+            drop.classList.remove("active");
+            drop.addEventListener("click", (e) => e.stopPropagation());
+        });
+    }
+
+    function toggleHamburger() {
+        navMenu.classList.toggle("show");
+    }
+
+    dropdownBtn.forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+            const dropdownIndex = e.currentTarget.dataset.dropdown;
+            const dropdownElement = document.getElementById(dropdownIndex);
+
+            dropdownElement.classList.toggle("active");
+            dropdown.forEach((drop) => {
+                if (drop.id !== btn.dataset["dropdown"]) {
+                    drop.classList.remove("active");
+                }
+            });
+            e.stopPropagation();
+            btn.setAttribute(
+                "aria-expanded",
+                btn.getAttribute("aria-expanded") === "false" ? "true" : "false"
+            );
+        });
+    });
+
+    // close dropdown menu when the dropdown links are clicked
+    links.forEach((link) =>
+        link.addEventListener("click", () => {
+            closeDropdownMenu();
+            setAriaExpandedFalse();
+            toggleHamburger();
+        })
+    );
+
+    // close dropdown menu when you click on the document body
+    document.documentElement.addEventListener("click", () => {
+        closeDropdownMenu();
+        setAriaExpandedFalse();
+    });
+
+    // close dropdown when the escape key is pressed
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            closeDropdownMenu();
+            setAriaExpandedFalse();
+        }
+    });
+
+    hamburgerBtn.addEventListener("click", toggleHamburger);
     //add you tube video
     function extractVideoId() {
         var embeddedLink = document.getElementById('embeddedLink').value;

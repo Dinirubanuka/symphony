@@ -4,14 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cart</title>
-
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
     <!-- Style CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/nav-bar.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-cart.css">
   </head>
   <body>
-<!-----------profile-nav-bar-------->
-<!-- <?php require_once APPROOT . '/views/inc/index-nav.php'; ?> -->
+  <?php require_once APPROOT . '/views/inc/viewNavBar.php'; ?>
+	<main class="main">
  <main>
      <!-- Start DEMO HTML (Use the following code into your project)-->
 <header id="site-header">
@@ -71,10 +72,10 @@
 			<div class="left">
 				<h2 class="subtotal">Subtotal: LKR. <span><?php echo $data['subtotal']; ?></span> </h2>
 				<h3 class="tax">Deposit Value: LKR. <span><?php echo $data['extra_charge']; ?></span></h3>
-				<h3 class="shipping">Service Charge: LKR. <span>200.00</span> </h3>
+				<h3 class="shipping">Service Charge: LKR. <span><?php echo $data['count'] == 0 ? '0.00' : '200.00'; ?></span> </h3>
 			</div>
 
-			<div class="right">
+			<div class="right" <?php echo $data['count'] == 0 ? 'hidden' : ''; ?>>
 				<h1 class="total">Total: LKR. <span><?php echo $data['total'];; ?></span> </h1>
 				<a id="checkOutBtn" class="btn"> Checkout </a>
 			</div>

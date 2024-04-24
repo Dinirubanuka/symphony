@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Instrument</title>
-
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/instrument.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/nav-bar.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-notifications.css">
 </head>
 <body>
 <!--navigation bar-->
@@ -50,10 +51,9 @@
         </div>
     </div>
 </div>
-<div class="account-requests">
+<div class="account-requests" style="position: absolute; top: 100px;">
 
 
-</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

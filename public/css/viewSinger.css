@@ -143,6 +143,7 @@ body {
     line-height:1.6;
     max-height: 250px;
     overflow: hidden;
+    margin-top: 10px;
 }
 #seeMore{
     display: none;
@@ -159,11 +160,15 @@ body {
     padding: 10px;
     color: white;
 }
+.video-uploadBody iframe{
+    height: 320px;
+    width: 560px;
+}
 .video-link{
-    color: white;
     padding: 10px;
 }
 .video-link input{
+    margin-top: 10px;
     padding: 10px;
     letter-spacing: 2px;
     overflow: hidden;
@@ -378,4 +383,41 @@ body {
         grid-template-columns: auto ;
         box-sizing: content-box;
     }
+}
+
+@media (max-width: 1000px) {
+    .titleHours{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .video-uploadBody iframe{
+        height: 320px;
+        width: 500px;
+    }
+}
+@media (max-width: 632px){
+    .video-uploadBody iframe{
+        height: 300px;
+        width: 400px;
+    }
+    .video-link input{
+        width: 300px;
+    }
+    .select-options{
+        gap: 0;
+    }
+}
+
+@media (max-width: 544px) {
+    .select-options{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .video-uploadBody iframe{
+        height: 200px;
+        width: 350px;
+    }
+    
 }

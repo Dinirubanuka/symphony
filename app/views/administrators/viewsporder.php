@@ -43,11 +43,11 @@
                               <th>Service Provider ID</th>
                               <th>Type and ID</th>
                               <th>Quantity</th>
-                              <th>Price per Day</th>
                               <th>Start Date</th>
                               <th>End Date</th>
-                              <th>Status</th>
+                              <th>Price per Day</th>
                               <th>Total</th>
+                              <th>Status</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -56,16 +56,16 @@
                               <td><div class = "sp-icon" onclick = "viewSP(<?php echo $data['product_data']->created_by; ?>)"><?php echo $data['product_data']->created_by ?></div></td>
                               <td><div product_id = "<?php echo $data['product_data']->product_id; ?>" product_type = "<?php echo $data['order_data']->type; ?>" class = "sp-icon" onclick = "viewProduct(this)"><?php echo $data['product_data']->Title ?> - <?php echo $data['product_data']->product_id ?></div></td>   
                               <td><?php echo $data['order_data']->qty ?></td>
-                              <td>LKR. <?php echo $data['product_data']->unit_price ?></td>
                               <td><?php echo $data['order_data']->start_date ?></td>
                               <td><?php echo $data['order_data']->end_date ?></td>
-                              <td class="status-<?php echo $data['order_data']->status ?>"><?php echo $data['order_data']->status ?></td>
+                              <td>LKR. <?php echo $data['product_data']->unit_price ?></td>
                               <td>LKR. <?php echo $data['order_data']->total ?></td>
+                              <td class="status-<?php echo $data['order_data']->status ?>"><?php echo $data['order_data']->status ?></td>
                           </tr>
                       </tbody>
                       <tfoot>
                           <tr>
-                              <td colspan="8" style="text-align: right;"><strong>Total:</strong></td>
+                              <td colspan="7" style="text-align: right;"><strong>Total:</strong></td>
                               <td>LKR. <?php echo $data['order_data']->total ?></td>
                           </tr>
                       </tfoot>

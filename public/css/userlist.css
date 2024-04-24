@@ -1,4 +1,23 @@
-    /* Modal Styles */
+/* Style the tab links */
+.tablink {
+    background-color: #f2f2f2;
+    float: left;
+    border: 1px solid #ccc;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+  }
+  
+  /* Change background color of the active tab link */
+  .tablink.active {
+    background-color: #4e4e4e;
+    color: #f2f2f2;
+  }
+  
+
+/* Modal Styles */
+    
     .modal {
         display: none;
         position: fixed;
