@@ -3,7 +3,6 @@
     private $administratorModel;
     public function __construct(){
       $this->administratorModel = $this->model('Administrator');
-        $this->userModel = $this->model('User');
     }
 
     public function index(){
@@ -1012,10 +1011,7 @@
                 'star4'=>$star4,
                 'star5'=>$star5,
                 'type' => $type,
-                'sp_data' => $sp_data,
-                'email' => $sp_data->business_address,
-                'telephoneNumber' => $sp_data->owner_contact_no,
-                'name' => $sp_data->business_name
+                'sp_data' => $sp_data
             ];
         } else if ($type == 'Studio'){
             $data = [
@@ -1051,8 +1047,7 @@
                 'star4'=>$star4,
                 'star5'=>$star5,
                 'type' => $type,
-                'sp_data' => $sp_data,
-                'name' => $sp_data->business_name
+                'sp_data' => $sp_data
             ];
         } else if ($type == 'Singer'){
             $data = [
@@ -1089,8 +1084,7 @@
                 'star4'=>$star4,
                 'star5'=>$star5,
                 'type' => $type,
-                'sp_data' => $sp_data,
-                'name' => $data->name
+                'sp_data' => $sp_data
             ];
         } else if ($type == 'Musician'){
             $data = [
@@ -1127,8 +1121,7 @@
                 'star4'=>$star4,
                 'star5'=>$star5,
                 'type' => $type,
-                'sp_data' => $sp_data,
-                'name' => $data->name
+                'sp_data' => $sp_data
             ];
         } else if ($type == 'Band'){
             $data = [
@@ -1166,8 +1159,7 @@
                 'star4'=>$star4,
                 'star5'=>$star5,
                 'type' => $type,
-                'sp_data' => $sp_data,
-                'name' => $data->name
+                'sp_data' => $sp_data
             ];
           } 
         } else {
@@ -2497,13 +2489,5 @@
           // Load view
           $this->view('administrators/addmoderator', $data);
       }
-      }
-
-      public function viewSPInvetory($id)
-      {
-          $data = $this->administratorModel->viewSPInvetory($id);
-          die(print_r($data));
-          $this->view('administrators/viewSpInventory', $data);
-
       }
   }
