@@ -552,7 +552,7 @@ class User
         $this->db->bind(':id', $id);
 
         $row = $this->db->single();
-
+//die(print_r($row));
         return $row;
     }
 

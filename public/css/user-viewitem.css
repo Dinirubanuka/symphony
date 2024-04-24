@@ -473,3 +473,134 @@ color: #000000;
 top: 50%;
 font-weight: 500;
 }
+.rate-header{
+  display: flex;
+  flex-direction: column;
+}
+.row .column .demo{
+  height: 190px;
+  width: 190px;
+}
+
+@media (max-width: 1100px) {
+  .wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+  .star-rating{
+    font-size: 2em;
+  }
+  .wrapper .item-container{
+    width: 800px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 660px) {
+  .rating{
+    display: flex;
+    flex-direction: column;
+  }
+  .row .column .demo{
+    height: 150px;
+    width: 150px;
+  }
+  .mySlides{
+    height: 300px;
+    width: 300px;
+  }
+  .wrapper .item-container{
+    margin: auto;
+    width: 400px;
+  }
+}
+
+@media (max-width: 424px) {
+  .row .column .demo{
+    height: 100px;
+    width: 100px;
+  }
+  .mySlides{
+    height: 200px;
+    width: 200px;
+  }
+  .wrapper .item-container{
+    margin: 20px;
+  }
+  .wrapper .item-container{
+    margin: auto;
+    width: 350px;
+  }
+}
+
+.singerPhoto{
+  height: 150px;
+  width: 150px;
+}
+
+.singerPhoto img{
+  border-radius: 50%;
+  object-fit: cover;
+  height: 150px;
+  width: 150px;
+}
+
+.singerDetails{
+  height: 40px;
+  display: flex;
+  gap: 8px;
+}
+
+.videoBox iframe{
+  height: 200px;
+  width: 320px;
+}
+
+.contactBox{
+  display: flex;
+  gap: 8px;
+}
+
+.emailBox{
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 5px;
+}
+
+.upperHome{
+  display: flex;
+}
+
+.upperHome img{
+  /*border: 1px solid red;*/
+  padding: 0;
+  margin: 5px 0 0 5px;
+}
+
+.categoryType{
+  /*border: 1px solid red;*/
+  padding-top: 11px;
+}
+
+.categoryType a{
+  background-color: rgba(206, 205, 205, 0.8);
+  border-radius: 10px;
+  opacity: 0.8;
+  font-weight: bolder;
+  padding: 5px;
+  color: #090808;
+}
+.categoryType a:hover{
+  background-color: rgb(9, 8, 8);
+  color: #ffffff;
+  border-radius: 10px;
+  transition: background-color 0.5s;
+}
+.categoryType:hover{
+  scale: 1.02;
+  transition: 0.5s;
+}
+
+.categoryArrow{
+  padding: 5px 3px 0 0;
+}
