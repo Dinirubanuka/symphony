@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2024 at 01:36 PM
+-- Generation Time: Apr 24, 2024 at 04:41 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -168,16 +168,19 @@ INSERT INTO `availability` (`entry_id`, `date`, `product_id`, `qty`, `type`) VAL
 (395, '2024-03-19', 24, 2, 'Equipment'),
 (396, '2024-03-20', 24, 2, 'Equipment'),
 (397, '2024-03-21', 24, 2, 'Equipment'),
-(408, '2024-04-18', 17, 1, 'Equipment'),
-(409, '2024-04-19', 17, 1, 'Equipment'),
-(410, '2024-04-20', 17, 1, 'Equipment'),
 (411, '2024-04-25', 3, 1, 'Studio'),
 (412, '2024-04-26', 3, 1, 'Studio'),
 (413, '2024-04-18', 17, 1, 'Equipment'),
 (414, '2024-04-19', 17, 1, 'Equipment'),
 (415, '2024-04-20', 17, 1, 'Equipment'),
 (416, '2024-04-25', 3, 1, 'Studio'),
-(417, '2024-04-26', 3, 1, 'Studio');
+(417, '2024-04-26', 3, 1, 'Studio'),
+(418, '2024-03-29', 20, 2, 'Equipment'),
+(419, '2024-03-30', 20, 2, 'Equipment'),
+(420, '2024-03-31', 20, 2, 'Equipment'),
+(421, '2024-04-01', 20, 2, 'Equipment'),
+(422, '2024-04-02', 20, 2, 'Equipment'),
+(423, '2024-04-03', 20, 2, 'Equipment');
 
 -- --------------------------------------------------------
 
@@ -252,13 +255,6 @@ CREATE TABLE `cart` (
   `extra` int(255) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`cart_id`, `user_id`, `product_id`, `quantity`, `start_date`, `end_date`, `days`, `total`, `availability`, `type`, `extra`) VALUES
-(76, 18, 20, 2, '2024-03-29', '2024-04-03', 6, 7200, 'available', 'Equipment', 1800);
-
 -- --------------------------------------------------------
 
 --
@@ -286,7 +282,9 @@ INSERT INTO `chat_mod_user` (`chat_id`, `user_id`, `moderator_id`, `created_by`,
 (7, 18, 1, 'user', 'rgbbe', '12:25:33 PM | February 6 2024'),
 (8, 18, 1, 'user', 'hello', '7:09:47 PM | February 19 2024'),
 (9, 18, 1, 'user', 'hi', '7:29:20 PM | February 19 2024'),
-(10, 18, 1, 'moderator', 'hewsh', '12:54:03 AM | March 23 2024');
+(10, 18, 1, 'moderator', 'hewsh', '12:54:03 AM | March 23 2024'),
+(11, 18, 1, 'moderator', 'hi', '2:31:11 PM | April 23 2024'),
+(12, 18, 1, 'moderator', 'what is the issue', '2:31:28 PM | April 23 2024');
 
 -- --------------------------------------------------------
 
@@ -317,7 +315,7 @@ CREATE TABLE `inquiries` (
 
 INSERT INTO `inquiries` (`inquiry_id`, `user_id`, `inquiryType`, `field_1`, `field_2`, `field_3`, `field_4`, `field_5`, `photo_1`, `photo_2`, `photo_3`, `status`, `moderator_id`, `placed_on`) VALUES
 (1, 18, 'Technical Issue', 'egwsjhedrje', 'h4rwhg4wg', '', '', '', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'Completed', 1, NULL),
-(2, 18, 'Technical Issue', 'nwsr', 'j,truf,m', '', '', '', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'Pending', 0, NULL),
+(2, 18, 'Technical Issue', 'nwsr', 'j,truf,m', '', '', '', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'In-Progress', 1, NULL),
 (3, 18, 'Technical Issue', 'gbwrsvsloj kbqweuikfhq', 'wrhw fqefwf', '', '', '', 'IMG-65c1e3564de106.71069130.jpg', 'IMG-65c1e3564df517.77863469.jpg', 'IMG-65c1e3564df998.02290386.jpg', 'In-Progress', 1, NULL),
 (4, 18, 'Other', 'f bqknecl; qnhilofh q', 'qilo;bekhq vwhvf', '', '', '', 'IMG-65c1e36d67d473.29055626.jpeg', 'IMG-65c1e36d67df29.80862974.png', 'IMG-65c1e36d67e355.60262304.jpeg', 'In-Progress', 1, NULL),
 (5, 18, 'Recover Account', '', '', '', '', '', 'IMG-656bdc23223334.62765635.png', '', '', 'In-Progress', 1, NULL);
@@ -346,7 +344,9 @@ INSERT INTO `inq_chat` (`inq_chat_id`, `chat_id`, `inquiry_id`) VALUES
 (5, 7, 1),
 (6, 8, 4),
 (7, 9, 4),
-(8, 10, 4);
+(8, 10, 4),
+(9, 11, 2),
+(10, 12, 2);
 
 -- --------------------------------------------------------
 
@@ -1134,7 +1134,150 @@ INSERT INTO `logs` (`log_id`, `user_type`, `user_id`, `date_and_time`, `log_type
 (748, 'Administrator', 1, '2024-04-21 12:21:40', 'Generate Reports', 'Administrator viewed reports'),
 (749, 'Administrator', 1, '2024-04-21 13:09:03', 'Generate Reports', 'Administrator viewed reports'),
 (750, 'Administrator', 1, '2024-04-21 13:13:10', 'Generate Reports', 'Administrator viewed reports'),
-(751, 'Administrator', 1, '2024-04-21 13:30:36', 'Generate Reports', 'Administrator viewed reports');
+(751, 'Administrator', 1, '2024-04-21 13:30:36', 'Generate Reports', 'Administrator viewed reports'),
+(752, 'Customer', 18, '2024-04-23 07:09:55', 'Login', 'User logged in'),
+(753, 'Customer', 18, '2024-04-23 07:09:58', 'View Bands', 'User viewed the bands available'),
+(754, 'Customer', 18, '2024-04-23 07:10:31', 'View Bands', 'User viewed the bands available'),
+(755, 'Customer', 18, '2024-04-23 07:10:42', 'View Bands', 'User viewed the bands available'),
+(756, 'Customer', 18, '2024-04-23 07:11:34', 'View Bands', 'User viewed the bands available'),
+(757, 'Customer', 18, '2024-04-23 07:11:44', 'View Bands', 'User viewed the bands available'),
+(758, 'Customer', 18, '2024-04-23 07:12:05', 'View Bands', 'User viewed the bands available'),
+(759, 'Customer', 18, '2024-04-23 07:12:24', 'View Bands', 'User viewed the bands available'),
+(760, 'Customer', 18, '2024-04-23 07:12:53', 'View Instruments', 'User viewed the instruments available'),
+(761, 'Customer', 18, '2024-04-23 07:12:59', 'View Bands', 'User viewed the bands available'),
+(762, 'Customer', 18, '2024-04-23 07:13:10', 'View Orders', 'User viewed their orders'),
+(763, 'Customer', 18, '2024-04-23 07:13:10', 'View Instruments', 'User viewed the instruments available'),
+(764, 'Customer', 18, '2024-04-23 07:13:19', 'View Bands', 'User viewed the bands available'),
+(765, 'Customer', 18, '2024-04-23 10:58:51', 'Logout', 'User logged out'),
+(766, 'Moderator', 1, '2024-04-23 10:59:03', 'Login', 'Moderator logged in'),
+(767, 'Moderator', 1, '2024-04-23 10:59:07', 'View Inquiries', 'Moderator viewed pending inquiries'),
+(768, 'Moderator', 1, '2024-04-23 10:59:09', 'View Inquiry', 'Moderator viewed pending inquiry 2 details'),
+(769, 'Moderator', 1, '2024-04-23 10:59:12', 'Approve Inquiry', 'Moderator approved inquiry 2 and assign to self'),
+(770, 'Moderator', 1, '2024-04-23 10:59:12', 'View Inquiries', 'Moderator viewed pending inquiries'),
+(771, 'Moderator', 1, '2024-04-23 10:59:14', 'View Inquiries', 'Moderator viewed active inquiries'),
+(772, 'Moderator', 1, '2024-04-23 10:59:16', 'View Inquiry', 'Moderator viewed inquiry 2 details'),
+(773, 'Moderator', 1, '2024-04-23 11:01:06', 'View Inquiry', 'Moderator viewed inquiry 2 details'),
+(774, 'Moderator', 1, '2024-04-23 11:01:11', 'Send Message', 'Moderator sent a message to user 18 regarding inquiry 2'),
+(775, 'Moderator', 1, '2024-04-23 11:01:11', 'View Inquiry', 'Moderator viewed inquiry 2 details'),
+(776, 'Moderator', 1, '2024-04-23 11:01:28', 'Send Message', 'Moderator sent a message to user 18 regarding inquiry 2'),
+(777, 'Moderator', 1, '2024-04-23 11:01:28', 'View Inquiry', 'Moderator viewed inquiry 2 details'),
+(778, 'Moderator', 1, '2024-04-23 11:02:02', 'Logout', 'Moderator logged out'),
+(779, 'Customer', 18, '2024-04-23 11:02:10', 'Login', 'User logged in'),
+(780, 'Customer', 18, '2024-04-23 11:02:12', 'View Instruments', 'User viewed the instruments available'),
+(781, 'Customer', 18, '2024-04-23 11:02:20', 'View Studios', 'User viewed the studios available'),
+(782, 'Customer', 18, '2024-04-23 11:02:25', 'View Studio', 'User viewed an studio with product id 3'),
+(783, 'Customer', 18, '2024-04-23 11:02:32', 'Manage Cart', 'User viewed their cart'),
+(784, 'Customer', 18, '2024-04-23 11:02:33', 'View Studio', 'User viewed an studio with product id 3'),
+(785, 'Customer', 18, '2024-04-23 11:02:35', 'View Studios', 'User viewed the studios available'),
+(786, 'Customer', 18, '2024-04-23 11:03:06', 'View Instruments', 'User viewed the instruments available'),
+(787, 'Customer', 18, '2024-04-23 11:03:09', 'View Singers', 'User viewed the singers available'),
+(788, 'Customer', 18, '2024-04-23 11:03:12', 'View Bands', 'User viewed the bands available'),
+(789, 'Customer', 18, '2024-04-23 11:03:14', 'View Musicians', 'User viewed the musicians available'),
+(790, 'Customer', 18, '2024-04-23 11:05:22', 'View Musicians', 'User viewed the musicians available'),
+(791, 'Customer', 18, '2024-04-23 11:05:28', 'View Studios', 'User viewed the studios available'),
+(792, 'Customer', 18, '2024-04-23 11:07:12', 'View Studios', 'User viewed the studios available'),
+(793, 'Customer', 18, '2024-04-23 11:07:13', 'View Studios', 'User viewed the studios available'),
+(794, 'Customer', 18, '2024-04-23 11:14:55', 'View Studios', 'User viewed the studios available'),
+(795, 'Customer', 18, '2024-04-23 11:16:28', 'View Studios', 'User viewed the studios available'),
+(796, 'Customer', 18, '2024-04-23 11:18:05', 'View Studios', 'User viewed the studios available'),
+(797, 'Customer', 18, '2024-04-23 11:18:20', 'View Studios', 'User viewed the studios available'),
+(798, 'Customer', 18, '2024-04-23 11:18:21', 'View Studios', 'User viewed the studios available'),
+(799, 'Customer', 18, '2024-04-23 11:18:21', 'View Studios', 'User viewed the studios available'),
+(800, 'Customer', 18, '2024-04-23 11:18:21', 'View Studios', 'User viewed the studios available'),
+(801, 'Customer', 18, '2024-04-23 11:18:21', 'View Studios', 'User viewed the studios available'),
+(802, 'Customer', 18, '2024-04-23 11:19:59', 'View Studios', 'User viewed the studios available'),
+(803, 'Customer', 18, '2024-04-23 11:20:00', 'Manage Cart', 'User viewed their cart'),
+(804, 'Customer', 18, '2024-04-23 11:20:02', 'View Studios', 'User viewed the studios available'),
+(805, 'Customer', 18, '2024-04-23 11:32:39', 'View Studios', 'User viewed the studios available'),
+(806, 'Customer', 18, '2024-04-23 11:36:07', 'View Studios', 'User viewed the studios available'),
+(807, 'Customer', 18, '2024-04-23 11:37:28', 'View Studios', 'User viewed the studios available'),
+(808, 'Customer', 18, '2024-04-23 11:37:59', 'View Studios', 'User viewed the studios available'),
+(809, 'Customer', 18, '2024-04-23 11:38:12', 'View Studios', 'User viewed the studios available'),
+(810, 'Customer', 18, '2024-04-23 11:38:13', 'View Studios', 'User viewed the studios available'),
+(811, 'Customer', 18, '2024-04-23 11:38:26', 'View Studios', 'User viewed the studios available'),
+(812, 'Customer', 18, '2024-04-23 11:38:43', 'View Studios', 'User viewed the studios available'),
+(813, 'Customer', 18, '2024-04-23 11:38:51', 'View Studios', 'User viewed the studios available'),
+(814, 'Customer', 18, '2024-04-23 11:39:22', 'View Studios', 'User viewed the studios available'),
+(815, 'Customer', 18, '2024-04-23 11:41:44', 'View Studios', 'User viewed the studios available'),
+(816, 'Customer', 18, '2024-04-23 11:42:00', 'View Studios', 'User viewed the studios available'),
+(817, 'Customer', 18, '2024-04-23 11:42:06', 'View Studios', 'User viewed the studios available'),
+(818, 'Customer', 18, '2024-04-23 11:42:32', 'View Studios', 'User viewed the studios available'),
+(819, 'Customer', 18, '2024-04-23 11:42:42', 'View Studios', 'User viewed the studios available'),
+(820, 'Customer', 18, '2024-04-23 11:44:41', 'View Studios', 'User viewed the studios available'),
+(821, 'Customer', 18, '2024-04-23 11:44:52', 'View Studios', 'User viewed the studios available'),
+(822, 'Customer', 18, '2024-04-23 11:45:01', 'View Studios', 'User viewed the studios available'),
+(823, 'Customer', 18, '2024-04-23 11:45:07', 'View Studios', 'User viewed the studios available'),
+(824, 'Customer', 18, '2024-04-23 11:45:29', 'View Studios', 'User viewed the studios available'),
+(825, 'Customer', 18, '2024-04-23 11:45:37', 'View Studios', 'User viewed the studios available'),
+(826, 'Customer', 18, '2024-04-23 11:45:46', 'View Studios', 'User viewed the studios available'),
+(827, 'Customer', 18, '2024-04-23 11:45:53', 'View Studios', 'User viewed the studios available'),
+(828, 'Customer', 18, '2024-04-23 11:45:59', 'Manage Cart', 'User viewed their cart'),
+(829, 'Customer', 18, '2024-04-23 11:46:01', 'View Studios', 'User viewed the studios available'),
+(830, 'Customer', 18, '2024-04-23 11:46:05', 'View Studios', 'User viewed the studios available'),
+(831, 'Customer', 18, '2024-04-23 11:46:05', 'View Studios', 'User viewed the studios available'),
+(832, 'Customer', 18, '2024-04-23 11:49:27', 'View Studios', 'User viewed the studios available'),
+(833, 'Customer', 18, '2024-04-23 11:49:28', 'View Studios', 'User viewed the studios available'),
+(834, 'Customer', 18, '2024-04-23 11:49:28', 'View Studios', 'User viewed the studios available'),
+(835, 'Customer', 18, '2024-04-23 11:50:12', 'View Studios', 'User viewed the studios available'),
+(836, 'Customer', 18, '2024-04-23 11:51:10', 'View Studios', 'User viewed the studios available'),
+(837, 'Customer', 18, '2024-04-23 11:51:21', 'View Studios', 'User viewed the studios available'),
+(838, 'Customer', 18, '2024-04-23 11:51:21', 'View Studios', 'User viewed the studios available'),
+(839, 'Customer', 18, '2024-04-23 11:51:22', 'View Studios', 'User viewed the studios available'),
+(840, 'Customer', 18, '2024-04-23 11:51:22', 'View Studios', 'User viewed the studios available'),
+(841, 'Customer', 18, '2024-04-23 11:51:39', 'View Studios', 'User viewed the studios available'),
+(842, 'Customer', 18, '2024-04-23 11:51:40', 'View Studios', 'User viewed the studios available'),
+(843, 'Customer', 18, '2024-04-23 11:52:10', 'View Studios', 'User viewed the studios available'),
+(844, 'Customer', 18, '2024-04-23 11:52:11', 'View Studios', 'User viewed the studios available'),
+(845, 'Customer', 18, '2024-04-23 11:56:58', 'View Studios', 'User viewed the studios available'),
+(846, 'Customer', 18, '2024-04-23 11:57:29', 'View Studios', 'User viewed the studios available'),
+(847, 'Customer', 18, '2024-04-23 11:58:04', 'View Studios', 'User viewed the studios available'),
+(848, 'Customer', 18, '2024-04-23 11:59:49', 'View Studios', 'User viewed the studios available'),
+(849, 'Customer', 18, '2024-04-23 11:59:51', 'View Studios', 'User viewed the studios available'),
+(850, 'Customer', 18, '2024-04-23 11:59:51', 'View Studios', 'User viewed the studios available'),
+(851, 'Customer', 18, '2024-04-23 12:00:07', 'View Studios', 'User viewed the studios available'),
+(852, 'Customer', 18, '2024-04-23 12:00:35', 'View Studios', 'User viewed the studios available'),
+(853, 'Customer', 18, '2024-04-23 12:01:06', 'View Studios', 'User viewed the studios available'),
+(854, 'Customer', 18, '2024-04-23 12:01:10', 'View Studios', 'User viewed the studios available'),
+(855, 'Customer', 18, '2024-04-23 12:01:11', 'View Studios', 'User viewed the studios available'),
+(856, 'Customer', 18, '2024-04-23 12:01:31', 'View Studios', 'User viewed the studios available'),
+(857, 'Customer', 18, '2024-04-23 12:01:37', 'View Studios', 'User viewed the studios available'),
+(858, 'Customer', 18, '2024-04-23 12:01:44', 'View Studios', 'User viewed the studios available'),
+(859, 'Customer', 18, '2024-04-23 12:01:52', 'View Studios', 'User viewed the studios available'),
+(860, 'Customer', 18, '2024-04-23 12:01:57', 'View Studios', 'User viewed the studios available'),
+(861, 'Customer', 18, '2024-04-23 12:02:05', 'View Studios', 'User viewed the studios available'),
+(862, 'Customer', 18, '2024-04-23 12:02:13', 'View Studios', 'User viewed the studios available'),
+(863, 'Customer', 18, '2024-04-23 12:02:35', 'View Studios', 'User viewed the studios available'),
+(864, 'Customer', 18, '2024-04-23 12:02:42', 'View Studios', 'User viewed the studios available'),
+(865, 'Customer', 18, '2024-04-23 12:02:48', 'View Studios', 'User viewed the studios available'),
+(866, 'Customer', 18, '2024-04-23 12:02:59', 'View Studios', 'User viewed the studios available'),
+(867, 'Customer', 18, '2024-04-23 12:03:07', 'View Studios', 'User viewed the studios available'),
+(868, 'Customer', 18, '2024-04-23 12:03:15', 'View Studios', 'User viewed the studios available'),
+(869, 'Customer', 18, '2024-04-23 12:03:27', 'View Studios', 'User viewed the studios available'),
+(870, 'Customer', 18, '2024-04-23 12:03:37', 'View Studios', 'User viewed the studios available'),
+(871, 'Customer', 18, '2024-04-23 12:03:50', 'View Studios', 'User viewed the studios available'),
+(872, 'Customer', 18, '2024-04-23 12:04:08', 'View Studios', 'User viewed the studios available'),
+(873, 'Customer', 18, '2024-04-23 12:06:14', 'View Studios', 'User viewed the studios available'),
+(874, 'Customer', 18, '2024-04-23 12:16:45', 'Manage Cart', 'User viewed their cart'),
+(875, 'Customer', 18, '2024-04-23 12:16:47', 'Place Order', 'User placed an order'),
+(876, 'Customer', 18, '2024-04-23 12:16:50', 'View Orders', 'User viewed their orders'),
+(877, 'Customer', 18, '2024-04-23 12:16:50', 'View Instruments', 'User viewed the instruments available'),
+(878, 'Customer', 18, '2024-04-23 12:25:51', 'Order Complete', 'User completed an order with order id: 24 and sub order id: 48'),
+(879, 'Customer', 18, '2024-04-23 12:25:51', 'View Orders', 'User viewed their orders'),
+(880, 'Customer', 18, '2024-04-23 12:25:52', 'View Instruments', 'User viewed the instruments available'),
+(881, 'Customer', 18, '2024-04-23 12:26:42', 'View Instruments', 'User viewed the instruments available'),
+(882, 'Customer', 18, '2024-04-23 12:26:44', 'View Instrument', 'User viewed an instrument with product id 20'),
+(883, 'Customer', 18, '2024-04-23 12:27:00', 'Logout', 'User logged out'),
+(884, 'Service Provider', 19, '2024-04-23 12:27:29', 'Login', 'Service Provider has logged in'),
+(885, 'Service Provider', 19, '2024-04-23 12:27:31', 'View Orders', 'Service Provider has viewed their orders'),
+(886, 'Service Provider', 19, '2024-04-23 12:27:35', 'Accept Order', 'Service Provider has accepted an order with the ID 58'),
+(887, 'Service Provider', 19, '2024-04-23 12:27:35', 'View Orders', 'Service Provider has viewed their orders'),
+(888, 'Service Provider', 19, '2024-04-23 12:27:45', 'Logout', 'Service Provider has logged out'),
+(889, 'Customer', 18, '2024-04-23 12:27:50', 'Login', 'User logged in'),
+(890, 'Customer', 18, '2024-04-23 12:27:59', 'View Orders', 'User viewed their orders'),
+(891, 'Customer', 18, '2024-04-23 12:28:00', 'View Instruments', 'User viewed the instruments available'),
+(892, 'Customer', 18, '2024-04-23 12:30:13', 'Order Cancel', 'User cancelled an order with order id: 28 and sub order id: 54'),
+(893, 'Customer', 18, '2024-04-23 12:30:13', 'View Orders', 'User viewed their orders'),
+(894, 'Customer', 18, '2024-04-23 12:30:14', 'View Instruments', 'User viewed the instruments available');
 
 -- --------------------------------------------------------
 
@@ -1210,6 +1353,42 @@ INSERT INTO `musician` (`product_id`, `created_by`, `category`, `brand`, `model`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `notification_id` int(11) NOT NULL,
+  `user_type` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `date_time` datetime NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `data` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`notification_id`, `user_type`, `user_id`, `date_time`, `status`, `data`) VALUES
+(1, 'User', 18, '2024-04-23 10:59:12', 'Unread', 'Moderator with ID 1 has accepted your inquiry and will be assisting you'),
+(2, 'User', 18, '2024-04-23 11:01:11', 'Unread', 'Moderator sent a message to you regarding inquiry 2'),
+(3, 'User', 18, '2024-04-23 11:01:28', 'Unread', 'Moderator sent a message to you regarding inquiry 2'),
+(4, 'ServiceProvider', 19, '2024-04-23 12:16:46', 'Unread', 'You have a new order request from Gayathra Dissanayake for '),
+(5, 'Customer', 18, '2024-04-24 22:00:00', 'Unread', 'Please make sure to leave a review for item you rented with order id: 24 and sub order id: 48'),
+(6, 'Customer', 18, '2024-04-23 12:27:35', 'unread', 'Your order containing the sub order with the ID 58 has been accepted by the service provider'),
+(7, 'ServiceProvider', 19, '2024-04-23 12:27:35', 'unread', 'You have successfully accepted an order with the ID 58'),
+(8, 'ServiceProvider', 19, '2024-03-28 22:00:00', 'unread', 'You have an upcoming order with the sub order ID 58 starting at 2024-03-29 and ending at 2024-04-03'),
+(9, 'ServiceProvider', 19, '2024-03-29 00:00:00', 'unread', 'You have an upcoming order with the sub order ID 58 starting at 2024-03-29 and ending at 2024-04-03'),
+(10, 'ServiceProvider', 19, '2024-04-02 22:00:00', 'unread', 'Your order with the sub order ID 58 is about to end in 2 hours'),
+(11, 'ServiceProvider', 19, '2024-04-03 00:00:00', 'unread', 'Your order with the sub order ID 58 has ended'),
+(12, 'Customer', 18, '2024-03-28 22:00:00', 'unread', 'You have an upcoming order with the sub order ID 58 starting at 2024-03-29 and ending at 2024-04-03'),
+(13, 'Customer', 18, '2024-03-29 00:00:00', 'unread', 'You have an upcoming order with the sub order ID 58 starting at 2024-03-29 and ending at 2024-04-03'),
+(14, 'Customer', 18, '2024-04-02 22:00:00', 'unread', 'Your order with the sub order ID 58 is about to end in 2 hours. Please make sure to end the order on time to avoid any penalties.'),
+(15, 'Customer', 18, '2024-04-03 00:00:00', 'unread', 'Your order with the sub order ID 58 has ended. Please make sure to end the order on time to avoid any penalties.');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
@@ -1242,7 +1421,8 @@ INSERT INTO `orders` (`order_id`, `user_id`, `sorder_id`, `total`, `order_placed
 (25, 18, '49', 2930, '2024-02-19', 0),
 (26, 18, '50,51', 35515, '2024-02-23', 0),
 (27, 18, '52,53', 200, '2024-02-24', 0),
-(28, 18, '54,55', 7340, '2024-02-27', 3300);
+(28, 18, '54,55', 4040, '2024-02-27', 3300),
+(29, 18, '58', 9650, '2024-04-23', 1800);
 
 -- --------------------------------------------------------
 
@@ -1535,16 +1715,17 @@ INSERT INTO `suborder` (`sorder_id`, `user_id`, `serviceprovider_id`, `product_i
 (45, 18, 14, 17, 1, '2024-02-14', '2024-02-20', 7, 7700, 'Completed', '356,357,358,359,360,361,362', 'Equipment', '2024-02-19', 0, 0),
 (46, 18, 14, 18, 4, '2024-02-29', '2024-03-08', 9, 10800, 'Upcoming', '363,364,365,366,367,368,369,370,371', 'Equipment', '2024-02-19', 0, 0),
 (47, 18, 18, 24, 2, '2024-02-28', '2024-02-29', 2, 8400, 'Cancelled', '372,373', 'Equipment', '2024-02-19', 0, 0),
-(48, 18, 1, 8, 1, '2024-02-22', '2024-02-28', 7, 469000, 'In-Progress', '372,373,374,375,376,377,378,379,380', 'Singer', '2024-02-19', 0, 0),
+(48, 18, 1, 8, 1, '2024-02-22', '2024-02-28', 7, 469000, 'Completed', '372,373,374,375,376,377,378,379,380', 'Singer', '2024-02-19', 0, 0),
 (49, 18, 14, 11, 1, '2024-02-22', '2024-02-23', 2, 2600, 'Completed', '381,382', 'Singer', '2024-02-19', 0, 0),
 (50, 18, 1, 3, 1, '2024-02-23', '2024-02-29', 7, 700, 'Cancelled', '383,384,385,386,387,388,389', 'Studio', '2024-02-23', 0, 0),
 (51, 18, 18, 24, 2, '2024-03-14', '2024-03-21', 8, 33600, 'Upcoming', '383,384,385,386,387,388,389,390,391,392,393,394,395,396,397', 'Equipment', '2024-02-23', 0, 0),
 (52, 18, 14, 17, 1, '2024-02-29', '2024-03-02', 3, 3300, 'Rejected', '398,399,400', 'Equipment', '2024-02-24', 0, 0),
 (53, 18, 19, 20, 2, '2024-03-14', '2024-03-20', 7, 8400, 'Cancelled', '398,399,400,401,402,403,404,405,406,407', 'Equipment', '2024-02-24', 0, 0),
-(54, 18, 14, 17, 1, '2024-04-18', '2024-04-20', 3, 3300, 'Pending', '408,409,410', 'Equipment', '2024-02-27', 3300, 0),
+(54, 18, 14, 17, 1, '2024-04-18', '2024-04-20', 3, 3300, 'Cancelled', '408,409,410', 'Equipment', '2024-02-27', 3300, 0),
 (55, 18, 1, 3, 1, '2024-04-25', '2024-04-26', 2, 200, 'Pending', '408,409,410,411,412', 'Studio', '2024-02-27', 0, 0),
 (56, 18, 14, 17, 1, '2024-04-18', '2024-04-20', 3, 3300, 'Pending', '413,414,415', 'Equipment', '2024-02-27', 3300, 0),
-(57, 18, 1, 3, 1, '2024-04-25', '2024-04-26', 2, 200, 'Pending', '413,414,415,416,417', 'Studio', '2024-02-27', 0, 0);
+(57, 18, 1, 3, 1, '2024-04-25', '2024-04-26', 2, 200, 'Pending', '413,414,415,416,417', 'Studio', '2024-02-27', 0, 0),
+(58, 18, 19, 20, 2, '2024-03-29', '2024-04-03', 6, 7200, 'Upcoming', '418,419,420,421,422,423', 'Equipment', '2024-04-23', 1800, 0);
 
 -- --------------------------------------------------------
 
@@ -1692,6 +1873,12 @@ ALTER TABLE `musician`
   ADD PRIMARY KEY (`product_id`);
 
 --
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`notification_id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -1778,7 +1965,7 @@ ALTER TABLE `administrators`
 -- AUTO_INCREMENT for table `availability`
 --
 ALTER TABLE `availability`
-  MODIFY `entry_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=418;
+  MODIFY `entry_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=424;
 
 --
 -- AUTO_INCREMENT for table `band`
@@ -1802,7 +1989,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `chat_mod_user`
 --
 ALTER TABLE `chat_mod_user`
-  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `inquiries`
@@ -1814,7 +2001,7 @@ ALTER TABLE `inquiries`
 -- AUTO_INCREMENT for table `inq_chat`
 --
 ALTER TABLE `inq_chat`
-  MODIFY `inq_chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `inq_chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `login_logout_logs`
@@ -1826,7 +2013,7 @@ ALTER TABLE `login_logout_logs`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=752;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=895;
 
 --
 -- AUTO_INCREMENT for table `moderators`
@@ -1841,10 +2028,16 @@ ALTER TABLE `musician`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -1892,7 +2085,7 @@ ALTER TABLE `studio`
 -- AUTO_INCREMENT for table `suborder`
 --
 ALTER TABLE `suborder`
-  MODIFY `sorder_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `sorder_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `users`
