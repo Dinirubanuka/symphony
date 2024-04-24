@@ -190,6 +190,12 @@ class Users extends Controller
         redirect('users/orders');
     }
 
+    public function markNotifications()
+    {
+        $this->userModel->markNotificationsAsRead($_SESSION['user_id'], date('Y-m-d H:i:s'));
+        redirect('users/index');
+    }
+
     public function edit()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -1329,10 +1335,11 @@ class Users extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $inventory = $this->userModel->studio();
             $notificaions = $this->userModel->getNotifications($_SESSION['user_id'], date('Y-m-d H:i:s'));
+            $notificationCount = count($notificaions);
             $data = [
                 'inventory' => $inventory,
                 'notifications' => $notificaions,
-                'count' => count($notificaions),
+                'count' => $notificationCount,
             ];
             $log_data = [
                 'user_type' => 'Customer',
@@ -1583,6 +1590,8 @@ class Users extends Controller
         $this->userModel->addLogData($log_data);
         $this->view('users/orders', $data);
     }
+    
+    
 
     public function placeOrder(){
         $cart = $this->userModel->cart($_SESSION['user_id']);
@@ -1789,7 +1798,6 @@ class Users extends Controller
     }
 
     public function viewAllAC($type, $availability, $data_selected){
-        die('hi');
         $product_id = $data_selected['product_id'];
         if($type == 'Equipment'){
             $data = $this->userModel->viewItem($product_id);
@@ -2071,7 +2079,6 @@ class Users extends Controller
         die('Something went wrong');
     }
 }
-
     public function viewItem($product_id){
         $type = 'Equipment';
         $this->viewAll($product_id, $type);
@@ -2101,7 +2108,6 @@ class Users extends Controller
         if($type == 'Equipment'){
             $data = $this->userModel->viewItem($product_id);
             $reviews = $this->userModel->viewreviews($product_id, $type);
-            $spDetails = $this->userModel->getServiceProviderData($data->created_by);
         }
         if($type == 'Studio'){
             $data = $this->userModel->viewStudio($product_id);
@@ -2201,9 +2207,7 @@ class Users extends Controller
                     'start_date' => '',
                     'end_date' => '',
                     'purchased' => $purchased,
-                    'type' => $type,
-                    'email' => $spDetails->business_address,
-                    'telephoneNumber' => $spDetails->owner_contact_no
+                    'type' => $type
                 ];
                 $log_data = [
                     'user_type' => 'Customer',

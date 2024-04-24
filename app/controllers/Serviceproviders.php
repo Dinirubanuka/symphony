@@ -272,7 +272,7 @@ class serviceproviders extends Controller
                         'user_id' => $_SESSION['serviceprovider_id'],
                         'data' => 'You have successfully added a new Musician to your inventory',
                         'date_time' => date('Y-m-d H:i:s'),
-                        'status' => 'unread'    
+                        'status' => 'Unread'    
                     ];
                     $this->serviceProviderModel->addNotification($notification_data);
                     redirect('serviceproviders/musicians');
@@ -480,7 +480,7 @@ class serviceproviders extends Controller
                             'user_id' => $_SESSION['serviceprovider_id'],
                             'data' => 'You have successfully updated the details of a Musician in your inventory',
                             'date_time' => date('Y-m-d H:i:s'),
-                            'status' => 'unread'    
+                            'status' => 'Unread'    
                         ];
                         $this->serviceProviderModel->addNotification($notification_data);
                         redirect('serviceproviders/viewMusicians/' . $id);
@@ -529,7 +529,7 @@ class serviceproviders extends Controller
                 'user_id' => $_SESSION['serviceprovider_id'],
                 'data' => 'You have successfully deleted a Band from your inventory',
                 'date_time' => date('Y-m-d H:i:s'),
-                'status' => 'unread'    
+                'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data);
             redirect('serviceproviders/band');
@@ -621,7 +621,7 @@ class serviceproviders extends Controller
                             'user_id' => $_SESSION['serviceprovider_id'],
                             'data' => 'You have successfully updated the details of a Band in your inventory',
                             'date_time' => date('Y-m-d H:i:s'),
-                            'status' => 'unread'    
+                            'status' => 'Unread'    
                         ];
                         $this->serviceProviderModel->addNotification($notification_data);
                         redirect('serviceproviders/viewBand/' . $id);
@@ -1080,7 +1080,7 @@ class serviceproviders extends Controller
                         'user_id' => $_SESSION['serviceprovider_id'],
                         'data' => 'You have successfully updated the details of an item in your inventory',
                         'date_time' => date('Y-m-d H:i:s'),
-                        'status' => 'unread'    
+                        'status' => 'Unread'    
                     ];
                     $this->serviceProviderModel->addNotification($notification_data);
                     // flash('register_success', 'You are registered and can log in');
@@ -1288,7 +1288,7 @@ class serviceproviders extends Controller
                         'user_id' => $_SESSION['serviceprovider_id'],
                         'data' => 'You have successfully added a new item to your inventory',
                         'date_time' => date('Y-m-d H:i:s'),
-                        'status' => 'unread'    
+                        'status' => 'Unread'    
                     ];
                     $this->serviceProviderModel->addNotification($notification_data);
                     // flash('register_success', 'You are registered and can log in');
@@ -1365,7 +1365,7 @@ class serviceproviders extends Controller
                 'user_id' => $_SESSION['serviceprovider_id'],
                 'data' => 'You have successfully deleted an item from your inventory',
                 'date_time' => date('Y-m-d H:i:s'),
-                'status' => 'unread'    
+                'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data);
             redirect('serviceproviders/inventory');
@@ -1482,7 +1482,7 @@ class serviceproviders extends Controller
                         'user_id' => $_SESSION['serviceprovider_id'],
                         'data' => 'You have successfully added a new studio to your inventory',
                         'date_time' => date('Y-m-d H:i:s'),
-                        'status' => 'unread'    
+                        'status' => 'Unread'    
                     ];
                     $this->serviceProviderModel->addNotification($notification_data);
                     redirect('serviceproviders/studio');
@@ -1646,7 +1646,7 @@ class serviceproviders extends Controller
                         'user_id' => $_SESSION['serviceprovider_id'],
                         'data' => 'You have successfully added a new singer to your inventory',
                         'date_time' => date('Y-m-d H:i:s'),
-                        'status' => 'unread'    
+                        'status' => 'Unread'    
                     ];
                     $this->serviceProviderModel->addNotification($notification_data);
                     redirect('serviceproviders/singer');
@@ -1834,7 +1834,7 @@ class serviceproviders extends Controller
                         'user_id' => $_SESSION['serviceprovider_id'],
                         'data' => 'You have successfully added a new band to your inventory',
                         'date_time' => date('Y-m-d H:i:s'),
-                        'status' => 'unread'    
+                        'status' => 'Unread'    
                     ];
                     $this->serviceProviderModel->addNotification($notification_data);
                     redirect('serviceproviders/band');
@@ -2007,7 +2007,7 @@ class serviceproviders extends Controller
                         'user_id' => $_SESSION['serviceprovider_id'],
                         'data' => 'You have successfully edited a studio in your inventory',
                         'date_time' => date('Y-m-d H:i:s'),
-                        'status' => 'unread'    
+                        'status' => 'Unread'    
                     ];
                     $this->serviceProviderModel->addNotification($notification_data);
                     redirect('serviceproviders/studio');
@@ -2094,7 +2094,7 @@ class serviceproviders extends Controller
                 'user_id' => $_SESSION['serviceprovider_id'],
                 'data' => 'You have successfully deleted a singer from your inventory',
                 'date_time' => date('Y-m-d H:i:s'),
-                'status' => 'unread'    
+                'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data);
             redirect('serviceproviders/singer');
@@ -2121,7 +2121,7 @@ class serviceproviders extends Controller
                 'user_id' => $_SESSION['serviceprovider_id'],
                 'data' => 'You have successfully deleted a studio from your inventory',
                 'date_time' => date('Y-m-d H:i:s'),
-                'status' => 'unread'    
+                'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data);
             redirect('serviceproviders/inventory');
@@ -2297,7 +2297,7 @@ class serviceproviders extends Controller
                         'user_id' => $_SESSION['serviceprovider_id'],
                         'data' => 'You have successfully edited your profile',
                         'date_time' => date('Y-m-d H:i:s'),
-                        'status' => 'unread'    
+                        'status' => 'Unread'    
                     ];
                     $this->serviceProviderModel->addNotification($notification_data);
                     // flash('register_success', 'You are registered and can log in');
@@ -2769,15 +2769,15 @@ class serviceproviders extends Controller
                 'user_id' => $suborder_data->user_id,
                 'data' => 'Your order containing the sub order with the ID ' . $order_id . ' has been rejected by the service provider',
                 'date_time' => date('Y-m-d H:i:s'),
-                'status' => 'unread'    
+                'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data);
             $notification_data_2 = [
                 'user_type' => 'ServiceProvider',
                 'user_id' => $_SESSION['serviceprovider_id'],
-                'data' => 'You have successfully rejected an order with the ID ' . $order_id,
+                'data' => 'You have successfully rejected the order with the ID ' . $order_id,
                 'date_time' => date('Y-m-d H:i:s'),
-                'status' => 'unread'    
+                'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data_2);
         } else if($status === 'Upcoming'){
@@ -2786,7 +2786,7 @@ class serviceproviders extends Controller
                 'user_id' => $_SESSION['serviceprovider_id'],
                 'log_type' => 'Accept Order',
                 'date_and_time' => date('Y-m-d H:i:s'),
-                'data' => 'Service Provider has accepted an order with the ID ' . $order_id
+                'data' => 'Service Provider has accepted the order with the ID ' . $order_id
             ];
             $this->serviceProviderModel->addLogData($log_data);
             $suborder_data = $this->serviceProviderModel->getOrderData($order_id);
@@ -2795,7 +2795,7 @@ class serviceproviders extends Controller
                 'user_id' => $suborder_data->user_id,
                 'data' => 'Your order containing the sub order with the ID ' . $order_id . ' has been accepted by the service provider',
                 'date_time' => date('Y-m-d H:i:s'),
-                'status' => 'unread'    
+                'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data);
             $notification_data_2 = [
@@ -2803,19 +2803,19 @@ class serviceproviders extends Controller
                 'user_id' => $_SESSION['serviceprovider_id'],
                 'data' => 'You have successfully accepted an order with the ID ' . $order_id,
                 'date_time' => date('Y-m-d H:i:s'),
-                'status' => 'unread'    
+                'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data_2);
             $order_date_minus_2hours = date('Y-m-d H:i:s', strtotime($suborder_data->start_date . ' -2 hours'));
             $order_date = date('Y-m-d H:i:s', strtotime($suborder_data->start_date));
-            $order_date_end_minus_2hours = date('Y-m-d H:i:s', strtotime($suborder_data->end_date . ' -2 hours'));
-            $order_date_end = date('Y-m-d H:i:s', strtotime($suborder_data->end_date));
+            $order_date_end_minus_2hours = date('Y-m-d H:i:s', strtotime($suborder_data->end_date . ' +22 hours'));
+            $order_date_end = date('Y-m-d H:i:s', strtotime($suborder_data->end_date . ' +24 hours'));
             $notification_data_3 = [
                 'user_type' => 'ServiceProvider',
                 'user_id' => $_SESSION['serviceprovider_id'],
                 'data' => 'You have an upcoming order with the sub order ID ' . $order_id . ' starting at ' . $suborder_data->start_date . ' and ending at ' . $suborder_data->end_date,
                 'date_time' => $order_date_minus_2hours,
-                'status' => 'unread'    
+                'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data_3);
             $notification_data_4 = [
@@ -2823,7 +2823,7 @@ class serviceproviders extends Controller
                 'user_id' => $_SESSION['serviceprovider_id'],
                 'data' => 'You have an upcoming order with the sub order ID ' . $order_id . ' starting at ' . $suborder_data->start_date . ' and ending at ' . $suborder_data->end_date,
                 'date_time' => $order_date,
-                'status' => 'unread'    
+                'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data_4);
             $notification_data_5 = [
@@ -2831,7 +2831,7 @@ class serviceproviders extends Controller
                 'user_id' => $_SESSION['serviceprovider_id'],
                 'data' => 'Your order with the sub order ID ' . $order_id . ' is about to end in 2 hours',
                 'date_time' => $order_date_end_minus_2hours,
-                'status' => 'unread'    
+                'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data_5);
             $notification_data_6 = [
@@ -2839,7 +2839,7 @@ class serviceproviders extends Controller
                 'user_id' => $_SESSION['serviceprovider_id'],
                 'data' => 'Your order with the sub order ID ' . $order_id . ' has ended',
                 'date_time' => $order_date_end,
-                'status' => 'unread'    
+                'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data_6);
             $notification_data_7 = [
@@ -2847,7 +2847,7 @@ class serviceproviders extends Controller
                 'user_id' => $suborder_data->user_id,
                 'data' => 'You have an upcoming order with the sub order ID ' . $order_id . ' starting at ' . $suborder_data->start_date . ' and ending at ' . $suborder_data->end_date,
                 'date_time' => $order_date_minus_2hours,
-                'status' => 'unread'    
+                'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data_7);
             $notification_data_8 = [
@@ -2855,7 +2855,7 @@ class serviceproviders extends Controller
                 'user_id' => $suborder_data->user_id,
                 'data' => 'You have an upcoming order with the sub order ID ' . $order_id . ' starting at ' . $suborder_data->start_date . ' and ending at ' . $suborder_data->end_date,
                 'date_time' => $order_date,
-                'status' => 'unread'    
+                'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data_8);
             $notification_data_9 = [
@@ -2863,7 +2863,7 @@ class serviceproviders extends Controller
                 'user_id' => $suborder_data->user_id,
                 'data' => 'Your order with the sub order ID ' . $order_id . ' is about to end in 2 hours. Please make sure to end the order on time to avoid any penalties.',
                 'date_time' => $order_date_end_minus_2hours,
-                'status' => 'unread'    
+                'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data_9);
             $notification_data_10 = [
@@ -2871,7 +2871,7 @@ class serviceproviders extends Controller
                 'user_id' => $suborder_data->user_id,
                 'data' => 'Your order with the sub order ID ' . $order_id . ' has ended. Please make sure to end the order on time to avoid any penalties.',
                 'date_time' => $order_date_end,
-                'status' => 'unread'    
+                'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data_10);
         }
@@ -3138,7 +3138,7 @@ class serviceproviders extends Controller
                             'user_id' => $_SESSION['serviceprovider_id'],
                             'data' => 'You have successfully updated a Singer in your inventory',
                             'date_time' => date('Y-m-d H:i:s'),
-                            'status' => 'unread'    
+                            'status' => 'Unread'    
                         ];
                         $this->serviceProviderModel->addNotification($notification_data);
                         redirect('serviceproviders/viewSinger/' . $id);

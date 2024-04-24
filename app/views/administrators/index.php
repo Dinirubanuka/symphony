@@ -116,7 +116,7 @@
               <div class="container" id="top">
                   <main class="grid-main">
                       <div class="grid-2" id="traffic">
-                          <h2><u>Traffic</u></h2>
+                          <h2><u>Views</u></h2>
                           <ul class="btn-chart">
                               <li class="li" id="hour">Last 24h</li>
                               <li class="li" id="day">Last Week</li>
@@ -293,7 +293,6 @@
       const currentDate = new Date();
       const currentMonth = currentDate.getMonth();
       const currentYear = currentDate.getFullYear();
-
       for (let i = 11; i >= 0; i--) {
           const month = (currentMonth - i + 12) % 12;
           const year = (currentMonth - i) < 0 ? currentYear - 1 : currentYear;

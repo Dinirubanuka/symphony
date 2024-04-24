@@ -14,20 +14,8 @@
 </head>
 <body onload="changeRating(); checkAvailability() ">
 <!------------nav-bar-------->
-<?php require_once APPROOT . '/views/inc/viewNavBar.php'; ?>
-<div class="upperHome">
-    <a href="<?php echo URLROOT?>/users/index"><img src="http://localhost/symphony/img/home.png" alt="camera-icon" class="" id="" style="height: 30px;width: 30px;"></a>
-    <div class="categoryArrow">
-        <img src="http://localhost/symphony/img/right-arrow.png" alt="camera-icon" class="" id="" style="height: 20px;width: 20px;">
-    </div>
-    <div class="categoryType">
-        <a href="<?php echo URLROOT?>/users/<?php echo ($data['type'] == 'Band' || $data['type'] == 'Singer' || $data['type'] == 'Musician' || $data['type'] == 'Studio') ? $data['type'] : ($data['type'] == 'Equipment' ? 'Instrument' : '') ?>">
-            <?php echo ($data['type'])?>
-        </a>
-    </div>
-</div>
+ <?php require_once APPROOT . '/views/inc/navBar.php'; ?>
 
-<h2>owner :<?php echo $data['name']?></h2>
 <div class="wrapper">
     <div class="container">
         <div class="slides">
@@ -68,12 +56,7 @@
         <div class="item-details">
             <div class="item-info">
             <form action="<?php echo URLROOT; ?>/users/checkAvailability/<?php echo $data['type']; ?>/<?php echo $data['product_id']; ?>" class="form" method="post" enctype="multipart/form-data" id="addToCartForm">
-                <h1><?php echo ($data['type'])?></h1>
-                <div class=" <?php echo ($data['type'] === 'Singer') ? 'singerPhoto': ''; ?>">
-                    <?php if ($data['type'] === 'Singer'): ?>
-                        <img src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $data['singerPhoto']; ?>" alt="singer photo">
-                    <?php endif; ?>
-                </div>
+                    <h1><?php echo $data['Title']; ?></h1>
                     <h3><div <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>Category: <?php echo $data['category']; ?></div></h3>
                     <h3><div <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>Brand: <?php echo $data['brand']; ?></div></h3>
                     <p><div <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>Model: <?php echo $data['model']; ?></div></p>
@@ -101,31 +84,15 @@
                     <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>Instrument: <?php echo $data['instrument']; ?></div></p>
                     <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>Singer Photo: <?php echo $data['singerPhoto']; ?></div></p>
                     <p><div <?php echo ($data['type'] == 'Musician') ? '' : 'style="display: none;"'; ?>>Email: <?php echo $data['email']; ?></div></p>
-
-                <div class="<?php echo ($data['type']) == 'Singer' ? 'singerDetails': '' ?>">
-                    <h3><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>><?php echo $data['singer_name']; ?></div></h3>
-                    <h4><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>(<?php echo $data['nickName']; ?>)</div></h4>
-                </div>
-                <?php if ($data['type'] === 'Singer') : ?>
-                    <h4>Rate: <?php echo $data['unit_price']; ?><span> /per day</span></h4>
-                <?php endif; ?>
-
-                <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>><img src="http://localhost/symphony/img/location-pin.png" alt="camera-icon" class="" id="" style="height: 16px;width: 16px;"> <?php echo $data['location']; ?></div></p>
-                <p>Description: <?php echo $data['Description']; ?></p>
-                <div class="contactBox">
-                    <div class="emailBox">
-                        <div><img src="http://localhost/symphony/img/email.png" alt="camera-icon" class="" id="" style="height: 16px;width: 16px;"></div>
-                        <div><?php echo $data['email']; ?></div>
-                    </div>
-                    <p><div><img src="http://localhost/symphony/img/telephone-call.png" alt="camera-icon" class="" id="" style="height: 16px;width: 16px;">   <?php echo $data['telephoneNumber']; ?></div></p>
-                </div>
-                <?php if ($data['type'] != 'Equipment') : ?>
-                    <div class="videoBox">
-                        <iframe src="<?php echo $data['videoLink']; ?>"></iframe>
-                    </div>
-                <?php endif; ?>
-
-                <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Instrument: <?php echo $data['instrument']; ?></div></p>
+                    <h3><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Name: <?php echo $data['singer_name']; ?></div></h3>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>NickName: <?php echo $data['nickName']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Telephone Number: <?php echo $data['telephoneNumber']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Video Link: <?php echo $data['videoLink']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Location: <?php echo $data['location']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Instrument: <?php echo $data['instrument']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Singer Photo: <?php echo $data['singerPhoto']; ?></div></p>
+                    <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Email: <?php echo $data['email']; ?></div></p>
+                    <p>Price per day: <?php echo $data['unit_price']; ?></p>
                     <p>Last Modified: <?php echo $data['createdDate']; ?></p>
                     <p>Description: <?php echo $data['Description']; ?></p>
 

@@ -552,7 +552,7 @@ class User
         $this->db->bind(':id', $id);
 
         $row = $this->db->single();
-//die(print_r($row));
+
         return $row;
     }
 
@@ -1028,7 +1028,23 @@ class User
         $this->db->bind(':status', 'Unread');
         $this->db->bind(':user_id', $user_id);
         $this->db->bind(':date_time', $date_time);
-        $results = $this->db->single();
+        $results = $this->db->resultSet();
         return $results;
+    }
+
+    public function markNotificationsAsRead($user_id, $date_time)
+    {
+        $this->db->query('UPDATE notifications SET status = :status WHERE user_id = :user_id AND user_type = :user_type AND date_time <= :date_time AND status = :status2');
+        $this->db->bind(':status', 'Read');
+        $this->db->bind(':status2', 'Unread');
+        $this->db->bind(':user_type', 'Customer');
+        $this->db->bind(':user_id', $user_id);
+        $this->db->bind(':date_time', $date_time);
+        // Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
