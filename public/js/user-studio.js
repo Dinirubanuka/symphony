@@ -12,7 +12,6 @@ function toggleCategory(categoryId) {
 // Display data
 const accReq = document.querySelector(".account-requests");
 const cart = document.querySelector(".cart");
-
 function cartItems() {
     $.ajax({
         method: 'GET',
@@ -27,7 +26,6 @@ function cartItems() {
         }
     });
 }
-
 function showCartItems(count){
     let text = "";
     text += `<p class="badge" >`+count+`</p>`+
@@ -36,7 +34,6 @@ function showCartItems(count){
         `</a>`;
     cart.innerHTML=text;
 }
-
 Redirect();
 function Redirect() {
     cartItems();

@@ -179,14 +179,6 @@ class Users extends Controller
             'data' => 'User completed an order with order id: ' . $order_id . ' and sub order id: ' . $sorder_id
         ];
         $this->userModel->addLogData($log_data);
-        $notification_data = [
-            'user_type' => 'Customer',
-            'user_id' => $_SESSION['user_id'],
-            'date_time' => date('Y-m-d H:i:s', strtotime($today . ' +1 day +22 hours')),
-            'status' => 'Unread',
-            'data' => 'Please make sure to leave a review for item you rented with order id: ' . $order_id . ' and sub order id: ' . $sorder_id
-        ];
-        $this->userModel->addNotification($notification_data);
         redirect('users/orders');
     }
 
@@ -261,14 +253,6 @@ class Users extends Controller
                         'data' => 'User updated their profile information'
                     ];
                     $this->userModel->addLogData($log_data);
-                    $notification_data = [
-                        'user_type' => 'Customer',
-                        'user_id' => $_SESSION['user_id'],
-                        'date_time' => date('Y-m-d H:i:s'),
-                        'status' => 'Unread',
-                        'data' => 'Your profile information has been updated'
-                    ];
-                    $this->userModel->addNotification($notification_data);
                     redirect('users/profile');
                 } else {
                     $log_data = [
@@ -736,14 +720,6 @@ class Users extends Controller
                             'data' => 'User changed their password while logged in'
                         ];
                         $this->userModel->addLogData($log_data);
-                        $notification_data = [
-                            'user_type' => 'Customer',
-                            'user_id' => $_SESSION['user_id'],
-                            'date_time' => date('Y-m-d H:i:s'),
-                            'status' => 'Unread',
-                            'data' => 'Your password has been changed'
-                        ];
-                        $this->userModel->addNotification($notification_data);
                         $this->logout();
                     } else {
                         $log_data = [
@@ -1328,11 +1304,8 @@ class Users extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $inventory = $this->userModel->studio();
-            $notificaions = $this->userModel->getNotifications($_SESSION['user_id'], date('Y-m-d H:i:s'));
             $data = [
-                'inventory' => $inventory,
-                'notifications' => $notificaions,
-                'count' => count($notificaions),
+                'inventory' => $inventory
             ];
             $log_data = [
                 'user_type' => 'Customer',
@@ -1645,14 +1618,6 @@ class Users extends Controller
             $order_deposit = $order_deposit + $cartItem->extra;
             $this->userModel->placeOrder($data);
             $result = $this->userModel->getSubOrderId($data);
-            $notification_data = [
-                'user_type' => 'ServiceProvider',
-                'user_id' => $product_data->created_by,
-                'date_time' => date('Y-m-d H:i:s'),
-                'status' => 'Unread',
-                'data' => 'You have a new order request from '.$_SESSION['user_name'].' for '.$product_data->name
-            ];
-            $this->userModel->addNotification($notification_data);
             $temp = $result->sorder_id;
             if($sorder_id == ''){
                 $sorder_id .= $temp;

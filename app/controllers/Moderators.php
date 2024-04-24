@@ -562,7 +562,7 @@
 
     function calculateSimilarityPercentage($user_data , $recover_data){
       $similarityPercentage = 0;
-      $divideBy = 10;
+      $divideBy = 7;
       $similarityName = 0;
       $similarityFirstPurchaseName = 0;
       $similarityLastPurchaseName = 0;
@@ -652,7 +652,7 @@
       $answer = strtolower($user_data['user']['Answer']);
       $recoverAnswer = strtolower($recover_data['recover']->securityAnswer); 
       if ($answer === $recoverAnswer) {
-          $similarityAnswer = 400;
+          $similarityAnswer = 100;
       } else {
           $similarityAnswer = 0;
       }
@@ -1406,14 +1406,6 @@
           'data' => 'Moderator accepted service provider request '.$id
         ];
         $this->moderatorModel->addLogData($log_data);
-        $notification_data = [
-          'user_type' => 'ServiceProvider',
-          'user_id' => $id,
-          'date_time' => date('Y-m-d H:i:s'),
-          'data' => 'Your account has been approved by the moderator with ID '.$_SESSION['moderator_id'],
-          'status' => 'Unread'
-        ];
-        $this->moderatorModel->addNotification($notification_data);
         redirect('moderators/pendingrequest');
       } else {
         $log_data = [
@@ -1672,14 +1664,6 @@
             'data' => 'Moderator sent a message to user '.$id.' regarding inquiry '.$inquiry_id
         ];
         $this->moderatorModel->addLogData($log_data);
-        $notification_data = [
-          'user_type' => 'User',
-          'user_id' => $id,
-          'date_time' => date('Y-m-d H:i:s'),
-          'data' => 'Moderator sent a message to you regarding inquiry '.$inquiry_id,
-          'status' => 'Unread'
-        ];
-        $this->moderatorModel->addNotification($notification_data);
           redirect('moderators/viewInquiry/'.$inquiry_id.'');
       } else {
         $log_data = [
@@ -1704,14 +1688,6 @@
               'data' => "Moderator approved inquiry $inquiry_id and assign to self"
           ];
           $this->moderatorModel->addLogData($log_data);
-          $notification_data = [
-            'user_type' => 'User',
-            'user_id' => $this->moderatorModel->getInquiry($inquiry_id)->user_id,
-            'date_time' => date('Y-m-d H:i:s'),
-            'data' => 'Moderator with ID '.$_SESSION['moderator_id'].' has accepted your inquiry and will be assisting you',
-            'status' => 'Unread'
-          ];
-          $this->moderatorModel->addNotification($notification_data);
             redirect('moderators/pendinginquiries');
         } else {
           $log_data = [
@@ -1736,14 +1712,6 @@
               'data' => 'Moderator completed inquiry '.$inquiry_id
           ];
           $this->moderatorModel->addLogData($log_data);
-          $notification_data = [
-            'user_type' => 'User',
-            'user_id' => $this->moderatorModel->getInquiry($inquiry_id)->user_id,
-            'date_time' => date('Y-m-d H:i:s'),
-            'data' => 'Moderator with ID '.$_SESSION['moderator_id'].' has marked your inquiry as completed',
-            'status' => 'Unread'
-          ];
-          $this->moderatorModel->addNotification($notification_data);
             redirect('moderators/activeinquiries');
         } else {
           $log_data = [
