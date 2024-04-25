@@ -7,6 +7,7 @@ class serviceproviders extends Controller
     public function __construct()
     {
         $this->serviceProviderModel = $this->model('serviceprovider');
+        $this->userModel = $this->model('User');
     }
 
     public function index()
@@ -3217,4 +3218,319 @@ class serviceproviders extends Controller
         }
     }
 
+    public function reviewItem($product_id){
+        $type = 'Equipment';
+        $this->viewAll($product_id, $type);
+    }
+
+    public function reviewStudio($product_id){
+        $type = 'Studio';
+        $this->viewAll($product_id, $type);
+    }
+
+    public function reviewSinger($product_id){
+        $type = 'Singer';
+        $this->viewAll($product_id, $type);
+    }
+
+    public function reviewBand($product_id){
+        $type = 'Band';
+        $this->viewAll($product_id, $type);
+    }
+
+    public function reviewMusician($product_id){
+        $type = 'Musician';
+        $this->viewAll($product_id, $type);
+    }
+
+    public function viewAll($product_id, $type){
+        if($type == 'Equipment'){
+            $data = $this->userModel->viewItem($product_id);
+            $reviews = $this->userModel->viewreviews($product_id, $type);
+        }
+        if($type == 'Studio'){
+            $data = $this->userModel->viewStudio($product_id);
+            $reviews = $this->userModel->viewreviews($product_id, $type);
+        }
+
+        if($type == 'Singer'){
+            $data = $this->userModel->viewSinger($product_id);
+            $reviews = $this->userModel->viewreviews($product_id, $type);
+        }
+
+        if($type == 'Band'){
+            $data = $this->userModel->viewBand($product_id);
+            $reviews = $this->userModel->viewreviews($product_id, $type);
+        }
+
+        if($type == 'Musician'){
+            $data = $this->userModel->viewMusician($product_id);
+            $reviews = $this->userModel->viewreviews($product_id, $type);
+        }
+        $user = $this->userModel->view($_SESSION['user_id']);
+        $purchased = false;
+        if($reviews){
+            $count = 0;
+            $star1 = 0;
+            $star2 = 0;
+            $star3 = 0;
+            $star4 = 0;
+            $star5 = 0;
+            $rating = 0;
+            foreach ($reviews as $review){
+                $count = $count + 1;
+                switch ($review->rating) {
+                    case 1:
+                        $star1 = $star1 + 1;
+                        break;
+                    case 2:
+                        $star2 = $star2 + 1;
+                        break;
+                    case 3:
+                        $star3 = $star3 + 1;
+                        break;
+                    case 4:
+                        $star4 = $star4 + 1;
+                        break;
+                    case 5:
+                        $star5 = $star5 + 1;
+                        break;
+                }
+            }
+            if($count != 0){
+                $rating = ($star1 + $star2*2 + $star3*3 + $star4*4 + $star5*5)/$count;
+            }
+        } else {
+            $rating = 0;
+            $star1 = 0;
+            $star2 = 0;
+            $star3 = 0;
+            $star4 = 0;
+            $star5 = 0;
+            $count = 0;
+        }
+        $productPurchased = $this->userModel->checkProductPurchased($product_id, $_SESSION['user_id'], 'Completed', $type);
+        if($productPurchased){
+            $purchased = true;
+        }
+        if($data){
+            if ($type == 'Equipment'){
+                $data =[
+                    'product_id'=>$data->product_id,
+                    'created_by'=>$data->created_by,
+                    'category'=>$data->category,
+                    'brand'=>$data->brand,
+                    'model'=>$data->model,
+                    'quantity'=>$data->quantity,
+                    'unit_price'=>$data->unit_price,
+                    'photo_1'=>$data->photo_1,
+                    'photo_2'=>$data->photo_2,
+                    'photo_3'=>$data->photo_3,
+                    'Title'=>$data->Title,
+                    'Description'=>$data->Description,
+                    'outOfStock'=>$data->outOfStock,
+                    'createdDate'=>$data->createdDate,
+                    'warranty'=>$data->warranty,
+                    'name'=>$user->name,
+                    'photo'=>$user->profile_photo,
+                    'reviews'=>$reviews,
+                    'rating'=>$rating,
+                    'count'=>$count,
+                    'star1'=>$star1,
+                    'star2'=>$star2,
+                    'star3'=>$star3,
+                    'star4'=>$star4,
+                    'star5'=>$star5,
+                    'availability' => 'notChecked',
+                    'quantity_selected' => '',
+                    'start_date' => '',
+                    'end_date' => '',
+                    'purchased' => $purchased,
+                    'type' => $type
+                ];
+                $this->view('serviceproviders/viewReviews',$data);
+
+            } else if ($type == 'Studio'){
+                $data = [
+                    'product_id' => $data->product_id,
+                    'created_by' => $data->created_by,
+                    'category' => $data->category,
+                    'brand' => $data->brand,
+                    'model' => $data->model,
+                    'quantity' => $data->quantity,
+                    'unit_price' => $data->unit_price,
+                    'photo_1' => $data->photo_1,
+                    'photo_2' => $data->photo_2,
+                    'photo_3' => $data->photo_3,
+                    'Title' => $data->Title,
+                    'Description' => $data->Description,
+                    'outOfStock' => $data->outOfStock,
+                    'createdDate' => $data->createdDate,
+                    'warranty' => $data->warranty,
+                    'location' => $data->location,
+                    'instrument' => $data->instrument,
+                    'descriptionSounds' => $data->descriptionSounds,
+                    'descriptionStudio' => $data->descriptionStudio,
+                    'telephoneNumber' => $data->telephoneNumber,
+                    'videoLink' => $data->videoLink,
+                    'airCondition' => $data->airCondition,
+                    'status' => $data->status,
+                    'name'=>$user->name,
+                    'photo'=>$user->profile_photo,
+                    'reviews'=>$reviews,
+                    'rating'=>$rating,
+                    'count'=>$count,
+                    'star1'=>$star1,
+                    'star2'=>$star2,
+                    'star3'=>$star3,
+                    'star4'=>$star4,
+                    'star5'=>$star5,
+                    'availability' => 'notChecked',
+                    'quantity_selected' => '1',
+                    'start_date' => '',
+                    'end_date' => '',
+                    'purchased' => $purchased,
+                    'type' => $type
+                ];
+                $this->view('serviceproviders/viewReviews',$data);
+
+            } else if ($type == 'Singer'){
+                $data = [
+                    'product_id' => $data->product_id,
+                    'created_by' => $data->created_by,
+                    'category' => $data->category,
+                    'brand' => $data->brand,
+                    'model' => $data->model,
+                    'quantity' => $data->quantity,
+                    'unit_price' => $data->unit_price,
+                    'photo_1' => $data->photo_1,
+                    'photo_2' => $data->photo_2,
+                    'photo_3' => $data->photo_3,
+                    'Title' => $data->Title,
+                    'Description' => $data->Description,
+                    'outOfStock' => $data->outOfStock,
+                    'createdDate' => $data->createdDate,
+                    'warranty' => $data->warranty,
+                    'singer_name' => $data->name,
+                    'nickName' => $data->nickName,
+                    'telephoneNumber' => $data->telephoneNumber,
+                    'videoLink' => $data->videoLink,
+                    'location' => $data->location,
+                    'instrument' => $data->instrument,
+                    'singerPhoto' => $data->singerPhoto,
+                    'email' => $data->email,
+                    'status' => $data->status,
+                    'name'=>$user->name,
+                    'photo'=>$user->profile_photo,
+                    'reviews'=>$reviews,
+                    'rating'=>$rating,
+                    'count'=>$count,
+                    'star1'=>$star1,
+                    'star2'=>$star2,
+                    'star3'=>$star3,
+                    'star4'=>$star4,
+                    'star5'=>$star5,
+                    'availability' => 'notChecked',
+                    'quantity_selected' => '1',
+                    'start_date' => '',
+                    'end_date' => '',
+                    'purchased' => $purchased,
+                    'type' => $type
+                ];
+                $this->view('serviceproviders/viewReviews',$data);
+
+            } else if ($type == 'Musician'){
+                $data = [
+                    'product_id' => $data->product_id,
+                    'created_by' => $data->created_by,
+                    'category' => $data->category,
+                    'brand' => $data->brand,
+                    'model' => $data->model,
+                    'quantity' => $data->quantity,
+                    'unit_price' => $data->unit_price,
+                    'photo_1' => $data->photo_1,
+                    'photo_2' => $data->photo_2,
+                    'photo_3' => $data->photo_3,
+                    'Title' => $data->Title,
+                    'Description' => $data->Description,
+                    'outOfStock' => $data->outOfStock,
+                    'createdDate' => $data->createdDate,
+                    'warranty' => $data->warranty,
+                    'musician_name' => $data->name,
+                    'nickName' => $data->nickName,
+                    'telephoneNumber' => $data->telephoneNumber,
+                    'videoLink' => $data->videoLink,
+                    'location' => $data->location,
+                    'instrument' => $data->instrument,
+                    'singerPhoto' => $data->singerPhoto,
+                    'email' => $data->email,
+                    'status' => $data->status,
+                    'name'=>$user->name,
+                    'photo'=>$user->profile_photo,
+                    'reviews'=>$reviews,
+                    'rating'=>$rating,
+                    'count'=>$count,
+                    'star1'=>$star1,
+                    'star2'=>$star2,
+                    'star3'=>$star3,
+                    'star4'=>$star4,
+                    'star5'=>$star5,
+                    'availability' => 'notChecked',
+                    'quantity_selected' => '1',
+                    'start_date' => '',
+                    'end_date' => '',
+                    'purchased' => $purchased,
+                    'type' => $type
+                ];
+                $this->view('serviceproviders/viewReviews',$data);
+            } else if ($type == 'Band'){
+                $data = [
+                    'product_id' => $data->product_id,
+                    'created_by' => $data->created_by,
+                    'category' => $data->category,
+                    'brand' => $data->brand,
+                    'model' => $data->model,
+                    'unit_price' => $data->unit_price,
+                    'quantity' => $data->quantity,
+                    'photo_1' => $data->photo_1,
+                    'photo_2' => $data->photo_2,
+                    'photo_3' => $data->photo_3,
+                    'Title' => $data->Title,
+                    'Description' => $data->Description,
+                    'outOfStock' => $data->outOfStock,
+                    'createdDate' => $data->createdDate,
+                    'warranty' => $data->warranty,
+                    'videoLink' => $data->videoLink,
+                    'instrument' => $data->instrument,
+                    'email' => $data->email,
+                    'telephoneNumber' => $data->telephoneNumber,
+                    'memberCount' => $data->memberCount,
+                    'leaderPhoto' => $data->leaderPhoto,
+                    'bandPhoto' => $data->bandPhoto,
+                    'location' => $data->location,
+                    'leaderName' => $data->leaderName,
+                    'status' => $data->status,
+                    'name'=>$user->name,
+                    'photo'=>$user->profile_photo,
+                    'reviews'=>$reviews,
+                    'rating'=>$rating,
+                    'count'=>$count,
+                    'star1'=>$star1,
+                    'star2'=>$star2,
+                    'star3'=>$star3,
+                    'star4'=>$star4,
+                    'star5'=>$star5,
+                    'availability' => 'notChecked',
+                    'quantity_selected' => '1',
+                    'start_date' => '',
+                    'end_date' => '',
+                    'purchased' => $purchased,
+                    'type' => $type
+                ];
+                $this->view('serviceproviders/viewReviews',$data);
+            }
+        } else {
+            die('Something went wrong while viewing the product');
+        }
+    }
 }

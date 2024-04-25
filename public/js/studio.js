@@ -154,7 +154,7 @@ function displaydata(data) {
                 `<button href="" onclick="addItem(` + item.product_id + `, '` + instrumentList + `','` + locationList + `' , '`+ item.airCondition +`')" style="color: orange">see more details</button>` +
                 <!-- User reviews go here -->
                 `<div class="user-review">` +
-                `<a href="http://" style="font-size: 0.9rem;">Read Customer Reviews</a>` +
+                `<a href="http://localhost/symphony/serviceProvider/reviewStudio/` + item.product_id +`" style="font-size: 0.9rem;">Read Customer Reviews</a>` +
                 `</div>` +
                 `</div>` +
                 `</div>` +
