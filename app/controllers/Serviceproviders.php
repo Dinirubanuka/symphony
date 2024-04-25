@@ -3392,7 +3392,7 @@ class serviceproviders extends Controller
                     'purchased' => $purchased,
                     'type' => $type
                 ];
-                $this->view('serviceproviders/viewReviews',$data);
+                $this->view('serviceproviders/viewStudioReviews',$data);
 
             } else if ($type == 'Singer'){
                 $data = [
@@ -3437,7 +3437,7 @@ class serviceproviders extends Controller
                     'purchased' => $purchased,
                     'type' => $type
                 ];
-                $this->view('serviceproviders/viewReviews',$data);
+                $this->view('serviceproviders/viewSingerReviews',$data);
 
             } else if ($type == 'Musician'){
                 $data = [
@@ -3482,7 +3482,7 @@ class serviceproviders extends Controller
                     'purchased' => $purchased,
                     'type' => $type
                 ];
-                $this->view('serviceproviders/viewReviews',$data);
+                $this->view('serviceproviders/viewMusicianReviews',$data);
             } else if ($type == 'Band'){
                 $data = [
                     'product_id' => $data->product_id,
@@ -3527,7 +3527,7 @@ class serviceproviders extends Controller
                     'purchased' => $purchased,
                     'type' => $type
                 ];
-                $this->view('serviceproviders/viewReviews',$data);
+                $this->view('serviceproviders/viewBandReviews',$data);
             }
         } else {
             die('Something went wrong while viewing the product');

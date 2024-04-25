@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<?php require_once APPROOT . '/views/inc/sp-index-nav.php'; ?>
+<?php require_once APPROOT . '/views/inc/singer-nav.php'; ?>
 
 <div class="review-grid">
     <?php foreach ($data['reviews'] as $review) : ?>
@@ -26,7 +26,7 @@
         </figure>
     <?php endforeach; ?>
 </div>
-<script src="<?php echo URLROOT; ?>/js/sp-inventory.js"></script>
+<script src="<?php echo URLROOT; ?>/js/singer.js"></script>
 
 </body>
 </html>
