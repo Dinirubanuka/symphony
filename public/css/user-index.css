@@ -438,7 +438,7 @@ svg{
 }
 .thumbnail .item .content{
     position: absolute;
-    inset: auto 10px 10px 10px;
+    /*inset: auto 10px 10px 10px;*/
 }
 @media screen and (max-width: 678px) {
     .thumbnail{
