@@ -34,7 +34,7 @@
                                 <a input_product_id="<?php echo $cart->product_data->product_id; ?>"
                                    input_product_type="<?php echo $cart->product_data->type; ?>" class="close"
                                    onclick="removeFromCart(this);">
-                                    <img src="http://localhost/symphony/img/close.png" style="height: 15px; width: 15px;float: right">
+                                    <img src="http://localhost/symphony/img/close.png" style="height: 15px; width: 15px;float: right;margin: 4px -12px 0 0">
                                     <!--                                <h3>Remove product</h3>-->
                                 </a>
                                 <h1><?php echo $cart->product_data->Title; ?></h1>
