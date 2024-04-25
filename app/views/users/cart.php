@@ -22,17 +22,22 @@
                         <header>
                             <a input_product_id="<?php echo $cart->product_data->product_id; ?>"
                                input_product_type="<?php echo $cart->product_data->type; ?>" class="remove"
-                               onclick="removeFromCart(this);">
+                               ">
                                 <img src="http://localhost/symphony/img/serviceProvider/<?php echo $cart->product_data->photo_1; ?>"
                                 >
-                                <h3>Remove product</h3>
+<!--                                <h3>Remove product</h3>-->
                             </a>
                         </header>
 
                         <div class="upcontent">
                             <div class="content">
+                                <a input_product_id="<?php echo $cart->product_data->product_id; ?>"
+                                   input_product_type="<?php echo $cart->product_data->type; ?>" class="close"
+                                   onclick="removeFromCart(this);">
+                                    <img src="http://localhost/symphony/img/close.png" style="height: 15px; width: 15px;float: right">
+                                    <!--                                <h3>Remove product</h3>-->
+                                </a>
                                 <h1><?php echo $cart->product_data->Title; ?></h1>
-                                <p>Quantity: <?php echo $cart->quantity; ?></p>
                                 <p>From: <?php echo $cart->start_date; ?> - To: <?php echo $cart->end_date; ?></p>
 
 
@@ -51,6 +56,8 @@
                                 <?php endif; ?>
 
                                 <h2 class="price">
+                                    <p>Quantity: <?php echo $cart->quantity; ?></p>
+
                                     x LKR.<?php echo $cart->product_data->unit_price; ?>
                                 </h2>
                             </footer>
@@ -66,13 +73,18 @@
         <div class="container clearfix">
 
             <div class="left">
-                <h2 class="subtotal">Subtotal: LKR. <span><?php echo $data['subtotal']; ?></span></h2>
-                <h3 class="tax">Deposit Value: LKR. <span><?php echo $data['extra_charge']; ?></span></h3>
-                <h3 class="shipping">Service Charge: LKR. <span>200.00</span></h3>
+                <span class="subtotal">Subtotal: LKR.</span>
+                <span><?php echo $data['subtotal']; ?></span>
+                <span class="tax">Deposit Value: LKR.</span>
+                <span><?php echo $data['extra_charge']; ?></span>
+                <span class="shipping">Service Charge: LKR.</span>
+                <span>200.00</span>
+                <span class="total">Total: LKR.</span>
+                <span class="total"><?php echo $data['total'];; ?></span>
             </div>
 
             <div class="right">
-                <h1 class="total">Total: LKR. <span><?php echo $data['total'];; ?></span></h1>
+
                 <a id="checkOutBtn" class="btn123" style="cursor: pointer;"> Checkout </a>
             </div>
 

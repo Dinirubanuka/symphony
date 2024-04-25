@@ -147,9 +147,6 @@ body {
 	width: 195px;
 }
 
-.product header:hover img {
-	opacity: .7;
-}
 
 .product header:hover h3 {
 	bottom: 73px;
@@ -210,6 +207,8 @@ body {
 	line-height: 49px;
 	margin: 0;
 	padding: 0 30px;
+	display: flex;
+	gap: 20px;
 }
 
 .product footer .full-price {
@@ -301,7 +300,23 @@ body {
 }
 
 .left {
+	display: grid;
+	grid-template-columns: auto auto;
 	float: left;
+}
+
+.left span{
+	padding: 10px;
+}
+
+.total{
+	font-weight: 500;
+	font-size: 20px;
+}
+
+.content .close{
+	height: 15px;
+	width: 15px;
 }
 
 .right {

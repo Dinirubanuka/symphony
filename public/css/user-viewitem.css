@@ -173,12 +173,12 @@ body {
 
 
 .addToCartBtn {
-  background-color: #e9e0b0;
+  background-color: #090808;
   transition: background-color 0.3s;
 }
 
 .addToCartBtn:hover {
-  background-color: #FFD700;
+  background-color: #6f7375;
   color: black;
 }
 
@@ -189,7 +189,7 @@ body {
 
 #addToFavoritesBtn:hover {
   background-color: #6f7375;
-  color: black;
+  color: #ffffff;
 }
 
 #availabilityChkBtn {
