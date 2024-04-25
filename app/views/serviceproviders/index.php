@@ -17,55 +17,50 @@
         <div class="item active">
             <img src="<?php echo URLROOT; ?>/img/instrument.jpg">
             <div class="content">
-                <p>design</p>
+                <p>symphony</p>
                 <h2>Instruments</h2>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                    Explore the world of musical tools! From guitars to keyboards, discover the diverse range of instruments used by musicians to create captivating melodies and rhythms.
                 </p>
             </div>
         </div>
         <div class="item">
             <img src="<?php echo URLROOT; ?>/img/studio.jpg">
             <div class="content">
-                <p>design</p>
+                <p>symphony</p>
                 <h2>Studio</h2>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                    Step into the heart of music production! Learn about the behind-the-scenes magic as sound engineers and producers work their technical wizardry to capture, mix, and master tracks, transforming raw recordings into polished masterpieces.
                 </p>
             </div>
         </div>
         <div class="item">
             <img src="<?php echo URLROOT; ?>/img/singer.jpg">
             <div class="content">
-                <p>design</p>
+                <p>symphony</p>
                 <h2>Singers</h2>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                    Dive into the realm of vocal talent! Meet the voices behind the music, from soulful soloists to harmonizing choirs, as they bring lyrics to life with their emotive performances.
                 </p>
             </div>
         </div>
         <div class="item">
             <img src="<?php echo URLROOT; ?>/img/band.jpg">
             <div class="content">
-                <p>design</p>
+                <p>symphony</p>
                 <h2>Bands</h2>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                    Join the ultimate musical collaboration! Discover the synergy of talented individuals coming together to form dynamic bands, from rock groups to jazz ensembles, as they unite their skills and creativity to deliver electrifying performances.
                 </p>
             </div>
         </div>
         <div class="item">
             <img src="<?php echo URLROOT; ?>/img/solo.jpg">
             <div class="content">
-                <p>design</p>
+                <p>symphony</p>
                 <h2>Musicians</h2>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, neque?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, ex.
+                    Celebrate the skilled artists who master their craft! Whether it's shredding on guitars, tickling the ivories on pianos, or blowing saxophones, these musicians showcase their talent and passion for creating unforgettable tunes.
                 </p>
             </div>
         </div>
