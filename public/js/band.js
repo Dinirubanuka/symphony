@@ -242,7 +242,7 @@ function displaydata(data) {
                 `<p>` + stockText + `</p>` +
                 <!-- User reviews go here -->
                 `<div class="user-review">` +
-                `<a href="http://localhost/symphony/serviceProvider/reviewband/` + item.product_id +`" style="font-size: 0.9rem;">Read Customer Reviews</a>` +
+                `<a href="http://localhost/symphony/serviceProviders/reviewband/` + item.product_id +`" style="font-size: 0.9rem;">Read Customer Reviews</a>` +
                 `</div>` +
                 `</div>` +
                 `</div>` +
