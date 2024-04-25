@@ -1,0 +1,13 @@
+.items-container {
+    text-align: left; /* Align the content horizontally */
+    margin-top: 30px;
+    margin-left: 20px; /* Add space above the container */
+  }
+  
+  .items-container h3 {
+    margin-bottom: 10px; /* Add space below the h3 element */
+  }
+
+  .h2 {
+    margin-left: 20px;
+  }

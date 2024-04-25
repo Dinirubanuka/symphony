@@ -404,6 +404,42 @@ require 'vendor/autoload.php';
       return $results;
     }
 
+    public function getEquipmentSP($sp_id){
+      $this->db->query('SELECT * FROM products WHERE created_by  = :serviceprovider_id');
+      $this->db->bind(':serviceprovider_id', $sp_id);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getStudioSP($sp_id){
+      $this->db->query('SELECT * FROM studio WHERE created_by  = :serviceprovider_id');
+      $this->db->bind(':serviceprovider_id', $sp_id);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getBandSP($sp_id){
+      $this->db->query('SELECT * FROM band WHERE created_by  = :serviceprovider_id');
+      $this->db->bind(':serviceprovider_id', $sp_id);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getSingerSP($sp_id){
+      $this->db->query('SELECT * FROM singer WHERE created_by  = :serviceprovider_id');
+      $this->db->bind(':serviceprovider_id', $sp_id);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getMusicianSP($sp_id){
+      $this->db->query('SELECT * FROM musician WHERE created_by  = :serviceprovider_id');
+      $this->db->bind(':serviceprovider_id', $sp_id);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+
     public function getInstrumentCount(){
       $this->db->query('SELECT COUNT(*) as count FROM products');
       $results = $this->db->single();

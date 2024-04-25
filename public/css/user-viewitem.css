@@ -183,23 +183,25 @@ body {
 }
 
 #addToFavoritesBtn {
-  background-color: #090808;
+  background-color: #6000fc;
+  color: #ffffff;
   transition: background-color 0.3s;
 }
 
 #addToFavoritesBtn:hover {
-  background-color: #6f7375;
+  background-color: #8c96f0;
   color: black;
 }
 
 #availabilityChkBtn {
   background-color: #090808;
+  color: #ffffff;
   transition: background-color 0.3s;
 }
 
 #availabilityChkBtn:hover {
-  background-color: #6f7375;
-  color: #ffffff;
+  background-color: #8f8f8f;
+  color: #000000;
 }
 
 

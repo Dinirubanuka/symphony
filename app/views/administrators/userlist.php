@@ -44,7 +44,7 @@
                   <td><?php echo $user->email; ?></td>
                   <td style="color: purple;">User</td>
                   <td style="color: <?php echo $user->status === 'Active' ? 'green' : 'red'; ?>"><?php echo $user->status; ?></td>
-                  <td><div class="sp-icon" onclick="generateUser(<?php echo $user->id; ?>)">Generate Logs</div></td>
+                  <td><button class="sp-icon" onclick="generateUser(<?php echo $user->id; ?>)">Generate Logs</button></td>
                 </tr>
               <?php endforeach; ?>
             </table>
@@ -68,7 +68,7 @@
                   <td><?php echo $user->business_email; ?></td>
                   <td style="color: green;">Service Provider</td>
                   <td style="color: <?php echo $user->status === 'Active' ? 'green' : 'red'; ?>"><?php echo $user->status; ?></td>
-                  <td><div class="sp-icon" onclick="generateSP(<?php echo $user->serviceprovider_id; ?>)">Generate Logs</div></td>
+                  <td><button class="sp-icon" onclick="generateSP(<?php echo $user->serviceprovider_id; ?>)">Generate Logs</button></td>
                 </tr>
               <?php endforeach; ?>
             </table>
@@ -92,7 +92,7 @@
                   <td><?php echo $user->moderator_email; ?></td>
                   <td style="color: red;">Moderator</td>
                   <td style="color: <?php echo $user->status === 'Active' ? 'green' : 'red'; ?>"><?php echo $user->status; ?></td>
-                  <td><div class="sp-icon" onclick="generateMOD(<?php echo $user->moderator_id; ?>)">Generate Logs</div></td>
+                  <td><button class="sp-icon" onclick="generateMOD(<?php echo $user->moderator_id; ?>)">Generate Logs</button></td>
               <?php endforeach; ?>
             </table>
           </div>

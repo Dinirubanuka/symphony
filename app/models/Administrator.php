@@ -519,6 +519,14 @@ require 'vendor/autoload.php';
       return $results;
     }
 
+    public function viewUserOrdersCompleted($id){
+      $this->db->query('SELECT * FROM suborder WHERE user_id = :id AND status = :status');
+      $this->db->bind(':id', $id);
+      $this->db->bind(':status', 'Completed');
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
     public function viewUserSubOrders($id){
       $this->db->query('SELECT * FROM suborder WHERE user_id = :id');
       $this->db->bind(':id', $id);
@@ -529,6 +537,14 @@ require 'vendor/autoload.php';
     public function viewSPOrders($id){
       $this->db->query('SELECT * FROM suborder WHERE serviceprovider_id = :id');
       $this->db->bind(':id', $id);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function viewSPOrdersCompleted($id){
+      $this->db->query('SELECT * FROM suborder WHERE serviceprovider_id = :id AND status = :status');
+      $this->db->bind(':id', $id);
+      $this->db->bind(':status', 'Completed');
       $results = $this->db->resultSet();
       return $results;
     }
@@ -585,6 +601,41 @@ require 'vendor/autoload.php';
       $this->db->query('SELECT * FROM musician WHERE product_id = :product_id');
       $this->db->bind(':product_id', $product_id);
       $results = $this->db->single();
+      return $results;
+    }
+
+    public function getEquipmentSP($sp_id){
+      $this->db->query('SELECT * FROM products WHERE created_by  = :serviceprovider_id');
+      $this->db->bind(':serviceprovider_id', $sp_id);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getStudioSP($sp_id){
+      $this->db->query('SELECT * FROM studio WHERE created_by  = :serviceprovider_id');
+      $this->db->bind(':serviceprovider_id', $sp_id);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getBandSP($sp_id){
+      $this->db->query('SELECT * FROM band WHERE created_by  = :serviceprovider_id');
+      $this->db->bind(':serviceprovider_id', $sp_id);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getSingerSP($sp_id){
+      $this->db->query('SELECT * FROM singer WHERE created_by  = :serviceprovider_id');
+      $this->db->bind(':serviceprovider_id', $sp_id);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getMusicianSP($sp_id){
+      $this->db->query('SELECT * FROM musician WHERE created_by  = :serviceprovider_id');
+      $this->db->bind(':serviceprovider_id', $sp_id);
+      $results = $this->db->resultSet();
       return $results;
     }
 

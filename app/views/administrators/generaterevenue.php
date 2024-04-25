@@ -20,11 +20,100 @@
       <div class="top">
         <h1>Revenue Report | <?php echo $data['admin_data']->admin_name; ?></h1>
           <div class="dashboard">
+            <h2>Top Users - This Week</h2>
+            <div class="containersologrid">
+                <?php foreach ($data['user_data']['top5SpendingWeekly'] as $user) : ?>
+                    <div class="containersolo">
+                    <div class="tilesolo">
+                        <img src="http://localhost/symphony/img/mag_img/<?php echo $user->profile_photo; ?>" alt="User Image">
+                        <div><b>Name:</b> <?php echo $user->name; ?></div>
+                        <div><b>Contact Number:</b> <?php echo $user->TelephoneNumber; ?></div>
+                        <div><b>Weekly  Spending:</b> <?php echo $user->totalSpendingWeekly; ?>.00 LKR</div>
+                        <button class="view-user" onclick="viewUser(<?php echo $user->id ?>)">View User</button>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div><br><br>
+            <h2>Top Users - This Month</h2>
+            <div class="containersologrid">
+                <?php foreach ($data['user_data']['top5SpendingMonthly'] as $user) : ?>
+                    <div class="containersolo">
+                    <div class="tilesolo">
+                        <img src="http://localhost/symphony/img/mag_img/<?php echo $user->profile_photo; ?>" alt="User Image">
+                        <div><b>Name:</b> <?php echo $user->name; ?></div>
+                        <div><b>Contact Number:</b> <?php echo $user->TelephoneNumber; ?></div>
+                        <div><b>Monthly  Spending:</b> <?php echo $user->totalSpendingMonthly; ?>.00 LKR</div>
+                        <button class="view-user" onclick="viewUser(<?php echo $user->id ?>)">View User</button>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div><br><br>
+            <h2>Top Users - This Year</h2>
+            <div class="containersologrid">
+                <?php foreach ($data['user_data']['top5SpendingYearly'] as $user) : ?>
+                    <div class="containersolo">
+                    <div class="tilesolo">
+                        <img src="http://localhost/symphony/img/mag_img/<?php echo $user->profile_photo; ?>" alt="User Image">
+                        <div><b>Name:</b> <?php echo $user->name; ?></div>
+                        <div><b>Contact Number:</b> <?php echo $user->TelephoneNumber; ?></div>
+                        <div><b>Yearly  Spending:</b> <?php echo $user->totalSpendingYearly; ?>.00 LKR</div>
+                        <button class="view-user" onclick="viewUser(<?php echo $user->id ?>)">View User</button>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div><br><br>
+            <h2>Top Service Providers - This Week</h2>
+            <div class="containersologrid">
+                <?php foreach ($data['sp_data']['top5RevenueWeekly'] as $serviceProvider) : ?>
+                    <div class="containersolo">
+                        <div class="tilesolo">
+                            <img src="http://localhost/symphony/img/mag_img/<?php echo $serviceProvider->profile_photo; ?>" alt="Service Provider Image">
+                            <div><b>Name:</b> <?php echo $serviceProvider->business_name; ?></div>
+                            <div><b>Contact Number:</b> <?php echo $serviceProvider->business_contact_no; ?></div>
+                            <div><b>Weekly Revenue:</b> <?php echo $serviceProvider->totalRevenueWeekly; ?>.00 LKR</div>
+                            <button class="view-service-provider" onclick="viewServiceProvider(<?php echo $serviceProvider->serviceprovider_id  ?>)">View Service Provider</button>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div><br><br>
+
+            <h2>Top Service Providers - This Month</h2>
+            <div class="containersologrid">
+                <?php foreach ($data['sp_data']['top5RevenueMonthly'] as $serviceProvider) : ?>
+                    <div class="containersolo">
+                        <div class="tilesolo">
+                            <img src="http://localhost/symphony/img/mag_img/<?php echo $serviceProvider->profile_photo; ?>" alt="Service Provider Image">
+                            <div><b>Name:</b> <?php echo $serviceProvider->business_name; ?></div>
+                            <div><b>Contact Number:</b> <?php echo $serviceProvider->business_contact_no; ?></div>
+                            <div><b>Monthly Revenue:</b> <?php echo $serviceProvider->totalRevenueMonthly; ?>.00 LKR</div>
+                            <button class="view-service-provider" onclick="viewServiceProvider(<?php echo $serviceProvider->serviceprovider_id  ?>)">View Service Provider</button>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div><br><br>
+
+            <h2>Top Service Providers - This Year</h2>
+            <div class="containersologrid">
+                <?php foreach ($data['sp_data']['top5RevenueYearly'] as $serviceProvider) : ?>
+                    <div class="containersolo">
+                        <div class="tilesolo">
+                            <img src="http://localhost/symphony/img/mag_img/<?php echo $serviceProvider->profile_photo; ?>" alt="Service Provider Image">
+                            <div><b>Name:</b> <?php echo $serviceProvider->business_name; ?></div>
+                            <div><b>Contact Number:</b> <?php echo $serviceProvider->business_contact_no; ?></div>
+                            <div><b>Yearly Revenue:</b> <?php echo $serviceProvider->totalRevenueYearly; ?>.00 LKR</div>
+                            <button class="view-service-provider" onclick="viewServiceProvider(<?php echo $serviceProvider->serviceprovider_id  ?>)">View Service Provider</button>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div><br><br>
+
+            </div>
+      </div>
           <div class="graph">
               <div class="container" id="top">
                   <main class="grid-main">
                       <div class="grid-2" id="traffic">
-                          <h2><u>Orders</u></h2>
+                          <h2><u>Orders</u></h2><br>
                           <ul class="btn-chart">
                               <li class="li" id="hour">Last 24h</li>
                               <li class="li" id="day">Last Week</li>
@@ -37,7 +126,7 @@
                       </div>
 
                       <div class="grid-2" id="trafficR">
-                          <h2><u>Revenue</u></h2>
+                          <h2><u>Revenue</u></h2><br>
                           <ul class="btn-chart">
                               <li class="li" id="hourR">Last 24h</li>
                               <li class="li" id="dayR">Last Week</li>
@@ -51,9 +140,23 @@
                   </main>
               </div>
           </div>
+
       </div>
+      </div>
+    </div>
+  </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
   <script>
+
+    // View User
+    function viewUser(id) {
+      window.location.href = "<?php echo URLROOT; ?>/administrators/viewuser/" + id;
+    }
+
+    // View Service Provider
+    function viewServiceProvider(id) {
+      window.location.href = "<?php echo URLROOT; ?>/administrators/viewserviceprovider/" + id;
+    }
     // Chart Variables
   const hourChart = document.getElementById('hour');
   const dayChart = document.getElementById('day');
@@ -375,8 +478,5 @@
   }
   stats_counter();
   </script>
-      </div>
-    </div>
-  </div>
   </body>
   </html>

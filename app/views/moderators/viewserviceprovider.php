@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/mod-index.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/sp-icon.css">
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
   <title><?php echo SITENAME; ?></title>
 </head>
@@ -38,20 +39,17 @@
                 <th>Business Contact Number</th>
                 <th>Business Address</th>
                 <th>Owner NIC</th>
+                <th>Action</th>
             </tr>
             <?php foreach ($data['serviceproviders'] as $serviceprovider) : ?>
                 <tr class="data-table-tr">
                     <td><?php echo $serviceprovider->serviceprovider_id; ?></td>
-                    <td><div class = "sp-icon" onclick = "viewSP(<?php echo $serviceprovider->serviceprovider_id; ?>)"><?php echo $serviceprovider->business_name; ?></div></td>
+                    <td><?php echo $serviceprovider->business_name; ?></td>
                     <td><?php echo $serviceprovider->business_email; ?></td>
                     <td><?php echo $serviceprovider->business_contact_no; ?></td>
                     <td><?php echo $serviceprovider->business_address; ?></td>
                     <td><?php echo $serviceprovider->owner_nic; ?></td>
-                    <td class="data-table-action">
-
-                    <a class="mod-below-delete" onclick="deleteServiceProvider(<?php echo $serviceprovider->serviceprovider_id; ?>)">
-                        <i class='bx bx-trash'></i>
-                    </a>
+                    <td><button class="sp-icon" onclick="viewSP(<?php echo $serviceprovider->serviceprovider_id; ?>)">View</button></td>
                     </td>
                 </tr>
             <?php endforeach; ?>

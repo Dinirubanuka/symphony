@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/mod-index.css">
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/sp-icon.css">
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
   <title><?php echo SITENAME; ?></title>
 </head>
@@ -35,20 +36,16 @@
                 <th>Email</th>
                 <th>Contact Number</th>
                 <th>Address</th>
+                <th>Action</th>
             </tr>
             <?php foreach ($data['users'] as $user) : ?>
                 <tr class="data-table-tr">
                     <td><?php echo $user->id; ?></td>
-                    <td><div class = "sp-icon" onclick = "viewUser(<?php echo $user->id; ?>)"><?php echo $user->name; ?></div></td>
+                    <td><?php echo $user->name; ?></td>
                     <td><?php echo $user->email; ?></td>
                     <td><?php echo $user->TelephoneNumber; ?></td>
                     <td><?php echo $user->address; ?></td>
-                    <td class="data-table-action">
-
-                    <a class="mod-below-delete" onclick="deleteUser(<?php echo $user->id; ?>)">
-                        <i class='bx bx-trash'></i>
-                    </a>
-                    </td>
+                    <td><button class="sp-icon" onclick="viewUser(<?php echo $user->id; ?>)">View Request</button></td>
                 </tr>
             <?php endforeach; ?>
 

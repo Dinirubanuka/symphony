@@ -160,7 +160,6 @@ class serviceproviders extends Controller
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
             $img1_name = $_FILES['photo_1']['name'];
             $img1_size = $_FILES['photo_1']['size'];
             $tmp1_name = $_FILES['photo_1']['tmp_name'];
@@ -1384,7 +1383,7 @@ class serviceproviders extends Controller
             $img1_size = $_FILES['photo_1']['size'];
             $tmp1_name = $_FILES['photo_1']['tmp_name'];
             $error1 = $_FILES['photo_1']['error'];
-
+            
             $img2_name = $_FILES['photo_2']['name'];
             $img2_size = $_FILES['photo_2']['size'];
             $tmp2_name = $_FILES['photo_2']['tmp_name'];
@@ -1534,12 +1533,11 @@ class serviceproviders extends Controller
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
             $img1_name = $_FILES['photo_1']['name'];
             $img1_size = $_FILES['photo_1']['size'];
             $tmp1_name = $_FILES['photo_1']['tmp_name'];
             $error1 = $_FILES['photo_1']['error'];
-
+            
             $img2_name = $_FILES['photo_2']['name'];
             $img2_size = $_FILES['photo_2']['size'];
             $tmp2_name = $_FILES['photo_2']['tmp_name'];

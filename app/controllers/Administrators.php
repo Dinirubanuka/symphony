@@ -2324,13 +2324,192 @@
       'last_8_weeks' => $count_8weeksR,
       'last_year' => $count_yearR,
     ];
+    $allSP = $this->administratorModel->getAllSP();
 
+    $topRevenueWeekly = [];
+    $topRevenueMonthly = [];
+    $topRevenueYearly = [];
+    $topOrdersWeekly = [];
+    $topOrdersMonthly = [];
+    $topOrdersYearly = [];
+    
+    foreach ($allSP as $sp) {
+        $sp->totalRevenueWeekly = 0;
+        $sp->totalRevenueMonthly = 0;
+        $sp->totalRevenueYearly = 0;
+        $sp->totalOrdersWeekly = 0;
+        $sp->totalOrdersMonthly = 0;
+        $sp->totalOrdersYearly = 0;
+        
+        $spSubOrders = $this->administratorModel->viewSPOrdersCompleted($sp->serviceprovider_id);
+        
+        foreach ($spSubOrders as $order) {
+            $timestamp = strtotime($order->order_placed_on);
+            
+            if ($timestamp >= strtotime('-1 week')) {
+                $sp->totalRevenueWeekly += $order->total;
+                $sp->totalOrdersWeekly++;
+            }
+            if ($timestamp >= strtotime('-1 month')) {
+                $sp->totalRevenueMonthly += $order->total;
+                $sp->totalOrdersMonthly++;
+            }
+            if ($timestamp >= strtotime('-1 year')) {
+                $sp->totalRevenueYearly += $order->total;
+                $sp->totalOrdersYearly++;
+            }
+        }
+        
+        $topRevenueWeekly[$sp->serviceprovider_id] = $sp;
+        $topRevenueMonthly[$sp->serviceprovider_id] = $sp;
+        $topRevenueYearly[$sp->serviceprovider_id] = $sp;
+        $topOrdersWeekly[$sp->serviceprovider_id] = $sp;
+        $topOrdersMonthly[$sp->serviceprovider_id] = $sp;
+        $topOrdersYearly[$sp->serviceprovider_id] = $sp;
+    }
+    
+    uasort($topRevenueWeekly, function ($a, $b) {
+        return $b->totalRevenueWeekly <=> $a->totalRevenueWeekly;
+    });
+    uasort($topRevenueMonthly, function ($a, $b) {
+        return $b->totalRevenueMonthly <=> $a->totalRevenueMonthly;
+    });
+    uasort($topRevenueYearly, function ($a, $b) {
+        return $b->totalRevenueYearly <=> $a->totalRevenueYearly;
+    });
+    uasort($topOrdersWeekly, function ($a, $b) {
+        return $b->totalOrdersWeekly <=> $a->totalOrdersWeekly;
+    });
+    uasort($topOrdersMonthly, function ($a, $b) {
+        return $b->totalOrdersMonthly <=> $a->totalOrdersMonthly;
+    });
+    uasort($topOrdersYearly, function ($a, $b) {
+        return $b->totalOrdersYearly <=> $a->totalOrdersYearly;
+    });
+    
+    $top5RevenueWeekly = array_slice($topRevenueWeekly, 0, 5, true);
+    $top5RevenueMonthly = array_slice($topRevenueMonthly, 0, 5, true);
+    $top5RevenueYearly = array_slice($topRevenueYearly, 0, 5, true);
+    $top5OrdersWeekly = array_slice($topOrdersWeekly, 0, 5, true);
+    $top5OrdersMonthly = array_slice($topOrdersMonthly, 0, 5, true);
+    $top5OrdersYearly = array_slice($topOrdersYearly, 0, 5, true);
+    
+    $sp_data = [
+      'top5RevenueWeekly' => $top5RevenueWeekly,
+      'top5RevenueMonthly' => $top5RevenueMonthly,
+      'top5RevenueYearly' => $top5RevenueYearly,
+      'top5OrdersWeekly' => $top5OrdersWeekly,
+      'top5OrdersMonthly' => $top5OrdersMonthly,
+      'top5OrdersYearly' => $top5OrdersYearly
+    ];
+
+    $allUsers = $this->administratorModel->getAllUsers();
+
+    $topSpendingWeekly = [];
+    $topSpendingMonthly = [];
+    $topSpendingYearly = [];
+    $topOrdersWeekly = [];
+    $topOrdersMonthly = [];
+    $topOrdersYearly = [];
+    
+    foreach ($allUsers as $user) {
+        $user->totalSpendingWeekly = 0;
+        $user->totalSpendingMonthly = 0;
+        $user->totalSpendingYearly = 0;
+        $user->totalOrdersWeekly = 0;
+        $user->totalOrdersMonthly = 0;
+        $user->totalOrdersYearly = 0;
+        
+        $userSubOrders = $this->administratorModel->viewUserOrdersCompleted($user->id);
+        
+        foreach ($userSubOrders as $order) {
+            $timestamp = strtotime($order->order_placed_on);
+            
+            if ($timestamp >= strtotime('-1 week')) {
+                $user->totalSpendingWeekly += $order->total;
+                $user->totalOrdersWeekly++;
+            }
+            if ($timestamp >= strtotime('-1 month')) {
+                $user->totalSpendingMonthly += $order->total;
+                $user->totalOrdersMonthly++;
+            }
+            if ($timestamp >= strtotime('-1 year')) {
+                $user->totalSpendingYearly += $order->total;
+                $user->totalOrdersYearly++;
+            }
+        }
+        
+        $topSpendingWeekly[$user->id] = $user;
+        $topSpendingMonthly[$user->id] = $user;
+        $topSpendingYearly[$user->id] = $user;
+        $topOrdersWeekly[$user->id] = $user;
+        $topOrdersMonthly[$user->id] = $user;
+        $topOrdersYearly[$user->id] = $user;
+    }
+    
+    uasort($topSpendingWeekly, function ($a, $b) {
+        return $b->totalSpendingWeekly <=> $a->totalSpendingWeekly;
+    });
+    uasort($topSpendingMonthly, function ($a, $b) {
+        return $b->totalSpendingMonthly <=> $a->totalSpendingMonthly;
+    });
+    uasort($topSpendingYearly, function ($a, $b) {
+        return $b->totalSpendingYearly <=> $a->totalSpendingYearly;
+    });
+    uasort($topOrdersWeekly, function ($a, $b) {
+        return $b->totalOrdersWeekly <=> $a->totalOrdersWeekly;
+    });
+    uasort($topOrdersMonthly, function ($a, $b) {
+        return $b->totalOrdersMonthly <=> $a->totalOrdersMonthly;
+    });
+    uasort($topOrdersYearly, function ($a, $b) {
+        return $b->totalOrdersYearly <=> $a->totalOrdersYearly;
+    });
+    
+    $top5SpendingWeekly = array_slice($topSpendingWeekly, 0, 5, true);
+    $top5SpendingMonthly = array_slice($topSpendingMonthly, 0, 5, true);
+    $top5SpendingYearly = array_slice($topSpendingYearly, 0, 5, true);
+    $top5OrdersWeekly = array_slice($topOrdersWeekly, 0, 5, true);
+    $top5OrdersMonthly = array_slice($topOrdersMonthly, 0, 5, true);
+    $top5OrdersYearly = array_slice($topOrdersYearly, 0, 5, true);
+    
+    $user_data = [
+      'top5SpendingWeekly' => $top5SpendingWeekly,
+      'top5SpendingMonthly' => $top5SpendingMonthly,
+      'top5SpendingYearly' => $top5SpendingYearly,
+      'top5OrdersWeekly' => $top5OrdersWeekly,
+      'top5OrdersMonthly' => $top5OrdersMonthly,
+      'top5OrdersYearly' => $top5OrdersYearly
+    ];
+    
     $data = [
       'admin_data' => $admin,
       'orders' => $data_set,
-      'revenue' => $data_setR
+      'revenue' => $data_setR,
+      'sp_data' => $sp_data,
+      'user_data' => $user_data
     ];
     $this->view('administrators/generaterevenue', $data);
+  }
+
+  public function viewInventory($sp_id){
+    $admin = $this->administratorModel->view($_SESSION['administrator_id']);
+    $sp = $this->administratorModel->getSP($sp_id);
+    $equipment = $this->administratorModel->getEquipmentSP($sp_id);
+    $studio = $this->administratorModel->getStudioSP($sp_id);
+    $band = $this->administratorModel->getBandSP($sp_id);
+    $singer = $this->administratorModel->getSingerSP($sp_id);
+    $musician = $this->administratorModel->getMusicianSP($sp_id);
+    $data = [
+      'admin_data' => $admin,
+      'sp' => $sp,
+      'equipment' => $equipment,
+      'studio' => $studio,
+      'band' => $band,
+      'singer' => $singer,
+      'musician' => $musician
+    ];
+    $this->view('administrators/viewinventory', $data);
   }
 
     public function createadministratorSession($administrator){

@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/mod-index.css">
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/public/css/sp-icon.css">
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
   <title><?php echo SITENAME; ?></title>
 </head>
@@ -28,16 +29,16 @@
                 <th>Mobile Number</th>
                 <th>Account created on</th>
                 <th>Email provided</th>
+                <th>Action</th>
             </tr>
             <?php foreach ($data['recover'] as $recover) : ?>
                 <tr class="data-table-tr">
-                    <td><div class = "sp-icon" onclick = "viewRequest(<?php echo $recover->recover_id; ?>)"><?php echo $recover->recover_id; ?></div></td>
+                    <td><?php echo $recover->recover_id; ?></td>
                     <td><?php echo $recover->user_name; ?></td>
                     <td><?php echo $recover->mobile_number; ?></td>
                     <td><?php echo $recover->account_created_on; ?></td>
                     <td><?php echo $recover->contactEmail; ?></td>
-                    <td class="data-table-action">
-                    </td>
+                    <td><button class="sp-icon" onclick="viewRequest(<?php echo $recover->recover_id; ?>)">View</button></td>
                 </tr>
             <?php endforeach; ?>
 

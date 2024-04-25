@@ -133,13 +133,6 @@
                         <span class="text nav-text">Rejected</span>
                     </a>
                 </li>
-
-                <li class="nav_link">
-                    <a href="<?php echo URLROOT; ?>/moderators/eventpackages">
-                        <i class='bx bx-notepad icon'></i>
-                        <span class="text nav-text">Event Packages</span>
-                    </a>
-                </li>
             </ul>
         </div>
 

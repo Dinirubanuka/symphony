@@ -100,13 +100,13 @@
                         <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>><img src="http://localhost/symphony/img/location-pin.png" alt="camera-icon" class="" id="" style="height: 16px;width: 16px;"> <?php echo $data['location']; ?></div></p>
                         <p>Description: <?php echo $data['Description']; ?></p>
                         <div class="contactBox">
-                            <div class="emailBox">
-                                <div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>><img src="http://localhost/symphony/img/email.png" alt="camera-icon" class="" id="" style="height: 16px;width: 16px;"></div>
+                            <div class="emailBox" <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>
+                                <div><img src="http://localhost/symphony/img/email.png" alt="camera-icon" class="" id="" style="height: 16px;width: 16px;"></div>
                                 <div><?php echo $data['email']; ?></div>
                             </div>
                             <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>><img src="http://localhost/symphony/img/telephone-call.png" alt="camera-icon" class="" id="" style="height: 16px;width: 16px;">   <?php echo $data['telephoneNumber']; ?></div></p>
                         </div>
-                        <div class="videoBox">
+                        <div class="videoBox"  <?php echo ($data['type'] == 'Singer' || $data['type'] == 'Musician' || $data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>
                             <iframe src="<?php echo $data['videoLink']; ?>"></iframe>
                         </div>
                     <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Instrument: <?php echo $data['instrument']; ?></div></p>
@@ -252,23 +252,23 @@
             <form action="<?php echo URLROOT; ?>/users/addReview/<?php echo $data['product_id']; ?>" class="form"
                   method="post" enctype="multipart/form-data">
                 <label>
-                    <input type="radio" name="rating" value="1"> 1
+                    1 <input type="radio" name="rating" value="1"> 
                 </label>
 
                 <label>
-                    <input type="radio" name="rating" value="2"> 2
+                    2 <input type="radio" name="rating" value="2">
                 </label>
 
                 <label>
-                    <input type="radio" name="rating" value="3"> 3
+                    3 <input type="radio" name="rating" value="3">
                 </label>
 
                 <label>
-                    <input type="radio" name="rating" value="4"> 4
+                    4 <input type="radio" name="rating" value="4">
                 </label>
 
                 <label>
-                    <input type="radio" name="rating" value="5"> 5
+                    5 <input type="radio" name="rating" value="5">
                 </label>
         </div>
         <input type="hidden" id="name" name="name" value="<?php echo $data['name']; ?>">

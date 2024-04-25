@@ -1782,6 +1782,26 @@
       }
     }
 
+    public function viewInventory($sp_id){
+      $mod = $this->moderatorModel->view($_SESSION['moderator_id']);
+      $sp = $this->moderatorModel->getSP($sp_id);
+      $equipment = $this->moderatorModel->getEquipmentSP($sp_id);
+      $studio = $this->moderatorModel->getStudioSP($sp_id);
+      $band = $this->moderatorModel->getBandSP($sp_id);
+      $singer = $this->moderatorModel->getSingerSP($sp_id);
+      $musician = $this->moderatorModel->getMusicianSP($sp_id);
+      $data = [
+        'admin_data' => $mod,
+        'sp' => $sp,
+        'equipment' => $equipment,
+        'studio' => $studio,
+        'band' => $band,
+        'singer' => $singer,
+        'musician' => $musician
+      ];
+      $this->view('moderators/viewinventory', $data);
+    }
+
     public function createmoderatorSession($moderator){
       
       $_SESSION['moderator_id'] = $moderator->moderator_id;

@@ -158,12 +158,7 @@
 
                         </div>
                     </li>
-                    <!--                add notification link here-->
-                    <li><div class="notification off">
-                        <a>
-                            <i class="fa-solid fa-bell"></i>
-                        </a>
-                    </div></li>
+
                     <li><a href="<?php echo URLROOT; ?>/users/profile" class="off">
                         <img
                                 src="<?php echo URLROOT; ?>/img/user.png"

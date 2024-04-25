@@ -38,7 +38,6 @@ class User
         //Attachments
 //    $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
 //    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
         //Content
         $this->mail->isHTML(true);                                  //Set email format to HTML
         $this->mail->Subject = 'Registeration - Symphony';

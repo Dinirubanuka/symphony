@@ -80,6 +80,12 @@ body {
 	font-family: 'Open Sans', sans-serif;
 }
 
+.containercart {
+	font-family: 'Open Sans', sans-serif;
+	margin: 0 auto;
+	width: 980px;
+}
+
 #cart {
 	width: 100%;
 }
@@ -110,9 +116,6 @@ body {
 }
 
 .product {
-	display: grid;
-	grid-template-columns: auto auto;
-	column-gap: 20px;
 	border: 1px solid #eee;
 	margin: 20px 0;
 	width: 100%;
@@ -144,8 +147,8 @@ body {
 	overflow: hidden;
 	padding: 0;
 	position: relative;
+	width: 24%;
 	height: 195px;
-	width: 195px;
 }
 
 .product header:hover img {

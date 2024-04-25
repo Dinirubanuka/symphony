@@ -16,7 +16,7 @@
  <main>
      <!-- Start DEMO HTML (Use the following code into your project)-->
 <header id="site-header">
-		<div class="container">
+		<div class="containercart">
 			<h1><a href="<?php echo URLROOT; ?>/users/index">
         	<i class="fa fa-arrow-left" aria-hidden="true"></i></a>
 			Cart</h1>
@@ -24,7 +24,7 @@
 		
 	</header>
 
-	<div class="container">
+	<div class="containercart">
 		<?php $atLeastOneNotAvailable = false; ?>
 		<section id="cart"> 
 		<form action="<?php echo URLROOT; ?>/users/placeOrder" class="form" method="post" enctype="multipart/form-data">
@@ -67,7 +67,7 @@
 
 	</div>
 	<footer id="site-footer">
-		<div class="container clearfix">
+		<div class="containercart clearfix">
 
 			<div class="left">
 				<h2 class="subtotal">Subtotal: LKR. <span><?php echo $data['subtotal']; ?></span> </h2>
