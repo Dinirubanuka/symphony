@@ -160,7 +160,7 @@
                         <button class="<?php echo $data['availability'] === 'available' ? 'addToCartBtn' : 'disabled-button'; ?>" <?php echo $data['availability'] === 'available' ? '' : 'disabled'; ?>>Add to Cart</button>
                     </div>
                 </form>
-                <button id="addToFavoritesBtn">Add to Favorites</button>
+                <button id="addToFavoritesBtn" onclick="addToFav('<?php echo $data['type']; ?>', '<?php echo $data['product_id']; ?>')">Add to Favorites</button>
             </div>
         </div>
     </div>
@@ -312,6 +312,10 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script>
+    function addToFav(type , id){
+            window.location.href = "http://localhost/symphony/users/addToFav/" + type + "/" + id;
+    }
+
     const cart = document.querySelector(".cart");
     Redirect();
     function Redirect() {

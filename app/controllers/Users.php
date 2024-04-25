@@ -2684,4 +2684,9 @@ class Users extends Controller
             $this->view('users/viewItem', $data);
         }
     }
+
+    public function addToFav($type , $id)
+    {
+
+    }
 }
