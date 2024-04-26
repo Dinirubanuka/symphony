@@ -118,6 +118,7 @@ function Redirect() {
             console.log('notifications',$notifications);
             console.log('notificationsCount',$notificationsCount);
             console.log('response',response);
+            console.log('orgdata',Orgdata);
             displaydata($data);
             displayNotifications($notifications, $notificationsCount);
             console.log('method');
@@ -271,6 +272,23 @@ function search() {
         }
     });
 }
+
+function airCondition() {
+    var selectedItems = []; // Initialize an empty array to store selected items
+
+    // Retrieve the selected preference from the checkbox
+    var airConditionPreference = document.querySelector('.airCondition input:checked').parentNode.textContent.trim();
+
+    // Iterate over Orgdata array and filter items based on selected preference
+    Orgdata.forEach(function(item) {
+        if (item.airCondition === airConditionPreference.toLowerCase()) {
+            selectedItems.push(item); // If airCondition matches the selected preference, push the item into selectedItems array
+        }
+    });
+        displaydata(selectedItems);
+    console.log(selectedItems); // Output the array of selected items
+}
+
 
 
 function viewItem(productId){
