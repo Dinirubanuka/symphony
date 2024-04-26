@@ -89,7 +89,6 @@ function Redirect() {
             $data = JSON.parse(JSON.stringify(response.inventory));
             Orgdata = JSON.parse(JSON.stringify(response.inventory));
             console.log('response', response);
-            console.log('data' , $data);
             displaydata($data);
             console.log('method');
         },
@@ -98,6 +97,8 @@ function Redirect() {
         }
     });
 }
+
+
 
 function Delete(productId) {
     var confirmed = confirm("Are you sure you want to delete this singer?");

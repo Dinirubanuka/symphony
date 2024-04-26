@@ -205,7 +205,7 @@ function displaydata(data){
                 `<h3>Title:`+item.Title+`</h3>`+
                 `<p>Air condition: `+item.airCondition+`</p>`+
                 `<p>Locations:  `+item.location+`</p>`+
-                `<p>Price(LKR): `+item.unit_price+`</p>`+
+                `<p>Price(LKR): `+item.unit_price+`.00</p>`+
                 `<p>`+stockText+`</p>`+
                 `</div>`+
                 `</div>`+
@@ -241,31 +241,37 @@ function updateDisplayedData() {
 }
 
 //search
-document.getElementById("search-item").addEventListener("keyup" , search);
-function search(){
+document.getElementById("search-item").addEventListener("keyup", search);
+
+function search() {
     const searchBox = document.getElementById("search-item").value.toUpperCase();
-    // const storeItems = document.getElementById("");
     const products = document.querySelectorAll(".item-container");
 
-
     products.forEach(product => {
-        const titleElement = product.querySelector("h3");
-        const brand = product.querySelector("p:nth-child(2)");
-        const model = product.querySelector("p:nth-child(3)");
+        const titleElement = product.querySelector(".item-info h3");
+        const airConditionElement = product.querySelector(".item-info p:nth-of-type(1)");
+        const locationElement = product.querySelector(".item-info p:nth-of-type(2)");
+        const priceElement = product.querySelector(".item-info p:nth-of-type(3)");
+        const stockElement = product.querySelector(".item-info p:nth-of-type(4)");
 
-        if (titleElement || brand || model) {
-            const textValue = titleElement.textContent || titleElement.innerHTML;
-            const brandValue = brand.textContent || brand.innerHTML;
-            const modelValue = model.textContent || model.innerHTML;
+        const title = titleElement.textContent || titleElement.innerHTML;
+        const airCondition = airConditionElement.textContent || airConditionElement.innerHTML;
+        const location = locationElement.textContent || locationElement.innerHTML;
+        const price = priceElement.textContent || priceElement.innerHTML;
+        const stock = stockElement.textContent || stockElement.innerHTML;
 
-            if (textValue.toUpperCase().indexOf(searchBox) > -1 || brandValue.toUpperCase().indexOf(searchBox) > -1 || modelValue.toUpperCase().indexOf(searchBox) > -1) {
-                product.style.display = "";
-            } else {
-                product.style.display = "none";
-            }
+        const searchValues = [title, airCondition, location, price, stock];
+
+        const match = searchValues.some(value => value.toUpperCase().indexOf(searchBox) > -1);
+
+        if (match) {
+            product.style.display = "";
+        } else {
+            product.style.display = "none";
         }
     });
 }
+
 
 function viewItem(productId){
     window.location.href = 'http://localhost/symphony/users/viewStudio/'+productId ;

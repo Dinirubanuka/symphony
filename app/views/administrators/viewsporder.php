@@ -58,15 +58,15 @@
                               <td><?php echo $data['order_data']->qty ?></td>
                               <td><?php echo $data['order_data']->start_date ?></td>
                               <td><?php echo $data['order_data']->end_date ?></td>
-                              <td>LKR. <?php echo $data['product_data']->unit_price ?></td>
-                              <td>LKR. <?php echo $data['order_data']->total ?></td>
+                              <td>LKR. <?php echo $data['product_data']->unit_price ?>.00</td>
+                              <td>LKR. <?php echo $data['order_data']->total ?>.00</td>
                               <td class="status-<?php echo $data['order_data']->status ?>"><?php echo $data['order_data']->status ?></td>
                           </tr>
                       </tbody>
                       <tfoot>
                           <tr>
                               <td colspan="7" style="text-align: right;"><strong>Total:</strong></td>
-                              <td>LKR. <?php echo $data['order_data']->total ?></td>
+                              <td>LKR. <?php echo $data['order_data']->total ?>.00</td>
                           </tr>
                       </tfoot>
                   </table>

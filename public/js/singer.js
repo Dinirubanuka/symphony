@@ -77,6 +77,7 @@ hamburgerBtn.addEventListener("click", toggleHamburger);
 
 // Display data
 const accReq = document.querySelector(".account-requests");
+const notifications = document.querySelector(".notifications");
 
 Redirect();
 
@@ -88,15 +89,73 @@ function Redirect() {
         success: function (response) {
             $data = JSON.parse(JSON.stringify(response.inventory));
             Orgdata = JSON.parse(JSON.stringify(response.inventory));
+            $notifications = JSON.parse(JSON.stringify(response.notifications));
+            $count = JSON.parse(JSON.stringify(response.count));
             console.log('response', response);
-            console.log('data' , $data);
             displaydata($data);
+            displayNotifications($notifications, $count);
             console.log('method');
         },
         error: function (error) {
             console.error('Error:', error);
         }
     });
+}
+
+function addEventListeners() {
+    const notificationBtn = document.getElementById('notificationBtn');
+    const notificationDropdown = document.getElementById('notificationDropdown');
+
+    // Toggle dropdown menu when notification button is clicked
+    notificationBtn.addEventListener('click', function () {
+        if (notificationDropdown.style.display === 'block') {
+            notificationDropdown.style.display = 'none';
+        } else {
+            notificationDropdown.style.display = 'block';
+        }
+    });
+
+    // Close notification when close button is clicked
+    const closeButtons = document.querySelectorAll('.close-btn');
+    closeButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            const notificationItem = button.parentNode;
+            notificationItem.style.display = 'none';
+        });
+    });
+
+    // Mark all notifications as read when "Mark All as Read" button is clicked
+    const markAllAsReadBtn = document.querySelector('.mark-all-as-read-btn');
+    markAllAsReadBtn.addEventListener('click', function () {
+        const notificationItems = document.querySelectorAll('.notification-item');
+        notificationItems.forEach(function (item) {
+            item.style.display = 'none';
+        });
+        window.location.href = 'http://localhost/symphony/users/markNotifications';
+    });
+}
+
+function displayNotifications(notificationsData, count) {
+    let text = "";
+    text += `<button class="notification-btn" id="notificationBtn"><i class="fa-solid fa-bell"></i></button>` +
+        `<p class="badge">` + count + `</p>` +
+        `<div class="notification-wrapper">` +
+        `<div class="notification-dropdown" id="notificationDropdown">` +
+        `<ul class="notification-list">`;
+
+    // Assuming notificationsData is an array of notification texts
+    notificationsData.forEach(function (notification, index) {
+        text += `<li class="notification-item">` + notification.data + ` <button class="close-btn">x</button></li>`;
+    });
+
+    text += `</ul>` +
+        `<button class="mark-all-as-read-btn">Mark All as Read</button>` +
+        `</div>` +
+        `</div>`;
+    notifications.innerHTML = text;
+
+    // Add event listeners to the newly created elements
+    addEventListeners();
 }
 
 function Delete(productId) {
@@ -241,7 +300,7 @@ function displaydata(data) {
                 `<p>` + stockText + `</p>` +
                 <!-- User reviews go here -->
                 `<div class="user-review">` +
-                `<a href="" style="font-size: 0.9rem;">Read Customer Reviews</a>` +
+                `<a href="http://localhost/symphony/serviceProviders/reviewSinger/` + item.product_id +`" style="font-size: 0.9rem;">Read Customer Reviews</a>` +
                 `</div>` +
                 `</div>` +
                 `</div>` +

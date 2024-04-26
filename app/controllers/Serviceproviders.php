@@ -7,6 +7,7 @@ class serviceproviders extends Controller
     public function __construct()
     {
         $this->serviceProviderModel = $this->model('serviceprovider');
+        $this->userModel = $this->model('User');
     }
 
     public function index()
@@ -60,8 +61,12 @@ class serviceproviders extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $inventory = $this->serviceProviderModel->inventory($_SESSION['serviceprovider_id']);
+            $notifications = $this->serviceProviderModel->getNotifications($_SESSION['serviceprovider_id'], date('Y-m-d H:i:s'));
+            $count = count($notifications);
             $data = [
-                'inventory' => $inventory
+                'inventory' => $inventory,
+                'notifications' => $notifications,
+                'count' => $count
             ];
         }
         header('Content-Type: application/json');
@@ -73,8 +78,12 @@ class serviceproviders extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $inventory = $this->serviceProviderModel->singer($_SESSION['serviceprovider_id']);
+            $notifications = $this->serviceProviderModel->getNotifications($_SESSION['serviceprovider_id'], date('Y-m-d H:i:s'));
+            $count = count($notifications);
             $data = [
-                'inventory' => $inventory
+                'inventory' => $inventory,
+                'notifications' => $notifications,
+                'count' => $count
             ];
         }
         $log_data = [
@@ -94,8 +103,12 @@ class serviceproviders extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $inventory = $this->serviceProviderModel->studio($_SESSION['serviceprovider_id']);
+            $notifications = $this->serviceProviderModel->getNotifications($_SESSION['serviceprovider_id'], date('Y-m-d H:i:s'));
+            $count = count($notifications);
             $data = [
-                'inventory' => $inventory
+                'inventory' => $inventory,
+                'notifications' => $notifications,
+                'count' => $count
             ];
         }
         $log_data = [
@@ -115,8 +128,12 @@ class serviceproviders extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $inventory = $this->serviceProviderModel->band($_SESSION['serviceprovider_id']);
+            $notifications = $this->serviceProviderModel->getNotifications($_SESSION['serviceprovider_id'], date('Y-m-d H:i:s'));
+            $count = count($notifications);
             $data = [
-                'inventory' => $inventory
+                'inventory' => $inventory,
+                'notifications' => $notifications,
+                'count' => $count
             ];
         }
         $log_data = [
@@ -137,8 +154,12 @@ class serviceproviders extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $inventory = $this->serviceProviderModel->musician($_SESSION['serviceprovider_id']);
+            $notifications = $this->serviceProviderModel->getNotifications($_SESSION['serviceprovider_id'], date('Y-m-d H:i:s'));
+            $count = count($notifications);
             $data = [
-                'inventory' => $inventory
+                'inventory' => $inventory,
+                'notifications' => $notifications,
+                'count' => $count
             ];
         }
         $log_data = [
@@ -186,7 +207,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img1_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
                 $bool = move_uploaded_file($tmp1_name, $img_upload_path);
             }
 
@@ -196,7 +217,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img2_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
                 $bool = move_uploaded_file($tmp2_name, $img_upload_path);
             }
 
@@ -206,7 +227,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img3_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
                 $bool = move_uploaded_file($tmp3_name, $img_upload_path);
             }
 
@@ -216,7 +237,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img4_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img4_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
                 $bool = move_uploaded_file($tmp4_name, $img_upload_path);
             }
 
@@ -395,7 +416,7 @@ class serviceproviders extends Controller
                     $img_ex = pathinfo($img4_name, PATHINFO_EXTENSION);
                     $img_ex_lc = strtolower($img_ex);
                     $new_img4_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
+                    $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
                     $bool = move_uploaded_file($tmp4_name, $img_upload_path);
                 }
 
@@ -581,7 +602,7 @@ class serviceproviders extends Controller
                     $img_ex = pathinfo($img4_name, PATHINFO_EXTENSION);
                     $img_ex_lc = strtolower($img_ex);
                     $new_img4_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
+                    $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
                     $bool = move_uploaded_file($tmp4_name, $img_upload_path);
                 }
 
@@ -840,7 +861,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
                 $bool = move_uploaded_file($tmp_name, $img_upload_path);
 
                 if ($this->serviceProviderModel->photoUpdate($new_img_name)) {
@@ -942,7 +963,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img1_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
                 $bool = move_uploaded_file($tmp1_name, $img_upload_path);
 
                 $data = [
@@ -958,7 +979,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img2_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
                 $bool = move_uploaded_file($tmp2_name, $img_upload_path);
 
                 $data = [
@@ -973,7 +994,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img3_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
                 $bool = move_uploaded_file($tmp3_name, $img_upload_path);
 
                 $data = [
@@ -1159,7 +1180,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img1_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
                 $bool = move_uploaded_file($tmp1_name, $img_upload_path);
             }
 
@@ -1169,7 +1190,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img2_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
                 $bool = move_uploaded_file($tmp2_name, $img_upload_path);
             }
 
@@ -1179,7 +1200,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img3_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
                 $bool = move_uploaded_file($tmp3_name, $img_upload_path);
             }
             // Init data
@@ -1400,7 +1421,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img1_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
                 $bool = move_uploaded_file($tmp1_name, $img_upload_path);
             }
 
@@ -1410,7 +1431,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img2_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
                 $bool = move_uploaded_file($tmp2_name, $img_upload_path);
             }
 
@@ -1420,7 +1441,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img3_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
                 $bool = move_uploaded_file($tmp3_name, $img_upload_path);
             }
 
@@ -1734,7 +1755,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img1_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
                 $bool = move_uploaded_file($tmp1_name, $img_upload_path);
             }
 
@@ -1744,7 +1765,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img2_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
                 $bool = move_uploaded_file($tmp2_name, $img_upload_path);
             }
 
@@ -1754,7 +1775,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img3_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
                 $bool = move_uploaded_file($tmp3_name, $img_upload_path);
             }
 
@@ -1764,7 +1785,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img4_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img4_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
                 $bool = move_uploaded_file($tmp4_name, $img_upload_path);
             }
 
@@ -1774,7 +1795,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img5_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img5_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img5_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img5_name;
                 $bool = move_uploaded_file($tmp5_name, $img_upload_path);
             }
 
@@ -1910,7 +1931,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img1_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img1_name;
                 $bool = move_uploaded_file($tmp1_name, $img_upload_path);
 
                 $data = [
@@ -1926,7 +1947,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img2_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img2_name;
                 $bool = move_uploaded_file($tmp2_name, $img_upload_path);
 
                 $data = [
@@ -1942,7 +1963,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img3_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img3_name;
                 $bool = move_uploaded_file($tmp3_name, $img_upload_path);
 
                 $data = [
@@ -2435,7 +2456,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img1_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/sp_validations/' . $new_img1_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/sp_validations/' . $new_img1_name;
                 $bool = move_uploaded_file($tmp1_name, $img_upload_path);
             }
 
@@ -2445,7 +2466,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img2_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/sp_validations/' . $new_img2_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/sp_validations/' . $new_img2_name;
                 $bool = move_uploaded_file($tmp2_name, $img_upload_path);
             }
 
@@ -2455,7 +2476,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img3_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/sp_validations/' . $new_img3_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/sp_validations/' . $new_img3_name;
                 $bool = move_uploaded_file($tmp3_name, $img_upload_path);
             }
 
@@ -2465,7 +2486,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img4_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img4_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/sp_validations/' . $new_img3_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/sp_validations/' . $new_img3_name;
                 $bool = move_uploaded_file($tmp4_name, $img_upload_path);
             }
 
@@ -2475,7 +2496,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img5_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img5_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/sp_validations/' . $new_img3_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/sp_validations/' . $new_img3_name;
                 $bool = move_uploaded_file($tmp5_name, $img_upload_path);
             }
             // Sanitize POST data
@@ -2491,7 +2512,7 @@ class serviceproviders extends Controller
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
                 $bool = move_uploaded_file($tmp_name, $img_upload_path);
             }
             // Init data
@@ -2997,7 +3018,7 @@ class serviceproviders extends Controller
     {
         $inventory = $this->serviceProviderModel->inventory($_SESSION['serviceprovider_id']);
         $data = [
-            'inventory' => $inventory
+            'inventory' => $inventory,
         ];
         $log_data = [
             'user_type' => 'Service Provider',
@@ -3098,7 +3119,7 @@ class serviceproviders extends Controller
                     $img_ex = pathinfo($img4_name, PATHINFO_EXTENSION);
                     $img_ex_lc = strtolower($img_ex);
                     $new_img4_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
+                    $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/serviceProvider/' . $new_img4_name;
                     $bool = move_uploaded_file($tmp4_name, $img_upload_path);
                 }
 
@@ -3215,4 +3236,699 @@ class serviceproviders extends Controller
         }
     }
 
+    public function reviewItem($product_id){
+        $type = 'Equipment';
+        $this->viewAll($product_id, $type);
+    }
+
+    public function reviewStudio($product_id){
+        $type = 'Studio';
+        $this->viewAll($product_id, $type);
+    }
+
+    public function reviewSinger($product_id){
+        $type = 'Singer';
+        $this->viewAll($product_id, $type);
+    }
+
+    public function reviewBand($product_id){
+        $type = 'Band';
+        $this->viewAll($product_id, $type);
+    }
+
+    public function reviewMusician($product_id){
+        $type = 'Musician';
+        $this->viewAll($product_id, $type);
+    }
+
+    public function viewAll($product_id, $type){
+        if($type == 'Equipment'){
+            $data = $this->userModel->viewItem($product_id);
+            $reviews = $this->userModel->viewreviews($product_id, $type);
+        }
+        if($type == 'Studio'){
+            $data = $this->userModel->viewStudio($product_id);
+            $reviews = $this->userModel->viewreviews($product_id, $type);
+        }
+
+        if($type == 'Singer'){
+            $data = $this->userModel->viewSinger($product_id);
+            $reviews = $this->userModel->viewreviews($product_id, $type);
+        }
+
+        if($type == 'Band'){
+            $data = $this->userModel->viewBand($product_id);
+            $reviews = $this->userModel->viewreviews($product_id, $type);
+        }
+
+        if($type == 'Musician'){
+            $data = $this->userModel->viewMusician($product_id);
+            $reviews = $this->userModel->viewreviews($product_id, $type);
+        }
+        $user = $this->userModel->view($_SESSION['user_id']);
+        $purchased = false;
+        if($reviews){
+            $count = 0;
+            $star1 = 0;
+            $star2 = 0;
+            $star3 = 0;
+            $star4 = 0;
+            $star5 = 0;
+            $rating = 0;
+            foreach ($reviews as $review){
+                $count = $count + 1;
+                switch ($review->rating) {
+                    case 1:
+                        $star1 = $star1 + 1;
+                        break;
+                    case 2:
+                        $star2 = $star2 + 1;
+                        break;
+                    case 3:
+                        $star3 = $star3 + 1;
+                        break;
+                    case 4:
+                        $star4 = $star4 + 1;
+                        break;
+                    case 5:
+                        $star5 = $star5 + 1;
+                        break;
+                }
+            }
+            if($count != 0){
+                $rating = ($star1 + $star2*2 + $star3*3 + $star4*4 + $star5*5)/$count;
+            }
+        } else {
+            $rating = 0;
+            $star1 = 0;
+            $star2 = 0;
+            $star3 = 0;
+            $star4 = 0;
+            $star5 = 0;
+            $count = 0;
+        }
+        $productPurchased = $this->userModel->checkProductPurchased($product_id, $_SESSION['user_id'], 'Completed', $type);
+        if($productPurchased){
+            $purchased = true;
+        }
+        if($data){
+            if ($type == 'Equipment'){
+                $data =[
+                    'product_id'=>$data->product_id,
+                    'created_by'=>$data->created_by,
+                    'category'=>$data->category,
+                    'brand'=>$data->brand,
+                    'model'=>$data->model,
+                    'quantity'=>$data->quantity,
+                    'unit_price'=>$data->unit_price,
+                    'photo_1'=>$data->photo_1,
+                    'photo_2'=>$data->photo_2,
+                    'photo_3'=>$data->photo_3,
+                    'Title'=>$data->Title,
+                    'Description'=>$data->Description,
+                    'outOfStock'=>$data->outOfStock,
+                    'createdDate'=>$data->createdDate,
+                    'warranty'=>$data->warranty,
+                    'name'=>$user->name,
+                    'photo'=>$user->profile_photo,
+                    'reviews'=>$reviews,
+                    'rating'=>$rating,
+                    'count'=>$count,
+                    'star1'=>$star1,
+                    'star2'=>$star2,
+                    'star3'=>$star3,
+                    'star4'=>$star4,
+                    'star5'=>$star5,
+                    'availability' => 'notChecked',
+                    'quantity_selected' => '',
+                    'start_date' => '',
+                    'end_date' => '',
+                    'purchased' => $purchased,
+                    'type' => $type
+                ];
+                $this->view('serviceproviders/viewReviews',$data);
+
+            } else if ($type == 'Studio'){
+                $data = [
+                    'product_id' => $data->product_id,
+                    'created_by' => $data->created_by,
+                    'category' => $data->category,
+                    'brand' => $data->brand,
+                    'model' => $data->model,
+                    'quantity' => $data->quantity,
+                    'unit_price' => $data->unit_price,
+                    'photo_1' => $data->photo_1,
+                    'photo_2' => $data->photo_2,
+                    'photo_3' => $data->photo_3,
+                    'Title' => $data->Title,
+                    'Description' => $data->Description,
+                    'outOfStock' => $data->outOfStock,
+                    'createdDate' => $data->createdDate,
+                    'warranty' => $data->warranty,
+                    'location' => $data->location,
+                    'instrument' => $data->instrument,
+                    'descriptionSounds' => $data->descriptionSounds,
+                    'descriptionStudio' => $data->descriptionStudio,
+                    'telephoneNumber' => $data->telephoneNumber,
+                    'videoLink' => $data->videoLink,
+                    'airCondition' => $data->airCondition,
+                    'status' => $data->status,
+                    'name'=>$user->name,
+                    'photo'=>$user->profile_photo,
+                    'reviews'=>$reviews,
+                    'rating'=>$rating,
+                    'count'=>$count,
+                    'star1'=>$star1,
+                    'star2'=>$star2,
+                    'star3'=>$star3,
+                    'star4'=>$star4,
+                    'star5'=>$star5,
+                    'availability' => 'notChecked',
+                    'quantity_selected' => '1',
+                    'start_date' => '',
+                    'end_date' => '',
+                    'purchased' => $purchased,
+                    'type' => $type
+                ];
+                $this->view('serviceproviders/viewStudioReviews',$data);
+
+            } else if ($type == 'Singer'){
+                $data = [
+                    'product_id' => $data->product_id,
+                    'created_by' => $data->created_by,
+                    'category' => $data->category,
+                    'brand' => $data->brand,
+                    'model' => $data->model,
+                    'quantity' => $data->quantity,
+                    'unit_price' => $data->unit_price,
+                    'photo_1' => $data->photo_1,
+                    'photo_2' => $data->photo_2,
+                    'photo_3' => $data->photo_3,
+                    'Title' => $data->Title,
+                    'Description' => $data->Description,
+                    'outOfStock' => $data->outOfStock,
+                    'createdDate' => $data->createdDate,
+                    'warranty' => $data->warranty,
+                    'singer_name' => $data->name,
+                    'nickName' => $data->nickName,
+                    'telephoneNumber' => $data->telephoneNumber,
+                    'videoLink' => $data->videoLink,
+                    'location' => $data->location,
+                    'instrument' => $data->instrument,
+                    'singerPhoto' => $data->singerPhoto,
+                    'email' => $data->email,
+                    'status' => $data->status,
+                    'name'=>$user->name,
+                    'photo'=>$user->profile_photo,
+                    'reviews'=>$reviews,
+                    'rating'=>$rating,
+                    'count'=>$count,
+                    'star1'=>$star1,
+                    'star2'=>$star2,
+                    'star3'=>$star3,
+                    'star4'=>$star4,
+                    'star5'=>$star5,
+                    'availability' => 'notChecked',
+                    'quantity_selected' => '1',
+                    'start_date' => '',
+                    'end_date' => '',
+                    'purchased' => $purchased,
+                    'type' => $type
+                ];
+                $this->view('serviceproviders/viewSingerReviews',$data);
+
+            } else if ($type == 'Musician'){
+                $data = [
+                    'product_id' => $data->product_id,
+                    'created_by' => $data->created_by,
+                    'category' => $data->category,
+                    'brand' => $data->brand,
+                    'model' => $data->model,
+                    'quantity' => $data->quantity,
+                    'unit_price' => $data->unit_price,
+                    'photo_1' => $data->photo_1,
+                    'photo_2' => $data->photo_2,
+                    'photo_3' => $data->photo_3,
+                    'Title' => $data->Title,
+                    'Description' => $data->Description,
+                    'outOfStock' => $data->outOfStock,
+                    'createdDate' => $data->createdDate,
+                    'warranty' => $data->warranty,
+                    'musician_name' => $data->name,
+                    'nickName' => $data->nickName,
+                    'telephoneNumber' => $data->telephoneNumber,
+                    'videoLink' => $data->videoLink,
+                    'location' => $data->location,
+                    'instrument' => $data->instrument,
+                    'singerPhoto' => $data->singerPhoto,
+                    'email' => $data->email,
+                    'status' => $data->status,
+                    'name'=>$user->name,
+                    'photo'=>$user->profile_photo,
+                    'reviews'=>$reviews,
+                    'rating'=>$rating,
+                    'count'=>$count,
+                    'star1'=>$star1,
+                    'star2'=>$star2,
+                    'star3'=>$star3,
+                    'star4'=>$star4,
+                    'star5'=>$star5,
+                    'availability' => 'notChecked',
+                    'quantity_selected' => '1',
+                    'start_date' => '',
+                    'end_date' => '',
+                    'purchased' => $purchased,
+                    'type' => $type
+                ];
+                $this->view('serviceproviders/viewMusicianReviews',$data);
+            } else if ($type == 'Band'){
+                $data = [
+                    'product_id' => $data->product_id,
+                    'created_by' => $data->created_by,
+                    'category' => $data->category,
+                    'brand' => $data->brand,
+                    'model' => $data->model,
+                    'unit_price' => $data->unit_price,
+                    'quantity' => $data->quantity,
+                    'photo_1' => $data->photo_1,
+                    'photo_2' => $data->photo_2,
+                    'photo_3' => $data->photo_3,
+                    'Title' => $data->Title,
+                    'Description' => $data->Description,
+                    'outOfStock' => $data->outOfStock,
+                    'createdDate' => $data->createdDate,
+                    'warranty' => $data->warranty,
+                    'videoLink' => $data->videoLink,
+                    'instrument' => $data->instrument,
+                    'email' => $data->email,
+                    'telephoneNumber' => $data->telephoneNumber,
+                    'memberCount' => $data->memberCount,
+                    'leaderPhoto' => $data->leaderPhoto,
+                    'bandPhoto' => $data->bandPhoto,
+                    'location' => $data->location,
+                    'leaderName' => $data->leaderName,
+                    'status' => $data->status,
+                    'name'=>$user->name,
+                    'photo'=>$user->profile_photo,
+                    'reviews'=>$reviews,
+                    'rating'=>$rating,
+                    'count'=>$count,
+                    'star1'=>$star1,
+                    'star2'=>$star2,
+                    'star3'=>$star3,
+                    'star4'=>$star4,
+                    'star5'=>$star5,
+                    'availability' => 'notChecked',
+                    'quantity_selected' => '1',
+                    'start_date' => '',
+                    'end_date' => '',
+                    'purchased' => $purchased,
+                    'type' => $type
+                ];
+                $this->view('serviceproviders/viewBandReviews',$data);
+            }
+        } else {
+            die('Something went wrong while viewing the product');
+        }
+    }
+
+    public function generateReports(){
+        $sp = $this->serviceProviderModel->view($_SESSION['serviceprovider_id']);
+        $orders = $this->serviceProviderModel->getOrders($_SESSION['serviceprovider_id']);
+        $count_week = [
+            '6_7_days' => 0,
+            '5_6_days' => 0,
+            '4_5_days' => 0,
+            '3_4_days' => 0,
+            '2_3_days' => 0,
+            '1_2_days' => 0,
+            '0_1_days' => 0,
+        ];
+        
+        $count_8weeks = [
+            '7_to_8_weeks' => 0,
+            '6_to_7_weeks' => 0,
+            '5_to_6_weeks' => 0,
+            '4_to_5_weeks' => 0,
+            '3_to_4_weeks' => 0,
+            '2_to_3_weeks' => 0,
+            '1_to_2_weeks' => 0,
+            '0_to_1_week' => 0,
+        ];
+        
+        $count_year = [
+            '11_12_months' => 0,
+            '10_11_months' => 0,
+            '9_10_months' => 0,
+            '8_9_months' => 0,
+            '7_8_months' => 0,
+            '6_7_months' => 0,
+            '5_6_months' => 0,
+            '4_5_months' => 0,
+            '3_4_months' => 0,
+            '2_3_months' => 0,
+            '1_2_months' => 0,
+            '0_1_month' => 0,
+        ];
+
+        $lifetimeEarnings = 0;
+        $lifetimeOrders = 0;
+        foreach ($orders as $order){
+            $date = new DateTime($order->order_placed_on);
+            $timestamp = $date->getTimestamp();
+            if ($timestamp >= strtotime('-1 days')) {
+                $count_week['0_1_days'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-2 days') && $timestamp < strtotime('-1 days')) {
+                $count_week['1_2_days'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-3 days') && $timestamp < strtotime('-2 days')) {
+                $count_week['2_3_days'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-4 days') && $timestamp < strtotime('-3 days')) {
+                $count_week['3_4_days'] += $order->total;
+            } 
+            if ($timestamp >= strtotime('-5 days') && $timestamp < strtotime('-4 days')) {
+                $count_week['4_5_days'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-6 days') && $timestamp < strtotime('-5 days')) {
+                $count_week['5_6_days'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-7 days') && $timestamp < strtotime('-6 days')) {
+                $count_week['6_7_days'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-1 week')) {
+                $count_8weeks['0_to_1_week'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-2 weeks') && $timestamp < strtotime('-1 week')) {
+                $count_8weeks['1_to_2_weeks'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-3 weeks') && $timestamp < strtotime('-2 weeks')) {
+                $count_8weeks['2_to_3_weeks'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-4 weeks') && $timestamp < strtotime('-3 weeks')) {
+                $count_8weeks['3_to_4_weeks'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-5 weeks') && $timestamp < strtotime('-4 weeks')) {
+                $count_8weeks['4_to_5_weeks'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-6 weeks') && $timestamp < strtotime('-5 weeks')) {
+                $count_8weeks['5_to_6_weeks'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-7 weeks') && $timestamp < strtotime('-6 weeks')) {
+                $count_8weeks['6_to_7_weeks'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-8 weeks') && $timestamp < strtotime('-7 weeks')) {
+                $count_8weeks['7_to_8_weeks'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-1 month')) {
+                $count_year['0_1_month'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-2 months') && $timestamp < strtotime('-1 month')) {
+                $count_year['1_2_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-3 months') && $timestamp < strtotime('-2 months')) {
+                $count_year['2_3_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-4 months') && $timestamp < strtotime('-3 months')) {
+                $count_year['3_4_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-5 months') && $timestamp < strtotime('-4 months')) {
+                $count_year['4_5_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-6 months') && $timestamp < strtotime('-5 months')) {
+                $count_year['5_6_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-7 months') && $timestamp < strtotime('-6 months')) {
+                $count_year['6_7_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-8 months') && $timestamp < strtotime('-7 months')) {
+                $count_year['7_8_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-9 months') && $timestamp < strtotime('-8 months')) {
+                $count_year['8_9_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-10 months') && $timestamp < strtotime('-9 months')) {
+                $count_year['9_10_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-11 months') && $timestamp < strtotime('-10 months')) {
+                $count_year['10_11_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-12 months') && $timestamp < strtotime('-11 months')) {
+                $count_year['11_12_months'] += $order->total;
+            }
+            $lifetimeEarnings += $order->total;
+            $lifetimeOrders += 1;
+        }
+        $spending = [
+            'count_week' => $count_week,
+            'count_8weeks' => $count_8weeks,
+            'count_year' => $count_year
+        ];
+        $activity_24h = [
+            '23_to_24_hours' => 0,
+            '22_to_23_hours' => 0,
+            '21_to_22_hours' => 0,
+            '20_to_21_hours' => 0,
+            '19_to_20_hours' => 0,
+            '18_to_19_hours' => 0,
+            '17_to_18_hours' => 0,
+            '16_to_17_hours' => 0,
+            '15_to_16_hours' => 0,
+            '14_to_15_hours' => 0,
+            '13_to_14_hours' => 0,
+            '12_to_13_hours' => 0,
+            '11_to_12_hours' => 0,
+            '10_to_11_hours' => 0,
+            '9_to_10_hours' => 0,
+            '8_to_9_hours' => 0,
+            '7_to_8_hours' => 0,
+            '6_to_7_hours' => 0,
+            '5_to_6_hours' => 0,
+            '4_to_5_hours' => 0,
+            '3_to_4_hours' => 0,
+            '2_to_3_hours' => 0,
+            '1_to_2_hours' => 0,
+            '0_to_1_hours' => 0,
+        ];
+        
+        $activity_week = [
+            '6_7_days' => 0,
+            '5_6_days' => 0,
+            '4_5_days' => 0,
+            '3_4_days' => 0,
+            '2_3_days' => 0,
+            '1_2_days' => 0,
+            '0_1_days' => 0,
+        ];
+        
+        $activity_8weeks = [
+            '7_to_8_weeks' => 0,
+            '6_to_7_weeks' => 0,
+            '5_to_6_weeks' => 0,
+            '4_to_5_weeks' => 0,
+            '3_to_4_weeks' => 0,
+            '2_to_3_weeks' => 0,
+            '1_to_2_weeks' => 0,
+            '0_to_1_week' => 0,
+        ];
+        
+        $activity_year = [
+            '11_12_months' => 0,
+            '10_11_months' => 0,
+            '9_10_months' => 0,
+            '8_9_months' => 0,
+            '7_8_months' => 0,
+            '6_7_months' => 0,
+            '5_6_months' => 0,
+            '4_5_months' => 0,
+            '3_4_months' => 0,
+            '2_3_months' => 0,
+            '1_2_months' => 0,
+            '0_1_month' => 0,
+        ];
+        $activityData = $this->serviceProviderModel->getActivity($_SESSION['serviceprovider_id']);
+        foreach ($activityData as $activity){
+            $date = new DateTime($activity->date_and_time);
+            $timestamp = $date->getTimestamp();
+            if ($timestamp >= strtotime('-1 hours')) {
+                $activity_24h['0_to_1_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-2 hours') && $timestamp < strtotime('-1 hours')) {
+                $activity_24h['1_to_2_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-3 hours') && $timestamp < strtotime('-2 hours')) {
+                $activity_24h['2_to_3_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-4 hours') && $timestamp < strtotime('-3 hours')) {
+                $activity_24h['3_to_4_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-5 hours') && $timestamp < strtotime('-4 hours')) {
+                $activity_24h['4_to_5_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-6 hours') && $timestamp < strtotime('-5 hours')) {
+                $activity_24h['5_to_6_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-7 hours') && $timestamp < strtotime('-6 hours')) {
+                $activity_24h['6_to_7_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-8 hours') && $timestamp < strtotime('-7 hours')) {
+                $activity_24h['7_to_8_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-9 hours') && $timestamp < strtotime('-8 hours')) {
+                $activity_24h['8_to_9_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-10 hours') && $timestamp < strtotime('-9 hours')) {
+                $activity_24h['9_to_10_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-11 hours') && $timestamp < strtotime('-10 hours')) {
+                $activity_24h['10_to_11_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-12 hours') && $timestamp < strtotime('-11 hours')) {
+                $activity_24h['11_to_12_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-13 hours') && $timestamp < strtotime('-12 hours')) {
+                $activity_24h['12_to_13_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-14 hours') && $timestamp < strtotime('-13 hours')) {
+                $activity_24h['13_to_14_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-15 hours') && $timestamp < strtotime('-14 hours')) {
+                $activity_24h['14_to_15_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-16 hours') && $timestamp < strtotime('-15 hours')) {
+                $activity_24h['15_to_16_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-17 hours') && $timestamp < strtotime('-16 hours')) {
+                $activity_24h['16_to_17_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-18 hours') && $timestamp < strtotime('-17 hours')) {
+                $activity_24h['17_to_18_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-19 hours') && $timestamp < strtotime('-18 hours')) {
+                $activity_24h['18_to_19_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-20 hours') && $timestamp < strtotime('-19 hours')) {
+                $activity_24h['19_to_20_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-21 hours') && $timestamp < strtotime('-20 hours')) {
+                $activity_24h['20_to_21_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-22 hours') && $timestamp < strtotime('-21 hours')) {
+                $activity_24h['21_to_22_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-23 hours') && $timestamp < strtotime('-22 hours')) {
+                $activity_24h['22_to_23_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-24 hours') && $timestamp < strtotime('-23 hours')) {
+                $activity_24h['23_to_24_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-1 days')) {
+                $activity_week['0_1_days'] += 1;
+            }
+            if ($timestamp >= strtotime('-2 days') && $timestamp < strtotime('-1 days')) {
+                $activity_week['1_2_days'] += 1;
+            }
+            if ($timestamp >= strtotime('-3 days') && $timestamp < strtotime('-2 days')) {
+                $activity_week['2_3_days'] += 1;
+            }
+            if ($timestamp >= strtotime('-4 days') && $timestamp < strtotime('-3 days')) {
+                $activity_week['3_4_days'] += 1;
+            }
+            if ($timestamp >= strtotime('-5 days') && $timestamp < strtotime('-4 days')) {
+                $activity_week['4_5_days'] += 1;
+            }
+            if ($timestamp >= strtotime('-6 days') && $timestamp < strtotime('-5 days')) {
+                $activity_week['5_6_days'] += 1;
+            }
+            if ($timestamp >= strtotime('-7 days') && $timestamp < strtotime('-6 days')) {
+                $activity_week['6_7_days'] += 1;
+            }
+            if ($timestamp >= strtotime('-1 week')) {
+                $activity_8weeks['0_to_1_week'] += 1;
+            }
+            if ($timestamp >= strtotime('-2 weeks') && $timestamp < strtotime('-1 week')) {
+                $activity_8weeks['1_to_2_weeks'] += 1;
+            }
+            if ($timestamp >= strtotime('-3 weeks') && $timestamp < strtotime('-2 weeks')) {
+                $activity_8weeks['2_to_3_weeks'] += 1;
+            }
+            if ($timestamp >= strtotime('-4 weeks') && $timestamp < strtotime('-3 weeks')) {
+                $activity_8weeks['3_to_4_weeks'] += 1;
+            }
+            if ($timestamp >= strtotime('-5 weeks') && $timestamp < strtotime('-4 weeks')) {
+                $activity_8weeks['4_to_5_weeks'] += 1;
+            }
+            if ($timestamp >= strtotime('-6 weeks') && $timestamp < strtotime('-5 weeks')) {
+                $activity_8weeks['5_to_6_weeks'] += 1;
+            }
+            if ($timestamp >= strtotime('-7 weeks') && $timestamp < strtotime('-6 weeks')) {
+                $activity_8weeks['6_to_7_weeks'] += 1;
+            }
+            if ($timestamp >= strtotime('-8 weeks') && $timestamp < strtotime('-7 weeks')) {
+                $activity_8weeks['7_to_8_weeks'] += 1;
+            }
+            if ($timestamp >= strtotime('-1 month')) {
+                $activity_year['0_1_month'] += 1;
+            }
+            if ($timestamp >= strtotime('-2 months') && $timestamp < strtotime('-1 month')) {
+                $activity_year['1_2_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-3 months') && $timestamp < strtotime('-2 months')) {
+                $activity_year['2_3_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-4 months') && $timestamp < strtotime('-3 months')) {
+                $activity_year['3_4_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-5 months') && $timestamp < strtotime('-4 months')) {
+                $activity_year['4_5_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-6 months') && $timestamp < strtotime('-5 months')) {
+                $activity_year['5_6_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-7 months') && $timestamp < strtotime('-6 months')) {
+                $activity_year['6_7_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-8 months') && $timestamp < strtotime('-7 months')) {
+                $activity_year['7_8_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-9 months') && $timestamp < strtotime('-8 months')) {
+                $activity_year['8_9_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-10 months') && $timestamp < strtotime('-9 months')) {
+                $activity_year['9_10_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-11 months') && $timestamp < strtotime('-10 months')) {
+                $activity_year['10_11_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-12 months') && $timestamp < strtotime('-11 months')) {
+                $activity_year['11_12_months'] += 1;
+            }
+        }
+        
+        $activityUser = [
+            'activity_24h' => $activity_24h,
+            'activity_week' => $activity_week,
+            'activity_8weeks' => $activity_8weeks,
+            'activity_year' => $activity_year
+        ];
+        $instrumentCount = count($this->serviceProviderModel->inventory($_SESSION['serviceprovider_id']));
+        $studioCount = count($this->serviceProviderModel->studio($_SESSION['serviceprovider_id']));
+        $singerCount = count($this->serviceProviderModel->singer($_SESSION['serviceprovider_id']));
+        $bandCount = count($this->serviceProviderModel->band($_SESSION['serviceprovider_id']));
+        $musicianCount = count($this->serviceProviderModel->musician($_SESSION['serviceprovider_id']));
+        $data = [
+            'sp' => $sp,
+            'lifetimeEarnings' => $lifetimeEarnings,
+            'lifetimeOrders' => $lifetimeOrders,
+            'spending' => $spending,
+            'instrumentCount' => $instrumentCount,
+            'studioCount' => $studioCount,
+            'singerCount' => $singerCount,
+            'bandCount' => $bandCount,
+            'musicianCount' => $musicianCount,
+            'activityUser' => $activityUser
+        ];
+        $this->view('serviceproviders/reports', $data);
+    }
 }

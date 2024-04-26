@@ -113,7 +113,7 @@
                                     <iframe src="<?php echo $data['videoLink']; ?>"></iframe>
                                 </div>
                             <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Instrument: <?php echo $data['instrument']; ?></div></p>
-                            <p>Price per day: <?php echo $data['unit_price']; ?></p>
+                            <p>Price per day: <?php echo $data['unit_price']; ?>.00</p>
                             <p>Last Modified: <?php echo $data['createdDate']; ?></p>
                             <p>Description: <?php echo $data['Description']; ?></p>
                             <div class="date-picker-container">

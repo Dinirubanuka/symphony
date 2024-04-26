@@ -1015,7 +1015,16 @@ class ServiceProvider
         $this->db->bind(':status', 'Unread');
         $this->db->bind(':user_id', $user_id);
         $this->db->bind(':date_time', $date_time);
-        $results = $this->db->single();
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function getActivity($sp_id)
+    {
+        $this->db->query('SELECT * FROM logs WHERE user_id = :user_id AND user_type = :user_type');
+        $this->db->bind(':user_id', $sp_id);
+        $this->db->bind(':user_type', 'Service Provider');
+        $results = $this->db->resultSet();
         return $results;
     }
 }

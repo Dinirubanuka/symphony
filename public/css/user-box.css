@@ -1,0 +1,68 @@
+
+.user-info-box {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.graph-container {
+    flex: 70%;
+    padding: 10px;
+}
+
+.user-details {
+    flex: 30%;
+    padding: 10px;
+}
+
+.user-details h2 {
+    margin: 0 0 10px 0;
+}
+
+.user-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-details ul li {
+    margin-bottom: 5px;
+}
+
+.user-avatar img {
+    margin-left: 90px;
+    width: 100px; /* Adjust width as needed */
+    height: 100px; /* Adjust height as needed */
+    border-radius: 50%; /* Make the image circular */
+    border: 2px solid #fff; /* Add a border around the image */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add a shadow effect */
+    object-fit: cover; /* Maintain aspect ratio and cover entire container */
+}
+
+
+  .main-grid-reports {
+    display: flex;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid columns */
+    grid-gap: 20px; /* Gap between report items */
+    padding: 20px; /* Padding for the grid container */
+}
+
+.report-item {
+    /* Styles for each report item */
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Additional styling for specific report items */
+.report-item h3 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.report-item p {
+    margin-bottom: 0;
+    color: #666;
+}

@@ -33,7 +33,7 @@
                       <div><strong>Title: </strong><?php echo $equipment->Title?></div>
                       <div><strong>Brand: </strong><?php echo $equipment->brand?></div>
                       <div><strong>Model: </strong><?php echo $equipment->model?></div>
-                      <div><strong>Price(LKR): </strong><?php echo $equipment->unit_price?></div>
+                      <div><strong>Price(LKR): </strong><?php echo $equipment->unit_price?>.00</div>
                   </div>
               </div>
           </div>
@@ -53,7 +53,7 @@
                       <div><strong>Title: </strong><?php echo $equipment->Title?></div>
                       <div><strong>Air condition </strong><?php echo $equipment->airCondition?></div>
                       <div><strong>Locations: </strong><?php echo $equipment->location?></div>
-                      <div><strong>Price(LKR): </strong><?php echo $equipment->unit_price?></div>
+                      <div><strong>Price(LKR): </strong><?php echo $equipment->unit_price?>.00</div>
                   </div>
               </div>
           </div>
@@ -73,7 +73,7 @@
                       <div><strong>Title: </strong><?php echo $equipment->Title?></div>
                       <div><strong>Leader Name: </strong><?php echo $equipment->leaderName?></div>
                       <div><strong>Location: </strong><?php echo $equipment->location?></div>
-                      <div><strong>Price(LKR): </strong><?php echo $equipment->unit_price?></div>
+                      <div><strong>Price(LKR): </strong><?php echo $equipment->unit_price?>.00</div>
                   </div>
               </div>
           </div>
@@ -93,7 +93,7 @@
                       <div><strong>Nick Name: </strong><?php echo $equipment->nickName?></div>
                       <div><strong>Name: </strong><?php echo $equipment->name?></div>
                       <div><strong>Location: </strong><?php echo $equipment->location?></div>
-                      <div><strong>Price(LKR): </strong><?php echo $equipment->unit_price?></div>
+                      <div><strong>Price(LKR): </strong><?php echo $equipment->unit_price?>.00</div>
                   </div>
               </div>
           </div>
@@ -112,7 +112,7 @@
                   <div class="item-info">
                       <div><strong>Name: </strong><?php echo $equipment->name?></div>
                       <div><strong>Location: </strong><?php echo $equipment->location?></div>
-                      <div><strong>Price(LKR): </strong><?php echo $equipment->unit_price?></div>
+                      <div><strong>Price(LKR): </strong><?php echo $equipment->unit_price?>.00</div>
                   </div>
               </div>
           </div>

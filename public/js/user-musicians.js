@@ -202,7 +202,7 @@ function displaydata(data){
                 `<div class="item-info">`+
                 `<h3>Name:`+item.name+`</h3>`+
                 `<p>Locations:  `+item.location+`</p>`+
-                `<p>Price(LKR): `+item.unit_price+`</p>`+
+                `<p>Price(LKR): `+item.unit_price+`.00</p>`+
                 `</div>`+
                 `</div>`+
                 `</div>`;
@@ -237,31 +237,33 @@ function updateDisplayedData() {
 }
 
 //search
-document.getElementById("search-item").addEventListener("keyup" , search);
-function search(){
+document.getElementById("search-item").addEventListener("keyup", search);
+
+function search() {
     const searchBox = document.getElementById("search-item").value.toUpperCase();
-    // const storeItems = document.getElementById("");
     const products = document.querySelectorAll(".item-container");
 
-
     products.forEach(product => {
-        const titleElement = product.querySelector("h3");
-        const brand = product.querySelector("p:nth-child(2)");
-        const model = product.querySelector("p:nth-child(3)");
+        const nameElement = product.querySelector(".item-info h3");
+        const locationElement = product.querySelector(".item-info p:nth-of-type(1)");
+        const priceElement = product.querySelector(".item-info p:nth-of-type(2)");
 
-        if (titleElement || brand || model) {
-            const textValue = titleElement.textContent || titleElement.innerHTML;
-            const brandValue = brand.textContent || brand.innerHTML;
-            const modelValue = model.textContent || model.innerHTML;
+        const name = nameElement.textContent || nameElement.innerHTML;
+        const location = locationElement.textContent || locationElement.innerHTML;
+        const price = priceElement.textContent || priceElement.innerHTML;
 
-            if (textValue.toUpperCase().indexOf(searchBox) > -1 || brandValue.toUpperCase().indexOf(searchBox) > -1 || modelValue.toUpperCase().indexOf(searchBox) > -1) {
-                product.style.display = "";
-            } else {
-                product.style.display = "none";
-            }
+        const searchValues = [name, location, price];
+
+        const match = searchValues.some(value => value.toUpperCase().indexOf(searchBox) > -1);
+
+        if (match) {
+            product.style.display = "";
+        } else {
+            product.style.display = "none";
         }
     });
 }
+
 
 function viewItem(productId){
     window.location.href = 'http://localhost/symphony/users/viewMusician/'+productId ;

@@ -117,10 +117,8 @@ function Redirect() {
             $notificationsCount = JSON.parse(JSON.stringify(response.count));
             console.log('notifications',$notifications);
             console.log('notificationsCount',$notificationsCount);
-            console.log('response',response);
             displaydata($data);
             displayNotifications($notifications, $notificationsCount);
-            console.log('method');
         },
         error: function (error) {
             console.error('Error:', error);
@@ -191,19 +189,19 @@ function displaydata(data){
 
     if (inventory && inventory.length > 0) {
         inventory.forEach(function (item) {
-            console.log('Product ID:', item.product_id);
-            console.log('Created By:', item.created_by);
-            console.log('Category:', item.category);
-            console.log('Brand:', item.brand);
-            console.log('Model:', item.model);
-            console.log('Quantity:', item.quantity);
-            console.log('Unit Price:', item.unit_price);
-            console.log('Description:', item.Description);
-            console.log('Photo 1:', item.photo_1);
-            console.log('Photo 2:', item.photo_2);
-            console.log('Photo 3:', item.photo_3);
-            console.log('Title:', item.Title);
-            console.log('------------------------');
+            // console.log('Product ID:', item.product_id);
+            // console.log('Created By:', item.created_by);
+            // console.log('Category:', item.category);
+            // console.log('Brand:', item.brand);
+            // console.log('Model:', item.model);
+            // console.log('Quantity:', item.quantity);
+            // console.log('Unit Price:', item.unit_price);
+            // console.log('Description:', item.Description);
+            // console.log('Photo 1:', item.photo_1);
+            // console.log('Photo 2:', item.photo_2);
+            // console.log('Photo 3:', item.photo_3);
+            // console.log('Title:', item.Title);
+            // console.log('------------------------');
 
             var stockText="";
             if(item.quantity<=0){
@@ -219,8 +217,7 @@ function displaydata(data){
                 `<h3>Title:`+item.Title+`</h3>`+
                 `<p>Brand: `+item.brand+`</p>`+
                 `<p>Model:  `+item.model+`</p>`+
-                `<p>Units Left:  `+item.quantity+`</p>`+
-                `<p>Price(LKR): `+item.unit_price+`</p>`+
+                `<p>Price(LKR): `+item.unit_price+`.00</p>`+
                 `<p>`+stockText+`</p>`+
                 `</div>`+
                 `</div>`+
@@ -229,7 +226,7 @@ function displaydata(data){
         accReq.innerHTML=req;
     } else {
     req +=`<p style="color: #ee087f">No inventory data Available</p>`
-    console.log('No inventory data Available')
+    // console.log('No inventory data Available')
     accReq.innerHTML=req;
 }
 }
@@ -246,13 +243,13 @@ function updateDisplayedData() {
     } else {
         filteredData = JSON.parse(JSON.stringify(Orgdata)).filter(function(item) {
             return selectedCategories.some(function(selectedCategory) {
-                console.log(item.category);
+                // console.log(item.category);
                 return item.category.includes(selectedCategory);
             });
         });
     }
     displaydata(filteredData);
-    console.log(filteredData);
+    // console.log(filteredData);
 }
 
 // function toggleCategory(category) {

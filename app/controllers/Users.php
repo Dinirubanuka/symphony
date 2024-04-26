@@ -85,7 +85,7 @@ class Users extends Controller
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
                 $bool = move_uploaded_file($tmp_name, $img_upload_path);
                 if ($this->userModel->photoUpdate($new_img_name)) {
                     // flash('register_success', 'You are registered and can log in');
@@ -630,7 +630,7 @@ class Users extends Controller
                     $img_ex = pathinfo($img1_name, PATHINFO_EXTENSION);
                     $img_ex_lc = strtolower($img_ex);
                     $new_img1_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/inquiries/' . $new_img1_name;
+                    $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/inquiries/' . $new_img1_name;
                     $bool = move_uploaded_file($tmp1_name, $img_upload_path);
                 }
     
@@ -640,7 +640,7 @@ class Users extends Controller
                     $img_ex = pathinfo($img2_name, PATHINFO_EXTENSION);
                     $img_ex_lc = strtolower($img_ex);
                     $new_img2_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/inquiries/' . $new_img2_name;
+                    $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/inquiries/' . $new_img2_name;
                     $bool = move_uploaded_file($tmp2_name, $img_upload_path);
                 }
     
@@ -650,7 +650,7 @@ class Users extends Controller
                     $img_ex = pathinfo($img3_name, PATHINFO_EXTENSION);
                     $img_ex_lc = strtolower($img_ex);
                     $new_img3_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                    $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/inquiries/' . $new_img3_name;
+                    $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/inquiries/' . $new_img3_name;
                     $bool = move_uploaded_file($tmp3_name, $img_upload_path);
                 }
                 $data = [
@@ -927,7 +927,7 @@ class Users extends Controller
                 $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                 $img_ex_lc = strtolower($img_ex);
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ex_lc;
-                $img_upload_path = 'D:/Xaamp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
+                $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/mag_img/' . $new_img_name;
                 $bool = move_uploaded_file($tmp_name, $img_upload_path);
             }
             $data = [
@@ -1504,7 +1504,7 @@ class Users extends Controller
                 }
                 $cartItem->product_data = $product_data;
             }
-            $total = $subtotal + $subtotal*0.05 + 200.00 + $extra_charge;
+            $total = $subtotal + 200.00 + $extra_charge;
             
             $data =[
                 'cart' => $cart,
@@ -1591,7 +1591,7 @@ class Users extends Controller
                 }
             }
         }
-        $user_data = json_decode(json_encode($this->userModel->view($order->user_id)), true);
+        $user_data = json_decode(json_encode($this->userModel->view($_SESSION['user_id'])), true);
         $data = [
             'orders' => $result,
             'user_data' => $user_data
@@ -2683,5 +2683,382 @@ class Users extends Controller
             // Load view
             $this->view('users/viewItem', $data);
         }
+    }
+
+    public function generateReports()
+    {
+        $user = $this->userModel->view($_SESSION['user_id']);
+        $orders = $this->userModel->getOrdersCompleted($_SESSION['user_id']);
+        $notificaions = $this->userModel->getNotifications($_SESSION['user_id'], date('Y-m-d H:i:s'));
+        $notificationCount = count($notificaions);
+        $count_week = [
+            '6_7_days' => 0,
+            '5_6_days' => 0,
+            '4_5_days' => 0,
+            '3_4_days' => 0,
+            '2_3_days' => 0,
+            '1_2_days' => 0,
+            '0_1_days' => 0,
+        ];
+        
+        $count_8weeks = [
+            '7_to_8_weeks' => 0,
+            '6_to_7_weeks' => 0,
+            '5_to_6_weeks' => 0,
+            '4_to_5_weeks' => 0,
+            '3_to_4_weeks' => 0,
+            '2_to_3_weeks' => 0,
+            '1_to_2_weeks' => 0,
+            '0_to_1_week' => 0,
+        ];
+        
+        $count_year = [
+            '11_12_months' => 0,
+            '10_11_months' => 0,
+            '9_10_months' => 0,
+            '8_9_months' => 0,
+            '7_8_months' => 0,
+            '6_7_months' => 0,
+            '5_6_months' => 0,
+            '4_5_months' => 0,
+            '3_4_months' => 0,
+            '2_3_months' => 0,
+            '1_2_months' => 0,
+            '0_1_month' => 0,
+        ];
+
+        $lifetimeSpending = 0;
+        $lifetimeOrders = 0;
+        foreach ($orders as $order){
+            $date = new DateTime($order->date_and_time);
+            $timestamp = $date->getTimestamp();
+            if ($timestamp >= strtotime('-1 days')) {
+                $count_week['0_1_days'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-2 days') && $timestamp < strtotime('-1 days')) {
+                $count_week['1_2_days'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-3 days') && $timestamp < strtotime('-2 days')) {
+                $count_week['2_3_days'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-4 days') && $timestamp < strtotime('-3 days')) {
+                $count_week['3_4_days'] += $order->total;
+            } 
+            if ($timestamp >= strtotime('-5 days') && $timestamp < strtotime('-4 days')) {
+                $count_week['4_5_days'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-6 days') && $timestamp < strtotime('-5 days')) {
+                $count_week['5_6_days'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-7 days') && $timestamp < strtotime('-6 days')) {
+                $count_week['6_7_days'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-1 week')) {
+                $count_8weeks['0_to_1_week'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-2 weeks') && $timestamp < strtotime('-1 week')) {
+                $count_8weeks['1_to_2_weeks'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-3 weeks') && $timestamp < strtotime('-2 weeks')) {
+                $count_8weeks['2_to_3_weeks'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-4 weeks') && $timestamp < strtotime('-3 weeks')) {
+                $count_8weeks['3_to_4_weeks'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-5 weeks') && $timestamp < strtotime('-4 weeks')) {
+                $count_8weeks['4_to_5_weeks'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-6 weeks') && $timestamp < strtotime('-5 weeks')) {
+                $count_8weeks['5_to_6_weeks'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-7 weeks') && $timestamp < strtotime('-6 weeks')) {
+                $count_8weeks['6_to_7_weeks'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-8 weeks') && $timestamp < strtotime('-7 weeks')) {
+                $count_8weeks['7_to_8_weeks'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-1 month')) {
+                $count_year['0_1_month'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-2 months') && $timestamp < strtotime('-1 month')) {
+                $count_year['1_2_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-3 months') && $timestamp < strtotime('-2 months')) {
+                $count_year['2_3_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-4 months') && $timestamp < strtotime('-3 months')) {
+                $count_year['3_4_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-5 months') && $timestamp < strtotime('-4 months')) {
+                $count_year['4_5_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-6 months') && $timestamp < strtotime('-5 months')) {
+                $count_year['5_6_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-7 months') && $timestamp < strtotime('-6 months')) {
+                $count_year['6_7_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-8 months') && $timestamp < strtotime('-7 months')) {
+                $count_year['7_8_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-9 months') && $timestamp < strtotime('-8 months')) {
+                $count_year['8_9_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-10 months') && $timestamp < strtotime('-9 months')) {
+                $count_year['9_10_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-11 months') && $timestamp < strtotime('-10 months')) {
+                $count_year['10_11_months'] += $order->total;
+            }
+            if ($timestamp >= strtotime('-12 months') && $timestamp < strtotime('-11 months')) {
+                $count_year['11_12_months'] += $order->total;
+            }
+            $lifetimeSpending += $order->total;
+            $lifetimeOrders += 1;
+        }
+        $spending = [
+            'count_week' => $count_week,
+            'count_8weeks' => $count_8weeks,
+            'count_year' => $count_year
+        ];
+        $lifetimeReviews = $this->userModel->getReviews($_SESSION['user_id']);
+        $activity_24h = [
+            '23_to_24_hours' => 0,
+            '22_to_23_hours' => 0,
+            '21_to_22_hours' => 0,
+            '20_to_21_hours' => 0,
+            '19_to_20_hours' => 0,
+            '18_to_19_hours' => 0,
+            '17_to_18_hours' => 0,
+            '16_to_17_hours' => 0,
+            '15_to_16_hours' => 0,
+            '14_to_15_hours' => 0,
+            '13_to_14_hours' => 0,
+            '12_to_13_hours' => 0,
+            '11_to_12_hours' => 0,
+            '10_to_11_hours' => 0,
+            '9_to_10_hours' => 0,
+            '8_to_9_hours' => 0,
+            '7_to_8_hours' => 0,
+            '6_to_7_hours' => 0,
+            '5_to_6_hours' => 0,
+            '4_to_5_hours' => 0,
+            '3_to_4_hours' => 0,
+            '2_to_3_hours' => 0,
+            '1_to_2_hours' => 0,
+            '0_to_1_hours' => 0,
+        ];
+        
+        $activity_week = [
+            '6_7_days' => 0,
+            '5_6_days' => 0,
+            '4_5_days' => 0,
+            '3_4_days' => 0,
+            '2_3_days' => 0,
+            '1_2_days' => 0,
+            '0_1_days' => 0,
+        ];
+        
+        $activity_8weeks = [
+            '7_to_8_weeks' => 0,
+            '6_to_7_weeks' => 0,
+            '5_to_6_weeks' => 0,
+            '4_to_5_weeks' => 0,
+            '3_to_4_weeks' => 0,
+            '2_to_3_weeks' => 0,
+            '1_to_2_weeks' => 0,
+            '0_to_1_week' => 0,
+        ];
+        
+        $activity_year = [
+            '11_12_months' => 0,
+            '10_11_months' => 0,
+            '9_10_months' => 0,
+            '8_9_months' => 0,
+            '7_8_months' => 0,
+            '6_7_months' => 0,
+            '5_6_months' => 0,
+            '4_5_months' => 0,
+            '3_4_months' => 0,
+            '2_3_months' => 0,
+            '1_2_months' => 0,
+            '0_1_month' => 0,
+        ];
+        $activityData = $this->userModel->getActivity($_SESSION['user_id']);
+        foreach ($activityData as $activity){
+            $date = new DateTime($activity->date_and_time);
+            $timestamp = $date->getTimestamp();
+            if ($timestamp >= strtotime('-1 hours')) {
+                $activity_24h['0_to_1_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-2 hours') && $timestamp < strtotime('-1 hours')) {
+                $activity_24h['1_to_2_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-3 hours') && $timestamp < strtotime('-2 hours')) {
+                $activity_24h['2_to_3_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-4 hours') && $timestamp < strtotime('-3 hours')) {
+                $activity_24h['3_to_4_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-5 hours') && $timestamp < strtotime('-4 hours')) {
+                $activity_24h['4_to_5_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-6 hours') && $timestamp < strtotime('-5 hours')) {
+                $activity_24h['5_to_6_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-7 hours') && $timestamp < strtotime('-6 hours')) {
+                $activity_24h['6_to_7_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-8 hours') && $timestamp < strtotime('-7 hours')) {
+                $activity_24h['7_to_8_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-9 hours') && $timestamp < strtotime('-8 hours')) {
+                $activity_24h['8_to_9_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-10 hours') && $timestamp < strtotime('-9 hours')) {
+                $activity_24h['9_to_10_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-11 hours') && $timestamp < strtotime('-10 hours')) {
+                $activity_24h['10_to_11_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-12 hours') && $timestamp < strtotime('-11 hours')) {
+                $activity_24h['11_to_12_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-13 hours') && $timestamp < strtotime('-12 hours')) {
+                $activity_24h['12_to_13_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-14 hours') && $timestamp < strtotime('-13 hours')) {
+                $activity_24h['13_to_14_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-15 hours') && $timestamp < strtotime('-14 hours')) {
+                $activity_24h['14_to_15_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-16 hours') && $timestamp < strtotime('-15 hours')) {
+                $activity_24h['15_to_16_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-17 hours') && $timestamp < strtotime('-16 hours')) {
+                $activity_24h['16_to_17_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-18 hours') && $timestamp < strtotime('-17 hours')) {
+                $activity_24h['17_to_18_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-19 hours') && $timestamp < strtotime('-18 hours')) {
+                $activity_24h['18_to_19_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-20 hours') && $timestamp < strtotime('-19 hours')) {
+                $activity_24h['19_to_20_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-21 hours') && $timestamp < strtotime('-20 hours')) {
+                $activity_24h['20_to_21_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-22 hours') && $timestamp < strtotime('-21 hours')) {
+                $activity_24h['21_to_22_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-23 hours') && $timestamp < strtotime('-22 hours')) {
+                $activity_24h['22_to_23_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-24 hours') && $timestamp < strtotime('-23 hours')) {
+                $activity_24h['23_to_24_hours'] += 1;
+            }
+            if ($timestamp >= strtotime('-1 days')) {
+                $activity_week['0_1_days'] += 1;
+            }
+            if ($timestamp >= strtotime('-2 days') && $timestamp < strtotime('-1 days')) {
+                $activity_week['1_2_days'] += 1;
+            }
+            if ($timestamp >= strtotime('-3 days') && $timestamp < strtotime('-2 days')) {
+                $activity_week['2_3_days'] += 1;
+            }
+            if ($timestamp >= strtotime('-4 days') && $timestamp < strtotime('-3 days')) {
+                $activity_week['3_4_days'] += 1;
+            }
+            if ($timestamp >= strtotime('-5 days') && $timestamp < strtotime('-4 days')) {
+                $activity_week['4_5_days'] += 1;
+            }
+            if ($timestamp >= strtotime('-6 days') && $timestamp < strtotime('-5 days')) {
+                $activity_week['5_6_days'] += 1;
+            }
+            if ($timestamp >= strtotime('-7 days') && $timestamp < strtotime('-6 days')) {
+                $activity_week['6_7_days'] += 1;
+            }
+            if ($timestamp >= strtotime('-1 week')) {
+                $activity_8weeks['0_to_1_week'] += 1;
+            }
+            if ($timestamp >= strtotime('-2 weeks') && $timestamp < strtotime('-1 week')) {
+                $activity_8weeks['1_to_2_weeks'] += 1;
+            }
+            if ($timestamp >= strtotime('-3 weeks') && $timestamp < strtotime('-2 weeks')) {
+                $activity_8weeks['2_to_3_weeks'] += 1;
+            }
+            if ($timestamp >= strtotime('-4 weeks') && $timestamp < strtotime('-3 weeks')) {
+                $activity_8weeks['3_to_4_weeks'] += 1;
+            }
+            if ($timestamp >= strtotime('-5 weeks') && $timestamp < strtotime('-4 weeks')) {
+                $activity_8weeks['4_to_5_weeks'] += 1;
+            }
+            if ($timestamp >= strtotime('-6 weeks') && $timestamp < strtotime('-5 weeks')) {
+                $activity_8weeks['5_to_6_weeks'] += 1;
+            }
+            if ($timestamp >= strtotime('-7 weeks') && $timestamp < strtotime('-6 weeks')) {
+                $activity_8weeks['6_to_7_weeks'] += 1;
+            }
+            if ($timestamp >= strtotime('-8 weeks') && $timestamp < strtotime('-7 weeks')) {
+                $activity_8weeks['7_to_8_weeks'] += 1;
+            }
+            if ($timestamp >= strtotime('-1 month')) {
+                $activity_year['0_1_month'] += 1;
+            }
+            if ($timestamp >= strtotime('-2 months') && $timestamp < strtotime('-1 month')) {
+                $activity_year['1_2_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-3 months') && $timestamp < strtotime('-2 months')) {
+                $activity_year['2_3_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-4 months') && $timestamp < strtotime('-3 months')) {
+                $activity_year['3_4_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-5 months') && $timestamp < strtotime('-4 months')) {
+                $activity_year['4_5_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-6 months') && $timestamp < strtotime('-5 months')) {
+                $activity_year['5_6_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-7 months') && $timestamp < strtotime('-6 months')) {
+                $activity_year['6_7_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-8 months') && $timestamp < strtotime('-7 months')) {
+                $activity_year['7_8_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-9 months') && $timestamp < strtotime('-8 months')) {
+                $activity_year['8_9_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-10 months') && $timestamp < strtotime('-9 months')) {
+                $activity_year['9_10_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-11 months') && $timestamp < strtotime('-10 months')) {
+                $activity_year['10_11_months'] += 1;
+            }
+            if ($timestamp >= strtotime('-12 months') && $timestamp < strtotime('-11 months')) {
+                $activity_year['11_12_months'] += 1;
+            }
+        }
+        
+        $activityUser = [
+            'activity_24h' => $activity_24h,
+            'activity_week' => $activity_week,
+            'activity_8weeks' => $activity_8weeks,
+            'activity_year' => $activity_year
+        ];
+        $data = [
+            'user' => $user,
+            'spending' => $spending,
+            'lifetimeSpending' => $lifetimeSpending,
+            'lifetimeOrders' => $lifetimeOrders,
+            'lifetimeReviews' => count($lifetimeReviews),
+            'activityUser' => $activityUser,
+            'notifications' => $notificaions,
+            'count' => $notificationCount,
+        ];
+        $this->view('users/reports', $data);
     }
 }
