@@ -116,6 +116,7 @@ function Redirect() {
             console.log('notifications',$notifications);
             console.log('notificationsCount',$notificationsCount);
             console.log('response',response);
+            console.log('Orgdata',Orgdata);
             displaydata($data);
             displayNotifications($notifications, $notificationsCount);
             console.log('method');
@@ -219,7 +220,7 @@ function updateDisplayedData() {
     var selectedCategories = $('.equipment-list input:checked').map(function () {
         return $(this).parent().text().trim();
     }).get();
-
+    console.log(selectedCategories);
     var filteredData;
 
     if (selectedCategories.length === 0) {
@@ -227,7 +228,7 @@ function updateDisplayedData() {
     } else {
         filteredData = JSON.parse(JSON.stringify(Orgdata)).filter(function (item) {
             return selectedCategories.some(function (selectedCategory) {
-                return item.location.includes(selectedCategory) || item.category.includes(selectedCategory);
+                return item.instrument.includes(selectedCategory) || item.category.includes(selectedCategory);
             });
         });
     }
