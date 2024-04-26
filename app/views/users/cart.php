@@ -51,14 +51,14 @@
                                     <?php $atLeastOneNotAvailable = true; ?>
                                 <?php else : ?>
                                     <h2 class="full-price">
-                                        LKR. <?php echo $cart->total ?>
+                                        LKR. <?php echo $cart->total ?>.00
                                     </h2>
                                 <?php endif; ?>
 
                                 <h2 class="price">
                                     <p>Quantity: <?php echo $cart->quantity; ?></p>
 
-                                    x LKR.<?php echo $cart->product_data->unit_price; ?>
+                                    x LKR.<?php echo $cart->product_data->unit_price; ?>.00
                                 </h2>
                             </footer>
                         </div>
@@ -74,13 +74,13 @@
 
             <div class="left">
                 <span class="subtotal">Subtotal: LKR.</span>
-                <span><?php echo $data['subtotal']; ?></span>
+                <span><?php echo $data['subtotal']; ?>.00</span>
                 <span class="tax">Deposit Value: LKR.</span>
-                <span><?php echo $data['extra_charge']; ?></span>
+                <span><?php echo $data['extra_charge']; ?>.00</span>
                 <span class="shipping">Service Charge: LKR.</span>
-                <span>200.00</span>
+                <?php echo $data['count'] == 0 ? '<span>0.00</span>' : '<span>200.00</span>' ?>
                 <span class="total">Total: LKR.</span>
-                <span class="total"><?php echo $data['total'];; ?></span>
+                <span class="total"><?php echo $data['count'] == 0 ? '0' : $data['total']; ?>.00</span>
             </div>
 
             <div class="right">

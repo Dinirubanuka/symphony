@@ -1022,8 +1022,9 @@ class User
 
     public function getNotifications($user_id, $date_time)
     {
-        $this->db->query('SELECT * FROM notifications WHERE user_id = :user_id AND user_type = :user_type AND date_time <= :date_time AND status = :status ORDER BY date_time DESC');
+        $this->db->query('SELECT * FROM notifications WHERE user_id = :user_id AND (user_type = :user_type OR user_type = :user_type2) AND date_time <= :date_time AND status = :status ORDER BY date_time DESC');
         $this->db->bind(':user_type', 'Customer');
+        $this->db->bind(':user_type2', 'User');
         $this->db->bind(':status', 'Unread');
         $this->db->bind(':user_id', $user_id);
         $this->db->bind(':date_time', $date_time);

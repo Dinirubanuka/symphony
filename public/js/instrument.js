@@ -219,7 +219,7 @@ function displaydata(data){
                 `<h3>Title:`+item.Title+`</h3>`+
                 `<p>Brand: `+item.brand+`</p>`+
                 `<p>Model:  `+item.model+`</p>`+
-                `<p>Price(LKR): `+item.unit_price+`</p>`+
+                `<p>Price(LKR): `+item.unit_price+`.00</p>`+
                 `<p>`+stockText+`</p>`+
                 `</div>`+
                 `</div>`+

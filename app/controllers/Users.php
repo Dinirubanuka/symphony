@@ -1504,7 +1504,7 @@ class Users extends Controller
                 }
                 $cartItem->product_data = $product_data;
             }
-            $total = $subtotal + $subtotal*0.05 + 200.00 + $extra_charge;
+            $total = $subtotal + 200.00 + $extra_charge;
             
             $data =[
                 'cart' => $cart,
@@ -1591,7 +1591,7 @@ class Users extends Controller
                 }
             }
         }
-        $user_data = json_decode(json_encode($this->userModel->view($order->user_id)), true);
+        $user_data = json_decode(json_encode($this->userModel->view($_SESSION['user_id'])), true);
         $data = [
             'orders' => $result,
             'user_data' => $user_data

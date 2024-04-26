@@ -139,7 +139,7 @@
                         <label id="product_id" name="product_id" value="<?php echo $data['product_id']; ?>"></label>
                         <div class="number-input-container"  <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>
                             <label for="amount">Quantity:</label>
-                            <input type="number" id="quantity" name="quantity" value="<?php echo $data['quantity_selected']; ?>" required>
+                            <input type="number" id="quantity" name="quantity" value="<?php echo $data['quantity_selected']; ?>" min="1" max="<?php echo $data['quantity']; ?>" required>
                         </div>
                     </div>
                     <br>

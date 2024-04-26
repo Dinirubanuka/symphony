@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2024 at 04:41 AM
+-- Generation Time: Apr 26, 2024 at 03:13 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -43,10 +43,7 @@ CREATE TABLE `administrators` (
 --
 
 INSERT INTO `administrators` (`admin_id`, `admin_name`, `admin_email`, `admin_contact_no`, `admin_nic`, `admin_address`, `password`, `status`) VALUES
-(1, 'admin01', 'admin@gmail.com', 0, '0000000000', 'admin01', '$2y$10$.giPsKxvJSX5q2/xFa8iouS5c3P8U7hyOfX4f/Xn.4nkxOYl.bfsS', 'Active'),
-(2, 'admin03@gmail.com', 'admin03@gmail.com', 2147483647, '333333333333333', 'admin03@gmail.com', '$2y$10$bxkmDjVr50DKfrqQf2tEXeWRnnvP3WTgRVzXzXfkStDg4rA0m/F5C', 'Active'),
-(3, 'admin04@gmail.com', 'admin04@gmail.com', 2147483647, '121212121212', 'admin04@gmail.com', '$2y$10$6UJ09vjR/p8YOJbq0lLMzufUnBps9iIYItVx4TqUuGEC6jvo0pNQS', 'Active'),
-(4, 'admin05@gmail.com', 'admin05@gmail.com', 1234567890, 'admin05@gmail.c', 'admin05@gmail.com', '$2y$10$sOQxgV32c0sTDlLwgq6IB.ZogTav3f8oyjPAWVyt/Qkat9YC8UZkS', 'Active');
+(1, 'Kavindu Hansaja', 'admin@gmail.com', 784593211, '200034658219', 'No 55/A Delkanda junction, Nugegoda.', '$2y$10$.giPsKxvJSX5q2/xFa8iouS5c3P8U7hyOfX4f/Xn.4nkxOYl.bfsS', 'Active');
 
 -- --------------------------------------------------------
 
@@ -61,126 +58,6 @@ CREATE TABLE `availability` (
   `qty` int(10) NOT NULL,
   `type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `availability`
---
-
-INSERT INTO `availability` (`entry_id`, `date`, `product_id`, `qty`, `type`) VALUES
-(254, '2024-01-17', 21, 3, 'Equipment'),
-(255, '2024-01-18', 21, 3, 'Equipment'),
-(256, '2024-01-19', 21, 3, 'Equipment'),
-(257, '2024-01-20', 21, 3, 'Equipment'),
-(258, '2024-01-21', 21, 3, 'Equipment'),
-(259, '2024-01-22', 21, 3, 'Equipment'),
-(260, '2024-01-23', 21, 3, 'Equipment'),
-(261, '2024-01-24', 21, 3, 'Equipment'),
-(262, '2024-01-25', 21, 3, 'Equipment'),
-(263, '2024-01-26', 21, 3, 'Equipment'),
-(264, '2024-01-27', 21, 3, 'Equipment'),
-(265, '2024-01-28', 21, 3, 'Equipment'),
-(266, '2024-01-29', 21, 3, 'Equipment'),
-(281, '2024-01-14', 23, 1, 'Equipment'),
-(282, '2024-01-15', 23, 1, 'Equipment'),
-(283, '2024-01-16', 23, 1, 'Equipment'),
-(284, '2024-01-17', 23, 1, 'Equipment'),
-(285, '2024-01-18', 23, 1, 'Equipment'),
-(286, '2024-01-19', 23, 1, 'Equipment'),
-(287, '2024-01-20', 23, 1, 'Equipment'),
-(288, '2024-01-21', 23, 1, 'Equipment'),
-(289, '2024-01-22', 23, 1, 'Equipment'),
-(290, '2024-01-23', 23, 1, 'Equipment'),
-(291, '2024-01-13', 18, 8, 'Equipment'),
-(292, '2024-01-14', 18, 8, 'Equipment'),
-(293, '2024-01-15', 18, 8, ''),
-(294, '2024-01-16', 18, 8, ''),
-(295, '2024-01-17', 18, 8, ''),
-(296, '2024-01-18', 18, 8, ''),
-(297, '2024-01-19', 18, 8, ''),
-(298, '2024-01-20', 18, 8, ''),
-(299, '2024-01-21', 18, 8, ''),
-(300, '2024-01-22', 18, 8, ''),
-(301, '2024-01-23', 18, 8, ''),
-(302, '2024-01-24', 18, 8, ''),
-(303, '2024-01-25', 18, 8, ''),
-(304, '2024-01-26', 18, 8, ''),
-(305, '2024-01-27', 18, 8, ''),
-(306, '2024-01-28', 18, 8, ''),
-(307, '2024-01-29', 18, 8, ''),
-(308, '2024-01-30', 18, 8, ''),
-(309, '2024-01-31', 18, 8, ''),
-(323, '2024-02-05', 23, 1, ''),
-(324, '2024-02-06', 23, 1, ''),
-(325, '2024-02-07', 23, 1, ''),
-(326, '2024-02-08', 23, 1, ''),
-(327, '2024-02-09', 23, 1, ''),
-(328, '2024-02-10', 23, 1, ''),
-(329, '2024-02-11', 23, 1, ''),
-(330, '2024-02-12', 23, 1, ''),
-(331, '2024-02-13', 23, 1, ''),
-(332, '2024-02-14', 23, 1, ''),
-(333, '2024-02-15', 23, 1, ''),
-(334, '2024-02-16', 23, 1, ''),
-(335, '2024-02-17', 23, 1, ''),
-(336, '2024-02-18', 23, 1, ''),
-(337, '2024-02-19', 23, 1, ''),
-(338, '2024-02-20', 23, 1, ''),
-(339, '2024-02-21', 23, 1, ''),
-(340, '2024-02-22', 23, 1, ''),
-(341, '2024-02-23', 23, 1, ''),
-(342, '2024-01-17', 20, 2, ''),
-(343, '2024-01-18', 20, 2, ''),
-(344, '2024-01-19', 20, 2, ''),
-(345, '2024-01-20', 20, 2, ''),
-(346, '2024-01-21', 20, 2, ''),
-(347, '2024-01-22', 20, 2, ''),
-(348, '2024-01-23', 20, 2, ''),
-(349, '2024-01-24', 20, 2, ''),
-(350, '2024-01-25', 20, 2, ''),
-(351, '2024-01-26', 20, 2, ''),
-(352, '2024-01-27', 20, 2, ''),
-(353, '2024-01-28', 20, 2, ''),
-(354, '2024-01-29', 20, 2, ''),
-(355, '2024-01-30', 20, 2, ''),
-(356, '2024-02-14', 17, 1, ''),
-(357, '2024-02-15', 17, 1, ''),
-(358, '2024-02-16', 17, 1, ''),
-(359, '2024-02-17', 17, 1, ''),
-(360, '2024-02-18', 17, 1, ''),
-(361, '2024-02-19', 17, 1, ''),
-(362, '2024-02-20', 17, 1, ''),
-(363, '2024-02-29', 18, 4, ''),
-(364, '2024-03-01', 18, 4, ''),
-(365, '2024-03-02', 18, 4, ''),
-(366, '2024-03-03', 18, 4, ''),
-(367, '2024-03-04', 18, 4, ''),
-(368, '2024-03-05', 18, 4, ''),
-(369, '2024-03-06', 18, 4, ''),
-(370, '2024-03-07', 18, 4, ''),
-(371, '2024-03-08', 18, 4, ''),
-(381, '2024-02-22', 11, 1, 'Singer'),
-(382, '2024-02-23', 11, 1, 'Singer'),
-(390, '2024-03-14', 24, 2, 'Equipment'),
-(391, '2024-03-15', 24, 2, 'Equipment'),
-(392, '2024-03-16', 24, 2, 'Equipment'),
-(393, '2024-03-17', 24, 2, 'Equipment'),
-(394, '2024-03-18', 24, 2, 'Equipment'),
-(395, '2024-03-19', 24, 2, 'Equipment'),
-(396, '2024-03-20', 24, 2, 'Equipment'),
-(397, '2024-03-21', 24, 2, 'Equipment'),
-(411, '2024-04-25', 3, 1, 'Studio'),
-(412, '2024-04-26', 3, 1, 'Studio'),
-(413, '2024-04-18', 17, 1, 'Equipment'),
-(414, '2024-04-19', 17, 1, 'Equipment'),
-(415, '2024-04-20', 17, 1, 'Equipment'),
-(416, '2024-04-25', 3, 1, 'Studio'),
-(417, '2024-04-26', 3, 1, 'Studio'),
-(418, '2024-03-29', 20, 2, 'Equipment'),
-(419, '2024-03-30', 20, 2, 'Equipment'),
-(420, '2024-03-31', 20, 2, 'Equipment'),
-(421, '2024-04-01', 20, 2, 'Equipment'),
-(422, '2024-04-02', 20, 2, 'Equipment'),
-(423, '2024-04-03', 20, 2, 'Equipment');
 
 -- --------------------------------------------------------
 
@@ -221,7 +98,15 @@ CREATE TABLE `band` (
 --
 
 INSERT INTO `band` (`product_id`, `created_by`, `category`, `brand`, `model`, `unit_price`, `quantity`, `photo_1`, `photo_2`, `photo_3`, `Title`, `Description`, `outOfStock`, `createdDate`, `warranty`, `videoLink`, `instrument`, `email`, `telephoneNumber`, `memberCount`, `leaderPhoto`, `bandPhoto`, `location`, `leaderName`, `status`) VALUES
-(2, 14, 'band', 'no brand', 'no model', 23, 1, 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'Band', 'test2', 1, '2024-02-18 06:59:42', '2024-02-22 09:27:47', 'https://www.youtube.com/embed/qUH5I_jKRB0?si=utDfZHOERWmNqFRy', 'Accordion Bansuri BassDrum', 'imacbanu@gmail.com', 768836682, 43, 'IMG-65bdecb57b2fa6.98038302.jpg', 'IMG-65be1dddb6e8e7.50561916.jpg', 'Colombo Galle', 'banuka', 'Active');
+(7, 51, 'Band', 'no brand', 'no model', 60000, 1, 'IMG-662ac0538d2ae1.78889923.jpg', 'IMG-662ac0538d8d22.25937356.jpg', 'IMG-662ac0538dd314.06854658.jpg', 'Echo Syndicate', 'Professional band with 2 years expirience,', 1, '2024-04-25 20:42:59', NULL, 'Warning:  Undefined array key', 'DrumSet ElectricGuitar Guitar Synthesizer', 'peneloperichardson@gmail.com', 2147483647, 4, 'IMG-662ac0538e14e2.09060024.jpg', 'IMG-662ac0538e59c6.77504697.jpg', 'Colombo', 'Penelope Richardson', ''),
+(8, 51, 'Band', 'no brand', 'no model', 24000, 1, 'IMG-662ac17c9aaaa3.56238813.jpg', 'IMG-662ac17c9aefb3.22009074.jpg', 'IMG-662ac17c9b3685.49283238.jpg', 'Crimson Crescendo', 'three piece band , highly recommend for small area parties', 1, '2024-04-25 20:47:56', NULL, 'Warning:  Undefined array key', 'Accordion Cajon Guitar', 'harperreed@gmail.com', 2147483647, 3, 'IMG-662ac17c9b9b73.87029560.jpg', 'IMG-662ac17c9c0251.98337306.jpg', 'Gampaha', 'Harper Reed', ''),
+(9, 51, 'Band', 'no brand', 'no model', 120000, 1, 'IMG-662ac2a5072f09.99820188.jpg', 'IMG-662ac2a5078477.53868086.jpg', 'IMG-662ac2a507e226.53477823.jpg', 'Stardust Symphony', 'professional full band for any occation', 1, '2024-04-25 20:52:53', NULL, 'Warning:  Undefined array key', 'DigitalPiano DrumSet ElectricGuitar Guitar Organ Synthesizer', 'sadiewashington@gmail.com', 2147483647, 6, 'IMG-662ac2a50845d1.30516676.jpg', 'IMG-662ac2a508b2d0.52770322.jpg', 'Colombo', 'Sadie Washington', ''),
+(10, 51, 'Band', 'no brand', 'no model', 24000, 1, 'IMG-662ac55b65ef27.67829011.jpg', 'IMG-662ac55b663892.42557641.jpg', 'IMG-662ac55b667ff8.47430201.jpg', 'Sapphire Soul', 'mostly for small parties like birthday parties', 1, '2024-04-25 21:04:27', NULL, 'Warning:  Undefined array key', 'DrumSet ElectricGuitar Synthesizer', 'zacharyhughes@gmail.com', 2147483647, 3, 'IMG-662ac55b66cab6.31311350.jpg', 'IMG-662ac55b671a20.11020654.jpg', 'Kandy', 'Zachary Hughes', ''),
+(11, 52, 'Band', 'no brand', 'no model', 50000, 1, 'IMG-662ac8a9024af0.07903571.jpg', 'IMG-662ac8a902a061.06965968.jpg', 'IMG-662ac8a902ebc1.41920014.jpg', 'Electric Echoes', 'highly recommend for weddings', 1, '2024-04-25 21:18:33', NULL, 'Warning:  Undefined array key', 'DigitalPiano DrumSet ElectricGuitar Guitar Synthesizer', 'cameronramirez@gmail.com', 2147483647, 5, 'IMG-662ac8a9032cd1.41067060.jpg', 'IMG-662ac8a90aa412.17872801.jpg', 'Kandy', 'Cameron Ramirez', ''),
+(12, 52, 'Band', 'no brand', 'no model', 30000, 1, 'IMG-662acae5b94c22.76251529.jpg', 'IMG-662acae5b9a627.16696165.jpg', 'IMG-662acae5b9fb01.88026897.jpg', 'Neon Harmony', 'mostly for weddings , get-togethers etc.', 1, '2024-04-25 21:28:05', NULL, 'Warning:  Undefined array key', 'DrumSet ElectricGuitar Synthesizer', 'brooklyndiaz@gmail.com', 2147483647, 3, 'IMG-662acae5ba3b25.08460889.jpg', 'IMG-662acae5ba8d18.30314583.jpg', 'Nuwara Eliya', 'Brooklyn Diaz', ''),
+(13, 52, 'Band', 'no brand', 'no model', 40000, 1, 'IMG-662acc8532ed61.62390553.jpg', 'IMG-662acc85332956.91901821.jpg', 'IMG-662acc85338f05.25673310.jpg', 'Prism Pulse', 'professional band for functions such ad weddings', 1, '2024-04-25 21:35:01', NULL, 'Warning:  Undefined array key', 'DrumSet ElectricGuitar Guitar Synthesizer', 'wyattmorgan@gmail.com', 2147483647, 4, 'IMG-662acc8533ce51.27466578.jpg', 'IMG-662acc85340a75.79284724.jpg', 'Galle', 'Wyatt Morgan', ''),
+(14, 53, 'Band', 'no brand', 'no model', 1260000, 1, 'IMG-662ad0322975a7.14053727.jpg', 'IMG-662ad03229f8c5.54884498.jpg', 'IMG-662ad0322a5f31.11682378.jpg', 'Lunar Lullaby', 'professional band for any occation', 1, '2024-04-25 21:50:42', NULL, 'Warning:  Undefined array key', 'DigitalPiano DrumSet ElectricGuitar Guitar Organ Synthesizer', 'zacharyhughes@gmail.com', 2147483647, 6, 'IMG-662ad0322ab8b1.06211990.jpg', 'IMG-662ad0322c0cd2.72134317.jpg', 'Kegalle', 'Zachary Hughes', ''),
+(15, 53, 'Band', 'no brand', 'no model', 15000, 1, 'IMG-662ad1a59088c6.78218374.jpg', 'IMG-662ad1a590c795.59029838.jpg', 'IMG-662ad1a59119b9.21003760.jpg', 'Sonic Spectrum', 'play for small functions like birthday parties', 1, '2024-04-25 21:56:53', NULL, 'Warning:  Undefined array key', 'Accordion Cajon Guitar', 'noahbailey@gmail.com', 2147483647, 3, 'IMG-656bdc23223334.62765635.png', 'IMG-662ad1a5916e27.79412993.jpg', 'Colombo', 'Noah Bailey', '');
 
 -- --------------------------------------------------------
 
@@ -270,22 +155,6 @@ CREATE TABLE `chat_mod_user` (
   `chat_date` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `chat_mod_user`
---
-
-INSERT INTO `chat_mod_user` (`chat_id`, `user_id`, `moderator_id`, `created_by`, `chat_data`, `chat_date`) VALUES
-(3, 18, 1, 'moderator', 'hrllo', '12:25:04 PM | February 6 2024'),
-(4, 18, 1, 'moderator', 'ewsb gew gqweg', '12:25:07 PM | February 6 2024'),
-(5, 18, 1, 'moderator', 'jhterjh3 j5k4ik5wd FWGW G', '12:25:09 PM | February 6 2024'),
-(6, 18, 1, 'user', 'BGETR', '12:25:29 PM | February 6 2024'),
-(7, 18, 1, 'user', 'rgbbe', '12:25:33 PM | February 6 2024'),
-(8, 18, 1, 'user', 'hello', '7:09:47 PM | February 19 2024'),
-(9, 18, 1, 'user', 'hi', '7:29:20 PM | February 19 2024'),
-(10, 18, 1, 'moderator', 'hewsh', '12:54:03 AM | March 23 2024'),
-(11, 18, 1, 'moderator', 'hi', '2:31:11 PM | April 23 2024'),
-(12, 18, 1, 'moderator', 'what is the issue', '2:31:28 PM | April 23 2024');
-
 -- --------------------------------------------------------
 
 --
@@ -309,17 +178,6 @@ CREATE TABLE `inquiries` (
   `placed_on` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `inquiries`
---
-
-INSERT INTO `inquiries` (`inquiry_id`, `user_id`, `inquiryType`, `field_1`, `field_2`, `field_3`, `field_4`, `field_5`, `photo_1`, `photo_2`, `photo_3`, `status`, `moderator_id`, `placed_on`) VALUES
-(1, 18, 'Technical Issue', 'egwsjhedrje', 'h4rwhg4wg', '', '', '', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'Completed', 1, NULL),
-(2, 18, 'Technical Issue', 'nwsr', 'j,truf,m', '', '', '', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'In-Progress', 1, NULL),
-(3, 18, 'Technical Issue', 'gbwrsvsloj kbqweuikfhq', 'wrhw fqefwf', '', '', '', 'IMG-65c1e3564de106.71069130.jpg', 'IMG-65c1e3564df517.77863469.jpg', 'IMG-65c1e3564df998.02290386.jpg', 'In-Progress', 1, NULL),
-(4, 18, 'Other', 'f bqknecl; qnhilofh q', 'qilo;bekhq vwhvf', '', '', '', 'IMG-65c1e36d67d473.29055626.jpeg', 'IMG-65c1e36d67df29.80862974.png', 'IMG-65c1e36d67e355.60262304.jpeg', 'In-Progress', 1, NULL),
-(5, 18, 'Recover Account', '', '', '', '', '', 'IMG-656bdc23223334.62765635.png', '', '', 'In-Progress', 1, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -331,80 +189,6 @@ CREATE TABLE `inq_chat` (
   `chat_id` int(11) NOT NULL,
   `inquiry_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `inq_chat`
---
-
-INSERT INTO `inq_chat` (`inq_chat_id`, `chat_id`, `inquiry_id`) VALUES
-(1, 3, 1),
-(2, 4, 1),
-(3, 5, 1),
-(4, 6, 1),
-(5, 7, 1),
-(6, 8, 4),
-(7, 9, 4),
-(8, 10, 4),
-(9, 11, 2),
-(10, 12, 2);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `login_logout_logs`
---
-
-CREATE TABLE `login_logout_logs` (
-  `login_id` int(11) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `date_time` datetime NOT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `login_logout_logs`
---
-
-INSERT INTO `login_logout_logs` (`login_id`, `type`, `date_time`, `id`) VALUES
-(1, 'User - Login', '2024-02-11 12:11:00', 18),
-(2, 'User - Logout', '2024-02-11 12:11:02', 18),
-(3, 'User - Login', '2024-02-11 12:14:55', 19),
-(4, 'User - Logout', '2024-02-11 12:14:56', 19),
-(5, 'Service Provider - Login', '2024-02-11 12:15:07', 18),
-(6, 'Service Provider - Logout', '2024-02-11 12:15:28', 18),
-(7, 'User - Login', '2024-02-11 12:20:42', 18),
-(8, 'User - Logout', '2024-02-11 12:20:44', 18),
-(9, 'User - Login', '2024-02-17 10:29:42', 18),
-(10, 'User - Logout', '2024-02-17 10:30:26', 18),
-(11, 'Service Provider - Login', '2024-02-17 10:30:32', 14),
-(12, 'User - Login', '2024-02-17 10:37:36', 18),
-(13, 'User - Logout', '2024-02-17 11:33:27', 18),
-(14, 'User - Login', '2024-02-17 11:33:33', 18),
-(15, 'User - Logout', '2024-02-17 11:33:45', 18),
-(16, 'Service Provider - Login', '2024-02-17 12:07:15', 14),
-(17, 'User - Login', '2024-02-17 12:23:54', 18),
-(18, 'User - Logout', '2024-02-18 04:21:52', 18),
-(19, 'User - Login', '2024-02-18 04:21:57', 18),
-(20, 'User - Logout', '2024-02-18 05:32:14', 18),
-(21, 'User - Login', '2024-02-18 05:32:20', 18),
-(22, 'User - Logout', '2024-02-18 08:05:35', 18),
-(23, 'User - Login', '2024-02-18 08:05:41', 18),
-(24, 'User - Logout', '2024-02-18 09:40:06', 18),
-(25, 'User - Login', '2024-02-18 09:40:11', 18),
-(26, 'User - Logout', '2024-02-19 06:46:41', 18),
-(27, 'User - Login', '2024-02-19 06:46:56', 18),
-(28, 'User - Logout', '2024-02-19 07:30:31', 18),
-(29, 'Service Provider - Login', '2024-02-19 07:30:38', 14),
-(30, 'Service Provider - Logout', '2024-02-19 07:30:51', 14),
-(31, 'User - Login', '2024-02-19 07:30:56', 18),
-(32, 'User - Logout', '2024-02-19 07:47:56', 18),
-(33, 'Service Provider - Login', '2024-02-19 07:48:03', 14),
-(34, 'Service Provider - Logout', '2024-02-19 07:54:05', 14),
-(35, 'User - Login', '2024-02-19 07:54:12', 18),
-(36, 'User - Logout', '2024-02-19 07:55:00', 18),
-(37, 'Service Provider - Login', '2024-02-19 07:55:06', 14),
-(38, 'Service Provider - Logout', '2024-02-19 07:59:51', 14),
-(39, 'User - Login', '2024-02-19 14:12:49', 18);
 
 -- --------------------------------------------------------
 
@@ -1277,7 +1061,56 @@ INSERT INTO `logs` (`log_id`, `user_type`, `user_id`, `date_and_time`, `log_type
 (891, 'Customer', 18, '2024-04-23 12:28:00', 'View Instruments', 'User viewed the instruments available'),
 (892, 'Customer', 18, '2024-04-23 12:30:13', 'Order Cancel', 'User cancelled an order with order id: 28 and sub order id: 54'),
 (893, 'Customer', 18, '2024-04-23 12:30:13', 'View Orders', 'User viewed their orders'),
-(894, 'Customer', 18, '2024-04-23 12:30:14', 'View Instruments', 'User viewed the instruments available');
+(894, 'Customer', 18, '2024-04-23 12:30:14', 'View Instruments', 'User viewed the instruments available'),
+(895, 'Customer', 18, '2024-04-25 20:43:46', 'View Studios', 'User viewed the studios available'),
+(896, 'Customer', 18, '2024-04-25 20:43:58', 'View Studios', 'User viewed the studios available'),
+(897, 'Customer', 18, '2024-04-25 20:43:59', 'View Studios', 'User viewed the studios available'),
+(898, 'Customer', 18, '2024-04-25 20:44:17', 'Manage Profile', 'User viewed their profile'),
+(899, 'Customer', 18, '2024-04-25 20:44:22', 'View Studios', 'User viewed the studios available'),
+(900, 'Customer', 18, '2024-04-25 20:46:28', 'View Studios', 'User viewed the studios available'),
+(901, 'Customer', 18, '2024-04-25 20:46:29', 'View Studios', 'User viewed the studios available'),
+(902, 'Customer', 18, '2024-04-25 20:46:30', 'View Studios', 'User viewed the studios available'),
+(903, 'Customer', 18, '2024-04-25 20:46:31', 'View Studios', 'User viewed the studios available'),
+(904, 'Customer', 18, '2024-04-25 20:46:33', 'View Studios', 'User viewed the studios available'),
+(905, 'Customer', 18, '2024-04-25 20:46:37', 'Manage Profile', 'User viewed their profile'),
+(906, 'Customer', 18, '2024-04-25 20:46:38', 'Logout', 'User logged out'),
+(907, 'Customer', 18, '2024-04-25 20:46:44', 'Login', 'User logged in'),
+(908, 'Customer', 18, '2024-04-25 20:46:47', 'View Studios', 'User viewed the studios available'),
+(909, 'Customer', 18, '2024-04-25 20:47:16', 'View Studios', 'User viewed the studios available'),
+(910, 'Service Provider', 14, '2024-04-25 21:08:00', 'Login', 'Service Provider has logged in'),
+(911, 'Service Provider', 14, '2024-04-25 21:08:20', 'Manage Inventory', 'Service Provider has viewed their Band inventory'),
+(912, 'Service Provider', 14, '2024-04-25 21:08:20', 'Manage Inventory', 'Service Provider has viewed their Band Inventory'),
+(913, 'Service Provider', 14, '2024-04-25 21:09:28', 'Add Band', 'Service Provider has added a new band to their inventory'),
+(914, 'Service Provider', 14, '2024-04-25 21:09:28', 'Manage Inventory', 'Service Provider has viewed their Band inventory'),
+(915, 'Service Provider', 14, '2024-04-25 21:09:28', 'Manage Inventory', 'Service Provider has viewed their Band Inventory'),
+(916, 'Customer', 18, '2024-04-26 02:32:29', 'Login', 'User logged in'),
+(917, 'Customer', 18, '2024-04-26 02:32:32', 'View Studios', 'User viewed the studios available'),
+(918, 'Customer', 18, '2024-04-26 02:32:34', 'Manage Cart', 'User viewed their cart'),
+(919, 'Customer', 18, '2024-04-26 02:32:44', 'Logout', 'User logged out'),
+(920, 'Customer', 18, '2024-04-26 03:00:35', 'Login', 'User logged in'),
+(921, 'Customer', 18, '2024-04-26 03:00:46', 'View Singers', 'User viewed the singers available'),
+(922, 'Customer', 18, '2024-04-26 03:00:54', 'View Bands', 'User viewed the bands available'),
+(923, 'Customer', 18, '2024-04-26 03:00:57', 'View Musicians', 'User viewed the musicians available'),
+(924, 'Customer', 18, '2024-04-26 03:01:02', 'View Singers', 'User viewed the singers available'),
+(925, 'Customer', 18, '2024-04-26 03:01:07', 'View Studios', 'User viewed the studios available'),
+(926, 'Customer', 18, '2024-04-26 03:01:12', 'View Musicians', 'User viewed the musicians available'),
+(927, 'Customer', 18, '2024-04-26 03:01:15', 'View Bands', 'User viewed the bands available'),
+(928, 'Customer', 18, '2024-04-26 03:02:04', 'Manage Profile', 'User viewed their profile'),
+(929, 'Customer', 18, '2024-04-26 03:02:06', 'Logout', 'User logged out'),
+(930, 'Administrator', 1, '2024-04-26 03:02:17', 'Login', 'Administrator logged in'),
+(931, 'Administrator', 1, '2024-04-26 03:09:56', 'Manage Service Provider Requests', 'Administrator viewed pending service provider requests'),
+(932, 'Administrator', 1, '2024-04-26 03:10:00', 'Manage Service Provider Requests', 'Administrator viewed pending service provider request 43 details'),
+(933, 'Administrator', 1, '2024-04-26 03:10:00', 'Manage Service Provider Requests', 'Administrator viewed pending service provider request logo.png details'),
+(934, 'Administrator', 1, '2024-04-26 03:10:05', 'View Users', 'Administrator viewed active users'),
+(935, 'Administrator', 1, '2024-04-26 03:10:09', 'Manage Users', 'Administrator viewed user 39 details'),
+(936, 'Administrator', 1, '2024-04-26 03:10:09', 'Manage Users', 'Administrator viewed user logo.png details'),
+(937, 'Administrator', 1, '2024-04-26 03:10:17', 'Generate Reports', 'Administrator viewed reports'),
+(938, 'Administrator', 1, '2024-04-26 03:11:00', 'Logout', 'Administrator logged out'),
+(939, 'Customer', 18, '2024-04-26 03:11:14', 'Login', 'User logged in'),
+(940, 'Customer', 18, '2024-04-26 03:11:16', 'View Instruments', 'User viewed the instruments available'),
+(941, 'Customer', 18, '2024-04-26 03:11:54', 'View Instruments', 'User viewed the instruments available'),
+(942, 'Customer', 18, '2024-04-26 03:12:03', 'View Singers', 'User viewed the singers available'),
+(943, 'Customer', 18, '2024-04-26 03:12:06', 'View Bands', 'User viewed the bands available');
 
 -- --------------------------------------------------------
 
@@ -1302,12 +1135,7 @@ CREATE TABLE `moderators` (
 --
 
 INSERT INTO `moderators` (`moderator_id`, `moderator_name`, `moderator_email`, `moderator_contact_no`, `moderator_nic`, `moderator_address`, `password`, `type`, `status`) VALUES
-(1, 'moderator01', 'moderator01@gmail.com', 100000000, '100000000', 'moderator01@gmail.com', '$2y$10$.fjzjyiF0Rg88ec0LNJGh.Aep5ScztV4nG6/9Rb0U9Uzevd7lnPUK', 'User Account Moderator', 'Active'),
-(2, 'moderator02', 'moderator02@gmail.com', 2000000000, '200000000', 'moderator02@gmail.com', '$2y$10$Cx.y2kQr58hwufiyxlvUuuBnTqNYb3rRKJMzxJ5e2Voa3C0iXSOiG', 'User Support Moderator', 'Active'),
-(3, 'moderator03@gmail.com', 'moderator03@gmail.com', 2147483647, '3333333333333', 'moderator03@gmail.com', '$2y$10$oQKMQhd8.EXbxsrSj/OAW.OKH/7iDjNPcwY0U2MCref1pT9E8Q1M2', 'Event Package Moderator', 'Active'),
-(4, 'moderator04@gmail.com', 'moderator04@gmail.com', 12121212, 'moderator04@gma', 'moderator04@gmail.com', '$2y$10$RoZ.MvwI4m7ItPCRFs1qDOYsEvjrGDFeie1Q7CnBmn3Gt750T8C2i', 'User Account Moderator', 'Active'),
-(5, 'moderator05@gmail.com', 'moderator05@gmail.com', 1234567890, 'moderator05@gma', 'moderator05@gmail.com', '$2y$10$3bWEbemGAY5JZoRTYNc6BeLEaEFzzry9Er1Sa8WErV3J2GbG1BdMm', 'User Support Moderator', 'Active'),
-(6, 'moderator06@gmail.com', 'moderator06@gmail.com', 1234567890, 'moderator06@gma', 'moderator06@gmail.com', '$2y$10$ifp/RMqF16m7T5R1WEK9qOdkafczxIE5y1V2GKsh66Hf91E2SoeDC', 'User Account Moderator', 'Active');
+(1, 'Nethsara Sandeepa', 'moderator01@gmail.com', 716229573, '98347716V', '04/C Hospital road, Jayawardhanapura.', '$2y$10$.fjzjyiF0Rg88ec0LNJGh.Aep5ScztV4nG6/9Rb0U9Uzevd7lnPUK', 'User Account Moderator', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1347,8 +1175,16 @@ CREATE TABLE `musician` (
 --
 
 INSERT INTO `musician` (`product_id`, `created_by`, `category`, `brand`, `model`, `quantity`, `unit_price`, `photo_1`, `photo_2`, `photo_3`, `Title`, `Description`, `outOfStock`, `createdDate`, `warranty`, `name`, `nickName`, `telephoneNumber`, `videoLink`, `location`, `instrument`, `singerPhoto`, `email`, `status`) VALUES
-(14, 14, 'musician', 'no brand', 'no model', 1, 33, 'IMG-65c7a15b8b66b3.00228537.heic', 'IMG-65c7a15b8c2dd0.09977782.heic', 'IMG-65c7a15b8c4be9.60353733.heic', 'Musician', 'awe', 1, '2024-02-18 06:59:49', '2024-02-10 21:46:27', 'test', 'SDcsDcd', 768836682, 'https://www.youtube.com/embed/pxjZM-d_ShI?si=vKm0OdkPl6DDBqLE', 'Colombo Kandy Jaffna Jaffna', 'Accordion Bansuri BassDrum', 'IMG-65c7a15b8c62a7.69532636.heic', 'imacbanu@gmai.com', 'Active'),
-(15, 14, 'musician', 'no brand', 'no model', 1, 3000, 'IMG-65d07d14e8b591.45765267.jpg', 'IMG-65d07d14e8c891.96080093.jpeg', 'IMG-65d07d14e8d4e4.86739829.jpg', 'Musician', 'this is a test', 1, '2024-02-18 06:59:52', '2024-02-17 15:02:04', 'Aeox', 'aeox', 1234567890, 'https://www.youtube.com/watch?v=mtv8WkYyK0s', 'Colombo', 'Bansuri BassDrum Sarod Saxophone Tuba', 'IMG-65d07d14e8e069.39777040.jpeg', 'aeox@gmail.com', 'Active');
+(16, 54, 'Musician', 'no brand', 'no model', 1, 10000, 'IMG-662adf20081fb8.19648333.jpg', 'IMG-662adf20085eb5.91403017.jpg', 'IMG-662adf2008b9f3.55852771.jpg', 'Musician', 'professional lead guitarist', 1, '2024-04-25 23:04:03', '2024-04-26 04:24:24', 'Asher Silva', 'Asher Silva', 2147483647, 'Warning:  Undefined array key', 'Colombo', 'ElectricGuitar', 'IMG-662adf2008fee1.49985089.jpg', 'asher.silva@example.com', ''),
+(17, 55, 'Musician', 'no brand', 'no model', 1, 8000, 'IMG-662adf8f85f0d2.23814295.jpg', 'IMG-662adf8f861ef5.39964117.jpg', 'IMG-662adf8f865436.60087132.jpg', 'Musician', 'professional keyboardist', 1, '2024-04-25 23:04:52', '2024-04-26 04:26:15', 'Isla Fernando', 'Isla Fernando', 2147483647, 'Warning:  Undefined array key', 'Gampaha', 'SnareDrum', 'IMG-662adf8f86a287.77480961.jpg', 'isla.fernando@example.com', ''),
+(18, 46, 'Musician', 'no brand', 'no model', 1, 10000, 'IMG-662ae049555949.94284118.jpg', 'IMG-662ae04955c5c8.89562544.jpg', 'IMG-662ae049562e85.75615068.jpg', 'Musician', 'professional drummer', 1, '2024-04-25 23:03:10', '2024-04-26 04:29:21', 'Liam Perera', 'Liam Perera', 2147483647, 'Warning:  Undefined array key', 'Kandy', 'DrumSet', 'IMG-662ae04956bde9.14584590.jpg', 'liam.perera@example.com', ''),
+(19, 46, 'Musician', 'no brand', 'no model', 1, 10000, 'IMG-662ae11de57709.46907534.jpg', 'IMG-662ae11de5c0e5.56863781.jpg', 'IMG-662ae11de639f5.26548233.jpg', 'Musician', 'Professional bass guitarist', 1, '2024-04-25 23:02:53', '2024-04-26 04:32:53', 'Harper Bandara', 'Harper Bandara', 2147483647, 'Warning:  Undefined array key', 'Kegalle', 'ElectricGuitar', 'IMG-662ae11de68181.17076811.jpg', 'harper.bandara@example.com', ''),
+(20, 50, 'Musician', 'no brand', 'no model', 1, 8000, 'IMG-662ae2700fe6f3.27695684.jpg', 'IMG-662ae270108752.47829602.jpg', 'IMG-662ae27010d0e3.47315011.jpg', 'Musician', 'professional saxaphone player', 1, '2024-04-25 23:08:32', '2024-04-26 04:38:32', 'Noah Silva', 'Noah Silva', 2147483647, 'Warning:  Undefined array key', 'Matara', 'Saxophone', 'IMG-662ae270110900.55213161.jpg', 'noah.silva@example.com', ''),
+(21, 50, 'Musician', 'no brand', 'no model', 1, 8000, 'IMG-662ae30e140157.04222342.jpg', 'IMG-662ae30e143859.85197772.jpg', 'IMG-662ae30e1469a7.40640062.jpg', 'Musician', 'Professional violine player', 1, '2024-04-25 23:11:10', '2024-04-26 04:41:10', 'Mia Perera', 'Mia Perera', 2147483647, 'Warning:  Undefined array key', 'Kurunegala', 'Violin', 'IMG-662ae30e14a0d0.41520948.jpg', 'mia.perera@example.com', ''),
+(22, 50, 'Musician', 'no brand', 'no model', 1, 10000, 'IMG-662ae3b9261704.97666377.jpg', 'IMG-662ae3b9266162.29686538.jpg', 'IMG-662ae3b926a2d7.69018099.jpg', 'Musician', 'professional classical guitar player', 1, '2024-04-25 23:14:01', '2024-04-26 04:44:01', 'Liam Rajapakse', 'Liam Rajapakse', 2147483647, 'Warning:  Undefined array key', 'Colombo', 'Guitar', 'IMG-662ae3b926f164.18279560.jpg', 'liam.rajapakse@example.com', ''),
+(23, 50, 'Musician', 'no brand', 'no model', 1, 15000, 'IMG-662ae478d65155.31477246.jpg', 'IMG-662ae478d6aea9.60355837.jpg', 'IMG-662ae478d74875.07231771.jpg', 'Musician', 'Professional keyboadist', 1, '2024-04-25 23:17:12', '2024-04-26 04:47:12', 'Olivia Fonseka', 'Olivia Fonseka', 2147483647, 'Warning:  Undefined array key', 'Colombo', 'Synthesizer', 'IMG-662ae478d7afd0.50037405.jpg', 'olivia.fonseka@example.com', ''),
+(24, 50, 'Musician', 'no brand', 'no model', 1, 10000, 'IMG-662ae5000f7a69.55354831.jpg', 'IMG-662ae5000fcef2.06518050.jpg', 'IMG-662ae5001032f0.88500195.jpg', 'Musician', 'Professional drummer', 1, '2024-04-25 23:19:28', '2024-04-26 04:49:28', 'Ethan Perera', 'Ethan Perera', 2147483647, 'Warning:  Undefined array key', 'Gampaha', 'NULL', 'IMG-662ae500107894.89099053.jpg', 'ethan.perera@example.com', ''),
+(25, 50, 'Musician', 'no brand', 'no model', 1, 20000, 'IMG-662ae5bc9674c6.49610099.jpg', 'IMG-662ae5bc96ce80.13591870.jpg', 'IMG-662ae5bc971c02.34498898.jpg', 'Musician', 'professional pianist', 1, '2024-04-25 23:22:36', '2024-04-26 04:52:36', 'Ava Silva', 'Ava Silva', 2147483647, 'Warning:  Undefined array key', 'Kandy', 'Piano', 'IMG-662ae5bc97b2c4.07173961.jpg', 'ava.silva@example.com', '');
 
 -- --------------------------------------------------------
 
@@ -1365,27 +1201,6 @@ CREATE TABLE `notifications` (
   `data` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `notifications`
---
-
-INSERT INTO `notifications` (`notification_id`, `user_type`, `user_id`, `date_time`, `status`, `data`) VALUES
-(1, 'User', 18, '2024-04-23 10:59:12', 'Unread', 'Moderator with ID 1 has accepted your inquiry and will be assisting you'),
-(2, 'User', 18, '2024-04-23 11:01:11', 'Unread', 'Moderator sent a message to you regarding inquiry 2'),
-(3, 'User', 18, '2024-04-23 11:01:28', 'Unread', 'Moderator sent a message to you regarding inquiry 2'),
-(4, 'ServiceProvider', 19, '2024-04-23 12:16:46', 'Unread', 'You have a new order request from Gayathra Dissanayake for '),
-(5, 'Customer', 18, '2024-04-24 22:00:00', 'Unread', 'Please make sure to leave a review for item you rented with order id: 24 and sub order id: 48'),
-(6, 'Customer', 18, '2024-04-23 12:27:35', 'unread', 'Your order containing the sub order with the ID 58 has been accepted by the service provider'),
-(7, 'ServiceProvider', 19, '2024-04-23 12:27:35', 'unread', 'You have successfully accepted an order with the ID 58'),
-(8, 'ServiceProvider', 19, '2024-03-28 22:00:00', 'unread', 'You have an upcoming order with the sub order ID 58 starting at 2024-03-29 and ending at 2024-04-03'),
-(9, 'ServiceProvider', 19, '2024-03-29 00:00:00', 'unread', 'You have an upcoming order with the sub order ID 58 starting at 2024-03-29 and ending at 2024-04-03'),
-(10, 'ServiceProvider', 19, '2024-04-02 22:00:00', 'unread', 'Your order with the sub order ID 58 is about to end in 2 hours'),
-(11, 'ServiceProvider', 19, '2024-04-03 00:00:00', 'unread', 'Your order with the sub order ID 58 has ended'),
-(12, 'Customer', 18, '2024-03-28 22:00:00', 'unread', 'You have an upcoming order with the sub order ID 58 starting at 2024-03-29 and ending at 2024-04-03'),
-(13, 'Customer', 18, '2024-03-29 00:00:00', 'unread', 'You have an upcoming order with the sub order ID 58 starting at 2024-03-29 and ending at 2024-04-03'),
-(14, 'Customer', 18, '2024-04-02 22:00:00', 'unread', 'Your order with the sub order ID 58 is about to end in 2 hours. Please make sure to end the order on time to avoid any penalties.'),
-(15, 'Customer', 18, '2024-04-03 00:00:00', 'unread', 'Your order with the sub order ID 58 has ended. Please make sure to end the order on time to avoid any penalties.');
-
 -- --------------------------------------------------------
 
 --
@@ -1400,29 +1215,6 @@ CREATE TABLE `orders` (
   `order_placed_on` date NOT NULL,
   `deposit` int(255) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`order_id`, `user_id`, `sorder_id`, `total`, `order_placed_on`, `deposit`) VALUES
-(10, 18, '33', 28865, '2024-02-01', 0),
-(11, 18, '34,35', 98480, '2024-02-01', 0),
-(12, 18, '36', 8285, '2024-02-01', 0),
-(13, 18, '37', 18628, '2024-02-01', 0),
-(17, 18, '38', 8285, '2024-02-01', 0),
-(18, 18, '40', 13850, '2024-02-01', 0),
-(19, 18, '41', 48080, '2024-02-01', 0),
-(20, 18, '42,43', 32278, '2024-02-01', 0),
-(21, 18, '44', 17840, '2024-02-01', 0),
-(22, 18, '45', 8285, '2024-02-01', 0),
-(23, 18, '46', 11540, '2024-02-17', 0),
-(24, 18, '47,48', 24070, '2024-02-19', 0),
-(25, 18, '49', 2930, '2024-02-19', 0),
-(26, 18, '50,51', 35515, '2024-02-23', 0),
-(27, 18, '52,53', 200, '2024-02-24', 0),
-(28, 18, '54,55', 4040, '2024-02-27', 3300),
-(29, 18, '58', 9650, '2024-04-23', 1800);
 
 -- --------------------------------------------------------
 
@@ -1454,12 +1246,57 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `created_by`, `category`, `brand`, `model`, `quantity`, `unit_price`, `photo_1`, `photo_2`, `photo_3`, `Title`, `Description`, `outOfStock`, `createdDate`, `warranty`, `status`) VALUES
-(17, 14, 'Electric Guitars', 'Yamaha', 'G13', 2, 1100, 'IMG-65941e25181055.71853029.jpg', 'IMG-65941e25202227.58261776.jpg', 'IMG-65941e25281010.99267029.jpg', 'Keyboard', 'dv zsdvfaetgeag egeagaf', 0, '2024-02-06 06:45:37', '2024-01-01', 'Active'),
-(18, 14, 'Audio ', 'Yamaha', '2134c', 10, 300, 'IMG-659254383db6c3.64392645.jpg', 'IMG-65941e3ee8f334.28591517.jpg', 'IMG-6592543855fb02.30725840.jpg', 'Microphone', 'hrdysmey,sunsert', 0, '2024-02-06 06:45:37', '2030-01-01', 'Active'),
-(20, 19, 'Electric Guitars', 'Yamaha', 'G11', 3, 600, 'IMG-65925309cca440.10886502.jpg', 'IMG-65925309ccadd5.85824551.jpg', 'IMG-65925309ccb201.59047494.jpg', 'Guitar', 'this is the product description', 0, '2024-02-06 06:45:38', '2026-10-13', 'Active'),
-(21, 19, 'Keyboard Organs', 'Lowrey', 'K11', 3, 450, 'IMG-6592534fc88a55.88013733.jpg', 'IMG-6592534fc89692.28602216.jpg', 'IMG-65941e742d7498.42037729.jpg', 'Keyboard', 'ajevbnailubvaijokvbuia', 0, '2024-02-06 06:45:38', '2024-01-23', 'Active'),
-(23, 18, 'Percussion Drums', 'Bosphorus', 'D11', 1, 1300, 'IMG-659253cc68bd38.12224044.jpeg', 'IMG-659253cc68ca09.28564496.jpg', 'IMG-659253cc68ce52.56432290.jpeg', 'Drumset', 'bsrmteantatsemykae', 0, '2024-02-06 06:45:38', '2024-01-23', 'Active'),
-(24, 18, 'Percussion Drums', 'Bosphorus', 'D12', 2, 2100, 'IMG-659253f8b217d8.22407869.jpg', 'IMG-65941e5c0f8b54.99131092.jpg', 'IMG-659253f8b22507.42992831.jpg', 'Drumset', 'ndsethshjrshbsrehsjndshn', 0, '2024-02-06 06:45:38', '2024-01-15', 'Active');
+(25, 26, 'Acoustic Guitars', 'Yamaha', 'Fender Squier SA-150', 5, 5000, 'IMG-662763e3df09e5.79897803.jpg', 'IMG-662763e3df9bb0.93679760.jpg', 'IMG-662763e3dfbaa8.61902064.jpg', 'Fender acoustic guitar', 'natural color Fender Squier SA-150 for rent', 0, '2024-04-23 02:01:47', '2026-06-16', 'Active'),
+(26, 26, 'Acoustic Guitars', 'Yamaha', 'Yamaha F310', 3, 3000, 'IMG-6627675fbacb59.32610934.jpg', 'IMG-6627675fbaf3e4.80720735.jpg', 'IMG-6627675fbb2b64.58016462.jpg', 'Yamaha acoustic guitar', 'yamaha f310 for rent', 0, '2024-04-23 02:16:39', '2025-03-12', 'Active'),
+(27, 26, 'Acoustic Guitars', 'Yamaha', 'Yamaha C40', 4, 5000, 'IMG-66277b8f33d9f1.75542121.jpg', 'IMG-66277b8f33fd65.21211951.jpg', 'IMG-66277b8f341ef7.99126530.jpg', 'Yamaha classical guitar', 'yamaha c40 classical guitar for rent', 0, '2024-04-23 03:42:47', '2025-07-17', 'Active'),
+(28, 26, 'Acoustic Guitars', 'Yamaha', 'Yamaha C70', 4, 6000, 'IMG-66277f680dfbc1.98127888.jpg', 'IMG-66277f680e3010.74572238.jpg', 'IMG-66277f680e7037.22807167.jpg', 'yamaha classical guitar', 'Yamaha c70 for rent', 0, '2024-04-23 03:59:12', '2027-06-15', 'Active'),
+(29, 27, 'Keyboard Piano', 'Yamaha', 'Yamaha G2 grand piano', 1, 7000, 'IMG-66290be07ecfd6.79092679.jpg', 'IMG-66290be07fddf6.21596167.jpg', 'IMG-66290be0805ab0.73708281.jpeg', 'yamaha piano', 'brand new yamaha G2 grand piano', 0, '2024-04-24 08:10:48', '2028-06-06', 'Active'),
+(30, 27, 'Keyboard Piano', 'Kawai', 'Kawai KU2 Piano', 2, 5000, 'IMG-66290d8ca1e406.31241559.jpg', 'IMG-66290d8ca24661.66309893.jpg', 'IMG-66290d8ca2d3e2.24965934.jpg', 'kawai piano', 'brand new kawai KU2 piano', 0, '2024-04-24 08:17:56', '2027-09-13', 'Active'),
+(31, 27, 'Keyboard Piano', 'Yamaha', 'Roland FP-30X', 3, 6000, 'IMG-662913d5d970a3.10986147.jpg', 'IMG-662913d5d9d670.20146610.jpg', 'IMG-662913d5da68c1.38861645.jpg', 'Roland piano', 'Roland digital piano with speakers', 0, '2024-04-24 10:03:29', '2028-07-05', 'Active'),
+(32, 27, 'Band_And_Orchestra String Violins', 'Rozannas Violins', 'cremono SV-1240', 3, 5000, 'IMG-662922f8aee0d4.15939478.jpg', 'IMG-662922f8af10b9.22972240.jpg', 'IMG-662922f8af5c85.00316391.jpg', 'cremoni violin', 'brand new cremono violine', 0, '2024-04-24 09:49:20', '2028-06-24', 'Active'),
+(33, 27, 'Band_And_Orchestra String Cellos', 'D Z Strad', 'DZ strad model 101', 1, 7000, 'IMG-662925d3b31215.36543688.jpg', 'IMG-662925d3b36b24.61520988.jpg', 'IMG-662925d3b761e8.71804797.jpg', 'DZ strad cello', 'DZ strad cello', 0, '2024-04-24 10:01:31', '2028-11-24', 'Active'),
+(34, 27, 'Keyboard Organs', 'Roland', 'Roland-xps-30', 4, 3000, 'IMG-6629286ca672c6.19132441.jpg', 'IMG-6629286ca6abc5.10059599.jpg', 'IMG-6629286ca6e897.14820817.jpg', 'roland keyboard', 'brand new roland keyboard', 0, '2024-04-24 10:12:36', '2028-11-24', 'Active'),
+(35, 27, 'Keyboard Organs', 'Roland', 'Roland FANTOM-6', 3, 4500, 'IMG-662929fb7689f0.46232835.jpg', 'IMG-662929fb76ded5.41410364.jpg', 'IMG-662929fb771333.74360315.jpg', 'roland synthesizer keyboard', 'brand new synthesizert', 0, '2024-04-24 10:19:15', '2027-11-24', 'Active'),
+(36, 26, 'Acoustic Guitars', 'Ibanez', 'Ibanez AAD100', 4, 3500, 'IMG-662a0293e78140.13033415.png', 'IMG-662a0293e83940.90328425.jpg', 'IMG-662a0293e8abc3.56178054.jpg', 'ibanez acoustic guitar', 'brand new Ibanez guitar', 0, '2024-04-25 01:43:23', '2026-10-20', 'Active'),
+(37, 26, 'Acoustic Guitars', 'Gibson', 'Gibson J-45', 3, 4000, 'IMG-662a03a337c621.27118250.jpg', 'IMG-662a03a3382755.94425899.jpg', 'IMG-662a03a3388783.50859615.jpg', 'Gibson acoustic guitar', 'gibson acoustic guitar', 0, '2024-04-25 01:47:55', '2027-06-15', 'Active'),
+(38, 28, 'Percussion Drums', 'Bosphorus', 'Pearl EXX EXX 705/c', 1, 7000, 'IMG-662a0562a4c421.94608718.jpg', 'IMG-662a0562a51bc5.70154431.jpg', 'IMG-662a0562a594e9.53688464.jpg', 'Peaarl accoustic drumset', 'Blue pearl Drum set', 0, '2024-04-25 01:55:22', '2027-11-18', 'Active'),
+(39, 28, 'Percussion Drums', 'Bosphorus', 'dw DWe', 1, 8000, 'IMG-662a06935c6544.05089821.jpg', 'IMG-662a06935cc6a5.41476668.jpg', 'IMG-662a06935d4a67.90494805.jpg', 'DW drum set', 'brand new dw drumset', 0, '2024-04-25 02:00:27', '2027-07-07', 'Active'),
+(40, 28, 'Percussion Drums', 'Pergamon', 'Toca 2300RR', 1, 6000, 'IMG-662a07a352f545.92455382.jpg', 'IMG-662a07a3535f37.94498949.jpg', 'IMG-662a07a3540382.75369678.jpg', 'conga', 'toca red conga', 0, '2024-04-25 02:04:59', '2027-06-09', 'Active'),
+(41, 28, 'Percussion Drums', 'Sabian', 'Artist EDK260', 1, 7000, 'IMG-662a0929b26b54.37864628.jpg', 'IMG-662a0929b2d329.53054653.jpg', 'IMG-662a0929b33f48.40082622.jpg', 'Electric drum set', 'Brand new electric Drum set', 0, '2024-04-25 02:11:29', '2027-07-08', 'Active'),
+(42, 28, 'Percussion Cymbals', 'Istanbul Agop', 'ERINGOGO', 1, 2500, 'IMG-662a0a0b1ff632.95645481.jpg', 'IMG-662a0a0b205060.04598154.jpg', 'IMG-662a0a0b20dd54.35073735.jpg', 'cymbls', 'ERINGOGO 2 ps cymbals', 0, '2024-04-25 02:15:15', '2025-06-11', 'Active'),
+(43, 29, 'Keyboard Organs', 'Roland', 'Roland EX-20', 3, 4500, 'IMG-662a0c072b7560.36188110.jpg', 'IMG-662a0c072be9e9.51402532.jpg', 'IMG-662a0c072c7f12.28251925.jpg', 'Roland keyboard', 'brand new roland keyboard', 0, '2024-04-25 02:23:43', '2027-06-09', 'Active'),
+(44, 29, 'Keyboard Organs', 'Baldwin', 'Baldwin EX-10', 1, 3500, 'IMG-662a0d4d8f9224.94046976.jpg', 'IMG-662a0d4d900033.00436360.jpg', 'IMG-662a0d4d906ca8.70205493.jpg', 'Baldwin keyboard', 'Brand new Baldwin keyboard', 0, '2024-04-25 02:29:09', '2026-06-09', 'Active'),
+(45, 29, 'Keyboard Organs', 'Roland', 'Roland E-A7', 2, 5000, 'IMG-662a0e3d0cd2f1.72718337.jpg', 'IMG-662a0e3d0d46d4.18906363.jpg', 'IMG-662a0e3d0df153.80554613.jpg', 'Roland Keyboard', 'brand new Roland keyboard', 0, '2024-04-25 02:33:09', '2028-07-05', 'Active'),
+(46, 29, 'Keyboard Organs', 'Gulbransen', 'Yamaha PSR-E473', 2, 5500, 'IMG-662a0f7290a397.30059436.jpg', 'IMG-662a0f72911275.25441079.jpg', 'IMG-662a0f72917802.28580946.jpg', 'Yamaha keyboard', 'beand new yamaha keyboard', 0, '2024-04-25 02:38:18', '2026-10-13', 'Active'),
+(47, 29, 'Keyboard Organs', 'Conn', 'Casio CTK-7200', 1, 6400, 'IMG-662a10d7287a87.52488231.jpg', 'IMG-662a10d728db69.37539536.jpg', 'IMG-662a10d7295bc6.24512912.jpg', 'Casio keyboard', 'Casio keyboard', 0, '2024-04-25 02:44:15', '2026-08-14', 'Active'),
+(48, 30, 'Electric Guitars', 'Ibanez', 'Ibanez GSR180', 3, 4500, 'IMG-662a1833bc6656.42898101.jpg', 'IMG-662a1833bcd7e6.70934945.jpg', 'IMG-662a1833bd6280.64796920.jpg', 'Ibanez bass guitar', 'Ibanez bass guitar', 0, '2024-04-25 03:15:39', '2025-11-12', 'Active'),
+(49, 30, 'Acoustic Guitars', 'Yamaha', 'Yamaha FG820', 1, 5000, 'IMG-662a19316e2228.12454870.jpg', 'IMG-662a19316e7e07.17730154.jpg', 'IMG-662a19316ee5c2.51577934.jpg', 'Yamaha 12 string guitat', 'Yamaha 12 string guitar', 0, '2024-04-25 03:19:53', '2027-11-25', 'Active'),
+(50, 30, 'Acoustic Guitars', 'Yamaha', 'Kremona Fiesta F65CW-7S', 2, 4500, 'IMG-662a1a807d6fd3.79668609.jpg', 'IMG-662a1a807ddce5.78847410.jpg', 'IMG-662a1a807e7584.07475831.jpg', 'Kremona acoustic guitar', 'kremona acoustic guitar', 0, '2024-04-25 03:25:28', '2024-11-13', 'Active'),
+(51, 30, 'Audio Amplifiers', 'Yamaha', 'Yamaha GA 15', 4, 3000, 'IMG-662a1b4ecb2975.71730754.jpg', 'IMG-662a1b4ecb9f24.12603834.jpg', 'IMG-662a1b4ecc3019.57774214.jpg', 'Yamaha amplifier', 'Yamaha lead guitar amplifier', 0, '2024-04-25 03:28:54', '2026-07-09', 'Active'),
+(52, 30, 'Audio Microphones', 'AKG', 'AKG D90s', 3, 2500, 'IMG-662a1c50065706.14757500.jpg', 'IMG-662a1c5006d0f3.22422754.png', 'IMG-662a1c50076241.84487169.jpg', 'AKG microphone', 'high quality microphone', 0, '2024-04-25 03:33:12', '2027-10-12', 'Active'),
+(53, 31, 'Audio Headphones', 'Yamaha', 'Yamaha HPH-MT 7', 3, 3000, 'IMG-662a20bc2141c1.86551772.jpg', 'IMG-662a20bc21bac9.54568369.jpg', 'IMG-662a20bc221951.30675485.jpg', 'Yamaha head phone', 'High quality head phones', 0, '2024-04-25 03:52:04', '2026-11-26', 'Active'),
+(54, 31, 'Audio Mixers', 'Yamaha', 'Yamaha MG20XU', 1, 7000, 'IMG-662a2187583820.23666212.jpg', 'IMG-662a218758a052.80685057.jpg', 'IMG-662a2187592f30.23660156.jpg', 'Yamaha mixer', 'Yamaha mixer', 0, '2024-04-25 03:55:27', '2027-11-17', 'Active'),
+(55, 31, 'Audio Amplifiers', 'Powell', 'Marshall MG50GX', 2, 4500, 'IMG-662a22a44cf486.33904981.jpg', 'IMG-662a22a44d5b18.90300263.jpg', 'IMG-662a22a44dc563.91273617.jpg', 'Marshal amplifier', 'marshall guitar amplifier', 0, '2024-04-25 04:00:12', '2027-10-13', 'Active'),
+(56, 31, 'Audio Amplifiers', 'Armstrong', 'Fender Rumble 40 V3', 2, 5000, 'IMG-662a239f6040e0.62146188.jpg', 'IMG-662a239f60a9b2.39698000.jpg', 'IMG-662a239f613eb2.43216018.jpg', 'Bass guitar amplifier', 'Bass guitar amplifier', 0, '2024-04-25 04:04:23', '2027-08-13', 'Active'),
+(57, 32, 'Band_And_Orchestra Woodwind Flutes', 'Yamaha', 'Yamaha YFL-222', 4, 5000, 'IMG-662a2c3e9bb989.72699940.jpg', 'IMG-662a2c3e9c1720.72830309.jpg', 'IMG-662a2c3e9c7e96.62670828.jpg', 'Yamaha Flute', 'Yamaha flute', 0, '2024-04-25 04:41:10', '2027-09-12', 'Active'),
+(58, 32, 'Band_And_Orchestra Woodwind Flutes', 'Armstrong', 'Jupiter 700E', 5, 2000, 'IMG-662a2d7758c0d8.29978485.jpg', 'IMG-662a2d7758eab2.71306570.jpg', 'IMG-662a2d77591571.57739590.jpg', 'Armstrong Flute', 'Jupiter student flute', 0, '2024-04-25 04:46:23', '2028-11-15', 'Active'),
+(59, 32, 'Band_And_Orchestra Woodwind Clarinets', 'Buffet Crampon', 'Buffet Crmpon E-11C', 2, 4000, 'IMG-662a2ecfd764d4.24846665.jpg', 'IMG-662a2ecfd7f445.62920202.jpg', 'IMG-662a2ecfd89da6.01430072.jpg', 'Buffet Crampon Clarinet', 'Brand new clarinet', 0, '2024-04-25 04:52:07', '2027-11-18', 'Active'),
+(60, 32, 'Band_And_Orchestra Woodwind Saxophones', 'Yamaha', 'Yamaha YAS-280', 2, 8000, 'IMG-662a2f6a307ee9.80095863.jpg', 'IMG-662a2f6a30e971.03497912.jpg', 'IMG-662a2f6a315163.91862280.jpg', 'Yamaha Saxophone', 'Brand new saxophone', 0, '2024-04-25 04:54:42', '2027-11-25', 'Active'),
+(61, 32, 'Band_And_Orchestra Woodwind Saxophones', 'Selmer', 'Selmer series III tenor', 4, 7500, 'IMG-662a3008a4c2e3.94642840.jpg', 'IMG-662a3008a54094.91150585.jpg', 'IMG-662a3008a5cd71.98055218.jpg', 'Selmer Saxophone', 'Brand new saxophone', 0, '2024-04-25 04:57:20', '2027-08-20', 'Active'),
+(62, 33, 'Acoustic Guitars', 'Yamaha', 'Yamaha F310', 5, 2500, 'IMG-662a3185d5d9e8.15264614.jpg', 'IMG-662a3185d66321.36760276.jpg', 'IMG-662a3185d70488.71950715.jpg', 'Yamaha acoustic guitar', 'Brand new Yamaha acoustic guitar', 0, '2024-04-25 05:03:41', '2026-11-19', 'Active'),
+(63, 33, 'Band_And_Orchestra String Violins', 'Suzuki', 'Suzuki NS-20', 2, 3000, 'IMG-662a35e0219de9.01385709.jpg', 'IMG-662a35e0220169.52739153.jpg', 'IMG-662a35e02275c3.31360245.jpg', 'Suzuki ciolin', 'Suzuki brand new violin', 0, '2024-04-25 05:22:16', '2027-12-24', 'Active'),
+(64, 33, 'Band_And_Orchestra String Cellos', 'D Z Strad', 'DZ strad model 250', 1, 6000, 'IMG-662a379ed01917.85492343.jpg', 'IMG-662a379ed09e44.38532248.jpg', 'IMG-662a379ed14475.80507127.jpg', 'Cello', 'Brand new cello', 0, '2024-04-25 05:29:42', '2027-10-19', 'Active'),
+(65, 33, 'Percussion Drums', 'Pergamon', 'Acrylic DDAC2215CL', 1, 8000, 'IMG-662a38c8aec559.62102181.jpg', 'IMG-662a38c8af5b88.09116078.jpg', 'IMG-662a38c8afce01.20738809.jpg', 'Acoustic drum set', 'Brand new acoustic drum set', 0, '2024-04-25 05:34:40', '2027-11-18', 'Active'),
+(66, 34, 'Electric Guitars', 'Gibson', 'Gibson ES-330TD', 2, 4500, 'IMG-662a3a5a80fc33.46408383.jpg', 'IMG-662a3a5a8162a2.14933158.jpg', 'IMG-662a3a5a81ec01.42915199.jpg', 'Gibson electic guitar', 'Brand new gibson electic guitar', 0, '2024-04-25 05:41:22', '2027-10-12', 'Active'),
+(67, 34, 'Electric Guitars', 'PRS', 'PRS CE 24', 2, 5000, 'IMG-662a3b300ecc71.75072071.jpg', 'IMG-662a3b300f5239.92113542.jpg', 'IMG-662a3b30101625.02845182.jpg', 'PRS electric guitar', 'Brand new PES guitar', 0, '2024-04-25 05:44:56', '2024-12-20', 'Active'),
+(68, 34, 'Electric Guitars', 'PRS', 'PRS SE Standard 24', 5, 7000, 'IMG-662a3c0ab2aad3.46383548.jpg', 'IMG-662a3c0ab30ca9.80986690.jpg', 'IMG-662a3c0ab38730.40466386.jpg', 'PRS electirc guitar', 'Brand new PRS electric guitar', 0, '2024-04-25 05:48:34', '2027-11-17', 'Active'),
+(69, 34, 'Electric Guitars', 'Epiphone', 'Epiphone  ES-335', 3, 5000, 'IMG-662a3e700454c6.50099609.jpg', 'IMG-662a3e7004e288.14454614.jpg', 'IMG-662a3e70052c94.02974325.jpg', 'Epiphone electric guitar', 'Brand new electric guitar', 0, '2024-04-25 05:58:48', '2027-07-15', 'Active'),
+(70, 34, 'Electric Guitars', 'ESP', 'ESP LTD EC-1000', 2, 2500, 'IMG-662a406257e949.39054809.png', 'IMG-662a4062586e89.28793419.jpg', 'IMG-662a4062590e24.99093201.jpg', 'Esp Electric guitar', 'ESP electric guitar', 0, '2024-04-25 06:07:06', '2027-11-18', 'Active'),
+(71, 35, 'Band_And_Orchestra Brass ', 'Bach', 'Yamaha YTR - 2330', 4, 2500, 'IMG-662a42884c3ad2.06097869.jpg', 'IMG-662a42884ca4f7.54985387.jpg', 'IMG-662a42884d4854.47794779.jpg', 'Yamaha Trumpet', 'Student trumpet', 0, '2024-04-25 06:16:16', '2026-06-09', 'Active'),
+(72, 35, 'Band_And_Orchestra Brass ', 'Bach', 'Bach 190M37X', 7, 4500, 'IMG-662a434ccb37a7.56250138.jpg', 'IMG-662a434ccbb2d9.85409810.jpg', 'IMG-662a434ccc6768.01477700.jpg', 'Bach Trumpet', 'Brandnew Bach Trumpet', 0, '2024-04-25 06:19:32', '2027-07-15', 'Active'),
+(73, 35, 'Band_And_Orchestra Brass ', 'Jupiter', 'Jupiter JR606MR', 2, 5000, 'IMG-662a43fd80d0f6.47036597.jpg', 'IMG-662a43fd815451.42396255.jpg', 'IMG-662a43fd81ca44.91678217.jpg', 'Jupiter Trumpet', 'Brand new Jupiter trumpet', 0, '2024-04-25 06:22:29', '2028-11-16', 'Active'),
+(74, 35, 'Band_And_Orchestra Brass ', 'Bach', 'Yamaha YSL-354C', 3, 6000, 'IMG-662a44c2eb3697.57558354.jpg', 'IMG-662a44c2ebb218.67675384.jpg', 'IMG-662a44c2ec4a24.62992900.jpg', 'Yamaha Trombone', 'Brand new Yamaha Trombone', 0, '2024-04-25 06:25:46', '2027-08-20', 'Active'),
+(75, 35, 'Band_And_Orchestra Brass ', 'Yamaha', 'Yamaha YHR 314', 2, 5000, 'IMG-662a45a75f8698.18270801.jpg', 'IMG-662a45a75ff650.14620024.jpg', 'IMG-662a45a7606fb2.29635494.jpg', 'French Horn', 'Brand new French Horne', 0, '2024-04-25 06:29:35', '2027-11-18', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1487,17 +1324,6 @@ CREATE TABLE `recover_account_user` (
   `securityAnswer` varchar(255) NOT NULL DEFAULT 'Not Given'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `recover_account_user`
---
-
-INSERT INTO `recover_account_user` (`recover_id`, `user_name`, `first_purchase_date`, `first_purchase_item`, `last_purchase_date`, `last_purchase_item`, `account_created_on`, `mobile_number`, `address`, `dob`, `gender`, `other`, `status`, `placed_on`, `contactEmail`, `securityQuestion`, `securityAnswer`) VALUES
-(3, 'test', '2024-02-22', 'gfqag', '2024-02-07', 'hello', '2024-02-07', 0, 'gtest', '2024-02-22', 'male', 'thetheh', 'Accepted', '2024-02-20', 'gayathradissa@gmail.com', 'Not Given', 'Not Given'),
-(4, 'test', '2024-02-22', 'gfqag', '2024-02-07', 'hello', '2024-02-07', 0, 'gtest', '2024-02-22', 'male', 'thetheh', 'Rejected', '2024-02-20', 'gayathradissa@gmail.com', 'Not Given', 'Not Given'),
-(5, 'Gayathra', '0000-00-00', 'gfqag', '2021-02-03', 'test 23', '0000-00-00', 712056046, 'hg g hwsb gwgwgwe', '2000-03-31', 'male', '', 'Pending', '2024-02-20', 'itsaeox98@gmail.com', 'Not Given', 'Not Given'),
-(6, 'user_05', '0000-00-00', '', '0000-00-00', '', '2024-02-24', 722899088, 'user_05@gmail.com', '2000-03-31', 'male', '', 'Pending', '2024-02-25', 'gayathradissa@gmail.com', 'What is your mother\'s maiden name?', 'Eroshini'),
-(7, 'user_09', '0000-00-00', '', '0000-00-00', '', '2024-02-24', 1234567890, 'user_09@gmail.com', '2024-02-08', 'male', '', 'Pending', '2024-02-25', 'thedarksoul776@gmail.com', 'What is the model of your first car?', 'onmi');
-
 -- --------------------------------------------------------
 
 --
@@ -1515,19 +1341,6 @@ CREATE TABLE `reviews` (
   `placed_on` date DEFAULT NULL,
   `type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `reviews`
---
-
-INSERT INTO `reviews` (`review_id`, `product_id`, `user_id`, `rating`, `content`, `name`, `photo`, `placed_on`, `type`) VALUES
-(36, 20, 18, 3, 'gqagaeg', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-02-18', 'Equipment'),
-(37, 8, 18, 4, 'uewshwsg4e', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-02-18', 'Singer'),
-(38, 8, 18, 5, 'g gbwsrhwgw', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-02-18', 'Singer'),
-(39, 2, 18, 3, 'hello', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-02-18', 'Band'),
-(40, 20, 18, 4, 'vnjezavlk', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-03-22', 'Equipment'),
-(41, 2, 18, 3, 'jr6yttr', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-04-17', 'Band'),
-(42, 2, 18, 3, 'herllo', 'Gayathra Dissanayake', 'IMG-65864fca5956f6.45090781.jpeg', '2024-04-17', 'Band');
 
 -- --------------------------------------------------------
 
@@ -1548,7 +1361,25 @@ CREATE TABLE `sec_queation` (
 --
 
 INSERT INTO `sec_queation` (`sec_id`, `user_type`, `user_id`, `question`, `answer`) VALUES
-(1, 'Customer', 26, 'What is the model of your first car', 'onmi');
+(1, 'Customer', 26, 'What is the model of your first car', 'onmi'),
+(2, 'Customer', 27, 'In which city were you born?', 'anuradhapura'),
+(3, 'Customer', 28, 'In which city were you born?', 'colombo'),
+(4, 'Customer', 29, 'In which city were you born?', 'Homagama'),
+(5, 'Customer', 30, 'What is your mother&#39;s maiden name?', 'Kumari'),
+(6, 'Customer', 31, 'What is the name of your first pet?', 'tom'),
+(7, 'Customer', 32, 'What is your favorite childhood book?', 'sherlock Holmes'),
+(8, 'Customer', 33, 'What is the model of your first car?', 'toyota'),
+(9, 'Customer', 34, 'What is your mother&#39;s maiden name?', 'uma'),
+(10, 'Customer', 35, 'In which city were you born?', 'colombo'),
+(11, 'Customer', 36, 'What is the name of your first pet?', 'jambo'),
+(12, 'Customer', 37, 'What is your favorite childhood book?', 'beauty and the beast'),
+(13, 'Customer', 38, 'What is the model of your first car?', 'tesla'),
+(14, 'Customer', 39, 'What is your mother&#39;s maiden name?', 'pooja'),
+(15, 'Customer', 40, 'In which city were you born?', 'kandy'),
+(16, 'Customer', 41, 'What is the name of your first pet?', 'sindy'),
+(17, 'Customer', 42, 'What is your favorite childhood book?', 'harry potter'),
+(18, 'Customer', 43, 'What is the model of your first car?', 'honda civic'),
+(19, 'Customer', 44, 'What is your mother&#39;s maiden name?', 'madu');
 
 -- --------------------------------------------------------
 
@@ -1588,7 +1419,34 @@ INSERT INTO `serviceproviders` (`serviceprovider_id`, `business_name`, `business
 (14, 'gayathradissa@gmail.com', 'gayathradissa@gmail.com', '1234567890', 'gayathradissa@gmail.com', '$2y$10$wnKk3/23oLc/i9IZlSiae.iqt/Zx6.zjn8vMQ6I3XO9HCoriMBy7m', 'gayathradissa@gmail.com', 'gayathradissa@gmail.com', '1234567890', 'gayathradissa@g', 'gayathradissa@gmail.com', 'gayathradissa@gmail.com', 'IMG-65864b06e5a500.12264750.jpg', 162655, 'Active', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2023-11-01'),
 (18, 'gayathradissa1@gmail.com', 'gayathradissa1@gmail.com', '1234567890', 'gayathradissa1@gmail.com', '$2y$10$vW8S4t.8UL4/gvMhUT7zPeseKUq2vXJnOQR9p/abm2ktCyqIRUgee', 'gayathradissa1@gmail.com', 'gayathradissa1@gmail.com', '1234567890', 'gayathradissa1@', 'gayathradissa1@gmail.com', 'gayathradissa1@gmail.com', 'IMG-659252651d92c6.46419557.png', 108783, 'Active', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2023-11-01'),
 (19, 'gayathradissa2@gmail.com', 'gayathradissa2@gmail.com', '1234567890', 'gayathradissa2@gmail.com', '$2y$10$JGdsN89gcJCO7VEvUwvMB.uIOeo37z5CkBwFqRQR.WiHz3CUTuAo.', 'gayathradissa2@gmail.com', 'gayathradissa2@gmail.com', '1234567890', 'gayathradissa2@', 'gayathradissa2@gmail.com', 'gayathradissa2@gmail.com', 'IMG-659252aa449923.24623916.png', 178095, 'Active', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2023-11-01'),
-(20, 'sp_05@gmail.com', 'sp_05@gmail.com', '1234567890', 'sp_05@gmail.com', '$2y$10$zijEDgbokOHrsgu3oSnM8.85IWrUg1YBRn2sRRKBfy7h37gGogoYy', 'sp_05@gmail.com', 'sp_05@gmail.com', '1234567890', 'sp_05@gmail.com', 'sp_05@gmail.com', 'sp_05@gmail.com', 'IMG-65c1ea6b060084.30240957.jpg', 238863, 'Banned', 'IMG-65c1ea6b05e658.53252507.png', 'IMG-65c1ea6b05f091.87700728.jpeg', 'IMG-65c1ea6b05f4f4.87778616.jpeg', 'IMG-65c1ea6b05f874.66097781.png', 'IMG-656bdc23223334.62765635.png', '2023-11-01');
+(26, 'Melody Mart', '25A, Palm Grove, Colombo 03', '1234567890', 'melodymart@gmail.com', '$2y$10$4Yq2hAMpm1NEZ790gSMsKOnIzmkeIfcAdqvSl/mUwlAi9ZVvz0FOS', 'Emily Johnson', '10B, Jasmine Lane, Kandy', '2345678901', '123456789012345', 'emilyjohnson@gmail.com', 'about melody mart', 'IMG-6627616b0532c4.16165502.jpg', 222684, 'Active', 'IMG-66262a2ad4bf40.19996905.jpg', 'IMG-66262a2ad4ea99.37831850.jpg', 'IMG-66262a2ad53029.27396713.jpg', 'IMG-66262a2ad56c24.09708517.jpg', 'IMG-66262a2ad5a743.83917572.jpg', '2024-04-22'),
+(27, 'Harmony Haven', '45, Ocean View Road, Galle', '3456789012', 'harmonyhaven@gmail.com', '$2y$10$mWZKH02kkI7TXEOscgXTgeYR8XKJzqL9CbrG2XSHq6P/MvPyQNTpe', 'Daniel Martinez', '7/2, Lotus Avenue, Negombo', '4567890123', '234567890123456', 'danielmartinez@gmail.com', 'about harmony haven', 'IMG-66262b543f8ad4.59753967.png', 224201, 'Active', 'IMG-66262b543e9d74.47294772.jpg', 'IMG-66262b543ebd17.10801180.jpg', 'IMG-66262b543ee848.35768548.jpg', 'IMG-66262b543f1592.89971184.jpg', 'IMG-66262b543f51f5.27615260.jpg', '2024-04-22'),
+(28, 'Tempo Trading', '14, Hillside Drive, Nuwara Eliya', '5678901234', 'tempotrading@gmail.com', '$2y$10$qZN6tsu98aBEyKsshVjwyeul3NWKvKhnZM6vrgge9ISkyNXXw838O', 'Chloe Brown', '32, Coconut Gardens, Jaffna', '6789012345', '567890123456789', 'chloebrown@gmail.com', 'about tempo trading', 'IMG-66262cc1bf4e75.65336557.jpg', 227427, 'Active', 'IMG-66262cc1be1735.39028696.jpg', 'IMG-66262cc1be5eb1.56054691.jpg', 'IMG-66262cc1bebb51.25399206.jpg', 'IMG-66262cc1beeeb2.35804302.jpg', 'IMG-66262cc1bf1c84.35309770.jpg', '2024-04-22'),
+(29, 'Rhythm Retail', '6A, Sunset Street, Matara', '7890123456', 'rhythmretail@gmail.com', '$2y$10$9WQFLCRj9EwsqtyI.Tt1YeIQ//TAFyAlMNj6txKqGGiDRAeeJOKaO', 'Ethan Anderson', '18/1, River Bank, Trincomalee', '8901234567', '456789012345678', 'ethananderson@gmail.com', 'about rhythm retail', 'IMG-662a0ada79b402.89805769.jpg', 321762, 'Active', 'IMG-66262ebc8518e8.65976844.jpg', 'IMG-66262ebc855901.84756511.jpg', 'IMG-66262ebc858534.70747609.jpg', 'IMG-66262ebc85b0e5.35814121.jpg', 'IMG-66262ebc85eda7.84767113.jpg', '2024-04-22'),
+(30, 'Crescendo Corner', '22, Paradise Road, Batticaloa', '9012345678', 'crescendocorner@gamil.com', '$2y$10$SnDa2.pyn1CEB4nz3L7ok..V38QOqwKgJfJpeZgb5T0LIV1RncmlO', 'Olivia Wilson', '3, Coral Crescent, Anuradhapura', '0123456789', '567890123456789', 'oliviawilson@gmail.com', 'about Crescendo Corner', 'IMG-66263180cd7b40.87930576.png', 207027, 'Active', 'IMG-66263180cc4102.90208100.jpg', 'IMG-66263180cc6fc6.62054073.jpg', 'IMG-66263180cc9ce6.93427251.jpg', 'IMG-66263180ccd1b5.94119569.jpg', 'IMG-66263180cd2493.59129914.jpg', '2024-04-22'),
+(31, 'Sonic Supplies', '8, Pearl Avenue, Ratnapura', '1352463579', 'sonicsupplies@gmail.com', '$2y$10$FsL2aGqZEKFUgtZJPLjMzO2aJJjMTQ0LIlhVmLDLrlzfjWlbn/0py', 'Alexander Taylor', '11/5, Starlight Lane, Polonnaruwa', '2463574680', '678901234567890', 'alexandertaylor@gmail.com', 'about sonic suppies', 'IMG-662634d87a81a8.60777547.png', 196046, 'Active', 'IMG-662634d878f119.31083490.jpg', 'IMG-662634d8794878.81302655.jpg', 'IMG-662634d8798782.13185177.jpg', 'IMG-662634d879d273.95726824.jpg', 'IMG-662634d87a3694.24688128.jpg', '2024-04-22'),
+(32, 'Note Nexus', '29, Moonbeam Road, Hambantota', '3574685791', 'notenexus@gmail.com', '$2y$10$14Jm/Xr/ubvAEQEwroruH.FQe.EZMb.YM8jROoQKJMRMBu17SYW4.', 'Sophia Thompson', '17, Sapphire Street, Ampara', '4685796802', '789012345678901', 'sophiathompson@gmail.com', 'about note nexus', 'IMG-66263b97cebad0.98016700.png', 655054, 'Active', 'IMG-66263b97cd7334.24644603.jpg', 'IMG-66263b97cdc109.29437380.jpg', 'IMG-66263b97cdfb83.26788368.jpg', 'IMG-66263b97ce4004.89866015.jpg', 'IMG-66263b97ce8f41.17654169.jpg', '2024-04-22'),
+(33, 'Acoustic Avenue', '5, Emerald Close, Badulla', '5796807913', 'acousticavenue@gmail.com', '$2y$10$nb35jSNLRyuR5yVQYS6B1e4NhrETgOJs1UJuhfpgP4E9NJ8aCtm3O', 'Mason Harris', '42, Ruby Lane, Kurunegala', '6807918024', '890123456789012', 'masonharris@gmail.com', 'about acoustic avenue', 'IMG-662641300428d5.49071232.jpg', 122620, 'Active', 'IMG-662641300308b6.80116826.jpg', 'IMG-66264130032b77.03745579.jpg', 'IMG-66264130035655.32435004.jpg', 'IMG-662641300397b7.04896067.jpg', 'IMG-6626413003e5f5.08633875.jpg', '2024-04-22'),
+(34, 'String Emporium', '9A, Gold View Terrace, Gampaha', '7918029135', 'stringemporium@gmail.com', '$2y$10$0gSvup/J3SD6zJaocvAH4.ax/7uC8g0yuIVnkrrdiudZPP.loNwZm', 'Ava Clark', '20, Diamond Drive, Kalutara', '8029130246', '802567890234567', 'avaclark@gmail.com', 'about String Emporium', 'IMG-6626448552c541.72696355.jpg', 267588, 'Active', 'IMG-66264485517759.76883441.jpg', 'IMG-6626448551ad14.98440390.jpg', 'IMG-6626448551ef03.88053504.jpg', 'IMG-66264485522794.35027445.jpg', 'IMG-66264485527604.22628214.jpg', '2024-04-22'),
+(35, 'Brass Bazaar', '12/3, Silver Crescent, Matale', '9130241357', 'brassbazaar@gmail.com', '$2y$10$sin89NpftTcX7G35rQMp/uuKT6Uoj0dyd5hd6yq0n82zNbLbay6PS', 'William Lewis', '33, Platinum Park, Bentota', '0241352468', '012345678901234', 'williamlewis@gmail.com', 'about Brass Bazaar', 'IMG-66264699d915c8.84395177.jpg', 271306, 'Active', 'IMG-66264699d338e1.68397206.jpg', 'IMG-66264699d36075.22558464.jpg', 'IMG-66264699d87c20.83895585.jpg', 'IMG-66264699d8ae74.25407603.jpg', 'IMG-66264699d8ea03.69640597.jpg', '2024-04-22'),
+(36, 'SoundScape Studios', '6, Crystal Gardens, Dambulla', '1472583690', 'soundscapestudios@gmail.com', '$2y$10$EtlBKfR4SU54CNHt0t1BluHVmJpSc4TfLpmQUXCemFAYCRvaxC.sm', 'Isabella Robinson', '15/1, Topaz Street, Beruwala', '2583694801', '135792468012345', 'isabellarobinson@gmail.com', 'about SoundScape Studios', 'IMG-66264e6961ccd4.32512582.png', 108595, 'Active', 'IMG-66264e696146a3.19471744.jpeg', 'IMG-66264e69616c73.27083571.jpg', 'IMG-66264e69619d12.09128703.jpg', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2024-04-22'),
+(37, 'NoteCraft Music', '27, Amethyst Lane, Gampola', '3694805912', 'notecraftmusic@gmail.com', '$2y$10$/LvY.vlkvdAKl.fME6ytxOQVXW4Amnb9H/NKDj.eOS45586GmO7Ke', 'Michael Hall', '4B, Garnet Avenue, Vavuniya', '3694805912', '246801357923456', 'michaelhall@gmai.com', 'about NoteCraft Music', 'IMG-6626523ee550f7.70380855.jpg', 556283, 'Active', 'IMG-6626523ee50374.76440543.jpg', 'IMG-6626523ee526c2.52923451.jpg', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2024-04-22'),
+(38, 'Harmony House Studios', '19, Opal Road, Chilaw', '5916027134', 'harmonyhousestudios@gmail.com', '$2y$10$hMObLypUSnpcY85KIXjsUeWIYFhM7lUvVYrHFBAQ9W/96.0F7uZWG', 'Charlotte Green', '14/2, Quartz Lane, Bandarawela', '6027138245', '357912346834567', 'charlottegreen@gmail.com', 'about harmony house', 'IMG-6626572cb3a299.40436752.png', 146815, 'Active', 'IMG-6626572cb2e148.91463048.jpg', 'IMG-6626572cb334c3.38059196.jpg', 'IMG-6626572cb371d3.77203459.jpg', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2024-04-22'),
+(39, 'Tempo Tower', '28, Tanzanite Terrace, Polonnaruwa', '7138249356', 'tempotower@gmail.com', '$2y$10$/Fy.3z01NUWc1fGj841O0O.fQrwhNgzcD.7ae.OpwXNjdMNyYcgjC', 'James Carter', '22, Topaz Gardens, Ratnapura', '8249350467', '468123457895678', 'jamescarter@gmail.com', 'about temp tower', 'IMG-66265ae039e649.65783954.jpg', 215991, 'Active', 'IMG-66265ae0395684.72614028.jpg', 'IMG-66265ae03982a8.82350288.jpg', 'IMG-66265ae039b713.34697865.jpg', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2024-04-22'),
+(40, 'Melody Mill', '7, Moonstone Avenue, Trincomalee', '9350461578', 'melodymill@gmail.com', '$2y$10$rL5xZdp.UcAx8zY67liYjO4TVBqHV0itbeKuG3WVSD1wkn93sqCgi', 'Amelia Wright', '36, Peridot Place, Anuradhapura', '0461572689', '579234568901234', 'ameliawright@gmail.com', 'about Melody Mill', 'IMG-66266036465074.31785479.png', 301546, 'Active', 'IMG-6626603645ccf4.78584588.jpg', 'IMG-66266036462223.62091829.jpg', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2024-04-22'),
+(41, 'Sonic Sanctuary', '9/1, Aquamarine Street, Matale', '1592703814', 'sonicsanctuary@gmail.com', '$2y$10$pxP/6QWDq9aFcLS1kKxsIeuIYDOPMpxudn5MVxd2RKtFPyJZU7jqi', 'Benjamin King', '24, Zircon Lane, Kurunegala', '2703814925', '680345679012345', 'benjaminking@gmail.com', 'about Sonic Sanctuary', 'IMG-662663cf9e8300.99745763.jpg', 760047, 'Active', 'IMG-662663cf9de498.47560106.jpg', 'IMG-662663cf9e3c76.81958180.jpg', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2024-04-22'),
+(42, 'Rhythm Room Records', '11, Emerald Drive, Matara', '3814925036', 'rhythmroomrecords@gmail.com', '$2y$10$YUoY9m4u5LVEc.MjufrDieAKLyFyFZoOP1NY1Z0GUsQrvHISnH4Y2', 'Mia Rodriguez', '35/2, Sapphire Street, Hambantota', '4925036147', '791456780123456', 'miarodriguez@gmail.com', 'about Rhythm Room Records', 'IMG-6626659abf5be6.99766920.png', 278719, 'Active', 'IMG-6626659abf0c49.86216801.jpg', 'IMG-6626659abf3426.46775099.jpg', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2024-04-22'),
+(43, 'Crescendo Creations', '18, Ruby Road, Nuwara Eliya', '5036147258', 'crescendocreations@gmail.com', '$2y$10$FMTFaRbmrtxuRFaVAzhl1eGvlo0EIFeKPdg2WFuBlZ7Q6ifrobW5.', 'Jacob Adams', '5A, Diamond Lane, Galle', '6147258369', '802567890234567', 'jacobadams@gmail.com', 'about Crescendo Creations', 'IMG-662759757d6860.16632629.png', 158388, 'Pending', 'IMG-662759757c8d01.10290675.jpg', 'IMG-662759757d2161.89737828.jpg', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2024-04-23'),
+(44, 'Tune Town Studios', '30, Coral Crescent, Negombo', '7258369470', 'tunetownstudios@gmail.com', '$2y$10$Dsm4Arnuq.UEld05QRaskubZf3U9gRbr5YHG2NBajMaP5hJBuXbhm', 'Harper Lee', '23, Pearl Gardens, Kandy', '8369470581', '913678901345678', 'harperlee@gmail.com', 'about Tune Town Studios', 'IMG-66275cd9547f00.35661918.jpg', 347554, 'Pending', 'IMG-66275cd9544000.01817302.jpg', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2024-04-23'),
+(45, 'Acoustic Alcove', '16/3, Gold View Terrace, Colombo 05', '9470581692', 'acousticalcove@gmail.com', '$2y$10$lzmKXB47A8QI3CdyH.Mi4.v5sUaYcCi9IQXQ7vQkeE.PxofB3KXL.', 'Alexander White', '38, Platinum Park, Gampaha', '0581692703', '024789012456789', 'alexanderwhite@gmail.com', 'about Acoustic Alcove', 'IMG-66275ed7144546.48276940.jpg', 353319, 'Pending', 'IMG-66275ed7138912.92321253.jpeg', 'IMG-66275ed7140be2.43390326.jpeg', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2024-04-23'),
+(46, 'Melo Maestro', '12, Crystal Close, Kalutara', '3694805912', 'melomaestro@gmail.com', '$2y$10$xLtWICOGm7dHTgnac6bsmOf0fKltaan.iVeFfort/DG9QzLpk98tG', 'Aiden Nelson', '25/1, Amethyst Avenue, Beruwala', '4805916023', '258369012345678', 'aidennelson@gmail.com', 'about Aiden Nelson', 'IMG-6627da75233b46.45225001.jpg', 182933, 'Active', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2024-04-23'),
+(47, 'Vocal Virtuoso', '10, Garnet Gardens, Ratnapura', '5916027134', 'vocalvirtuoso@gmail.com', '$2y$10$dWq6StqauN/aH8oy51BN6.5vTNZoDK2U9LKZsY7ur2YwEkMCG3NtW', 'Zoe Garcia', '10, Garnet Gardens, Ratnapura', '5916027134', '046789012345678', 'zoegarcia@gmail.com', 'about Vocal Virtuoso', 'IMG-6627e684ad98b9.14725766.jpg', 185134, 'Active', 'IMG-6627e684acae11.39451631.png', 'IMG-6627e684ad5031.33391341.jpg', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2024-04-23'),
+(50, 'Songbird Supreme', '10B, Garnet Avenue, Colombo 05', '9350461578', 'songbirdsupreme@gmail.com', '$2y$10$uPic1/PALbCnDO9bHDggHO/2UW0WsCkB5jFQo9OogAU4NPyNKXRZK', 'Valentina Perry', '10B, Garnet Avenue, Colombo 05', '9350461578', '480123456789012', 'valentinaperry@gmail.com', 'about Valentina Perry', 'IMG-662a72dd5bc740.07713822.jpg', 995417, 'Active', 'IMG-662a72dd5b2132.72315530.png', 'IMG-662a72dd5b6a77.18183428.jpg', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2024-04-25'),
+(51, 'Velvet Horizon', '41, Opal Lane, Kalutara', '8249350467', 'velvethorizon@gmail.com', '$2y$10$0m2IMh/uxE/X.eV7MwivDubNZBHZgig.9.ykz.vocVM70JsJHj/Q.', 'Hannah Wood', '41, Opal Lane, Kalutara', '4805916023', '268901234567890', 'hannahwood@gmail.com', 'about  velvet horizon', 'IMG-662a86d60a2c76.36961393.jpg', 251242, 'Active', 'IMG-662a86d60894a7.24090565.jpg', 'IMG-662a86d608bd99.38767770.jpg', 'IMG-662a86d608f451.50180899.jpg', 'IMG-662a86d6092a79.42965416.jpg', 'IMG-662a86d6099e65.99767598.jpg', '2024-04-25'),
+(52, 'Midnight Mirage', '9, Aquamarine Gardens, Bandarawela', '6027138245', 'midnightmirage@gmail.com', '$2y$10$ucPA5cNdbP2ZA6IHkXgu/eh1./C6viKz68DsfbnKp74OAPmkDqLhm', 'Skylar Brooks', '9, Aquamarine Gardens, Bandarawela', '6027138245', '602345678901234', 'skylarbrooks@gmail.com', 'about Midnight Mirage', 'IMG-653fd611dd2445.48951448.png', 251244, 'Active', 'IMG-662a893cd35249.53156172.jpg', 'IMG-662a893cd38ae9.14985054.jpg', 'IMG-662a893cd3bef0.62317025.jpg', 'IMG-662a893cd42111.56988484.jpg', 'IMG-662a893cd460b2.45405029.jpg', '2024-04-25'),
+(53, 'Solar Serenade', '16/3, Gold View Terrace, Colombo 05', '6027138245', 'solarserenade@gmail.com', '$2y$10$qYho8vLRSyeqTsYlMDPImOvUkvBHU41X3eEANWk0nJshur66Fbeja', 'Dominic Brooks', '16/3, Gold View Terrace, Colombo 05', '6027138245', '713456789012345', 'bominicbrooks@gmail.com', 'about Solar Serenade', 'IMG-662a8aa88e7876.11196437.jpg', 654945, 'Active', 'IMG-662a8aa88d9282.34066099.jpg', 'IMG-662a8aa88dbc49.80389955.jpg', 'IMG-662a8aa88dea30.98313533.jpg', 'IMG-662a8aa88e1ed5.93427758.jpg', 'IMG-662a8aa88e4d06.84895788.jpg', '2024-04-25'),
+(54, 'Asher Silva', '25A, Palm Grove, Colombo 03, Sri Lanka', '94761234567', 'asher.silva@example.com', '$2y$10$LoDikFpcL39k3i20AQr7Zumqiu0GdHp1RdeOD0delAHoH3MhFiNIK', 'Asher Silva', '25A, Palm Grove, Colombo 03, Sri Lanka', '94761234567', '961234567V', 'asher.silva@example.com', 'about Asher Silva', 'IMG-653fd611dd2445.48951448.png', 217292, 'Active', 'IMG-662ad6c0da5256.21619412.jpg', 'IMG-662ad6c0da9e27.77460545.jpg', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2024-04-26'),
+(55, 'Isla Fernando', '10B, Jasmine Lane, Kandy, Sri Lanka', '94772345678', 'isla.fernando@example.com', '$2y$10$SHpuZXMmQhXJnL4C7q/ZA.StD0HJnYByDfS53bknH40Xtmw0mxSBC', 'Isla Fernando', '10B, Jasmine Lane, Kandy, Sri Lanka', '94772345678', '975432109V', 'isla.fernando@example.com', 'about  Isla Fernando', 'IMG-662ad79f6e9887.60446932.jpg', 224894, 'Active', 'IMG-662ad79f6db506.62379296.jpg', 'IMG-662ad79f6dfe87.43011055.jpg', 'IMG-662ad79f6e4ce7.56095102.jpg', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2024-04-26');
 
 -- --------------------------------------------------------
 
@@ -1628,9 +1486,20 @@ CREATE TABLE `singer` (
 --
 
 INSERT INTO `singer` (`product_id`, `created_by`, `category`, `brand`, `model`, `quantity`, `unit_price`, `photo_1`, `photo_2`, `photo_3`, `Title`, `Description`, `outOfStock`, `createdDate`, `warranty`, `name`, `nickName`, `telephoneNumber`, `videoLink`, `location`, `instrument`, `singerPhoto`, `email`, `status`) VALUES
-(7, 1, 'singer', 'no brand', 'no model', 1, 34, 'IMG-65b75a30f1e127.01170410.jpg', 'IMG-65b75a30f20226.47881022.jpg', 'IMG-65b75a30f21619.91493291.jpeg', 'Singer', '40,144,013 views  Aug 19, 2006\r\nBeatin Down Yo Block Now Streaming', 1, '2024-02-18 07:00:08', '2024-01-29 13:26:32', 'imac banu', 'dassa', 768836682, 'https://www.youtube.com/embed/qUH5I_jKRB0?si=ZkOSBMSeuVGS2FuW', 'Gampaha Mannar Mullaitivu Vavuniya Batticola', 'Guiro Guzheng Marimba Ney Oboe', 'IMG-65b75a30f21e68.38378178.jpeg', 'imacbanu@gmail.com', 'Active'),
-(8, 1, 'singer', 'no brand', 'no model', 1, 67000, 'IMG-65b77d6bca24e1.24492751.jpg', 'IMG-65b77d6bcb6942.33579196.jpg', 'IMG-65b77d6bcb7581.65685958.png', 'Singer', 'earff', 1, '2024-02-18 07:00:11', '2024-01-29 15:56:51', 'imac banu', 'pini', 768836682, 'https://www.youtube.com/embed/pxjZM-d_ShI?si=vKm0OdkPl6DDBqLE', 'Colombo Gampaha Kurunegala Puttalam', 'Accordion Bansuri BassDrum Bassoon TalkingDrum Theremin Timpani', 'IMG-65b7816e1c8c92.83734193.', 'imacbanu@gmail.com', 'Active'),
-(11, 14, 'Singer', 'no brand', 'no model', 1, 1300, 'IMG-65bb3aad9c83b9.97097280.jpg', 'IMG-65bb3aad9ca352.46560085.jpg', 'IMG-65bb3aad9cb9c5.08242150.jpg', 'Singer', 'test 01test 01test 01test 01', 1, '2024-02-19 06:58:46', '2024-02-01 12:01:09', 'test', 'test 03', 702604647, 'test 01test 01test 01', 'Colombo Gampaha', 'Accordion', 'IMG-65d07db1e6baf5.88913690.', 'test 01test 01test 01', 'Active');
+(12, 46, 'Singer', 'no brand', 'no model', 1, 15000, 'IMG-662a74acdacd66.68662314.jpg', 'IMG-662a74acdcd3b6.20048081.jpg', 'IMG-662a74acdcf186.77972026.jpg', 'Singer', 'Professional singer with a diploma in western music', 1, '2024-04-25 15:20:53', '2024-04-25 20:50:12', 'Aiden Nelson', 'Melo Maestro', 2147483647, 'Warning:  Undefined array key', 'NULL', 'Piano', 'IMG-662a74acdd0be5.78929977.jpg', 'melomaestro@gmail.com', 'Deactive'),
+(13, 46, 'Singer', 'no brand', 'no model', 1, 15000, 'IMG-662a75a9112901.88098496.jpg', 'IMG-662a75a91148f1.38569079.jpg', 'IMG-662a75a91158f1.14222179.jpg', 'Singer', 'Professional singer with a digree in western music', 1, '2024-04-25 15:24:25', '2024-04-25 20:54:25', 'Aiden Nelson', 'Melo Maestro', 2147483647, 'Warning:  Undefined array key', 'NULL', 'Piano', 'IMG-662a75a9116d08.73315334.jpg', 'melomaestro@gmail.com', 'Active'),
+(14, 46, 'Singer', 'no brand', 'no model', 1, 12500, 'IMG-662a7a34465c75.45021446.jpg', 'IMG-662a7a3446e6e2.80958419.jpg', 'IMG-662a7a34472182.35341217.jpg', 'Singer', 'Professional Singer with a Digree in eastern music', 1, '2024-04-25 15:43:48', '2024-04-25 21:13:48', 'Violet Cox', 'Harmony Hero', 2147483647, 'Warning:  Undefined array key', 'NULL', 'NULL', 'IMG-662a7a34475b69.53544167.jpg', 'harmonyhero@gmail.com', 'Active'),
+(15, 46, 'Singer', 'no brand', 'no model', 1, 14000, 'IMG-662a7ad8780089.37905422.jpg', 'IMG-662a7ad8786d29.60581952.jpg', 'IMG-662a7ad878a4e0.16565663.jpg', 'Singer', 'professional singer with a digree', 1, '2024-04-25 15:46:32', '2024-04-25 21:16:32', 'Elijah Price', 'Croon King', 2147483647, 'Warning:  Undefined array key', 'NULL', 'NULL', 'IMG-662a7ad878e1c7.84030072.jpg', 'croonking@gmail.com', 'Active'),
+(16, 46, 'Singer', 'no brand', 'no model', 1, 15000, 'IMG-662a7b8ee14b39.50432920.jpg', 'IMG-662a7b8ee1a903.92001474.jpg', 'IMG-662a7b8ee1df61.85906597.jpg', 'Singer', 'Professional singer with a music digree', 1, '2024-04-25 15:49:34', '2024-04-25 21:19:34', 'Sebastian Cox', 'Tune Titan', 2147483647, 'Warning:  Undefined array key', 'NULL', 'Guitar', 'IMG-662a7b8ee21353.86466774.jpg', 'tunetitan@gmail.com', 'Active'),
+(17, 46, 'Singer', 'no brand', 'no model', 1, 16000, 'IMG-662a7c401a4239.31182034.jpg', 'IMG-662a7c401a9212.19224817.jpg', 'IMG-662a7c401acd57.62458943.jpg', 'Singer', 'Professional singer with a digree', 1, '2024-04-25 15:52:32', '2024-04-25 21:22:32', 'Naomi Ramirez', 'Melody Maven', 1572683790, 'Warning:  Undefined array key', 'NULL', 'Guitar', 'IMG-662a7c401b0716.09181894.jpg', 'melodymaven@gmail.com', 'Active'),
+(18, 46, 'Singer', 'no brand', 'no model', 1, 13000, 'IMG-662a7cc0abb458.70722207.jpg', 'IMG-662a7cc0ac0fd4.95999737.jpg', 'IMG-662a7cc0ac4672.92804304.jpg', 'Singer', 'professional singer with a digree', 1, '2024-04-25 15:54:40', '2024-04-25 21:24:40', 'Audrey Bennett', 'Serenade Sensation', 2147483647, 'Warning:  Undefined array key', 'NULL', 'Piano', 'IMG-662a7cc0ac7970.49501832.jpg', 'serenadesensation@gmail.com', 'Active'),
+(19, 47, 'Singer', 'no brand', 'no model', 1, 11000, 'IMG-662a7d91ed7434.44504275.jpg', 'IMG-662a7d91edcc98.25242616.jpg', 'IMG-662a7d91ee0357.19098377.jpg', 'Singer', 'professional singer with a digree in music', 1, '2024-04-25 15:58:09', '2024-04-25 21:28:09', 'Joshua Sanders', 'Midnight Serenade', 2147483647, 'Warning:  Undefined array key', 'NULL', 'Guitar', 'IMG-662a7d91ee3764.94634536.jpg', 'midnightserenade@gmail.com', 'Active'),
+(20, 47, 'Singer', 'no brand', 'no model', 1, 14000, 'IMG-662a7e188956f1.25617786.jpg', 'IMG-662a7e1889acc5.64588739.jpg', 'IMG-662a7e1889e780.77264698.jpg', 'Singer', 'professional singer with a music sigree in music', 1, '2024-04-25 16:00:24', '2024-04-25 21:30:24', 'Colton Brooks', 'Phoenix Crescendo', 2147483647, 'Warning:  Undefined array key', 'NULL', 'Piano', 'IMG-662a7e188a2561.05876054.jpg', 'phoenixcrescendo@gmail.com', 'Active'),
+(21, 47, 'Singer', 'no brand', 'no model', 1, 14000, 'IMG-662a7f6dd2fc75.04052663.jpg', 'IMG-662a7f6dd350b0.95036453.jpg', 'IMG-662a7f6dd386c1.28277227.jpg', 'Singer', 'Professional singer with a music digree', 1, '2024-04-25 16:06:05', '2024-04-25 21:36:05', 'Nathan Cook', 'Harmony Rivers', 1572683790, 'Warning:  Undefined array key', 'NULL', 'Guitar', 'IMG-662a7f6dd3b920.44068888.jpg', 'harmonyrivers@gmail.com', 'Active'),
+(22, 47, 'Singer', 'no brand', 'no model', 1, 13500, 'IMG-662a801f18a767.88143995.jpg', 'IMG-662a801f1908d0.04057764.jpg', 'IMG-662a801f193f14.36483252.jpg', 'Singer', 'professional singer with a digree in music', 1, '2024-04-25 16:09:03', '2024-04-25 21:39:03', 'Ariana Perry', 'Echo Velvet', 2147483647, 'Warning:  Undefined array key', 'NULL', 'Piano', 'IMG-662a801f197305.62571059.jpg', 'echovelvet@gmail.com', 'Active'),
+(23, 47, 'Singer', 'no brand', 'no model', 1, 14500, 'IMG-662a80afaa9627.06241736.jpg', 'IMG-662a80afaaf644.97293025.jpg', 'IMG-662a80afab2d03.96614565.jpg', 'Singer', 'professional singer with a music digree', 1, '2024-04-25 16:11:27', '2024-04-25 21:41:27', 'Dylan Foster', 'Solstice Sonata', 2147483647, 'Warning:  Undefined array key', 'NULL', 'Guitar', 'IMG-662a80afab6818.69355340.jpg', 'solsticesonata@gmail.com', 'Active'),
+(24, 47, 'Singer', 'no brand', 'no model', 1, 11500, 'IMG-662a813c1adbc1.10768741.jpg', 'IMG-662a813c1b4326.26548222.jpg', 'IMG-662a813c1b7ef5.76182329.jpg', 'Singer', 'professional singer with a digree in music', 1, '2024-04-25 16:29:22', '2024-04-25 21:43:48', 'Alexis Nguyen', 'Luna Starlight', 1572683790, 'Warning:  Undefined array key', 'NULL', 'NULL', 'IMG-662a84e26a2982.83961041.jpg', 'lunastarlight@gmail.com', 'Active'),
+(25, 47, 'Singer', 'no brand', 'no model', 1, 16000, 'IMG-662a84bc33cfc3.14264097.jpg', 'IMG-662a84bc345c21.64830677.jpg', 'IMG-662a84bc34c6b0.20453639.jpg', 'Singer', 'professional singer with a digree in music', 1, '2024-04-25 16:28:44', '2024-04-25 21:58:44', 'Christopher Bell', 'Blaze Harmony', 2147483647, 'Warning:  Undefined array key', 'NULL', 'NULL', 'IMG-662a84bc354703.99568717.jpg', 'blazeharmony@gmail.com', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1669,7 +1538,17 @@ CREATE TABLE `studio` (
 --
 
 INSERT INTO `studio` (`product_id`, `created_by`, `category`, `brand`, `model`, `quantity`, `unit_price`, `photo_1`, `photo_2`, `photo_3`, `Title`, `Description`, `outOfStock`, `createdDate`, `warranty`, `location`, `instrument`, `descriptionSounds`, `descriptionStudio`, `telephoneNumber`, `videoLink`, `airCondition`, `status`) VALUES
-(3, 1, 'studio', 'no brand', 'no model', 1, 100, 'IMG-65b7864392bd60.65283221.', 'IMG-65b78643933f31.29459990.', 'IMG-65b78643936246.72403522.', 'Studio', 'no description', 1, '2024-02-18 05:54:09', '2024-01-29', 'Colombo Gampaha Kandy', 'Colombo Gampaha Kandy Accordion Bansuri BassDrum Bassoon', 'aredf', 'awsefcwe', 122312, 'https://www.youtube.com/embed/pxjZM-d_ShI?si=vKm0OdkPl6DDBqLE', 'yes', 'Active');
+(4, 36, 'Studio', 'no brand', 'no model', 1, 1500, 'IMG-662a6472809024.07662667.jpg', 'IMG-662a6472810312.78876025.jpg', 'IMG-662a6472812fd9.38167887.jpg', 'Harmony Hall', 'no description', 1, '2024-04-25 14:10:58', '2024-04-25', 'NULL', 'Cajon Chime DigitalPiano DrumSet ElectricGuitar Guitar', 'Sound mixer and guitar amps, microphones are available', 'Fully air conditioned Sound proof studio hall', 0, '', 'yes', 'Active'),
+(5, 36, 'Studio', 'no brand', 'no model', 1, 2000, 'IMG-662a652f9725c4.24932812.jpg', 'IMG-662a652f978946.96601945.jpg', 'IMG-662a652f97f747.32859263.jpg', 'Melody Lounge', 'no description', 1, '2024-04-25 14:14:07', '2024-04-25', 'NULL', 'DigitalPiano DrumSet ElectricGuitar Guitar', 'Mixer, bass bins, monitors, guitar amplifiers are available with mentioned instruments', 'Fully air conditioned and sound proof', 0, '', 'yes', 'Active'),
+(6, 36, 'Studio', 'no brand', 'no model', 1, 1500, 'IMG-662a65f432e2b4.40442215.jpg', 'IMG-662a65f4330e66.56752598.jpg', 'IMG-662a65f4334e16.25157236.jpg', 'Rhythm Retreat', 'no description', 1, '2024-04-25 14:17:24', '2024-04-25', 'NULL', 'DrumSet ElectricGuitar Guitar Organ Piano', 'Mixer , speakers, Monitors, and microphones are available with the instruments', 'Fully air conditioned and sound proof', 0, '', 'yes', 'Active'),
+(7, 37, 'Studio', 'no brand', 'no model', 1, 1700, 'IMG-662a66ef1aebb3.85319674.jpg', 'IMG-662a66ef1b27b0.21261480.jpg', 'IMG-662a66ef1b78d3.93600641.jpg', 'Crescendo Chamber', 'no description', 1, '2024-04-25 14:21:35', '2024-04-25', 'NULL', 'DrumSet Organ Piano Synthesizer', 'Mixer, Speakers, Microphones are available with the instruments', 'Fully air conditioned and sound proof', 0, '', 'yes', 'Active'),
+(8, 38, 'Studio', 'no brand', 'no model', 1, 1800, 'IMG-662a67b1bc6c33.06972019.jpg', 'IMG-662a67b1bc9154.07528885.jpg', 'IMG-662a67b1bcbfe1.66569358.jpg', 'Beat Box', 'no description', 1, '2024-04-25 14:24:49', '2024-04-25', 'NULL', 'DigitalPiano DrumSet ElectricGuitar Guiro Organ Piccolo Recorder', 'Mixer, Speakers, Microphones are available  with the instruments', 'Fully air conditioned and sound proof', 0, '', 'yes', 'Active'),
+(9, 38, 'Studio', 'no brand', 'no model', 1, 1400, 'IMG-662a68617a2864.51948269.jpg', 'IMG-662a68617a5380.38733281.jpg', 'IMG-662a68617a8717.17457814.jpg', 'Echo Chamber', 'no description', 1, '2024-04-25 14:27:45', '2024-04-25', 'NULL', 'DigitalPiano DrumSet ElectricGuitar Guitar Organ Piano Recorder Synthesizer', 'Mixer , Speakers, Microphones and in ears are available with the instruments', 'Fully air conditioned and sound proof', 0, '', 'yes', 'Active'),
+(10, 39, 'Studio', 'no brand', 'no model', 1, 2000, 'IMG-662a6920553313.43288727.jpg', 'IMG-662a6920557088.06760743.jpg', 'IMG-662a692055c268.09129001.jpg', 'Serenade Suite', 'no description', 1, '2024-04-25 14:30:56', '2024-04-25', 'NULL', 'DigitalPiano DrumSet ElectricGuitar Guitar Organ Piano Recorder Synthesizer', 'Mixer , speaker , microphones and in ears are available with instruments', 'Fully air conditioned and sound proof', 0, '', 'yes', 'Active'),
+(11, 40, 'Studio', 'no brand', 'no model', 1, 1600, 'IMG-662a6a60bbedd1.38621443.jpg', 'IMG-662a6a60bc2d63.74574368.jpg', 'IMG-662a6a60bc6e68.04391085.jpg', 'Cadence Cove', 'no description', 1, '2024-04-25 14:36:16', '2024-04-25', 'NULL', 'DrumSet ElectricGuitar Guitar Organ Piano Synthesizer', 'Mixer, Speakers, Monitors, Guitar amplifiers and Microphones are available', 'Fully air conditioned and sound proof', 0, '', 'yes', 'Active'),
+(12, 40, 'Studio', 'no brand', 'no model', 1, 1900, 'IMG-662a6ae8c056a2.42256576.jpg', 'IMG-662a6ae8c09362.67262755.jpg', 'IMG-662a6ae8c10678.16937883.jpg', 'Acoustic Annex', 'no description', 1, '2024-04-25 14:38:32', '2024-04-25', 'NULL', 'DrumSet ElectricGuitar Guitar Organ Piano Synthesizer', 'Mixer, speakers, monitors and guitar amplifiers are available', 'Fully air conditioned and sound proof', 0, '', 'yes', 'Active'),
+(13, 41, 'Studio', 'no brand', 'no model', 1, 1800, 'IMG-662a6ba80c4fb3.75332261.jpg', 'IMG-662a6ba80c7848.70664643.jpg', 'IMG-662a6ba80cb8a8.39991437.jpg', 'Vibrato Vault', 'no description', 1, '2024-04-25 14:41:44', '2024-04-25', 'NULL', 'DrumSet ElectricGuitar Organ Synthesizer', 'Mixer, Speaker, Microphones And guitar amplifiers are available', 'Fully air conditoned and sound proof', 0, '', 'yes', 'Active'),
+(14, 42, 'Studio', 'no brand', 'no model', 1, 1900, 'IMG-662a6ca63561e1.32149985.jpg', 'IMG-662a6ca6358be6.14739140.jpg', 'IMG-662a6ca635e1f5.11921439.jpg', 'Groove Gallery', 'no description', 1, '2024-04-25 14:45:58', '2024-04-25', 'NULL', 'DrumSet ElectricGuitar Guitar Organ Piano Synthesizer', 'Mixer , Speakers ,Monitors , Guitar amplifiers  and in ears are available', 'Fully air conditioned and sound proof', 0, '', 'yes', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1694,38 +1573,6 @@ CREATE TABLE `suborder` (
   `extra` int(255) NOT NULL DEFAULT 0,
   `fine` int(255) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `suborder`
---
-
-INSERT INTO `suborder` (`sorder_id`, `user_id`, `serviceprovider_id`, `product_id`, `qty`, `start_date`, `end_date`, `days`, `total`, `status`, `avail`, `type`, `order_placed_on`, `extra`, `fine`) VALUES
-(33, 18, 18, 23, 1, '2024-01-11', '2024-01-31', 21, 27300, 'Completed', '199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219', 'Equipment', '2024-02-19', 0, 0),
-(34, 18, 19, 21, 2, '2024-01-18', '2024-01-23', 6, 5400, 'Completed', '220,221,222,223,224,225', 'Equipment', '2024-02-12', 0, 0),
-(35, 18, 18, 24, 2, '2024-01-11', '2024-01-31', 21, 88200, 'Completed', '220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246', 'Equipment', '2024-02-19', 0, 0),
-(36, 18, 14, 17, 1, '2024-01-17', '2024-01-23', 7, 7700, 'Completed', '247,248,249,250,251,252,253', 'Equipment', '2024-02-19', 0, 0),
-(37, 18, 19, 21, 3, '2024-01-17', '2024-01-29', 13, 17550, 'Completed', '254,255,256,257,258,259,260,261,262,263,264,265,266', 'Equipment', '2024-02-19', 0, 0),
-(38, 18, 14, 17, 1, '2024-01-16', '2024-01-22', 7, 7700, 'Completed', '267,268,269,270,271,272,273', 'Equipment', '2024-02-19', 0, 0),
-(39, 18, 14, 17, 1, '2024-01-16', '2024-01-22', 7, 7700, 'Completed', '274,275,276,277,278,279,280', 'Equipment', '2024-02-19', 0, 0),
-(40, 18, 18, 23, 1, '2024-01-14', '2024-01-23', 10, 13000, 'Completed', '281,282,283,284,285,286,287,288,289,290', 'Equipment', '2024-02-19', 0, 0),
-(41, 18, 14, 18, 8, '2024-01-13', '2024-01-31', 19, 45600, 'Completed', '291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309', 'Equipment', '2024-02-19', 0, 0),
-(42, 18, 19, 21, 1, '2024-02-15', '2024-02-27', 13, 5850, 'Cancelled', '310,311,312,313,314,315,316,317,318,319,320,321,322', 'Equipment', '2024-02-19', 0, 0),
-(43, 18, 18, 23, 1, '2024-02-05', '2024-02-23', 19, 24700, 'Completed', '310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341', 'Equipment', '2024-02-19', 0, 0),
-(44, 18, 19, 20, 2, '2024-01-17', '2024-01-30', 14, 16800, 'Completed', '342,343,344,345,346,347,348,349,350,351,352,353,354,355', 'Equipment', '2024-02-19', 0, 0),
-(45, 18, 14, 17, 1, '2024-02-14', '2024-02-20', 7, 7700, 'Completed', '356,357,358,359,360,361,362', 'Equipment', '2024-02-19', 0, 0),
-(46, 18, 14, 18, 4, '2024-02-29', '2024-03-08', 9, 10800, 'Upcoming', '363,364,365,366,367,368,369,370,371', 'Equipment', '2024-02-19', 0, 0),
-(47, 18, 18, 24, 2, '2024-02-28', '2024-02-29', 2, 8400, 'Cancelled', '372,373', 'Equipment', '2024-02-19', 0, 0),
-(48, 18, 1, 8, 1, '2024-02-22', '2024-02-28', 7, 469000, 'Completed', '372,373,374,375,376,377,378,379,380', 'Singer', '2024-02-19', 0, 0),
-(49, 18, 14, 11, 1, '2024-02-22', '2024-02-23', 2, 2600, 'Completed', '381,382', 'Singer', '2024-02-19', 0, 0),
-(50, 18, 1, 3, 1, '2024-02-23', '2024-02-29', 7, 700, 'Cancelled', '383,384,385,386,387,388,389', 'Studio', '2024-02-23', 0, 0),
-(51, 18, 18, 24, 2, '2024-03-14', '2024-03-21', 8, 33600, 'Upcoming', '383,384,385,386,387,388,389,390,391,392,393,394,395,396,397', 'Equipment', '2024-02-23', 0, 0),
-(52, 18, 14, 17, 1, '2024-02-29', '2024-03-02', 3, 3300, 'Rejected', '398,399,400', 'Equipment', '2024-02-24', 0, 0),
-(53, 18, 19, 20, 2, '2024-03-14', '2024-03-20', 7, 8400, 'Cancelled', '398,399,400,401,402,403,404,405,406,407', 'Equipment', '2024-02-24', 0, 0),
-(54, 18, 14, 17, 1, '2024-04-18', '2024-04-20', 3, 3300, 'Cancelled', '408,409,410', 'Equipment', '2024-02-27', 3300, 0),
-(55, 18, 1, 3, 1, '2024-04-25', '2024-04-26', 2, 200, 'Pending', '408,409,410,411,412', 'Studio', '2024-02-27', 0, 0),
-(56, 18, 14, 17, 1, '2024-04-18', '2024-04-20', 3, 3300, 'Pending', '413,414,415', 'Equipment', '2024-02-27', 3300, 0),
-(57, 18, 1, 3, 1, '2024-04-25', '2024-04-26', 2, 200, 'Pending', '413,414,415,416,417', 'Studio', '2024-02-27', 0, 0),
-(58, 18, 19, 20, 2, '2024-03-29', '2024-04-03', 6, 7200, 'Upcoming', '418,419,420,421,422,423', 'Equipment', '2024-04-23', 1800, 0);
 
 -- --------------------------------------------------------
 
@@ -1753,15 +1600,23 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `TelephoneNumber`, `BirthDate`, `address`, `password`, `gender`, `profile_photo`, `verification`, `status`, `registration_date`) VALUES
-(18, 'Gayathra Dissanayake', 'gayathradissa@gmail.com', 1234565789, '2000-03-31', 'test  test  test', '$2y$10$rGgNvX/xlY1X2uRCVSWUl.UnyP4sWCA8xfdu2vNSXZf9SpStWwioq', 'male', 'IMG-65864fca5956f6.45090781.jpeg', 681741, 'Active', '2023-11-01'),
-(19, 'Test 02', 'itsaeox98@gmail.com', 1234567890, '2024-01-23', 'itsaeox98@gmail.com', '$2y$10$QkEmYPYl5TQMk76hUkvS1uSGRz7GnEJYszq0uOdl5jLonz9HRomvC', 'male', 'IMG-6592556e970157.07537984.png', 119619, 'Active', '2023-11-01'),
-(20, 'user_03', 'user_03@gmail.com', 722899088, '2000-03-31', 'user_03@gmail.com', '$2y$10$GCrNihZkcSpEzS.b6Nt3Ou26jMenS.l6v9abYqYZzc6QeJdfc3b4e', 'male', 'IMG-65d97578a84687.85209747.jpeg', 218512, 'Active', '2024-02-24'),
-(21, 'user_04', 'user_04@gmail.com', 722899088, '2000-03-31', 'user_04@gmail.com', '$2y$10$4Gui65HDHyCVnsuG7fCj2.kGi.4yosNRkSR.4Vtu5bOI7MnJhoG9e', 'male', 'IMG-653fd611dd2445.48951448.png', 242995, 'Deactivated', '2024-02-24'),
-(22, 'user_05', 'user_05@gmail.com', 722899088, '2000-03-31', 'user_04@gmail.com', '$2y$10$FZazLReP3w52NeURN8qP8.4dhdueye77d7rTYvqNeUuHly7bCwmMC', 'male', 'IMG-653fd611dd2445.48951448.png', 158828, 'Active', '2024-02-24'),
-(23, 'user_06', 'user_06@gmail.com', 1234567890, '2024-02-08', 'user_06@gmail.com', '$2y$10$n0vIHJOUZDw8xX9B6U1c0eqaavPxctnuHos/nHqeJfvptH5Ym5b4m', 'male', 'IMG-65d976dfdb7643.92903837.jpg', 281179, 'Active', '2024-02-24'),
-(24, 'user_07', 'user_07@gmail.com', 1234567890, '2024-02-08', 'user_06@gmail.com', '$2y$10$LBbMysvUMMAC7uNSD/cete7SXUN.9x17yIziOEaFYfCqK8zotrXky', 'male', 'IMG-653fd611dd2445.48951448.png', 130625, 'Banned', '2024-02-24'),
-(25, 'user_08', 'user_08@gmail.com', 1234567890, '2024-02-08', 'user_06@gmail.com', '$2y$10$z4nYaVJIQXchnam4fkfWQ.ra1iIW.gq/oSKfYx/2q.33Xyz3NX0I2', 'male', 'IMG-653fd611dd2445.48951448.png', 599546, 'Banned', '2024-02-24'),
-(26, 'user_09', 'user_09@gmail.com', 1234567890, '2024-02-08', 'user_09@gmail.com', '$2y$10$9cgQ9cpE0O7i7KZ3VZFTYefw5DSCPZtCu0CQndWNoFApILBdaScVe', 'male', 'IMG-653fd611dd2445.48951448.png', 356274, 'Active', '2024-02-24');
+(18, 'Gayathra Dissanayake', 'gayathradissa@gmail.com', 702604647, '2000-03-31', 'No 05, Kottawa, Pannipitiya', '$2y$10$rGgNvX/xlY1X2uRCVSWUl.UnyP4sWCA8xfdu2vNSXZf9SpStWwioq', 'male', 'IMG-65864fca5956f6.45090781.jpeg', 681741, 'Active', '2023-11-01'),
+(29, 'John Doe', 'johndoe@example.com', 770123456, '1985-07-12', '25/1A, Main Street, Colombo 05', '$2y$10$QZYj.RKWCqfp4GVmmDrNt.eKKkcjS58.Ji0Xn1/I/37w3TjbX9qQi', 'male', 'IMG-662277f14f9309.47741094.png', 152120, 'Active', '2024-04-19'),
+(30, 'Jane Smith', 'janesmith@example.com', 770234567, '1988-05-20', '15/2B, Galle Road, Dehiwala', '$2y$10$w0Sll05PbuGGsNpiJ08z3.QzzkBYjDZpozwdB2A1gGmolgMWJUyx6', 'female', 'IMG-653fd611dd2445.48951448.png', 183156, 'Active', '2024-04-20'),
+(31, 'Michael Johnson', 'michaeljohnson@example.com', 770345678, '1982-09-03', '12/3C, Nawala Road, Rajagiriya', '$2y$10$LiU1Vu5S0n5RADnfl4tZkuI68/ZTlRmu9hijE7HuYjktkKVVf1id6', 'male', 'IMG-653fd611dd2445.48951448.png', 233366, 'Active', '2024-04-21'),
+(32, 'Emily Brown', 'emilybrown@example.com', 770456789, '1990-11-15', '8/4D, Duplication Road, Bambal', '$2y$10$2gla7K9PGzaCNPrujHoJP.e23Uqwq9rz0c7fyv4E5uSuTpDYrDyC2', 'female', 'IMG-653fd611dd2445.48951448.png', 319412, 'Active', '2024-04-22'),
+(33, 'David Wilson', 'davidwilson@example.com', 770567890, '1979-03-28', '17/5E, Castle Street, Colombo ', '$2y$10$CCEUnfsnxN1VTEzJ2nZYSOOlQ0BfeREtcjQKxIdaLDMUGkGoa6dUu', 'male', 'IMG-653fd611dd2445.48951448.png', 230442, 'Active', '2024-04-23'),
+(34, 'Sarah Taylor', 'sarahtaylor@example.com', 770678901, '1987-12-05', '22/6F, Elvitigala Mawatha, Col', '$2y$10$bfzUBnBUJURMJz6HLmyePOyRl1Lr/niZaYnlKYppfNoqPY8.HAGJu', 'female', 'IMG-653fd611dd2445.48951448.png', 106046, 'Active', '2024-04-24'),
+(35, 'Daniel Martinez', 'danielmartinez@example.com', 770789012, '1983-06-18', '9/7G, High Level Road, Nugegod', '$2y$10$5Km6KkEnqb9VZVkfVSQJI.vEtEnAEFnKNz7DnEKPbZ.LPoiBF6jvC', 'male', 'IMG-653fd611dd2445.48951448.png', 238806, 'Active', '2024-04-25'),
+(36, 'Olivia Garcia', 'oliviagarcia@example.com', 770890123, '1992-04-30', '6/8H, Horton Place, Colombo 07', '$2y$10$tifc4HiC1rCcLOa.zmGkjuVQ9zlM.sMoH6HMJ3SY/GmYTfVUdGFlO', 'female', 'IMG-653fd611dd2445.48951448.png', 260927, 'Active', '2024-04-26'),
+(37, 'Matthew Rodriguez', 'matthewrodriguez@example.com', 770901234, '1981-08-22', '33/9I, R.A. De Mel Mawatha, Co', '$2y$10$mLISwyAJoGRQB87hmjP4..awwU5u9Db1NolvGPd8sdH7QC.meoDCa', 'male', 'IMG-653fd611dd2445.48951448.png', 138080, 'Active', '2024-04-27'),
+(38, 'Ava Hernandez', 'avahernandez@example.com', 770012345, '1986-10-14', '45/10J, Maligakanda Road, Colo', '$2y$10$oRrhXSWBxtOsa7RotRdHdekD472X22L09sDYjzNK48BiBxlo2AqKO', 'female', 'IMG-653fd611dd2445.48951448.png', 178836, 'Active', '2024-04-28'),
+(39, 'Alexander Martinez', 'alexandermartinez@example.com', 770123456, '1984-02-09', '19/11K, Horton Place, Colombo ', '$2y$10$3kpB26dt.8Ujv7NPkzDpUultaSrF66zMovWTyXKCUJl55GNYrLVLa', 'male', 'IMG-653fd611dd2445.48951448.png', 361458, 'Active', '2024-04-29'),
+(40, 'Sophia Torres', 'sophiatorres@example.com', 770234567, '1989-09-27', '7/12L, High Level Road, Mahara', '$2y$10$TR4NdIBLkgnt/dj5fXTVLO0mKPnMXnNgXQjYxmRRukXM67s91rloS', 'female', 'IMG-653fd611dd2445.48951448.png', 298478, 'Active', '2024-04-30'),
+(41, 'William Lopez', 'williamlopez@example.com', 770345678, '1980-11-03', '11/13M, Galle Road, Mount Lavi', '$2y$10$YwowrA6qqSKupWrqwse0v.9F6fBc4K5jtdJ4Us77VAH19ExoIOxWi', 'male', 'IMG-653fd611dd2445.48951448.png', 234804, 'Active', '2024-05-01'),
+(42, 'Isabella Gonzales', 'isabellagonzales@example.com', 770456789, '1993-03-17', '3/14N, Nawala Road, Nugegoda', '$2y$10$1SS5w4l3NcclVpSN7d8ywuExgwvS7djMIpfBDITTyOjRmJ4Au7nhS', 'female', 'IMG-653fd611dd2445.48951448.png', 168952, 'Active', '2024-05-02'),
+(43, 'Ethan Perez', 'ethanperez@example.com', 770567890, '1982-07-25', '28/15O, Jawatte Road, Colombo ', '$2y$10$poyPGbH75NGK9bdqDLVKZ.m4fGUbCRy5NVhbqEQvrj7HZsgJItBKS', 'male', 'IMG-653fd611dd2445.48951448.png', 269801, 'Active', '2024-05-03'),
+(44, 'Mia Sanchez', 'miasanchez@example.com', 770678901, '1995-01-10', '5/16P, De Alwis Place, Colombo', '$2y$10$MeVc22zcOQT9XLXBP3MnCudRUIKn923zYlueE6r18duUuV1URPv6O', 'female', 'IMG-653fd611dd2445.48951448.png', 255280, 'Active', '2024-05-04');
 
 -- --------------------------------------------------------
 
@@ -1774,19 +1629,6 @@ CREATE TABLE `user_passwords` (
   `user_id` int(10) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `user_passwords`
---
-
-INSERT INTO `user_passwords` (`user_pw_id`, `user_id`, `password`) VALUES
-(1, 18, '$2y$10$hkSH/wYeUySbtSotZgYu/Oic5SP/ULTNupKXFtdDecNG/gVIPrmNS'),
-(2, 18, '$2y$10$/AB6mGXXQhvl3VCUqZknyeh6NazYa/7tV6peZcJV1CmaxUkNC4aAm'),
-(3, 18, '$2y$10$PZbxoBJHeppTTcdRi2hzG.LRdcpS1rPsNoO4S372/umbFiCH.KRI2'),
-(4, 18, '$2y$10$dC5dIi.OzMmnFWRdm.ooKOzm73JDRA.LmVt5lFpj/3c.hjdjj1w.O'),
-(5, 19, '$2y$10$iXs/M1wv31i9FmBCYwP4nOT2IJnaQ5Cf9r.zKvvYgBLtexXs8.qEW'),
-(6, 18, '$2y$10$iXs/M1wv31i9FmBCYwP4nOT2IJnaQ5Cf9r.zKvvYgBLtexXs8.qEW'),
-(7, 19, '$2y$10$jGEsBANDB6kp6rACb4rPu.gwJ2gvDPoMINZgCxR.z9VVkR9yPzIEa');
 
 --
 -- Indexes for dumped tables
@@ -1821,24 +1663,19 @@ ALTER TABLE `bookmarks`
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
-  ADD PRIMARY KEY (`cart_id`),
-  ADD KEY `fk_product_cart` (`product_id`),
-  ADD KEY `fk_user_cart` (`user_id`);
+  ADD PRIMARY KEY (`cart_id`);
 
 --
 -- Indexes for table `chat_mod_user`
 --
 ALTER TABLE `chat_mod_user`
-  ADD PRIMARY KEY (`chat_id`),
-  ADD KEY `mod_user_chat_user` (`user_id`),
-  ADD KEY `mod_user_chat_mod` (`moderator_id`);
+  ADD PRIMARY KEY (`chat_id`);
 
 --
 -- Indexes for table `inquiries`
 --
 ALTER TABLE `inquiries`
-  ADD PRIMARY KEY (`inquiry_id`),
-  ADD KEY `inq_user` (`user_id`);
+  ADD PRIMARY KEY (`inquiry_id`);
 
 --
 -- Indexes for table `inq_chat`
@@ -1847,12 +1684,6 @@ ALTER TABLE `inq_chat`
   ADD PRIMARY KEY (`inq_chat_id`),
   ADD KEY `inq_chat_chat` (`chat_id`),
   ADD KEY `inq_chat_inq` (`inquiry_id`);
-
---
--- Indexes for table `login_logout_logs`
---
-ALTER TABLE `login_logout_logs`
-  ADD PRIMARY KEY (`login_id`);
 
 --
 -- Indexes for table `logs`
@@ -1882,15 +1713,13 @@ ALTER TABLE `notifications`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`order_id`) USING BTREE,
-  ADD KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`order_id`) USING BTREE;
 
 --
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`product_id`),
-  ADD KEY `fk_sp` (`created_by`);
+  ADD PRIMARY KEY (`product_id`);
 
 --
 -- Indexes for table `recover_account_user`
@@ -1903,8 +1732,7 @@ ALTER TABLE `recover_account_user`
 --
 ALTER TABLE `reviews`
   ADD PRIMARY KEY (`review_id`),
-  ADD KEY `fk_product` (`product_id`),
-  ADD KEY `fk_user` (`user_id`);
+  ADD KEY `fk_product` (`product_id`);
 
 --
 -- Indexes for table `sec_queation`
@@ -1935,7 +1763,6 @@ ALTER TABLE `studio`
 --
 ALTER TABLE `suborder`
   ADD PRIMARY KEY (`sorder_id`),
-  ADD KEY `user_id` (`user_id`),
   ADD KEY `serviceprovider_id` (`serviceprovider_id`),
   ADD KEY `suborder_ibfk_1` (`product_id`);
 
@@ -1971,7 +1798,7 @@ ALTER TABLE `availability`
 -- AUTO_INCREMENT for table `band`
 --
 ALTER TABLE `band`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `bookmarks`
@@ -2004,16 +1831,10 @@ ALTER TABLE `inq_chat`
   MODIFY `inq_chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `login_logout_logs`
---
-ALTER TABLE `login_logout_logs`
-  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
-
---
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=895;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=944;
 
 --
 -- AUTO_INCREMENT for table `moderators`
@@ -2025,13 +1846,13 @@ ALTER TABLE `moderators`
 -- AUTO_INCREMENT for table `musician`
 --
 ALTER TABLE `musician`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -2043,7 +1864,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `recover_account_user`
@@ -2061,25 +1882,25 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `sec_queation`
 --
 ALTER TABLE `sec_queation`
-  MODIFY `sec_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `sec_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `serviceproviders`
 --
 ALTER TABLE `serviceproviders`
-  MODIFY `serviceprovider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `serviceprovider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `singer`
 --
 ALTER TABLE `singer`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `studio`
 --
 ALTER TABLE `studio`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `suborder`
@@ -2091,29 +1912,13 @@ ALTER TABLE `suborder`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `user_passwords`
 --
 ALTER TABLE `user_passwords`
   MODIFY `user_pw_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `cart`
---
-ALTER TABLE `cart`
-  ADD CONSTRAINT `fk_user_cart` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `fk_sp` FOREIGN KEY (`created_by`) REFERENCES `serviceproviders` (`serviceprovider_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

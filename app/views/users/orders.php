@@ -65,9 +65,9 @@
                         <td><?php echo $suborder['start_date'] ?></td>
                         <td><?php echo $suborder['end_date'] ?></td>
                         <td><?php echo $suborder['qty'] ?></td>
-                        <td>LKR. <?php echo $suborder['unit_price'] ?></td>
-                        <td>LKR. <?php echo $suborder['total'] ?></td>
-                        <td>LKR. <?php echo $suborder['extra'] ?></td>
+                        <td>LKR. <?php echo $suborder['unit_price'] ?>.00</td>
+                        <td>LKR. <?php echo $suborder['total'] ?>.00</td>
+                        <td>LKR. <?php echo $suborder['extra'] ?>.00</td>
                         <td class="status-<?php echo $suborder['status'] ?>"><?php echo $suborder['status'] ?></td>
                         <td>
                             <div <?php echo $orderStatus == 'Pending' ? '' : 'style="display: none;"';?>>
@@ -92,7 +92,7 @@
                 <tfoot>
                     <tr>
                         <td colspan="6" style="text-align: right;"><strong>Total:</strong></td>
-                        <td>LKR. <?php echo $orders['order']->total ?></td>
+                        <td>LKR. <?php echo $orders['order']->total ?>.00</td>
                     </tr>
                 </tfoot>
             </table>

@@ -202,7 +202,7 @@ function displaydata(data){
                 `<div class="item-info">`+
                 `<h3>Name:`+item.name+`</h3>`+
                 `<p>Locations:  `+item.location+`</p>`+
-                `<p>Price(LKR): `+item.unit_price+`</p>`+
+                `<p>Price(LKR): `+item.unit_price+`.00</p>`+
                 `</div>`+
                 `</div>`+
                 `</div>`;
