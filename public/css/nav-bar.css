@@ -342,6 +342,15 @@ button {
     color: white;
     font-size: small;
 }
+
+.on.favourite .badge{
+    margin: 0;
+    padding: 2px 5px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+    font-size: small;
+}
 @media (max-width: 414px) {
     .nav-menu .container{
         padding: 0 8px 0;

@@ -1047,4 +1047,52 @@ class User
             return false;
         }
     }
+    public function checkAddToFav($type , $id)
+    {
+        $this->db->query('SELECT * FROM favourite WHERE type = :type  AND product_id = :id AND user_id = :id');
+        $this->db->bind(':type',$type);
+        $this->db->bind(':id',$id);
+        $this->db->bind(':user_id',$_SESSION['user_id'] );
+        $results = $this->db->resultSet();
+        return $results;
+
+    }
+
+    public function favCount()
+    {
+        $this->db->query('SELECT * FROM favourite WHERE user_id = :id');
+        $this->db->bind(':id',$_SESSION['user_id']);
+        $results = $this->db->resultSet();
+        return count($results);
+    }
+
+    public function addToFav($type , $id)
+    {
+        $data = $this->checkAddToFav($type , $id);
+        $count = $this->favCount();
+
+        if ($data){
+            $data = [
+                'message' => 'item already in the favourite list',
+                'count' => $count
+
+            ];
+            return $data;
+        }else{
+            $this->db->query('INSERT INTO favourite(type , product_id , user_id) VALUES (:type , :id, :user_id)');
+            $this->db->bind(':type',$type);
+            $this->db->bind(':id',$id);
+            $this->db->bind(':user_id',$_SESSION['user_id'] );
+            if ($this->db->execute()) {
+                $count = $this->favCount();
+                $data = [
+                    'message' => 'TRUE',
+                    'count' => $count
+                ];
+                return $data;
+            } else {
+                return false;
+            }
+        }
+    }
 }

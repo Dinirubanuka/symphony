@@ -59,6 +59,11 @@
                                 <i class="fa-solid fa-bell"></i>
                             </a>
                         </div></li>
+                    <li><div class="favourite off">
+                            <a>
+                                <i class="fa-regular fa-heart"></i>
+                            </a>
+                        </div></li>
                     <li><a href="<?php echo URLROOT; ?>/users/profile" class="off">
                             <img
                                     src="<?php echo URLROOT; ?>/img/user.png"
@@ -88,6 +93,9 @@
                     <a>
                         <i class="fa-solid fa-bell"></i>
                     </a>
+                </div>
+                <div class="on favourite ">
+
                 </div>
                 <a href="<?php echo URLROOT; ?>/users/profile" class="on">
                     <img

@@ -160,7 +160,7 @@
                         <button class="<?php echo $data['availability'] === 'available' ? 'addToCartBtn' : 'disabled-button'; ?>" <?php echo $data['availability'] === 'available' ? '' : 'disabled'; ?>>Add to Cart</button>
                     </div>
                 </form>
-                <button id="addToFavoritesBtn" onclick="addToFav('<?php echo $data['type']; ?>', '<?php echo $data['product_id']; ?>')">Add to Favorites</button>
+                <button id="addToFavoritesBtn" onclick="addToFav('<?php echo $data['type']; ?>','<?php echo $data['product_id']; ?>')">Add to Favorites</button>
             </div>
         </div>
     </div>
@@ -312,11 +312,50 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script>
+    countFav();
+    function countFav(){
+        $.ajax({
+            method: 'GET',
+            url: 'http://localhost/symphony/users/countFav',
+            dataType: 'json',
+            success: function (response) {
+                // console.log('count',response);
+                console.log('count',response.count);
+                displayFavCount(response.count);
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+
     function addToFav(type , id){
-            window.location.href = "http://localhost/symphony/users/addToFav/" + type + "/" + id;
+        $.ajax({
+            method: 'GET',
+            url: 'http://localhost/symphony/users/addToFav/' + type + "/" + id,
+            dataType: 'json',
+            success: function (response) {
+                console.log('count',response.message);
+                console.log('count',response.count);
+                displayFavCount(response.count);
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
     }
 
     const cart = document.querySelector(".cart");
+    const favourite = document.querySelector(".on.favourite");
+
+    function displayFavCount(count){
+        let text = "";
+        text += `<p class="badge" >`+count+`</p>`+
+            `<a href="http://localhost/symphony/users/showFavourites">`+
+            `<i class="fa-regular fa-heart"></i>`+
+            `</a>`;
+        favourite.innerHTML=text;
+    }
     Redirect();
     function Redirect() {
         $.ajax({
@@ -332,6 +371,7 @@
             }
         });
     }
+
     function displaydata(count){
         let text = "";
         text += `<p class="badge" >`+count+`</p>`+

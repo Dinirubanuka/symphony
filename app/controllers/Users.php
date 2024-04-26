@@ -2687,6 +2687,31 @@ class Users extends Controller
 
     public function addToFav($type , $id)
     {
+        if($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data = $this->userModel->addToFav($type,$id);
+            if ($data){
+                header('Content-Type: application/json');
+                echo json_encode($data);
+                exit();
+            }else{
+                $data = [
+                    'message' => 'error'
+                ];
+                header('Content-Type: application/json');
+                echo json_encode($data);
+                exit();
+            }
+        }
+    }
 
+    public function countFav(){
+        if($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $data = [
+                'count'=> $this->userModel->favCount()
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($data);
+            exit();
+        }
     }
 }
