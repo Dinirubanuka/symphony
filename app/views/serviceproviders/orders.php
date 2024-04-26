@@ -46,7 +46,6 @@
 <script src="https://kit.fontawesome.com/3376ff6b83.js" crossorigin="anonymous"></script>
 <script src="<?php echo URLROOT; ?>/js/sp-orders-.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
 $(document).ready(function () {
     $('#orderSearch').on('input', function () {

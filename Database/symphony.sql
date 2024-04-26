@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2024 at 03:13 AM
+-- Generation Time: Apr 26, 2024 at 05:53 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -1110,7 +1110,82 @@ INSERT INTO `logs` (`log_id`, `user_type`, `user_id`, `date_and_time`, `log_type
 (940, 'Customer', 18, '2024-04-26 03:11:16', 'View Instruments', 'User viewed the instruments available'),
 (941, 'Customer', 18, '2024-04-26 03:11:54', 'View Instruments', 'User viewed the instruments available'),
 (942, 'Customer', 18, '2024-04-26 03:12:03', 'View Singers', 'User viewed the singers available'),
-(943, 'Customer', 18, '2024-04-26 03:12:06', 'View Bands', 'User viewed the bands available');
+(943, 'Customer', 18, '2024-04-26 03:12:06', 'View Bands', 'User viewed the bands available'),
+(944, 'Customer', 18, '2024-04-26 03:20:52', 'View Instruments', 'User viewed the instruments available'),
+(945, 'Customer', 18, '2024-04-26 03:20:53', 'View Orders', 'User viewed their orders'),
+(946, 'Customer', 18, '2024-04-26 03:20:53', 'View Instruments', 'User viewed the instruments available'),
+(947, 'Customer', 18, '2024-04-26 03:20:56', 'View Instruments', 'User viewed the instruments available'),
+(948, 'Customer', 18, '2024-04-26 04:13:12', 'Logout', 'User logged out'),
+(949, 'Customer', 18, '2024-04-26 04:13:19', 'Login', 'User logged in'),
+(950, 'Customer', 18, '2024-04-26 04:22:07', 'Manage Profile', 'User viewed their profile'),
+(951, 'Customer', 18, '2024-04-26 04:22:26', 'Manage Profile', 'User viewed their profile'),
+(952, 'Customer', 18, '2024-04-26 04:22:29', 'Manage Profile', 'User viewed their profile'),
+(953, 'Customer', 18, '2024-04-26 04:22:32', 'View Instruments', 'User viewed the instruments available'),
+(954, 'Customer', 18, '2024-04-26 04:22:33', 'View Orders', 'User viewed their orders'),
+(955, 'Customer', 18, '2024-04-26 04:22:33', 'View Instruments', 'User viewed the instruments available'),
+(956, 'Customer', 18, '2024-04-26 04:22:42', 'View Instruments', 'User viewed the instruments available'),
+(957, 'Customer', 18, '2024-04-26 04:42:57', 'View Instruments', 'User viewed the instruments available'),
+(958, 'Customer', 18, '2024-04-26 04:58:36', 'Manage Profile', 'User viewed their profile'),
+(959, 'Customer', 18, '2024-04-26 05:05:09', 'View Orders', 'User viewed their orders'),
+(960, 'Customer', 18, '2024-04-26 05:05:09', 'View Instruments', 'User viewed the instruments available'),
+(961, 'Customer', 18, '2024-04-26 05:07:19', 'View Orders', 'User viewed their orders'),
+(962, 'Customer', 18, '2024-04-26 05:07:19', 'View Instruments', 'User viewed the instruments available'),
+(963, 'Customer', 18, '2024-04-26 05:10:04', 'View Instruments', 'User viewed the instruments available'),
+(964, 'Customer', 18, '2024-04-26 05:10:10', 'Manage Cart', 'User viewed their cart'),
+(965, 'Customer', 18, '2024-04-26 05:10:15', 'View Instruments', 'User viewed the instruments available'),
+(966, 'Customer', 18, '2024-04-26 05:10:30', 'View Instruments', 'User viewed the instruments available'),
+(967, 'Customer', 18, '2024-04-26 05:10:31', 'View Instruments', 'User viewed the instruments available'),
+(968, 'Customer', 18, '2024-04-26 05:10:31', 'View Instruments', 'User viewed the instruments available'),
+(969, 'Customer', 18, '2024-04-26 05:10:31', 'View Instruments', 'User viewed the instruments available'),
+(970, 'Customer', 18, '2024-04-26 05:10:31', 'View Instruments', 'User viewed the instruments available'),
+(971, 'Customer', 18, '2024-04-26 05:10:32', 'View Instruments', 'User viewed the instruments available'),
+(972, 'Customer', 18, '2024-04-26 05:14:12', 'View Instruments', 'User viewed the instruments available'),
+(973, 'Customer', 18, '2024-04-26 05:14:18', 'View Instruments', 'User viewed the instruments available'),
+(974, 'Customer', 18, '2024-04-26 05:15:11', 'View Instruments', 'User viewed the instruments available'),
+(975, 'Customer', 18, '2024-04-26 05:16:20', 'View Instruments', 'User viewed the instruments available'),
+(976, 'Customer', 18, '2024-04-26 05:17:19', 'View Instruments', 'User viewed the instruments available'),
+(977, 'Customer', 18, '2024-04-26 05:18:44', 'Logout', 'User logged out'),
+(978, 'Service Provider', 14, '2024-04-26 05:18:52', 'Login', 'Service Provider has logged in'),
+(979, 'Service Provider', 14, '2024-04-26 05:20:04', 'Manage Inventory', 'Service Provider has viewed their Studio inventory'),
+(980, 'Service Provider', 14, '2024-04-26 05:20:04', 'Manage Inventory', 'Service Provider has viewed their Studio Inventory'),
+(981, 'Service Provider', 14, '2024-04-26 05:20:13', 'Manage Profile', 'Service Provider has viewed their profile'),
+(982, 'Service Provider', 14, '2024-04-26 05:20:50', 'View Orders', 'Service Provider has viewed their orders'),
+(983, 'Service Provider', 14, '2024-04-26 05:21:22', 'View Orders', 'Service Provider has viewed their orders'),
+(984, 'Service Provider', 14, '2024-04-26 05:21:23', 'View Orders', 'Service Provider has viewed their orders'),
+(985, 'Service Provider', 14, '2024-04-26 05:21:24', 'View Orders', 'Service Provider has viewed their orders'),
+(986, 'Service Provider', 14, '2024-04-26 05:21:44', 'Manage Profile', 'Service Provider has viewed their profile'),
+(987, 'Service Provider', 14, '2024-04-26 05:22:50', 'Manage Profile', 'Service Provider has viewed their profile'),
+(988, 'Service Provider', 14, '2024-04-26 05:22:55', 'Manage Profile', 'Service Provider has viewed their profile'),
+(989, 'Service Provider', 14, '2024-04-26 05:23:02', 'Manage Profile', 'Service Provider has viewed their profile'),
+(990, 'Service Provider', 14, '2024-04-26 05:23:09', 'Manage Profile', 'Service Provider has viewed their profile'),
+(991, 'Service Provider', 14, '2024-04-26 05:23:12', 'Manage Profile', 'Service Provider has viewed the page to edit their details'),
+(992, 'Service Provider', 14, '2024-04-26 05:23:16', 'Manage Profile', 'Service Provider has viewed their profile'),
+(993, 'Service Provider', 14, '2024-04-26 05:30:49', 'View Orders', 'Service Provider has viewed their orders'),
+(994, 'Service Provider', 14, '2024-04-26 05:43:43', 'Manage Profile', 'Service Provider has viewed their profile'),
+(995, 'Service Provider', 14, '2024-04-26 05:43:46', 'Logout', 'Service Provider has logged out'),
+(996, 'Customer', 18, '2024-04-26 05:43:50', 'Login', 'User logged in'),
+(997, 'Customer', 18, '2024-04-26 05:43:52', 'View Instruments', 'User viewed the instruments available'),
+(998, 'Customer', 18, '2024-04-26 05:44:10', 'Logout', 'User logged out'),
+(999, 'Service Provider', 14, '2024-04-26 05:44:17', 'Login', 'Service Provider has logged in');
+INSERT INTO `logs` (`log_id`, `user_type`, `user_id`, `date_and_time`, `log_type`, `data`) VALUES
+(1000, 'Service Provider', 14, '2024-04-26 05:44:20', 'Manage Profile', 'Service Provider has viewed their profile'),
+(1001, 'Service Provider', 14, '2024-04-26 05:44:28', 'Manage Inventory', 'Service Provider has viewed their Singer inventory'),
+(1002, 'Service Provider', 14, '2024-04-26 05:44:28', 'Manage Inventory', 'Service Provider has viewed their Singer Inventory'),
+(1003, 'Service Provider', 14, '2024-04-26 05:47:50', 'Manage Profile', 'Service Provider has viewed their profile'),
+(1004, 'Service Provider', 14, '2024-04-26 05:47:53', 'Manage Profile', 'Service Provider has viewed their profile'),
+(1005, 'Service Provider', 14, '2024-04-26 05:47:54', 'Logout', 'Service Provider has logged out'),
+(1006, 'Customer', 18, '2024-04-26 05:50:30', 'Login', 'User logged in'),
+(1007, 'Customer', 18, '2024-04-26 05:50:32', 'View Instruments', 'User viewed the instruments available'),
+(1008, 'Customer', 18, '2024-04-26 05:50:36', 'Logout', 'User logged out'),
+(1009, 'Service Provider', 14, '2024-04-26 05:50:39', 'Login', 'Service Provider has logged in'),
+(1010, 'Service Provider', 14, '2024-04-26 05:50:51', 'Manage Profile', 'Service Provider has viewed their profile'),
+(1011, 'Service Provider', 14, '2024-04-26 05:50:54', 'Logout', 'Service Provider has logged out'),
+(1012, 'Service Provider', 27, '2024-04-26 05:51:01', 'Login', 'Service Provider has logged in'),
+(1013, 'Service Provider', 27, '2024-04-26 05:51:10', 'View Orders', 'Service Provider has viewed their orders'),
+(1014, 'Service Provider', 27, '2024-04-26 05:51:11', 'Manage Profile', 'Service Provider has viewed their profile'),
+(1015, 'Service Provider', 27, '2024-04-26 05:51:25', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1016, 'Service Provider', 27, '2024-04-26 05:51:37', 'Manage Profile', 'Service Provider has viewed their profile'),
+(1017, 'Service Provider', 27, '2024-04-26 05:51:39', 'Logout', 'Service Provider has logged out');
 
 -- --------------------------------------------------------
 
@@ -1416,9 +1491,7 @@ CREATE TABLE `serviceproviders` (
 --
 
 INSERT INTO `serviceproviders` (`serviceprovider_id`, `business_name`, `business_address`, `business_contact_no`, `business_email`, `password`, `owner_name`, `owner_address`, `owner_contact_no`, `owner_nic`, `owner_email`, `about`, `profile_photo`, `verification`, `status`, `photo_R1`, `photo_R2`, `photo_R3`, `photo_R4`, `photo_R5`, `registration_date`) VALUES
-(14, 'gayathradissa@gmail.com', 'gayathradissa@gmail.com', '1234567890', 'gayathradissa@gmail.com', '$2y$10$wnKk3/23oLc/i9IZlSiae.iqt/Zx6.zjn8vMQ6I3XO9HCoriMBy7m', 'gayathradissa@gmail.com', 'gayathradissa@gmail.com', '1234567890', 'gayathradissa@g', 'gayathradissa@gmail.com', 'gayathradissa@gmail.com', 'IMG-65864b06e5a500.12264750.jpg', 162655, 'Active', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2023-11-01'),
-(18, 'gayathradissa1@gmail.com', 'gayathradissa1@gmail.com', '1234567890', 'gayathradissa1@gmail.com', '$2y$10$vW8S4t.8UL4/gvMhUT7zPeseKUq2vXJnOQR9p/abm2ktCyqIRUgee', 'gayathradissa1@gmail.com', 'gayathradissa1@gmail.com', '1234567890', 'gayathradissa1@', 'gayathradissa1@gmail.com', 'gayathradissa1@gmail.com', 'IMG-659252651d92c6.46419557.png', 108783, 'Active', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2023-11-01'),
-(19, 'gayathradissa2@gmail.com', 'gayathradissa2@gmail.com', '1234567890', 'gayathradissa2@gmail.com', '$2y$10$JGdsN89gcJCO7VEvUwvMB.uIOeo37z5CkBwFqRQR.WiHz3CUTuAo.', 'gayathradissa2@gmail.com', 'gayathradissa2@gmail.com', '1234567890', 'gayathradissa2@', 'gayathradissa2@gmail.com', 'gayathradissa2@gmail.com', 'IMG-659252aa449923.24623916.png', 178095, 'Active', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2023-11-01'),
+(14, 'Aeox Studios', '23/1B, Kottawa, Pannipitiya', '0717345366', 'gayathradissa@gmail.com', '$2y$10$wnKk3/23oLc/i9IZlSiae.iqt/Zx6.zjn8vMQ6I3XO9HCoriMBy7m', 'Gayathra Dissanayake', 'No 05, Kottawa Pannipitiya', '0702604647', '200009102897', 'gayathradissa@gmail.com', 'about Aeox Studios', 'IMG-65864b06e5a500.12264750.jpg', 162655, 'Active', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', 'IMG-656bdc23223334.62765635.png', '2023-11-01'),
 (26, 'Melody Mart', '25A, Palm Grove, Colombo 03', '1234567890', 'melodymart@gmail.com', '$2y$10$4Yq2hAMpm1NEZ790gSMsKOnIzmkeIfcAdqvSl/mUwlAi9ZVvz0FOS', 'Emily Johnson', '10B, Jasmine Lane, Kandy', '2345678901', '123456789012345', 'emilyjohnson@gmail.com', 'about melody mart', 'IMG-6627616b0532c4.16165502.jpg', 222684, 'Active', 'IMG-66262a2ad4bf40.19996905.jpg', 'IMG-66262a2ad4ea99.37831850.jpg', 'IMG-66262a2ad53029.27396713.jpg', 'IMG-66262a2ad56c24.09708517.jpg', 'IMG-66262a2ad5a743.83917572.jpg', '2024-04-22'),
 (27, 'Harmony Haven', '45, Ocean View Road, Galle', '3456789012', 'harmonyhaven@gmail.com', '$2y$10$mWZKH02kkI7TXEOscgXTgeYR8XKJzqL9CbrG2XSHq6P/MvPyQNTpe', 'Daniel Martinez', '7/2, Lotus Avenue, Negombo', '4567890123', '234567890123456', 'danielmartinez@gmail.com', 'about harmony haven', 'IMG-66262b543f8ad4.59753967.png', 224201, 'Active', 'IMG-66262b543e9d74.47294772.jpg', 'IMG-66262b543ebd17.10801180.jpg', 'IMG-66262b543ee848.35768548.jpg', 'IMG-66262b543f1592.89971184.jpg', 'IMG-66262b543f51f5.27615260.jpg', '2024-04-22'),
 (28, 'Tempo Trading', '14, Hillside Drive, Nuwara Eliya', '5678901234', 'tempotrading@gmail.com', '$2y$10$qZN6tsu98aBEyKsshVjwyeul3NWKvKhnZM6vrgge9ISkyNXXw838O', 'Chloe Brown', '32, Coconut Gardens, Jaffna', '6789012345', '567890123456789', 'chloebrown@gmail.com', 'about tempo trading', 'IMG-66262cc1bf4e75.65336557.jpg', 227427, 'Active', 'IMG-66262cc1be1735.39028696.jpg', 'IMG-66262cc1be5eb1.56054691.jpg', 'IMG-66262cc1bebb51.25399206.jpg', 'IMG-66262cc1beeeb2.35804302.jpg', 'IMG-66262cc1bf1c84.35309770.jpg', '2024-04-22'),
@@ -1834,7 +1907,7 @@ ALTER TABLE `inq_chat`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=944;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1018;
 
 --
 -- AUTO_INCREMENT for table `moderators`

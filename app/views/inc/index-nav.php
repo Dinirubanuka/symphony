@@ -14,6 +14,7 @@
                 <ul class="menu-bar">
                     <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/orders">Orders</a></li>
                     <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/inquiries">Inquiries</a></li>
+                    <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/generateReports">Reports</a></li>
                 </ul>
             </nav>
         </div>

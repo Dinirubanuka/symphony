@@ -728,6 +728,15 @@ class User
 
     }
 
+    public function getActivity($user_id)
+    {
+        $this->db->query('SELECT * FROM logs WHERE user_id = :user_id AND user_type = :user_type');
+        $this->db->bind(':user_id', $user_id);
+        $this->db->bind(':user_type', 'Customer');
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
     public function getOrderData($sorder_id){
         $this->db->query('SELECT * FROM suborder WHERE sorder_id  = :sorder_id');
         $this->db->bind(':sorder_id', $sorder_id );
@@ -769,6 +778,20 @@ class User
 
     public function getOrders($user_id){
         $this->db->query('SELECT * FROM suborder WHERE user_id= :user_id');
+        $this->db->bind(':user_id', $user_id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function getReviews($user_id){
+        $this->db->query('SELECT * FROM reviews WHERE user_id= :user_id');
+        $this->db->bind(':user_id', $user_id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
+    public function getOrdersCompleted($user_id){
+        $this->db->query('SELECT * FROM suborder WHERE user_id= :user_id AND status = "Completed"');
         $this->db->bind(':user_id', $user_id);
         $results = $this->db->resultSet();
         return $results;

@@ -38,7 +38,7 @@
                     <td><div product_id = "<?php echo $order->product_id ; ?>" product_type = "<?php echo $order->type ; ?>" class = "sp-icon" onclick = "viewItem(this)"><?php echo $order->type ; ?> - <?php echo $order->product_id ; ?></div></td>
                     <td><?php echo $order->qty; ?></td>
                     <td><div class = "status-<?php echo $order->status ?>"><?php echo $order->status; ?></div></td>
-                    <td><?php echo $order->total; ?></td>
+                    <td><?php echo $order->total; ?>.00</td>
                     <td><?php echo $order->order_placed_on; ?></td>
                     <td class="data-table-action">
                     </td>

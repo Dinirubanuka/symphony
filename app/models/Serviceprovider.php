@@ -1018,4 +1018,13 @@ class ServiceProvider
         $results = $this->db->single();
         return $results;
     }
+
+    public function getActivity($sp_id)
+    {
+        $this->db->query('SELECT * FROM logs WHERE user_id = :user_id AND user_type = :user_type');
+        $this->db->bind(':user_id', $sp_id);
+        $this->db->bind(':user_type', 'Service Provider');
+        $results = $this->db->resultSet();
+        return $results;
+    }
 }
