@@ -132,6 +132,10 @@ body {
   opacity: 0.6;
 }
 
+.starrevi {
+  color: gold;
+  font-size: 24px;
+}
 .active,
 .demo:hover {
   opacity: 1;

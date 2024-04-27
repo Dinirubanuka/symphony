@@ -301,7 +301,7 @@
                 <img src="<?php echo URLROOT; ?>/img/mag_img/<?php echo $review->photo; ?>"/>
                 <span><?php echo $review->name; ?></span>
             </div>
-            <blockquote><?php echo $review->content; ?></blockquote>
+            <blockquote>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="starrevi">&#9733;</span><?php echo $review->rating; ?>/5<br><?php echo $review->content; ?></blockquote>
         </figure>
     <?php endforeach; ?>
 </div>
