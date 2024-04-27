@@ -66,6 +66,7 @@ body {
 
 /*item container */
 .item-container {
+    height: 430px;
     width: 250px;
     display: flex;
     align-items: center;

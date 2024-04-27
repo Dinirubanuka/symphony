@@ -131,7 +131,7 @@ class Users extends Controller
     }
 
     public function cancelOrder($order_id, $sorder_id)
-    {   
+    {
         $orders = $this->userModel->getOrders($_SESSION['user_id']);
         foreach ($orders as $order) {
             if ($order->sorder_id == $sorder_id) {
@@ -425,7 +425,7 @@ class Users extends Controller
                 'status' => 'Pending',
                 'moderator_id' => ''
             ];
-        } else if ($inquiryData['inquiryType'] == 'question'){
+        } else if ($inquiryData['inquiryType'] == 'question') {
             $data = [
                 'user_id' => $_SESSION['user_id'],
                 'inquiryType' => 'Question',
@@ -440,7 +440,7 @@ class Users extends Controller
                 'status' => 'Pending',
                 'moderator_id' => ''
             ];
-        } else if ($inquiryData['inquiryType'] == 'other'){
+        } else if ($inquiryData['inquiryType'] == 'other') {
             $data = [
                 'user_id' => $_SESSION['user_id'],
                 'inquiryType' => 'Other',
@@ -456,7 +456,7 @@ class Users extends Controller
                 'moderator_id' => ''
             ];
         }
-        if($this->userModel->addInquiry($data)){
+        if ($this->userModel->addInquiry($data)) {
             $log_data = [
                 'user_type' => 'Customer',
                 'user_id' => $_SESSION['user_id'],
@@ -499,7 +499,7 @@ class Users extends Controller
     public function viewInquiry($inquiry_id)
     {
         $inquiry = $this->userModel->getInquiry($inquiry_id);
-        if($inquiry->status == 'Pending'){
+        if ($inquiry->status == 'Pending') {
             $log_data = [
                 'user_type' => 'Customer',
                 'user_id' => $_SESSION['user_id'],
@@ -512,7 +512,7 @@ class Users extends Controller
         } else {
             $chat = [];
             $chatIds = $this->userModel->getInqIds($inquiry_id);
-            foreach ($chatIds as $chatId){
+            foreach ($chatIds as $chatId) {
                 $chatData = $this->userModel->getModChat($chatId->chat_id);
                 array_push($chat, $chatData);
             }
@@ -536,7 +536,8 @@ class Users extends Controller
         }
     }
 
-    public function sendMessageMod($message, $inquiry_id, $moderator_id, $date){
+    public function sendMessageMod($message, $inquiry_id, $moderator_id, $date)
+    {
         $modifiedDate = str_replace('_', ' ', $date);
         $modifiedMessage = str_replace('_', ' ', $message);
         $data = [
@@ -548,7 +549,7 @@ class Users extends Controller
             'created_by' => 'user'
         ];
         $chat_id = $this->userModel->addChatUserToMod($data);
-        if($this->userModel->addToInqChat($chat_id, $inquiry_id)){
+        if ($this->userModel->addToInqChat($chat_id, $inquiry_id)) {
             $log_data = [
                 'user_type' => 'Customer',
                 'user_id' => $_SESSION['user_id'],
@@ -557,7 +558,7 @@ class Users extends Controller
                 'data' => 'User sent a message to a moderator with inquiry id: ' . $inquiry_id . ' and moderator id: ' . $moderator_id
             ];
             $this->userModel->addLogData($log_data);
-            redirect('users/viewInquiry/'.$inquiry_id.'');
+            redirect('users/viewInquiry/' . $inquiry_id . '');
         } else {
             $log_data = [
                 'user_type' => 'Customer',
@@ -571,59 +572,60 @@ class Users extends Controller
         }
     }
 
-    public function contactsupport(){
+    public function contactsupport()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $inq_type = trim($_POST['inquiryType']);
-            if($inq_type == 'technicalIssue' || $inq_type == 'reportBug' || $inq_type == 'other'){
+            if ($inq_type == 'technicalIssue' || $inq_type == 'reportBug' || $inq_type == 'other') {
 
-                if($inq_type == 'technicalIssue'){
+                if ($inq_type == 'technicalIssue') {
                     $img1_name = $_FILES['photo_1']['name'];
                     $img1_size = $_FILES['photo_1']['size'];
                     $tmp1_name = $_FILES['photo_1']['tmp_name'];
                     $error1 = $_FILES['photo_1']['error'];
-        
+
                     $img2_name = $_FILES['photo_2']['name'];
                     $img2_size = $_FILES['photo_2']['size'];
                     $tmp2_name = $_FILES['photo_2']['tmp_name'];
                     $error2 = $_FILES['photo_2']['error'];
-        
+
                     $img3_name = $_FILES['photo_3']['name'];
                     $img3_size = $_FILES['photo_3']['size'];
                     $tmp3_name = $_FILES['photo_3']['tmp_name'];
                     $error3 = $_FILES['photo_3']['error'];
-                } else if ($inq_type == 'reportBug'){
+                } else if ($inq_type == 'reportBug') {
                     $img1_name = $_FILES['photo_4']['name'];
                     $img1_size = $_FILES['photo_4']['size'];
                     $tmp1_name = $_FILES['photo_4']['tmp_name'];
                     $error1 = $_FILES['photo_4']['error'];
-        
+
                     $img2_name = $_FILES['photo_5']['name'];
                     $img2_size = $_FILES['photo_5']['size'];
                     $tmp2_name = $_FILES['photo_5']['tmp_name'];
                     $error2 = $_FILES['photo_5']['error'];
-        
+
                     $img3_name = $_FILES['photo_6']['name'];
                     $img3_size = $_FILES['photo_6']['size'];
                     $tmp3_name = $_FILES['photo_6']['tmp_name'];
                     $error3 = $_FILES['photo_6']['error'];
-                } else if ($inq_type == 'other'){
+                } else if ($inq_type == 'other') {
                     $img1_name = $_FILES['photo_7']['name'];
                     $img1_size = $_FILES['photo_7']['size'];
                     $tmp1_name = $_FILES['photo_7']['tmp_name'];
                     $error1 = $_FILES['photo_7']['error'];
-        
+
                     $img2_name = $_FILES['photo_8']['name'];
                     $img2_size = $_FILES['photo_8']['size'];
                     $tmp2_name = $_FILES['photo_8']['tmp_name'];
                     $error2 = $_FILES['photo_8']['error'];
-        
+
                     $img3_name = $_FILES['photo_9']['name'];
                     $img3_size = $_FILES['photo_9']['size'];
                     $tmp3_name = $_FILES['photo_9']['tmp_name'];
                     $error3 = $_FILES['photo_9']['error'];
                 }
-    
+
                 if ($error1 === UPLOAD_ERR_NO_FILE) {
                     $new_img1_name = 'IMG-656bdc23223334.62765635.png';
                 } else {
@@ -633,7 +635,7 @@ class Users extends Controller
                     $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/inquiries/' . $new_img1_name;
                     $bool = move_uploaded_file($tmp1_name, $img_upload_path);
                 }
-    
+
                 if ($error2 === UPLOAD_ERR_NO_FILE) {
                     $new_img2_name = 'IMG-656bdc23223334.62765635.png';
                 } else {
@@ -643,7 +645,7 @@ class Users extends Controller
                     $img_upload_path = 'C:/xampp/htdocs/symphony/public/img/inquiries/' . $new_img2_name;
                     $bool = move_uploaded_file($tmp2_name, $img_upload_path);
                 }
-    
+
                 if ($error3 === UPLOAD_ERR_NO_FILE) {
                     $new_img3_name = 'IMG-656bdc23223334.62765635.png';
                 } else {
@@ -699,13 +701,14 @@ class Users extends Controller
                 ];
             }
             $this->sortInquries($data);
-            } else {
-                $this->view('users/contactsupport');
-            }
+        } else {
+            $this->view('users/contactsupport');
         }
+    }
 
-    public function changePassword(){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    public function changePassword()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
                 'current_password' => trim($_POST['current_password']),
@@ -718,21 +721,21 @@ class Users extends Controller
             ];
             $result = $this->userModel->fectchEncrptedPassword($_SESSION['user_id'], $data['current_password']);
             $user_data = $this->userModel->view($_SESSION['user_id']);
-            if($result){
-                if(empty($data['new_password'])){
+            if ($result) {
+                if (empty($data['new_password'])) {
                     $data['new_password_err'] = 'Please enter new password';
-                } elseif(strlen($data['new_password']) < 6){
+                } elseif (strlen($data['new_password']) < 6) {
                     $data['new_password_err'] = 'Password must be at least 6 characters';
-                } elseif(empty($data['confirm_password'])){
+                } elseif (empty($data['confirm_password'])) {
                     $data['confirm_password_err'] = 'Please confirm password';
                 } else {
-                    if($data['new_password'] != $data['confirm_password']){
+                    if ($data['new_password'] != $data['confirm_password']) {
                         $data['confirm_password_err'] = 'Passwords do not match';
                     }
                 }
-                if(empty($data['current_password_err']) && empty($data['new_password_err']) && empty($data['confirm_password_err'])){
+                if (empty($data['current_password_err']) && empty($data['new_password_err']) && empty($data['confirm_password_err'])) {
                     $data['new_password'] = password_hash($data['new_password'], PASSWORD_DEFAULT);
-                    if($this->userModel->changePassword($data)){
+                    if ($this->userModel->changePassword($data)) {
                         $this->userModel->addPreviousPassword($user_data->id, $user_data->password);
                         $log_data = [
                             'user_type' => 'Customer',
@@ -790,8 +793,9 @@ class Users extends Controller
         }
     }
 
-    public function changePassword_lo(){
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    public function changePassword_lo()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $user_id = trim($_POST['user_id']);
             $data = [
@@ -802,20 +806,20 @@ class Users extends Controller
                 'user_id' => $user_id
             ];
             $user_data = $this->userModel->view($user_id);
-            if(empty($data['new_password'])){
+            if (empty($data['new_password'])) {
                 $data['new_password_err'] = 'Please enter new password';
-            } elseif(strlen($data['new_password']) < 6){
+            } elseif (strlen($data['new_password']) < 6) {
                 $data['new_password_err'] = 'Password must be at least 6 characters';
-            } elseif(empty($data['confirm_password'])){
+            } elseif (empty($data['confirm_password'])) {
                 $data['confirm_password_err'] = 'Please confirm password';
             } else {
-                if($data['new_password'] != $data['confirm_password']){
+                if ($data['new_password'] != $data['confirm_password']) {
                     $data['confirm_password_err'] = 'Passwords do not match';
                 }
             }
-            if(empty($data['current_password_err']) && empty($data['new_password_err']) && empty($data['confirm_password_err'])){
+            if (empty($data['current_password_err']) && empty($data['new_password_err']) && empty($data['confirm_password_err'])) {
                 $data['new_password'] = password_hash($data['new_password'], PASSWORD_DEFAULT);
-                if($this->userModel->changePassword($data)){
+                if ($this->userModel->changePassword($data)) {
                     $this->userModel->addPreviousPassword($user_data->id, $user_data->password);
                     $message = 'Password changed successfully! Please login with your new password';
                     $data = [
@@ -829,7 +833,7 @@ class Users extends Controller
                         'data' => 'User changed their password using forgot password'
                     ];
                     $this->userModel->addLogData($log_data);
-                    $this->view('users/forgotpassword', $data); 
+                    $this->view('users/forgotpassword', $data);
                 } else {
                     $log_data = [
                         'user_type' => 'Customer',
@@ -1016,7 +1020,7 @@ class Users extends Controller
             }
 
             // Make sure errors are empty
-            if (empty($data['email_err']) && empty($data['name_err']) && empty($data['tel_Number_err']) && empty($data['date_err']) && empty($data['address_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['security_question_err']) && empty($data['security_answer_err'])){
+            if (empty($data['email_err']) && empty($data['name_err']) && empty($data['tel_Number_err']) && empty($data['date_err']) && empty($data['address_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['security_question_err']) && empty($data['security_answer_err'])) {
                 // Validated
 
                 // Hash Password
@@ -1077,14 +1081,15 @@ class Users extends Controller
         }
     }
 
-    public function forgotpassword(){
+    public function forgotpassword()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $type = trim($_POST['recoveryType']);
-            if($type == 'emailMethod'){
+            if ($type == 'emailMethod') {
                 $email = trim($_POST['email']);
                 $user_name = trim($_POST['email_accountName']);
                 $user_data = $this->userModel->getUserByEmail($email);
-                if($user_data->name == $user_name){
+                if ($user_data->name == $user_name) {
                     $length = 16;
                     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
                     $password = '';
@@ -1095,14 +1100,14 @@ class Users extends Controller
                     }
 
                     $password_hashed = password_hash($password, PASSWORD_DEFAULT);
-                    
+
                     $data_info = [
                         'email' => $email,
                         'password' => $password,
                         'name' => $user_name,
                         'password_hashed' => $password_hashed
                     ];
-                    
+
                     $this->userModel->sendRecoveryEmail($data_info);
                 }
 
@@ -1119,19 +1124,19 @@ class Users extends Controller
                 ];
                 $this->userModel->addLogData($log_data);
                 $this->view('users/forgotpassword', $data);
-            } else if ($type == 'passwordMethod'){
+            } else if ($type == 'passwordMethod') {
                 $user_name = trim($_POST['pw_accountName']);
                 $password = trim($_POST['password']);
                 $user_data = $this->userModel->getUserByName($user_name);
                 $pass_true = false;
                 $password_hashed = password_hash($password, PASSWORD_DEFAULT);
                 $previous_password = $this->userModel->getPreviousPasswords($user_data->id);
-                foreach ($previous_password as $prev_pass){
-                    if(password_verify($password, $prev_pass->password)){
+                foreach ($previous_password as $prev_pass) {
+                    if (password_verify($password, $prev_pass->password)) {
                         $pass_true = true;
                     }
                 }
-                if($pass_true){
+                if ($pass_true) {
                     $data = [
                         'new_password_err' => '',
                         'confirm_password_err' => '',
@@ -1161,7 +1166,7 @@ class Users extends Controller
                     ];
                     $this->view('users/forgotpassword', $data);
                 }
-            } else if ($type == 'dontRemember'){
+            } else if ($type == 'dontRemember') {
                 $data = [
                     'user_name' => trim($_POST['other_accountName']),
                     'first_purchase_date' => trim($_POST['firstPurchaseDate']),
@@ -1179,7 +1184,7 @@ class Users extends Controller
                     'securityAnswer' => trim($_POST['securityAnswer']),
                     'status' => 'Pending'
                 ];
-                if($this->userModel->addRecoveryRequest($data)){
+                if ($this->userModel->addRecoveryRequest($data)) {
                     $message = "Your request has been submitted. If the information provided matches an account in our database an email will be sent to your email address. Please check your email to recover your account.";
                     $data = [
                         'message' => $message
@@ -1189,7 +1194,7 @@ class Users extends Controller
                     die('Something went wrong');
                 }
             }
-                
+
         } else {
             $data = [
                 'message' => ''
@@ -1227,7 +1232,7 @@ class Users extends Controller
             // Check for user/email
             if ($this->userModel->findUserByEmail($data['email'])) {
                 // User found
-            } else if($this->userModel->findBannedUserByEmail($data['email'])){
+            } else if ($this->userModel->findBannedUserByEmail($data['email'])) {
                 $data['email_err'] = 'Sorry, Your account has been banned!';
             } else {
                 // User not found
@@ -1356,7 +1361,7 @@ class Users extends Controller
             header('Content-Type: application/json');
             echo json_encode($data);
             exit();
-        } else{
+        } else {
             $this->view('users/studio');
         }
     }
@@ -1442,12 +1447,13 @@ class Users extends Controller
         }
     }
 
-    public function cart(){
-        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+    public function cart()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $cart_ini = $this->userModel->cart($_SESSION['user_id']);
             $subtotal = 0;
             $extra_charge = 0;
-            foreach ($cart_ini as $cartItem){
+            foreach ($cart_ini as $cartItem) {
                 $startDateObj = new DateTime($cartItem->start_date);
                 $endDateObj = new DateTime($cartItem->end_date);
                 while ($startDateObj <= $endDateObj) {
@@ -1456,23 +1462,23 @@ class Users extends Controller
                         'type' => $cartItem->type,
                         'date' => $startDateObj->format('Y-m-d')
                     ];
-                    if($cartItem->type == 'Equipment'){
+                    if ($cartItem->type == 'Equipment') {
                         $product_data = $this->userModel->viewItem($cartItem->product_id);
-                    } else if($cartItem->type == 'Studio'){
+                    } else if ($cartItem->type == 'Studio') {
                         $product_data = $this->userModel->viewStudio($cartItem->product_id);
-                    } else if($cartItem->type == 'Singer'){
+                    } else if ($cartItem->type == 'Singer') {
                         $product_data = $this->userModel->viewSinger($cartItem->product_id);
-                    } else if($cartItem->type == 'Band'){
+                    } else if ($cartItem->type == 'Band') {
                         $product_data = $this->userModel->viewBand($cartItem->product_id);
-                    } else if($cartItem->type == 'Musician'){
+                    } else if ($cartItem->type == 'Musician') {
                         $product_data = $this->userModel->viewMusician($cartItem->product_id);
                     }
                     $availability = $this->userModel->checkAvailability($data_check);
                     $qty = $cartItem->quantity;
-                    foreach ($availability as $avail){
+                    foreach ($availability as $avail) {
                         $qty = $qty + $avail->qty;
                     }
-                    if($qty > $product_data->quantity){
+                    if ($qty > $product_data->quantity) {
                         $this->userModel->setNotAvailableCart($cartItem->product_id, $_SESSION['user_id'], $cartItem->type);
                         break;
                     }
@@ -1480,33 +1486,54 @@ class Users extends Controller
                 }
             }
             $cart = $this->userModel->cart($_SESSION['user_id']);
-            foreach ($cart as $cartItem){
-                if($cartItem->availability === 'notAvailable'){
+            foreach ($cart as $cartItem) {
+                if ($cartItem->availability === 'notAvailable') {
                     continue;
                 }
                 $extra_charge = $extra_charge + $cartItem->extra;
                 $subtotal = $subtotal + ($cartItem->total);
-                if ($cartItem->type == 'Equipment'){
+                if ($cartItem->type == 'Equipment') {
                     $product_data = $this->userModel->viewItem($cartItem->product_id);
                     $product_data->type = 'Equipment';
-                } else if ($cartItem->type == 'Studio'){
+                } else if ($cartItem->type == 'Studio') {
                     $product_data = $this->userModel->viewStudio($cartItem->product_id);
                     $product_data->type = 'Studio';
-                } else if ($cartItem->type == 'Singer'){
+                } else if ($cartItem->type == 'Singer') {
                     $product_data = $this->userModel->viewSinger($cartItem->product_id);
                     $product_data->type = 'Singer';
-                } else if ($cartItem->type == 'Band'){
+                } else if ($cartItem->type == 'Band') {
                     $product_data = $this->userModel->viewBand($cartItem->product_id);
                     $product_data->type = 'Band';
-                } else if ($cartItem->type == 'Musician'){
+                } else if ($cartItem->type == 'Musician') {
                     $product_data = $this->userModel->viewMusician($cartItem->product_id);
                     $product_data->type = 'Musician';
                 }
                 $cartItem->product_data = $product_data;
             }
             $total = $subtotal + 200.00 + $extra_charge;
-            
-            $data =[
+
+            $merchant_id = "1226027";
+            $order_id = uniqid();
+            $totAmount = $total; // Example amount, replace with your actual amount
+            $currency = "LKR";
+            $merchant_secret = "NTk2OTE1OTM2MzcwMzcxOTQ1MzAzNTc1Nzg5MjM0NjkxNjM4NDU=";
+
+            $hash = strtoupper(
+                md5(
+                    $merchant_id .
+                    $order_id .
+                    number_format($totAmount, 2, '.', '') .
+                    $currency .
+                    strtoupper(md5(base64_decode($merchant_secret)))
+                )
+            );
+
+            $data = [
+                'merchant_id' => $merchant_id,
+                'order_id' => $order_id,
+                'amount' => $totAmount,
+                'currency' => $currency,
+                'hash' => $hash,
                 'cart' => $cart,
                 'subtotal' => $subtotal,
                 'total' => $total,
@@ -1522,11 +1549,12 @@ class Users extends Controller
             'data' => 'User viewed their cart'
         ];
         $this->userModel->addLogData($log_data);
-        $this->view('users/cart',$data);
+        $this->view('users/cart', $data);
     }
 
 
-    public function getSuborderDetails($suborders, $suborderID) {
+    public function getSuborderDetails($suborders, $suborderID)
+    {
         foreach ($suborders as $suborder) {
             if ($suborder['sorder_id'] == $suborderID) {
                 return $suborder;
@@ -1535,7 +1563,8 @@ class Users extends Controller
         return null;
     }
 
-    public function orders(){
+    public function orders()
+    {
         $orders = $this->userModel->getOrders($_SESSION['user_id']);
         $completeOrders = $this->userModel->getCompleteOrders($_SESSION['user_id']);
         $order_objects = [];
@@ -1548,15 +1577,15 @@ class Users extends Controller
                 $this->userModel->changeOrderStatus($order->sorder_id, 'In-Progress');
             }
             $user_data = json_decode(json_encode($this->userModel->view($order->user_id)), true);
-            if ($order->type == 'Equipment'){
+            if ($order->type == 'Equipment') {
                 $product_data = json_decode(json_encode($this->userModel->getItemData($order->product_id)), true);
-            } else if ($order->type == 'Studio'){
+            } else if ($order->type == 'Studio') {
                 $product_data = json_decode(json_encode($this->userModel->getStudioData($order->product_id)), true);
-            } else if ($order->type == 'Singer'){
+            } else if ($order->type == 'Singer') {
                 $product_data = json_decode(json_encode($this->userModel->getSingerData($order->product_id)), true);
-            } else if ($order->type == 'Band'){
+            } else if ($order->type == 'Band') {
                 $product_data = json_decode(json_encode($this->userModel->getBandData($order->product_id)), true);
-            } else if ($order->type == 'Musician'){
+            } else if ($order->type == 'Musician') {
                 $product_data = json_decode(json_encode($this->userModel->getMusicianData($order->product_id)), true);
             }
             if (isset($user_data['status'])) {
@@ -1566,19 +1595,19 @@ class Users extends Controller
                 unset($product_data['status']);
             }
             $order_data = json_decode(json_encode($order), true);
-            $order_data = array_merge($order_data, $user_data, $product_data); 
+            $order_data = array_merge($order_data, $user_data, $product_data);
             $order_objects[] = $order_data;
         }
         $result = [];
-    
+
         foreach ($completeOrders as $order) {
             $orderDetails = $order;
             $orderSuborderIDs = explode(',', $order->sorder_id);
-    
+
             foreach ($orderSuborderIDs as $suborderID) {
                 $suborderDetails = $this->getSuborderDetails($order_objects, $suborderID);
                 $orderIndex = array_search($orderDetails, array_column($result, 'order'));
-    
+
                 if ($orderIndex !== false) {
                     // Order already exists, add the suborder to the existing order
                     $result[$orderIndex]['suborders'][] = $suborderDetails;
@@ -1607,30 +1636,30 @@ class Users extends Controller
         $this->userModel->addLogData($log_data);
         $this->view('users/orders', $data);
     }
-    
-    
 
-    public function placeOrder(){
+
+    public function placeOrder()
+    {
         $cart = $this->userModel->cart($_SESSION['user_id']);
         $sorder_id = '';
         $avail_ids = '';
-        $total = 0; 
+        $total = 0;
         $order_deposit = 0;
         $today = date("Y-m-d");
-        foreach ($cart as $cartItem){
-            if ($cartItem->type == 'Equipment'){
+        foreach ($cart as $cartItem) {
+            if ($cartItem->type == 'Equipment') {
                 $product_data = $this->userModel->viewItem($cartItem->product_id);
                 $product_data->type = 'Equipment';
-            } else if ($cartItem->type == 'Studio'){
+            } else if ($cartItem->type == 'Studio') {
                 $product_data = $this->userModel->viewStudio($cartItem->product_id);
                 $product_data->type = 'Studio';
-            } else if ($cartItem->type == 'Singer'){
+            } else if ($cartItem->type == 'Singer') {
                 $product_data = $this->userModel->viewSinger($cartItem->product_id);
                 $product_data->type = 'Singer';
-            } else if ($cartItem->type == 'Band'){
+            } else if ($cartItem->type == 'Band') {
                 $product_data = $this->userModel->viewBand($cartItem->product_id);
                 $product_data->type = 'Band';
-            } else if ($cartItem->type == 'Musician'){
+            } else if ($cartItem->type == 'Musician') {
                 $product_data = $this->userModel->viewMusician($cartItem->product_id);
                 $product_data->type = 'Musician';
             }
@@ -1644,10 +1673,10 @@ class Users extends Controller
                     'quantity' => $cartItem->quantity
                 ];
                 $entry_id = $this->userModel->setAvailability($avail_data);
-                if($avail_ids == ''){
+                if ($avail_ids == '') {
                     $avail_ids .= $entry_id;
                 } else {
-                    $avail_ids .= ','.$entry_id;
+                    $avail_ids .= ',' . $entry_id;
                 }
                 $startDateObj->add(new DateInterval('P1D'));
             }
@@ -1675,17 +1704,17 @@ class Users extends Controller
                 'user_id' => $product_data->created_by,
                 'date_time' => date('Y-m-d H:i:s'),
                 'status' => 'Unread',
-                'data' => 'You have a new order request from '.$_SESSION['user_name'].' for '.$product_data->name
+                'data' => 'You have a new order request from ' . $_SESSION['user_name'] . ' for ' . $product_data->name
             ];
             $this->userModel->addNotification($notification_data);
             $temp = $result->sorder_id;
-            if($sorder_id == ''){
+            if ($sorder_id == '') {
                 $sorder_id .= $temp;
             } else {
-                $sorder_id .= ','.$temp;
+                $sorder_id .= ',' . $temp;
             }
         }
-        $total = $total + $total*0.05 + 200.00;
+        $total = $total + $total * 0.05 + 200.00;
         $data_order = [
             'user_id' => $_SESSION['user_id'],
             'sorder_id' => $sorder_id,
@@ -1693,7 +1722,7 @@ class Users extends Controller
             'order_placed_on' => $today,
             'deposit' => $order_deposit,
         ];
-        if($this->userModel->placeOrderTotal($data_order)){
+        if ($this->userModel->placeOrderTotal($data_order)) {
             $log_data = [
                 'user_type' => 'Customer',
                 'user_id' => $_SESSION['user_id'],
@@ -1709,36 +1738,37 @@ class Users extends Controller
         }
     }
 
-    public function removeFromCart($product_id, $type){
+    public function removeFromCart($product_id, $type)
+    {
         $this->userModel->removeFromCart($product_id);
         $cart = $this->userModel->cart($_SESSION['user_id']);
         $subtotal = 0;
-        foreach ($cart as $cartItem){
-            if($cartItem->availability === 'notAvailable'){
+        foreach ($cart as $cartItem) {
+            if ($cartItem->availability === 'notAvailable') {
                 continue;
             }
             $subtotal = $subtotal + ($cartItem->total);
-            if ($cartItem->type == 'Equipment'){
+            if ($cartItem->type == 'Equipment') {
                 $product_data = $this->userModel->viewItem($cartItem->product_id);
                 $product_data->type = 'Equipment';
-            } else if ($cartItem->type == 'Studio'){
+            } else if ($cartItem->type == 'Studio') {
                 $product_data = $this->userModel->viewStudio($cartItem->product_id);
                 $product_data->type = 'Studio';
-            } else if ($cartItem->type == 'Singer'){
+            } else if ($cartItem->type == 'Singer') {
                 $product_data = $this->userModel->viewSinger($cartItem->product_id);
                 $product_data->type = 'Singer';
-            } else if ($cartItem->type == 'Band'){
+            } else if ($cartItem->type == 'Band') {
                 $product_data = $this->userModel->viewBand($cartItem->product_id);
                 $product_data->type = 'Band';
-            } else if ($cartItem->type == 'Musician'){
+            } else if ($cartItem->type == 'Musician') {
                 $product_data = $this->userModel->viewMusician($cartItem->product_id);
                 $product_data->type = 'Musician';
             }
             $cartItem->product_data = $product_data;
         }
-        $total = $subtotal + $subtotal*0.05 + 200.00;
-        
-        $data =[
+        $total = $subtotal + $subtotal * 0.05 + 200.00;
+
+        $data = [
             'cart' => $cart,
             'subtotal' => $subtotal,
             'total' => $total
@@ -1748,22 +1778,23 @@ class Users extends Controller
             'user_id' => $_SESSION['user_id'],
             'log_type' => 'Manage Cart',
             'date_and_time' => date('Y-m-d H:i:s'),
-            'data' => 'User removed an '.$type.' with product id '.$product_id.' from their cart'
+            'data' => 'User removed an ' . $type . ' with product id ' . $product_id . ' from their cart'
         ];
         $this->userModel->addLogData($log_data);
-        $this->view('users/cart',$data);
+        $this->view('users/cart', $data);
     }
 
-    public function checkAvailability($type, $product_id){
+    public function checkAvailability($type, $product_id)
+    {
         // Check for POST
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $data =[
+            $data = [
                 'product_id' => $product_id,
-                'type' => $type,    
-                'quantity' =>trim($_POST['quantity']),
-                'start_date' =>trim($_POST['fromDate']),
-                'end_date' =>trim($_POST['toDate'])
+                'type' => $type,
+                'quantity' => trim($_POST['quantity']),
+                'start_date' => trim($_POST['fromDate']),
+                'end_date' => trim($_POST['toDate'])
             ];
             $avalability = true;
             $startDateObj = new DateTime($data['start_date']);
@@ -1774,23 +1805,23 @@ class Users extends Controller
                     'type' => $data['type'],
                     'date' => $startDateObj->format('Y-m-d')
                 ];
-                if($type == 'Equipment'){
+                if ($type == 'Equipment') {
                     $product_data = $this->userModel->viewItem($product_id);
-                } else if($type == 'Studio'){
+                } else if ($type == 'Studio') {
                     $product_data = $this->userModel->viewStudio($product_id);
-                } else if($type == 'Singer'){
+                } else if ($type == 'Singer') {
                     $product_data = $this->userModel->viewSinger($product_id);
-                } else if($type == 'Band'){
+                } else if ($type == 'Band') {
                     $product_data = $this->userModel->viewBand($product_id);
-                } else if($type == 'Musician'){
+                } else if ($type == 'Musician') {
                     $product_data = $this->userModel->viewMusician($product_id);
                 }
                 $availability = $this->userModel->checkAvailability($data_check);
                 $qty = $data['quantity'];
-                foreach ($availability as $avail){
+                foreach ($availability as $avail) {
                     $qty = $qty + $avail->qty;
                 }
-                if($qty > $product_data->quantity){
+                if ($qty > $product_data->quantity) {
                     $avalability = false;
                     break;
                 }
@@ -1804,7 +1835,7 @@ class Users extends Controller
                 'data' => "User checked the availability of an $type  with product id $product_id"
             ];
             $this->userModel->addLogData($log_data);
-            if($avalability){
+            if ($avalability) {
                 $this->viewAllAC($type, 'available', $data);
             } else {
                 $this->viewAllAC($type, 'notAvailable', $data);
@@ -1814,31 +1845,32 @@ class Users extends Controller
         }
     }
 
-    public function viewAllAC($type, $availability, $data_selected){
+    public function viewAllAC($type, $availability, $data_selected)
+    {
         $product_id = $data_selected['product_id'];
-        if($type == 'Equipment'){
+        if ($type == 'Equipment') {
             $data = $this->userModel->viewItem($product_id);
             $reviews = $this->userModel->viewreviews($product_id, $type);
-        } else if($type == 'Studio'){
+        } else if ($type == 'Studio') {
             $data = $this->userModel->viewStudio($product_id);
             $reviews = $this->userModel->viewreviews($product_id, $type);
-        } else if($type == 'Singer'){
+        } else if ($type == 'Singer') {
             $data = $this->userModel->viewSinger($product_id);
             $reviews = $this->userModel->viewreviews($product_id, $type);
-        } else if($type == 'Band'){
+        } else if ($type == 'Band') {
             $data = $this->userModel->viewBand($product_id);
             $reviews = $this->userModel->viewreviews($product_id, $type);
-        } else if($type == 'Musician'){
+        } else if ($type == 'Musician') {
             $data = $this->userModel->viewMusician($product_id);
             $reviews = $this->userModel->viewreviews($product_id, $type);
         }
         $purchased = false;
         $user = $this->userModel->view($_SESSION['user_id']);
         $productPurchased = $this->userModel->checkProductPurchased($product_id, $_SESSION['user_id'], 'Completed', $type);
-        if($productPurchased){
+        if ($productPurchased) {
             $purchased = true;
         }
-        if($reviews){
+        if ($reviews) {
             $count = 0;
             $star1 = 0;
             $star2 = 0;
@@ -1846,7 +1878,7 @@ class Users extends Controller
             $star4 = 0;
             $star5 = 0;
             $rating = 0;
-            foreach ($reviews as $review){
+            foreach ($reviews as $review) {
                 $count = $count + 1;
                 switch ($review->rating) {
                     case 1:
@@ -1866,376 +1898,56 @@ class Users extends Controller
                         break;
                 }
             }
-            if($count != 0){
-                $rating = ($star1 + $star2*2 + $star3*3 + $star4*4 + $star5*5)/$count;
+            if ($count != 0) {
+                $rating = ($star1 + $star2 * 2 + $star3 * 3 + $star4 * 4 + $star5 * 5) / $count;
             }
         } else {
             $rating = 0;
-            $star1 = 0;
-            $star2 = 0; 
-            $star3 = 0;
-            $star4 = 0;
-            $star5 = 0;
-            $count = 0;
-        }
-
-    if($data){
-        if ($type == 'Equipment'){
-            $data =[
-                'product_id'=>$data->product_id,
-                'created_by'=>$data->created_by,
-                'category'=>$data->category,
-                'brand'=>$data->brand,
-                'model'=>$data->model,
-                'quantity'=>$data->quantity,
-                'unit_price'=>$data->unit_price,
-                'photo_1'=>$data->photo_1,
-                'photo_2'=>$data->photo_2,
-                'photo_3'=>$data->photo_3,
-                'Title'=>$data->Title,
-                'Description'=>$data->Description,
-                'outOfStock'=>$data->outOfStock,
-                'createdDate'=>$data->createdDate,
-                'warranty'=>$data->warranty,
-                'name'=>$user->name,
-                'photo'=>$user->profile_photo,
-                'reviews'=>$reviews,
-                'rating'=>$rating,
-                'count'=>$count,
-                'star1'=>$star1,
-                'star2'=>$star2,
-                'star3'=>$star3,
-                'star4'=>$star4,
-                'star5'=>$star5,
-                'availability' => $availability,
-                'quantity_selected' => $data_selected['quantity'],
-                'start_date' => $data_selected['start_date'],
-                'end_date' => $data_selected['end_date'],
-                'purchased' => $purchased,
-                'type' => $type
-            ];
-            $this->view('users/viewItem',$data);
-        } else if ($type == 'Studio'){
-            $data = [
-                'product_id' => $data->product_id,
-                'created_by' => $data->created_by,
-                'category' => $data->category,
-                'brand' => $data->brand,
-                'model' => $data->model,
-                'quantity' => $data->quantity,
-                'unit_price' => $data->unit_price,
-                'photo_1' => $data->photo_1,
-                'photo_2' => $data->photo_2,
-                'photo_3' => $data->photo_3,
-                'Title' => $data->Title,
-                'Description' => $data->Description,
-                'outOfStock' => $data->outOfStock,
-                'createdDate' => $data->createdDate,
-                'warranty' => $data->warranty,
-                'location' => $data->location,
-                'instrument' => $data->instrument,
-                'descriptionSounds' => $data->descriptionSounds,
-                'descriptionStudio' => $data->descriptionStudio,
-                'telephoneNumber' => $data->telephoneNumber,
-                'videoLink' => $data->videoLink,
-                'airCondition' => $data->airCondition,
-                'status' => $data->status,
-                'name'=>$user->name,
-                'photo'=>$user->profile_photo,
-                'reviews'=>$reviews,
-                'rating'=>$rating,
-                'count'=>$count,
-                'star1'=>$star1,
-                'star2'=>$star2,
-                'star3'=>$star3,
-                'star4'=>$star4,
-                'star5'=>$star5,
-                'availability' => $availability,
-                'quantity_selected' => $data_selected['quantity'],
-                'start_date' => $data_selected['start_date'],
-                'end_date' => $data_selected['end_date'],
-                'purchased' => $purchased,
-                'type' => $type
-            ];
-            $this->view('users/viewItem',$data);
-        } else if ($type == 'Singer'){
-            $data = [
-                'product_id' => $data->product_id,
-                'created_by' => $data->created_by,
-                'category' => $data->category,
-                'brand' => $data->brand,
-                'model' => $data->model,
-                'quantity' => $data->quantity,
-                'unit_price' => $data->unit_price,
-                'photo_1' => $data->photo_1,
-                'photo_2' => $data->photo_2,
-                'photo_3' => $data->photo_3,
-                'Title' => $data->Title,
-                'Description' => $data->Description,
-                'outOfStock' => $data->outOfStock,
-                'createdDate' => $data->createdDate,
-                'warranty' => $data->warranty,
-                'singer_name' => $data->name,
-                'nickName' => $data->nickName,
-                'telephoneNumber' => $data->telephoneNumber,
-                'videoLink' => $data->videoLink,
-                'location' => $data->location,
-                'instrument' => $data->instrument,
-                'singerPhoto' => $data->singerPhoto,
-                'email' => $data->email,
-                'status' => $data->status,
-                'name'=>$user->name,
-                'photo'=>$user->profile_photo,
-                'reviews'=>$reviews,
-                'rating'=>$rating,
-                'count'=>$count,
-                'star1'=>$star1,
-                'star2'=>$star2,
-                'star3'=>$star3,
-                'star4'=>$star4,
-                'star5'=>$star5,
-                'availability' => $availability,
-                'quantity_selected' => $data_selected['quantity'],
-                'start_date' => $data_selected['start_date'],
-                'end_date' => $data_selected['end_date'],
-                'purchased' => $purchased,
-                'type' => $type
-            ];
-            $this->view('users/viewItem',$data);
-        } else if ($type == 'Musician'){
-            $data = [
-                'product_id' => $data->product_id,
-                'created_by' => $data->created_by,
-                'category' => $data->category,
-                'brand' => $data->brand,
-                'model' => $data->model,
-                'quantity' => $data->quantity,
-                'unit_price' => $data->unit_price,
-                'photo_1' => $data->photo_1,
-                'photo_2' => $data->photo_2,
-                'photo_3' => $data->photo_3,
-                'Title' => $data->Title,
-                'Description' => $data->Description,
-                'outOfStock' => $data->outOfStock,
-                'createdDate' => $data->createdDate,
-                'warranty' => $data->warranty,
-                'musician_name' => $data->name,
-                'nickName' => $data->nickName,
-                'telephoneNumber' => $data->telephoneNumber,
-                'videoLink' => $data->videoLink,
-                'location' => $data->location,
-                'instrument' => $data->instrument,
-                'singerPhoto' => $data->singerPhoto,
-                'email' => $data->email,
-                'status' => $data->status,
-                'name'=>$user->name,
-                'photo'=>$user->profile_photo,
-                'reviews'=>$reviews,
-                'rating'=>$rating,
-                'count'=>$count,
-                'star1'=>$star1,
-                'star2'=>$star2,
-                'star3'=>$star3,
-                'star4'=>$star4,
-                'star5'=>$star5,
-                'availability' => $availability,
-                'quantity_selected' => $data_selected['quantity'],
-                'start_date' => $data_selected['start_date'],
-                'end_date' => $data_selected['end_date'],
-                'purchased' => $purchased,
-                'type' => $type
-            ];
-            $this->view('users/viewItem',$data);
-        } else if ($type == 'Band'){
-            $data = [
-                'product_id' => $data->product_id,
-                'created_by' => $data->created_by,
-                'category' => $data->category,
-                'brand' => $data->brand,
-                'model' => $data->model,
-                'unit_price' => $data->unit_price,
-                'quantity' => $data->quantity,
-                'photo_1' => $data->photo_1,
-                'photo_2' => $data->photo_2,
-                'photo_3' => $data->photo_3,
-                'Title' => $data->Title,
-                'Description' => $data->Description,
-                'outOfStock' => $data->outOfStock,
-                'createdDate' => $data->createdDate,
-                'warranty' => $data->warranty,
-                'videoLink' => $data->videoLink,
-                'instrument' => $data->instrument,
-                'email' => $data->email,
-                'telephoneNumber' => $data->telephoneNumber,
-                'memberCount' => $data->memberCount,
-                'leaderPhoto' => $data->leaderPhoto,
-                'bandPhoto' => $data->bandPhoto,
-                'location' => $data->location,
-                'leaderName' => $data->leaderName,
-                'status' => $data->status,
-                'name'=>$user->name,
-                'photo'=>$user->profile_photo,
-                'reviews'=>$reviews,
-                'rating'=>$rating,
-                'count'=>$count,
-                'star1'=>$star1,
-                'star2'=>$star2,
-                'star3'=>$star3,
-                'star4'=>$star4,
-                'star5'=>$star5,
-                'availability' => $availability,
-                'quantity_selected' => $data_selected['quantity'],
-                'start_date' => $data_selected['start_date'],
-                'end_date' => $data_selected['end_date'],
-                'purchased' => $purchased,
-                'type' => $type
-            ];
-            $this->view('users/viewItem',$data);
-        } 
-    } else {
-        die('Something went wrong');
-    }
-}
-    public function viewItem($product_id){
-        $type = 'Equipment';
-        $this->viewAll($product_id, $type);
-    }
-
-    public function viewStudio($product_id){
-        $type = 'Studio';
-        $this->viewAll($product_id, $type);
-    }
-
-    public function viewSinger($product_id){
-        $type = 'Singer';
-        $this->viewAll($product_id, $type);
-    }
-
-    public function viewBand($product_id){
-        $type = 'Band';
-        $this->viewAll($product_id, $type);
-    }
-
-    public function viewMusician($product_id){
-        $type = 'Musician';
-        $this->viewAll($product_id, $type);
-    }
-
-    public function viewAll($product_id, $type){
-        if($type == 'Equipment'){
-            $data = $this->userModel->viewItem($product_id);
-            $reviews = $this->userModel->viewreviews($product_id, $type);
-        }
-        if($type == 'Studio'){
-            $data = $this->userModel->viewStudio($product_id);
-            $reviews = $this->userModel->viewreviews($product_id, $type);
-        }
-
-        if($type == 'Singer'){
-            $data = $this->userModel->viewSinger($product_id);
-            $reviews = $this->userModel->viewreviews($product_id, $type);
-        }
-
-        if($type == 'Band'){
-            $data = $this->userModel->viewBand($product_id);
-            $reviews = $this->userModel->viewreviews($product_id, $type);
-        }
-
-        if($type == 'Musician'){
-            $data = $this->userModel->viewMusician($product_id);
-            $reviews = $this->userModel->viewreviews($product_id, $type);
-        }
-        $user = $this->userModel->view($_SESSION['user_id']);
-        $purchased = false;
-        if($reviews){
-            $count = 0;
             $star1 = 0;
             $star2 = 0;
             $star3 = 0;
             $star4 = 0;
             $star5 = 0;
-            $rating = 0;
-            foreach ($reviews as $review){
-                $count = $count + 1;
-                switch ($review->rating) {
-                    case 1:
-                        $star1 = $star1 + 1;
-                        break;
-                    case 2:
-                        $star2 = $star2 + 1;
-                        break;
-                    case 3:
-                        $star3 = $star3 + 1;
-                        break;
-                    case 4:
-                        $star4 = $star4 + 1;
-                        break;
-                    case 5:
-                        $star5 = $star5 + 1;
-                        break;
-                }
-            }
-            if($count != 0){
-                $rating = ($star1 + $star2*2 + $star3*3 + $star4*4 + $star5*5)/$count;
-            }
-        } else {
-            $rating = 0;
-            $star1 = 0;
-            $star2 = 0; 
-            $star3 = 0;
-            $star4 = 0;
-            $star5 = 0;
             $count = 0;
         }
-        $productPurchased = $this->userModel->checkProductPurchased($product_id, $_SESSION['user_id'], 'Completed', $type);
-        if($productPurchased){
-            $purchased = true;
-        }
-        if($data){
-            if ($type == 'Equipment'){
-                $data =[
-                    'product_id'=>$data->product_id,
-                    'created_by'=>$data->created_by,
-                    'category'=>$data->category,
-                    'brand'=>$data->brand,
-                    'model'=>$data->model,
-                    'quantity'=>$data->quantity,
-                    'unit_price'=>$data->unit_price,
-                    'photo_1'=>$data->photo_1,
-                    'photo_2'=>$data->photo_2,
-                    'photo_3'=>$data->photo_3,
-                    'Title'=>$data->Title,
-                    'Description'=>$data->Description,
-                    'outOfStock'=>$data->outOfStock,
-                    'createdDate'=>$data->createdDate,
-                    'warranty'=>$data->warranty,
-                    'name'=>$user->name,
-                    'photo'=>$user->profile_photo,
-                    'reviews'=>$reviews,
-                    'rating'=>$rating,
-                    'count'=>$count,
-                    'star1'=>$star1,
-                    'star2'=>$star2,
-                    'star3'=>$star3,
-                    'star4'=>$star4,
-                    'star5'=>$star5,
-                    'availability' => 'notChecked',
-                    'quantity_selected' => '',
-                    'start_date' => '',
-                    'end_date' => '',
+
+        if ($data) {
+            if ($type == 'Equipment') {
+                $data = [
+                    'product_id' => $data->product_id,
+                    'created_by' => $data->created_by,
+                    'category' => $data->category,
+                    'brand' => $data->brand,
+                    'model' => $data->model,
+                    'quantity' => $data->quantity,
+                    'unit_price' => $data->unit_price,
+                    'photo_1' => $data->photo_1,
+                    'photo_2' => $data->photo_2,
+                    'photo_3' => $data->photo_3,
+                    'Title' => $data->Title,
+                    'Description' => $data->Description,
+                    'outOfStock' => $data->outOfStock,
+                    'createdDate' => $data->createdDate,
+                    'warranty' => $data->warranty,
+                    'name' => $user->name,
+                    'photo' => $user->profile_photo,
+                    'reviews' => $reviews,
+                    'rating' => $rating,
+                    'count' => $count,
+                    'star1' => $star1,
+                    'star2' => $star2,
+                    'star3' => $star3,
+                    'star4' => $star4,
+                    'star5' => $star5,
+                    'availability' => $availability,
+                    'quantity_selected' => $data_selected['quantity'],
+                    'start_date' => $data_selected['start_date'],
+                    'end_date' => $data_selected['end_date'],
                     'purchased' => $purchased,
                     'type' => $type
                 ];
-                $log_data = [
-                    'user_type' => 'Customer',
-                    'user_id' => $_SESSION['user_id'],
-                    'log_type' => 'View Instrument',
-                    'date_and_time' => date('Y-m-d H:i:s'),
-                    'data' => 'User viewed an instrument with product id '.$product_id
-                ];
-                $this->userModel->addLogData($log_data);
-                $this->view('users/viewItem',$data);
-            } else if ($type == 'Studio'){
+                $this->view('users/viewItem', $data);
+            } else if ($type == 'Studio') {
                 $data = [
                     'product_id' => $data->product_id,
                     'created_by' => $data->created_by,
@@ -2260,33 +1972,25 @@ class Users extends Controller
                     'videoLink' => $data->videoLink,
                     'airCondition' => $data->airCondition,
                     'status' => $data->status,
-                    'name'=>$user->name,
-                    'photo'=>$user->profile_photo,
-                    'reviews'=>$reviews,
-                    'rating'=>$rating,
-                    'count'=>$count,
-                    'star1'=>$star1,
-                    'star2'=>$star2,
-                    'star3'=>$star3,
-                    'star4'=>$star4,
-                    'star5'=>$star5,
-                    'availability' => 'notChecked',
-                    'quantity_selected' => '1',
-                    'start_date' => '',
-                    'end_date' => '',
+                    'name' => $user->name,
+                    'photo' => $user->profile_photo,
+                    'reviews' => $reviews,
+                    'rating' => $rating,
+                    'count' => $count,
+                    'star1' => $star1,
+                    'star2' => $star2,
+                    'star3' => $star3,
+                    'star4' => $star4,
+                    'star5' => $star5,
+                    'availability' => $availability,
+                    'quantity_selected' => $data_selected['quantity'],
+                    'start_date' => $data_selected['start_date'],
+                    'end_date' => $data_selected['end_date'],
                     'purchased' => $purchased,
                     'type' => $type
                 ];
-                $log_data = [
-                    'user_type' => 'Customer',
-                    'user_id' => $_SESSION['user_id'],
-                    'log_type' => 'View Studio',
-                    'date_and_time' => date('Y-m-d H:i:s'),
-                    'data' => 'User viewed an studio with product id '.$product_id
-                ];
-                $this->userModel->addLogData($log_data);
-                $this->view('users/viewItem',$data);
-            } else if ($type == 'Singer'){
+                $this->view('users/viewItem', $data);
+            } else if ($type == 'Singer') {
                 $data = [
                     'product_id' => $data->product_id,
                     'created_by' => $data->created_by,
@@ -2312,33 +2016,25 @@ class Users extends Controller
                     'singerPhoto' => $data->singerPhoto,
                     'email' => $data->email,
                     'status' => $data->status,
-                    'name'=>$user->name,
-                    'photo'=>$user->profile_photo,
-                    'reviews'=>$reviews,
-                    'rating'=>$rating,
-                    'count'=>$count,
-                    'star1'=>$star1,
-                    'star2'=>$star2,
-                    'star3'=>$star3,
-                    'star4'=>$star4,
-                    'star5'=>$star5,
-                    'availability' => 'notChecked',
-                    'quantity_selected' => '1',
-                    'start_date' => '',
-                    'end_date' => '',
+                    'name' => $user->name,
+                    'photo' => $user->profile_photo,
+                    'reviews' => $reviews,
+                    'rating' => $rating,
+                    'count' => $count,
+                    'star1' => $star1,
+                    'star2' => $star2,
+                    'star3' => $star3,
+                    'star4' => $star4,
+                    'star5' => $star5,
+                    'availability' => $availability,
+                    'quantity_selected' => $data_selected['quantity'],
+                    'start_date' => $data_selected['start_date'],
+                    'end_date' => $data_selected['end_date'],
                     'purchased' => $purchased,
                     'type' => $type
                 ];
-                $log_data = [
-                    'user_type' => 'Customer',
-                    'user_id' => $_SESSION['user_id'],
-                    'log_type' => 'View Singer',
-                    'date_and_time' => date('Y-m-d H:i:s'),
-                    'data' => 'User viewed a singer with product id '.$product_id
-                ];
-                $this->userModel->addLogData($log_data);
-                $this->view('users/viewItem',$data);
-            } else if ($type == 'Musician'){
+                $this->view('users/viewItem', $data);
+            } else if ($type == 'Musician') {
                 $data = [
                     'product_id' => $data->product_id,
                     'created_by' => $data->created_by,
@@ -2364,33 +2060,25 @@ class Users extends Controller
                     'singerPhoto' => $data->singerPhoto,
                     'email' => $data->email,
                     'status' => $data->status,
-                    'name'=>$user->name,
-                    'photo'=>$user->profile_photo,
-                    'reviews'=>$reviews,
-                    'rating'=>$rating,
-                    'count'=>$count,
-                    'star1'=>$star1,
-                    'star2'=>$star2,
-                    'star3'=>$star3,
-                    'star4'=>$star4,
-                    'star5'=>$star5,
-                    'availability' => 'notChecked',
-                    'quantity_selected' => '1',
-                    'start_date' => '',
-                    'end_date' => '',
+                    'name' => $user->name,
+                    'photo' => $user->profile_photo,
+                    'reviews' => $reviews,
+                    'rating' => $rating,
+                    'count' => $count,
+                    'star1' => $star1,
+                    'star2' => $star2,
+                    'star3' => $star3,
+                    'star4' => $star4,
+                    'star5' => $star5,
+                    'availability' => $availability,
+                    'quantity_selected' => $data_selected['quantity'],
+                    'start_date' => $data_selected['start_date'],
+                    'end_date' => $data_selected['end_date'],
                     'purchased' => $purchased,
                     'type' => $type
                 ];
-                $log_data = [
-                    'user_type' => 'Customer',
-                    'user_id' => $_SESSION['user_id'],
-                    'log_type' => 'View Musician',
-                    'date_and_time' => date('Y-m-d H:i:s'),
-                    'data' => 'User viewed a musician with product id '.$product_id
-                ];
-                $this->userModel->addLogData($log_data);
-                $this->view('users/viewItem',$data);
-            } else if ($type == 'Band'){
+                $this->view('users/viewItem', $data);
+            } else if ($type == 'Band') {
                 $data = [
                     'product_id' => $data->product_id,
                     'created_by' => $data->created_by,
@@ -2417,16 +2105,367 @@ class Users extends Controller
                     'location' => $data->location,
                     'leaderName' => $data->leaderName,
                     'status' => $data->status,
-                    'name'=>$user->name,
-                    'photo'=>$user->profile_photo,
-                    'reviews'=>$reviews,
-                    'rating'=>$rating,
-                    'count'=>$count,
-                    'star1'=>$star1,
-                    'star2'=>$star2,
-                    'star3'=>$star3,
-                    'star4'=>$star4,
-                    'star5'=>$star5,
+                    'name' => $user->name,
+                    'photo' => $user->profile_photo,
+                    'reviews' => $reviews,
+                    'rating' => $rating,
+                    'count' => $count,
+                    'star1' => $star1,
+                    'star2' => $star2,
+                    'star3' => $star3,
+                    'star4' => $star4,
+                    'star5' => $star5,
+                    'availability' => $availability,
+                    'quantity_selected' => $data_selected['quantity'],
+                    'start_date' => $data_selected['start_date'],
+                    'end_date' => $data_selected['end_date'],
+                    'purchased' => $purchased,
+                    'type' => $type
+                ];
+                $this->view('users/viewItem', $data);
+            }
+        } else {
+            die('Something went wrong');
+        }
+    }
+
+    public function viewItem($product_id)
+    {
+        $type = 'Equipment';
+        $this->viewAll($product_id, $type);
+    }
+
+    public function viewStudio($product_id)
+    {
+        $type = 'Studio';
+        $this->viewAll($product_id, $type);
+    }
+
+    public function viewSinger($product_id)
+    {
+        $type = 'Singer';
+        $this->viewAll($product_id, $type);
+    }
+
+    public function viewBand($product_id)
+    {
+        $type = 'Band';
+        $this->viewAll($product_id, $type);
+    }
+
+    public function viewMusician($product_id)
+    {
+        $type = 'Musician';
+        $this->viewAll($product_id, $type);
+    }
+
+    public function viewAll($product_id, $type)
+    {
+        if ($type == 'Equipment') {
+            $data = $this->userModel->viewItem($product_id);
+            $reviews = $this->userModel->viewreviews($product_id, $type);
+        }
+        if ($type == 'Studio') {
+            $data = $this->userModel->viewStudio($product_id);
+            $reviews = $this->userModel->viewreviews($product_id, $type);
+        }
+
+        if ($type == 'Singer') {
+            $data = $this->userModel->viewSinger($product_id);
+            $reviews = $this->userModel->viewreviews($product_id, $type);
+        }
+
+        if ($type == 'Band') {
+            $data = $this->userModel->viewBand($product_id);
+            $reviews = $this->userModel->viewreviews($product_id, $type);
+        }
+
+        if ($type == 'Musician') {
+            $data = $this->userModel->viewMusician($product_id);
+            $reviews = $this->userModel->viewreviews($product_id, $type);
+        }
+        $user = $this->userModel->view($_SESSION['user_id']);
+        $purchased = false;
+        if ($reviews) {
+            $count = 0;
+            $star1 = 0;
+            $star2 = 0;
+            $star3 = 0;
+            $star4 = 0;
+            $star5 = 0;
+            $rating = 0;
+            foreach ($reviews as $review) {
+                $count = $count + 1;
+                switch ($review->rating) {
+                    case 1:
+                        $star1 = $star1 + 1;
+                        break;
+                    case 2:
+                        $star2 = $star2 + 1;
+                        break;
+                    case 3:
+                        $star3 = $star3 + 1;
+                        break;
+                    case 4:
+                        $star4 = $star4 + 1;
+                        break;
+                    case 5:
+                        $star5 = $star5 + 1;
+                        break;
+                }
+            }
+            if ($count != 0) {
+                $rating = ($star1 + $star2 * 2 + $star3 * 3 + $star4 * 4 + $star5 * 5) / $count;
+            }
+        } else {
+            $rating = 0;
+            $star1 = 0;
+            $star2 = 0;
+            $star3 = 0;
+            $star4 = 0;
+            $star5 = 0;
+            $count = 0;
+        }
+        $productPurchased = $this->userModel->checkProductPurchased($product_id, $_SESSION['user_id'], 'Completed', $type);
+        if ($productPurchased) {
+            $purchased = true;
+        }
+        if ($data) {
+            if ($type == 'Equipment') {
+                $data = [
+                    'product_id' => $data->product_id,
+                    'created_by' => $data->created_by,
+                    'category' => $data->category,
+                    'brand' => $data->brand,
+                    'model' => $data->model,
+                    'quantity' => $data->quantity,
+                    'unit_price' => $data->unit_price,
+                    'photo_1' => $data->photo_1,
+                    'photo_2' => $data->photo_2,
+                    'photo_3' => $data->photo_3,
+                    'Title' => $data->Title,
+                    'Description' => $data->Description,
+                    'outOfStock' => $data->outOfStock,
+                    'createdDate' => $data->createdDate,
+                    'warranty' => $data->warranty,
+                    'name' => $user->name,
+                    'photo' => $user->profile_photo,
+                    'reviews' => $reviews,
+                    'rating' => $rating,
+                    'count' => $count,
+                    'star1' => $star1,
+                    'star2' => $star2,
+                    'star3' => $star3,
+                    'star4' => $star4,
+                    'star5' => $star5,
+                    'availability' => 'notChecked',
+                    'quantity_selected' => '',
+                    'start_date' => '',
+                    'end_date' => '',
+                    'purchased' => $purchased,
+                    'type' => $type
+                ];
+                $log_data = [
+                    'user_type' => 'Customer',
+                    'user_id' => $_SESSION['user_id'],
+                    'log_type' => 'View Instrument',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'User viewed an instrument with product id ' . $product_id
+                ];
+                $this->userModel->addLogData($log_data);
+                $this->view('users/viewItem', $data);
+            } else if ($type == 'Studio') {
+                $data = [
+                    'product_id' => $data->product_id,
+                    'created_by' => $data->created_by,
+                    'category' => $data->category,
+                    'brand' => $data->brand,
+                    'model' => $data->model,
+                    'quantity' => $data->quantity,
+                    'unit_price' => $data->unit_price,
+                    'photo_1' => $data->photo_1,
+                    'photo_2' => $data->photo_2,
+                    'photo_3' => $data->photo_3,
+                    'Title' => $data->Title,
+                    'Description' => $data->Description,
+                    'outOfStock' => $data->outOfStock,
+                    'createdDate' => $data->createdDate,
+                    'warranty' => $data->warranty,
+                    'location' => $data->location,
+                    'instrument' => $data->instrument,
+                    'descriptionSounds' => $data->descriptionSounds,
+                    'descriptionStudio' => $data->descriptionStudio,
+                    'telephoneNumber' => $data->telephoneNumber,
+                    'videoLink' => $data->videoLink,
+                    'airCondition' => $data->airCondition,
+                    'status' => $data->status,
+                    'name' => $user->name,
+                    'photo' => $user->profile_photo,
+                    'reviews' => $reviews,
+                    'rating' => $rating,
+                    'count' => $count,
+                    'star1' => $star1,
+                    'star2' => $star2,
+                    'star3' => $star3,
+                    'star4' => $star4,
+                    'star5' => $star5,
+                    'availability' => 'notChecked',
+                    'quantity_selected' => '1',
+                    'start_date' => '',
+                    'end_date' => '',
+                    'purchased' => $purchased,
+                    'type' => $type
+                ];
+                $log_data = [
+                    'user_type' => 'Customer',
+                    'user_id' => $_SESSION['user_id'],
+                    'log_type' => 'View Studio',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'User viewed an studio with product id ' . $product_id
+                ];
+                $this->userModel->addLogData($log_data);
+                $this->view('users/viewItem', $data);
+            } else if ($type == 'Singer') {
+                $data = [
+                    'product_id' => $data->product_id,
+                    'created_by' => $data->created_by,
+                    'category' => $data->category,
+                    'brand' => $data->brand,
+                    'model' => $data->model,
+                    'quantity' => $data->quantity,
+                    'unit_price' => $data->unit_price,
+                    'photo_1' => $data->photo_1,
+                    'photo_2' => $data->photo_2,
+                    'photo_3' => $data->photo_3,
+                    'Title' => $data->Title,
+                    'Description' => $data->Description,
+                    'outOfStock' => $data->outOfStock,
+                    'createdDate' => $data->createdDate,
+                    'warranty' => $data->warranty,
+                    'singer_name' => $data->name,
+                    'nickName' => $data->nickName,
+                    'telephoneNumber' => $data->telephoneNumber,
+                    'videoLink' => $data->videoLink,
+                    'location' => $data->location,
+                    'instrument' => $data->instrument,
+                    'singerPhoto' => $data->singerPhoto,
+                    'email' => $data->email,
+                    'status' => $data->status,
+                    'name' => $user->name,
+                    'photo' => $user->profile_photo,
+                    'reviews' => $reviews,
+                    'rating' => $rating,
+                    'count' => $count,
+                    'star1' => $star1,
+                    'star2' => $star2,
+                    'star3' => $star3,
+                    'star4' => $star4,
+                    'star5' => $star5,
+                    'availability' => 'notChecked',
+                    'quantity_selected' => '1',
+                    'start_date' => '',
+                    'end_date' => '',
+                    'purchased' => $purchased,
+                    'type' => $type
+                ];
+                $log_data = [
+                    'user_type' => 'Customer',
+                    'user_id' => $_SESSION['user_id'],
+                    'log_type' => 'View Singer',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'User viewed a singer with product id ' . $product_id
+                ];
+                $this->userModel->addLogData($log_data);
+                $this->view('users/viewItem', $data);
+            } else if ($type == 'Musician') {
+                $data = [
+                    'product_id' => $data->product_id,
+                    'created_by' => $data->created_by,
+                    'category' => $data->category,
+                    'brand' => $data->brand,
+                    'model' => $data->model,
+                    'quantity' => $data->quantity,
+                    'unit_price' => $data->unit_price,
+                    'photo_1' => $data->photo_1,
+                    'photo_2' => $data->photo_2,
+                    'photo_3' => $data->photo_3,
+                    'Title' => $data->Title,
+                    'Description' => $data->Description,
+                    'outOfStock' => $data->outOfStock,
+                    'createdDate' => $data->createdDate,
+                    'warranty' => $data->warranty,
+                    'musician_name' => $data->name,
+                    'nickName' => $data->nickName,
+                    'telephoneNumber' => $data->telephoneNumber,
+                    'videoLink' => $data->videoLink,
+                    'location' => $data->location,
+                    'instrument' => $data->instrument,
+                    'singerPhoto' => $data->singerPhoto,
+                    'email' => $data->email,
+                    'status' => $data->status,
+                    'name' => $user->name,
+                    'photo' => $user->profile_photo,
+                    'reviews' => $reviews,
+                    'rating' => $rating,
+                    'count' => $count,
+                    'star1' => $star1,
+                    'star2' => $star2,
+                    'star3' => $star3,
+                    'star4' => $star4,
+                    'star5' => $star5,
+                    'availability' => 'notChecked',
+                    'quantity_selected' => '1',
+                    'start_date' => '',
+                    'end_date' => '',
+                    'purchased' => $purchased,
+                    'type' => $type
+                ];
+                $log_data = [
+                    'user_type' => 'Customer',
+                    'user_id' => $_SESSION['user_id'],
+                    'log_type' => 'View Musician',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'User viewed a musician with product id ' . $product_id
+                ];
+                $this->userModel->addLogData($log_data);
+                $this->view('users/viewItem', $data);
+            } else if ($type == 'Band') {
+                $data = [
+                    'product_id' => $data->product_id,
+                    'created_by' => $data->created_by,
+                    'category' => $data->category,
+                    'brand' => $data->brand,
+                    'model' => $data->model,
+                    'unit_price' => $data->unit_price,
+                    'quantity' => $data->quantity,
+                    'photo_1' => $data->photo_1,
+                    'photo_2' => $data->photo_2,
+                    'photo_3' => $data->photo_3,
+                    'Title' => $data->Title,
+                    'Description' => $data->Description,
+                    'outOfStock' => $data->outOfStock,
+                    'createdDate' => $data->createdDate,
+                    'warranty' => $data->warranty,
+                    'videoLink' => $data->videoLink,
+                    'instrument' => $data->instrument,
+                    'email' => $data->email,
+                    'telephoneNumber' => $data->telephoneNumber,
+                    'memberCount' => $data->memberCount,
+                    'leaderPhoto' => $data->leaderPhoto,
+                    'bandPhoto' => $data->bandPhoto,
+                    'location' => $data->location,
+                    'leaderName' => $data->leaderName,
+                    'status' => $data->status,
+                    'name' => $user->name,
+                    'photo' => $user->profile_photo,
+                    'reviews' => $reviews,
+                    'rating' => $rating,
+                    'count' => $count,
+                    'star1' => $star1,
+                    'star2' => $star2,
+                    'star3' => $star3,
+                    'star4' => $star4,
+                    'star5' => $star5,
                     'availability' => 'notChecked',
                     'quantity_selected' => '1',
                     'start_date' => '',
@@ -2439,32 +2478,33 @@ class Users extends Controller
                     'user_id' => $_SESSION['user_id'],
                     'log_type' => 'View Band',
                     'date_and_time' => date('Y-m-d H:i:s'),
-                    'data' => 'User viewed a band with product id '.$product_id
+                    'data' => 'User viewed a band with product id ' . $product_id
                 ];
                 $this->userModel->addLogData($log_data);
-                $this->view('users/viewItem',$data);
-            } 
+                $this->view('users/viewItem', $data);
+            }
         } else {
             die('Something went wrong while viewing the product');
         }
     }
 
 
-    public function addToCart($product_id){
+    public function addToCart($product_id)
+    {
         // Check for POST
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $cart = $this->userModel->cart($_SESSION['user_id']);
             $extra = 0;
-            $cart_data_check =[
+            $cart_data_check = [
                 'product_id' => $product_id,
                 'type' => trim($_POST['type']),
-                'quantity' =>trim($_POST['quantity']),
-                'start_date' =>trim($_POST['fromDate']),
-                'end_date' =>trim($_POST['toDate'])
+                'quantity' => trim($_POST['quantity']),
+                'start_date' => trim($_POST['fromDate']),
+                'end_date' => trim($_POST['toDate'])
             ];
             $item_exists = false;
-            foreach ($cart as $cartItem){
-                if($cartItem->product_id == $product_id && $cartItem->type == trim($_POST['type'])){
+            foreach ($cart as $cartItem) {
+                if ($cartItem->product_id == $product_id && $cartItem->type == trim($_POST['type'])) {
                     $this->viewAllAC($cart_data_check['type'], 'alreadyInCart', $cart_data_check);
                     $item_exists = true;
                 }
@@ -2477,25 +2517,25 @@ class Users extends Controller
                 $days = $days + 1;
                 $startDateObj->add(new DateInterval('P1D'));
             }
-            if ($cart_data_check['type'] == 'Equipment'){
+            if ($cart_data_check['type'] == 'Equipment') {
                 $product_data = $this->userModel->viewItem($product_id);
                 $extra = $product_data->unit_price * 3;
-            } else if ($cart_data_check['type'] == 'Studio'){
+            } else if ($cart_data_check['type'] == 'Studio') {
                 $product_data = $this->userModel->viewStudio($product_id);
-            } else if ($cart_data_check['type'] == 'Singer'){
+            } else if ($cart_data_check['type'] == 'Singer') {
                 $product_data = $this->userModel->viewSinger($product_id);
-            } else if ($cart_data_check['type'] == 'Band'){
+            } else if ($cart_data_check['type'] == 'Band') {
                 $product_data = $this->userModel->viewBand($product_id);
-            } else if ($cart_data_check['type'] == 'Musician'){
+            } else if ($cart_data_check['type'] == 'Musician') {
                 $product_data = $this->userModel->viewMusician($product_id);
             }
             $total = $days * $product_data->unit_price * trim($_POST['quantity']);
-            $data =[
+            $data = [
                 'product_id' => $product_id,
                 'type' => trim($_POST['type']),
-                'quantity' =>trim($_POST['quantity']),
-                'start_date' =>trim($_POST['fromDate']),
-                'end_date' =>trim($_POST['toDate']),
+                'quantity' => trim($_POST['quantity']),
+                'start_date' => trim($_POST['fromDate']),
+                'end_date' => trim($_POST['toDate']),
                 'user_id' => $_SESSION['user_id'],
                 'extra' => $extra,
                 'days' => $days,
@@ -2506,73 +2546,73 @@ class Users extends Controller
                 'end_date_err' => ''
             ];
 
-            if(empty($data['quantity'])){
+            if (empty($data['quantity'])) {
                 $data['quantity_err'] = 'Pleae enter the quantity';
-            }else if($data['quantity'] <= 0){
+            } else if ($data['quantity'] <= 0) {
                 $data['quantity_err'] = 'Quantity cannot be a negative number';
-            }else if($data['quantity'] > $data['quantity']) {
+            } else if ($data['quantity'] > $data['quantity']) {
                 $data['quantity_err'] = 'Not enough items in the stock';
             }
 
-            if(empty($data['quantity_err']) && $item_exists == false){
-                if($this->userModel->addToCart($data)){
-                    if ($data['type'] == 'Equipment'){
+            if (empty($data['quantity_err']) && $item_exists == false) {
+                if ($this->userModel->addToCart($data)) {
+                    if ($data['type'] == 'Equipment') {
                         $log_data = [
                             'user_type' => 'Customer',
                             'user_id' => $_SESSION['user_id'],
                             'log_type' => 'Manage Cart',
                             'date_and_time' => date('Y-m-d H:i:s'),
-                            'data' => 'User added an Instrument to the cart with the id of '.$product_id
-                        ]; 
-                        $this->userModel->addLogData($log_data);
-                        redirect('users/viewItem/'.$product_id);
-                    } else if ($data['type'] == 'Studio'){
-                        $log_data = [
-                            'user_type' => 'Customer',
-                            'user_id' => $_SESSION['user_id'],
-                            'log_type' => 'Manage Cart',
-                            'date_and_time' => date('Y-m-d H:i:s'),
-                            'data' => 'User added a Studio to the cart with the id of '.$product_id
+                            'data' => 'User added an Instrument to the cart with the id of ' . $product_id
                         ];
                         $this->userModel->addLogData($log_data);
-                        redirect('users/viewStudio/'.$product_id);
-                    } else if ($data['type'] == 'Singer'){
+                        redirect('users/viewItem/' . $product_id);
+                    } else if ($data['type'] == 'Studio') {
                         $log_data = [
                             'user_type' => 'Customer',
                             'user_id' => $_SESSION['user_id'],
                             'log_type' => 'Manage Cart',
                             'date_and_time' => date('Y-m-d H:i:s'),
-                            'data' => 'User added a Singer to the cart with the id of '.$product_id
+                            'data' => 'User added a Studio to the cart with the id of ' . $product_id
                         ];
                         $this->userModel->addLogData($log_data);
-                        redirect('users/viewSinger/'.$product_id);
-                    } else if ($data['type'] == 'Band'){
+                        redirect('users/viewStudio/' . $product_id);
+                    } else if ($data['type'] == 'Singer') {
                         $log_data = [
                             'user_type' => 'Customer',
                             'user_id' => $_SESSION['user_id'],
                             'log_type' => 'Manage Cart',
                             'date_and_time' => date('Y-m-d H:i:s'),
-                            'data' => 'User added a Band to the cart with the id of '.$product_id
+                            'data' => 'User added a Singer to the cart with the id of ' . $product_id
                         ];
                         $this->userModel->addLogData($log_data);
-                        redirect('users/viewBand/'.$product_id);
-                    } else if ($data['type'] == 'Musician'){
+                        redirect('users/viewSinger/' . $product_id);
+                    } else if ($data['type'] == 'Band') {
                         $log_data = [
                             'user_type' => 'Customer',
                             'user_id' => $_SESSION['user_id'],
                             'log_type' => 'Manage Cart',
                             'date_and_time' => date('Y-m-d H:i:s'),
-                            'data' => 'User added a Musician to the cart with the id of '.$product_id
+                            'data' => 'User added a Band to the cart with the id of ' . $product_id
                         ];
                         $this->userModel->addLogData($log_data);
-                        redirect('users/viewMusician/'.$product_id);
+                        redirect('users/viewBand/' . $product_id);
+                    } else if ($data['type'] == 'Musician') {
+                        $log_data = [
+                            'user_type' => 'Customer',
+                            'user_id' => $_SESSION['user_id'],
+                            'log_type' => 'Manage Cart',
+                            'date_and_time' => date('Y-m-d H:i:s'),
+                            'data' => 'User added a Musician to the cart with the id of ' . $product_id
+                        ];
+                        $this->userModel->addLogData($log_data);
+                        redirect('users/viewMusician/' . $product_id);
                     }
                 } else {
                     die('Something went wrong while adding to the cart');
                 }
             }
         } else {
-            $data =[
+            $data = [
                 'quantity_err' => '',
                 'start_date_err' => '',
                 'end_date_err' => ''
@@ -2582,11 +2622,12 @@ class Users extends Controller
         }
     }
 
-    public function cartItemCount(){
-        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+    public function cartItemCount()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $cart = $this->userModel->cart($_SESSION['user_id']);
-            $data =[
-                'Count'=>count($cart)
+            $data = [
+                'Count' => count($cart)
             ];
             header('Content-Type: application/json');
             echo json_encode($data);
@@ -2594,92 +2635,93 @@ class Users extends Controller
         }
     }
 
-    public function addReview($product_id){
+    public function addReview($product_id)
+    {
         // Check for POST
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $cat_ini = trim($_POST['category']);
-            if ($cat_ini == 'band'){
+            if ($cat_ini == 'band') {
                 $cat = 'Band';
-            } else if ($cat_ini == 'studio'){
+            } else if ($cat_ini == 'studio') {
                 $cat = 'Studio';
-            } else if ($cat_ini == 'singer'){
+            } else if ($cat_ini == 'singer') {
                 $cat = 'Singer';
-            } else if ($cat_ini == 'musician'){
+            } else if ($cat_ini == 'musician') {
                 $cat = 'Musician';
             } else {
                 $cat = 'Equipment';
             }
-            $data =[
+            $data = [
                 'product_id' => $product_id,
-                'rating' =>trim($_POST['rating']),
-                'content' =>trim($_POST['reviewDescription']),
+                'rating' => trim($_POST['rating']),
+                'content' => trim($_POST['reviewDescription']),
                 'user_id' => $_SESSION['user_id'],
-                'name' =>trim($_POST['name']),
-                'photo' =>trim($_POST['photo']),
+                'name' => trim($_POST['name']),
+                'photo' => trim($_POST['photo']),
                 'category' => $cat,
                 'reviewDescription_err' => '',
                 'rating_err' => ''
             ];
-            if(empty($data['quantity_err']) && empty($data['start_date_err']) && empty($data['end_date_err'])){
-                if($this->userModel->addReview($data)){
-                    if ($cat == 'Equipment'){
+            if (empty($data['quantity_err']) && empty($data['start_date_err']) && empty($data['end_date_err'])) {
+                if ($this->userModel->addReview($data)) {
+                    if ($cat == 'Equipment') {
                         $log_data = [
                             'user_type' => 'Customer',
                             'user_id' => $_SESSION['user_id'],
                             'log_type' => 'Add Review',
                             'date_and_time' => date('Y-m-d H:i:s'),
-                            'data' => 'User added a review to an Instrument with the id of '.$product_id
+                            'data' => 'User added a review to an Instrument with the id of ' . $product_id
                         ];
                         $this->userModel->addLogData($log_data);
-                        redirect('users/viewItem/'.$product_id);
-                    } else if ($cat == 'Studio'){
+                        redirect('users/viewItem/' . $product_id);
+                    } else if ($cat == 'Studio') {
                         $log_data = [
                             'user_type' => 'Customer',
                             'user_id' => $_SESSION['user_id'],
                             'log_type' => 'Add Review',
                             'date_and_time' => date('Y-m-d H:i:s'),
-                            'data' => 'User added a review to a Studio with the id of '.$product_id
+                            'data' => 'User added a review to a Studio with the id of ' . $product_id
                         ];
                         $this->userModel->addLogData($log_data);
-                        redirect('users/viewStudio/'.$product_id);
-                    } else if ($cat == 'Singer'){
+                        redirect('users/viewStudio/' . $product_id);
+                    } else if ($cat == 'Singer') {
                         $log_data = [
                             'user_type' => 'Customer',
                             'user_id' => $_SESSION['user_id'],
                             'log_type' => 'Add Review',
                             'date_and_time' => date('Y-m-d H:i:s'),
-                            'data' => 'User added a review to a Singer with the id of '.$product_id
+                            'data' => 'User added a review to a Singer with the id of ' . $product_id
                         ];
                         $this->userModel->addLogData($log_data);
-                        redirect('users/viewSinger/'.$product_id);
-                    } else if ($cat == 'Band'){
+                        redirect('users/viewSinger/' . $product_id);
+                    } else if ($cat == 'Band') {
                         $log_data = [
                             'user_type' => 'Customer',
                             'user_id' => $_SESSION['user_id'],
                             'log_type' => 'Add Review',
                             'date_and_time' => date('Y-m-d H:i:s'),
-                            'data' => 'User added a review to a Band with the id of '.$product_id
+                            'data' => 'User added a review to a Band with the id of ' . $product_id
                         ];
                         $this->userModel->addLogData($log_data);
-                        redirect('users/viewBand/'.$product_id);
-                    } else if ($cat == 'Musician'){
+                        redirect('users/viewBand/' . $product_id);
+                    } else if ($cat == 'Musician') {
                         $log_data = [
                             'user_type' => 'Customer',
                             'user_id' => $_SESSION['user_id'],
                             'log_type' => 'Add Review',
                             'date_and_time' => date('Y-m-d H:i:s'),
-                            'data' => 'User added a review to a Musician with the id of '.$product_id
+                            'data' => 'User added a review to a Musician with the id of ' . $product_id
                         ];
                         $this->userModel->addLogData($log_data);
-                        redirect('users/viewMusician/'.$product_id);
+                        redirect('users/viewMusician/' . $product_id);
                     }
                 } else {
                     die('Something went wrong while adding the review');
                 }
             }
         } else {
-            $data =[
+            $data = [
             ];
             // Load view
             $this->view('users/viewItem', $data);
@@ -2701,7 +2743,7 @@ class Users extends Controller
             '1_2_days' => 0,
             '0_1_days' => 0,
         ];
-        
+
         $count_8weeks = [
             '7_to_8_weeks' => 0,
             '6_to_7_weeks' => 0,
@@ -2712,7 +2754,7 @@ class Users extends Controller
             '1_to_2_weeks' => 0,
             '0_to_1_week' => 0,
         ];
-        
+
         $count_year = [
             '11_12_months' => 0,
             '10_11_months' => 0,
@@ -2730,7 +2772,7 @@ class Users extends Controller
 
         $lifetimeSpending = 0;
         $lifetimeOrders = 0;
-        foreach ($orders as $order){
+        foreach ($orders as $order) {
             $date = new DateTime($order->date_and_time);
             $timestamp = $date->getTimestamp();
             if ($timestamp >= strtotime('-1 days')) {
@@ -2744,7 +2786,7 @@ class Users extends Controller
             }
             if ($timestamp >= strtotime('-4 days') && $timestamp < strtotime('-3 days')) {
                 $count_week['3_4_days'] += $order->total;
-            } 
+            }
             if ($timestamp >= strtotime('-5 days') && $timestamp < strtotime('-4 days')) {
                 $count_week['4_5_days'] += $order->total;
             }
@@ -2849,7 +2891,7 @@ class Users extends Controller
             '1_to_2_hours' => 0,
             '0_to_1_hours' => 0,
         ];
-        
+
         $activity_week = [
             '6_7_days' => 0,
             '5_6_days' => 0,
@@ -2859,7 +2901,7 @@ class Users extends Controller
             '1_2_days' => 0,
             '0_1_days' => 0,
         ];
-        
+
         $activity_8weeks = [
             '7_to_8_weeks' => 0,
             '6_to_7_weeks' => 0,
@@ -2870,7 +2912,7 @@ class Users extends Controller
             '1_to_2_weeks' => 0,
             '0_to_1_week' => 0,
         ];
-        
+
         $activity_year = [
             '11_12_months' => 0,
             '10_11_months' => 0,
@@ -2886,7 +2928,7 @@ class Users extends Controller
             '0_1_month' => 0,
         ];
         $activityData = $this->userModel->getActivity($_SESSION['user_id']);
-        foreach ($activityData as $activity){
+        foreach ($activityData as $activity) {
             $date = new DateTime($activity->date_and_time);
             $timestamp = $date->getTimestamp();
             if ($timestamp >= strtotime('-1 hours')) {
@@ -3043,7 +3085,7 @@ class Users extends Controller
                 $activity_year['11_12_months'] += 1;
             }
         }
-        
+
         $activityUser = [
             'activity_24h' => $activity_24h,
             'activity_week' => $activity_week,
