@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2024 at 02:28 PM
+-- Generation Time: Apr 27, 2024 at 07:50 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -58,6 +58,14 @@ CREATE TABLE `availability` (
   `qty` int(10) NOT NULL,
   `type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `availability`
+--
+
+INSERT INTO `availability` (`entry_id`, `date`, `product_id`, `qty`, `type`) VALUES
+(454, '2024-04-30', 28, 1, 'Equipment'),
+(455, '2024-05-01', 28, 1, 'Equipment');
 
 -- --------------------------------------------------------
 
@@ -1885,7 +1893,143 @@ INSERT INTO `logs` (`log_id`, `user_type`, `user_id`, `date_and_time`, `log_type
 (1601, 'Customer', 18, '2024-04-27 14:07:55', 'View Bands', 'User viewed the bands available'),
 (1602, 'Customer', 18, '2024-04-27 14:07:57', 'View Studios', 'User viewed the studios available'),
 (1603, 'Customer', 18, '2024-04-27 14:08:00', 'View Musicians', 'User viewed the musicians available'),
-(1604, 'Customer', 18, '2024-04-27 14:08:06', 'View Singers', 'User viewed the singers available');
+(1604, 'Customer', 18, '2024-04-27 14:08:06', 'View Singers', 'User viewed the singers available'),
+(1605, 'Customer', 52, '2024-04-27 14:58:40', 'Login', 'User logged in'),
+(1606, 'Customer', 52, '2024-04-27 14:58:58', 'View Studios', 'User viewed the studios available'),
+(1607, 'Customer', 52, '2024-04-27 14:58:58', 'View Studio', 'User viewed an studio with product id 10'),
+(1608, 'Customer', 52, '2024-04-27 14:58:59', 'View Studios', 'User viewed the studios available'),
+(1609, 'Customer', 52, '2024-04-27 14:59:00', 'View Studio', 'User viewed an studio with product id 11'),
+(1610, 'Customer', 52, '2024-04-27 14:59:03', 'View Studios', 'User viewed the studios available'),
+(1611, 'Customer', 52, '2024-04-27 14:59:04', 'View Studio', 'User viewed an studio with product id 12'),
+(1612, 'Customer', 52, '2024-04-27 14:59:06', 'View Studios', 'User viewed the studios available'),
+(1613, 'Customer', 52, '2024-04-27 14:59:06', 'View Studio', 'User viewed an studio with product id 12'),
+(1614, 'Customer', 52, '2024-04-27 14:59:07', 'View Studios', 'User viewed the studios available'),
+(1615, 'Customer', 52, '2024-04-27 14:59:08', 'View Studio', 'User viewed an studio with product id 13'),
+(1616, 'Customer', 52, '2024-04-27 14:59:12', 'Add Review', 'User added a review to an Instrument with the id of 13'),
+(1617, 'Customer', 52, '2024-04-27 15:00:43', 'View Studio', 'User viewed an studio with product id 13'),
+(1618, 'Customer', 52, '2024-04-27 15:00:46', 'Add Review', 'User added a review to an Instrument with the id of 13'),
+(1619, 'Customer', 52, '2024-04-27 15:02:48', 'View Studios', 'User viewed the studios available'),
+(1620, 'Customer', 52, '2024-04-27 15:03:33', 'View Studio', 'User viewed an studio with product id 13'),
+(1621, 'Customer', 52, '2024-04-27 15:03:39', 'Add Review', 'User added a review to an Instrument with the id of 13'),
+(1622, 'Customer', 52, '2024-04-27 15:03:44', 'View Studio', 'User viewed an studio with product id 13'),
+(1623, 'Customer', 52, '2024-04-27 15:03:47', 'View Studio', 'User viewed an studio with product id 13'),
+(1624, 'Customer', 52, '2024-04-27 15:04:02', 'Add Review', 'User added a review to an Instrument with the id of 13'),
+(1625, 'Customer', 52, '2024-04-27 15:04:15', 'View Studios', 'User viewed the studios available'),
+(1626, 'Customer', 52, '2024-04-27 15:05:11', 'View Studios', 'User viewed the studios available'),
+(1627, 'Customer', 52, '2024-04-27 15:05:11', 'View Studios', 'User viewed the studios available'),
+(1628, 'Customer', 52, '2024-04-27 15:05:12', 'View Studio', 'User viewed an studio with product id 10'),
+(1629, 'Customer', 52, '2024-04-27 15:05:16', 'View Studios', 'User viewed the studios available'),
+(1630, 'Customer', 52, '2024-04-27 15:05:17', 'View Studio', 'User viewed an studio with product id 13'),
+(1631, 'Customer', 52, '2024-04-27 15:05:36', 'View Studio', 'User viewed an studio with product id 13'),
+(1632, 'Customer', 52, '2024-04-27 15:05:39', 'Add Review', 'User added a review to an Instrument with the id of 13'),
+(1633, 'Customer', 52, '2024-04-27 15:07:34', 'View Instrument', 'User viewed an instrument with product id 13'),
+(1634, 'Customer', 52, '2024-04-27 15:10:04', 'View Studio', 'User viewed an studio with product id 13'),
+(1635, 'Customer', 52, '2024-04-27 15:12:16', 'Add Review', 'User added a review to a Studio with the id of 13'),
+(1636, 'Customer', 52, '2024-04-27 15:12:17', 'View Studio', 'User viewed an studio with product id 13'),
+(1637, 'Customer', 18, '2024-04-27 15:30:12', 'Login', 'User logged in'),
+(1638, 'Customer', 18, '2024-04-27 15:30:57', 'Manage Profile', 'User viewed their profile'),
+(1639, 'Customer', 18, '2024-04-27 15:34:54', 'Logout', 'User logged out'),
+(1640, 'Service Provider', 14, '2024-04-27 15:34:59', 'Login', 'Service Provider has logged in'),
+(1641, 'Service Provider', 14, '2024-04-27 15:36:27', 'Manage Inventory', 'Service Provider has viewed their Studio inventory'),
+(1642, 'Service Provider', 14, '2024-04-27 15:36:27', 'Manage Inventory', 'Service Provider has viewed their Studio Inventory'),
+(1643, 'Service Provider', 14, '2024-04-27 15:36:31', 'Manage Inventory', 'Service Provider has viewed their Studio inventory'),
+(1644, 'Service Provider', 14, '2024-04-27 15:36:31', 'Manage Inventory', 'Service Provider has viewed their Studio Inventory'),
+(1645, 'Service Provider', 14, '2024-04-27 15:36:34', 'View Orders', 'Service Provider has viewed their orders'),
+(1646, 'Service Provider', 14, '2024-04-27 15:36:38', 'View Orders', 'Service Provider has viewed their orders'),
+(1647, 'Service Provider', 14, '2024-04-27 15:37:07', 'Logout', 'Service Provider has logged out'),
+(1648, 'Moderator', 1, '2024-04-27 15:37:15', 'Login', 'Moderator logged in'),
+(1649, 'Moderator', 1, '2024-04-27 15:38:38', 'View Service Providers', 'Moderator viewed active service providers'),
+(1650, 'Moderator', 1, '2024-04-27 15:38:40', 'Manage Service Providers', 'Moderator viewed service provider 26 details'),
+(1651, 'Moderator', 1, '2024-04-27 15:39:40', 'View Product', 'Moderator viewed product 28 details of type Equipment'),
+(1652, 'Moderator', 1, '2024-04-27 15:39:47', 'Manage Service Provider Requests', 'Moderator viewed pending service provider requests'),
+(1653, 'Moderator', 1, '2024-04-27 15:40:16', 'View Inquiries', 'Moderator viewed pending inquiries'),
+(1654, 'Moderator', 1, '2024-04-27 15:41:40', 'Logout', 'Moderator logged out'),
+(1655, 'Administrator', 1, '2024-04-27 15:41:50', 'Login', 'Administrator logged in'),
+(1656, 'Administrator', 1, '2024-04-27 17:21:09', 'Logout', 'Administrator logged out'),
+(1657, 'Customer', 18, '2024-04-27 17:21:18', 'Login', 'User logged in'),
+(1658, 'Customer', 18, '2024-04-27 17:36:22', 'View Orders', 'User viewed their orders'),
+(1659, 'Customer', 18, '2024-04-27 17:36:22', 'View Instruments', 'User viewed the instruments available'),
+(1660, 'Customer', 18, '2024-04-27 18:22:00', 'Logout', 'User logged out'),
+(1661, 'Customer', 18, '2024-04-27 18:22:23', 'Login', 'User logged in'),
+(1662, 'Customer', 18, '2024-04-27 18:45:21', 'Logout', 'User logged out'),
+(1663, 'Customer', 18, '2024-04-27 18:54:45', 'Login', 'User logged in'),
+(1664, 'Customer', 18, '2024-04-27 18:54:48', 'Logout', 'User logged out'),
+(1665, 'Service Provider', 14, '2024-04-27 18:59:56', 'Login', 'Service Provider has logged in'),
+(1666, 'Service Provider', 14, '2024-04-27 19:06:11', 'Logout', 'Service Provider has logged out'),
+(1667, 'Service Provider', 14, '2024-04-27 19:17:20', 'Login', 'Service Provider has logged in'),
+(1668, 'Service Provider', 14, '2024-04-27 19:17:25', 'Manage Inventory', 'Service Provider has viewed their Studio inventory'),
+(1669, 'Service Provider', 14, '2024-04-27 19:17:26', 'Manage Inventory', 'Service Provider has viewed their Studio Inventory'),
+(1670, 'Service Provider', 14, '2024-04-27 19:17:26', 'Manage Profile', 'Service Provider has viewed their profile'),
+(1671, 'Service Provider', 14, '2024-04-27 19:17:28', 'Logout', 'Service Provider has logged out'),
+(1672, 'Customer', 18, '2024-04-27 19:17:38', 'Login', 'User logged in'),
+(1673, 'Customer', 18, '2024-04-27 19:17:41', 'View Instruments', 'User viewed the instruments available'),
+(1674, 'Customer', 18, '2024-04-27 19:17:48', 'View Instrument', 'User viewed an instrument with product id 28'),
+(1675, 'Customer', 18, '2024-04-27 19:17:55', 'Check Availability', 'User checked the availability of an Equipment  with product id 28'),
+(1676, 'Customer', 18, '2024-04-27 19:17:57', 'Manage Cart', 'User added an Instrument to the cart with the id of 28'),
+(1677, 'Customer', 18, '2024-04-27 19:17:57', 'View Instrument', 'User viewed an instrument with product id 28'),
+(1678, 'Customer', 18, '2024-04-27 19:17:59', 'Manage Cart', 'User viewed their cart'),
+(1679, 'Customer', 18, '2024-04-27 19:18:01', 'Place Order', 'User placed an order'),
+(1680, 'Customer', 18, '2024-04-27 19:18:04', 'Logout', 'User logged out'),
+(1681, 'Service Provider', 26, '2024-04-27 19:18:25', 'Login', 'Service Provider has logged in'),
+(1682, 'Service Provider', 26, '2024-04-27 19:18:28', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1683, 'Service Provider', 26, '2024-04-27 19:18:33', 'View Orders', 'Service Provider has viewed their orders'),
+(1684, 'Service Provider', 26, '2024-04-27 19:18:36', 'Accept Order', 'Service Provider has accepted the order with the ID 372'),
+(1685, 'Service Provider', 26, '2024-04-27 19:18:36', 'View Orders', 'Service Provider has viewed their orders'),
+(1686, 'Service Provider', 26, '2024-04-27 19:18:39', 'View Orders', 'Service Provider has viewed their orders'),
+(1687, 'Service Provider', 26, '2024-04-27 19:18:43', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1688, 'Service Provider', 26, '2024-04-27 19:18:46', 'Manage Inventory', 'Service Provider has deleted an item from their inventory with the ID 28'),
+(1689, 'Service Provider', 26, '2024-04-27 19:19:57', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1690, 'Service Provider', 26, '2024-04-27 19:20:09', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1691, 'Service Provider', 26, '2024-04-27 19:20:54', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1692, 'Service Provider', 26, '2024-04-27 19:20:55', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1693, 'Service Provider', 14, '2024-04-27 19:21:08', 'Login', 'Service Provider has logged in'),
+(1694, 'Service Provider', 14, '2024-04-27 19:21:10', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1695, 'Service Provider', 14, '2024-04-27 19:21:13', 'Manage Profile', 'Service Provider has viewed their profile'),
+(1696, 'Service Provider', 14, '2024-04-27 19:21:15', 'Logout', 'Service Provider has logged out'),
+(1697, 'Service Provider', 26, '2024-04-27 19:21:23', 'Login', 'Service Provider has logged in'),
+(1698, 'Service Provider', 26, '2024-04-27 19:21:25', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1699, 'Service Provider', 26, '2024-04-27 19:25:35', 'Login', 'Service Provider has logged in'),
+(1700, 'Service Provider', 26, '2024-04-27 19:25:37', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1701, 'Service Provider', 26, '2024-04-27 19:25:41', 'Manage Inventory', 'Service Provider has deleted an item from their inventory with the ID 28'),
+(1702, 'Service Provider', 26, '2024-04-27 19:26:19', 'Login', 'Service Provider has logged in'),
+(1703, 'Service Provider', 26, '2024-04-27 19:26:21', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1704, 'Service Provider', 26, '2024-04-27 19:26:36', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1705, 'Service Provider', 26, '2024-04-27 19:26:43', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1706, 'Service Provider', 26, '2024-04-27 19:26:48', 'Manage Inventory', 'Service Provider has deleted an item from their inventory with the ID 28'),
+(1707, 'Service Provider', 26, '2024-04-27 19:27:21', 'View Orders', 'Service Provider has viewed their orders'),
+(1708, 'Service Provider', 26, '2024-04-27 19:27:28', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1709, 'Service Provider', 26, '2024-04-27 19:28:44', 'Manage Profile', 'Service Provider has viewed their profile'),
+(1710, 'Service Provider', 26, '2024-04-27 19:28:50', 'Account Delete', 'Service Provider has failed to delete their profile as they have pending orders'),
+(1711, 'Service Provider', 26, '2024-04-27 19:28:50', 'Account Delete', 'Service Provider has deleted their profile'),
+(1712, 'Service Provider', 26, '2024-04-27 19:29:29', 'Login', 'Service Provider has logged in'),
+(1713, 'Service Provider', 26, '2024-04-27 19:29:50', 'Manage Profile', 'Service Provider has viewed their profile'),
+(1714, 'Service Provider', 26, '2024-04-27 19:30:16', 'Manage Profile', 'Service Provider has viewed their profile'),
+(1715, 'Service Provider', 26, '2024-04-27 19:31:00', 'Account Delete', 'Service Provider has failed to delete their profile as they have pending orders'),
+(1716, 'Service Provider', 26, '2024-04-27 19:31:00', 'Manage Profile', 'Service Provider has viewed their profile'),
+(1717, 'Service Provider', 26, '2024-04-27 19:31:01', 'Account Delete', 'Service Provider has deleted their profile'),
+(1718, 'Service Provider', 26, '2024-04-27 19:31:32', 'Login', 'Service Provider has logged in'),
+(1719, 'Service Provider', 26, '2024-04-27 19:31:34', 'Manage Profile', 'Service Provider has viewed their profile'),
+(1720, 'Service Provider', 26, '2024-04-27 19:31:37', 'Manage Profile', 'Service Provider has viewed the page to edit their details'),
+(1721, 'Service Provider', 26, '2024-04-27 19:31:38', 'Manage Profile', 'Service Provider has viewed their profile'),
+(1722, 'Service Provider', 26, '2024-04-27 19:32:12', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1723, 'Service Provider', 26, '2024-04-27 19:32:47', 'Manage Profile', 'Service Provider has viewed their profile'),
+(1724, 'Service Provider', 26, '2024-04-27 19:32:50', 'Account Delete', 'Service Provider has failed to delete their profile as they have pending orders'),
+(1725, 'Service Provider', 26, '2024-04-27 19:32:50', 'Account Delete', 'Service Provider has deleted their profile'),
+(1726, 'Service Provider', 26, '2024-04-27 19:33:12', 'Login', 'Service Provider has logged in'),
+(1727, 'Service Provider', 26, '2024-04-27 19:33:14', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1728, 'Service Provider', 26, '2024-04-27 19:33:23', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1729, 'Service Provider', 26, '2024-04-27 19:34:21', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1730, 'Service Provider', 26, '2024-04-27 19:34:22', 'Manage Profile', 'Service Provider has viewed their profile'),
+(1731, 'Service Provider', 26, '2024-04-27 19:34:25', 'Account Delete', 'Service Provider has failed to delete their profile as they have pending orders'),
+(1732, 'Service Provider', 26, '2024-04-27 19:34:25', 'Account Delete', 'Service Provider has deleted their profile'),
+(1733, 'Service Provider', 26, '2024-04-27 19:34:48', 'Login', 'Service Provider has logged in'),
+(1734, 'Service Provider', 26, '2024-04-27 19:34:52', 'Manage Inventory', 'Service Provider has viewed their Instrument inventory'),
+(1735, 'Service Provider', 26, '2024-04-27 19:39:14', 'Manage Profile', 'Service Provider has viewed their profile'),
+(1736, 'Service Provider', 26, '2024-04-27 19:39:16', 'Logout', 'Service Provider has logged out'),
+(1737, 'Moderator', 1, '2024-04-27 19:40:59', 'Login', 'Moderator logged in'),
+(1738, 'Moderator', 1, '2024-04-27 19:41:02', 'Logout', 'Moderator logged out'),
+(1739, 'Administrator', 1, '2024-04-27 19:48:41', 'Login', 'Administrator logged in'),
+(1740, 'Administrator', 1, '2024-04-27 19:48:44', 'Logout', 'Administrator logged out');
 
 -- --------------------------------------------------------
 
@@ -1985,9 +2129,9 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`notification_id`, `user_type`, `user_id`, `date_time`, `status`, `data`) VALUES
-(17, 'ServiceProvider', 26, '2024-04-26 08:50:06', 'Unread', 'You have a new order request from Gayathra Dissanayake for '),
+(17, 'ServiceProvider', 26, '2024-04-26 08:50:06', 'Read', 'You have a new order request from Gayathra Dissanayake for '),
 (18, 'Customer', 18, '2024-04-26 08:51:30', 'Read', 'Your order containing the sub order with the ID 59 has been accepted by the service provider'),
-(19, 'ServiceProvider', 26, '2024-04-26 08:51:30', 'Unread', 'You have successfully accepted an order with the ID 59'),
+(19, 'ServiceProvider', 26, '2024-04-26 08:51:30', 'Read', 'You have successfully accepted an order with the ID 59'),
 (20, 'ServiceProvider', 26, '2024-05-01 22:00:00', 'Unread', 'You have an upcoming order with the sub order ID 59 starting at 2024-05-02 and ending at 2024-05-08'),
 (21, 'ServiceProvider', 26, '2024-05-02 00:00:00', 'Unread', 'You have an upcoming order with the sub order ID 59 starting at 2024-05-02 and ending at 2024-05-08'),
 (22, 'ServiceProvider', 26, '2024-05-08 22:00:00', 'Unread', 'Your order with the sub order ID 59 is about to end in 2 hours'),
@@ -1997,9 +2141,9 @@ INSERT INTO `notifications` (`notification_id`, `user_type`, `user_id`, `date_ti
 (26, 'Customer', 18, '2024-05-08 22:00:00', 'Unread', 'Your order with the sub order ID 59 is about to end in 2 hours. Please make sure to end the order on time to avoid any penalties.'),
 (27, 'Customer', 18, '2024-05-09 00:00:00', 'Unread', 'Your order with the sub order ID 59 has ended. Please make sure to end the order on time to avoid any penalties.'),
 (28, 'ServiceProvider', 27, '2024-04-26 10:50:43', 'Unread', 'You have a new order request from Gayathra Dissanayake for '),
-(29, 'ServiceProvider', 26, '2024-04-26 10:50:43', 'Unread', 'You have a new order request from Gayathra Dissanayake for '),
+(29, 'ServiceProvider', 26, '2024-04-26 10:50:43', 'Read', 'You have a new order request from Gayathra Dissanayake for '),
 (30, 'Customer', 18, '2024-04-26 10:52:06', 'Read', 'Your order containing the sub order with the ID 61 has been accepted by the service provider'),
-(31, 'ServiceProvider', 26, '2024-04-26 10:52:06', 'Unread', 'You have successfully accepted an order with the ID 61'),
+(31, 'ServiceProvider', 26, '2024-04-26 10:52:06', 'Read', 'You have successfully accepted an order with the ID 61'),
 (32, 'ServiceProvider', 26, '2024-05-01 22:00:00', 'Unread', 'You have an upcoming order with the sub order ID 61 starting at 2024-05-02 and ending at 2024-05-04'),
 (33, 'ServiceProvider', 26, '2024-05-02 00:00:00', 'Unread', 'You have an upcoming order with the sub order ID 61 starting at 2024-05-02 and ending at 2024-05-04'),
 (34, 'ServiceProvider', 26, '2024-05-04 22:00:00', 'Unread', 'Your order with the sub order ID 61 is about to end in 2 hours'),
@@ -2012,12 +2156,30 @@ INSERT INTO `notifications` (`notification_id`, `user_type`, `user_id`, `date_ti
 (41, 'User', 18, '2024-04-26 11:02:58', 'Unread', 'Moderator with ID 1 has accepted your inquiry and will be assisting you'),
 (42, 'ServiceProvider', 27, '2024-04-26 11:20:05', 'Unread', 'You have a new order request from Gayathra Dissanayake1 for '),
 (43, 'ServiceProvider', 36, '2024-04-26 11:24:07', 'Unread', 'You have a new order request from Gayathra Dissanayake1 for '),
-(44, 'ServiceProvider', 26, '2024-04-26 11:54:50', 'Unread', 'You have successfully deleted an item from your inventory'),
+(44, 'ServiceProvider', 26, '2024-04-26 11:54:50', 'Read', 'You have successfully deleted an item from your inventory'),
 (45, 'ServiceProvider', 36, '2024-04-26 15:14:25', 'Unread', 'You have a new order request from Gayathra Dissanayake1 for '),
 (46, 'User', 18, '2024-04-27 12:34:31', 'Unread', 'Moderator with ID 1 has accepted your inquiry and will be assisting you'),
 (47, 'User', 18, '2024-04-27 12:36:25', 'Unread', 'Moderator sent a message to you regarding inquiry 7'),
 (48, 'User', 18, '2024-04-27 12:37:11', 'Unread', 'Moderator sent a message to you regarding inquiry 7'),
-(49, 'User', 18, '2024-04-27 12:37:13', 'Unread', 'Moderator with ID 1 has marked your inquiry as completed');
+(49, 'User', 18, '2024-04-27 12:37:13', 'Unread', 'Moderator with ID 1 has marked your inquiry as completed'),
+(50, 'ServiceProvider', 26, '2024-04-27 19:18:01', 'Read', 'You have a new order request from Gayathra Dissanayake for '),
+(51, 'Customer', 18, '2024-04-27 19:18:36', 'Unread', 'Your order containing the sub order with the ID 372 has been accepted by the service provider'),
+(52, 'ServiceProvider', 26, '2024-04-27 19:18:36', 'Read', 'You have successfully accepted an order with the ID 372'),
+(53, 'ServiceProvider', 26, '2024-04-29 22:00:00', 'Unread', 'You have an upcoming order with the sub order ID 372 starting at 2024-04-30 and ending at 2024-05-01'),
+(54, 'ServiceProvider', 26, '2024-04-30 00:00:00', 'Unread', 'You have an upcoming order with the sub order ID 372 starting at 2024-04-30 and ending at 2024-05-01'),
+(55, 'ServiceProvider', 26, '2024-05-01 22:00:00', 'Unread', 'Your order with the sub order ID 372 is about to end in 2 hours'),
+(56, 'ServiceProvider', 26, '2024-05-02 00:00:00', 'Unread', 'Your order with the sub order ID 372 has ended'),
+(57, 'Customer', 18, '2024-04-29 22:00:00', 'Unread', 'You have an upcoming order with the sub order ID 372 starting at 2024-04-30 and ending at 2024-05-01'),
+(58, 'Customer', 18, '2024-04-30 00:00:00', 'Unread', 'You have an upcoming order with the sub order ID 372 starting at 2024-04-30 and ending at 2024-05-01'),
+(59, 'Customer', 18, '2024-05-01 22:00:00', 'Unread', 'Your order with the sub order ID 372 is about to end in 2 hours. Please make sure to end the order on time to avoid any penalties.'),
+(60, 'Customer', 18, '2024-05-02 00:00:00', 'Unread', 'Your order with the sub order ID 372 has ended. Please make sure to end the order on time to avoid any penalties.'),
+(61, 'ServiceProvider', 26, '2024-04-27 19:18:46', 'Read', 'You have successfully deleted an item from your inventory'),
+(62, 'ServiceProvider', 26, '2024-04-27 19:25:41', 'Read', 'You have successfully deleted an item from your inventory'),
+(63, 'ServiceProvider', 26, '2024-04-27 19:26:48', 'Read', 'You have successfully deleted an item from your inventory'),
+(64, 'ServiceProvider', 26, '2024-04-27 19:28:50', 'Read', 'You have pending orders. Please complete them before deleting your account'),
+(65, 'ServiceProvider', 26, '2024-04-27 19:31:00', 'Read', 'You have pending orders. Please complete them before deleting your account'),
+(66, 'ServiceProvider', 26, '2024-04-27 19:32:50', 'Read', 'You have pending orders. Please complete them before deleting your account'),
+(67, 'ServiceProvider', 26, '2024-04-27 19:34:25', 'Unread', 'You have pending orders. Please complete them before deleting your account');
 
 -- --------------------------------------------------------
 
@@ -2350,7 +2512,8 @@ INSERT INTO `orders` (`order_id`, `user_id`, `sorder_id`, `total`, `order_placed
 (338, 48, '368', 21200, '2024-04-08', 0),
 (339, 45, '369', 21200, '2023-10-17', 0),
 (340, 29, '370', 21200, '2023-08-30', 0),
-(341, 29, '371', 21200, '2023-02-09', 0);
+(341, 29, '371', 21200, '2023-02-09', 0),
+(342, 18, '372', 31700, '2024-04-27', 18000);
 
 -- --------------------------------------------------------
 
@@ -2385,7 +2548,7 @@ INSERT INTO `products` (`product_id`, `created_by`, `category`, `brand`, `model`
 (25, 26, 'Acoustic Guitars', 'Yamaha', 'Fender Squier SA-150', 5, 5000, 'IMG-662763e3df09e5.79897803.jpg', 'IMG-662763e3df9bb0.93679760.jpg', 'IMG-662763e3dfbaa8.61902064.jpg', 'Fender acoustic guitar', 'natural color Fender Squier SA-150 for rent', 0, '2024-04-26 09:55:08', '2026-06-16', 'Active'),
 (26, 26, 'Acoustic Guitars', 'Yamaha', 'Yamaha F310', 3, 3000, 'IMG-6627675fbacb59.32610934.jpg', 'IMG-6627675fbaf3e4.80720735.jpg', 'IMG-6627675fbb2b64.58016462.jpg', 'Yamaha acoustic guitar', 'yamaha f310 for rent', 0, '2024-04-23 02:16:39', '2025-03-12', 'Active'),
 (27, 26, 'Acoustic Guitars', 'Yamaha', 'Yamaha C40', 4, 5000, 'IMG-66277b8f33d9f1.75542121.jpg', 'IMG-66277b8f33fd65.21211951.jpg', 'IMG-66277b8f341ef7.99126530.jpg', 'Yamaha classical guitar', 'yamaha c40 classical guitar for rent', 0, '2024-04-23 03:42:47', '2025-07-17', 'Active'),
-(28, 26, 'Acoustic Guitars', 'Yamaha', 'Yamaha C70', 4, 6000, 'IMG-66277f680dfbc1.98127888.jpg', 'IMG-66277f680e3010.74572238.jpg', 'IMG-66277f680e7037.22807167.jpg', 'yamaha classical guitar', 'Yamaha c70 for rent', 0, '2024-04-23 03:59:12', '2027-06-15', 'Active'),
+(28, 26, 'Acoustic Guitars', 'Yamaha', 'Yamaha C70', 4, 6000, 'IMG-66277f680dfbc1.98127888.jpg', 'IMG-66277f680e3010.74572238.jpg', 'IMG-66277f680e7037.22807167.jpg', 'yamaha classical guitar', 'Yamaha c70 for rent', 0, '2024-04-27 17:27:19', '2027-06-15', 'Active'),
 (29, 27, 'Keyboard Piano', 'Yamaha', 'Yamaha G2 grand piano', 1, 7000, 'IMG-66290be07ecfd6.79092679.jpg', 'IMG-66290be07fddf6.21596167.jpg', 'IMG-66290be0805ab0.73708281.jpeg', 'yamaha piano', 'brand new yamaha G2 grand piano', 0, '2024-04-24 08:10:48', '2028-06-06', 'Active'),
 (30, 27, 'Keyboard Piano', 'Kawai', 'Kawai KU2 Piano', 2, 5000, 'IMG-66290d8ca1e406.31241559.jpg', 'IMG-66290d8ca24661.66309893.jpg', 'IMG-66290d8ca2d3e2.24965934.jpg', 'kawai piano', 'brand new kawai KU2 piano', 0, '2024-04-24 08:17:56', '2027-09-13', 'Active'),
 (31, 27, 'Keyboard Piano', 'Yamaha', 'Roland FP-30X', 3, 6000, 'IMG-662913d5d970a3.10986147.jpg', 'IMG-662913d5d9d670.20146610.jpg', 'IMG-662913d5da68c1.38861645.jpg', 'Roland piano', 'Roland digital piano with speakers', 0, '2024-04-24 10:03:29', '2028-07-05', 'Active'),
@@ -2483,7 +2646,13 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`review_id`, `product_id`, `user_id`, `rating`, `content`, `name`, `photo`, `placed_on`, `type`) VALUES
-(45, 46, 33, 4, 'The sound quality is surprisingly good, with a variety of tones and effects to choose from. The keys have a nice, responsive feel to them, making it enjoyable to play different melodies and chords. Additionally, the built-in speakers produce decent volume and clarity, although I prefer using headphones for a more immersive experience.\r\n\r\nOne minor downside is that the keyboard doesn&#39;t come with a sustain pedal, but considering the affordability, it&#39;s not a dealbreaker. Overall, I&#39;m very satisfied with my purchase and would highly recommend this keyboard to anyone looking to learn how to play the piano or keyboard.', 'David Wilson', 'IMG-653fd611dd2445.48951448.png', '2024-04-27', 'Equipment');
+(45, 46, 33, 4, 'The sound quality is surprisingly good, with a variety of tones and effects to choose from. The keys have a nice, responsive feel to them, making it enjoyable to play different melodies and chords. Additionally, the built-in speakers produce decent volume and clarity, although I prefer using headphones for a more immersive experience.\r\n\r\nOne minor downside is that the keyboard doesn&#39;t come with a sustain pedal, but considering the affordability, it&#39;s not a dealbreaker. Overall, I&#39;m very satisfied with my purchase and would highly recommend this keyboard to anyone looking to learn how to play the piano or keyboard.', 'David Wilson', 'IMG-653fd611dd2445.48951448.png', '2024-04-27', 'Equipment'),
+(46, 13, 52, 3, 'sameera@example.com', 'Sameera Jayasinghe', 'IMG-653fd611dd2445.48951448.png', '2024-04-27', 'Equipment'),
+(47, 13, 52, 3, 'sameera@example.com', 'Sameera Jayasinghe', 'IMG-653fd611dd2445.48951448.png', '2024-04-27', 'Equipment'),
+(48, 13, 52, 4, 'sameera@example.com', 'Sameera Jayasinghe', 'IMG-653fd611dd2445.48951448.png', '2024-04-27', 'Equipment'),
+(49, 13, 52, 3, 'sameera@example.com', 'Sameera Jayasinghe', 'IMG-653fd611dd2445.48951448.png', '2024-04-27', 'Equipment'),
+(50, 13, 52, 3, 'sameera@example.com', 'Sameera Jayasinghe', 'IMG-653fd611dd2445.48951448.png', '2024-04-27', 'Equipment'),
+(51, 13, 52, 3, 'sameera@example.com', 'Sameera Jayasinghe', 'IMG-653fd611dd2445.48951448.png', '2024-04-27', 'Studio');
 
 -- --------------------------------------------------------
 
@@ -3032,7 +3201,8 @@ INSERT INTO `suborder` (`sorder_id`, `user_id`, `serviceprovider_id`, `product_i
 (368, 48, 50, 25, 1, '2024-04-19', '2024-04-19', 1, 20000, 'Completed', '777', 'Musician', '2024-04-08', 0, 0),
 (369, 45, 50, 25, 1, '2023-10-28', '2023-10-28', 1, 20000, 'Completed', '778', 'Musician', '2023-10-17', 0, 0),
 (370, 29, 50, 25, 1, '2023-09-02', '2023-09-02', 1, 20000, 'Completed', '779', 'Musician', '2023-08-30', 0, 0),
-(371, 29, 50, 25, 1, '2023-02-24', '2023-02-24', 1, 20000, 'Completed', '780', 'Musician', '2023-02-09', 0, 0);
+(371, 29, 50, 25, 1, '2023-02-24', '2023-02-24', 1, 20000, 'Completed', '780', 'Musician', '2023-02-09', 0, 0),
+(372, 18, 26, 28, 1, '2024-04-30', '2024-05-01', 2, 12000, 'Upcoming', '454,455', 'Equipment', '2024-04-27', 18000, 0);
 
 -- --------------------------------------------------------
 
@@ -3272,7 +3442,7 @@ ALTER TABLE `administrators`
 -- AUTO_INCREMENT for table `availability`
 --
 ALTER TABLE `availability`
-  MODIFY `entry_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=454;
+  MODIFY `entry_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=456;
 
 --
 -- AUTO_INCREMENT for table `band`
@@ -3290,7 +3460,7 @@ ALTER TABLE `bookmarks`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `cart_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT for table `chat_mod_user`
@@ -3314,7 +3484,7 @@ ALTER TABLE `inq_chat`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1605;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1741;
 
 --
 -- AUTO_INCREMENT for table `moderators`
@@ -3332,13 +3502,13 @@ ALTER TABLE `musician`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=342;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=343;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -3356,7 +3526,7 @@ ALTER TABLE `recover_account_user`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `review_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `review_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `sec_queation`
@@ -3386,7 +3556,7 @@ ALTER TABLE `studio`
 -- AUTO_INCREMENT for table `suborder`
 --
 ALTER TABLE `suborder`
-  MODIFY `sorder_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=372;
+  MODIFY `sorder_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=373;
 
 --
 -- AUTO_INCREMENT for table `users`
