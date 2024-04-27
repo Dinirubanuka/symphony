@@ -2512,17 +2512,18 @@
         $startDate = new DateTime($_POST['fromDate']);
         $endDate = new DateTime($_POST['toDate']);
         while ($startDate <= $endDate) {
-          $totalForDay = 0;
-          foreach ($suborders as $suborder) {
-              $orderDate = new DateTime($suborder->order_placed_on);
-              if ($startDate->format('Y-m-d') == $orderDate->format('Y-m-d')) {
-                  $totalForDay += $suborder->total;
-              }
-          }
-          $datalist[$startDate->format('Y-m-d')] = $totalForDay;
-          $startDate->modify('+1 day');
+            $totalForDay = 0;
+            foreach ($suborders as $suborder) {
+                $orderDate = new DateTime($suborder->order_placed_on);
+                if ($startDate->format('Y-m-d') == $orderDate->format('Y-m-d')) {
+                    $totalForDay += $suborder->total;
+                }
+            }
+            $dayKey = $startDate->format('Y-m-d');
+            $datalist[$dayKey] = $totalForDay;
+            $startDate->modify('+1 day');
         }
-      } else if ($selection == 'byWeek'){
+    } else if ($selection == 'byWeek'){
         $select_text = 'Week';
         $startDate = new DateTime($_POST['fromDate']);
         $endDate = new DateTime($_POST['toDate']);
@@ -2542,17 +2543,18 @@
         $startDate = new DateTime($_POST['fromDate']);
         $endDate = new DateTime($_POST['toDate']);
         while ($startDate <= $endDate) {
-          $totalForMonth = 0;
-          foreach ($suborders as $suborder) {
-              $orderDate = new DateTime($suborder->order_placed_on);
-              if ($startDate->format('m') == $orderDate->format('m')) {
-                  $totalForMonth += $suborder->total;
-              }
-          }
-          $datalist[$startDate->format('m')] = $totalForMonth;
-          $startDate->modify('+1 month');
+            $totalForMonth = 0;
+            foreach ($suborders as $suborder) {
+                $orderDate = new DateTime($suborder->order_placed_on);
+                if ($startDate->format('Y-m') == $orderDate->format('Y-m')) {
+                    $totalForMonth += $suborder->total;
+                }
+            }
+            $monthYearKey = $startDate->format('F Y');
+            $datalist[$monthYearKey] = $totalForMonth;
+            $startDate->modify('+1 month');
         }
-      } else if ($selection == 'byYear'){
+    } else if ($selection == 'byYear'){
         $select_text = 'Year';
         $startDate = new DateTime($_POST['fromDate']);
         $endDate = new DateTime($_POST['toDate']);

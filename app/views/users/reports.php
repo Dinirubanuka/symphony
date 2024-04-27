@@ -82,21 +82,23 @@
             </div>
             <button type="submit" id="submitButton">Submit</button>
             </form>
+            <button id="printButton" <?php echo ($data['data'] === 'NA') ? 'style="display: none;"' : ''; ?>>Print PDF</button>
+
         </div>
     </div>
 </div>
 <div id="users" class="tabcontent" <?php echo ($data['data'] === 'NA') ? 'style="display: none;"' : ''; ?>>
-            <h1>Generating Revenue reports sorted by <?php echo $data['type']; ?></h1>
+<h2>Revenue reports from <?php echo $data['from_date']; ?> to <?php echo $data['to_date']; ?></h2>
             <table class="data-table">
                 <?php if ($data['type'] != 'Order') : ?>
                 <tr>
                     <th><?php echo $data['type']; ?></th>
-                    <th>Revenue</th>
+                    <th>Revenue(LKR)</th>
                 </tr>
                 <?php foreach ($data['datalist'] as $key => $value) : ?>
                 <tr class="data-table-tr">
                     <td><?php echo $key; ?></td>
-                    <td><?php echo $value; ?></td>
+                    <td><?php echo $value; ?>.00</td>
                 </tr>
                 <?php endforeach; ?>
                 <?php else : ?>
@@ -106,7 +108,7 @@
                     <th>Service Provider ID</th>
                     <th>Product Type/ID</th>
                     <th>Quantity</th>
-                    <th>Revenue</th>
+                    <th>Revenue(LKR)</th>
                 </tr>
                 <?php foreach ($data['datalist'] as $value) : ?>
                 <tr class="data-table-tr">
@@ -115,13 +117,12 @@
                     <td><?php echo $value->serviceprovider_id; ?></td>
                     <td><?php echo $value->type; ?> - <?php echo $value->product_id; ?></td>
                     <td><?php echo $value->qty; ?></td>
-                    <td><?php echo $value->total; ?></td>
+                    <td><?php echo $value->total; ?>.00</td>
                 </tr>
                 <?php endforeach; ?>
                 <?php endif; ?>
             </table>
             </div>
-        <button id="printButton" <?php echo ($data['data'] === 'NA') ? 'style="display: none;"' : ''; ?>>Print PDF</button>
     </div>
 <script src="https://kit.fontawesome.com/3376ff6b83.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

@@ -75,7 +75,7 @@
 }
 
 #printButton {
-    background-color: #4CAF50; /* Green */
+    background-color: #503d00; /* Green */
     border: none;
     color: white;
     padding: 10px 20px;
@@ -89,11 +89,14 @@
 }
 
 #printButton:hover {
-    background-color: #45a049; /* Darker green */
+    background-color: #bbbbbb; /* Darker green */
+    color: black;
+    transition: 0.3s; /* Smooth transition on hover */
 }
 
 #printButton:active {
-    background-color: #3e8e41; /* Pressed color */
+    background-color: #503d00; /* Pressed color */
+    color: white;
     transform: translateY(1px); /* Push button down when clicked */
     box-shadow: 0 1px #666; /* Add shadow to make it look like it's being pressed */
 }
