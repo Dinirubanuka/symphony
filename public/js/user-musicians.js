@@ -228,7 +228,7 @@ function updateDisplayedData() {
         filteredData = JSON.parse(JSON.stringify(Orgdata)).filter(function (item) {
             return selectedCategories.some(function (selectedCategory) {
                 console.log(item.location);
-                return item.location.includes(selectedCategory);
+                return item.instrument.includes(selectedCategory) || item.location.includes(selectedCategory);
             });
         });
     }
