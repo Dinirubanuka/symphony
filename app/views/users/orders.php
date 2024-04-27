@@ -50,13 +50,14 @@
                         <th>End Date</th>
                         <th>Quantity</th>
                         <th>Unit Price</th>
-                        <th>Total</th>
+                        <th>Subtotal</th>
                         <th>Diposit</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
-                <?php foreach($orders['suborders'] as $suborder) : ?>
+                <?php   $subtotal = 0;
+                        foreach($orders['suborders'] as $suborder) : ?>
                 <tbody>
                     <tr>
                         <?php $orderStatus = $suborder['status']; ?>
@@ -88,17 +89,21 @@
                         </td>
                     </tr>
                 </tbody>
+                <?php $subtotal += $suborder['total']; ?>
                 <?php endforeach; ?>
                 <tfoot>
                     <tr>
+                        <td colspan="6" style="text-align: right;"><strong>Service Charge:</strong></td>
+                        <td>LKR. <?php echo 200 + $subtotal * 0.05 ?>.00</td>
+                    </tr>
+                    <tr>
                         <td colspan="6" style="text-align: right;"><strong>Total:</strong></td>
-                        <td>LKR. <?php echo $orders['order']->total ?>.00</td>
+                        <td>LKR. <?php echo 200 + $subtotal * 0.05 + $subtotal ?>.00</td>
                     </tr>
                 </tfoot>
             </table>
         </div>
         <div class="action-buttons">
-            <button class="download-button" onclick="downloadPDF(<?php echo $index; ?>)">Download</button>
             <button class="print-button" onclick="printInvoice(<?php echo $index; ?>)">Print</button>
         </div>
 
@@ -187,31 +192,6 @@ function addReview(button) {
     }
 }
     
-function downloadPDF(cardIndex) {
-    const invoiceCard = $('.invoice-card-' + cardIndex).eq(cardIndex).clone();
-    
-    // Create a new jsPDF instance with A3 paper size
-    window.jsPDF = window.jspdf.jsPDF;
-    const pdf = new jsPDF({
-        unit: 'mm',
-        format: 'a3',  // Set the paper size to A3
-        orientation: 'portrait'
-    });
-
-    // Convert the cloned invoice card to HTML
-    const element = $(invoiceCard)[0];
-    
-    // Use html2pdf to generate a PDF from the HTML element
-    html2pdf(element, {
-        margin: 10,
-        filename: `Invoice_${cardIndex + 1}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a3', orientation: 'portrait' }
-    }).then(() => {
-        console.log('PDF downloaded');
-    });
-}
 </script>
 <script src="<?php echo URLROOT; ?>/js/instrument.js"></script>
 </body>

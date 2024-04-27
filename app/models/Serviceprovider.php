@@ -300,6 +300,14 @@ class ServiceProvider
         return $results;
     }
 
+    public function getOrdersCompleted($serviceprovider_id)
+    {
+        $this->db->query('SELECT * FROM suborder WHERE serviceprovider_id = :serviceprovider_id AND status = "Completed"');
+        $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
     public function getFullOrderData(){
         $this->db->query('SELECT * FROM orders');
         $results = $this->db->resultSet();

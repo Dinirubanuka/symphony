@@ -18,7 +18,7 @@
     </div>
     <div class="right-component">
       <div class="top">
-        <h1>Revenue Report | <?php echo $data['admin_data']->admin_name; ?></h1>
+        <h1>Status Report | <?php echo $data['admin_data']->admin_name; ?></h1>
           <div class="dashboard">
             <h2>Top Users - This Week</h2>
             <div class="containersologrid">

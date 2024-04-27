@@ -78,7 +78,7 @@
                 <span class="tax">Deposit Value: LKR.</span>
                 <span><?php echo $data['extra_charge']; ?>.00</span>
                 <span class="shipping">Service Charge: LKR.</span>
-                <?php echo $data['count'] == 0 ? '<span>0.00</span>' : '<span>200.00</span>' ?>
+                <span><?php echo $data['service_charge']; ?>.00</span>
                 <span class="total">Total: LKR.</span>
                 <span class="total"><?php echo $data['count'] == 0 ? '0' : $data['total']; ?>.00</span>
             </div>

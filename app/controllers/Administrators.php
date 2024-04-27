@@ -2492,6 +2492,105 @@
     $this->view('administrators/generaterevenue', $data);
   }
 
+  public function generateStatReport(){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      $admin = $this->administratorModel->view($_SESSION['administrator_id']);
+      $suborders = $this->administratorModel->getSubOrdersCompleted();
+      $selection = $_POST['selection'];
+      $select_text = '';
+      $datalist = [];
+      if($selection == 'byOrder'){
+        $select_text = 'Order';
+        foreach ($suborders as $suborder){
+          if($suborder->order_placed_on >= $_POST['fromDate'] && $suborder->order_placed_on <= $_POST['toDate']){
+            $datalist[] = $suborder;
+          }
+        } 
+      } else if ($selection == 'byDay'){
+        $select_text = 'Day';
+        $startDate = new DateTime($_POST['fromDate']);
+        $endDate = new DateTime($_POST['toDate']);
+        while ($startDate <= $endDate) {
+          $totalForDay = 0;
+          foreach ($suborders as $suborder) {
+              $orderDate = new DateTime($suborder->order_placed_on);
+              if ($startDate->format('Y-m-d') == $orderDate->format('Y-m-d')) {
+                  $totalForDay += $suborder->total;
+              }
+          }
+          $datalist[$startDate->format('Y-m-d')] = $totalForDay;
+          $startDate->modify('+1 day');
+        }
+      } else if ($selection == 'byWeek'){
+        $select_text = 'Week';
+        $startDate = new DateTime($_POST['fromDate']);
+        $endDate = new DateTime($_POST['toDate']);
+        while ($startDate <= $endDate) {
+          $totalForWeek = 0;
+          foreach ($suborders as $suborder) {
+              $orderDate = new DateTime($suborder->order_placed_on);
+              if ($startDate->format('W') == $orderDate->format('W')) {
+                  $totalForWeek += $suborder->total;
+              }
+          }
+          $datalist[$startDate->format('Y-W')] = $totalForWeek;
+          $startDate->modify('+1 week');
+        }
+      } else if ($selection == 'byMonth'){
+        $select_text = 'Month';
+        $startDate = new DateTime($_POST['fromDate']);
+        $endDate = new DateTime($_POST['toDate']);
+        while ($startDate <= $endDate) {
+          $totalForMonth = 0;
+          foreach ($suborders as $suborder) {
+              $orderDate = new DateTime($suborder->order_placed_on);
+              if ($startDate->format('m') == $orderDate->format('m')) {
+                  $totalForMonth += $suborder->total;
+              }
+          }
+          $datalist[$startDate->format('m')] = $totalForMonth;
+          $startDate->modify('+1 month');
+        }
+      } else if ($selection == 'byYear'){
+        $select_text = 'Year';
+        $startDate = new DateTime($_POST['fromDate']);
+        $endDate = new DateTime($_POST['toDate']);
+        while ($startDate <= $endDate) {
+          $totalForYear = 0;
+          foreach ($suborders as $suborder) {
+              $orderDate = new DateTime($suborder->order_placed_on);
+              if ($startDate->format('Y') == $orderDate->format('Y')) {
+                  $totalForYear += $suborder->total;
+              }
+          }
+          $datalist[$startDate->format('Y')] = $totalForYear;
+          $startDate->modify('+1 year');
+        }
+      }
+      $data = [
+        'admin_data' => $admin,
+        'datalist' => $datalist,
+        'from_date' => $_POST['fromDate'],
+        'to_date' => $_POST['toDate'],
+        'type' => $select_text,
+        'data' => 'AV'
+      ];
+      $this->view('administrators/generatestat', $data);
+    } else {
+      $admin = $this->administratorModel->view($_SESSION['administrator_id']);
+      $data = [
+        'admin_data' => $admin,
+        'orders' => 'NA',
+        'from_date' => '',
+        'to_date' => '',
+        'type' => '',
+        'data' => 'NA'
+      ];
+      $this->view('administrators/generatestat', $data);
+    }
+  }
+
   public function viewInventory($sp_id){
     $admin = $this->administratorModel->view($_SESSION['administrator_id']);
     $sp = $this->administratorModel->getSP($sp_id);

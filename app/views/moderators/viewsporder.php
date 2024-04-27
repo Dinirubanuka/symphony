@@ -46,7 +46,7 @@
                               <th>Start Date</th>
                               <th>End Date</th>
                               <th>Price per Day</th>
-                              <th>Total</th>
+                              <th>Subotal</th>
                               <th>Status</th>
                           </tr>
                       </thead>

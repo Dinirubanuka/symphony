@@ -1,7 +1,14 @@
 
 .user-info-box {
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100vh; /* Make the user-info-box take the full height of the viewport */
+    width: calc(100% - 300px); /* Subtract the width of the sidebar from the total width */
+    padding: 20px; /* Add padding as needed */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+    overflow-y: auto; /* Add vertical scroll if needed */
 }
 
 .graph-container {
@@ -65,4 +72,28 @@
 .report-item p {
     margin-bottom: 0;
     color: #666;
+}
+
+#printButton {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px; /* Adjust margin as needed */
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#printButton:hover {
+    background-color: #45a049; /* Darker green */
+}
+
+#printButton:active {
+    background-color: #3e8e41; /* Pressed color */
+    transform: translateY(1px); /* Push button down when clicked */
+    box-shadow: 0 1px #666; /* Add shadow to make it look like it's being pressed */
 }

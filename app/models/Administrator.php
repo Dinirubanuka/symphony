@@ -569,6 +569,13 @@ require 'vendor/autoload.php';
       return $results;
     }
 
+    public function getSubOrdersCompleted(){
+      $this->db->query('SELECT * FROM suborder WHERE status = :status ORDER BY order_placed_on ASC');
+      $this->db->bind(':status', 'Completed');
+      $results = $this->db->resultSet();
+      return $results;
+  }  
+
     public function getEquipmentData($product_id){
       $this->db->query('SELECT * FROM products WHERE product_id = :product_id');
       $this->db->bind(':product_id', $product_id);
