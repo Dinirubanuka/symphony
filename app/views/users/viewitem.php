@@ -21,10 +21,22 @@
         <img src="http://localhost/symphony/img/right-arrow.png" alt="camera-icon" class="" id="" style="height: 20px;width: 20px;">
     </div>
     <div class="categoryType">
-        <a href="<?php echo URLROOT?>/users/<?php echo ($data['type'] == 'Band' || $data['type'] == 'Singer' || $data['type'] == 'Musician' || $data['type'] == 'Studio') ? $data['type'] : ($data['type'] == 'Equipment' ? 'Instrument' : '') ?>">
-            <?php echo ($data['type'])?>
+        <a href="<?php echo URLROOT?>/users/<?php
+        if ($data['type'] == 'Band' || $data['type'] == 'Singer' || $data['type'] == 'Studio') {
+            echo $data['type'];
+        } elseif ($data['type'] == 'Musician') {
+            echo 'Musicians';
+        } elseif ($data['type'] == 'Equipment') {
+            echo 'Instrument';
+        }
+        ?>">
+            <?php
+            // Change the display text if $data['type'] is 'Musician'
+            echo ($data['type'] == 'Musician') ? 'Musicians' : $data['type'];
+            ?>
         </a>
     </div>
+
 </div>
 
 <h2>owner :<?php echo $data['name']?></h2>
@@ -74,6 +86,14 @@
                             <img src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $data['singerPhoto']; ?>" alt="singer photo">
                         <?php endif; ?>
                     </div>
+
+<!--                    band leader photo-->
+                    <div class=" <?php echo ($data['type'] === 'Band') ? 'singerPhoto': ''; ?>">
+                        <?php if ($data['type'] === 'Band'): ?>
+                            <img src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $data['leaderPhoto']; ?>" alt="bLeader photo">
+                        <?php endif; ?>
+                    </div>
+
                     <h3><div <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>Category: <?php echo $data['category']; ?></div></h3>
                     <h3><div <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>Brand: <?php echo $data['brand']; ?></div></h3>
                     <p><div <?php echo ($data['type'] == 'Equipment') ? '' : 'style="display: none;"'; ?>>Model: <?php echo $data['model']; ?></div></p>
@@ -88,8 +108,6 @@
                     <p><div <?php echo ($data['type'] == 'Studio') ? '' : 'style="display: none;"'; ?>>Air Condition: <?php echo $data['airCondition']; ?></div></p>
                     <h3><div <?php echo ($data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>Leader Name: <?php echo $data['leaderName']; ?></div></h3>
                     <p><div <?php echo ($data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>Member Count: <?php echo $data['memberCount']; ?></div></p>
-                    <p><div <?php echo ($data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>Leader Photo: <?php echo $data['leaderPhoto']; ?></div></p>
-                    <p><div <?php echo ($data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>Band Photo: <?php echo $data['bandPhoto']; ?></div></p>
                     <p><div <?php echo ($data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>Location: <?php echo $data['location']; ?></div></p>
                     <p><div <?php echo ($data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>Instrument: <?php echo $data['instrument']; ?></div></p>
                     <p><div <?php echo ($data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>Email: <?php echo $data['email']; ?></div></p>
@@ -106,22 +124,18 @@
                         <h3><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>><?php echo $data['singer_name']; ?></div></h3>
                         <h4><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>(<?php echo $data['nickName']; ?>)</div></h4>
                     </div>
-                    <?php if ($data['type'] === 'Singer') : ?>
+<!--                    --><?php //if ($data['type'] === 'Singer') : ?>
                         <h4>Rate: <?php echo $data['unit_price']; ?><span> /per day</span></h4>
-                    <?php endif; ?>
+<!--                    --><?php //endif; ?>
 
                         <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>><img src="http://localhost/symphony/img/location-pin.png" alt="camera-icon" class="" id="" style="height: 16px;width: 16px;"> <?php echo $data['location']; ?></div></p>
                         <p>Description: <?php echo $data['Description']; ?></p>
-                        <div class="contactBox">
-                            <div class="emailBox" <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>
-                                <div><img src="http://localhost/symphony/img/email.png" alt="camera-icon" class="" id="" style="height: 16px;width: 16px;"></div>
-                                <div><?php echo $data['email']; ?></div>
-                            </div>
-                            <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>><img src="http://localhost/symphony/img/telephone-call.png" alt="camera-icon" class="" id="" style="height: 16px;width: 16px;">   <?php echo $data['telephoneNumber']; ?></div></p>
-                        </div>
+<!--                    --><?php //if ($data['type'] === 'Singer' || $data['type'] === 'Musician' || $data['type'] === 'Band') : ?>
                         <div class="videoBox"  <?php echo ($data['type'] == 'Singer' || $data['type'] == 'Musician' || $data['type'] == 'Band') ? '' : 'style="display: none;"'; ?>>
                             <iframe src="<?php echo $data['videoLink']; ?>"></iframe>
                         </div>
+<!--                    --><?php //endif; ?>
+
 
                     <p><div <?php echo ($data['type'] == 'Singer') ? '' : 'style="display: none;"'; ?>>Instrument: <?php echo $data['instrument']; ?></div></p>
                     <p>Last Modified: <?php echo $data['createdDate']; ?></p>
