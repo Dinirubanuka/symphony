@@ -115,22 +115,29 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script>
-$(document).ready(function () {
-    $('#orderSearch').on('input', function () {
-        const searchValue = $(this).val().toLowerCase().trim();
+    $(document).ready(function () {
+        $('#orderSearch').on('input', function () {
+            const searchValue = $(this).val().toLowerCase().trim();
 
-        $('.invoice-card').each(function () {
-            let isVisible = false;
-            $(this).find('tbody').each(function () {
-                const textContent = $(this).text().toLowerCase();
-                if (textContent.includes(searchValue)) {
-                    isVisible = true; 
+            $('.invoice-card').each(function () {
+                let isVisible = false;
+                const invoiceHeader = $(this).find('.invoice-header h2').text().toLowerCase();
+                const userDetailText = $(this).find('.invoice-details .flex-item').text().toLowerCase();
+
+                if (invoiceHeader.includes(searchValue) || userDetailText.includes(searchValue)) {
+                    isVisible = true;
+                } else {
+                    $(this).find('h3, p').each(function () {
+                        const textContent = $(this).text().toLowerCase();
+                        if (textContent.includes(searchValue)) {
+                            isVisible = true;
+                        }
+                    });
                 }
+                isVisible ? $(this).show() : $(this).hide();
             });
-            isVisible ? $(this).show() : $(this).hide();
         });
     });
-});
 
 function printInvoice(cardIndex) {
     const iframe = document.createElement('iframe');
