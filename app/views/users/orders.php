@@ -30,6 +30,8 @@
                     <h3>User Details</h3>
                     <p><strong>Name:</strong> <?php echo $data['user_data']['name']; ?></p>
                     <p><strong>Email:</strong> <?php echo $data['user_data']['email']; ?></p>
+                    <p><strong>Contact Number:</strong> <?php echo $data['product_data']['telephoneNumber']; ?></p>
+
                     <!-- Add more user details as needed -->
                 </div>
 
@@ -104,8 +106,10 @@
 
         <!-- Adjusted bottom-left text gap -->
         <div class="bottom-left-text">
-            <h2><strong>SYMPHONY</strong></h2> <br>For all your musical needs
+            <h2><strong>SYMPHONY</strong></h2>
+            <br>For all your musical needs
         </div>
+
     </div>
     <?php   $index = $index + 1;
             endforeach; ?>

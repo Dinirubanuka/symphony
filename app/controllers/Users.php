@@ -1593,6 +1593,7 @@ class Users extends Controller
         }
         $user_data = json_decode(json_encode($this->userModel->view($_SESSION['user_id'])), true);
         $data = [
+            'product_data' => $product_data,
             'orders' => $result,
             'user_data' => $user_data
         ];
