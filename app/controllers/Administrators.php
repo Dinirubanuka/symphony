@@ -5,7 +5,12 @@
       $this->administratorModel = $this->model('Administrator');
     }
 
+    public function error(){
+      $this->view('administrators/error');
+    }
+
     public function index(){
+     if(isset($_SESSION['administrator_id'])){
       $mod_data = $this->administratorModel->view($_SESSION['administrator_id']);
       $users = $this->administratorModel->getAllUsers();
       $user_total = count($users);
@@ -416,7 +421,10 @@
         'reg_data' => $reg_data
       ];
       $this->view('administrators/index', $data);
+    } else {
+      redirect('administrators/error');
     }
+  }
 
     public function register(){
       // Check for POST
@@ -610,6 +618,7 @@
     }
 
     public function viewmoderator(){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $moderators = $this->administratorModel->getModerators();
       $data = [
         'moderators' => $moderators
@@ -618,6 +627,7 @@
     }
 
     public function pendingrecoverrequests(){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $recover = $this->administratorModel->getRecoverRequests('Pending');
       $data = [
         'status' => 'Pending',
@@ -635,6 +645,7 @@
     }
 
     public function acceptedrecoverrequests(){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $recover = $this->administratorModel->getRecoverRequests('Accepted');
       $data = [
         'status' => 'Accepted',
@@ -652,6 +663,7 @@
     }
 
     public function rejectedrecoverrequests(){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $recover = $this->administratorModel->getRecoverRequests('Rejected');
       $data = [
         'status' => 'Rejected',
@@ -770,6 +782,7 @@
     }
 
     public function viewRecoverRequest($id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $recover = $this->administratorModel->getRecoverRequest($id);
       $users = $this->administratorModel->getAllUsers();
       $transformedUsers = [];
@@ -851,6 +864,7 @@
     }
 
     public function changeUserPassword($id, $email, $req_id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
         $length = 16;
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $password = '';
@@ -907,6 +921,7 @@
     }
 
     public function rejectRecoverRequest($id, $encodedReason){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $decodeddReason = str_replace('_', ' ', $encodedReason);
       $request_data = $this->administratorModel->getRecoverRequest($id);
       $email_data = [
@@ -931,6 +946,7 @@
     }
 
     public function viewProduct($type, $product_id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       if($type == 'Equipment'){
         $data = $this->administratorModel->getEquipmentData($product_id);
       } else if ($type == 'Studio'){
@@ -1184,6 +1200,7 @@
     }
 
     public function viewActiveUser(){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $users = $this->administratorModel->getUsers();
       $data = [
         'users' => $users,
@@ -1201,6 +1218,7 @@
     }
 
     public function viewBannedUser(){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $users = $this->administratorModel->getBannedUsers();
       $data = [
         'users' => $users,
@@ -1218,6 +1236,7 @@
     }
 
     public function viewDeactivatedUser(){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $users = $this->administratorModel->getDeactivatedUsers();
       $data = [
         'users' => $users,
@@ -1235,6 +1254,7 @@
     }
 
     public function viewActiveSP(){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $serviceproviders = $this->administratorModel->getServiceProviders();
       $data = [
         'serviceproviders' => $serviceproviders,
@@ -1252,6 +1272,7 @@
     }
 
     public function viewRejectedSP(){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $serviceproviders = $this->administratorModel->getRejectedServiceProviders();
       $data = [
         'serviceproviders' => $serviceproviders,
@@ -1269,6 +1290,7 @@
     }
 
     public function viewDeactivatedSP(){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $serviceproviders = $this->administratorModel->getDeactivatedServiceProviders();
       $data = [
         'serviceproviders' => $serviceproviders,
@@ -1286,6 +1308,7 @@
     }
 
     public function viewBannedSP(){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $serviceproviders = $this->administratorModel->getBannedServiceProviders();
       $data = [
         'serviceproviders' => $serviceproviders,
@@ -1303,6 +1326,7 @@
     }
 
     public function deleteuser($id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       if($this->administratorModel->deleteUser($id)){
         $log_data = [
           'user_type' => 'Administrator',
@@ -1327,6 +1351,7 @@
     }
 
     public function pendingrequest(){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $pending = $this->administratorModel->getPendingRequests();
       $data = [
         'pending' => $pending
@@ -1343,6 +1368,7 @@
     }
 
     public function viewPendingRequest($id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $request = $this->administratorModel->getSP($id);
       $data = [
         'request' => $request
@@ -1359,6 +1385,7 @@
     }
 
     public function viewserviceprovider($id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $serviceprovider = $this->administratorModel->getSP($id);
       $data = [
         'request' => $serviceprovider
@@ -1375,6 +1402,7 @@
     }
 
     public function viewuser($id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $user = $this->administratorModel->getUser($id);
       $data = [
         'request' => $user
@@ -1391,6 +1419,7 @@
     }
 
     public function banuser($id, $encodedReason){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $decodedReason = str_replace('_', ' ', $encodedReason);
       $user = $this->administratorModel->getUser($id);
       if($this->administratorModel->banUser($id)){
@@ -1418,6 +1447,7 @@
     }
 
     public function banserviceprovider($id, $encodedReason){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $decodeddReason = str_replace('_', ' ', $encodedReason);
       $sp = $this->administratorModel->getSP($id);
       if($this->administratorModel->banServiceProvider($id)){
@@ -1445,6 +1475,7 @@
     }
 
     public function unbanserviceprovider($id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $sp = $this->administratorModel->getSP($id);
       $email_data = [
         'name' => $sp->business_name,
@@ -1475,6 +1506,7 @@
     }
 
     public function unbanuser($id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $user = $this->administratorModel->getUser($id);
       $email_data = [
         'name' => $user->name,
@@ -1505,6 +1537,7 @@
     }
 
     public function deletemoderator($id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       if($this->administratorModel->deleteModerator($id)){
         redirect('administrators/viewmoderator');
       } else {
@@ -1513,6 +1546,7 @@
     }
 
     public function deleteserviceprovider($id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       if($this->administratorModel->deleteServiceProvider($id)){
         $log_data = [
           'user_type' => 'Administrator',
@@ -1537,6 +1571,7 @@
     }
 
     public function acceptServiceProvider($id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       if($this->administratorModel->acceptSP($id)){
         $log_data = [
           'user_type' => 'Administrator',
@@ -1561,6 +1596,7 @@
     }
 
     public function rejectServiceProvider($id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       if($this->administratorModel->rejectSP($id)){
         $log_data = [
           'user_type' => 'Administrator',
@@ -1585,6 +1621,7 @@
     }
 
     public function viewUserOrders($id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $order = $this->administratorModel->viewUserOrders($id);
       $data = [
         'order' => $order,
@@ -1602,6 +1639,7 @@
     }
 
     public function viewSPOrders($id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $order = $this->administratorModel->viewSPOrders($id);
       $data = [
         'order' => $order,
@@ -1619,6 +1657,7 @@
     }
 
     public function viewOrder($id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $order = $this->administratorModel->getOrderData($id);
       $user_data = $this->administratorModel->getUser($order->user_id);
       $order_data = json_decode(json_encode($order), true);
@@ -1660,6 +1699,7 @@
     }
 
     public function viewSubOrder($id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $suborder = $this->administratorModel->getSubOrderData($id);
       $user_data = $this->administratorModel->getUser($suborder->user_id);
       if($suborder->type == 'Equipment'){
@@ -1689,6 +1729,7 @@
     }
 
     public function generatereports(){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $log_data = [
         'user_type' => 'Administrator',
         'user_id' => $_SESSION['administrator_id'],
@@ -1701,6 +1742,7 @@
     }
 
     public function getUserList(){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $all_users = $this->administratorModel->getAllUsers();
       $all_sp = $this->administratorModel->getAllSP();
       $all_moderators = $this->administratorModel->getAllModerators();
@@ -1713,6 +1755,7 @@
     }
 
     public function generateUserLog($user_id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           if(isset($_POST['options'])){
@@ -1781,6 +1824,7 @@
     }
 
     public function generateSPLog($sp_id){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           if(isset($_POST['options'])){
@@ -1853,6 +1897,7 @@
     }
 
     public function generateModLog($modid){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           if(isset($_POST['options'])){
@@ -1927,6 +1972,7 @@
     }
 
     public function generateRevenueReport(){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $admin = $this->administratorModel->view($_SESSION['administrator_id']);
       $orders = $this->administratorModel->getSubOrders();
       $count_24h = [
@@ -2493,6 +2539,7 @@
   }
 
   public function generateStatReport(){
+    isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
       $admin = $this->administratorModel->view($_SESSION['administrator_id']);
@@ -2594,6 +2641,7 @@
   }
 
   public function viewInventory($sp_id){
+    isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
     $admin = $this->administratorModel->view($_SESSION['administrator_id']);
     $sp = $this->administratorModel->getSP($sp_id);
     $equipment = $this->administratorModel->getEquipmentSP($sp_id);
@@ -2623,6 +2671,7 @@
     }
 
     public function logout(){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       $log_data = [
         'user_type' => 'Administrator',
         'user_id' => $_SESSION['administrator_id'],
@@ -2639,6 +2688,7 @@
     }
 
     public function addmoderator(){
+      isset($_SESSION['administrator_id']) ? '' : redirect('administrators/error');
       // Check for POST
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
           // Process form

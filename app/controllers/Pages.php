@@ -24,4 +24,7 @@
       $this->view('serviceproviders/serviceproviderregister');      
     }
     
+    public function notfound(){
+      $this->view('pages/404');
+    }
   }

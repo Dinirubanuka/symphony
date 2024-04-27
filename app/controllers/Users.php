@@ -23,12 +23,19 @@ class Users extends Controller
 
     public function index()
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $this->view('users/index');
+    }
+
+    public function error()
+    {
+        $this->view('users/error');
     }
 
     //view profile
     public function profile()
-    {
+    {   
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $user = $this->userModel->view($_SESSION['user_id']);
         $data = [
             'name' => $user->name,
@@ -53,6 +60,7 @@ class Users extends Controller
     //profile_photo update
     public function profilePhotoUpdate()
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -107,6 +115,7 @@ class Users extends Controller
 
     public function editDetail($id)
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user = $this->userModel->view($_SESSION['user_id']);
             $data = [
@@ -132,6 +141,7 @@ class Users extends Controller
 
     public function cancelOrder($order_id, $sorder_id)
     {   
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $orders = $this->userModel->getOrders($_SESSION['user_id']);
         foreach ($orders as $order) {
             if ($order->sorder_id == $sorder_id) {
@@ -160,6 +170,7 @@ class Users extends Controller
 
     public function completeOrder($order_id, $sorder_id)
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $order_data = $this->userModel->getOrderData($sorder_id);
         $today = date('Y-m-d');
         $end_data = $order_data->end_date;
@@ -192,12 +203,14 @@ class Users extends Controller
 
     public function markNotifications()
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $this->userModel->markNotificationsAsRead($_SESSION['user_id'], date('Y-m-d H:i:s'));
         redirect('users/index');
     }
 
     public function edit()
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // Sanitize POST data
@@ -299,9 +312,30 @@ class Users extends Controller
 
     public function delete()
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $password = trim($_POST['password']);
             $result = $this->userModel->fectchEncrptedPassword($_SESSION['user_id'], $password);
+            $has_orders = $this->userModel->hasOrders($_SESSION['user_id']);
+            if ($has_orders) {
+                $log_data = [
+                    'user_type' => 'Customer',
+                    'user_id' => $_SESSION['user_id'],
+                    'log_type' => 'Account Delete',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'User tried to delete their account but they have pending orders'
+                ];
+                $this->userModel->addLogData($log_data);
+                $notification_data = [
+                    'user_type' => 'Customer',
+                    'user_id' => $_SESSION['user_id'],
+                    'date_time' => date('Y-m-d H:i:s'),
+                    'status' => 'Unread',
+                    'data' => 'You Have Incomplete Orders. Please complete them before deleting your account'
+                ];
+                $this->userModel->addNotification($notification_data);
+                redirect('users/profile');
+            }
             if ($result) {
                 if ($this->userModel->delete($_SESSION['user_id'])) {
                     $log_data = [
@@ -335,6 +369,7 @@ class Users extends Controller
 
     public function sortInquries($inquiryData)
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         if ($inquiryData['inquiryType'] == 'recoverAccount') {
             $data = [
                 'user_id' => $_SESSION['user_id'],
@@ -481,6 +516,7 @@ class Users extends Controller
 
     public function inquiries()
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $inquiries = $this->userModel->getInquiries($_SESSION['user_id']);
         $data = [
             'inquiries' => $inquiries
@@ -498,6 +534,7 @@ class Users extends Controller
 
     public function viewInquiry($inquiry_id)
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $inquiry = $this->userModel->getInquiry($inquiry_id);
         if($inquiry->status == 'Pending'){
             $log_data = [
@@ -536,7 +573,9 @@ class Users extends Controller
         }
     }
 
-    public function sendMessageMod($message, $inquiry_id, $moderator_id, $date){
+    public function sendMessageMod($message, $inquiry_id, $moderator_id, $date)
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $modifiedDate = str_replace('_', ' ', $date);
         $modifiedMessage = str_replace('_', ' ', $message);
         $data = [
@@ -571,7 +610,9 @@ class Users extends Controller
         }
     }
 
-    public function contactsupport(){
+    public function contactsupport()
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $inq_type = trim($_POST['inquiryType']);
@@ -704,7 +745,9 @@ class Users extends Controller
             }
         }
 
-    public function changePassword(){
+    public function changePassword()
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $data = [
@@ -790,7 +833,8 @@ class Users extends Controller
         }
     }
 
-    public function changePassword_lo(){
+    public function changePassword_lo()
+    {
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $user_id = trim($_POST['user_id']);
@@ -1289,6 +1333,7 @@ class Users extends Controller
 
     public function logout()
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $log_data = [
             'user_type' => 'Customer',
             'date_and_time' => date('Y-m-d H:i:s'),
@@ -1306,11 +1351,13 @@ class Users extends Controller
 
     public function Instrument()
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $this->view('users/instrument');
     }
 
     public function inventory()
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $inventory = $this->userModel->inventory();
             $notificaions = $this->userModel->getNotifications($_SESSION['user_id'], date('Y-m-d H:i:s'));
@@ -1336,6 +1383,7 @@ class Users extends Controller
 
     public function Studio()
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $inventory = $this->userModel->studio();
             $notificaions = $this->userModel->getNotifications($_SESSION['user_id'], date('Y-m-d H:i:s'));
@@ -1363,6 +1411,7 @@ class Users extends Controller
 
     public function Singer()
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $inventory = $this->userModel->singer();
             $notificaions = $this->userModel->getNotifications($_SESSION['user_id'], date('Y-m-d H:i:s'));
@@ -1390,6 +1439,7 @@ class Users extends Controller
 
     public function Band()
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $inventory = $this->userModel->band();
             $notificaions = $this->userModel->getNotifications($_SESSION['user_id'], date('Y-m-d H:i:s'));
@@ -1417,6 +1467,7 @@ class Users extends Controller
 
     public function Musicians()
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $inventory = $this->userModel->musicians();
             $notificaions = $this->userModel->getNotifications($_SESSION['user_id'], date('Y-m-d H:i:s'));
@@ -1442,7 +1493,9 @@ class Users extends Controller
         }
     }
 
-    public function cart(){
+    public function cart()
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
             $cart_ini = $this->userModel->cart($_SESSION['user_id']);
             $subtotal = 0;
@@ -1531,7 +1584,9 @@ class Users extends Controller
     }
 
 
-    public function getSuborderDetails($suborders, $suborderID) {
+    public function getSuborderDetails($suborders, $suborderID) 
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         foreach ($suborders as $suborder) {
             if ($suborder['sorder_id'] == $suborderID) {
                 return $suborder;
@@ -1540,7 +1595,9 @@ class Users extends Controller
         return null;
     }
 
-    public function orders(){
+    public function orders()
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $orders = $this->userModel->getOrders($_SESSION['user_id']);
         $completeOrders = $this->userModel->getCompleteOrders($_SESSION['user_id']);
         $order_objects = [];
@@ -1614,7 +1671,9 @@ class Users extends Controller
     
     
 
-    public function placeOrder(){
+    public function placeOrder()
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $cart = $this->userModel->cart($_SESSION['user_id']);
         $sorder_id = '';
         $avail_ids = '';
@@ -1713,40 +1772,10 @@ class Users extends Controller
         }
     }
 
-    public function removeFromCart($product_id, $type){
+    public function removeFromCart($product_id, $type)
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $this->userModel->removeFromCart($product_id);
-        $cart = $this->userModel->cart($_SESSION['user_id']);
-        $subtotal = 0;
-        foreach ($cart as $cartItem){
-            if($cartItem->availability === 'notAvailable'){
-                continue;
-            }
-            $subtotal = $subtotal + ($cartItem->total);
-            if ($cartItem->type == 'Equipment'){
-                $product_data = $this->userModel->viewItem($cartItem->product_id);
-                $product_data->type = 'Equipment';
-            } else if ($cartItem->type == 'Studio'){
-                $product_data = $this->userModel->viewStudio($cartItem->product_id);
-                $product_data->type = 'Studio';
-            } else if ($cartItem->type == 'Singer'){
-                $product_data = $this->userModel->viewSinger($cartItem->product_id);
-                $product_data->type = 'Singer';
-            } else if ($cartItem->type == 'Band'){
-                $product_data = $this->userModel->viewBand($cartItem->product_id);
-                $product_data->type = 'Band';
-            } else if ($cartItem->type == 'Musician'){
-                $product_data = $this->userModel->viewMusician($cartItem->product_id);
-                $product_data->type = 'Musician';
-            }
-            $cartItem->product_data = $product_data;
-        }
-        $total = $subtotal + $subtotal*0.05 + 200.00;
-        
-        $data =[
-            'cart' => $cart,
-            'subtotal' => $subtotal,
-            'total' => $total
-        ];
         $log_data = [
             'user_type' => 'Customer',
             'user_id' => $_SESSION['user_id'],
@@ -1755,10 +1784,12 @@ class Users extends Controller
             'data' => 'User removed an '.$type.' with product id '.$product_id.' from their cart'
         ];
         $this->userModel->addLogData($log_data);
-        $this->view('users/cart',$data);
+        $this->cart();
     }
 
-    public function checkAvailability($type, $product_id){
+    public function checkAvailability($type, $product_id)
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         // Check for POST
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1818,7 +1849,9 @@ class Users extends Controller
         }
     }
 
-    public function viewAllAC($type, $availability, $data_selected){
+    public function viewAllAC($type, $availability, $data_selected)
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $product_id = $data_selected['product_id'];
         if($type == 'Equipment'){
             $data = $this->userModel->viewItem($product_id);
@@ -2100,52 +2133,57 @@ class Users extends Controller
         die('Something went wrong');
     }
 }
-    public function viewItem($product_id){
+    public function viewItem($product_id)
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $type = 'Equipment';
         $this->viewAll($product_id, $type);
     }
 
-    public function viewStudio($product_id){
+    public function viewStudio($product_id)
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $type = 'Studio';
         $this->viewAll($product_id, $type);
     }
 
-    public function viewSinger($product_id){
+    public function viewSinger($product_id)
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $type = 'Singer';
         $this->viewAll($product_id, $type);
     }
 
-    public function viewBand($product_id){
+    public function viewBand($product_id)
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $type = 'Band';
         $this->viewAll($product_id, $type);
     }
 
-    public function viewMusician($product_id){
+    public function viewMusician($product_id)
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $type = 'Musician';
         $this->viewAll($product_id, $type);
     }
 
-    public function viewAll($product_id, $type){
+    public function viewAll($product_id, $type)
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         if($type == 'Equipment'){
             $data = $this->userModel->viewItem($product_id);
             $reviews = $this->userModel->viewreviews($product_id, $type);
-        }
-        if($type == 'Studio'){
+        }else if($type == 'Studio'){
             $data = $this->userModel->viewStudio($product_id);
             $reviews = $this->userModel->viewreviews($product_id, $type);
-        }
-
-        if($type == 'Singer'){
+        }else if($type == 'Singer'){
             $data = $this->userModel->viewSinger($product_id);
             $reviews = $this->userModel->viewreviews($product_id, $type);
-        }
-
-        if($type == 'Band'){
+        }else if($type == 'Band'){
             $data = $this->userModel->viewBand($product_id);
             $reviews = $this->userModel->viewreviews($product_id, $type);
-        }
-
-        if($type == 'Musician'){
+        } else if($type == 'Musician'){
             $data = $this->userModel->viewMusician($product_id);
             $reviews = $this->userModel->viewreviews($product_id, $type);
         }
@@ -2454,7 +2492,9 @@ class Users extends Controller
     }
 
 
-    public function addToCart($product_id){
+    public function addToCart($product_id)
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         // Check for POST
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $cart = $this->userModel->cart($_SESSION['user_id']);
@@ -2586,7 +2626,9 @@ class Users extends Controller
         }
     }
 
-    public function cartItemCount(){
+    public function cartItemCount()
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
             $cart = $this->userModel->cart($_SESSION['user_id']);
             $data =[
@@ -2598,18 +2640,20 @@ class Users extends Controller
         }
     }
 
-    public function addReview($product_id){
+    public function addReview($product_id)
+    {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         // Check for POST
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $cat_ini = trim($_POST['category']);
-            if ($cat_ini == 'band'){
+            if ($cat_ini == 'Band'){
                 $cat = 'Band';
-            } else if ($cat_ini == 'studio'){
+            } else if ($cat_ini == 'Studio'){
                 $cat = 'Studio';
-            } else if ($cat_ini == 'singer'){
+            } else if ($cat_ini == 'Singer'){
                 $cat = 'Singer';
-            } else if ($cat_ini == 'musician'){
+            } else if ($cat_ini == 'Musician'){
                 $cat = 'Musician';
             } else {
                 $cat = 'Equipment';
@@ -2692,6 +2736,7 @@ class Users extends Controller
 
     public function generateReports()
     {
+        isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $user = $this->userModel->view($_SESSION['user_id']);
         $orders = $this->userModel->getOrdersCompleted($_SESSION['user_id']);
         $notificaions = $this->userModel->getNotifications($_SESSION['user_id'], date('Y-m-d H:i:s'));

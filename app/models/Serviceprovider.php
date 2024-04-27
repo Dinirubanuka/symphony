@@ -18,6 +18,36 @@ class ServiceProvider
         $this->mail = new PHPMailer(true);
     }
 
+    public function hasorders($serviceprovider_id)
+    {
+        $this->db->query('SELECT * FROM suborder WHERE serviceprovider_id = :serviceprovider_id AND (status = :status1 OR status = :status2 OR status = :status3)');
+        $this->db->bind(':serviceprovider_id', $serviceprovider_id);
+        $this->db->bind(':status1', 'Pending');
+        $this->db->bind(':status2', 'Upcoming');
+        $this->db->bind(':status3', 'In Progress');
+        $results = $this->db->resultSet();
+        if ($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function hasitemorders($product_id, $type){
+        $this->db->query('SELECT * FROM suborder WHERE product_id = :product_id AND type = :type AND (status = :status1 OR status = :status2 OR status = :status3)');
+        $this->db->bind(':product_id', $product_id);
+        $this->db->bind(':type', $type);
+        $this->db->bind(':status1', 'Pending');
+        $this->db->bind(':status2', 'Upcoming');
+        $this->db->bind(':status3', 'In Progress');
+        $results = $this->db->resultSet();
+        if ($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function additem($data)
     {
 
@@ -1025,6 +1055,17 @@ class ServiceProvider
         $this->db->bind(':date_time', $date_time);
         $results = $this->db->resultSet();
         return $results;
+    }
+
+    public function markNotifications($user_id, $date_time)
+    {
+        $this->db->query('UPDATE notifications SET status = :status WHERE user_id = :user_id AND user_type = :user_type AND date_time <= :date_time AND status = :status2');
+        $this->db->bind(':status', 'Read');
+        $this->db->bind(':status2', 'Unread');
+        $this->db->bind(':user_type', 'Serviceprovider');
+        $this->db->bind(':user_id', $user_id);
+        $this->db->bind(':date_time', $date_time);
+        $this->db->execute();
     }
 
     public function getActivity($sp_id)

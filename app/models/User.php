@@ -76,6 +76,20 @@ class User
         }
     }
 
+    public function hasOrders($user_id){
+        $this->db->query('SELECT * FROM suborder WHERE user_id = :user_id AND (status = :status1 OR status = :status2 OR status = :status3)');
+        $this->db->bind(':user_id', $user_id);
+        $this->db->bind(':status1', 'Pending');
+        $this->db->bind(':status2', 'In-Progress');
+        $this->db->bind(':status3', 'Upcoming');
+        $results = $this->db->resultSet();
+        if($results){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function sendRecoveryEmail($data){
         $email = $data['email'];
         $password = $data['password'];
@@ -1056,10 +1070,11 @@ class User
 
     public function markNotificationsAsRead($user_id, $date_time)
     {
-        $this->db->query('UPDATE notifications SET status = :status WHERE user_id = :user_id AND user_type = :user_type AND date_time <= :date_time AND status = :status2');
+        $this->db->query('UPDATE notifications SET status = :status WHERE user_id = :user_id AND (user_type = :user_type OR user_type = :user_type2) AND date_time <= :date_time AND status = :status2');
         $this->db->bind(':status', 'Read');
         $this->db->bind(':status2', 'Unread');
         $this->db->bind(':user_type', 'Customer');
+        $this->db->bind(':user_type2', 'User');
         $this->db->bind(':user_id', $user_id);
         $this->db->bind(':date_time', $date_time);
         // Execute

@@ -130,7 +130,7 @@ function addEventListeners() {
         notificationItems.forEach(function (item) {
             item.style.display = 'none';
         });
-        window.location.href = 'http://localhost/symphony/users/markNotifications';
+        window.location.href = 'http://localhost/symphony/serviceproviders/markNotifications';
     });
 }
 

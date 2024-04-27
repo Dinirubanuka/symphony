@@ -5,36 +5,151 @@
       $this->moderatorModel = $this->model('Moderator');
     }
 
+    public function error(){
+      $this->view('moderators/error');
+    }
+
     public function index(){
-      $mod_data = $this->moderatorModel->view($_SESSION['moderator_id']);
-      $users = $this->moderatorModel->getAllUsers();
-      $user_total = count($users);
-      $user_data = [
-        'Active' => 0,
-        'Deactivated' => 0,
-        'Banned' => 0
-      ];
-      $sps = $this->moderatorModel->getAllSP();
-      $sp_total = count($sps);
-      $sp_data = [
-        'Pending' => 0,
-        'Active' => 0,
-        'Deactivated' => 0,
-        'Rejected' => 0,
-        'Banned' => 0,
-      ];
-          
-      $reg_user = [
-        '6_7_days' => 0,
-        '5_6_days' => 0,
-        '4_5_days' => 0,
-        '3_4_days' => 0,
-        '2_3_days' => 0,
-        '1_2_days' => 0,
-        '0_1_days' => 0,
+      if (isset($_SESSION['moderator_id'])){
+        $mod_data = $this->moderatorModel->view($_SESSION['moderator_id']);
+        $users = $this->moderatorModel->getAllUsers();
+        $user_total = count($users);
+        $user_data = [
+          'Active' => 0,
+          'Deactivated' => 0,
+          'Banned' => 0
+        ];
+        $sps = $this->moderatorModel->getAllSP();
+        $sp_total = count($sps);
+        $sp_data = [
+          'Pending' => 0,
+          'Active' => 0,
+          'Deactivated' => 0,
+          'Rejected' => 0,
+          'Banned' => 0,
+        ];
+            
+        $reg_user = [
+          '6_7_days' => 0,
+          '5_6_days' => 0,
+          '4_5_days' => 0,
+          '3_4_days' => 0,
+          '2_3_days' => 0,
+          '1_2_days' => 0,
+          '0_1_days' => 0,
+        ];
+        
+        $reg_sp = [
+            '6_7_days' => 0,
+            '5_6_days' => 0,
+            '4_5_days' => 0,
+            '3_4_days' => 0,
+            '2_3_days' => 0,
+            '1_2_days' => 0,
+            '0_1_days' => 0,
+        ];
+        
+        foreach ($users as $user){
+          if($user->status == 'Active'){
+            $user_data['Active'] = $user_data['Active'] + 1;
+          } else if($user->status == 'Deactivated'){
+            $user_data['Deactivated'] = $user_data['Deactivated'] + 1;
+          } else if($user->status == 'Banned'){
+            $user_data['Banned'] = $user_data['Banned'] + 1;
+          }
+          $timestamp = strtotime($user->registration_date);
+          if ($timestamp >= strtotime('-1 days')) {
+              $reg_user['0_1_days']++;
+          }
+          if ($timestamp >= strtotime('-2 days') && $timestamp < strtotime('-1 days')) {
+              $reg_user['1_2_days']++;
+          }
+          if ($timestamp >= strtotime('-3 days') && $timestamp < strtotime('-2 days')) {
+              $reg_user['2_3_days']++;
+          }
+          if ($timestamp >= strtotime('-4 days') && $timestamp < strtotime('-3 days')) {
+              $reg_user['3_4_days']++;
+          }
+          if ($timestamp >= strtotime('-5 days') && $timestamp < strtotime('-4 days')) {
+              $reg_user['4_5_days']++;
+          }
+          if ($timestamp >= strtotime('-6 days') && $timestamp < strtotime('-5 days')) {
+              $reg_user['5_6_days']++;
+          }
+          if ($timestamp >= strtotime('-7 days') && $timestamp < strtotime('-6 days')) {
+              $reg_user['6_7_days']++;
+          }
+        }
+        foreach ($sps as $sp){
+          if($sp->status == 'Pending'){
+            $sp_data['Pending'] = $sp_data['Pending'] + 1;
+          } else if($sp->status == 'Active'){
+            $sp_data['Active'] = $sp_data['Active'] + 1;
+          } else if($sp->status == 'Deactivated'){
+            $sp_data['Deactivated'] = $sp_data['Deactivated'] + 1;
+          } else if($sp->status == 'Rejected'){
+            $sp_data['Rejected'] = $sp_data['Rejected'] + 1;
+          } else if($sp->status == 'Banned'){
+            $sp_data['Banned'] = $sp_data['Banned'] + 1;
+          }
+          $timestamp = strtotime($sp->registration_date);
+          if ($timestamp >= strtotime('-1 days')) {
+              $reg_sp['0_1_days']++;
+          }
+          if ($timestamp >= strtotime('-2 days') && $timestamp < strtotime('-1 days')) {
+              $reg_sp['1_2_days']++;
+          }
+          if ($timestamp >= strtotime('-3 days') && $timestamp < strtotime('-2 days')) {
+              $reg_sp['2_3_days']++;
+          }
+          if ($timestamp >= strtotime('-4 days') && $timestamp < strtotime('-3 days')) {
+              $reg_sp['3_4_days']++;
+          }
+          if ($timestamp >= strtotime('-5 days') && $timestamp < strtotime('-4 days')) {
+              $reg_sp['4_5_days']++;
+          }
+          if ($timestamp >= strtotime('-6 days') && $timestamp < strtotime('-5 days')) {
+              $reg_sp['5_6_days']++;
+          }
+          if ($timestamp >= strtotime('-7 days') && $timestamp < strtotime('-6 days')) {
+              $reg_sp['6_7_days']++;
+          }
+        }
+        $instrument_count = $this->moderatorModel->getInstrumentCount();
+        $studio_count = $this->moderatorModel->getStudioCount();
+        $band_count = $this->moderatorModel->getBandCount();
+        $singer_count = $this->moderatorModel->getSingerCount();
+        $musician_count = $this->moderatorModel->getMusicianCount();
+        $originalData = $this->moderatorModel->getLogs();
+        // Arrays for different time periods
+        $count_24h = [
+          '23_to_24_hours' => 0,
+          '22_to_23_hours' => 0,
+          '21_to_22_hours' => 0,
+          '20_to_21_hours' => 0,
+          '19_to_20_hours' => 0,
+          '18_to_19_hours' => 0,
+          '17_to_18_hours' => 0,
+          '16_to_17_hours' => 0,
+          '15_to_16_hours' => 0,
+          '14_to_15_hours' => 0,
+          '13_to_14_hours' => 0,
+          '12_to_13_hours' => 0,
+          '11_to_12_hours' => 0,
+          '10_to_11_hours' => 0,
+          '9_to_10_hours' => 0,
+          '8_to_9_hours' => 0,
+          '7_to_8_hours' => 0,
+          '6_to_7_hours' => 0,
+          '5_to_6_hours' => 0,
+          '4_to_5_hours' => 0,
+          '3_to_4_hours' => 0,
+          '2_to_3_hours' => 0,
+          '1_to_2_hours' => 0,
+          '0_to_1_hours' => 0,
       ];
       
-      $reg_sp = [
+      $count_week = [
           '6_7_days' => 0,
           '5_6_days' => 0,
           '4_5_days' => 0,
@@ -44,384 +159,278 @@
           '0_1_days' => 0,
       ];
       
-      foreach ($users as $user){
-        if($user->status == 'Active'){
-          $user_data['Active'] = $user_data['Active'] + 1;
-        } else if($user->status == 'Deactivated'){
-          $user_data['Deactivated'] = $user_data['Deactivated'] + 1;
-        } else if($user->status == 'Banned'){
-          $user_data['Banned'] = $user_data['Banned'] + 1;
-        }
-        $timestamp = strtotime($user->registration_date);
-        if ($timestamp >= strtotime('-1 days')) {
-            $reg_user['0_1_days']++;
-        }
-        if ($timestamp >= strtotime('-2 days') && $timestamp < strtotime('-1 days')) {
-            $reg_user['1_2_days']++;
-        }
-        if ($timestamp >= strtotime('-3 days') && $timestamp < strtotime('-2 days')) {
-            $reg_user['2_3_days']++;
-        }
-        if ($timestamp >= strtotime('-4 days') && $timestamp < strtotime('-3 days')) {
-            $reg_user['3_4_days']++;
-        }
-        if ($timestamp >= strtotime('-5 days') && $timestamp < strtotime('-4 days')) {
-            $reg_user['4_5_days']++;
-        }
-        if ($timestamp >= strtotime('-6 days') && $timestamp < strtotime('-5 days')) {
-            $reg_user['5_6_days']++;
-        }
-        if ($timestamp >= strtotime('-7 days') && $timestamp < strtotime('-6 days')) {
-            $reg_user['6_7_days']++;
-        }
-      }
-      foreach ($sps as $sp){
-        if($sp->status == 'Pending'){
-          $sp_data['Pending'] = $sp_data['Pending'] + 1;
-        } else if($sp->status == 'Active'){
-          $sp_data['Active'] = $sp_data['Active'] + 1;
-        } else if($sp->status == 'Deactivated'){
-          $sp_data['Deactivated'] = $sp_data['Deactivated'] + 1;
-        } else if($sp->status == 'Rejected'){
-          $sp_data['Rejected'] = $sp_data['Rejected'] + 1;
-        } else if($sp->status == 'Banned'){
-          $sp_data['Banned'] = $sp_data['Banned'] + 1;
-        }
-        $timestamp = strtotime($sp->registration_date);
-        if ($timestamp >= strtotime('-1 days')) {
-            $reg_sp['0_1_days']++;
-        }
-        if ($timestamp >= strtotime('-2 days') && $timestamp < strtotime('-1 days')) {
-            $reg_sp['1_2_days']++;
-        }
-        if ($timestamp >= strtotime('-3 days') && $timestamp < strtotime('-2 days')) {
-            $reg_sp['2_3_days']++;
-        }
-        if ($timestamp >= strtotime('-4 days') && $timestamp < strtotime('-3 days')) {
-            $reg_sp['3_4_days']++;
-        }
-        if ($timestamp >= strtotime('-5 days') && $timestamp < strtotime('-4 days')) {
-            $reg_sp['4_5_days']++;
-        }
-        if ($timestamp >= strtotime('-6 days') && $timestamp < strtotime('-5 days')) {
-            $reg_sp['5_6_days']++;
-        }
-        if ($timestamp >= strtotime('-7 days') && $timestamp < strtotime('-6 days')) {
-            $reg_sp['6_7_days']++;
-        }
-      }
-      $instrument_count = $this->moderatorModel->getInstrumentCount();
-      $studio_count = $this->moderatorModel->getStudioCount();
-      $band_count = $this->moderatorModel->getBandCount();
-      $singer_count = $this->moderatorModel->getSingerCount();
-      $musician_count = $this->moderatorModel->getMusicianCount();
-      $originalData = $this->moderatorModel->getLogs();
-      // Arrays for different time periods
-      $count_24h = [
-        '23_to_24_hours' => 0,
-        '22_to_23_hours' => 0,
-        '21_to_22_hours' => 0,
-        '20_to_21_hours' => 0,
-        '19_to_20_hours' => 0,
-        '18_to_19_hours' => 0,
-        '17_to_18_hours' => 0,
-        '16_to_17_hours' => 0,
-        '15_to_16_hours' => 0,
-        '14_to_15_hours' => 0,
-        '13_to_14_hours' => 0,
-        '12_to_13_hours' => 0,
-        '11_to_12_hours' => 0,
-        '10_to_11_hours' => 0,
-        '9_to_10_hours' => 0,
-        '8_to_9_hours' => 0,
-        '7_to_8_hours' => 0,
-        '6_to_7_hours' => 0,
-        '5_to_6_hours' => 0,
-        '4_to_5_hours' => 0,
-        '3_to_4_hours' => 0,
-        '2_to_3_hours' => 0,
-        '1_to_2_hours' => 0,
-        '0_to_1_hours' => 0,
-    ];
-    
-    $count_week = [
-        '6_7_days' => 0,
-        '5_6_days' => 0,
-        '4_5_days' => 0,
-        '3_4_days' => 0,
-        '2_3_days' => 0,
-        '1_2_days' => 0,
-        '0_1_days' => 0,
-    ];
-    
-    $count_8weeks = [
-        '7_to_8_weeks' => 0,
-        '6_to_7_weeks' => 0,
-        '5_to_6_weeks' => 0,
-        '4_to_5_weeks' => 0,
-        '3_to_4_weeks' => 0,
-        '2_to_3_weeks' => 0,
-        '1_to_2_weeks' => 0,
-        '0_to_1_week' => 0,
-    ];
-    
-    $count_year = [
-        '11_12_months' => 0,
-        '10_11_months' => 0,
-        '9_10_months' => 0,
-        '8_9_months' => 0,
-        '7_8_months' => 0,
-        '6_7_months' => 0,
-        '5_6_months' => 0,
-        '4_5_months' => 0,
-        '3_4_months' => 0,
-        '2_3_months' => 0,
-        '1_2_months' => 0,
-        '0_1_month' => 0,
-    ];
-
+      $count_8weeks = [
+          '7_to_8_weeks' => 0,
+          '6_to_7_weeks' => 0,
+          '5_to_6_weeks' => 0,
+          '4_to_5_weeks' => 0,
+          '3_to_4_weeks' => 0,
+          '2_to_3_weeks' => 0,
+          '1_to_2_weeks' => 0,
+          '0_to_1_week' => 0,
+      ];
       
-      // Calculate the counts for each time period
-      foreach ($originalData as $log) {
-          $timestamp = strtotime($log->date_and_time);
-      
-          if ($timestamp >= strtotime('-1 hours')) {
-            $count_24h['0_to_1_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-2 hours') && $timestamp < strtotime('-1 hours')) {
-            $count_24h['1_to_2_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-3 hours') && $timestamp < strtotime('-2 hours')) {
-            $count_24h['2_to_3_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-4 hours') && $timestamp < strtotime('-3 hours')) {
-            $count_24h['3_to_4_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-5 hours') && $timestamp < strtotime('-4 hours')) {
-            $count_24h['4_to_5_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-6 hours') && $timestamp < strtotime('-5 hours')) {
-            $count_24h['5_to_6_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-7 hours') && $timestamp < strtotime('-6 hours')) {
-            $count_24h['6_to_7_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-8 hours') && $timestamp < strtotime('-7 hours')) {
-            $count_24h['7_to_8_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-9 hours') && $timestamp < strtotime('-8 hours')) {
-            $count_24h['8_to_9_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-10 hours') && $timestamp < strtotime('-9 hours')) {
-            $count_24h['9_to_10_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-11 hours') && $timestamp < strtotime('-10 hours')) {
-            $count_24h['10_to_11_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-12 hours') && $timestamp < strtotime('-11 hours')) {
-            $count_24h['11_to_12_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-13 hours') && $timestamp < strtotime('-12 hours')) {
-            $count_24h['12_to_13_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-14 hours') && $timestamp < strtotime('-13 hours')) {
-            $count_24h['13_to_14_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-15 hours') && $timestamp < strtotime('-14 hours')) {
-            $count_24h['14_to_15_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-16 hours') && $timestamp < strtotime('-15 hours')) {
-            $count_24h['15_to_16_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-17 hours') && $timestamp < strtotime('-16 hours')) {
-            $count_24h['16_to_17_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-18 hours') && $timestamp < strtotime('-17 hours')) {
-            $count_24h['17_to_18_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-19 hours') && $timestamp < strtotime('-18 hours')) {
-            $count_24h['18_to_19_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-20 hours') && $timestamp < strtotime('-19 hours')) {
-            $count_24h['19_to_20_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-21 hours') && $timestamp < strtotime('-20 hours')) {
-            $count_24h['20_to_21_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-22 hours') && $timestamp < strtotime('-21 hours')) {
-            $count_24h['21_to_22_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-23 hours') && $timestamp < strtotime('-22 hours')) {
-            $count_24h['22_to_23_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-24 hours') && $timestamp < strtotime('-23 hours')) {
-            $count_24h['23_to_24_hours']++;
-          }
-
-          if ($timestamp >= strtotime('-1 days')) {
-              $count_week['0_1_days']++;
-          }
-
-          if ($timestamp >= strtotime('-2 days') && $timestamp < strtotime('-1 days')) {
-            $count_week['1_2_days']++;
-          }
-
-          if ($timestamp >= strtotime('-3 days') && $timestamp < strtotime('-2 days')) {
-            $count_week['2_3_days']++;
-          }
-
-          if ($timestamp >= strtotime('-4 days') && $timestamp < strtotime('-3 days')) {
-            $count_week['3_4_days']++;
-          }
-
-          if ($timestamp >= strtotime('-5 days') && $timestamp < strtotime('-4 days')) {
-            $count_week['4_5_days']++;
-          }
-
-          if ($timestamp >= strtotime('-6 days') && $timestamp < strtotime('-5 days')) {
-            $count_week['5_6_days']++;
-          }
-
-          if ($timestamp >= strtotime('-7 days') && $timestamp < strtotime('-6 days')) {
-            $count_week['6_7_days']++;
-          }
+      $count_year = [
+          '11_12_months' => 0,
+          '10_11_months' => 0,
+          '9_10_months' => 0,
+          '8_9_months' => 0,
+          '7_8_months' => 0,
+          '6_7_months' => 0,
+          '5_6_months' => 0,
+          '4_5_months' => 0,
+          '3_4_months' => 0,
+          '2_3_months' => 0,
+          '1_2_months' => 0,
+          '0_1_month' => 0,
+      ];
+  
         
-          if ($timestamp >= strtotime('-1 week')) {
-              $count_8weeks['0_to_1_week']++;
-          }
-
-          if ($timestamp >= strtotime('-2 weeks') && $timestamp < strtotime('-1 weeks')) {
-            $count_8weeks['1_to_2_weeks']++;
-          }
-
-          if ($timestamp >= strtotime('-3 weeks') && $timestamp < strtotime('-2 weeks')) {
-            $count_8weeks['2_to_3_weeks']++;
-          }
-
-          if ($timestamp >= strtotime('-4 weeks') && $timestamp < strtotime('-3 weeks')) {
-            $count_8weeks['3_to_4_weeks']++;
-          }
-
-          if ($timestamp >= strtotime('-5 weeks') && $timestamp < strtotime('-4 weeks')) {
-            $count_8weeks['4_to_5_weeks']++;
-          }
-
-          if ($timestamp >= strtotime('-6 weeks') && $timestamp < strtotime('-5 weeks')) {
-            $count_8weeks['5_to_6_weeks']++;
-          }
-
-          if ($timestamp >= strtotime('-7 weeks') && $timestamp < strtotime('-6 weeks')) {
-            $count_8weeks['6_to_7_weeks']++;
-          }
-
-          if ($timestamp >= strtotime('-8 weeks') && $timestamp < strtotime('-7 weeks')) {
-            $count_8weeks['7_to_8_weeks']++;
-          }
-      
-          if ($timestamp >= strtotime('-1 month')) {
-              $count_year['0_1_month']++;
-          }
-
-          if ($timestamp >= strtotime('-2 months') && $timestamp < strtotime('-1 months')) {
-            $count_year['1_2_months']++;
-          }
-
-          if ($timestamp >= strtotime('-3 months') && $timestamp < strtotime('-2 months')) {
-            $count_year['2_3_months']++;
-          }
-
-          if ($timestamp >= strtotime('-4 months') && $timestamp < strtotime('-3 months')) {
-            $count_year['3_4_months']++;
-          }
-
-          if ($timestamp >= strtotime('-5 months') && $timestamp < strtotime('-4 months')) {
-            $count_year['4_5_months']++;
-          }
-
-          if ($timestamp >= strtotime('-6 months') && $timestamp < strtotime('-5 months')) {
-            $count_year['5_6_months']++;
-          }
-
-          if ($timestamp >= strtotime('-7 months') && $timestamp < strtotime('-6 months')) {
-            $count_year['6_7_months']++;
-          }
-
-          if ($timestamp >= strtotime('-8 months') && $timestamp < strtotime('-7 months')) {
-            $count_year['7_8_months']++;
-          }
-
-          if ($timestamp >= strtotime('-9 months') && $timestamp < strtotime('-8 months')) {
-            $count_year['8_9_months']++;
-          }
-
-          if ($timestamp >= strtotime('-10 months') && $timestamp < strtotime('-9 months')) {
-            $count_year['9_10_months']++;
-          }
-
-          if ($timestamp >= strtotime('-11 months') && $timestamp < strtotime('-10 months')) {
-            $count_year['10_11_months']++;
-          }
-
-          if ($timestamp >= strtotime('-12 months') && $timestamp < strtotime('-11 months')) {
-            $count_year['11_12_months']++;
-          }
+        // Calculate the counts for each time period
+        foreach ($originalData as $log) {
+            $timestamp = strtotime($log->date_and_time);
+        
+            if ($timestamp >= strtotime('-1 hours')) {
+              $count_24h['0_to_1_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-2 hours') && $timestamp < strtotime('-1 hours')) {
+              $count_24h['1_to_2_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-3 hours') && $timestamp < strtotime('-2 hours')) {
+              $count_24h['2_to_3_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-4 hours') && $timestamp < strtotime('-3 hours')) {
+              $count_24h['3_to_4_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-5 hours') && $timestamp < strtotime('-4 hours')) {
+              $count_24h['4_to_5_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-6 hours') && $timestamp < strtotime('-5 hours')) {
+              $count_24h['5_to_6_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-7 hours') && $timestamp < strtotime('-6 hours')) {
+              $count_24h['6_to_7_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-8 hours') && $timestamp < strtotime('-7 hours')) {
+              $count_24h['7_to_8_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-9 hours') && $timestamp < strtotime('-8 hours')) {
+              $count_24h['8_to_9_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-10 hours') && $timestamp < strtotime('-9 hours')) {
+              $count_24h['9_to_10_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-11 hours') && $timestamp < strtotime('-10 hours')) {
+              $count_24h['10_to_11_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-12 hours') && $timestamp < strtotime('-11 hours')) {
+              $count_24h['11_to_12_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-13 hours') && $timestamp < strtotime('-12 hours')) {
+              $count_24h['12_to_13_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-14 hours') && $timestamp < strtotime('-13 hours')) {
+              $count_24h['13_to_14_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-15 hours') && $timestamp < strtotime('-14 hours')) {
+              $count_24h['14_to_15_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-16 hours') && $timestamp < strtotime('-15 hours')) {
+              $count_24h['15_to_16_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-17 hours') && $timestamp < strtotime('-16 hours')) {
+              $count_24h['16_to_17_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-18 hours') && $timestamp < strtotime('-17 hours')) {
+              $count_24h['17_to_18_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-19 hours') && $timestamp < strtotime('-18 hours')) {
+              $count_24h['18_to_19_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-20 hours') && $timestamp < strtotime('-19 hours')) {
+              $count_24h['19_to_20_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-21 hours') && $timestamp < strtotime('-20 hours')) {
+              $count_24h['20_to_21_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-22 hours') && $timestamp < strtotime('-21 hours')) {
+              $count_24h['21_to_22_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-23 hours') && $timestamp < strtotime('-22 hours')) {
+              $count_24h['22_to_23_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-24 hours') && $timestamp < strtotime('-23 hours')) {
+              $count_24h['23_to_24_hours']++;
+            }
+  
+            if ($timestamp >= strtotime('-1 days')) {
+                $count_week['0_1_days']++;
+            }
+  
+            if ($timestamp >= strtotime('-2 days') && $timestamp < strtotime('-1 days')) {
+              $count_week['1_2_days']++;
+            }
+  
+            if ($timestamp >= strtotime('-3 days') && $timestamp < strtotime('-2 days')) {
+              $count_week['2_3_days']++;
+            }
+  
+            if ($timestamp >= strtotime('-4 days') && $timestamp < strtotime('-3 days')) {
+              $count_week['3_4_days']++;
+            }
+  
+            if ($timestamp >= strtotime('-5 days') && $timestamp < strtotime('-4 days')) {
+              $count_week['4_5_days']++;
+            }
+  
+            if ($timestamp >= strtotime('-6 days') && $timestamp < strtotime('-5 days')) {
+              $count_week['5_6_days']++;
+            }
+  
+            if ($timestamp >= strtotime('-7 days') && $timestamp < strtotime('-6 days')) {
+              $count_week['6_7_days']++;
+            }
+          
+            if ($timestamp >= strtotime('-1 week')) {
+                $count_8weeks['0_to_1_week']++;
+            }
+  
+            if ($timestamp >= strtotime('-2 weeks') && $timestamp < strtotime('-1 weeks')) {
+              $count_8weeks['1_to_2_weeks']++;
+            }
+  
+            if ($timestamp >= strtotime('-3 weeks') && $timestamp < strtotime('-2 weeks')) {
+              $count_8weeks['2_to_3_weeks']++;
+            }
+  
+            if ($timestamp >= strtotime('-4 weeks') && $timestamp < strtotime('-3 weeks')) {
+              $count_8weeks['3_to_4_weeks']++;
+            }
+  
+            if ($timestamp >= strtotime('-5 weeks') && $timestamp < strtotime('-4 weeks')) {
+              $count_8weeks['4_to_5_weeks']++;
+            }
+  
+            if ($timestamp >= strtotime('-6 weeks') && $timestamp < strtotime('-5 weeks')) {
+              $count_8weeks['5_to_6_weeks']++;
+            }
+  
+            if ($timestamp >= strtotime('-7 weeks') && $timestamp < strtotime('-6 weeks')) {
+              $count_8weeks['6_to_7_weeks']++;
+            }
+  
+            if ($timestamp >= strtotime('-8 weeks') && $timestamp < strtotime('-7 weeks')) {
+              $count_8weeks['7_to_8_weeks']++;
+            }
+        
+            if ($timestamp >= strtotime('-1 month')) {
+                $count_year['0_1_month']++;
+            }
+  
+            if ($timestamp >= strtotime('-2 months') && $timestamp < strtotime('-1 months')) {
+              $count_year['1_2_months']++;
+            }
+  
+            if ($timestamp >= strtotime('-3 months') && $timestamp < strtotime('-2 months')) {
+              $count_year['2_3_months']++;
+            }
+  
+            if ($timestamp >= strtotime('-4 months') && $timestamp < strtotime('-3 months')) {
+              $count_year['3_4_months']++;
+            }
+  
+            if ($timestamp >= strtotime('-5 months') && $timestamp < strtotime('-4 months')) {
+              $count_year['4_5_months']++;
+            }
+  
+            if ($timestamp >= strtotime('-6 months') && $timestamp < strtotime('-5 months')) {
+              $count_year['5_6_months']++;
+            }
+  
+            if ($timestamp >= strtotime('-7 months') && $timestamp < strtotime('-6 months')) {
+              $count_year['6_7_months']++;
+            }
+  
+            if ($timestamp >= strtotime('-8 months') && $timestamp < strtotime('-7 months')) {
+              $count_year['7_8_months']++;
+            }
+  
+            if ($timestamp >= strtotime('-9 months') && $timestamp < strtotime('-8 months')) {
+              $count_year['8_9_months']++;
+            }
+  
+            if ($timestamp >= strtotime('-10 months') && $timestamp < strtotime('-9 months')) {
+              $count_year['9_10_months']++;
+            }
+  
+            if ($timestamp >= strtotime('-11 months') && $timestamp < strtotime('-10 months')) {
+              $count_year['10_11_months']++;
+            }
+  
+            if ($timestamp >= strtotime('-12 months') && $timestamp < strtotime('-11 months')) {
+              $count_year['11_12_months']++;
+            }
+        }
+        
+        // Now $count_24h, $count_week, $count_8weeks, and $count_year contain the counts
+        $data_set = [
+            'last_24h' => $count_24h,
+            'last_week' => $count_week,
+            'last_8_weeks' => $count_8weeks,
+            'last_year' => $count_year,
+        ];
+  
+        $reg_data = [
+          'user' => $reg_user,
+          'sp' => $reg_sp
+        ];
+  
+        $data = [
+          'mod_data' => $mod_data,
+          'user_data' => $user_data,
+          'sp_data' => $sp_data,
+          'user_total' => $user_total,
+          'sp_total' => $sp_total,
+          'instrument_count' => $instrument_count->count,
+          'studio_count' => $studio_count->count,
+          'band_count' => $band_count->count,
+          'singer_count' => $singer_count->count,
+          'musician_count' => $musician_count->count,
+          'traffic_data' => $data_set,
+          'reg_data' => $reg_data
+        ];
+        $this->view('moderators/index', $data);
+      } else {
+        $this->view('moderators/error');
       }
-      
-      // Now $count_24h, $count_week, $count_8weeks, and $count_year contain the counts
-      $data_set = [
-          'last_24h' => $count_24h,
-          'last_week' => $count_week,
-          'last_8_weeks' => $count_8weeks,
-          'last_year' => $count_year,
-      ];
-
-      $reg_data = [
-        'user' => $reg_user,
-        'sp' => $reg_sp
-      ];
-
-      $data = [
-        'mod_data' => $mod_data,
-        'user_data' => $user_data,
-        'sp_data' => $sp_data,
-        'user_total' => $user_total,
-        'sp_total' => $sp_total,
-        'instrument_count' => $instrument_count->count,
-        'studio_count' => $studio_count->count,
-        'band_count' => $band_count->count,
-        'singer_count' => $singer_count->count,
-        'musician_count' => $musician_count->count,
-        'traffic_data' => $data_set,
-        'reg_data' => $reg_data
-      ];
-      $this->view('moderators/index', $data);
     }
 
     //view profile
     public function profile(){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $moderator = $this->moderatorModel->view($_SESSION['moderator_id']);
       $data =[
         'moderator_name'=>$moderator->moderator_name,
@@ -510,6 +519,7 @@
     }
 
     public function pendingrecoverrequests(){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $recover = $this->moderatorModel->getRecoverRequests('Pending');
       $data = [
         'status' => 'Pending',
@@ -527,6 +537,7 @@
     }
 
     public function acceptedrecoverrequests(){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $recover = $this->moderatorModel->getRecoverRequests('Accepted');
       $data = [
         'status' => 'Accepted',
@@ -544,6 +555,7 @@
     }
 
     public function rejectedrecoverrequests(){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $recover = $this->moderatorModel->getRecoverRequests('Rejected');
       $data = [
         'status' => 'Rejected',
@@ -662,6 +674,7 @@
     }
 
     public function viewRecoverRequest($id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $recover = $this->moderatorModel->getRecoverRequest($id);
       $users = $this->moderatorModel->getAllUsers();
       $transformedUsers = [];
@@ -743,6 +756,7 @@
     }
 
     public function changeUserPassword($id, $email, $req_id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
         $length = 16;
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $password = '';
@@ -799,6 +813,7 @@
     }
 
     public function rejectRecoverRequest($id, $encodedReason){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $decodeddReason = str_replace('_', ' ', $encodedReason);
       $request_data = $this->moderatorModel->getRecoverRequest($id);
       $email_data = [
@@ -823,6 +838,7 @@
     }
 
     public function viewProduct($type, $product_id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       if($type == 'Equipment'){
         $data = $this->moderatorModel->getEquipmentData($product_id);
       } else if ($type == 'Studio'){
@@ -1076,6 +1092,7 @@
     }
 
     public function viewActiveUser(){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $users = $this->moderatorModel->getUsers();
       $data = [
         'users' => $users,
@@ -1093,6 +1110,7 @@
     }
 
     public function viewBannedUser(){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $users = $this->moderatorModel->getBannedUsers();
       $data = [
         'users' => $users,
@@ -1110,6 +1128,7 @@
     }
 
     public function viewDeactivatedUser(){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $users = $this->moderatorModel->getDeactivatedUsers();
       $data = [
         'users' => $users,
@@ -1127,6 +1146,7 @@
     }
 
     public function viewActiveSP(){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $serviceproviders = $this->moderatorModel->getServiceProviders();
       $data = [
         'serviceproviders' => $serviceproviders,
@@ -1144,6 +1164,7 @@
     }
 
     public function viewRejectedSP(){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $serviceproviders = $this->moderatorModel->getRejectedServiceProviders();
       $data = [
         'serviceproviders' => $serviceproviders,
@@ -1161,6 +1182,7 @@
     }
 
     public function viewDeactivatedSP(){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $serviceproviders = $this->moderatorModel->getDeactivatedServiceProviders();
       $data = [
         'serviceproviders' => $serviceproviders,
@@ -1178,6 +1200,7 @@
     }
 
     public function viewBannedSP(){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $serviceproviders = $this->moderatorModel->getBannedServiceProviders();
       $data = [
         'serviceproviders' => $serviceproviders,
@@ -1195,6 +1218,7 @@
     }
 
     public function deleteuser($id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       if($this->moderatorModel->deleteUser($id)){
         $log_data = [
           'user_type' => 'Moderator',
@@ -1219,6 +1243,7 @@
     }
 
     public function pendingrequest(){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $pending = $this->moderatorModel->getPendingRequests();
       $data = [
         'pending' => $pending
@@ -1235,6 +1260,7 @@
     }
 
     public function viewPendingRequest($id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $request = $this->moderatorModel->getSP($id);
       $data = [
         'request' => $request
@@ -1251,6 +1277,7 @@
     }
 
     public function viewserviceprovider($id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $serviceprovider = $this->moderatorModel->getSP($id);
       $data = [
         'request' => $serviceprovider
@@ -1267,6 +1294,7 @@
     }
 
     public function viewuser($id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $user = $this->moderatorModel->getUser($id);
       $data = [
         'request' => $user
@@ -1283,6 +1311,7 @@
     }
 
     public function banuser($id, $encodedReason){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $decodedReason = str_replace('_', ' ', $encodedReason);
       $user = $this->moderatorModel->getUser($id);
       if($this->moderatorModel->banUser($id)){
@@ -1310,6 +1339,7 @@
     }
 
     public function banserviceprovider($id, $encodedReason){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $decodeddReason = str_replace('_', ' ', $encodedReason);
       $sp = $this->moderatorModel->getSP($id);
       if($this->moderatorModel->banServiceProvider($id)){
@@ -1337,6 +1367,7 @@
     }
 
     public function unbanserviceprovider($id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $sp = $this->moderatorModel->getSP($id);
       $email_data = [
         'name' => $sp->business_name,
@@ -1367,6 +1398,7 @@
     }
 
     public function unbanuser($id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $user = $this->moderatorModel->getUser($id);
       $email_data = [
         'name' => $user->name,
@@ -1397,6 +1429,7 @@
     }
 
     public function acceptServiceProvider($id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       if($this->moderatorModel->acceptSP($id)){
         $log_data = [
           'user_type' => 'Moderator',
@@ -1429,6 +1462,7 @@
     }
 
     public function rejectServiceProvider($id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       if($this->moderatorModel->rejectSP($id)){
         $log_data = [
           'user_type' => 'Moderator',
@@ -1453,6 +1487,7 @@
     }
 
     public function viewUserOrders($id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $order = $this->moderatorModel->viewUserOrders($id);
       $data = [
         'order' => $order,
@@ -1470,6 +1505,7 @@
     }
 
     public function viewSPOrders($id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $order = $this->moderatorModel->viewSPOrders($id);
       $data = [
         'order' => $order,
@@ -1487,6 +1523,7 @@
     }
 
     public function viewOrder($id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $order = $this->moderatorModel->getOrderData($id);
       $user_data = $this->moderatorModel->getUser($order->user_id);
       $order_data = json_decode(json_encode($order), true);
@@ -1528,6 +1565,7 @@
     }
 
     public function viewSubOrder($id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $suborder = $this->moderatorModel->getSubOrderData($id);
       $user_data = $this->moderatorModel->getUser($suborder->user_id);
       if($suborder->type == 'Equipment'){
@@ -1558,6 +1596,7 @@
 
     public function pendinginquiries()
     {
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
         $inquiries_pending = $this->moderatorModel->getPendingInquiries();
         $data = [
             'pending' => $inquiries_pending,
@@ -1575,6 +1614,7 @@
 
     public function activeinquiries()
     {
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
         $inquiries_active = $this->moderatorModel->getActiveInquiries($_SESSION['moderator_id']);
         $data = [
             'active' => $inquiries_active,
@@ -1592,6 +1632,7 @@
 
     public function completedinquiries()
     {
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
         $inquiries_completed = $this->moderatorModel->getCompletedInquiries($_SESSION['moderator_id']);
         $data = [
             'completed' => $inquiries_completed,
@@ -1609,6 +1650,7 @@
 
     public function viewInquiry($inquiry_id)
     {
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
         $inquiry = $this->moderatorModel->getInquiry($inquiry_id);
         $user_data = $this->moderatorModel->getUserData($inquiry->user_id);
         if($inquiry->status == 'Pending'){
@@ -1652,6 +1694,7 @@
     }
 
     public function sendMessageUser($message, $inquiry_id, $id, $date){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $modifiedDate = str_replace('_', ' ', $date);
       $modifiedMessage = str_replace('_', ' ', $message);
       $data = [
@@ -1695,6 +1738,7 @@
   }
 
     public function approveInquiry($inquiry_id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
         if($this->moderatorModel->approveInquiry($inquiry_id, $_SESSION['moderator_id'])){
           $log_data = [
               'user_type' => 'Moderator',
@@ -1727,6 +1771,7 @@
     }
 
     public function completeInquiry($inquiry_id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
         if($this->moderatorModel->completeInquiry($inquiry_id)){
           $log_data = [
               'user_type' => 'Moderator',
@@ -1759,6 +1804,7 @@
     }
 
     public function deleteserviceprovider($id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       if($this->moderatorModel->deleteServiceProvider($id)){
         $log_data = [
           'user_type' => 'Moderator',
@@ -1783,6 +1829,7 @@
     }
 
     public function viewInventory($sp_id){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $mod = $this->moderatorModel->view($_SESSION['moderator_id']);
       $sp = $this->moderatorModel->getSP($sp_id);
       $equipment = $this->moderatorModel->getEquipmentSP($sp_id);
@@ -1812,6 +1859,7 @@
     }
 
     public function logout(){
+      isset($_SESSION['moderator_id']) ? '' : $this->view('moderators/error');
       $log_data = [
         'user_type' => 'Moderator',
         'user_id' => $_SESSION['moderator_id'],

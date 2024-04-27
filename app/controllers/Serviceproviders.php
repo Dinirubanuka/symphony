@@ -12,11 +12,18 @@ class serviceproviders extends Controller
 
     public function index()
     {
-        $this->view('serviceproviders/index');
+        isset($_SESSION['serviceprovider_id']) ? $this->view('serviceproviders/index') : $this->view('serviceproviders/error');
+        
+    }
+
+    public function error()
+    {
+        $this->view('serviceproviders/error');
     }
     //view profile
     public function profile()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $serviceprovider = $this->serviceProviderModel->view($_SESSION['serviceprovider_id']);
         $data = [
             'business_name' => $serviceprovider->business_name,
@@ -43,6 +50,7 @@ class serviceproviders extends Controller
 
     public function inventory()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $inventory = $this->serviceProviderModel->inventory($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
@@ -59,6 +67,7 @@ class serviceproviders extends Controller
 
     public function inventoryDelete()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $inventory = $this->serviceProviderModel->inventory($_SESSION['serviceprovider_id']);
             $notifications = $this->serviceProviderModel->getNotifications($_SESSION['serviceprovider_id'], date('Y-m-d H:i:s'));
@@ -76,6 +85,7 @@ class serviceproviders extends Controller
 
     public function fetchSingers()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $inventory = $this->serviceProviderModel->singer($_SESSION['serviceprovider_id']);
             $notifications = $this->serviceProviderModel->getNotifications($_SESSION['serviceprovider_id'], date('Y-m-d H:i:s'));
@@ -101,6 +111,7 @@ class serviceproviders extends Controller
 
     public function fetchStudio()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $inventory = $this->serviceProviderModel->studio($_SESSION['serviceprovider_id']);
             $notifications = $this->serviceProviderModel->getNotifications($_SESSION['serviceprovider_id'], date('Y-m-d H:i:s'));
@@ -126,6 +137,7 @@ class serviceproviders extends Controller
 
     public function fetchBand()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $inventory = $this->serviceProviderModel->band($_SESSION['serviceprovider_id']);
             $notifications = $this->serviceProviderModel->getNotifications($_SESSION['serviceprovider_id'], date('Y-m-d H:i:s'));
@@ -152,6 +164,7 @@ class serviceproviders extends Controller
 
     public function fetchmusicians()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $inventory = $this->serviceProviderModel->musician($_SESSION['serviceprovider_id']);
             $notifications = $this->serviceProviderModel->getNotifications($_SESSION['serviceprovider_id'], date('Y-m-d H:i:s'));
@@ -178,6 +191,7 @@ class serviceproviders extends Controller
 
     public function addMusicians()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -355,6 +369,7 @@ class serviceproviders extends Controller
 
     public function musicians()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $inventory = $this->serviceProviderModel->musician($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
@@ -373,6 +388,7 @@ class serviceproviders extends Controller
 
     public function viewMusicians($product_id)
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $singerDetails = $this->serviceProviderModel->viewMusicians($product_id);
             if ($singerDetails) {
@@ -401,6 +417,7 @@ class serviceproviders extends Controller
 
     public function updateMusicians($id)
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
 //        $singerPhoto = $this->serviceProviderModel->fetchSingerPhoto($id);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -534,6 +551,27 @@ class serviceproviders extends Controller
     
     public function deleteBand($product_id)
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
+        $hasitemorders = $this->serviceProviderModel->hasitemorders($product_id, 'Band');
+        if ($hasitemorders) {
+            $log_data = [
+                'user_type' => 'Service Provider',
+                'user_id' => $_SESSION['serviceprovider_id'],
+                'log_type' => 'Manage Inventory',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'Service Provider has failed to delete a Band with the ID ' . $product_id . ' because it has been ordered by a customer'
+            ];
+            $this->serviceProviderModel->addLogData($log_data);
+            $notification_data = [
+                'user_type' => 'ServiceProvider',
+                'user_id' => $_SESSION['serviceprovider_id'],
+                'data' => 'You cannot delete a Band that has been ordered by a customer',
+                'date_time' => date('Y-m-d H:i:s'),
+                'status' => 'Unread'    
+            ];
+            $this->serviceProviderModel->addNotification($notification_data);
+            redirect('serviceproviders/band');
+        }
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->serviceProviderModel->deleteBand($product_id);
             $log_data = [
@@ -560,6 +598,7 @@ class serviceproviders extends Controller
 
     public function viewBand($product_id)
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $singerDetails = $this->serviceProviderModel->viewBand($product_id);
             if ($singerDetails) {
@@ -588,6 +627,7 @@ class serviceproviders extends Controller
 
     public function updateBand($id)
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
 //        $singerPhoto = $this->serviceProviderModel->fetchSingerPhoto($id);
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (!empty($_FILES['photo_4']['name'])) {
@@ -726,6 +766,7 @@ class serviceproviders extends Controller
     //thumbnail category
     public function inventoryAll()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $inventory = $this->serviceProviderModel->inventory($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
@@ -737,6 +778,7 @@ class serviceproviders extends Controller
 
     public function electricGuitars()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $inventory = $this->serviceProviderModel->electricGuitars($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
@@ -749,6 +791,7 @@ class serviceproviders extends Controller
 
     public function keyboard()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $inventory = $this->serviceProviderModel->keyboard($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
@@ -761,6 +804,7 @@ class serviceproviders extends Controller
 
     public function acousticGuitars()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $inventory = $this->serviceProviderModel->acousticGuitars($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
@@ -773,6 +817,7 @@ class serviceproviders extends Controller
 
     public function amps()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $inventory = $this->serviceProviderModel->amps($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
@@ -785,6 +830,7 @@ class serviceproviders extends Controller
 
     public function bassGuitars()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $inventory = $this->serviceProviderModel->bassGuitars($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
@@ -797,6 +843,7 @@ class serviceproviders extends Controller
 
     public function bandAndOrchestra()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $inventory = $this->serviceProviderModel->bandAndOrchestra($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
@@ -809,6 +856,7 @@ class serviceproviders extends Controller
 
     public function homeAudio()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $inventory = $this->serviceProviderModel->homeAudio($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
@@ -821,6 +869,7 @@ class serviceproviders extends Controller
 
     public function profilePhotoUpdate()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -893,6 +942,7 @@ class serviceproviders extends Controller
 
     public function editDetail($serviceprovider_id)
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $serviceprovider = $this->serviceProviderModel->view($_SESSION['serviceprovider_id']);
             $data = [
@@ -939,6 +989,7 @@ class serviceproviders extends Controller
 
     public function edititem($product_id)
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Process form
@@ -1155,6 +1206,7 @@ class serviceproviders extends Controller
 
     public function additem()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1370,6 +1422,7 @@ class serviceproviders extends Controller
 
     public function deleteitem($product_id)
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->serviceProviderModel->deleteitem($product_id);
             $log_data = [
@@ -1396,6 +1449,7 @@ class serviceproviders extends Controller
 
     public function addStudio()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1551,6 +1605,7 @@ class serviceproviders extends Controller
 
     public function addSinger()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1720,6 +1775,7 @@ class serviceproviders extends Controller
 
     public function addband()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -1906,6 +1962,7 @@ class serviceproviders extends Controller
 
     public function editStudio($product_id)
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -2076,6 +2133,7 @@ class serviceproviders extends Controller
     //studio instrument list update
     public function studioInstrument()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $data = file_get_contents("php://input");
         $requestData = json_decode($data, true);
 
@@ -2098,6 +2156,27 @@ class serviceproviders extends Controller
 
     public function deleteSinger($product_id)
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
+        $hasitemorders = $this->serviceProviderModel->hasitemorders($product_id, 'Singer');
+        if ($hasitemorders) {
+            $log_data = [
+                'user_type' => 'Service Provider',
+                'user_id' => $_SESSION['serviceprovider_id'],
+                'log_type' => 'Manage Inventory',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'Service Provider has failed to delete a singer from their inventory with the ID ' . $product_id . ' because it has orders'
+            ];
+            $this->serviceProviderModel->addLogData($log_data);
+            $notification_data = [
+                'user_type' => 'ServiceProvider',
+                'user_id' => $_SESSION['serviceprovider_id'],
+                'data' => 'You have failed to delete a singer from your inventory because it has orders',
+                'date_time' => date('Y-m-d H:i:s'),
+                'status' => 'Unread'    
+            ];
+            $this->serviceProviderModel->addNotification($notification_data);
+            redirect('serviceproviders/singer');
+        }
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->serviceProviderModel->deleteSinger($product_id);
             $log_data = [
@@ -2125,6 +2204,27 @@ class serviceproviders extends Controller
 
     public function deleteStudio($product_id)
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
+        $hasitemorders = $this->serviceProviderModel->hasitemorders($product_id, 'Studio');
+        if ($hasitemorders) {
+            $log_data = [
+                'user_type' => 'Service Provider',
+                'user_id' => $_SESSION['serviceprovider_id'],
+                'log_type' => 'Manage Inventory',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'Service Provider has failed to delete a studio from their inventory with the ID ' . $product_id . ' because it has orders'
+            ];
+            $this->serviceProviderModel->addLogData($log_data);
+            $notification_data = [
+                'user_type' => 'ServiceProvider',
+                'user_id' => $_SESSION['serviceprovider_id'],
+                'data' => 'You have failed to delete a studio from your inventory because it has orders',
+                'date_time' => date('Y-m-d H:i:s'),
+                'status' => 'Unread'    
+            ];
+            $this->serviceProviderModel->addNotification($notification_data);
+            redirect('serviceproviders/studio');
+        }
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->serviceProviderModel->deleteStudio($product_id);
             $log_data = [
@@ -2151,6 +2251,7 @@ class serviceproviders extends Controller
 
     public function editconfirm()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Process form
@@ -2217,6 +2318,7 @@ class serviceproviders extends Controller
 
     public function edit()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -2351,6 +2453,27 @@ class serviceproviders extends Controller
 
     public function delete()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
+        $hasorders = $this->serviceProviderModel->hasorders($_SESSION['serviceprovider_id']);
+        if ($hasorders) {
+            $log_data = [
+                'user_type' => 'Service Provider',
+                'user_id' => $_SESSION['serviceprovider_id'],
+                'log_type' => 'Account Delete',
+                'date_and_time' => date('Y-m-d H:i:s'),
+                'data' => 'Service Provider has failed to delete their profile as they have pending orders'
+            ];
+            $this->serviceProviderModel->addLogData($log_data);
+            $notification_data = [
+                'user_type' => 'ServiceProvider',
+                'user_id' => $_SESSION['serviceprovider_id'],
+                'data' => 'You have pending orders. Please complete them before deleting your account',
+                'date_time' => date('Y-m-d H:i:s'),
+                'status' => 'Unread'    
+            ];
+            $this->serviceProviderModel->addNotification($notification_data);
+            $this->view('serviceproviders/index');
+        }
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($this->serviceProviderModel->delete($_SESSION['serviceprovider_id'])) {
                 $log_data = [
@@ -2772,6 +2895,7 @@ class serviceproviders extends Controller
 
     public function changeOrderStatus($order_id, $status)
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $this->serviceProviderModel->changeOrderStatus($order_id, $status);
         if($status === 'Rejected'){
             $log_data = [
@@ -2938,6 +3062,7 @@ class serviceproviders extends Controller
 
     public function orders()
     {   
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $orders = $this->serviceProviderModel->getOrders($_SESSION['serviceprovider_id']);
         $order_objects = [];
         $today = strtotime(date("Y-m-d"));
@@ -2999,6 +3124,7 @@ class serviceproviders extends Controller
 
     public function logout()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $log_data = [
             'user_type' => 'Service Provider',
             'user_id' => $_SESSION['serviceprovider_id'],
@@ -3016,6 +3142,7 @@ class serviceproviders extends Controller
 
     public function Instrument()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $inventory = $this->serviceProviderModel->inventory($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory,
@@ -3033,6 +3160,7 @@ class serviceproviders extends Controller
 
     public function Studio()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $inventory = $this->serviceProviderModel->studio($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
@@ -3050,6 +3178,7 @@ class serviceproviders extends Controller
 
     public function Singer()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $inventory = $this->serviceProviderModel->singer($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
@@ -3067,6 +3196,7 @@ class serviceproviders extends Controller
 
     public function Band()
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $inventory = $this->serviceProviderModel->band($_SESSION['serviceprovider_id']);
         $data = [
             'inventory' => $inventory
@@ -3084,6 +3214,7 @@ class serviceproviders extends Controller
 
     public function viewSinger($product_id)
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $singerDetails = $this->serviceProviderModel->viewSinger($product_id);
             if ($singerDetails) {
@@ -3104,6 +3235,7 @@ class serviceproviders extends Controller
 
     public function updateSinger($id)
     {
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
 //        $singerPhoto = $this->serviceProviderModel->fetchSingerPhoto($id);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -3237,31 +3369,37 @@ class serviceproviders extends Controller
     }
 
     public function reviewItem($product_id){
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $type = 'Equipment';
         $this->viewAll($product_id, $type);
     }
 
     public function reviewStudio($product_id){
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $type = 'Studio';
         $this->viewAll($product_id, $type);
     }
 
     public function reviewSinger($product_id){
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $type = 'Singer';
         $this->viewAll($product_id, $type);
     }
 
     public function reviewBand($product_id){
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $type = 'Band';
         $this->viewAll($product_id, $type);
     }
 
     public function reviewMusician($product_id){
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $type = 'Musician';
         $this->viewAll($product_id, $type);
     }
 
     public function viewAll($product_id, $type){
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         if($type == 'Equipment'){
             $data = $this->userModel->viewItem($product_id);
             $reviews = $this->userModel->viewreviews($product_id, $type);
@@ -3553,6 +3691,7 @@ class serviceproviders extends Controller
     }
 
     public function generateReports(){
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
         $sp = $this->serviceProviderModel->view($_SESSION['serviceprovider_id']);
         $orders = $this->serviceProviderModel->getOrders($_SESSION['serviceprovider_id']);
         $count_week = [
@@ -4025,5 +4164,11 @@ class serviceproviders extends Controller
             $data = array_merge($data, $data2);
             $this->view('serviceproviders/reports', $data);
           }
+    }
+
+    public function markNotifications(){
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
+        $this->serviceProviderModel->markNotifications($_SESSION['serviceprovider_id'], date('Y-m-d H:i:s'));
+        redirect('serviceproviders/index');
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2024 at 12:13 PM
+-- Generation Time: Apr 27, 2024 at 02:28 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -155,6 +155,54 @@ CREATE TABLE `chat_mod_user` (
   `chat_date` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `chat_mod_user`
+--
+
+INSERT INTO `chat_mod_user` (`chat_id`, `user_id`, `moderator_id`, `created_by`, `chat_data`, `chat_date`) VALUES
+(13, 29, 7, 'moderator', 'hi! What can i help you with', '4:44:25 PM | April 27 2024'),
+(14, 29, 7, 'user', 'Hi there, I\'m having trouble logging into my account. Can you assist', '4:44:43 PM | April 27 2024'),
+(15, 29, 7, 'moderator', 'Let\'s try a few troubleshooting steps. Have you tried clearing your browser cache', '4:45:30 PM | April 27 2024'),
+(16, 29, 7, 'user', 'Yes, I did, but I\'m still encountering the issue', '4:45:47 PM | April 27 2024'),
+(17, 29, 7, 'moderator', 'Okay, let\'s try resetting your password. I\'ve sent you a password reset link to your registered email. Please check your inbox', '4:46:11 PM | April 27 2024'),
+(18, 29, 7, 'user', 'I can log in now. Thank you for your help!', '4:47:40 PM | April 27 2024'),
+(19, 29, 7, 'moderator', 'Your welcome', '4:48:12 PM | April 27 2024'),
+(20, 30, 8, 'moderator', 'Hi! What can i do to help you', '4:51:41 PM | April 27 2024'),
+(21, 30, 8, 'user', 'Hi, I noticed a bug on the website where the search function isn\'t working properly', '4:52:04 PM | April 27 2024'),
+(22, 30, 8, 'moderator', 'Thank you for bringing this to our attention. Can you provide more details about the issue you\'re experiencing', '4:52:17 PM | April 27 2024'),
+(23, 30, 8, 'user', 'Sure, when I search for \'guitar,\' it\'s not showing all the available options', '4:52:44 PM | April 27 2024'),
+(24, 30, 8, 'moderator', 'Got it. We\'ll look into this issue and get it fixed as soon as possible', '4:53:13 PM | April 27 2024'),
+(25, 30, 8, 'user', 'ok', '4:53:25 PM | April 27 2024'),
+(26, 30, 8, 'moderator', 'Can you check if it is working properly now', '4:53:48 PM | April 27 2024'),
+(27, 30, 8, 'user', 'oh now it\'s working. thanks for you help', '4:54:16 PM | April 27 2024'),
+(28, 30, 8, 'moderator', 'your welcome', '4:54:25 PM | April 27 2024'),
+(29, 31, 9, 'moderator', 'Hi! What can i help you with', '4:57:34 PM | April 27 2024'),
+(30, 31, 9, 'user', 'Hello, I made a payment for my rental, but I haven\'t received a confirmation email', '4:57:52 PM | April 27 2024'),
+(31, 31, 9, 'moderator', 'Let me check the status of your transaction. Can you provide me with your email address and the rental details', '4:58:14 PM | April 27 2024'),
+(32, 31, 9, 'user', 'Sure, my email is user@example.com, and I rented a keyboard for three days', '4:58:30 PM | April 27 2024'),
+(33, 31, 9, 'moderator', 'Thank you. I\'ll investigate this issue and get back to you shortly', '4:58:48 PM | April 27 2024'),
+(34, 32, 10, 'moderator', 'Hi! what can i help you with', '5:04:23 PM | April 27 2024'),
+(35, 32, 10, 'user', 'Hi, I accidentally rented the wrong musical equipment. Can I get a refund', '5:04:40 PM | April 27 2024'),
+(36, 32, 10, 'moderator', 'I\'m sorry to hear about the inconvenience. Please provide the details of the rental, and we\'ll process the refund for you', '5:04:57 PM | April 27 2024'),
+(37, 32, 10, 'user', 'Thank you! I rented a microphone instead of a guitar', '5:05:11 PM | April 27 2024'),
+(38, 32, 10, 'moderator', 'Noted. We\'ll initiate the refund process, and you should see the amount credited back to your account within 3-5 business days', '5:05:25 PM | April 27 2024'),
+(39, 34, 10, 'moderator', 'Hi! what can i help you with', '5:09:15 PM | April 27 2024'),
+(40, 34, 10, 'user', 'Hi, I encountered a user using inappropriate language in the chat. Can you take action', '5:09:51 PM | April 27 2024'),
+(41, 34, 10, 'moderator', 'Thank you for reporting this behavior. Can you provide the username or any other identifying information about the user', '5:10:03 PM | April 27 2024'),
+(42, 34, 10, 'user', 'MusicLover123', '5:10:15 PM | April 27 2024'),
+(43, 34, 10, 'moderator', 'Understood. We\'ll investigate the matter and take appropriate action against the user violating our community guidelines', '5:10:33 PM | April 27 2024'),
+(44, 35, 10, 'moderator', 'Hi! what can i help you with', '5:16:14 PM | April 27 2024'),
+(45, 35, 10, 'user', 'Hi, I have some questions about becoming a verified musician on the platform', '5:16:25 PM | April 27 2024'),
+(46, 35, 10, 'moderator', 'I\'d be happy to help. What specific information are you looking for', '5:16:35 PM | April 27 2024'),
+(47, 35, 10, 'moderator', 'I\'d like to know about the verification process and the documents required', '5:16:50 PM | April 27 2024'),
+(48, 35, 10, 'moderator', 'Hi! How may i help yoy', '5:19:32 PM | April 27 2024'),
+(49, 35, 10, 'user', 'I have some questions about becoming a verified musician on the platform', '5:20:15 PM | April 27 2024'),
+(50, 35, 10, 'moderator', 'I\'d be happy to help. What specific information are you looking for', '5:20:25 PM | April 27 2024'),
+(51, 35, 10, 'user', 'I\'d like to know about the verification process and the documents required', '5:20:34 PM | April 27 2024'),
+(52, 35, 10, 'moderator', 'Sure, let me provide you with a detailed overview of the verification process and the documents needed. Please hold on for a moment', '5:20:59 PM | April 27 2024'),
+(53, 35, 10, 'user', 'thank you', '5:21:10 PM | April 27 2024'),
+(54, 35, 10, 'moderator', 'your welcome', '5:21:17 PM | April 27 2024');
+
 -- --------------------------------------------------------
 
 --
@@ -178,6 +226,22 @@ CREATE TABLE `inquiries` (
   `placed_on` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `inquiries`
+--
+
+INSERT INTO `inquiries` (`inquiry_id`, `user_id`, `inquiryType`, `field_1`, `field_2`, `field_3`, `field_4`, `field_5`, `photo_1`, `photo_2`, `photo_3`, `status`, `moderator_id`, `placed_on`) VALUES
+(6, 18, 'Billing Issue', 'dyfj', 'hello', '', '', '', 'IMG-656bdc23223334.62765635.png', '', '', 'In-Progress', 1, '2024-04-26'),
+(7, 29, 'Technical Issue', 'I&#39;m experiencing difficulties accessing my account after updating my browser', 'even though my user name and password is correct i cant log in', '', '', '', 'IMG-662cdda6be4ec9.23321835.png', 'IMG-662cdda6bfe9e8.83540760.png', 'IMG-662cdda6c02847.82767096.png', 'Completed', 7, '2024-04-27'),
+(8, 30, 'Report Bug', 'There seems to be an error in the search function. It&#39;s not displaying accurate results for the instruments I&#39;m looking for', 'search bar is not working', '', '', '', 'IMG-662cdf91d89002.03109889.png', 'IMG-662cdf91d8de40.32088454.png', 'IMG-662cdf91d924d8.17598607.png', 'Completed', 8, '2024-04-27'),
+(9, 31, 'Billing Issue', 'I made a payment for my rental but haven&#39;t received a confirmation email', 'I didn&#39;t get a confirmation e-mail for my payment', '', '', '', 'IMG-656bdc23223334.62765635.png', '', '', 'In-Progress', 9, '2024-04-27'),
+(10, 32, 'Refund Purchase', 'I accidentally rented the wrong musical equipment. Can I get a refund so I can rent the correct one', 'I mistakenly rented the wrong instrument . i need to rend the correct instrument .so can i get a refund', '', '', '', 'IMG-656bdc23223334.62765635.png', '', '', 'In-Progress', 10, '2024-04-27'),
+(11, 34, 'Report User', 'I encountered a user who was using inappropriate language in the chat feature. Can you address this behavior', 'An user used some inappropriated language in the chat', '', '', '', 'IMG-656bdc23223334.62765635.png', '', '', 'Completed', 10, '2024-04-27'),
+(13, 35, 'Question', 'How to be come a verified musician in this website', 'What are the requirements for becoming a verified musician on the platform', '', '', '', 'IMG-656bdc23223334.62765635.png', '', '', 'Completed', 10, '2024-04-27'),
+(14, 41, 'Question', 'Where can I submit my suggestions for improvement', 'Where can I submit my suggestions for improvement', '', '', '', 'IMG-656bdc23223334.62765635.png', '', '', 'Pending', 0, '2024-04-27'),
+(15, 41, 'Question', 'Is there&#39;s a way to track the delivery status of my order', 'I recently rented a keyboard, and I&#39;m wondering if there&#39;s a way to track the delivery status of my orde', '', '', '', 'IMG-656bdc23223334.62765635.png', '', '', 'Pending', 0, '2024-04-27'),
+(16, 41, 'Question', 'cancellation policy and any associated fees', 'I need to cancel my rental due to unforeseen circumstances. Can you please explain the cancellation policy and any associated fees', '', '', '', 'IMG-656bdc23223334.62765635.png', '', '', 'Pending', 0, '2024-04-27');
+
 -- --------------------------------------------------------
 
 --
@@ -189,6 +253,54 @@ CREATE TABLE `inq_chat` (
   `chat_id` int(11) NOT NULL,
   `inquiry_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `inq_chat`
+--
+
+INSERT INTO `inq_chat` (`inq_chat_id`, `chat_id`, `inquiry_id`) VALUES
+(11, 13, 7),
+(12, 14, 7),
+(13, 15, 7),
+(14, 16, 7),
+(15, 17, 7),
+(16, 18, 7),
+(17, 19, 7),
+(18, 20, 8),
+(19, 21, 8),
+(20, 22, 8),
+(21, 23, 8),
+(22, 24, 8),
+(23, 25, 8),
+(24, 26, 8),
+(25, 27, 8),
+(26, 28, 8),
+(27, 29, 9),
+(28, 30, 9),
+(29, 31, 9),
+(30, 32, 9),
+(31, 33, 9),
+(32, 34, 10),
+(33, 35, 10),
+(34, 36, 10),
+(35, 37, 10),
+(36, 38, 10),
+(37, 39, 11),
+(38, 40, 11),
+(39, 41, 11),
+(40, 42, 11),
+(41, 43, 11),
+(42, 44, 12),
+(43, 45, 12),
+(44, 46, 12),
+(45, 47, 12),
+(46, 48, 13),
+(47, 49, 13),
+(48, 50, 13),
+(49, 51, 13),
+(50, 52, 13),
+(51, 53, 13),
+(52, 54, 13);
 
 -- --------------------------------------------------------
 
@@ -1643,7 +1755,137 @@ INSERT INTO `logs` (`log_id`, `user_type`, `user_id`, `date_and_time`, `log_type
 (1472, 'Customer', 18, '2024-04-27 12:08:01', 'Logout', 'User logged out');
 INSERT INTO `logs` (`log_id`, `user_type`, `user_id`, `date_and_time`, `log_type`, `data`) VALUES
 (1473, 'Administrator', 1, '2024-04-27 12:08:10', 'Login', 'Administrator logged in'),
-(1474, 'Administrator', 1, '2024-04-27 12:08:13', 'Generate Reports', 'Administrator viewed reports');
+(1474, 'Administrator', 1, '2024-04-27 12:08:13', 'Generate Reports', 'Administrator viewed reports'),
+(1475, 'Moderator', 1, '2024-04-27 12:33:09', 'Login', 'Moderator logged in'),
+(1476, 'Customer', 18, '2024-04-27 12:33:17', 'Login', 'User logged in'),
+(1477, 'Moderator', 1, '2024-04-27 12:33:22', 'View Service Providers', 'Moderator viewed active service providers'),
+(1478, 'Customer', 18, '2024-04-27 12:33:33', 'View Inquiries', 'User viewed their inquiries'),
+(1479, 'Customer', 18, '2024-04-27 12:34:15', 'Add Inquiry', 'User made an inquiry with inquiry type: question'),
+(1480, 'Customer', 18, '2024-04-27 12:34:15', 'View Inquiries', 'User viewed their inquiries'),
+(1481, 'Moderator', 1, '2024-04-27 12:34:22', 'View Inquiries', 'Moderator viewed pending inquiries'),
+(1482, 'Moderator', 1, '2024-04-27 12:34:29', 'View Inquiry', 'Moderator viewed pending inquiry 7 details'),
+(1483, 'Moderator', 1, '2024-04-27 12:34:31', 'Approve Inquiry', 'Moderator approved inquiry 7 and assign to self'),
+(1484, 'Moderator', 1, '2024-04-27 12:34:31', 'View Inquiries', 'Moderator viewed pending inquiries'),
+(1485, 'Moderator', 1, '2024-04-27 12:34:40', 'View Inquiries', 'Moderator viewed pending inquiries'),
+(1486, 'Moderator', 1, '2024-04-27 12:34:48', 'View Inquiries', 'Moderator viewed active inquiries'),
+(1487, 'Moderator', 1, '2024-04-27 12:36:06', 'View Inquiry', 'Moderator viewed inquiry 7 details'),
+(1488, 'Moderator', 1, '2024-04-27 12:36:25', 'Send Message', 'Moderator sent a message to user 18 regarding inquiry 7'),
+(1489, 'Moderator', 1, '2024-04-27 12:36:25', 'View Inquiry', 'Moderator viewed inquiry 7 details'),
+(1490, 'Customer', 18, '2024-04-27 12:36:27', 'View Inquiries', 'User viewed their inquiries'),
+(1491, 'Customer', 18, '2024-04-27 12:36:28', 'View Inquiry', 'User viewed an inquiry with inquiry id: 7 and inquiry type: Question'),
+(1492, 'Customer', 18, '2024-04-27 12:36:40', 'Send Message', 'User sent a message to a moderator with inquiry id: 7 and moderator id: 1'),
+(1493, 'Customer', 18, '2024-04-27 12:36:40', 'View Inquiry', 'User viewed an inquiry with inquiry id: 7 and inquiry type: Question'),
+(1494, 'Moderator', 1, '2024-04-27 12:36:42', 'View Inquiry', 'Moderator viewed inquiry 7 details'),
+(1495, 'Moderator', 1, '2024-04-27 12:37:11', 'Send Message', 'Moderator sent a message to user 18 regarding inquiry 7'),
+(1496, 'Moderator', 1, '2024-04-27 12:37:11', 'View Inquiry', 'Moderator viewed inquiry 7 details'),
+(1497, 'Moderator', 1, '2024-04-27 12:37:13', 'Complete Inquiry', 'Moderator completed inquiry 7'),
+(1498, 'Moderator', 1, '2024-04-27 12:37:13', 'View Inquiries', 'Moderator viewed active inquiries'),
+(1499, 'Customer', 18, '2024-04-27 12:37:16', 'View Inquiry', 'User viewed an inquiry with inquiry id: 7 and inquiry type: Question'),
+(1500, 'Customer', 18, '2024-04-27 12:37:21', 'View Inquiries', 'User viewed their inquiries'),
+(1501, 'Administrator', 1, '2024-04-27 12:47:35', 'Logout', 'Administrator logged out'),
+(1502, 'Customer', 33, '2024-04-27 12:47:45', 'Login', 'User logged in'),
+(1503, 'Customer', 33, '2024-04-27 12:47:48', 'View Orders', 'User viewed their orders'),
+(1504, 'Customer', 33, '2024-04-27 12:47:48', 'View Instruments', 'User viewed the instruments available'),
+(1505, 'Customer', 33, '2024-04-27 12:51:45', 'View Instruments', 'User viewed the instruments available'),
+(1506, 'Customer', 33, '2024-04-27 12:51:46', 'View Instrument', 'User viewed an instrument with product id 26'),
+(1507, 'Customer', 33, '2024-04-27 12:51:53', 'View Orders', 'User viewed their orders'),
+(1508, 'Customer', 33, '2024-04-27 12:51:53', 'View Instruments', 'User viewed the instruments available'),
+(1509, 'Customer', 33, '2024-04-27 12:52:12', 'View Instruments', 'User viewed the instruments available'),
+(1510, 'Customer', 33, '2024-04-27 12:52:39', 'View Orders', 'User viewed their orders'),
+(1511, 'Customer', 33, '2024-04-27 12:52:39', 'View Instruments', 'User viewed the instruments available'),
+(1512, 'Customer', 33, '2024-04-27 12:52:53', 'View Instruments', 'User viewed the instruments available'),
+(1513, 'Customer', 33, '2024-04-27 12:52:57', 'View Instrument', 'User viewed an instrument with product id 46'),
+(1514, 'Customer', 33, '2024-04-27 12:54:28', 'Add Review', 'User added a review to an Instrument with the id of 46'),
+(1515, 'Customer', 33, '2024-04-27 12:54:28', 'View Instrument', 'User viewed an instrument with product id 46'),
+(1516, 'Customer', 33, '2024-04-27 12:55:07', 'View Instrument', 'User viewed an instrument with product id 46'),
+(1517, 'Customer', 33, '2024-04-27 12:55:11', 'Add Review', 'User added a review to an Instrument with the id of 46'),
+(1518, 'Customer', 33, '2024-04-27 12:55:12', 'View Instrument', 'User viewed an instrument with product id 46'),
+(1519, 'Customer', 33, '2024-04-27 12:55:27', 'View Instrument', 'User viewed an instrument with product id 46'),
+(1520, 'Customer', 33, '2024-04-27 12:55:37', 'Add Review', 'User added a review to an Instrument with the id of 46'),
+(1521, 'Customer', 33, '2024-04-27 12:55:37', 'View Instrument', 'User viewed an instrument with product id 46'),
+(1522, 'Customer', 33, '2024-04-27 13:00:29', 'View Instrument', 'User viewed an instrument with product id 46'),
+(1523, 'Customer', 33, '2024-04-27 13:00:58', 'View Instrument', 'User viewed an instrument with product id 46'),
+(1524, 'Customer', 33, '2024-04-27 13:02:38', 'View Instrument', 'User viewed an instrument with product id 46'),
+(1525, 'Customer', 33, '2024-04-27 13:03:58', 'View Instrument', 'User viewed an instrument with product id 46'),
+(1526, 'Customer', 33, '2024-04-27 13:04:18', 'View Instrument', 'User viewed an instrument with product id 46'),
+(1527, 'Customer', 18, '2024-04-27 13:52:06', 'Login', 'User logged in'),
+(1528, 'Customer', 18, '2024-04-27 13:52:30', 'Manage Profile', 'User viewed their profile'),
+(1529, 'Customer', 18, '2024-04-27 13:54:20', 'View Instruments', 'User viewed the instruments available'),
+(1530, 'Customer', 18, '2024-04-27 13:54:21', 'View Instrument', 'User viewed an instrument with product id 27'),
+(1531, 'Customer', 18, '2024-04-27 13:54:28', 'Check Availability', 'User checked the availability of an Equipment  with product id 27'),
+(1532, 'Customer', 18, '2024-04-27 13:54:29', 'Manage Cart', 'User added an Instrument to the cart with the id of 27'),
+(1533, 'Customer', 18, '2024-04-27 13:54:29', 'View Instrument', 'User viewed an instrument with product id 27'),
+(1534, 'Customer', 18, '2024-04-27 13:54:32', 'Manage Cart', 'User viewed their cart'),
+(1535, 'Customer', 18, '2024-04-27 13:54:38', 'View Singers', 'User viewed the singers available'),
+(1536, 'Customer', 18, '2024-04-27 13:54:39', 'View Singer', 'User viewed a singer with product id 20'),
+(1537, 'Customer', 18, '2024-04-27 13:54:51', 'Check Availability', 'User checked the availability of an Singer  with product id 20'),
+(1538, 'Customer', 18, '2024-04-27 13:54:53', 'Manage Cart', 'User added a Singer to the cart with the id of 20'),
+(1539, 'Customer', 18, '2024-04-27 13:54:53', 'View Singer', 'User viewed a singer with product id 20'),
+(1540, 'Customer', 18, '2024-04-27 13:54:55', 'Manage Cart', 'User viewed their cart'),
+(1541, 'Customer', 18, '2024-04-27 13:54:57', 'Manage Cart', 'User removed an Singer with product id 20 from their cart'),
+(1542, 'Customer', 18, '2024-04-27 13:55:18', 'Manage Cart', 'User removed an Singer with product id 20 from their cart'),
+(1543, 'Customer', 18, '2024-04-27 13:55:24', 'View Instruments', 'User viewed the instruments available'),
+(1544, 'Customer', 18, '2024-04-27 13:55:29', 'View Orders', 'User viewed their orders'),
+(1545, 'Customer', 18, '2024-04-27 13:55:29', 'View Instruments', 'User viewed the instruments available'),
+(1546, 'Customer', 18, '2024-04-27 13:55:30', 'View Orders', 'User viewed their orders'),
+(1547, 'Customer', 18, '2024-04-27 13:55:30', 'View Instruments', 'User viewed the instruments available'),
+(1548, 'Customer', 18, '2024-04-27 13:55:38', 'View Studios', 'User viewed the studios available'),
+(1549, 'Customer', 18, '2024-04-27 13:56:35', 'View Studios', 'User viewed the studios available'),
+(1550, 'Customer', 18, '2024-04-27 13:56:36', 'View Studios', 'User viewed the studios available'),
+(1551, 'Customer', 18, '2024-04-27 13:56:36', 'View Studios', 'User viewed the studios available'),
+(1552, 'Customer', 18, '2024-04-27 13:56:37', 'View Studios', 'User viewed the studios available'),
+(1553, 'Customer', 18, '2024-04-27 13:56:37', 'View Studios', 'User viewed the studios available'),
+(1554, 'Customer', 18, '2024-04-27 13:56:37', 'View Studios', 'User viewed the studios available'),
+(1555, 'Customer', 18, '2024-04-27 13:56:37', 'View Studios', 'User viewed the studios available'),
+(1556, 'Customer', 18, '2024-04-27 13:56:37', 'View Studios', 'User viewed the studios available'),
+(1557, 'Customer', 18, '2024-04-27 13:56:38', 'View Studios', 'User viewed the studios available'),
+(1558, 'Customer', 18, '2024-04-27 13:56:38', 'View Studios', 'User viewed the studios available'),
+(1559, 'Customer', 18, '2024-04-27 13:56:38', 'View Studios', 'User viewed the studios available'),
+(1560, 'Customer', 18, '2024-04-27 13:56:38', 'View Studios', 'User viewed the studios available'),
+(1561, 'Customer', 18, '2024-04-27 13:56:49', 'View Studios', 'User viewed the studios available'),
+(1562, 'Customer', 18, '2024-04-27 13:56:50', 'Manage Cart', 'User viewed their cart'),
+(1563, 'Customer', 18, '2024-04-27 13:56:55', 'Manage Cart', 'User removed an Equipment with product id 27 from their cart'),
+(1564, 'Customer', 18, '2024-04-27 13:56:58', 'Manage Cart', 'User viewed their cart'),
+(1565, 'Customer', 18, '2024-04-27 13:56:59', 'View Studios', 'User viewed the studios available'),
+(1566, 'Customer', 18, '2024-04-27 13:57:00', 'View Studio', 'User viewed an studio with product id 5'),
+(1567, 'Customer', 18, '2024-04-27 13:57:05', 'Check Availability', 'User checked the availability of an Studio  with product id 5'),
+(1568, 'Customer', 18, '2024-04-27 13:57:06', 'Manage Cart', 'User added a Studio to the cart with the id of 5'),
+(1569, 'Customer', 18, '2024-04-27 13:57:06', 'View Studio', 'User viewed an studio with product id 5'),
+(1570, 'Customer', 18, '2024-04-27 13:57:08', 'View Studios', 'User viewed the studios available'),
+(1571, 'Customer', 18, '2024-04-27 13:57:09', 'View Studio', 'User viewed an studio with product id 12'),
+(1572, 'Customer', 18, '2024-04-27 13:57:14', 'Check Availability', 'User checked the availability of an Studio  with product id 12'),
+(1573, 'Customer', 18, '2024-04-27 13:57:14', 'Manage Cart', 'User added a Studio to the cart with the id of 12'),
+(1574, 'Customer', 18, '2024-04-27 13:57:15', 'View Studio', 'User viewed an studio with product id 12'),
+(1575, 'Customer', 18, '2024-04-27 13:57:18', 'Manage Cart', 'User viewed their cart'),
+(1576, 'Customer', 18, '2024-04-27 13:59:34', 'Manage Cart', 'User viewed their cart'),
+(1577, 'Customer', 18, '2024-04-27 13:59:36', 'Manage Cart', 'User removed an Studio with product id 5 from their cart'),
+(1578, 'Customer', 18, '2024-04-27 14:01:35', 'Manage Cart', 'User removed an Studio with product id 5 from their cart'),
+(1579, 'Customer', 18, '2024-04-27 14:01:35', 'Manage Cart', 'User viewed their cart'),
+(1580, 'Customer', 18, '2024-04-27 14:01:39', 'Manage Cart', 'User removed an Studio with product id 12 from their cart'),
+(1581, 'Customer', 18, '2024-04-27 14:01:39', 'Manage Cart', 'User viewed their cart'),
+(1582, 'Customer', 18, '2024-04-27 14:01:45', 'View Singers', 'User viewed the singers available'),
+(1583, 'Customer', 18, '2024-04-27 14:01:46', 'View Singer', 'User viewed a singer with product id 14'),
+(1584, 'Customer', 18, '2024-04-27 14:01:51', 'Check Availability', 'User checked the availability of an Singer  with product id 14'),
+(1585, 'Customer', 18, '2024-04-27 14:01:53', 'Manage Cart', 'User added a Singer to the cart with the id of 14'),
+(1586, 'Customer', 18, '2024-04-27 14:01:53', 'View Singer', 'User viewed a singer with product id 14'),
+(1587, 'Customer', 18, '2024-04-27 14:02:00', 'View Studios', 'User viewed the studios available'),
+(1588, 'Customer', 18, '2024-04-27 14:02:01', 'View Studio', 'User viewed an studio with product id 6'),
+(1589, 'Customer', 18, '2024-04-27 14:02:10', 'Check Availability', 'User checked the availability of an Studio  with product id 6'),
+(1590, 'Customer', 18, '2024-04-27 14:02:12', 'Manage Cart', 'User added a Studio to the cart with the id of 6'),
+(1591, 'Customer', 18, '2024-04-27 14:02:12', 'View Studio', 'User viewed an studio with product id 6'),
+(1592, 'Customer', 18, '2024-04-27 14:02:13', 'Manage Cart', 'User viewed their cart'),
+(1593, 'Customer', 18, '2024-04-27 14:02:16', 'Manage Cart', 'User removed an Studio with product id 6 from their cart'),
+(1594, 'Customer', 18, '2024-04-27 14:02:16', 'Manage Cart', 'User viewed their cart'),
+(1595, 'Customer', 18, '2024-04-27 14:02:23', 'Manage Cart', 'User removed an Studio with product id 6 from their cart'),
+(1596, 'Customer', 18, '2024-04-27 14:02:23', 'Manage Cart', 'User viewed their cart'),
+(1597, 'Customer', 18, '2024-04-27 14:02:27', 'Manage Cart', 'User removed an Singer with product id 14 from their cart'),
+(1598, 'Customer', 18, '2024-04-27 14:02:27', 'Manage Cart', 'User viewed their cart'),
+(1599, 'Customer', 18, '2024-04-27 14:07:38', 'View Singers', 'User viewed the singers available'),
+(1600, 'Customer', 18, '2024-04-27 14:07:51', 'View Singers', 'User viewed the singers available'),
+(1601, 'Customer', 18, '2024-04-27 14:07:55', 'View Bands', 'User viewed the bands available'),
+(1602, 'Customer', 18, '2024-04-27 14:07:57', 'View Studios', 'User viewed the studios available'),
+(1603, 'Customer', 18, '2024-04-27 14:08:00', 'View Musicians', 'User viewed the musicians available'),
+(1604, 'Customer', 18, '2024-04-27 14:08:06', 'View Singers', 'User viewed the singers available');
 
 -- --------------------------------------------------------
 
@@ -1668,7 +1910,11 @@ CREATE TABLE `moderators` (
 --
 
 INSERT INTO `moderators` (`moderator_id`, `moderator_name`, `moderator_email`, `moderator_contact_no`, `moderator_nic`, `moderator_address`, `password`, `type`, `status`) VALUES
-(1, 'Nethsara Sandeepa', 'moderator01@gmail.com', 716229573, '98347716V', '04/C Hospital road, Jayawardhanapura.', '$2y$10$.fjzjyiF0Rg88ec0LNJGh.Aep5ScztV4nG6/9Rb0U9Uzevd7lnPUK', 'User Account Moderator', 'Active');
+(1, 'Nethsara Sandeepa', 'moderator01@gmail.com', 716229573, '98347716V', '04/C Hospital road, Jayawardhanapura.', '$2y$10$.fjzjyiF0Rg88ec0LNJGh.Aep5ScztV4nG6/9Rb0U9Uzevd7lnPUK', 'User Account Moderator', 'Active'),
+(7, 'Samantha Fernando', 'samantha@example.com', 712345678, '960251234V', '123, Main Street, Colombo', '$2y$10$KGx39vz1uHgwP78007ohCO7V8SV5kaswFD6Z85Xsg3usljg.hIS4O', 'User Support Moderator', 'Active'),
+(8, 'Priyanthi Perera', 'priyanthi@example.com', 778901234, '870361234V', '456, Galle Road, Negombo', '$2y$10$pvQSOfM5IgUQCspqsOzA6u6whhEw70/Hk33y/zw7cvL/PsaIXXNlK', 'User Account Moderator', 'Active'),
+(9, 'Dilshan Silva', 'dilshan@example.com', 756789012, '931145678V', '789, Kandy Road, Kandy', '$2y$10$0.Bm.RFbPJHMIrdQYw52x.c1lN5sGB7omgzcnZ1wMJyQPWMN3GEIu', 'Event Package Moderator', 'Active'),
+(10, 'Nadeesha Rajapaksa', 'nadeesha@example.com', 765432109, '841032345V', '321, Hill Street, Galle', '$2y$10$DZd.r2hn/jRTa5iWuJoCEuSXTfs.pgS3d8zVmUsyqNvCo/yC28KNC', 'User Support Moderator', 'Active');
 
 -- --------------------------------------------------------
 
@@ -1767,7 +2013,11 @@ INSERT INTO `notifications` (`notification_id`, `user_type`, `user_id`, `date_ti
 (42, 'ServiceProvider', 27, '2024-04-26 11:20:05', 'Unread', 'You have a new order request from Gayathra Dissanayake1 for '),
 (43, 'ServiceProvider', 36, '2024-04-26 11:24:07', 'Unread', 'You have a new order request from Gayathra Dissanayake1 for '),
 (44, 'ServiceProvider', 26, '2024-04-26 11:54:50', 'Unread', 'You have successfully deleted an item from your inventory'),
-(45, 'ServiceProvider', 36, '2024-04-26 15:14:25', 'Unread', 'You have a new order request from Gayathra Dissanayake1 for ');
+(45, 'ServiceProvider', 36, '2024-04-26 15:14:25', 'Unread', 'You have a new order request from Gayathra Dissanayake1 for '),
+(46, 'User', 18, '2024-04-27 12:34:31', 'Unread', 'Moderator with ID 1 has accepted your inquiry and will be assisting you'),
+(47, 'User', 18, '2024-04-27 12:36:25', 'Unread', 'Moderator sent a message to you regarding inquiry 7'),
+(48, 'User', 18, '2024-04-27 12:37:11', 'Unread', 'Moderator sent a message to you regarding inquiry 7'),
+(49, 'User', 18, '2024-04-27 12:37:13', 'Unread', 'Moderator with ID 1 has marked your inquiry as completed');
 
 -- --------------------------------------------------------
 
@@ -2227,6 +2477,13 @@ CREATE TABLE `reviews` (
   `placed_on` date DEFAULT NULL,
   `type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`review_id`, `product_id`, `user_id`, `rating`, `content`, `name`, `photo`, `placed_on`, `type`) VALUES
+(45, 46, 33, 4, 'The sound quality is surprisingly good, with a variety of tones and effects to choose from. The keys have a nice, responsive feel to them, making it enjoyable to play different melodies and chords. Additionally, the built-in speakers produce decent volume and clarity, although I prefer using headphones for a more immersive experience.\r\n\r\nOne minor downside is that the keyboard doesn&#39;t come with a sustain pedal, but considering the affordability, it&#39;s not a dealbreaker. Overall, I&#39;m very satisfied with my purchase and would highly recommend this keyboard to anyone looking to learn how to play the piano or keyboard.', 'David Wilson', 'IMG-653fd611dd2445.48951448.png', '2024-04-27', 'Equipment');
 
 -- --------------------------------------------------------
 
@@ -3033,37 +3290,37 @@ ALTER TABLE `bookmarks`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `cart_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `chat_mod_user`
 --
 ALTER TABLE `chat_mod_user`
-  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `inquiries`
 --
 ALTER TABLE `inquiries`
-  MODIFY `inquiry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `inquiry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `inq_chat`
 --
 ALTER TABLE `inq_chat`
-  MODIFY `inq_chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `inq_chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1475;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1605;
 
 --
 -- AUTO_INCREMENT for table `moderators`
 --
 ALTER TABLE `moderators`
-  MODIFY `moderator_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `moderator_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `musician`
@@ -3075,7 +3332,7 @@ ALTER TABLE `musician`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -3099,7 +3356,7 @@ ALTER TABLE `recover_account_user`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `review_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `review_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `sec_queation`
