@@ -32,6 +32,11 @@ class Users extends Controller
         $this->view('users/error');
     }
 
+    public function notfound()
+    {
+        isset($_SESSION['user_id']) ? $this->view('users/404') : redirect('users/error');
+    }
+
     //view profile
     public function profile()
     {   

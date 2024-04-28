@@ -9,6 +9,10 @@
       $this->view('administrators/error');
     }
 
+    public function notfound(){
+      isset($_SESSION['administrator_id']) ? $this->view('administrators/404') : redirect('administrators/error');
+    }
+
     public function index(){
      if(isset($_SESSION['administrator_id'])){
       $mod_data = $this->administratorModel->view($_SESSION['administrator_id']);

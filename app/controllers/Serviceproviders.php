@@ -20,6 +20,11 @@ class serviceproviders extends Controller
     {
         $this->view('serviceproviders/error');
     }
+
+    public function notfound()
+    {
+        $this->view('serviceproviders/404');
+    }
     //view profile
     public function profile()
     {

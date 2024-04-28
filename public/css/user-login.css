@@ -76,7 +76,7 @@ nav ul.active {
         display: block;
         color: #ffff;
     }
-    nav a#logo,
+    nav,
     #ham-menu {
         font-size: 3.2rem;
     }
@@ -115,7 +115,6 @@ nav ul.active {
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 header a img{
-    width: 134px;
     margin-top: 4px;
 }
 .login-page {

@@ -9,6 +9,10 @@
       $this->view('moderators/error');
     }
 
+    public function notfound(){
+      isset($_SESSION['moderator_id']) ? $this->view('moderators/404') : $this->view('moderators/error');
+    }
+
     public function index(){
       if (isset($_SESSION['moderator_id'])){
         $mod_data = $this->moderatorModel->view($_SESSION['moderator_id']);
