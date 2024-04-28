@@ -920,25 +920,25 @@ document.getElementById("search-item").addEventListener("keyup", search);
 
 function search() {
     const searchBox = document.getElementById("search-item").value.toUpperCase();
-    // const storeItems = document.getElementById("");
-    const products = document.querySelectorAll(".item-container");
+    const items = document.querySelectorAll(".item-info");
 
+    items.forEach(item => {
+        const nameElement = item.querySelector("h3");
+        const nickNameElement = item.querySelector("p:nth-of-type(2)");
 
-    products.forEach(product => {
-        const titleElement = product.querySelector("h3");
-        const brand = product.querySelector("p:nth-child(1)");
+        if (nameElement && nickNameElement) {
+            const nameText = nameElement.textContent || nameElement.innerText;
+            const nickNameText = nickNameElement.textContent || nickNameElement.innerText;
 
-        if (titleElement || brand ) {
-            const textValue = titleElement.textContent || titleElement.innerHTML;
-            const brandValue = brand.textContent || brand.innerHTML;
-            if (textValue.toUpperCase().indexOf(searchBox) > -1 || brandValue.toUpperCase().indexOf(searchBox) > -1) {
-                product.style.display = "";
+            if (nameText.toUpperCase().includes(searchBox) || nickNameText.toUpperCase().includes(searchBox)) {
+                item.parentElement.style.display = "";
             } else {
-                product.style.display = "none";
+                item.parentElement.style.display = "none";
             }
         }
     });
 }
+
 
 //price sort
 function price(){
