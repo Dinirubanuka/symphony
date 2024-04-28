@@ -172,7 +172,6 @@
                         <button class="<?php echo $data['availability'] === 'available' ? 'addToCartBtn' : 'disabled-button'; ?>" <?php echo $data['availability'] === 'available' ? '' : 'disabled'; ?>>Add to Cart</button>
                     </div>
                 </form>
-                <button id="addToFavoritesBtn">Add to Favorites</button>
             </div>
         </div>
     </div>

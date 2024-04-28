@@ -3214,7 +3214,7 @@ class serviceproviders extends Controller
         unset($_SESSION['serviceprovider_email']);
         unset($_SESSION['serviceprovider_name']);
         session_destroy();
-        redirect('pages/index');
+        redirect('serviceproviders/serviceproviderlogin');
     }
 
     public function Instrument()

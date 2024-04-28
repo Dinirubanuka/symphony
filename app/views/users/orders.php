@@ -30,7 +30,6 @@
                     <h3>User Details</h3>
                     <p><strong>Name:</strong> <?php echo $data['user_data']['name']; ?></p>
                     <p><strong>Email:</strong> <?php echo $data['user_data']['email']; ?></p>
-                    <p><strong>Contact Number:</strong> <?php echo $data['product_data']['telephoneNumber']; ?></p>
 
                     <!-- Add more user details as needed -->
                 </div>
@@ -48,6 +47,8 @@
                     <tr>
                         <th>Image</th>
                         <th>Product</th>
+                        <th>Service Provider</th>
+                        <th>Contact Number</th>
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>Quantity</th>
@@ -65,6 +66,8 @@
                         <?php $orderStatus = $suborder['status']; ?>
                         <td><img src="<?php echo URLROOT; ?>/img/serviceProvider/<?php echo $suborder['photo_1']; ?>" style="width:100px; height:100px;" alt="Item 1"></td>
                         <td><?php echo $suborder['category'] ?></td>
+                        <td><?php echo $suborder['sp_name'] ?></td>
+                        <td><?php echo $suborder['sp_contact'] ?></td>
                         <td><?php echo $suborder['start_date'] ?></td>
                         <td><?php echo $suborder['end_date'] ?></td>
                         <td><?php echo $suborder['qty'] ?></td>

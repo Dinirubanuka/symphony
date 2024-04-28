@@ -128,7 +128,7 @@
   <p>The page you are trying to view does not exist!</p>
   <div class="buttons-con">
     <div class="action-link-wrap">
-      <a href="<?php echo URLROOT; ?>/pages/index" class="link-button">Go to Administrator Index</a>
+      <a href="<?php echo URLROOT; ?>/administrators/index" class="link-button">Go to Administrator Index</a>
     </div>
   </div>
 </div>
