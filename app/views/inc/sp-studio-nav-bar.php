@@ -71,7 +71,7 @@
                                 <!--                add notification link here-->
                                 <div class = "notifications">
 
-</div>
+                                </div>
                                 <a href="<?php echo URLROOT; ?>/serviceproviders/profile" class="on">
                     <img
                             src="<?php echo URLROOT; ?>/img/user.png"
