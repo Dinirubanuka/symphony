@@ -826,3 +826,25 @@ function price(){
     })
     displaydata(filterdArray);
 }
+
+//search
+document.getElementById("search-item").addEventListener("keyup", search);
+
+function search() {
+    const searchBox = document.getElementById("search-item").value.toUpperCase();
+    const items = document.querySelectorAll(".item-info");
+
+    items.forEach(item => {
+        const titleElement = item.querySelector("h3");
+
+        if (titleElement) {
+            const titleText = titleElement.textContent || titleElement.innerText;
+
+            if (titleText.toUpperCase().includes(searchBox)) {
+                item.parentElement.style.display = "";
+            } else {
+                item.parentElement.style.display = "none";
+            }
+        }
+    });
+}
