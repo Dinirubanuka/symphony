@@ -287,10 +287,10 @@ function displaydata(data) {
                 `<img class="carousel-image" src="http://localhost/symphony/img/serviceProvider/` + item.photo_1 + `" alt="Placeholder Image 1" style="display: block">` +
                 `</div>` +
                 `<div class="item-info">` +
-                `<h3>Title:` + item.Title + `</h3>` +
+                `<h4>Title:` + item.Title + `</h4>` +
                 `<p>Brand: ` + item.brand + `</p>` +
                 `<p>Model:  ` + item.model + `</p>` +
-                `<p>Units Left:  ` + item.quantity + `</p>` +
+                // `<p>Units Left:  ` + item.quantity + `</p>` +
                 `<p>Price(LKR): ` + item.unit_price + `</p>` +
                 `<button href="" onclick="addItem(` + item.product_id + `)" style="color: orange">see more details</button>` +
                 `<p>` + stockText + `</p>` +
@@ -974,35 +974,37 @@ document.getElementById("search-item").addEventListener("keyup", search);
 
 function search() {
     const searchBox = document.getElementById("search-item").value.toUpperCase();
-    const products = document.querySelectorAll(".item-container");
-
+    const products = document.querySelectorAll(".item-details");
 
     products.forEach(product => {
-        const titleElement = product.querySelector("h3");
-        const brand = product.querySelector("p:nth-child(2)");
-        const model = product.querySelector("p:nth-child(3)");
+        const titleElement = product.querySelector(".item-info h4");
+        const brand = product.querySelector(".item-info p:nth-of-type(2)");
+        const model = product.querySelector(".item-info p:nth-of-type(3)");
 
-        if (titleElement || brand || model) {
-            const textValue = titleElement.textContent || titleElement.innerHTML;
-            const brandValue = brand.textContent || brand.innerHTML;
-            const modelValue = model.textContent || model.innerHTML;
+        if (titleElement && brand && model) {
+            const textValue = titleElement.textContent || titleElement.innerText;
+            const brandValue = brand.textContent || brand.innerText;
+            const modelValue = model.textContent || model.innerText;
 
-            if (textValue.toUpperCase().indexOf(searchBox) > -1 || brandValue.toUpperCase().indexOf(searchBox) > -1 || modelValue.toUpperCase().indexOf(searchBox) > -1) {
-                product.style.display = "";
+            if (textValue.toUpperCase().includes(searchBox) ||
+                brandValue.toUpperCase().includes(searchBox) ||
+                modelValue.toUpperCase().includes(searchBox)) {
+                product.parentElement.style.display = "";
             } else {
-                product.style.display = "none";
+                product.parentElement.style.display = "none";
             }
         }
     });
 }
 
+
 //price sort
 function price(){
     var filterdArray = [];
     value1 = document.getElementById("value1").value;
-    console.log(value1);
     value2 = document.getElementById("value2").value;
-
+    console.log('value1',value1);
+    console.log('value2',value2);
     if (value1.length == 0){
         value1 = 0;
     }
@@ -1013,5 +1015,6 @@ function price(){
     $data.forEach(item =>{
         if(value1 <= item.unit_price && item.unit_price <= value2 ) filterdArray.push(item);
     })
+    console.log('filterdata',filterdArray);
     displaydata(filterdArray);
 }

@@ -12,6 +12,19 @@
 <!--navigation bar-->
 <?php require_once APPROOT . '/views/inc/viewNavBar.php'; ?>
 <div class="categories">
+<!--    price-->
+    <div class="category">
+        <div class="category-name" onclick="toggleCategory('price')">Price</div>
+        <ul class="equipment-list price" id="price">
+            <li class="equipment-item"><input type="number"
+                                              style="width: 150px;border: 1px solid #dad7d7;padding: 10px;"
+                                              id="value1" onchange="price()"></li>
+            <li class="equipment-item" style="padding: 10px">-</li>
+            <li class="equipment-item"><input type="number"
+                                              style="width: 150px;border: 1px solid #dad7d7;padding: 10px"
+                                              id="value2" onchange="price()"></li>
+        </ul>
+    </div>
     <div class="category">
         <div class="category-name" onclick="toggleCategory('location')">Location</div>
         <ul class="equipment-list" id="location" onchange="updateDisplayedData()">
@@ -25,31 +38,19 @@
             <li class="equipment-item"><input type="checkbox"> No</li>
         </ul>
     </div>
-    <div class="category">
-        <div class="category-name" onclick="toggleCategory('price')">Price</div>
-        <ul class="equipment-list price" id="price">
-            <li class="equipment-item"><input type="number"
-                                              style="width: 50px;border: 1px solid #dad7d7;padding: 10px;"
-                                              id="value1" onchange="price()"></li>
-            <li class="equipment-item" style="padding: 10px">-</li>
-            <li class="equipment-item"><input type="number"
-                                              style="width: 50px;border: 1px solid #dad7d7;padding: 10px"
-                                              id="value2" onchange="price()"></li>
-        </ul>
-    </div>
-    <div class="category sort">
-        <div class="category-name" onclick="toggleCategory('sort')">Sort</div>
-        <div class="sort-section">
-            <select id="sort">
-                <option value="name-asc">Name (A-Z)</option>
-                <option value="name-desc">Name (Z-A)</option>
-                <option value="price-asc">Price (Low to High)</option>
-                <option value="price-desc">Price (High to Low)</option>
-                <option value="date-asc">Date Added (Oldest First)</option>
-                <option value="date-desc">Date Added (Newest First)</option>
-            </select>
-        </div>
-    </div>
+<!--    <div class="category sort">-->
+<!--        <div class="category-name" onclick="toggleCategory('sort')">Sort</div>-->
+<!--        <div class="sort-section">-->
+<!--            <select id="sort">-->
+<!--                <option value="name-asc">Name (A-Z)</option>-->
+<!--                <option value="name-desc">Name (Z-A)</option>-->
+<!--                <option value="price-asc">Price (Low to High)</option>-->
+<!--                <option value="price-desc">Price (High to Low)</option>-->
+<!--                <option value="date-asc">Date Added (Oldest First)</option>-->
+<!--                <option value="date-desc">Date Added (Newest First)</option>-->
+<!--            </select>-->
+<!--        </div>-->
+<!--    </div>-->
 </div>
 <div class="account-requests" style="position: absolute; top: 100px;">
 

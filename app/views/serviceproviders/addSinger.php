@@ -361,7 +361,6 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    document.body.appendChild(container);
     function showInstruments() {
         var selection = document.getElementById("selection");
         var instruments = document.getElementById("hidden");
@@ -374,14 +373,19 @@
     }
 
     function toggleOptions(selection) {
-        if (selection == 'location' ){
-            var optionsContainer = document.querySelector('.optionsLocation');
-            optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
-        }else{
-            var optionsContainer = document.querySelector('.optionsInstrument');
-            optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
+        var optionsContainer;
+
+        if (selection === 'location') {
+            optionsContainer = document.querySelector('.optionsLocation');
+        } else if (selection === 'instrument') {
+            optionsContainer = document.querySelector('.optionsInstrument');
+        }
+
+        if (optionsContainer) {
+            optionsContainer.style.display = optionsContainer.style.display === 'none' ? 'block' : 'none';
         }
     }
+
 
     // add photo
     function triggerInput(id){

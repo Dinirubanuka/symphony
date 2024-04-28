@@ -11,6 +11,41 @@
                     />
       </a>
       <nav class="menu">
+        <ul class="menu-bar">
+            <li><a  class="nav-link" href="<?php echo URLROOT; ?>/users/index">Home</a></li>
+            <li>
+            <button
+                    class="nav-link dropdown-btn"
+                    data-dropdown="dropdown2"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    aria-label="discover">category
+              <i class="bx bx-chevron-down" aria-hidden="true"></i>
+            </button>
+              <div id="dropdown2" class="dropdown">
+                  <ul role="menu">
+                      <li role="menuitem">
+                          <a class="dropdown-link" href="<?php echo URLROOT; ?>/users/Instrument">Instrument</a>
+                      </li>
+                      <li role="menuitem">
+                          <a class="dropdown-link" href="<?php echo URLROOT; ?>/users/Studio">Studio</a>
+                      </li>
+                      <li role="menuitem">
+                          <a class="dropdown-link" href="<?php echo URLROOT; ?>/users/Singer"
+                          >Singer</a
+                          >
+                      </li>
+                      <li role="menuitem">
+                          <a class="dropdown-link" href="<?php echo URLROOT; ?>/users/Band">Band</a>
+                      </li>
+                      <li role="menuitem">
+                          <a class="dropdown-link" href="<?php echo URLROOT; ?>/users/Musicians">Musicians</a>
+                      </li>
+                  </ul>
+              </div>
+          </li>
+            <li><a class="nav-link" href="<?php echo URLROOT; ?>/users/orders">Orders</a></li>
+        </ul>
       </nav>
     </div>
     <div class="nav-end">

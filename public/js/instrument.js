@@ -1,3 +1,13 @@
+var $data;
+var Orgdata;
+function toggleCategory(categoryId) {
+    const categoryList = document.getElementById(categoryId);
+    if (categoryId === 'price') {
+        categoryList.style.display = categoryList.style.display === "none" ? "flex" : "none";
+    }else{
+        categoryList.style.display = categoryList.style.display === "none" ? "block" : "none";
+    }
+}
 
 const dropdownBtn = document.querySelectorAll(".dropdown-btn");
 const dropdown = document.querySelectorAll(".dropdown");
@@ -63,18 +73,6 @@ document.addEventListener("keydown", (e) => {
 });
 
 hamburgerBtn.addEventListener("click", toggleHamburger);
-
-
-var $data;
-var Orgdata;
-function toggleCategory(categoryId) {
-    const categoryList = document.getElementById(categoryId);
-    if (categoryId === 'price') {
-        categoryList.style.display = categoryList.style.display === "none" ? "flex" : "none";
-    }else{
-        categoryList.style.display = categoryList.style.display === "none" ? "block" : "none";
-    }
-}
 
 // Display data
 const accReq = document.querySelector(".account-requests");
@@ -184,6 +182,7 @@ function addEventListeners() {
 
 
 function displaydata(data){
+    console.log('display array ', data);
     var inventory = data;
     let req = "";
 
@@ -257,7 +256,6 @@ function updateDisplayedData() {
 //   updateDisplayedData();
 // }
 
-$('.equipment-list input').change(updateDisplayedData);
 
 //search
 document.getElementById("search-item").addEventListener("keyup" , search);
@@ -288,4 +286,24 @@ function search(){
 
 function viewItem(productId){
     window.location.href = 'http://localhost/symphony/users/viewItem/'+productId ;
+}
+
+function price(){
+    var filterdArray = [];
+    value1 = document.getElementById("value1").value;
+    value2 = document.getElementById("value2").value;
+    console.log('value1',value1);
+    console.log('value2',value2);
+    if (value1.length == 0){
+        value1 = 0;
+    }
+    if (value2.length == 0){
+        value2 = 1000000000000; // define huge value when max value is not set
+    }
+
+    $data.forEach(item =>{
+        if(value1 <= item.unit_price && item.unit_price <= value2 ) filterdArray.push(item);
+    })
+    console.log('filterdata',filterdArray);
+    displaydata(filterdArray);
 }
