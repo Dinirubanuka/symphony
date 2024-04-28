@@ -571,28 +571,29 @@ class serviceproviders extends Controller
             ];
             $this->serviceProviderModel->addNotification($notification_data);
             redirect('serviceproviders/band');
-        }
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->serviceProviderModel->deleteBand($product_id);
-            $log_data = [
-                'user_type' => 'Service Provider',
-                'user_id' => $_SESSION['serviceprovider_id'],
-                'log_type' => 'Manage Inventory',
-                'date_and_time' => date('Y-m-d H:i:s'),
-                'data' => 'Service Provider has deleted a Band with the ID ' . $product_id
-            ];
-            $this->serviceProviderModel->addLogData($log_data);
-            $notification_data = [
-                'user_type' => 'ServiceProvider',
-                'user_id' => $_SESSION['serviceprovider_id'],
-                'data' => 'You have successfully deleted a Band from your inventory',
-                'date_time' => date('Y-m-d H:i:s'),
-                'status' => 'Unread'    
-            ];
-            $this->serviceProviderModel->addNotification($notification_data);
-            redirect('serviceproviders/band');
         } else {
-            redirect('serviceproviders/band');
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $this->serviceProviderModel->deleteBand($product_id);
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'Manage Inventory',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has deleted a Band with the ID ' . $product_id
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
+                $notification_data = [
+                    'user_type' => 'ServiceProvider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'data' => 'You have successfully deleted a Band from your inventory',
+                    'date_time' => date('Y-m-d H:i:s'),
+                    'status' => 'Unread'    
+                ];
+                $this->serviceProviderModel->addNotification($notification_data);
+                redirect('serviceproviders/band');
+            } else {
+                redirect('serviceproviders/band');
+            }
         }
     }
 
@@ -1423,27 +1424,48 @@ class serviceproviders extends Controller
     public function deleteitem($product_id)
     {
         isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->serviceProviderModel->deleteitem($product_id);
+        $hasitemorders = $this->serviceProviderModel->hasitemorders($product_id, 'Equipment');
+        if ($hasitemorders) {
             $log_data = [
                 'user_type' => 'Service Provider',
                 'user_id' => $_SESSION['serviceprovider_id'],
                 'log_type' => 'Manage Inventory',
                 'date_and_time' => date('Y-m-d H:i:s'),
-                'data' => 'Service Provider has deleted an item from their inventory with the ID ' . $product_id
+                'data' => 'Service Provider has failed to delete an item from their inventory with the ID ' . $product_id . ' because it has been ordered by a customer'
             ];
             $this->serviceProviderModel->addLogData($log_data);
             $notification_data = [
                 'user_type' => 'ServiceProvider',
                 'user_id' => $_SESSION['serviceprovider_id'],
-                'data' => 'You have successfully deleted an item from your inventory',
+                'data' => 'You cannot delete an item that has been ordered by a customer',
                 'date_time' => date('Y-m-d H:i:s'),
                 'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data);
             redirect('serviceproviders/inventory');
         } else {
-            redirect('serviceproviders/inventory');
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $this->serviceProviderModel->deleteitem($product_id);
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'Manage Inventory',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has deleted an item from their inventory with the ID ' . $product_id
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
+                $notification_data = [
+                    'user_type' => 'ServiceProvider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'data' => 'You have successfully deleted an item from your inventory',
+                    'date_time' => date('Y-m-d H:i:s'),
+                    'status' => 'Unread'    
+                ];
+                $this->serviceProviderModel->addNotification($notification_data);
+                redirect('serviceproviders/inventory');
+            } else {
+                redirect('serviceproviders/inventory');
+            }
         }
     }
 
@@ -2176,28 +2198,29 @@ class serviceproviders extends Controller
             ];
             $this->serviceProviderModel->addNotification($notification_data);
             redirect('serviceproviders/singer');
-        }
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->serviceProviderModel->deleteSinger($product_id);
-            $log_data = [
-                'user_type' => 'Service Provider',
-                'user_id' => $_SESSION['serviceprovider_id'],
-                'log_type' => 'Manage Inventory',
-                'date_and_time' => date('Y-m-d H:i:s'),
-                'data' => 'Service Provider has deleted a singer from their inventory with the ID ' . $product_id
-            ];
-            $this->serviceProviderModel->addLogData($log_data);
-            $notification_data = [
-                'user_type' => 'ServiceProvider',
-                'user_id' => $_SESSION['serviceprovider_id'],
-                'data' => 'You have successfully deleted a singer from your inventory',
-                'date_time' => date('Y-m-d H:i:s'),
-                'status' => 'Unread'    
-            ];
-            $this->serviceProviderModel->addNotification($notification_data);
-            redirect('serviceproviders/singer');
         } else {
-            redirect('serviceproviders/singer');
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $this->serviceProviderModel->deleteSinger($product_id);
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'Manage Inventory',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has deleted a singer from their inventory with the ID ' . $product_id
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
+                $notification_data = [
+                    'user_type' => 'ServiceProvider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'data' => 'You have successfully deleted a singer from your inventory',
+                    'date_time' => date('Y-m-d H:i:s'),
+                    'status' => 'Unread'    
+                ];
+                $this->serviceProviderModel->addNotification($notification_data);
+                redirect('serviceproviders/singer');
+            } else {
+                redirect('serviceproviders/singer');
+            }
         }
     }
 
@@ -2224,28 +2247,76 @@ class serviceproviders extends Controller
             ];
             $this->serviceProviderModel->addNotification($notification_data);
             redirect('serviceproviders/studio');
+        } else {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $this->serviceProviderModel->deleteStudio($product_id);
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'Manage Inventory',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has deleted a studio from their inventory with the ID ' . $product_id
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
+                $notification_data = [
+                    'user_type' => 'ServiceProvider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'data' => 'You have successfully deleted a studio from your inventory',
+                    'date_time' => date('Y-m-d H:i:s'),
+                    'status' => 'Unread'    
+                ];
+                $this->serviceProviderModel->addNotification($notification_data);
+                redirect('serviceproviders/studio');
+            } else {
+                redirect('serviceproviders/studio');
+            }
         }
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->serviceProviderModel->deleteStudio($product_id);
+    }
+
+    public function deleteMusician($product_id){
+        isset($_SESSION['serviceprovider_id']) ? '' : $this->view('serviceproviders/error');
+        $hasitemorders = $this->serviceProviderModel->hasitemorders($product_id, 'Musician');
+        if ($hasitemorders) {
             $log_data = [
                 'user_type' => 'Service Provider',
                 'user_id' => $_SESSION['serviceprovider_id'],
                 'log_type' => 'Manage Inventory',
                 'date_and_time' => date('Y-m-d H:i:s'),
-                'data' => 'Service Provider has deleted a studio from their inventory with the ID ' . $product_id
+                'data' => 'Service Provider has failed to delete a musician from their inventory with the ID ' . $product_id . ' because it has orders'
             ];
             $this->serviceProviderModel->addLogData($log_data);
             $notification_data = [
                 'user_type' => 'ServiceProvider',
                 'user_id' => $_SESSION['serviceprovider_id'],
-                'data' => 'You have successfully deleted a studio from your inventory',
+                'data' => 'You have failed to delete a musician from your inventory because it has orders',
                 'date_time' => date('Y-m-d H:i:s'),
                 'status' => 'Unread'    
             ];
             $this->serviceProviderModel->addNotification($notification_data);
-            redirect('serviceproviders/inventory');
+            redirect('serviceproviders/musician');
         } else {
-            redirect('serviceproviders/inventory');
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $this->serviceProviderModel->deleteMusician($product_id);
+                $log_data = [
+                    'user_type' => 'Service Provider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'log_type' => 'Manage Inventory',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'Service Provider has deleted a musician from their inventory with the ID ' . $product_id
+                ];
+                $this->serviceProviderModel->addLogData($log_data);
+                $notification_data = [
+                    'user_type' => 'ServiceProvider',
+                    'user_id' => $_SESSION['serviceprovider_id'],
+                    'data' => 'You have successfully deleted a musician from your inventory',
+                    'date_time' => date('Y-m-d H:i:s'),
+                    'status' => 'Unread'    
+                ];
+                $this->serviceProviderModel->addNotification($notification_data);
+                redirect('serviceproviders/musician');
+            } else {
+                redirect('serviceproviders/musician');
+            }
         }
     }
 
@@ -2473,27 +2544,28 @@ class serviceproviders extends Controller
             ];
             $this->serviceProviderModel->addNotification($notification_data);
             $this->view('serviceproviders/index');
-        }
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if ($this->serviceProviderModel->delete($_SESSION['serviceprovider_id'])) {
-                $log_data = [
-                    'user_type' => 'Service Provider',
-                    'user_id' => $_SESSION['serviceprovider_id'],
-                    'log_type' => 'Account Delete',
-                    'date_and_time' => date('Y-m-d H:i:s'),
-                    'data' => 'Service Provider has deleted their profile'
-                ];
-                $this->serviceProviderModel->addLogData($log_data);
-                unset($_SESSION['serviceprovider_id']);
-                unset($_SESSION['serviceprovider_email']);
-                unset($_SESSION['serviceprovider_name']);
-                session_destroy();
-                redirect('pages/index');
-            } else {
-                die('Something went wrong');
-            }
         } else {
-            redirect('serviceproviders/profile');
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                if ($this->serviceProviderModel->delete($_SESSION['serviceprovider_id'])) {
+                    $log_data = [
+                        'user_type' => 'Service Provider',
+                        'user_id' => $_SESSION['serviceprovider_id'],
+                        'log_type' => 'Account Delete',
+                        'date_and_time' => date('Y-m-d H:i:s'),
+                        'data' => 'Service Provider has deleted their profile'
+                    ];
+                    $this->serviceProviderModel->addLogData($log_data);
+                    unset($_SESSION['serviceprovider_id']);
+                    unset($_SESSION['serviceprovider_email']);
+                    unset($_SESSION['serviceprovider_name']);
+                    session_destroy();
+                    redirect('pages/index');
+                } else {
+                    die('Something went wrong');
+                }
+            } else {
+                redirect('serviceproviders/profile');
+            }
         }
     }
 

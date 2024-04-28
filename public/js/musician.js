@@ -159,11 +159,11 @@ function displayNotifications(notificationsData, count) {
 }
 
 function Delete(productId) {
-    var confirmed = confirm("Are you sure you want to delete this singer?");
+    var confirmed = confirm("Are you sure you want to delete this Musician?");
     if (confirmed) {
         $.ajax({
             method: 'POST',
-            url: 'http://localhost/symphony/serviceproviders/deleteSinger/' + productId,
+            url: 'http://localhost/symphony/serviceproviders/deleteMusician/' + productId,
             success: function (response) {
                 console.log('response', response);
                 Redirect();

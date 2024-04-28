@@ -562,6 +562,19 @@ class ServiceProvider
         }
     }
 
+    public function deleteMusician($product_id)
+    {
+        $this->db->query('UPDATE musician SET status = "Deactive" WHERE product_id = :product_id');
+        $this->db->bind(':product_id', $product_id);
+
+        // Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function inventory($created_by)
     {
         $this->db->query('SELECT * FROM products WHERE created_by = :created_by AND status = "Active"');

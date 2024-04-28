@@ -11,9 +11,6 @@
       </a>
       <nav class="menu">
         <ul class="menu-bar">
-          <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/orders">Orders</a></li>
-            <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/inventory">Inventory</a></li>
-            <li><a class="nav-link" href="<?php echo URLROOT; ?>/serviceproviders/additem">Add Item</a></li>
         </ul>
       </nav>
     </div>

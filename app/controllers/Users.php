@@ -335,34 +335,35 @@ class Users extends Controller
                 ];
                 $this->userModel->addNotification($notification_data);
                 redirect('users/profile');
-            }
-            if ($result) {
-                if ($this->userModel->delete($_SESSION['user_id'])) {
-                    $log_data = [
-                        'user_type' => 'Customer',
-                        'user_id' => $_SESSION['user_id'],
-                        'log_type' => 'Account Delete',
-                        'date_and_time' => date('Y-m-d H:i:s'),
-                        'data' => 'User deleted their account'
-                    ];
-                    $this->userModel->addLogData($log_data);
-                    unset($_SESSION['user_id']);
-                    unset($_SESSION['user_email']);
-                    unset($_SESSION['user_name']);
-                    session_destroy();
-                    redirect('pages/index');
-                } else {
-                    $log_data = [
-                        'user_type' => 'Customer',
-                        'user_id' => $_SESSION['user_id'],
-                        'log_type' => 'Account Delete',
-                        'date_and_time' => date('Y-m-d H:i:s'),
-                        'data' => 'User failed to delete their account'
-                    ];
-                    die('Something went wrong');
-                }
             } else {
-                redirect('users/profile');
+                if ($result) {
+                    if ($this->userModel->delete($_SESSION['user_id'])) {
+                        $log_data = [
+                            'user_type' => 'Customer',
+                            'user_id' => $_SESSION['user_id'],
+                            'log_type' => 'Account Delete',
+                            'date_and_time' => date('Y-m-d H:i:s'),
+                            'data' => 'User deleted their account'
+                        ];
+                        $this->userModel->addLogData($log_data);
+                        unset($_SESSION['user_id']);
+                        unset($_SESSION['user_email']);
+                        unset($_SESSION['user_name']);
+                        session_destroy();
+                        redirect('pages/index');
+                    } else {
+                        $log_data = [
+                            'user_type' => 'Customer',
+                            'user_id' => $_SESSION['user_id'],
+                            'log_type' => 'Account Delete',
+                            'date_and_time' => date('Y-m-d H:i:s'),
+                            'data' => 'User failed to delete their account'
+                        ];
+                        die('Something went wrong');
+                    }
+                } else {
+                    redirect('users/profile');
+                }
             }
         }
     }
@@ -1675,100 +1676,112 @@ class Users extends Controller
     {
         isset($_SESSION['user_id']) ? '' : redirect('users/error');
         $cart = $this->userModel->cart($_SESSION['user_id']);
-        $sorder_id = '';
-        $avail_ids = '';
-        $total = 0; 
-        $order_deposit = 0;
-        $today = date("Y-m-d");
-        foreach ($cart as $cartItem){
-            if ($cartItem->type == 'Equipment'){
-                $product_data = $this->userModel->viewItem($cartItem->product_id);
-                $product_data->type = 'Equipment';
-            } else if ($cartItem->type == 'Studio'){
-                $product_data = $this->userModel->viewStudio($cartItem->product_id);
-                $product_data->type = 'Studio';
-            } else if ($cartItem->type == 'Singer'){
-                $product_data = $this->userModel->viewSinger($cartItem->product_id);
-                $product_data->type = 'Singer';
-            } else if ($cartItem->type == 'Band'){
-                $product_data = $this->userModel->viewBand($cartItem->product_id);
-                $product_data->type = 'Band';
-            } else if ($cartItem->type == 'Musician'){
-                $product_data = $this->userModel->viewMusician($cartItem->product_id);
-                $product_data->type = 'Musician';
-            }
-            $startDateObj = new DateTime($cartItem->start_date);
-            $endDateObj = new DateTime($cartItem->end_date);
-            while ($startDateObj <= $endDateObj) {
-                $avail_data = [
-                    'type' => $cartItem->type,
-                    'product_id' => $cartItem->product_id,
-                    'date' => $startDateObj->format('Y-m-d'),
-                    'quantity' => $cartItem->quantity
-                ];
-                $entry_id = $this->userModel->setAvailability($avail_data);
-                if($avail_ids == ''){
-                    $avail_ids .= $entry_id;
-                } else {
-                    $avail_ids .= ','.$entry_id;
-                }
-                $startDateObj->add(new DateInterval('P1D'));
-            }
-            $data = [
-                'user_id' => $_SESSION['user_id'],
-                'serviceprovider_id' => $product_data->created_by,
-                'product_id' => $cartItem->product_id,
-                'quantity' => $cartItem->quantity,
-                'start_date' => $cartItem->start_date,
-                'end_date' => $cartItem->end_date,
-                'days' => $cartItem->days,
-                'total' => $cartItem->total,
-                'status' => 'Pending',
-                'avail' => $avail_ids,
-                'type' => $cartItem->type,
-                'order_placed_on' => $today,
-                'extra' => $cartItem->extra
-            ];
-            $total = $total + $cartItem->total + $cartItem->extra;
-            $order_deposit = $order_deposit + $cartItem->extra;
-            $this->userModel->placeOrder($data);
-            $result = $this->userModel->getSubOrderId($data);
+        if(count($cart) == 0){
             $notification_data = [
-                'user_type' => 'ServiceProvider',
-                'user_id' => $product_data->created_by,
-                'date_time' => date('Y-m-d H:i:s'),
-                'status' => 'Unread',
-                'data' => 'You have a new order request from '.$_SESSION['user_name'].' for '.$product_data->name
-            ];
-            $this->userModel->addNotification($notification_data);
-            $temp = $result->sorder_id;
-            if($sorder_id == ''){
-                $sorder_id .= $temp;
-            } else {
-                $sorder_id .= ','.$temp;
-            }
-        }
-        $total = $total + $total*0.05 + 200.00;
-        $data_order = [
-            'user_id' => $_SESSION['user_id'],
-            'sorder_id' => $sorder_id,
-            'total' => $total,
-            'order_placed_on' => $today,
-            'deposit' => $order_deposit,
-        ];
-        if($this->userModel->placeOrderTotal($data_order)){
-            $log_data = [
                 'user_type' => 'Customer',
                 'user_id' => $_SESSION['user_id'],
-                'log_type' => 'Place Order',
-                'date_and_time' => date('Y-m-d H:i:s'),
-                'data' => 'User placed an order'
+                'date_time' => date('Y-m-d H:i:s'),
+                'status' => 'Unread',
+                'data' => 'You have no items in your cart'
             ];
-            $this->userModel->addLogData($log_data);
-            $this->userModel->clearCart($_SESSION['user_id']);
+            $this->userModel->addNotification($notification_data);
             redirect('users/index');
         } else {
-            die('Something went wrong');
+            $sorder_id = '';
+            $avail_ids = '';
+            $total = 0; 
+            $order_deposit = 0;
+            $today = date("Y-m-d");
+            foreach ($cart as $cartItem){
+                if ($cartItem->type == 'Equipment'){
+                    $product_data = $this->userModel->viewItem($cartItem->product_id);
+                    $product_data->type = 'Equipment';
+                } else if ($cartItem->type == 'Studio'){
+                    $product_data = $this->userModel->viewStudio($cartItem->product_id);
+                    $product_data->type = 'Studio';
+                } else if ($cartItem->type == 'Singer'){
+                    $product_data = $this->userModel->viewSinger($cartItem->product_id);
+                    $product_data->type = 'Singer';
+                } else if ($cartItem->type == 'Band'){
+                    $product_data = $this->userModel->viewBand($cartItem->product_id);
+                    $product_data->type = 'Band';
+                } else if ($cartItem->type == 'Musician'){
+                    $product_data = $this->userModel->viewMusician($cartItem->product_id);
+                    $product_data->type = 'Musician';
+                }
+                $startDateObj = new DateTime($cartItem->start_date);
+                $endDateObj = new DateTime($cartItem->end_date);
+                while ($startDateObj <= $endDateObj) {
+                    $avail_data = [
+                        'type' => $cartItem->type,
+                        'product_id' => $cartItem->product_id,
+                        'date' => $startDateObj->format('Y-m-d'),
+                        'quantity' => $cartItem->quantity
+                    ];
+                    $entry_id = $this->userModel->setAvailability($avail_data);
+                    if($avail_ids == ''){
+                        $avail_ids .= $entry_id;
+                    } else {
+                        $avail_ids .= ','.$entry_id;
+                    }
+                    $startDateObj->add(new DateInterval('P1D'));
+                }
+                $data = [
+                    'user_id' => $_SESSION['user_id'],
+                    'serviceprovider_id' => $product_data->created_by,
+                    'product_id' => $cartItem->product_id,
+                    'quantity' => $cartItem->quantity,
+                    'start_date' => $cartItem->start_date,
+                    'end_date' => $cartItem->end_date,
+                    'days' => $cartItem->days,
+                    'total' => $cartItem->total,
+                    'status' => 'Pending',
+                    'avail' => $avail_ids,
+                    'type' => $cartItem->type,
+                    'order_placed_on' => $today,
+                    'extra' => $cartItem->extra
+                ];
+                $total = $total + $cartItem->total + $cartItem->extra;
+                $order_deposit = $order_deposit + $cartItem->extra;
+                $this->userModel->placeOrder($data);
+                $result = $this->userModel->getSubOrderId($data);
+                $notification_data = [
+                    'user_type' => 'ServiceProvider',
+                    'user_id' => $product_data->created_by,
+                    'date_time' => date('Y-m-d H:i:s'),
+                    'status' => 'Unread',
+                    'data' => 'You have a new order request from '.$_SESSION['user_name'].' for '.$product_data->name
+                ];
+                $this->userModel->addNotification($notification_data);
+                $temp = $result->sorder_id;
+                if($sorder_id == ''){
+                    $sorder_id .= $temp;
+                } else {
+                    $sorder_id .= ','.$temp;
+                }
+            }
+            $total = $total + $total*0.05 + 200.00;
+            $data_order = [
+                'user_id' => $_SESSION['user_id'],
+                'sorder_id' => $sorder_id,
+                'total' => $total,
+                'order_placed_on' => $today,
+                'deposit' => $order_deposit,
+            ];
+            if($this->userModel->placeOrderTotal($data_order)){
+                $log_data = [
+                    'user_type' => 'Customer',
+                    'user_id' => $_SESSION['user_id'],
+                    'log_type' => 'Place Order',
+                    'date_and_time' => date('Y-m-d H:i:s'),
+                    'data' => 'User placed an order'
+                ];
+                $this->userModel->addLogData($log_data);
+                $this->userModel->clearCart($_SESSION['user_id']);
+                redirect('users/index');
+            } else {
+                die('Something went wrong');
+            }
         }
     }
 

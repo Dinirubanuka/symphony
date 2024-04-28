@@ -67,12 +67,14 @@
                 <form class="search" role="search">
                     <input type="search" name="search" placeholder="Search" id="search-item"/>
                     <i class="bx bx-search" aria-hidden="true"></i>
-                </form>
-                                <!--                add notification link here-->
-                                <div class = "notifications">
+                    </form>
+                    <a href="<?php echo URLROOT; ?>/serviceproviders/index">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    </a>
+                    <div class = "notifications">
 
-</div>
-                                <a href="<?php echo URLROOT; ?>/serviceproviders/profile" class="on">
+                    </div>
+                    <a href="<?php echo URLROOT; ?>/serviceproviders/profile" class="on">
                     <img
                             src="<?php echo URLROOT; ?>/img/user.png"
                         width="30"

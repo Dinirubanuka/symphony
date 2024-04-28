@@ -70,7 +70,7 @@
                     <i class="bx bx-search" aria-hidden="true"></i>
                 </form>
                 <a href="<?php echo URLROOT; ?>/serviceproviders/index">
-                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
                 </a>
                 <div class = "notifications">
 
