@@ -96,7 +96,7 @@
 
 <!--sandbox-->
 <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
-<p type="submit" onclick="paymentGayeway()" id="payhere-payment" >PayHere Pay</p>
+<!--<p type="submit" onclick="paymentGayeway()" id="payhere-payment" >PayHere Pay</p>-->
 <script>
     // Payment completed. It can be a successful failure.
     payhere.onCompleted = function onCompleted(orderId) {

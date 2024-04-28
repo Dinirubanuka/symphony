@@ -14,7 +14,7 @@
 </head>
 <body onload="changeRating(); checkAvailability() ">
 <!------------nav-bar-------->
-<?php require_once APPROOT . '/views/inc/viewNavBar.php'; ?>
+<?php require_once APPROOT . '/views/inc/viewItemNavBar.php'; ?>
 <div class="upperHome">
     <a href="<?php echo URLROOT?>/users/index"><img src="http://localhost/symphony/img/home.png" alt="camera-icon" class="" id="" style="height: 30px;width: 30px;"></a>
     <div class="categoryArrow">

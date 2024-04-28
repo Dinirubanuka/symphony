@@ -1,6 +1,13 @@
 <header>
     <nav>
-        <a href="<?php echo URLROOT; ?>/pages" id="logo">Site Logo</a>
+        <a class="logo" href="http://localhost/symphony/users/index">
+            <img
+                    src="<?php echo logo; ?>"
+                    width="35px"
+                    height="35px"
+                    alt="Inc Logo"
+            />
+        </a>
         <i class="fas fa-bars" id="ham-menu"></i>
         <ul id="nav-bar">
             <li>
