@@ -25,7 +25,7 @@
                     <img class="carousel-image" src="<?php echo URLROOT; ?>/img/log.jpg" style="display: block">
                 </div>
                 <div class="item-info">
-                    <div><strong>Report Type: </strong>Single Log Report</div>
+                    <div><strong>Report Type: </strong>Log Report</div>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                     <img class="carousel-image" src="<?php echo URLROOT; ?>/img/log.jpg" style="display: block">
                 </div>
                 <div class="item-info">
-                    <div><strong>Report Type: </strong> Staus</div>
+                    <div><strong>Report Type: </strong>Status Report</div>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                     <img class="carousel-image" src="<?php echo URLROOT; ?>/img/log.jpg" style="display: block">
                 </div>
                 <div class="item-info">
-                    <div><strong>Report Type: </strong> Revenue</div>
+                    <div><strong>Report Type: </strong>Revenue Report</div>
                 </div>
             </div>
         </div>

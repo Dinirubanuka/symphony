@@ -68,8 +68,8 @@
   }
 
   .mark-all-as-read-btn {
-    background-color: #2ecc71;
-    color: white;
+    background-color: #CE93D8;
+    color: rgb(0, 0, 0);
     border: none;
     padding: 5px 10px;
     cursor: pointer;
@@ -79,5 +79,7 @@
   }
 
   .mark-all-as-read-btn:hover {
-    background-color: #27ae60;
+    background-color: #4A148C;
+    color: #ffffff;
+    transition: 0.3s;
   }

@@ -1,66 +1,47 @@
-/* Google Font Import - Poppins */
+/* Google Font Import - Inter */
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
 }
 
-:root{
-     /* ===== Colors ===== */
-     --body-color: #E4E9F7;
-     --sidebar-color: #FFF;
-     --hover-color : #A8A8A8;
-     --primary-color-light: #F6F5FF;
-     --toggle-color: #DDD;
-     --text-color: #060000;
-
-    /* ====== Transition ====== */
-    --tran-03: all 0.2s ease;
-    --tran-03: all 0.3s ease;
-    --tran-04: all 0.3s ease;
-    --tran-05: all 0.3s ease;
-}
-
-body{
+body {
     min-height: 100vh;
-    background-color: var(--body-color);
-    transition: var(--tran-05);
+    background-color: #ffffff;
+    transition: all 0.3s ease;
 }
 
-::selection{
-    background-color: var(--hover-color);
+::selection {
+    background-color: #4A148C;
     color: #fff;
 }
 
-body.dark{
-    --body-color: #18191a;
-    --sidebar-color: #242526;
-    --hover-color : #3a3b3c;
-    --primary-color-light: #3a3b3c;
-    --toggle-color: #fff;
-    --text-color: #ccc;
+body.dark {
+    background-color: #4A148C;
 }
 
 /* ===== Sidebar ===== */
- .sidebar{
+.sidebar {
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     width: 250px;
     padding: 10px 14px;
-    background: var(--sidebar-color);
-    transition: var(--tran-05);
-    z-index: 100;  
+    background: #e2e2e2;
+    transition: all 0.3s ease;
+    z-index: 100;
 }
-.sidebar.close{
+
+.sidebar.close {
     width: 88px;
 }
 
 /* ===== Reusable code - Here ===== */
-.sidebar li{
+.sidebar li {
     height: 50px;
     list-style: none;
     display: flex;
@@ -68,7 +49,7 @@ body.dark{
     margin-top: 10px;
 }
 
-.sidebar .menu .menu-links .nav_link_seller{
+.sidebar .menu .menu-links .nav_link_seller {
     height: 30px !important;
     list-style: none;
     display: flex;
@@ -77,26 +58,27 @@ body.dark{
     margin-left: 10px;
 }
 
-.sidebar .nav_link_seller a:hover{
-    background-color:var(--body-color)!important;
+.sidebar .nav_link_seller a:hover {
+    background-color: #AB47BC !important;
 }
 
 .sidebar .nav_link_seller a:hover .icon,
-.sidebar .nav_link_seller a:hover .text{
-    color: black;
+.sidebar .nav_link_seller a:hover .text {
+    color: #ffffff;
 }
+
 body.dark .sidebar .nav_link_seller a:hover .icon,
-body.dark .sidebar .nav_link_seller a:hover .text{
-    color: var(--text-color);
+body.dark .sidebar .nav_link_seller a:hover .text {
+    color: #fff;
 }
 
 .sidebar header .image,
-.sidebar .icon{
+.sidebar .icon {
     min-width: 60px;
     border-radius: 6px;
 }
 
-.sidebar .icon{
+.sidebar .icon {
     min-width: 60px;
     border-radius: 6px;
     height: 100%;
@@ -107,109 +89,115 @@ body.dark .sidebar .nav_link_seller a:hover .text{
 }
 
 .sidebar .text,
-.sidebar .icon{
-    color: var(--text-color);
-    transition: var(--tran-03);
+.sidebar .icon {
+    color: #060000;
+    transition: all 0.2s ease;
 }
 
-.sidebar .text{
+.sidebar .text {
     font-size: 17px;
     font-weight: 550;
     white-space: nowrap;
     opacity: 1;
 }
-.sidebar.close .text{
+
+.sidebar.close .text {
     opacity: 0;
 }
+
 /* =========================== */
 
-.sidebar header{
+.sidebar header {
     position: relative;
 }
 
-.sidebar header .image-text{
+.sidebar header .image-text {
     display: flex;
     align-items: center;
 }
-.sidebar header .logo-text{
+
+.sidebar header .logo-text {
     display: flex;
     flex-direction: column;
 }
-header .image-text{
+
+header .image-text {
     margin-top: 10px;
 }
-header .image-text .name { 
+
+header .image-text .name {
     font-size: 16px;
     font-weight: 600;
 }
 
-header .image-text .profession{
+header .image-text .profession {
     font-size: 14px;
     margin-top: 0px;
     display: block;
 }
 
-.sidebar header .image{
+.sidebar header .image {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.sidebar header .image img{
+.sidebar header .image img {
     width: 40px;
     border-radius: 6px;
 }
 
-.sidebar header .toggle{
+.sidebar header .toggle {
     position: absolute;
     top: 50%;
     right: -25px;
     transform: translateY(-50%) rotate(180deg);
     height: 25px;
     width: 25px;
-    background-color: var(--primary-color);
-    color: var(--sidebar-color);
+    background-color: #9C27B0;
+    color: #FFF;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 22px;
     cursor: pointer;
-    transition: var(--tran-05);
+    transition: all 0.3s ease;
 }
 
-body.dark .sidebar header .toggle{
-    color: var(--text-color);
+body.dark .sidebar header .toggle {
+    color: #060000;
 }
 
-.sidebar.close .toggle{
+.sidebar.close .toggle {
     transform: translateY(-50%) rotate(0deg);
 }
 
-.sidebar .menu{
+.sidebar .menu {
     margin-top: 10px;
 }
 
-.sidebar li.search-box{
+.sidebar li.search-box {
     border-radius: 6px;
-    background-color: var(--primary-color-light);
+    background-color: #F6F5FF;
     cursor: pointer;
-    transition: var(--tran-05);
+    transition: all 0.3s ease;
 }
 
-.sidebar li.search-box input{
+.sidebar li.search-box input {
     height: 100%;
     width: 100%;
     outline: none;
     border: none;
-    background-color: var(--primary-color-light);
-    color: var(--text-color);
+    background-color: #F6F5FF;
+    color: #060000;
     border-radius: 6px;
     font-size: 17px;
     font-weight: 500;
-    transition: var(--tran-05);
+    transition: all 0.3s ease;
 }
-.sidebar li a{
+
+.sidebar li a {
     list-style: none;
     height: 100%;
     background-color: transparent;
@@ -219,57 +207,64 @@ body.dark .sidebar header .toggle{
     width: 100%;
     border-radius: 6px;
     text-decoration: none;
-    transition: var(--tran-03);
+    transition: all 0.2s ease;
 }
 
-.sidebar li a:hover{
-    background-color: var(--hover-color);
+.sidebar li a:hover {
+    background-color: #4A148C;
 }
+
 .sidebar li a:hover .icon,
-.sidebar li a:hover .text{
-    color: var(--sidebar-color);
-}
-body.dark .sidebar li a:hover .icon,
-body.dark .sidebar li a:hover .text{
-    color: var(--text-color);
+.sidebar li a:hover .text {
+    color: #FFF;
 }
 
-.sidebar .menu-bar{
+body.dark .sidebar li a:hover .icon,
+body.dark .sidebar li a:hover .text {
+    color: #060000;
+}
+
+.sidebar .menu-bar {
     height: calc(100% - 55px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow-y: scroll;
 }
-.menu-bar::-webkit-scrollbar{
+
+.menu-bar::-webkit-scrollbar {
     display: none;
 }
-.sidebar .menu-bar .mode{
+
+.sidebar .menu-bar .mode {
     border-radius: 6px;
-    background-color: var(--primary-color-light);
+    background-color: #F6F5FF;
     position: relative;
-    transition: var(--tran-05);
+    transition: all 0.3s ease;
 }
 
-.menu-bar .mode .sun-moon{
+.menu-bar .mode .sun-moon {
     height: 50px;
     width: 60px;
 }
 
-.mode .sun-moon i{
+.mode .sun-moon i {
     position: absolute;
 }
-.mode .sun-moon i.sun{
-    opacity: 0;
-}
-body.dark .mode .sun-moon i.sun{
-    opacity: 1;
-}
-body.dark .mode .sun-moon i.moon{
+
+.mode .sun-moon i.sun {
     opacity: 0;
 }
 
-.menu-bar .bottom-content .toggle-switch{
+body.dark .mode .sun-moon i.sun {
+    opacity: 1;
+}
+
+body.dark .mode .sun-moon i.moon {
+    opacity: 0;
+}
+
+.menu-bar .bottom-content .toggle-switch {
     position: absolute;
     right: 0;
     height: 100%;
@@ -280,16 +275,17 @@ body.dark .mode .sun-moon i.moon{
     border-radius: 6px;
     cursor: pointer;
 }
-.toggle-switch .switch{
+
+.toggle-switch .switch {
     position: relative;
     height: 22px;
     width: 40px;
     border-radius: 25px;
-    background-color: var(--toggle-color);
-    transition: var(--tran-05);
+    background-color: #DDD;
+    transition: all 0.3s ease;
 }
 
-.switch::before{
+.switch::before {
     content: '';
     position: absolute;
     height: 15px;
@@ -298,60 +294,62 @@ body.dark .mode .sun-moon i.moon{
     top: 50%;
     left: 5px;
     transform: translateY(-50%);
-    background-color: var(--sidebar-color);
-    transition: var(--tran-04);
+    background-color: #FFF;
+    transition: all 0.3s ease;
 }
 
-body.dark .switch::before{
+body.dark .switch::before {
     left: 20px;
 }
 
-.home .text{
+.home .text {
     font-size: 30px;
     font-weight: 500;
-    color: var(--text-color);
+    color: #060000;
     padding: 12px 60px;
 }
 
-.sidebar.close ~ .home{
+.sidebar.close ~ .home {
     left: 78px;
     height: 100vh;
     width: calc(100% - 78px);
 }
-body.dark .home .text{
-    color: var(--text-color);
+
+body.dark .home .text {
+    color: #060000;
 }
 
-.right-component{
+.right-component {
     position: absolute;
     left: 250px;
     height: 100vh;
     width: calc(100% - 250px);
-    background-color: var(--body-color);
-    transition: var(--tran-05);
+    background-color: #ffffff;
+    transition: all 0.3s ease;
 }
-.right-component .text{
+
+.right-component .text {
     font-size: 30px;
     font-weight: 500;
-    color: var(--text-color);
+    color: #060000;
     padding: 12px 60px;
 }
 
-.sidebar.close ~ .right-component{
+.sidebar.close ~ .right-component {
     left: 78px;
     height: 100vh;
     width: calc(100% - 78px);
 }
-body.dark .right-component .text{
-    color: var(--text-color);
+
+body.dark .right-component .text {
+    color: #060000;
 }
 
-.icon img{
+.icon img {
     height: 20px;
     width: 20px;
     border-radius: 50%;
 }
-
 
 .mod-above {
     margin: 20px;
@@ -363,16 +361,17 @@ body.dark .right-component .text{
     justify-content: space-between;
 }
 
-.mod-above h2{
-    color: var(--text-color);   
+.mod-above h2 {
+    color: #060000;
 }
+
 .mod-above button {
     margin-right: 30px;
     width: 150px;
     height: 40px;
     padding: 10px;
-    color: var(--text-color);
-    background-color: var(--sidebar-color);
+    color: #060000;
+    background-color: #FFF;
     font-weight: 600;
     font-size: 15px;
     text-decoration: none;
@@ -380,9 +379,9 @@ body.dark .right-component .text{
     border-radius: 5px;
 }
 
-.mod-above button:hover{
-    background-color: var(--hover-color);
-    color: var(--text-color);
+.mod-above button:hover {
+    background-color: #A8A8A8;
+    color: #060000;
     cursor: pointer;
 }
 
@@ -391,24 +390,25 @@ body.dark .right-component .text{
     padding: 20px;
     border-collapse: collapse;
     width: 98%;
-  }
-  
-.data-table th, td {
+}
+
+.data-table th,
+td {
     padding: 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-    color: var(--text-color);
-}
-  
-.data-table tr:hover {
-    background-color: var(--hover-color);
-    color: white;
+    color: #060000;
 }
 
-.add-mod{
+.data-table tr:hover {
+    background-color: #A8A8A8;
+    color: #fff;
+}
+
+.add-mod {
     width: 850px;
     height: auto;
-    margin-top: 50px ;
+    margin-top: 50px;
     margin-left: 220px;
     margin-right: 200px;
     padding: 30px;
@@ -416,80 +416,75 @@ body.dark .right-component .text{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--sidebar-color);
-    color: var(--text-color);
+    background-color: #FFF;
+    color: #060000;
 }
 
-.add-mod-btn{
+.add-mod-btn {
     height: 40px;
     width: 150px;
-    background-color: var(--primary-color-light);
+    background-color: #F6F5FF;
     border: 2px solid #707070;
     font-weight: 700px;
     font-size: 17px;
-    color: var(--text-color);
+    color: #060000;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.add-mod-btn:hover{
+.add-mod-btn:hover {
     cursor: pointer;
-    background-color: var(--hover-color);
+    background-color: #A8A8A8;
 }
 
-.add-mod-heading{
+.add-mod-heading {
     margin-bottom: 20px;
 }
-/* 
-.add-mod-inputs{
 
-} */
-
-.add-mod-form{
+.add-mod-form {
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
 }
 
-.add-mod-form input{
+.add-mod-form input {
     width: 700px;
     height: 40px;
     border-radius: 5px;
     padding: 5px 10px;
 }
 
-.data-table-tr a{
+.data-table-tr a {
     text-decoration: none;
 }
 
-.data-table-action{
+.data-table-action {
     display: flex;
     flex-direction: row;
 }
 
-.mod-below-delete{
+.mod-below-delete {
     color: #b30000;
     margin-right: 12px;
 }
 
-.mod-below-delete:hover{
+.mod-below-delete:hover {
     cursor: pointer;
 }
 
-.mod-below-edit{
+.mod-below-edit {
     color: #2eb82e;
 }
 
-.mod-below-edit:hover{
+.mod-below-edit:hover {
     cursor: pointer;
 }
 
-.add-mod-invalid{
+.add-mod-invalid {
     color: #b30000;
 }
 
-
-.mod-select-container{
+.mod-select-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -499,12 +494,12 @@ body.dark .right-component .text{
     margin-right: 30px;
 }
 
-.mod-select{
+.mod-select {
     border: none;
     appearance: none;
     padding: 10px;
     width: 100%;
-    color: var(--text-color);
-    background-color:var(--primary-color-light);
+    color: #060000;
+    background-color: #F6F5FF;
     font-size: 15px;
 }

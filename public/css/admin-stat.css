@@ -1,102 +1,102 @@
 .right-component {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .container {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .container h1 {
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input[type="date"],
-  select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  
-  .tabcontent {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .data-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .data-table th,
-  .data-table td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .data-table th {
-    background-color: #f2f2f2;
-  }
-  
-  .data-table tr:hover {
-    background-color: #f5f5f5;
-  }
-  
-  #printButton {
-    background-color: #503d00; /* Green */
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-top: 20px; /* Adjust margin as needed */
-    cursor: pointer;
-    border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+.container h1 {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="date"],
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #BA68C8;
+  border-radius: 4px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #AB47BC;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #000000;
+  transition: 0.3s;
+}
+
+.tabcontent {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #d6d6d6;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.data-table th {
+  background-color: #cccccc;
+}
+
+.data-table tr:hover {
+  background-color: #AB47BC;
+}
+
+#printButton {
+  background-color: #4A148C; /* Purple */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 20px; /* Adjust margin as needed */
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 #printButton:hover {
-    background-color: #bbbbbb; /* Darker green */
-    color: black;
-    transition: 0.3s; /* Smooth transition on hover */
+  background-color: #000000; /* Darker purple */
+  color: white;
+  transition: 0.3s; /* Smooth transition on hover */
 }
 
 #printButton:active {
-    background-color: #503d00; /* Pressed color */
-    color: white;
-    transform: translateY(1px); /* Push button down when clicked */
-    box-shadow: 0 1px #666; /* Add shadow to make it look like it's being pressed */
+  background-color: #4A148C; /* Pressed color */
+  color: white;
+  transform: translateY(1px); /* Push button down when clicked */
+  box-shadow: 0 1px #666; /* Add shadow to make it look like it's being pressed */
 }

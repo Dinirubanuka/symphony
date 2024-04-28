@@ -1,8 +1,8 @@
 
 .sp-icon {
-    background-color: #305edd; /* Green */
+    background-color: #CE93D8; /* Green */
     border: none;
-    color: white;
+    color: rgb(0, 0, 0);
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -14,5 +14,7 @@
   }
   
   .sp-icon:hover {
-    background-color: #ffffff; /* Darker Green */
+    background-color: #4A148C; /* Darker Green */
+    color: #ffffff;
+    transition: 0.3s;
   }

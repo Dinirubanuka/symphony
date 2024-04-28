@@ -88,12 +88,12 @@
     </div>
 </div>
 <div id="users" class="tabcontent" <?php echo ($data['data'] === 'NA') ? 'style="display: none;"' : ''; ?>>
-<h2>Revenue reports from <?php echo $data['from_date']; ?> to <?php echo $data['to_date']; ?></h2>
+<h2>Spending reports from <?php echo $data['from_date']; ?> to <?php echo $data['to_date']; ?></h2>
             <table class="data-table">
                 <?php if ($data['type'] != 'Order') : ?>
                 <tr>
                     <th><?php echo $data['type']; ?></th>
-                    <th>Revenue(LKR)</th>
+                    <th>Spending(LKR)</th>
                 </tr>
                 <?php foreach ($data['datalist'] as $key => $value) : ?>
                 <tr class="data-table-tr">
